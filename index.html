@@ -94,6 +94,59 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2.5rem 2.5rem 1.75rem}
 .copyright{font-size:11px;color:#86868b}
 .footer-bottom-links{display:flex;gap:1.5rem}
 .footer-bottom-link{font-size:11px;color:#86868b}
+
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .hero img{height:380px;object-position:center 50%}
+  .hero-body{padding:1.75rem 1.25rem}
+  .hero-eyebrow{font-size:11px}
+  .hero-h1{font-size:30px;letter-spacing:-.02em}
+  .hero-sub{font-size:14px;margin-bottom:1.25rem}
+  .btn-row{flex-direction:column;align-items:center;gap:8px}
+  .btn-white,.btn-ghost{width:100%;max-width:260px;text-align:center;padding:13px 20px}
+  .sec-header{padding:3rem 1.25rem 1.75rem}
+  .sec-title{font-size:26px}
+  .card-row{grid-template-columns:1fr;padding:0 8px 8px}
+  .card-row-3{grid-template-columns:1fr;padding:0 8px 8px}
+  .card-lg{height:300px;border-radius:14px}
+  .card-lg-body{padding:1.5rem 1.25rem}
+  .card-title{font-size:22px}
+  .card-sm{height:220px;border-radius:14px}
+  .card-sm-title{font-size:17px}
+  .banner{margin:0 8px 8px;height:180px;border-radius:14px}
+  .banner-title{font-size:20px}
+  .strip{grid-template-columns:repeat(3,1fr)}
+  .strip-item{padding:1.5rem .75rem}
+  .strip-num{font-size:26px}
+  .strip-label{font-size:11px}
+  .tesla-section{padding:3rem 0 0}
+  .tesla-title{font-size:26px}
+  .tesla-sub{font-size:14px}
+  .tesla-cards{grid-template-columns:1fr}
+  .tesla-card{height:340px}
+  .tesla-card-body{padding:1.75rem 1.5rem}
+  .tesla-card-title{font-size:26px}
+  .tesla-card-sub{font-size:13px;margin-bottom:1.25rem}
+  .tesla-btns{flex-direction:column;gap:8px}
+  .t-btn-blue,.t-btn-white{text-align:center;padding:12px 20px}
+  footer{padding:1.75rem 1.25rem 6rem}
+  .footer-cols{grid-template-columns:1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.5rem}
+  #geo-content{padding:48px 16px !important}
+  #seo-content{padding:48px 16px !important}
+  #faq{padding:48px 16px !important}
+}
+.mobile-line-fab{display:none}
+@media(max-width:768px){
+  .mobile-line-fab{
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;bottom:20px;right:18px;z-index:999;
+    width:56px;height:56px;border-radius:50%;
+    background:#06C755;
+    box-shadow:0 4px 16px rgba(6,199,85,.45);
+  }
+}
 </style>
 
 <meta name="keywords" content="租屋,新北市租屋,中和租屋,包租代管,房屋出租,不動產租賃,售後回租,不動產售後回租,貸款整合,民間轉銀行,房屋貸款整合,新北市貸款,中和貸款,鋮馨租賃,cx468,Cheng Xin Leasing">
@@ -524,4 +577,17 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2.5rem 2.5rem 1.75rem}
   </div>
   <div class="footer-bottom">
     <div class="copyright">Copyright © 2026 鋮馨租賃有限公司　版權所有</div>
-    <div class="footer-bottom-li
+    <div class="footer-bottom-links">
+      <a href="https://lin.ee/PHIfSoY" target="_blank" class="footer-bottom-link">LINE 官方帳號</a>
+      <a href="#" class="footer-bottom-link">隱私政策</a>
+    </div>
+  </div>
+</footer>
+
+<!-- 手機版浮動 LINE 按鈕 -->
+<a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M19.365 9.89c.50 0 .866.398.866.886s-.366.886-.866.886h-2.109v1.094h2.109c.5 0 .866.398.866.886s-.366.886-.866.886h-2.993c-.5 0-.866-.397-.866-.886V8.893c0-.488.366-.886.866-.886h2.993c.5 0 .866.398.866.886s-.366.886-.866.886h-2.127v.996h2.127zm-5.748 3.752c0 .366-.21.703-.545.862-.112.055-.231.082-.35.082-.228 0-.452-.09-.618-.265l-2.77-2.986v2.307c0 .488-.366.886-.866.886s-.866-.398-.866-.886V8.893c0-.366.21-.703.545-.862.335-.16.733-.106 1.013.133l2.77 2.986V8.893c0-.488.366-.886.866-.886s.866.398.866.886v4.749zm-6.614 0c0 .488-.366.886-.866.886s-.866-.398-.866-.886V8.893c0-.488.366-.886.866-.886s.866.398.866.886v4.749zm-2.69-4.749c0-.488-.366-.886-.866-.886s-.866.398-.866.886v4.749c0 .488.366.886.866.886h2.993c.5 0 .866-.398.866-.886s-.366-.886-.866-.886H4.313V8.893zM24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
+</a>
+
+</body>
+</html>
