@@ -114,8 +114,8 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   <div class="section-label">本次申報移轉現值</div>
   <div class="row2">
     <div class="field">
-      <label>每平方公尺現值 <span>萬元／㎡</span></label>
-      <div class="input-row"><input type="number" id="sellPsm" value="5" min="0.01" step="0.1" oninput="calc()"><span class="unit">萬元</span></div>
+      <label>每平方公尺現值 <span>元／㎡</span></label>
+      <div class="input-row"><input type="number" id="sellPsm" value="50000" min="1" step="100" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
       <label>土地面積 <span>1坪≈3.3058㎡</span></label>
@@ -139,8 +139,8 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
 
   <div class="section-label">前次移轉現值（或原規定地價）</div>
   <div class="field">
-    <label>每平方公尺前次現值 <span>萬元／㎡</span></label>
-    <div class="input-row"><input type="number" id="buyPsm" value="3" min="0.01" step="0.1" oninput="calc()"><span class="unit">萬元</span></div>
+    <label>每平方公尺前次現值 <span>元／㎡</span></label>
+    <div class="input-row"><input type="number" id="buyPsm" value="30000" min="1" step="100" oninput="calc()"><span class="unit">元</span></div>
   </div>
 
   <!-- CPI 查詢 -->
@@ -190,11 +190,11 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   <div class="row2">
     <div class="field">
       <label>改良土地費用</label>
-      <div class="input-row"><input type="number" id="improvement" value="0" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
+      <div class="input-row"><input type="number" id="improvement" value="0" min="0" step="1000" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
       <label>工程受益費＋重劃費</label>
-      <div class="input-row"><input type="number" id="otherDeduct" value="0" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
+      <div class="input-row"><input type="number" id="otherDeduct" value="0" min="0" step="1000" oninput="calc()"><span class="unit">元</span></div>
     </div>
   </div>
 
@@ -444,15 +444,15 @@ function setReadj(v){readjust=v;document.getElementById('readjYes').classList.to
 function fmt(n){if(isNaN(n)||n===null)return'—';return Math.round(n).toLocaleString('zh-TW');}
 
 function calc(){
-  const sellPsm=(parseFloat(document.getElementById('sellPsm').value)||0)*10000;
+  const sellPsm=parseFloat(document.getElementById('sellPsm').value)||0;
   const area=parseFloat(document.getElementById('areaSqm').value)||0;
   const fracNum=parseInt(document.getElementById('fracNum').value)||1;
   const fracDen=parseInt(document.getElementById('fracDen').value)||1;
   const frac=fracNum/fracDen;
-  const buyPsm=(parseFloat(document.getElementById('buyPsm').value)||0)*10000;
+  const buyPsm=parseFloat(document.getElementById('buyPsm').value)||0;
   const cpi=parseFloat(document.getElementById('cpi').value)||100;
-  const imp=(parseFloat(document.getElementById('improvement').value)||0)*10000;
-  const other=(parseFloat(document.getElementById('otherDeduct').value)||0)*10000;
+  const imp=parseFloat(document.getElementById('improvement').value)||0;
+  const other=parseFloat(document.getElementById('otherDeduct').value)||0;
   const sellTotal=sellPsm*area*frac;
   const adjBuy=buyPsm*area*frac*(cpi/100);
   const deduct=imp+other;
