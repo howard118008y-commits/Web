@@ -113,10 +113,10 @@ tr:hover td{background:#fafafa}
     <div class="field">
       <label>貸款金額</label>
       <div class="input-row">
-        <input type="number" id="amount" value="3000000" min="100000" max="50000000" step="100000" oninput="syncSlider('amount','amountSlider');calculate()">
-        <span class="unit">元</span>
+        <input type="number" id="amount" value="300" min="10" max="5000" step="10" oninput="syncSlider('amount','amountSlider');calculate()">
+        <span class="unit">萬元</span>
       </div>
-      <input type="range" id="amountSlider" min="500000" max="20000000" step="100000" value="3000000" oninput="syncInput('amountSlider','amount');calculate()">
+      <input type="range" id="amountSlider" min="50" max="2000" step="10" value="300" oninput="syncInput('amountSlider','amount');calculate()">
       <div class="range-labels"><span>50萬</span><span>2000萬</span></div>
     </div>
 
@@ -239,7 +239,7 @@ function syncSlider(a,b){document.getElementById(b).value=document.getElementByI
 function syncInput(a,b){document.getElementById(b).value=document.getElementById(a).value}
 function fmt(n){return Math.round(n).toLocaleString('zh-TW')}
 function calculate(){
-  const P=parseFloat(document.getElementById('amount').value)||0;
+  const P=(parseFloat(document.getElementById('amount').value)||0)*10000;
   const annualRate=parseFloat(document.getElementById('rate').value)||0;
   const years=parseInt(document.getElementById('years').value)||0;
   const n=years*12, r=annualRate/100/12;

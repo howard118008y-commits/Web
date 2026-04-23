@@ -270,11 +270,11 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   <div class="row2">
     <div class="field">
       <label>成交售價</label>
-      <div class="irow"><input type="number" id="sellPrice" value="15000000" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+      <div class="irow"><input type="number" id="sellPrice" value="1500" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
     </div>
     <div class="field">
       <label>取得成本 <span>購入總價</span></label>
-      <div class="irow"><input type="number" id="buyPrice" value="10000000" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+      <div class="irow"><input type="number" id="buyPrice" value="1000" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
     </div>
   </div>
 
@@ -283,7 +283,7 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   <div class="row2">
     <div class="field">
       <label>相關費用 <span>仲介、代書、裝修等</span></label>
-      <div class="irow"><input type="number" id="fees" value="0" min="0" step="10000" oninput="syncFeeMode();calc()"><span class="unit">元</span></div>
+      <div class="irow"><input type="number" id="fees" value="0" min="0" step="0.1" oninput="syncFeeMode();calc()"><span class="unit">萬元</span></div>
     </div>
     <div class="field">
       <label>費用計算方式</label>
@@ -295,7 +295,7 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   </div>
   <div class="field">
     <label>已繳土地增值稅 <span>可從課稅所得中扣除</span></label>
-    <div class="irow"><input type="number" id="landTax" value="0" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+    <div class="irow"><input type="number" id="landTax" value="0" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
   </div>
 
   <!-- 自用優惠 -->
@@ -446,9 +446,9 @@ function getRate(months, ver){
 function calc(){
   const buyDate=getDateStr('buyYear','buyMonth');
   const sellDate=getDateStr('sellYear','sellMonth');
-  const sellPrice=parseFloat(document.getElementById('sellPrice').value)||0;
-  const buyPrice=parseFloat(document.getElementById('buyPrice').value)||0;
-  const landTax=parseFloat(document.getElementById('landTax').value)||0;
+  const sellPrice=(parseFloat(document.getElementById('sellPrice').value)||0)*10000;
+  const buyPrice=(parseFloat(document.getElementById('buyPrice').value)||0)*10000;
+  const landTax=(parseFloat(document.getElementById('landTax').value)||0)*10000;
 
   if(!buyDate||!sellDate||sellPrice<=0||buyPrice<=0){
     document.getElementById('taxResult').textContent='—';
@@ -480,9 +480,9 @@ function calc(){
   let fees;
   if(feeMode==='auto'){
     fees=sellPrice*0.03;
-    document.getElementById('fees').value=Math.round(fees);
+    document.getElementById('fees').value=(fees/10000).toFixed(2);
   } else {
-    fees=parseFloat(document.getElementById('fees').value)||0;
+    fees=(parseFloat(document.getElementById('fees').value)||0)*10000;
   }
 
   // rate
