@@ -124,8 +124,12 @@ nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5
   </div>
   <div class="row2">
     <div class="field">
-      <label>移轉持分 <span>全部=1，半=0.5</span></label>
-      <div class="input-row"><input type="number" id="fraction" value="1" min="0.01" max="1" step="0.01" oninput="calc()"></div>
+      <label>移轉持分 <span id="fracDisplay">1／1 = 100%</span></label>
+      <div class="input-row" style="gap:6px">
+        <input type="number" id="fracNum" value="1" min="1" max="999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:16px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+        <span style="font-size:22px;color:#6e6e73;font-weight:300;flex-shrink:0">／</span>
+        <input type="number" id="fracDen" value="1" min="1" max="999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:16px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+      </div>
     </div>
     <div class="field">
       <label>申報現值總額</label>
@@ -442,7 +446,9 @@ function fmt(n){if(isNaN(n)||n===null)return'—';return Math.round(n).toLocaleS
 function calc(){
   const sellPsm=parseFloat(document.getElementById('sellPsm').value)||0;
   const area=parseFloat(document.getElementById('areaSqm').value)||0;
-  const frac=parseFloat(document.getElementById('fraction').value)||1;
+  const fracNum=parseInt(document.getElementById('fracNum').value)||1;
+  const fracDen=parseInt(document.getElementById('fracDen').value)||1;
+  const frac=fracNum/fracDen;
   const buyPsm=parseFloat(document.getElementById('buyPsm').value)||0;
   const cpi=parseFloat(document.getElementById('cpi').value)||100;
   const imp=parseFloat(document.getElementById('improvement').value)||0;
@@ -491,6 +497,17 @@ function calc(){
   document.getElementById('d-tax').textContent=fmt(finalTax)+' 元';
   if(selfUse){infoBox.style.display='block';infoBox.innerHTML='<strong>自用住宅優惠稅率 10%</strong><br>條件：①土地上建有房屋 ②本人、配偶或直系親屬設籍 ③無出租無營業 ④面積：都市≤3公畝、非都市≤7公畝<br>「一生一次」限制：持有年限無限制，一生只能申請一次。';}
   if(finalTax>100000&&!selfUse){warnBox.style.display='block';warnBox.innerHTML='💡 <strong>節稅提示：</strong>稅額逾10萬元，若符合自用住宅條件（稅率10%），可大幅節省。建議向稅捐稽徵處確認。';}
+}
+
+function updateFrac(){
+  const n=parseInt(document.getElementById('fracNum').value)||1;
+  const d=parseInt(document.getElementById('fracDen').value)||1;
+  const pct=(n/d*100).toFixed(1).replace('.0','');
+  document.getElementById('fracDisplay').textContent=n+'／'+d+' = '+pct+'%';
+  // highlight if invalid
+  const den=document.getElementById('fracDen');
+  den.style.borderColor=n>d?'#ff3b30':'#d2d2d7';
+  calc();
 }
 
 // Init
