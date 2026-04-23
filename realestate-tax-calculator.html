@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>房地合一稅試算｜鋮馨租賃</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh}
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+.nav-back{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}
+.hero{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 55%,#0ea5e9 100%);padding:60px 24px 44px;text-align:center}
+.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero p{font-size:16px;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto}
+@media(max-width:768px){.hero h1{font-size:30px}}
+.wrap{max-width:780px;margin:40px auto;padding:0 20px 80px}
+.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px}
+.sec{font-size:14px;font-weight:700;color:#1d1d1f;margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid #f0f0f0}
+.sec:first-of-type{margin-top:0}
+.field{margin-bottom:16px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:6px}
+.field label span{font-size:11px;font-weight:400;color:#6e6e73}
+.irow{display:flex;align-items:center;gap:8px}
+.irow input[type=number],.irow input[type=month],.irow select{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+.irow input:focus,.irow select:focus{border-color:#7C3AED}
+.unit{font-size:13px;color:#6e6e73;white-space:nowrap}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:540px){.row2{grid-template-columns:1fr}}
+.tog{display:flex;border:1.5px solid #d2d2d7;border-radius:10px;overflow:hidden}
+.togbtn{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:500;color:#6e6e73;cursor:pointer;border:none;background:#fff;transition:all .2s;border-right:1px solid #d2d2d7}
+.togbtn:last-child{border-right:none}
+.togbtn.on{background:#7C3AED;color:#fff;font-weight:700}
+.togbtn.on-blue{background:#2563EB;color:#fff;font-weight:700}
+.togbtn.on-red{background:#ef4444;color:#fff;font-weight:700}
+
+/* version badge */
+.ver-badge{display:inline-flex;align-items:center;gap:8px;background:#f3f0ff;border:1.5px solid #7C3AED;border-radius:10px;padding:10px 16px;margin-bottom:16px;font-size:13px;color:#5b21b6;font-weight:600}
+.ver-badge .dot{width:8px;height:8px;border-radius:50%;background:#7C3AED}
+
+/* holding strip */
+.hold-strip{background:linear-gradient(135deg,#f3f0ff,#eff6ff);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.hold-years{font-size:28px;font-weight:700;color:#7C3AED}
+.hold-label{font-size:12px;color:#6e6e73;margin-top:2px}
+.hold-right{text-align:right}
+.hold-rate-label{font-size:12px;color:#6e6e73}
+.hold-rate{font-size:22px;font-weight:700;color:#2563EB}
+
+/* results */
+.res-main{background:linear-gradient(135deg,#7C3AED,#2563EB);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+.res-main-lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
+.res-main-val{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.03em}
+.res-main-sub{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px}
+.rg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+@media(max-width:540px){.rg{grid-template-columns:1fr 1fr}}
+.rc{background:#f5f5f7;border-radius:12px;padding:16px 12px;text-align:center}
+.rc-lbl{font-size:11px;color:#6e6e73;margin-bottom:5px}
+.rc-val{font-size:17px;font-weight:700;color:#1d1d1f}
+.rc-sub{font-size:10px;color:#aaa;margin-top:2px}
+.rc.hl{background:#7C3AED}
+.rc.hl .rc-lbl,.rc.hl .rc-sub{color:rgba(255,255,255,.65)}
+.rc.hl .rc-val{color:#fff}
+.rc.grn{background:#16A34A}
+.rc.grn .rc-lbl,.rc.grn .rc-sub{color:rgba(255,255,255,.65)}
+.rc.grn .rc-val{color:#fff}
+.detail{background:#f5f5f7;border-radius:12px;padding:18px 20px;font-size:13px;line-height:2.1}
+.dr{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:2px 0}
+.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#7C3AED}
+.dr.minus span:last-child{color:#ef4444}
+.dr.plus span:last-child{color:#16A34A}
+.info-box{background:#f3f0ff;border:1.5px solid #7C3AED;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#5b21b6;line-height:1.75}
+.warn-box{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#92400e;line-height:1.75}
+.save-box{background:#f0fdf4;border:1.5px solid #16A34A;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#166534;line-height:1.75}
+
+/* rate table */
+.rt{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.rt th{background:#1d1d1f;color:#fff;padding:10px;text-align:center;font-weight:600}
+.rt th:first-child{text-align:left;min-width:100px}
+.rt td{padding:9px 10px;text-align:center;border-bottom:.5px solid #f0f0f0;color:#1d1d1f}
+.rt td:first-child{text-align:left;color:#6e6e73;font-weight:500}
+.rt tr.cur td{background:#f3f0ff;color:#7C3AED;font-weight:700}
+.rt tr:last-child td{border-bottom:none}
+.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
+.cta-strip{background:linear-gradient(135deg,#1d1d1f,#2d1b5e);border-radius:20px;padding:40px 28px;text-align:center;margin-top:24px}
+.cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.cta-strip p{font-size:15px;color:#a1a1a6;margin-bottom:24px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-purple{background:#7C3AED;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-green{background:#16A34A;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-back">‹ 返回首頁</a>
+  <img class="nav-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQABLAEsAAD/4QEqRXhpZgAATU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAExAAIAAABZAAAAcgE7AAIAAAAHAAAAzIdpAAQAAAABAAAA1AAAAAAAAAEsAAAAAQAAASwAAAABQ2FudmEgKFJlbmRlcmVyKSBkb2M9REFIR2cyWFFWZTAgdXNlcj1VQUUwbEV0SXJKayBicmFuZD1CQUUwbE8zeGFRMCB0ZW1wbGF0ZT1FQUY1alZubXJhYwAA5bCP56iLAAAABpAAAAcAAAAEMDIxMJEBAAcAAAAEAQIDAKAAAAcAAAAEMDEwMKABAAMAAAABAAEAAKACAAQAAAABAAAAyKADAAQAAAABAAAAyAAAAAD/4QocaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyI+IDxkYzpjcmVhdG9yPiA8cmRmOlNlcT4gPHJkZjpsaT7lsI/nqIs8L3JkZjpsaT4gPC9yZGY6U2VxPiA8L2RjOmNyZWF0b3I+IDxkYzp0aXRsZT4gPHJkZjpBbHQ+IDxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCI+6Kqg6aaoTkxPR08g55qE6KSH5pysICjpoK3lg48pIC0gMTwvcmRmOmxpPiA8L3JkZjpBbHQ+IDwvZGM6dGl0bGU+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDw/eHBhY2tldCBlbmQ9InciPz4A/+0AelBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAABBHAFaAAMbJUccAgAAAgACHAIFACLoqqDppqhOTE9HTyDnmoTopIfmnKwgKOmgreWDjykgLSAxHAJQAAblsI/nqIsAOEJJTQQlAAAAAAAQBeukxCSgkoDxr+UFZNlgE//AABEIAMgAyAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2wBDAAICAgICAgMCAgMFAwMDBQYFBQUFBggGBgYGBggKCAgICAgICgoKCgoKCgoMDAwMDAwODg4ODg8PDw8PDw8PDw//2wBDAQICAgQEBAcEBAcQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQ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/Ys+FWglZ/Eus+KfHF0OWk17xDf3Sse+YUljhx7FCKAOj+GnwU/Zo1XxvcftR/DbRNM1LW/GUUdwmtQHzkcMpVpYASVikkHErIFdiCH53V137SWf+GePifg4P/CMazz/ANuUtcN+y9+zYn7M2leMfDOleIJNU8P67rtzq2l2Bi8qLSre4wfs0fzNuAPUjaDgHaDkn6curW2vraWyvYUuLe4Ro5I5FDo6MMMrKeCCOCDwRQB+DHxck+AF3/wTdtY9Iuobjx+fDOgu+2W6e5+0l7U3JYFiudu/dnjGa+sNb0Sy0P8A4KEfALw5pQdLXRPAGpxoskjyuIlV4k3PIWdjxyWJJ7mv0yk0+wmsv7Nmtonsygj8lkUx7BwF2EYwPTGK+TPCH7MWu6d+1P4g/aT8b+NLjxH/AKA2leHdOeGONdMspyss6O6KvmES7xGcZCN8zMegB9f0UUUAFFFFAH//0P38ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//R/fyiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9L9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/0/38ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z" alt="鋮馨租賃">
+  <span style="width:72px"></span>
+</nav>
+<div class="hero">
+  <p class="eyebrow">Real Estate Transaction Tax</p>
+  <h1>房地合一稅試算</h1>
+  <p>自動判斷適用 1.0 或 2.0 版本，含自用住宅400萬免稅額、重購退稅。</p>
+</div>
+
+<div class="wrap">
+<div class="card">
+  <div class="card-title">輸入資料</div>
+
+  <!-- 身份 + 日期 -->
+  <div class="sec">基本資料</div>
+  <div class="row2">
+    <div class="field">
+      <label>納稅人身份</label>
+      <div class="tog">
+        <button class="togbtn on" id="idPersonal" onclick="setId('personal')">個人</button>
+        <button class="togbtn" id="idCorp" onclick="setId('corp')">法人（公司）</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>居住地</label>
+      <div class="tog">
+        <button class="togbtn on" id="locTW" onclick="setLoc('tw')">境內居住者</button>
+        <button class="togbtn" id="locForeign" onclick="setLoc('foreign')">境外（非居住者）</button>
+      </div>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label>購入（取得）年月 <span>決定1.0或2.0</span></label>
+      <div class="irow" style="gap:6px">
+        <select id="buyYear" onchange="calc()" style="flex:2">
+<option value="2026" selected>民國115年（2026）</option>
+<option value="2025">民國114年（2025）</option>
+<option value="2024">民國113年（2024）</option>
+<option value="2023">民國112年（2023）</option>
+<option value="2022">民國111年（2022）</option>
+<option value="2021">民國110年（2021）</option>
+<option value="2020">民國109年（2020）</option>
+<option value="2019" selected>民國108年（2019）</option>
+<option value="2018">民國107年（2018）</option>
+<option value="2017">民國106年（2017）</option>
+<option value="2016">民國105年（2016）</option>
+<option value="2015">民國104年（2015）</option>
+<option value="2014">民國103年（2014）</option>
+<option value="2013">民國102年（2013）</option>
+<option value="2012">民國101年（2012）</option>
+<option value="2011">民國100年（2011）</option>
+<option value="2010">民國99年（2010）</option>
+<option value="2009">民國98年（2009）</option>
+<option value="2008">民國97年（2008）</option>
+<option value="2007">民國96年（2007）</option>
+<option value="2006">民國95年（2006）</option>
+<option value="2005">民國94年（2005）</option>
+<option value="2004">民國93年（2004）</option>
+<option value="2003">民國92年（2003）</option>
+<option value="2002">民國91年（2002）</option>
+<option value="2001">民國90年（2001）</option>
+<option value="2000">民國89年（2000）</option>
+<option value="1999">民國88年（1999）</option>
+<option value="1998">民國87年（1998）</option>
+<option value="1997">民國86年（1997）</option>
+<option value="1996">民國85年（1996）</option>
+<option value="1995">民國84年（1995）</option>
+<option value="1994">民國83年（1994）</option>
+<option value="1993">民國82年（1993）</option>
+<option value="1992">民國81年（1992）</option>
+<option value="1991">民國80年（1991）</option>
+<option value="1990">民國79年（1990）</option>
+<option value="1989">民國78年（1989）</option>
+<option value="1988">民國77年（1988）</option>
+<option value="1987">民國76年（1987）</option>
+<option value="1986">民國75年（1986）</option>
+<option value="1985">民國74年（1985）</option>
+<option value="1984">民國73年（1984）</option>
+<option value="1983">民國72年（1983）</option>
+<option value="1982">民國71年（1982）</option>
+<option value="1981">民國70年（1981）</option>
+<option value="1980">民國69年（1980）</option>
+<option value="1979">民國68年（1979）</option>
+<option value="1978">民國67年（1978）</option>
+<option value="1977">民國66年（1977）</option>
+<option value="1976">民國65年（1976）</option>
+<option value="1975">民國64年（1975）</option>
+<option value="1974">民國63年（1974）</option>
+<option value="1973">民國62年（1973）</option>
+<option value="1972">民國61年（1972）</option>
+<option value="1971">民國60年（1971）</option>
+        </select>
+        <select id="buyMonth" onchange="calc()" style="flex:1">
+<option value="1" selected>1月</option>
+<option value="2">2月</option>
+<option value="3">3月</option>
+<option value="4">4月</option>
+<option value="5">5月</option>
+<option value="6">6月</option>
+<option value="7">7月</option>
+<option value="8">8月</option>
+<option value="9">9月</option>
+<option value="10">10月</option>
+<option value="11">11月</option>
+<option value="12">12月</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>出售（移轉）年月</label>
+      <div class="irow" style="gap:6px">
+        <select id="sellYear" onchange="calc()" style="flex:2">
+<option value="2026" selected>民國115年（2026）</option>
+<option value="2025">民國114年（2025）</option>
+<option value="2024">民國113年（2024）</option>
+<option value="2023">民國112年（2023）</option>
+<option value="2022">民國111年（2022）</option>
+<option value="2021">民國110年（2021）</option>
+<option value="2020">民國109年（2020）</option>
+<option value="2019" selected>民國108年（2019）</option>
+<option value="2018">民國107年（2018）</option>
+<option value="2017">民國106年（2017）</option>
+<option value="2016">民國105年（2016）</option>
+<option value="2015">民國104年（2015）</option>
+<option value="2014">民國103年（2014）</option>
+<option value="2013">民國102年（2013）</option>
+<option value="2012">民國101年（2012）</option>
+<option value="2011">民國100年（2011）</option>
+<option value="2010">民國99年（2010）</option>
+<option value="2009">民國98年（2009）</option>
+<option value="2008">民國97年（2008）</option>
+<option value="2007">民國96年（2007）</option>
+<option value="2006">民國95年（2006）</option>
+<option value="2005">民國94年（2005）</option>
+<option value="2004">民國93年（2004）</option>
+<option value="2003">民國92年（2003）</option>
+<option value="2002">民國91年（2002）</option>
+<option value="2001">民國90年（2001）</option>
+        </select>
+        <select id="sellMonth" onchange="calc()" style="flex:1">
+<option value="1">1月</option>
+<option value="2">2月</option>
+<option value="3">3月</option>
+<option value="4" selected>4月</option>
+<option value="5">5月</option>
+<option value="6">6月</option>
+<option value="7">7月</option>
+<option value="8">8月</option>
+<option value="9">9月</option>
+<option value="10">10月</option>
+<option value="11">11月</option>
+<option value="12">12月</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 版本 + 持有 badge（自動計算） -->
+  <div class="ver-badge" id="verBadge"><div class="dot"></div><span id="verText">版本判斷中…</span></div>
+  <div class="hold-strip">
+    <div>
+      <div class="hold-years" id="holdYears">—</div>
+      <div class="hold-label">持有年限</div>
+    </div>
+    <div class="hold-right">
+      <div class="hold-rate-label">適用稅率</div>
+      <div class="hold-rate" id="holdRate">—</div>
+    </div>
+  </div>
+
+  <!-- 金額 -->
+  <div class="sec">交易金額</div>
+  <div class="row2">
+    <div class="field">
+      <label>成交售價</label>
+      <div class="irow"><input type="number" id="sellPrice" value="15000000" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+    </div>
+    <div class="field">
+      <label>取得成本 <span>購入總價</span></label>
+      <div class="irow"><input type="number" id="buyPrice" value="10000000" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+    </div>
+  </div>
+
+  <!-- 費用 -->
+  <div class="sec">可扣除費用</div>
+  <div class="row2">
+    <div class="field">
+      <label>相關費用 <span>仲介、代書、裝修等</span></label>
+      <div class="irow"><input type="number" id="fees" value="0" min="0" step="10000" oninput="syncFeeMode();calc()"><span class="unit">元</span></div>
+    </div>
+    <div class="field">
+      <label>費用計算方式</label>
+      <div class="tog">
+        <button class="togbtn on" id="feeAuto" onclick="setFeeMode('auto')">售價×3%概算</button>
+        <button class="togbtn" id="feeManual" onclick="setFeeMode('manual')">手動輸入</button>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>已繳土地增值稅 <span>可從課稅所得中扣除</span></label>
+    <div class="irow"><input type="number" id="landTax" value="0" min="0" step="10000" oninput="calc()"><span class="unit">元</span></div>
+  </div>
+
+  <!-- 自用優惠 -->
+  <div class="sec">自用住宅優惠</div>
+  <div class="row2">
+    <div class="field">
+      <label>符合自用住宅條件</label>
+      <div class="tog">
+        <button class="togbtn on" id="selfNo" onclick="setSelf(false)">否（一般稅率）</button>
+        <button class="togbtn" id="selfYes" onclick="setSelf(true)">是（400萬免稅）</button>
+      </div>
+    </div>
+    <div class="field" id="repurchaseField">
+      <label>出售後重購自用住宅 <span>2年內可退稅</span></label>
+      <div class="tog">
+        <button class="togbtn on" id="reNo" onclick="setRepurchase(false)">否</button>
+        <button class="togbtn" id="reYes" onclick="setRepurchase(true)">是（申請退稅）</button>
+      </div>
+    </div>
+  </div>
+  <div id="selfCondBox" style="display:none;background:#f3f0ff;border-radius:12px;padding:14px 18px;font-size:12px;color:#5b21b6;line-height:1.8;margin-top:-8px;margin-bottom:16px">
+    ✅ 自用條件：①本人/配偶/未成年子女設籍 ②持有並居住連續滿6年 ③交易前6年無出租、無營業 ④每10年僅能申請一次
+  </div>
+  <div id="repurchaseBox" style="display:none;background:#f0fdf4;border-radius:12px;padding:14px 18px;font-size:12px;color:#166534;line-height:1.8;margin-top:-8px;margin-bottom:16px">
+    💡 重購退稅：出售後2年內重購自用住宅。<strong>小換大（新屋≥舊屋）→ 全額退稅；大換小 → 按比例退稅。</strong>
+  </div>
+</div>
+
+<!-- 結果 -->
+<div class="card">
+  <div class="card-title">試算結果</div>
+  <div class="res-main">
+    <div class="res-main-lbl">估算應繳房地合一稅</div>
+    <div class="res-main-val" id="taxResult">—</div>
+    <div class="res-main-sub" id="taxSub">請填入完整資料</div>
+  </div>
+  <div class="rg">
+    <div class="rc hl"><div class="rc-lbl">課稅所得</div><div class="rc-val" id="taxableIncome">—</div><div class="rc-sub">元</div></div>
+    <div class="rc"><div class="rc-lbl">適用稅率</div><div class="rc-val" id="rateDisplay">—</div><div class="rc-sub">—</div></div>
+    <div class="rc"><div class="rc-lbl">獲利金額</div><div class="rc-val" id="profitDisplay">—</div><div class="rc-sub">元（含費用）</div></div>
+  </div>
+  <div class="detail">
+    <div class="dr"><span>成交售價</span><span id="d-sell">—</span></div>
+    <div class="dr minus"><span>取得成本</span><span id="d-cost">—</span></div>
+    <div class="dr minus"><span>相關費用</span><span id="d-fee">—</span></div>
+    <div class="dr minus"><span>土地漲價總數額（已繳土地增值稅）</span><span id="d-land">—</span></div>
+    <div class="dr"><span>課稅所得</span><span id="d-income">—</span></div>
+    <div class="dr minus" id="d-exemptRow"><span>自用住宅免稅額（400萬）</span><span id="d-exempt">—</span></div>
+    <div class="dr"><span>適用稅率</span><span id="d-rate">—</span></div>
+    <div class="dr"><span>估算應繳稅額</span><span id="d-tax">—</span></div>
+  </div>
+  <div id="infoBox" class="info-box" style="display:none"></div>
+  <div id="warnBox" class="warn-box" style="display:none"></div>
+  <div id="saveBox" class="save-box" style="display:none"></div>
+  <div class="disclaimer">⚠️ 本試算依財政部公告公式估算，費用3%概算為簡化處理，實際可扣費用依憑證為準。課稅所得為負數時不需繳稅。實際稅額以申報為準，建議諮詢地政士或稅務專業人員。</div>
+</div>
+
+<!-- 稅率表 -->
+<div class="card">
+  <div class="card-title">房地合一稅率速查表</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#7C3AED;margin-bottom:10px">1.0版（105/1/1–110/6/30取得）</div>
+      <table class="rt" id="table10">
+        <thead><tr><th>持有期間</th><th>個人境內</th><th>境外/法人</th></tr></thead>
+        <tbody>
+          <tr id="r10-0"><td>≤2年</td><td>45%</td><td>45% / 35%</td></tr>
+          <tr id="r10-1"><td>2–5年</td><td>35%</td><td>35% / 35%</td></tr>
+          <tr id="r10-2"><td>5–10年</td><td>20%</td><td>20% / 20%</td></tr>
+          <tr id="r10-3"><td>&gt;10年</td><td>15%</td><td>15% / 20%</td></tr>
+          <tr id="r10-s"><td>自用6年+</td><td>10%*</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#2563EB;margin-bottom:10px">2.0版（110/7/1後取得）</div>
+      <table class="rt" id="table20">
+        <thead><tr><th>持有期間</th><th>個人境內</th><th>境外/法人</th></tr></thead>
+        <tbody>
+          <tr id="r20-0"><td>≤2年</td><td>45%</td><td>45% / 20%</td></tr>
+          <tr id="r20-1"><td>2–3年</td><td>35%</td><td>35% / 20%</td></tr>
+          <tr id="r20-2"><td>3–5年</td><td>30%</td><td>30% / 20%</td></tr>
+          <tr id="r20-3"><td>5–10年</td><td>20%</td><td>20% / 20%</td></tr>
+          <tr id="r20-4"><td>&gt;10年</td><td>15%</td><td>15% / 20%</td></tr>
+          <tr id="r20-s"><td>自用6年+</td><td>10%*</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#6e6e73;margin-top:14px;line-height:1.8">
+    * 自用住宅：課稅所得400萬以內免稅，超過部分按10%課徵。境外個人無論年限均45%。法人統一20%。
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h3>房地合一稅太高？有其他選擇。</h3>
+  <p>售後回租不觸發房地合一稅，同樣可以快速取得資金，保有居住權。</p>
+  <div class="cta-row">
+    <a href="sale-leaseback.html" class="btn-purple">了解售後回租</a>
+    <a href="https://lin.ee/PHIfSoY" target="_blank" class="btn-green">加入 LINE 諮詢</a>
+  </div>
+</div>
+</div>
+
+<script>
+let idMode='personal', locMode='tw', selfUse=false, repurchase=false, feeMode='auto';
+
+function setId(v){idMode=v;document.getElementById('idPersonal').classList.toggle('on',v==='personal');document.getElementById('idCorp').classList.toggle('on',v==='corp');calc();}
+function setLoc(v){locMode=v;document.getElementById('locTW').classList.toggle('on',v==='tw');document.getElementById('locForeign').classList.toggle('on',v==='foreign');calc();}
+function setSelf(v){selfUse=v;document.getElementById('selfYes').classList.toggle('on',v);document.getElementById('selfNo').classList.toggle('on',!v);document.getElementById('selfCondBox').style.display=v?'block':'none';calc();}
+function setRepurchase(v){repurchase=v;document.getElementById('reYes').classList.toggle('on',v);document.getElementById('reNo').classList.toggle('on',!v);document.getElementById('repurchaseBox').style.display=v?'block':'none';calc();}
+function setFeeMode(v){feeMode=v;document.getElementById('feeAuto').classList.toggle('on',v==='auto');document.getElementById('feeManual').classList.toggle('on',v==='manual');document.getElementById('fees').disabled=v==='auto';calc();}
+function syncFeeMode(){if(feeMode==='manual')return;}
+
+function fmt(n){if(isNaN(n)||n===null)return'—';return Math.round(n).toLocaleString('zh-TW');}
+
+function getDateStr(yearId,monthId){
+  const y=document.getElementById(yearId).value;
+  const m=String(document.getElementById(monthId).value).padStart(2,'0');
+  return y+'-'+m;
+}
+
+function monthDiff(a,b){const da=new Date(a+'-01'),db=new Date(b+'-01');return(db.getFullYear()-da.getFullYear())*12+(db.getMonth()-da.getMonth());}
+
+function getRate(months, ver){
+  // 法人統一20%
+  if(idMode==='corp') return {r:0.20, label:'20%（法人）', rowId:null};
+  // 境外個人固定45%
+  if(locMode==='foreign') return {r:0.45, label:'45%（境外）', rowId:null};
+  // 自用住宅
+  if(selfUse && months>=72) return {r:0.10, label:'10%（自用住宅）', rowId: ver===10?'r10-s':'r20-s'};
+
+  const yrs=months/12;
+  if(ver===10){
+    if(yrs<=2) return{r:.45,label:'45%',rowId:'r10-0'};
+    if(yrs<=5) return{r:.35,label:'35%',rowId:'r10-1'};
+    if(yrs<=10) return{r:.20,label:'20%',rowId:'r10-2'};
+    return{r:.15,label:'15%',rowId:'r10-3'};
+  } else {
+    if(yrs<=2) return{r:.45,label:'45%',rowId:'r20-0'};
+    if(yrs<=3) return{r:.35,label:'35%',rowId:'r20-1'};
+    if(yrs<=5) return{r:.30,label:'30%',rowId:'r20-2'};
+    if(yrs<=10) return{r:.20,label:'20%',rowId:'r20-3'};
+    return{r:.15,label:'15%',rowId:'r20-4'};
+  }
+}
+
+function calc(){
+  const buyDate=getDateStr('buyYear','buyMonth');
+  const sellDate=getDateStr('sellYear','sellMonth');
+  const sellPrice=parseFloat(document.getElementById('sellPrice').value)||0;
+  const buyPrice=parseFloat(document.getElementById('buyPrice').value)||0;
+  const landTax=parseFloat(document.getElementById('landTax').value)||0;
+
+  if(!buyDate||!sellDate||sellPrice<=0||buyPrice<=0){
+    document.getElementById('taxResult').textContent='—';
+    document.getElementById('taxSub').textContent='請填入完整資料';
+    return;
+  }
+
+  const months=monthDiff(buyDate,sellDate);
+  const yrs=(months/12);
+  if(months<0){
+    document.getElementById('taxResult').textContent='—';
+    document.getElementById('taxSub').textContent='出售日期不可早於購入日期';
+    return;
+  }
+
+  // version
+  const buyDateObj=new Date(buyDate+'-01');
+  const ver=(buyDateObj<new Date('2021-07-01'))?10:20;
+  document.getElementById('verText').textContent='適用房地合一稅 '+ver/10+'.0 版（'+( ver===10?'105年1月1日–110年6月30日':'110年7月1日後')+' 取得)';
+  document.getElementById('verBadge').style.background=ver===10?'#f3f0ff':'#eff6ff';
+  document.getElementById('verBadge').style.borderColor=ver===10?'#7C3AED':'#2563EB';
+  document.getElementById('verBadge').querySelector('.dot').style.background=ver===10?'#7C3AED':'#2563EB';
+
+  // holding
+  const yrsLabel=yrs>=1?yrs.toFixed(1)+'年':(months+'個月');
+  document.getElementById('holdYears').textContent=yrsLabel;
+
+  // fees
+  let fees;
+  if(feeMode==='auto'){
+    fees=sellPrice*0.03;
+    document.getElementById('fees').value=Math.round(fees);
+  } else {
+    fees=parseFloat(document.getElementById('fees').value)||0;
+  }
+
+  // rate
+  const {r, label, rowId}=getRate(months, ver);
+  document.getElementById('holdRate').textContent=label;
+  document.getElementById('rateDisplay').textContent=label;
+
+  // highlight rate table rows
+  document.querySelectorAll('.rt tr').forEach(tr=>tr.classList.remove('cur'));
+  if(rowId) document.getElementById(rowId)&&document.getElementById(rowId).classList.add('cur');
+
+  // income
+  const grossIncome=sellPrice-buyPrice-fees-landTax;
+  const exempt=selfUse?Math.min(Math.max(grossIncome,0),4000000):0;
+  const taxableIncome=Math.max(grossIncome-exempt,0);
+  const rawTax=taxableIncome*r;
+
+  document.getElementById('taxableIncome').textContent=fmt(taxableIncome);
+  document.getElementById('profitDisplay').textContent=fmt(grossIncome);
+  document.getElementById('d-sell').textContent=fmt(sellPrice)+' 元';
+  document.getElementById('d-cost').textContent='－ '+fmt(buyPrice)+' 元';
+  document.getElementById('d-fee').textContent='－ '+fmt(fees)+' 元'+(feeMode==='auto'?' (3%概算)':'');
+  document.getElementById('d-land').textContent='－ '+fmt(landTax)+' 元';
+  document.getElementById('d-income').textContent=fmt(grossIncome)+' 元';
+  document.getElementById('d-exempt').textContent='－ '+fmt(exempt)+' 元';
+  document.getElementById('d-exemptRow').style.display=selfUse?'flex':'none';
+  document.getElementById('d-rate').textContent=label;
+  document.getElementById('d-tax').textContent=fmt(rawTax)+' 元';
+
+  const info=document.getElementById('infoBox');
+  const warn=document.getElementById('warnBox');
+  const save=document.getElementById('saveBox');
+  info.style.display='none'; warn.style.display='none'; save.style.display='none';
+
+  if(grossIncome<=0){
+    document.getElementById('taxResult').textContent='0 元';
+    document.getElementById('taxSub').textContent='虧損出售，不需繳納房地合一稅';
+    info.style.display='block';
+    info.innerHTML='<strong>虧損出售：</strong>課稅所得為負數，依法不需繳納房地合一稅。虧損可於申報時列為財產交易損失，抵扣同年度其他財產交易所得。';
+    return;
+  }
+
+  document.getElementById('taxResult').textContent=fmt(rawTax)+' 元';
+  document.getElementById('taxSub').textContent=`持有 ${yrsLabel}｜${label}｜課稅所得 ${fmt(taxableIncome)} 元`;
+
+  if(selfUse&&grossIncome<=4000000){
+    save.style.display='block';
+    save.innerHTML='🎉 <strong>完全免稅：</strong>符合自用住宅條件且課稅所得未超過 400 萬元，本次出售<strong>免繳房地合一稅</strong>！';
+    document.getElementById('taxResult').textContent='0 元';
+    document.getElementById('taxSub').textContent='自用住宅 400萬免稅額，課稅所得未超過 400 萬元';
+  } else if(selfUse){
+    save.style.display='block';
+    save.innerHTML=`💡 <strong>自用優惠已適用：</strong>課稅所得扣除 400 萬免稅額後，剩餘 ${fmt(taxableIncome)} 元按 10% 課徵，已節省 <strong>${fmt(grossIncome*r-rawTax)} 元</strong>。`;
+  }
+
+  if(r>=0.35&&!selfUse){
+    warn.style.display='block';
+    warn.innerHTML=`⚠️ <strong>高稅率警示：</strong>持有 ${yrsLabel} 適用 ${label}，稅額 ${fmt(rawTax)} 元。`+(ver===20&&yrs<5?'<br>若可再持有至第3年以上可降至30%，持有5年以上可降至20%，節省可觀稅額。':'');
+  }
+
+  if(repurchase){
+    info.style.display='block';
+    info.innerHTML='🏠 <strong>重購退稅：</strong>出售後2年內重購自用住宅，可向稽徵機關申請退稅。<br>• 大換小（新屋成交價 < 舊屋成交價）：按比例退稅<br>• 小換大（新屋成交價 ≥ 舊屋成交價）：全額退稅 '+fmt(rawTax)+' 元';
+  }
+}
+
+// init
+setFeeMode('auto');
+calc();
+</script>
+</body>
+</html>
