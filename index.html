@@ -169,12 +169,13 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2.5rem 2.5rem 1.75rem}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FinancialService",
+  "@type": ["LocalBusiness","FinancialService"],
   "name": "鋮馨租賃有限公司",
-  "alternateName": "cx468",
+  "alternateName": ["CX468 鋮馨租賃","鋮馨租賃"],
   "url": "https://cx468.com.tw",
-  "logo": "https://cx468.com.tw",
-  "description": "新北市租屋・包租代管・不動產售後回租・貸款整合規劃。鋮馨租賃有限公司提供房屋出租管理、售後回租及貸款整合，協助屋主安心出租、降低財務壓力。新北市中和，全台服務。",
+  "logo": "https://cx468.com.tw/img/logo.jpg",
+  "image": "https://cx468.com.tw/img/hero.jpg",
+  "description": "鋮馨租賃有限公司提供售後回租、貸款整合、民間轉銀行、包租代管等不動產財務規劃服務。名下有房就能評估，協助信用瑕疵或負債比過高的屋主取得資金、降低財務壓力。服務新北市、台北市及全台灣。",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "中正路468號",
@@ -183,15 +184,29 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2.5rem 2.5rem 1.75rem}
     "postalCode": "235",
     "addressCountry": "TW"
   },
-  "telephone": ["02-2249-0517", "0931-087-996"],
+  "geo": {"@type":"GeoCoordinates","latitude":24.9935,"longitude":121.4977},
+  "telephone": "02-2249-0517",
   "email": "cx468@gmail.com",
-  "areaServed": {
-    "@type": "Country",
-    "name": "台灣"
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}
+  ],
+  "areaServed": [
+    {"@type":"City","name":"新北市"},
+    {"@type":"City","name":"台北市"},
+    {"@type":"AdministrativeArea","name":"台灣"}
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "不動產財務規劃服務",
+    "itemListElement": [
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"售後回租","description":"屋主將房屋出售後繼續以租客身分居住，立即取得大筆現金，適合信用瑕疵或急需資金者","url":"https://cx468.com.tw/sale-leaseback.html"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"貸款整合","description":"將多筆高利率負債整合為一筆低利率房貸，每月還款大幅降低","url":"https://cx468.com.tw/loan-process.html"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"民間轉銀行","description":"民間借貸月息2%轉換成銀行年息2%，每年節省大量利息","url":"https://cx468.com.tw/private-to-bank.html"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"包租代管","description":"委託專業公司全程管理出租房屋，含找租客、收租、維修協調","url":"https://cx468.com.tw/services.html"}}
+    ]
   },
-  "serviceType": ["租屋管理", "包租代管", "不動產售後回租", "貸款整合規劃", "民間轉銀行貸款", "個人貸款諮詢", "房屋出租"],
-  "openingHours": "Mo-Fr 09:00-18:00",
-  "sameAs": ["https://lin.ee/PHIfSoY"]
+  "sameAs": ["https://lin.ee/PHIfSoY"],
+  "priceRange": "免費評估"
 }
 </script>
 
