@@ -11,139 +11,217 @@
 <meta property="og:title" content="不動產市場走勢・銀行放貸分析｜鋮馨租賃">
 <meta property="og:url" content="https://cx468.com.tw/market-insight.html">
 <link rel="canonical" href="https://cx468.com.tw/market-insight.html">
+<link rel="stylesheet" href="style.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-.nav-logo{font-size:15px;font-weight:500}
-.nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
-.nav-links a:hover{opacity:1}
-.nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
-
 /* Hero */
 .hero{margin-top:48px;background:#0d1117;padding:88px 24px 80px;text-align:center;position:relative;overflow:hidden}
+
 .hero::before{content:'';position:absolute;inset:0;background:
   radial-gradient(ellipse at 20% 50%,rgba(0,113,227,.18) 0%,transparent 55%),
   radial-gradient(ellipse at 80% 50%,rgba(200,16,46,.12) 0%,transparent 55%);
 }
+
 .hero>*{position:relative;z-index:1}
+
 .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#86868b;margin-bottom:20px}
+
 .hero-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.06;margin-bottom:18px}
+
 .hero-sub{font-size:17px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto}
+
 .hero-toc{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+
 .toc-pill{font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;border:.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.65);cursor:pointer}
+
 .toc-pill:hover{background:rgba(255,255,255,.08)}
+
 .hero-cta{display:inline-block;background:#0071e3;color:#fff;font-size:14px;font-weight:700;padding:13px 30px;border-radius:24px}
+
 
 /* Section common */
 .sec{padding:80px 24px}
+
 .sec-inner{max-width:920px;margin:0 auto}
+
 .label-tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+
 .label-blue{color:#0071e3}
+
 .label-red{color:#c8102e}
+
 .label-green{color:#1a7a1a}
+
 .sec-h2{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f;margin-bottom:16px}
+
 .sec-sub{font-size:16px;color:#6e6e73;line-height:1.75;max-width:640px;margin-bottom:48px}
+
 
 /* ===== SECTION 1: 不動產走勢 ===== */
 .trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
+
 .trend-card{border-radius:20px;padding:32px 28px;border:.5px solid #e5e5e5}
+
 .trend-city{font-size:13px;font-weight:700;letter-spacing:.04em;color:#86868b;margin-bottom:10px}
+
 .trend-price{font-size:36px;font-weight:700;color:#1d1d1f;letter-spacing:-.02em;margin-bottom:4px}
+
 .trend-unit{font-size:13px;color:#86868b;margin-bottom:16px}
+
 .trend-bar-wrap{background:#f0f0f0;border-radius:6px;height:8px;margin-bottom:16px;overflow:hidden}
+
 .trend-bar{height:100%;border-radius:6px;background:linear-gradient(to right,#0071e3,#4da3ff)}
+
 .trend-change{font-size:13px;font-weight:600;padding:4px 10px;border-radius:10px;display:inline-block;margin-bottom:12px}
+
 .up{background:#fff0f0;color:#c8102e}
+
 .trend-note{font-size:13px;color:#6e6e73;line-height:1.6}
 
+
 .district-table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;border:.5px solid #d2d2d7;margin-bottom:32px}
+
 .district-table th{background:#1d1d1f;color:#f5f5f7;font-size:12px;font-weight:600;padding:12px 16px;text-align:left}
+
 .district-table td{padding:12px 16px;font-size:14px;border-bottom:.5px solid #f0f0f0;color:#1d1d1f}
+
 .district-table tr:last-child td{border-bottom:none}
+
 .district-table tr:nth-child(even) td{background:#fafafa}
+
 .badge-hot{font-size:11px;font-weight:600;background:#fff0f0;color:#c8102e;padding:2px 8px;border-radius:8px}
+
 .badge-stable{font-size:11px;font-weight:600;background:#f0f7ff;color:#0071e3;padding:2px 8px;border-radius:8px}
 
+
 .trend-insight{background:#f5f5f7;border-radius:20px;padding:32px 28px}
+
 .insight-title{font-size:17px;font-weight:700;color:#1d1d1f;margin-bottom:16px}
+
 .insight-list{display:flex;flex-direction:column;gap:10px}
+
 .insight-item{font-size:14px;color:#1d1d1f;display:flex;gap:12px;align-items:flex-start;line-height:1.6}
+
 .insight-dot{width:8px;height:8px;border-radius:50%;background:#0071e3;flex-shrink:0;margin-top:6px}
+
 
 /* ===== SECTION 2: 銀行放貸 ===== */
 .bank-sec{background:#0d1117}
+
 .bank-sec .sec-h2{color:#fff}
+
 .bank-sec .sec-sub{color:rgba(255,255,255,.5)}
+
 .status-banner{border-radius:20px;border:1.5px solid rgba(255,165,0,.35);background:rgba(255,165,0,.08);padding:28px 32px;display:flex;align-items:center;gap:20px;margin-bottom:36px}
+
 .status-dot{width:16px;height:16px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.25);flex-shrink:0;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(245,158,11,.25)}50%{box-shadow:0 0 0 8px rgba(245,158,11,.08)}}
+
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(245,158,11,.25)}
+50%{box-shadow:0 0 0 8px rgba(245,158,11,.08)}
+}
 .status-text strong{display:block;font-size:18px;font-weight:700;color:#fff;margin-bottom:4px}
+
 .status-text span{font-size:14px;color:rgba(255,255,255,.5);line-height:1.55}
+
 .bank-factors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
+
 .factor-card{border-radius:16px;padding:24px 20px;border:.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
+
 .factor-icon{font-size:24px;margin-bottom:12px}
+
 .factor-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:8px}
+
 .factor-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+
 .factor-tag{display:inline-block;margin-top:10px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px}
+
 .tag-tight{background:rgba(200,16,46,.2);color:#ff6b6b}
+
 .tag-normal{background:rgba(245,158,11,.2);color:#fbbf24}
+
 .tag-loose{background:rgba(6,199,85,.2);color:#34d399}
 
+
 .policy-timeline{display:flex;flex-direction:column;gap:0}
+
 .pt-item{display:grid;grid-template-columns:100px 1fr;gap:20px;padding:16px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+
 .pt-item:last-child{border-bottom:none}
+
 .pt-date{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);padding-top:2px}
+
 .pt-content strong{display:block;font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+
 .pt-content span{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55}
+
 .pt-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;margin-top:6px}
+
 .pt-badge.tight{background:rgba(200,16,46,.25);color:#ff6b6b}
+
 .pt-badge.ease{background:rgba(6,199,85,.2);color:#34d399}
+
 
 /* ===== SECTION 3: 比較 ===== */
 .compare-header{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:0;border-radius:16px 16px 0 0;overflow:hidden}
+
 .col-head{padding:18px 20px;text-align:center;font-size:13px;font-weight:700}
+
 .col-head.item{background:#f5f5f7;color:#86868b}
+
 .col-head.self{background:#e5e5e5;color:#6e6e73}
+
 .col-head.cx{background:#0071e3;color:#fff}
+
 .compare-body{border:.5px solid #d2d2d7;border-top:none;border-radius:0 0 16px 16px;overflow:hidden}
+
 .compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:.5px solid #f0f0f0}
+
 .compare-row:last-child{border-bottom:none}
+
 .compare-row:nth-child(even){background:#fafafa}
+
 .c-item{padding:16px 20px;font-size:14px;font-weight:600;color:#1d1d1f;display:flex;align-items:center}
+
 .c-self{padding:16px 20px;font-size:13px;color:#6e6e73;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.5;border-left:.5px solid #f0f0f0}
+
 .c-cx{padding:16px 20px;font-size:13px;color:#0071e3;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.5;border-left:.5px solid #f0f0f0;font-weight:500}
+
 .c-cx.good::before{content:'✓ ';font-weight:700}
+
 .c-self.bad::before{content:'✗ ';color:#c8102e;font-weight:700}
 
+
 .result-banner{margin-top:32px;background:linear-gradient(135deg,#0071e3,#005bb5);border-radius:20px;padding:36px 32px;text-align:center;color:#fff}
+
 .result-title{font-size:22px;font-weight:700;margin-bottom:10px}
+
 .result-sub{font-size:15px;color:rgba(255,255,255,.75);line-height:1.65;max-width:500px;margin:0 auto 24px}
+
 .result-btn{display:inline-block;background:#fff;color:#0071e3;font-size:14px;font-weight:700;padding:12px 28px;border-radius:24px}
+
 
 /* CTA */
 .cta-strip{background:#1d1d1f;padding:88px 24px;text-align:center}
-.cta-h2{font-size:42px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
-.cta-sub{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:32px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
-.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-blue{display:inline-block;background:#0071e3;color:#fff;font-size:14px;font-weight:700;padding:13px 30px;border-radius:24px}
-.btn-outline{display:inline-block;background:transparent;color:#fff;font-size:14px;padding:13px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.3)}
 
-footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.5px solid #2c2c2e}
-.footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
-.footer-col-title{font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
-.footer-link{display:block;font-size:11px;color:#86868b;margin-bottom:.4rem}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;border-top:.5px solid #2c2c2e;padding-top:1.25rem}
-.copyright{font-size:11px;color:#555}
+.cta-h2{font-size:42px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
+
+.cta-sub{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:32px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
+
+
+.btn-blue{display:inline-block;background:#0071e3;color:#fff;font-size:14px;font-weight:700;padding:13px 30px;border-radius:24px}
+
+
+
+
+
+
+
+
+
 .data-disclaimer{font-size:11px;color:#86868b;margin-top:12px;line-height:1.6}
 
-.mobile-line-fab{display:none}
+
+
 @media(max-width:768px){
-  nav{padding:0 1rem}
-  .nav-links{display:none}
   .hero-h1{font-size:28px}
   .hero-sub{font-size:15px}
   .sec-h2{font-size:24px}
@@ -157,24 +235,20 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.
   .c-self::before,.c-cx::before{content:attr(data-label)' ';font-weight:700;color:#86868b;margin-right:4px}
   .result-banner{padding:28px 20px}
   .cta-h2{font-size:26px}
-  .footer-cols{grid-template-columns:1fr}
-  footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
 }
 </style>
+  <script src="include.js" defer></script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<meta property="og:image" content="https://cx468.com.tw/favicon-512.png">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:type" content="website">
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><span><span style="color:#c8102e;font-weight:700;">鋮</span>馨租賃有限公司</span></a>
-  <div class="nav-links">
-    <a href="index.html">首頁</a>
-    <a href="services.html">服務項目</a>
-    <a href="about.html">關於我們</a>
-    <a href="faq.html">常見問題</a>
-    <a href="contact.html">聯絡我們</a>
-  </div>
-  <a href="evaluate.html" class="nav-cta">免費評估</a>
-</nav>
+<div data-include="nav"></div>
 
 <!-- Hero -->
 <div class="hero">
@@ -413,37 +487,6 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.
     <a href="https://lin.ee/PHIfSoY" target="_blank" class="btn-outline">加入 LINE 諮詢</a>
   </div>
 </div>
-
-<footer>
-  <div class="footer-cols">
-    <div>
-      <div class="footer-col-title">服務項目</div>
-      <a class="footer-link" href="services.html">包租代管</a>
-      <a class="footer-link" href="sale-leaseback.html">不動產售後回租</a>
-      <a class="footer-link" href="private-to-bank.html">民間轉銀行</a>
-      <a class="footer-link" href="loan-process.html">貸款整合流程</a>
-    </div>
-    <div>
-      <div class="footer-col-title">了解更多</div>
-      <a class="footer-link" href="about.html">關於我們</a>
-      <a class="footer-link" href="faq.html">常見問題</a>
-      <a class="footer-link" href="contact.html">聯絡我們</a>
-    </div>
-    <div>
-      <div class="footer-col-title">聯絡我們</div>
-      <span style="font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px;">電話</span>
-      <span style="font-size:11px;color:#86868b;">02-2249-0517 ／ 0931-087-996</span><br><br>
-      <span style="font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px;">地址</span>
-      <span style="font-size:11px;color:#86868b;">新北市中和區中正路 468 號</span>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="copyright">Copyright © 2026 鋮馨租賃有限公司　版權所有</div>
-    <a href="https://lin.ee/PHIfSoY" target="_blank" style="font-size:11px;color:#555;">LINE 官方帳號</a>
-  </div>
-</footer>
-<a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
-</a>
+<div data-include="footer"></div>
 </body>
 </html>

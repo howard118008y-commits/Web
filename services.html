@@ -13,74 +13,68 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cx468.com.tw/services.html">
 <link rel="canonical" href="https://cx468.com.tw/services.html">
+<link rel="stylesheet" href="style.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
-.nav-logo span{color:#c8102e;font-weight:700}
-.nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
-.nav-links a:hover{opacity:1}
-.nav-links a.active{opacity:1;font-weight:600;color:#c8102e}
-.nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
-.page-hero{margin-top:48px;background:#000;padding:80px 2rem 72px;text-align:center}
-.page-eyebrow{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
-.page-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:16px}
-.page-sub{font-size:18px;color:rgba(255,255,255,.7);max-width:540px;margin:0 auto 32px;line-height:1.6}
-.btn-line{display:inline-block;background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
 .services-grid{max-width:1080px;margin:0 auto;padding:80px 24px}
+
 .svc-block{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:96px}
+
 .svc-block.reverse{direction:rtl}
+
 .svc-block.reverse>*{direction:ltr}
+
 .svc-img{border-radius:24px;overflow:hidden;height:380px;background:#1d1d1f;position:relative}
+
 .svc-img img{width:100%;height:100%;object-fit:cover;opacity:.85}
+
 .svc-badge{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:12px;margin-bottom:16px;letter-spacing:.05em}
+
 .badge-blue{background:rgba(0,113,227,.12);color:#0071e3;border:.5px solid rgba(0,113,227,.25)}
+
 .badge-red{background:rgba(200,16,46,.1);color:#c8102e;border:.5px solid rgba(200,16,46,.22)}
+
 .badge-gold{background:rgba(212,163,38,.18);color:#b8860b;border:.5px solid rgba(212,163,38,.3)}
+
 .svc-num{font-size:11px;color:#86868b;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+
 .svc-title{font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:#1d1d1f;margin-bottom:16px}
+
 .svc-desc{font-size:16px;color:#6e6e73;line-height:1.75;margin-bottom:24px}
+
 .svc-points{list-style:none;margin-bottom:28px}
+
 .svc-points li{font-size:14px;color:#1d1d1f;padding:8px 0;border-bottom:.5px solid #f0f0f0;display:flex;gap:10px;align-items:flex-start}
+
 .svc-points li::before{content:"✓";color:#06C755;font-weight:700;flex-shrink:0;margin-top:1px}
+
 .svc-link{font-size:14px;font-weight:600;color:#0071e3;display:inline-flex;align-items:center;gap:4px}
+
 .svc-link::after{content:"›";font-size:18px}
-.cta-strip{background:#1d1d1f;padding:80px 24px;text-align:center}
-.cta-strip h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-bottom:16px}
-.cta-strip p{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
-.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-green{background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
-.btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4)}
-footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;border-top:.5px solid #424245;padding-top:1.25rem;margin-top:1.5rem}
-.copyright{font-size:11px;color:#86868b}
-.footer-links-row{display:flex;gap:1.5rem}
-.footer-link-sm{font-size:11px;color:#86868b}
-.footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
-.footer-col-title{font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
-.footer-link{display:block;font-size:11px;color:#86868b;margin-bottom:.4rem}
-.contact-label{font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px}
-.contact-value{font-size:11px;color:#86868b;line-height:1.65}
-.mobile-line-fab{display:none}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media(max-width:768px){
-  nav{padding:0 1rem}
-  .nav-links{display:none}
-  .page-h1{font-size:30px}
-  .page-sub{font-size:15px}
   .services-grid{padding:48px 16px}
   .svc-block{grid-template-columns:1fr;gap:32px;margin-bottom:64px}
   .svc-block.reverse{direction:ltr}
   .svc-img{height:240px;order:-1}
   .svc-title{font-size:26px}
   .svc-desc{font-size:14px}
-  .cta-strip h2{font-size:28px}
-  .footer-cols{grid-template-columns:1fr}
-  footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
 }
 </style>
 <script type="application/ld+json">
@@ -106,21 +100,17 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
   "url":"https://cx468.com.tw/services.html"
 }
 </script>
+  <script src="include.js" defer></script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<meta property="og:image" content="https://cx468.com.tw/favicon-512.png">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span style="font-size:15px;font-weight:500;"><span style="color:#c8102e;font-weight:700;">鋮</span>馨租賃有限公司</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">首頁</a>
-    <a href="services.html" class="active">服務項目</a>
-    <a href="about.html">關於我們</a>
-    <a href="faq.html">常見問題</a>
-    <a href="contact.html">聯絡我們</a>
-  </div>
-  <a href="https://lin.ee/PHIfSoY" target="_blank" class="nav-cta">免費評估</a>
-</nav>
+<div data-include="nav"></div>
 
 <div class="page-hero">
   <div class="page-eyebrow">鋮馨租賃有限公司 · 核心服務</div>
@@ -204,39 +194,6 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
     <a href="tel:0931087996" class="btn-outline">直接來電 0931-087-996</a>
   </div>
 </div>
-
-<footer>
-  <div class="footer-cols">
-    <div>
-      <div class="footer-col-title">服務項目</div>
-      <a class="footer-link" href="services.html">包租代管</a>
-      <a class="footer-link" href="services.html">不動產售後回租</a>
-      <a class="footer-link" href="services.html">貸款整合規劃</a>
-    </div>
-    <div>
-      <div class="footer-col-title">了解更多</div>
-      <a class="footer-link" href="about.html">關於我們</a>
-      <a class="footer-link" href="faq.html">常見問題</a>
-      <a class="footer-link" href="contact.html">聯絡我們</a>
-    </div>
-    <div>
-      <div class="footer-col-title">聯絡我們</div>
-      <span class="contact-label">電話</span>
-      <span class="contact-value">02-2249-0517 ／ 0931-087-996</span><br><br>
-      <span class="contact-label">地址</span>
-      <span class="contact-value">新北市中和區中正路 468 號</span>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="copyright">Copyright © 2026 鋮馨租賃有限公司　版權所有</div>
-    <div class="footer-links-row">
-      <a href="https://lin.ee/PHIfSoY" target="_blank" class="footer-link-sm">LINE 官方帳號</a>
-    </div>
-  </div>
-</footer>
-
-<a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
-</a>
+<div data-include="footer"></div>
 </body>
 </html>

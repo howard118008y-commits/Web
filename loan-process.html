@@ -13,124 +13,192 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cx468.com.tw/loan-process.html">
 <link rel="canonical" href="https://cx468.com.tw/loan-process.html">
+<link rel="stylesheet" href="style.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-.nav-logo{font-size:15px;font-weight:500}
-.nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
-.nav-links a:hover{opacity:1}
-.nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
-
 /* Hero */
 .hero{margin-top:48px;background:#111;padding:96px 24px 80px;text-align:center;position:relative;overflow:hidden}
+
 .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&q=70') center/cover no-repeat;opacity:.18}
+
 .hero>*{position:relative;z-index:1}
+
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a78bfa;background:rgba(167,139,250,.12);border:.5px solid rgba(167,139,250,.3);padding:5px 16px;border-radius:20px;margin-bottom:24px}
+
 .hero-h1{font-size:54px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.06;margin-bottom:20px}
+
 .hero-h1 em{color:#a78bfa;font-style:normal}
+
 .hero-sub{font-size:18px;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
+
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
 .btn-purple{display:inline-block;background:#7c3aed;color:#fff;font-size:14px;font-weight:700;padding:13px 28px;border-radius:24px}
+
 .btn-ghost-w{display:inline-block;background:transparent;color:rgba(255,255,255,.8);font-size:14px;padding:13px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.28)}
+
 
 /* Pain Section */
 .pain-wrap{background:#fafafa;padding:80px 24px}
+
 .pain-inner{max-width:900px;margin:0 auto}
+
 .label-tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;color:#7c3aed}
+
 .section-h2{font-size:40px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f;margin-bottom:16px}
+
 .section-sub{font-size:16px;color:#6e6e73;line-height:1.75;max-width:600px;margin-bottom:40px}
+
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
 .pain-card{background:#fff;border-radius:18px;padding:28px 24px;border:.5px solid #e5e5e5}
+
 .pain-icon{font-size:32px;margin-bottom:14px}
+
 .pain-title{font-size:16px;font-weight:700;color:#1d1d1f;margin-bottom:8px}
+
 .pain-desc{font-size:14px;color:#6e6e73;line-height:1.65}
+
 
 /* Process - Main */
 .process-wrap{max-width:900px;margin:0 auto;padding:88px 24px}
+
 .process-list{display:flex;flex-direction:column;gap:0;margin-top:56px;position:relative}
+
 .process-list::before{content:'';position:absolute;left:27px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#7c3aed,#a78bfa,#e5e5e5);z-index:0}
+
 .process-item{display:grid;grid-template-columns:56px 1fr;gap:28px;padding-bottom:48px;position:relative;z-index:1}
+
 .process-item:last-child{padding-bottom:0}
+
 .p-circle{width:56px;height:56px;border-radius:50%;background:#7c3aed;color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
+
 .p-circle.done{background:#06C755}
+
 .p-body{padding-top:12px}
+
 .p-step-label{font-size:11px;font-weight:600;color:#7c3aed;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+
 .p-title{font-size:22px;font-weight:700;color:#1d1d1f;letter-spacing:-.015em;margin-bottom:10px}
+
 .p-desc{font-size:15px;color:#6e6e73;line-height:1.75;margin-bottom:14px}
+
 .p-tags{display:flex;flex-wrap:wrap;gap:8px}
+
 .p-tag{font-size:12px;font-weight:500;background:#f0ebff;color:#7c3aed;padding:4px 12px;border-radius:20px;border:.5px solid #d4c5ff}
+
 .p-tag.doc{background:#f0f9ff;color:#0071e3;border-color:#bae0ff}
+
 .p-tag.time{background:#f5f5f5;color:#6e6e73;border-color:#d2d2d7}
+
 .p-note{margin-top:12px;background:#f9f9f9;border-left:3px solid #7c3aed;border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:#6e6e73;line-height:1.65}
+
 .p-note strong{color:#1d1d1f}
+
 
 /* Docs Section */
 .docs-wrap{background:#f5f5f7;padding:80px 24px}
+
 .docs-inner{max-width:900px;margin:0 auto}
+
 .docs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+
 .doc-card{background:#fff;border-radius:18px;padding:28px 24px;border:.5px solid #e5e5e5}
+
 .doc-card-title{font-size:15px;font-weight:700;color:#1d1d1f;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+
 .doc-card-icon{width:32px;height:32px;border-radius:8px;background:#f0ebff;display:flex;align-items:center;justify-content:center;font-size:16px}
+
 .doc-list{display:flex;flex-direction:column;gap:6px}
+
 .doc-item{font-size:13px;color:#6e6e73;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+
 .doc-item::before{content:'·';color:#7c3aed;font-weight:700;flex-shrink:0}
+
 .doc-note{margin-top:16px;font-size:12px;color:#86868b;background:#fafafa;border-radius:10px;padding:10px 14px;line-height:1.6}
+
 
 /* Timeline Visual */
 .timeline-wrap{max-width:760px;margin:0 auto;padding:80px 24px}
+
 .timeline-bar{display:flex;align-items:stretch;gap:0;margin-top:40px;border-radius:16px;overflow:hidden}
+
 .t-seg{padding:20px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+
 .t-seg:nth-child(1){background:#f0ebff;flex:1.2}
+
 .t-seg:nth-child(2){background:#ddd5ff;flex:0.8}
+
 .t-seg:nth-child(3){background:#c4b5fd;flex:1}
+
 .t-seg:nth-child(4){background:#a78bfa;flex:0.6}
+
 .t-seg:nth-child(5){background:#7c3aed;flex:0.6}
+
 .t-seg:nth-child(6){background:#06C755;flex:0.8}
+
 .t-label{font-size:12px;font-weight:700;color:#fff}
+
 .t-seg:nth-child(1) .t-label,.t-seg:nth-child(2) .t-label{color:#5b21b6}
+
 .t-days{font-size:11px;color:rgba(255,255,255,.75)}
+
 .t-seg:nth-child(1) .t-days,.t-seg:nth-child(2) .t-days{color:rgba(91,33,182,.6)}
+
 .timeline-note{text-align:center;font-size:13px;color:#86868b;margin-top:16px}
+
 
 /* FAQ */
 .faq-wrap{padding:80px 24px}
+
 .faq-inner{max-width:720px;margin:0 auto}
+
 details{border-top:1px solid #d2d2d7;padding:20px 0}
+
 details:last-child{border-bottom:1px solid #d2d2d7}
+
 summary{font-size:16px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+
 summary::-webkit-details-marker{display:none}
+
 .plus{font-size:22px;color:#86868b;font-weight:300;flex-shrink:0;transition:transform .2s}
+
 details[open] .plus{transform:rotate(45deg)}
+
 details p{font-size:15px;color:#6e6e73;line-height:1.75;margin-top:14px}
+
 
 /* CTA */
 .cta-strip{background:#1d1d1f;padding:96px 24px;text-align:center;position:relative;overflow:hidden}
+
 .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.2) 0%,transparent 65%)}
+
 .cta-strip>*{position:relative;z-index:1}
+
 .cta-h2{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
+
 .cta-sub{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
-.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+
 .btn-purple-lg{display:inline-block;background:#7c3aed;color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:28px}
+
 .btn-outline-w{display:inline-block;background:transparent;color:#fff;font-size:14px;padding:14px 28px;border-radius:28px;border:1.5px solid rgba(255,255,255,.3)}
+
 .promise-row{display:flex;gap:24px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+
 .promise-item{font-size:13px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px}
+
 .promise-item::before{content:'✓';color:#a78bfa;font-weight:700}
 
-footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.5px solid #2c2c2e}
-.footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
-.footer-col-title{font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
-.footer-link{display:block;font-size:11px;color:#86868b;margin-bottom:.4rem}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;border-top:.5px solid #2c2c2e;padding-top:1.25rem}
-.copyright{font-size:11px;color:#555}
 
-.mobile-line-fab{display:none}
+
+
+
+
+
+
+
+
 @media(max-width:768px){
-  nav{padding:0 1rem}
-  .nav-links{display:none}
   .hero-h1{font-size:30px}
   .hero-sub{font-size:15px}
   .section-h2{font-size:26px}
@@ -145,12 +213,8 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.
   .timeline-bar{flex-direction:column}
   .t-seg{padding:14px 24px;align-items:flex-start}
   .cta-h2{font-size:28px}
-  .footer-cols{grid-template-columns:1fr}
-  footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
 }
 </style>
-<meta property="og:image" content="https://cx468.com.tw/img/service-loan.jpg">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="鋮馨租賃有限公司">
 <script type="application/ld+json">
@@ -223,21 +287,16 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.
   ]
 }
 </script>
+  <script src="include.js" defer></script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<meta property="og:image" content="https://cx468.com.tw/favicon-512.png">
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span><span style="color:#c8102e;font-weight:700;">鋮</span>馨租賃有限公司</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">首頁</a>
-    <a href="services.html">服務項目</a>
-    <a href="about.html">關於我們</a>
-    <a href="faq.html">常見問題</a>
-    <a href="contact.html">聯絡我們</a>
-  </div>
-  <a href="evaluate.html" class="nav-cta">免費評估</a>
-</nav>
+<div data-include="nav"></div>
 
 <!-- Hero -->
 <div class="hero">
@@ -511,38 +570,6 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem;border-top:.
     <span class="promise-item">全程專人陪同</span>
   </div>
 </div>
-
-<footer>
-  <div class="footer-cols">
-    <div>
-      <div class="footer-col-title">服務項目</div>
-      <a class="footer-link" href="services.html">包租代管</a>
-      <a class="footer-link" href="sale-leaseback.html">不動產售後回租</a>
-      <a class="footer-link" href="private-to-bank.html">民間轉銀行</a>
-      <a class="footer-link" href="loan-process.html">貸款整合流程</a>
-    </div>
-    <div>
-      <div class="footer-col-title">了解更多</div>
-      <a class="footer-link" href="about.html">關於我們</a>
-      <a class="footer-link" href="faq.html">常見問題</a>
-      <a class="footer-link" href="contact.html">聯絡我們</a>
-    </div>
-    <div>
-      <div class="footer-col-title">聯絡我們</div>
-      <span style="font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px;">電話</span>
-      <span style="font-size:11px;color:#86868b;">02-2249-0517 ／ 0931-087-996</span><br><br>
-      <span style="font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px;">地址</span>
-      <span style="font-size:11px;color:#86868b;">新北市中和區中正路 468 號</span>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="copyright">Copyright © 2026 鋮馨租賃有限公司　版權所有</div>
-    <a href="https://lin.ee/PHIfSoY" target="_blank" style="font-size:11px;color:#555;">LINE 官方帳號</a>
-  </div>
-</footer>
-
-<a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
-</a>
+<div data-include="footer"></div>
 </body>
 </html>
