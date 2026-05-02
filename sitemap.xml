@@ -4,7 +4,7 @@
   <!-- 主頁 -->
   <url>
     <loc>https://cx468.com.tw/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/about.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -78,9 +78,15 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/article-mortgage-overdue.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-sale-leaseback-guide.html</loc>
