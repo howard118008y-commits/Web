@@ -69,6 +69,22 @@
 
 
 
+.scenarios-wrap{background:#f5f5f7;padding:80px 24px}
+.scenarios-inner{max-width:1080px;margin:0 auto}
+.scenarios-intro{max-width:680px;margin:0 auto 40px;text-align:center}
+.scenarios-disclaimer{font-size:13px;color:#86868b;margin-top:14px;line-height:1.7;padding:16px 20px;background:#fff;border-radius:14px;border:.5px solid #d2d2d7;text-align:left}
+.scenarios-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.scenario-card{background:#fff;border-radius:20px;padding:32px 28px;display:flex;flex-direction:column}
+.scenario-tag{display:inline-block;font-size:11px;font-weight:700;color:#c8102e;background:rgba(200,16,46,.08);padding:5px 12px;border-radius:12px;letter-spacing:.04em;margin-bottom:16px;align-self:flex-start}
+.scenario-title{font-size:19px;font-weight:700;color:#1d1d1f;letter-spacing:-.015em;line-height:1.35;margin-bottom:8px}
+.scenario-meta{font-size:13px;color:#86868b;margin-bottom:22px}
+.scenario-block{margin-bottom:18px}
+.scenario-block:last-child{margin-bottom:0}
+.scenario-label{font-size:11px;font-weight:600;color:#86868b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.scenario-text{font-size:14px;line-height:1.75;color:#3d3d3f;margin:0}
+.scenario-result .scenario-text{color:#1d1d1f;font-weight:500}
+.scenario-result .scenario-label{color:#16a34a}
+
 @media(max-width:768px){
   .stats-strip{grid-template-columns:1fr 1fr 1fr}
   .stat{padding:1.5rem .75rem}
@@ -76,6 +92,9 @@
   .about-wrap{padding:48px 16px}
   .section-title{font-size:26px}
   .values-grid{grid-template-columns:1fr}
+  .scenarios-wrap{padding:56px 16px}
+  .scenarios-grid{grid-template-columns:1fr;gap:16px}
+  .scenario-card{padding:26px 22px}
 }
 </style>
 <script type="application/ld+json">
@@ -184,6 +203,75 @@
 
 </div>
 
+<section class="scenarios-wrap" id="scenarios">
+  <div class="scenarios-inner">
+    <div class="scenarios-intro">
+      <div class="section-label" style="text-align:center;">典型處理情境</div>
+      <h2 class="section-title" style="text-align:center;">這些處境，<br>我們最常遇到。</h2>
+      <p class="scenarios-disclaimer">
+        以下為彙整自實際服務經驗的「典型情境分類」，非特定客戶的個案。所有金額與數字皆為一般範圍說明，實際結果依個案不動產條件、財務狀況與市場情況而定。
+      </p>
+    </div>
+    <div class="scenarios-grid">
+
+      <article class="scenario-card">
+        <span class="scenario-tag">情境 1 · 售後回租</span>
+        <h3 class="scenario-title">信用條件被銀行拒，<br>但名下有自住房</h3>
+        <div class="scenario-meta">50+ 歲・自營業者・新北市</div>
+        <div class="scenario-block">
+          <div class="scenario-label">困境</div>
+          <p class="scenario-text">早年因生意周轉有信用瑕疵紀錄。事業需約 300 萬資金，銀行二胎連續被 3 家拒絕。不想搬家，也不願賣掉自住的中和區公寓。</p>
+        </div>
+        <div class="scenario-block">
+          <div class="scenario-label">我們的處理</div>
+          <p class="scenario-text">採不動產售後回租 — 將公寓出售給合作投資方，同時簽訂 3 年期租賃契約，並保留原價買回的權利。</p>
+        </div>
+        <div class="scenario-block scenario-result">
+          <div class="scenario-label">結果</div>
+          <p class="scenario-text">資金到位約 3-4 週，繼續住原屋。3 年內可主動買回，月租金支出比銀行二胎月付低約 30%。</p>
+        </div>
+      </article>
+
+      <article class="scenario-card">
+        <span class="scenario-tag">情境 2 · 貸款整合</span>
+        <h3 class="scenario-title">信貸＋信用卡＋民間借款，<br>月付壓垮現金流</h3>
+        <div class="scenario-meta">40+ 歲・雙薪家庭・板橋區</div>
+        <div class="scenario-block">
+          <div class="scenario-label">困境</div>
+          <p class="scenario-text">信貸年息 12%、信用卡循環 15%、民間借款月息 2%，共 7 筆負債合計約 250 萬。每月還款負擔超過家庭收入 70%，現金流長期周轉不開。</p>
+        </div>
+        <div class="scenario-block">
+          <div class="scenario-label">我們的處理</div>
+          <p class="scenario-text">用名下板橋住家辦理銀行二胎，先全額結清信貸與信用卡；3 個月內逐步將民間借款轉入銀行體系。</p>
+        </div>
+        <div class="scenario-block scenario-result">
+          <div class="scenario-label">結果</div>
+          <p class="scenario-text">月付從約 6 萬下降至 2.8 萬。3 年期間累計利息支出減少約 65 萬，DSR 改善後信用評分逐步回升。</p>
+        </div>
+      </article>
+
+      <article class="scenario-card">
+        <span class="scenario-tag">情境 3 · 民間轉銀行</span>
+        <h3 class="scenario-title">民間借款月息 2%，<br>長年還不到本金</h3>
+        <div class="scenario-meta">60+ 歲・退休族・新莊區</div>
+        <div class="scenario-block">
+          <div class="scenario-label">困境</div>
+          <p class="scenario-text">早年向民間借款月息 2%（年息 24%），欠款約 200 萬，房屋已有民間二胎設定。長年只繳得起利息，本金幾乎沒減少。</p>
+        </div>
+        <div class="scenario-block">
+          <div class="scenario-label">我們的處理</div>
+          <p class="scenario-text">分階段還款規劃 — 先用銀行一胎清償部分民間借款；半年內將剩餘部分逐步轉至銀行，年息降至 2.85%。</p>
+        </div>
+        <div class="scenario-block scenario-result">
+          <div class="scenario-label">結果</div>
+          <p class="scenario-text">每年利息支出減少約 42 萬。本金第一次開始下降，還款期程明確可預見。</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <div class="cta-strip">
   <h2>準備好讓房子替你賺錢了嗎？</h2>
   <p>加入 LINE 或直接來電，免費評估你的不動產最佳方案。</p>
@@ -192,6 +280,7 @@
     <a href="contact.html" class="btn-outline">查看聯絡方式</a>
   </div>
 </div>
+<div data-include="line-qr"></div>
 <div data-include="footer"></div>
 </body>
 </html>
