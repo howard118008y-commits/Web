@@ -19,6 +19,15 @@
         // 用載入的 HTML 取代 placeholder
         var temp = document.createElement('div');
         temp.innerHTML = html.trim();
+        // 重建 <script> 標籤，否則 innerHTML 載入的 script 不會執行
+        temp.querySelectorAll('script').forEach(function (oldScript) {
+          var newScript = document.createElement('script');
+          Array.from(oldScript.attributes).forEach(function (attr) {
+            newScript.setAttribute(attr.name, attr.value);
+          });
+          newScript.text = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
         while (temp.firstChild) {
           el.parentNode.insertBefore(temp.firstChild, el);
         }
