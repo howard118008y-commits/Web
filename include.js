@@ -2,9 +2,15 @@
  * 鋮馨網站共用模組載入器
  * 把每頁 <div data-include="nav"></div> 替換為 nav.html 內容
  * 自動標記目前頁面對應的 menu 項目為 active
+ *
+ * 載入策略（為了 LCP）：
+ * - nav / footer / line-qr：DOMContentLoaded 立即載入（影響首屏 layout）
+ * - anti-fraud-modal：延遲到 idle / window load 後才載入（避免阻擋 hero LCP）
  */
 (function () {
   'use strict';
+
+  var DEFERRED = ['anti-fraud-modal'];
 
   function loadInclude(el) {
     var src = el.dataset.include;
@@ -16,10 +22,8 @@
         return r.text();
       })
       .then(function (html) {
-        // 用載入的 HTML 取代 placeholder
         var temp = document.createElement('div');
         temp.innerHTML = html.trim();
-        // 重建 <script> 標籤，否則 innerHTML 載入的 script 不會執行
         temp.querySelectorAll('script').forEach(function (oldScript) {
           var newScript = document.createElement('script');
           Array.from(oldScript.attributes).forEach(function (attr) {
@@ -48,8 +52,38 @@
     });
   }
 
+  function loadDeferred(deferredEls) {
+    if (!deferredEls.length) return;
+    var run = function () {
+      Promise.all(deferredEls.map(loadInclude));
+    };
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(run, { timeout: 2500 });
+    } else {
+      setTimeout(run, 300);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    var includes = document.querySelectorAll('[data-include]');
-    Promise.all(Array.from(includes).map(loadInclude)).then(markActiveNavLink);
+    var all = Array.from(document.querySelectorAll('[data-include]'));
+    var immediate = [];
+    var deferred = [];
+    all.forEach(function (el) {
+      if (DEFERRED.indexOf(el.dataset.include) >= 0) {
+        deferred.push(el);
+      } else {
+        immediate.push(el);
+      }
+    });
+
+    Promise.all(immediate.map(loadInclude)).then(markActiveNavLink);
+
+    if (document.readyState === 'complete') {
+      loadDeferred(deferred);
+    } else {
+      window.addEventListener('load', function () {
+        loadDeferred(deferred);
+      }, { once: true });
+    }
   });
 })();
