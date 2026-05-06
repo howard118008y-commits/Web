@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"><!-- vacancy-cost v1 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>空屋成本計算機｜鋮馨租賃</title>
+<title>空屋成本計算機｜每月房貸利息＋管理費損失一次看｜鋮馨租賃</title>
+<meta name="description" content="房子閒置一個月你損失多少？輸入房貸利息、管理費、稅金、機會成本，立刻算出空屋每月燒錢金額。新北中和鋮馨租賃提供包租代管，把空屋變現金流。">
 <link rel="stylesheet" href="style.css">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
@@ -129,8 +130,12 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <meta property="og:site_name" content="鋮馨租賃有限公司">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://cx468.com.tw/vacancy-cost-calculator.html">
-<meta property="og:title" content="空屋成本計算機｜鋮馨租賃">
+<meta property="og:title" content="空屋成本計算機｜每月房貸利息＋管理費損失一次看｜鋮馨租賃">
+<meta property="og:description" content="房子閒置一個月你損失多少？輸入房貸利息、管理費、稅金、機會成本，立刻算出空屋每月燒錢金額。新北中和鋮馨租賃。">
 <meta property="og:url" content="https://cx468.com.tw/vacancy-cost-calculator.html">
+<!-- Preconnect for Google Analytics -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
@@ -140,6 +145,33 @@ document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a|
 if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
 else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
 });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "空屋成本計算工具",
+  "url": "https://cx468.com.tw/vacancy-cost-calculator.html",
+  "description": "輸入房貸利息、管理費、稅金、機會成本，立刻算出空屋每月燒錢金額。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "inLanguage": "zh-TW",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"},
+  "provider": {"@type": "Organization", "name": "鋮馨租賃有限公司", "url": "https://cx468.com.tw"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"},
+    {"@type": "ListItem", "position": 2, "name": "房產試算工具", "item": "https://cx468.com.tw/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "空屋成本計算"}
+  ]
+}
 </script>
 </head>
 <body>
@@ -267,8 +299,8 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   <h2>空屋越久，損失越大</h2>
   <p>鋮馨租賃提供包租代管服務，協助您快速找到優質房客，消除空屋風險。</p>
   <div class="cta-row">
-    <a href="https://line.me/ti/p/~@cxrent" class="btn-green">LINE 免費諮詢</a>
-    <a href="rental-management.html" class="btn-blue">了解包租代管</a>
+    <a href="https://lin.ee/PHIfSoY" class="btn-green">LINE 免費諮詢</a>
+    <a href="services.html" class="btn-blue">了解包租代管</a>
   </div>
 </div>
 </div>
@@ -328,6 +360,16 @@ function calc(){
 
 calc();
 </script>
+<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
+  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
+    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="article-rental-management.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">包租代管 vs 自管比較 →</a>
+      <a href="services.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">鋮馨服務項目 →</a>
+      <a href="rental-yield-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">租金報酬率試算 →</a>
+    </div>
+  </div>
+</section>
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>

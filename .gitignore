@@ -1,0 +1,9 @@
+# 圖片原檔備份（壓縮前）— 本地保留即可，不進 repo
+img/_original/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp

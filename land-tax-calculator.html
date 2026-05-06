@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"><!-- land-tax v3 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>土地增值稅試算｜鋮馨租賃</title>
+<title>土地增值稅試算 2026｜自用住宅優惠稅率一鍵算｜鋮馨租賃</title>
+<meta name="description" content="免費線上土地增值稅試算，輸入前次取得現值與本次移轉現值，立刻算出一般用地或自用住宅優惠稅率應納稅額。新北中和鋮馨租賃，協助屋主賣屋前精算稅負。">
 <link rel="stylesheet" href="style.css">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
@@ -182,8 +183,12 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <meta property="og:site_name" content="鋮馨租賃有限公司">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://cx468.com.tw/land-tax-calculator.html">
-<meta property="og:title" content="土地增值稅試算｜鋮馨租賃">
+<meta property="og:title" content="土地增值稅試算 2026｜自用住宅優惠稅率一鍵算｜鋮馨租賃">
+<meta property="og:description" content="免費線上土地增值稅試算，輸入前次取得現值與本次移轉現值，立刻算出一般用地或自用住宅優惠稅率應納稅額。新北中和鋮馨租賃。">
 <meta property="og:url" content="https://cx468.com.tw/land-tax-calculator.html">
+<!-- Preconnect for Google Analytics -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
@@ -193,6 +198,33 @@ document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a|
 if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
 else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
 });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "土地增值稅試算工具",
+  "url": "https://cx468.com.tw/land-tax-calculator.html",
+  "description": "免費線上土地增值稅試算，輸入前次取得現值與本次移轉現值，立刻算出一般用地或自用住宅優惠稅率應納稅額。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "inLanguage": "zh-TW",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"},
+  "provider": {"@type": "Organization", "name": "鋮馨租賃有限公司", "url": "https://cx468.com.tw"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"},
+    {"@type": "ListItem", "position": 2, "name": "房產試算工具", "item": "https://cx468.com.tw/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "土地增值稅試算"}
+  ]
+}
 </script>
 </head>
 <body>
@@ -684,6 +716,16 @@ buildCPITable();
 document.getElementById('row-0').classList.add('active-row');
 lookupCPI();
 </script>
+<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
+  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
+    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="sale-leaseback.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">不動產售後回租 →</a>
+      <a href="realestate-tax-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">房地合一稅試算 →</a>
+      <a href="article-sale-leaseback-guide.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">售後回租完整指南 →</a>
+    </div>
+  </div>
+</section>
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
