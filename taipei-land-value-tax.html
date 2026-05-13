@@ -176,9 +176,9 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
 
   <div style="margin-top:12px;display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap">
     <button class="btn-query" id="queryBtn" onclick="queryPrice()" disabled>查詢最新申報地價</button>
-    <a id="officialQueryLink" href="https://services.arpa.tpctax.dof.gov.taipei/ilCal/" target="_blank" rel="noopener" class="official-link" style="flex:1;min-width:200px">
+    <a href="https://services.arpa.tpctax.dof.gov.taipei/ilCal/" target="_blank" rel="noopener" class="official-link" style="flex:1;min-width:200px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
-      前往台北市稅捐稽徵處官方試算（查詢申報地價）
+      查不到？前往台北市稅捐稽徵處官方系統
     </a>
   </div>
 
@@ -186,6 +186,7 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
     <div class="price-box highlight">
       <label>每平方公尺申報地價（元）</label>
       <div class="val pending" id="priceDisplay">尚未查詢</div>
+      <small id="pricenote" style="font-size:11px;color:#b45309;display:block;margin-top:4px"></small>
     </div>
     <div class="price-box">
       <label>一般土地級距</label>
@@ -280,10 +281,9 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
 </div><!-- /wrap -->
 
 <script>
-// ─── 台北市 115-116 年累進起點地價 ───
 const T = 43957000;
+const PROXY_BASE = 'https://taipei-tax-proxy.howard118008y.workers.dev';
 
-// 各級距：[上限倍數（相對T）, 稅率, 差額係數]
 const TIERS = [
   {max: 1,  rate: 0.010, coef: 0},
   {max: 6,  rate: 0.015, coef: 0.005},
@@ -293,40 +293,38 @@ const TIERS = [
   {max: Infinity, rate: 0.055, coef: 0.545}
 ];
 
-// ─── 行政區 → 地段 ───
-const SECTIONS = {
-  '01': ['松山段','三民段','東勢段','富錦段','敦化段','精忠段','東松段','民生段','健康段','中崙段','復興段','頂東段'],
-  '02': ['大安段','和平段','義安段','龍安段','古亭段','永康段','農業段','坡心段','臥龍段','信義段','廈門段','興安段'],
-  '03': ['中正段','城中段','光復段','三橋段','詔安段','南門段','羅斯福段','正義段','螢橋段','廈安段','福住段'],
-  '05': ['萬華段','和平段','龍山段','大理段','西園段','糖廍段','新興段','雙園段'],
-  '09': ['大同段','太原段','民族段','昌吉段','延平段','建成段','光華段','寧夏段'],
-  '10': ['中山段','長安段','健康段','民生段','龍江段','力行段','集英段','農安段','南京段','松江段','新庄段','行孝段'],
-  '11': ['文山段','興隆段','景美段','木柵段','萬芳段','老泉段','仙跡岩段','試院段'],
-  '13': ['南港段','東新段','玉成段','大坑段','九如段','後山埤段'],
-  '14': ['內湖段','石潭段','行善段','明湖段','東湖段','西湖段','成功段','新里族段','葫洲段','港墘段','康寧段'],
-  '15': ['士林段','福德段','天母段','芝山段','社子段','外雙溪段','菁山段','玉明段','平等段','蘭雅段'],
-  '16': ['北投段','石牌段','復興段','吉利段','尊賢段','清江段','湖山段','秀山段','大屯段','新北投段'],
-  '17': ['信義段','廣慈段','福德段','松仁段','景聯段','吳興段','犁和段']
-};
-
-// ─── 狀態 ───
 let currentDeclaredPrice = 0;
-let currentTierLevel = 0;
 
-// ─── 行政區切換 ───
-function onDistrictChange() {
+async function onDistrictChange() {
   const dv = document.getElementById('district').value;
   const sel = document.getElementById('section');
-  sel.innerHTML = '<option value="">請選擇地段</option>';
-  if (dv && SECTIONS[dv]) {
-    SECTIONS[dv].forEach(function(s) {
+  sel.innerHTML = '<option value="">載入中…</option>';
+  resetPrice();
+  if (!dv) {
+    sel.innerHTML = '<option value="">請先選擇行政區</option>';
+    checkQueryBtn();
+    return;
+  }
+  try {
+    const res = await fetch(PROXY_BASE + '/roadname?q=' + dv);
+    const data = await res.json();
+    sel.innerHTML = '<option value="">請選擇地段</option>';
+    data.forEach(function(item) {
+      const code = item[1], name = item[2], sub = item[3];
+      let label;
+      if (['0707','0708','0709','0710'].includes(code)) {
+        label = '犁和' + (sub ? sub + '小段' : '段');
+      } else {
+        label = name + (sub ? sub : '') + '段';
+      }
       const o = document.createElement('option');
-      o.value = s; o.textContent = s;
+      o.value = code; o.textContent = label;
       sel.appendChild(o);
     });
+  } catch (e) {
+    sel.innerHTML = '<option value="">載入失敗，請重試</option>';
   }
   checkQueryBtn();
-  resetPrice();
 }
 
 function onSectionChange() { checkQueryBtn(); resetPrice(); }
@@ -340,42 +338,76 @@ function checkQueryBtn() {
   const d = document.getElementById('district').value;
   const s = document.getElementById('section').value;
   const l = document.getElementById('landNo').value;
-  document.getElementById('queryBtn').disabled = !(d && s && l.length >= 4);
+  document.getElementById('queryBtn').disabled = !(d && s && l.length >= 1);
 }
 
 function resetPrice() {
   currentDeclaredPrice = 0;
-  document.getElementById('priceDisplay').textContent = '尚未查詢';
-  document.getElementById('priceDisplay').classList.add('pending');
+  const pd = document.getElementById('priceDisplay');
+  pd.textContent = '尚未查詢'; pd.className = 'val pending';
+  pd.style.fontSize = ''; pd.style.color = '';
+  document.getElementById('pricenote').textContent = '';
   document.getElementById('tierDisplay').textContent = '--';
+  document.getElementById('tierDisplay').className = 'val pending';
   calcAll();
 }
 
-// ─── 查詢申報地價（連結至官方系統）───
-function queryPrice() {
-  const distName = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
-  const section = document.getElementById('section').value;
+async function queryPrice() {
+  const distCode = document.getElementById('district').value;
+  const sectionCode = document.getElementById('section').value;
   const landNo = document.getElementById('landNo').value;
-  // 開啟官方系統
-  const url = 'https://services.arpa.tpctax.dof.gov.taipei/ilCal/';
-  window.open(url, '_blank');
-  // 顯示操作提示
-  document.getElementById('priceDisplay').textContent = '請從官方系統查詢後填入下方手動輸入欄';
-  document.getElementById('priceDisplay').classList.remove('pending');
-  document.getElementById('priceDisplay').style.fontSize = '12px';
-  document.getElementById('priceDisplay').style.color = '#b45309';
-  gtag && gtag('event', 'official_calc_click', {district: distName, section: section, land_no: landNo});
+  if (!distCode || !sectionCode || !landNo) return;
+
+  const paddedLandNo = landNo.padStart(8, '0');
+  const q = distCode + sectionCode + paddedLandNo;
+
+  const btn = document.getElementById('queryBtn');
+  btn.textContent = '查詢中…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(PROXY_BASE + '/search?q=' + q);
+    const text = (await res.text()).trim();
+    const price = parseFloat(text);
+    const pd = document.getElementById('priceDisplay');
+
+    if (price > 0) {
+      currentDeclaredPrice = price;
+      document.getElementById('manualDeclared').value = price;
+      pd.textContent = fmt(price) + ' 元/㎡';
+      pd.className = 'val';
+      pd.style.fontSize = '20px';
+      pd.style.color = '#c17f24';
+      document.getElementById('pricenote').textContent = '申報地價 ＝ 公告地價 × 80%';
+      calcAll();
+      const distName = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
+      gtag && gtag('event', 'land_price_query', {city:'taipei', district:distName, section:sectionCode, result:'found'});
+    } else {
+      pd.textContent = '查無資料，請確認地號';
+      pd.className = 'val';
+      pd.style.fontSize = '14px';
+      pd.style.color = '#dc2626';
+    }
+  } catch (e) {
+    const pd = document.getElementById('priceDisplay');
+    pd.textContent = '查詢失敗，請稍後再試';
+    pd.style.color = '#dc2626';
+  } finally {
+    btn.textContent = '查詢最新申報地價';
+    checkQueryBtn();
+  }
 }
 
-// ─── 手動輸入 ───
 function onManualInput() {
   const v = parseFloat(document.getElementById('manualDeclared').value) || 0;
   currentDeclaredPrice = v;
+  const pd = document.getElementById('priceDisplay');
   if (v > 0) {
-    document.getElementById('priceDisplay').textContent = fmt(v) + ' 元/㎡';
-    document.getElementById('priceDisplay').classList.remove('pending');
-    document.getElementById('priceDisplay').style.fontSize = '18px';
-    document.getElementById('priceDisplay').style.color = '#c17f24';
+    pd.textContent = fmt(v) + ' 元/㎡';
+    pd.className = 'val';
+    pd.style.fontSize = '18px';
+    pd.style.color = '#c17f24';
+    document.getElementById('pricenote').textContent = '(手動輸入)';
   } else { resetPrice(); }
   calcAll();
 }
@@ -390,7 +422,6 @@ function convertAnnounced() {
   }
 }
 
-// ─── 主計算 ───
 function calcAll() {
   const dp = currentDeclaredPrice || parseFloat(document.getElementById('manualDeclared').value) || 0;
   const types = ['General','Self','Industrial','Public'];
@@ -402,22 +433,16 @@ function calcAll() {
     const taxBase = dp * area;
     document.getElementById('cp' + t).textContent = fmt(taxBase);
     let tax = 0;
-    if (t === 'General') {
-      generalTaxBase = taxBase;
-      tax = calcGeneral(taxBase);
-    } else {
-      tax = taxBase * rates[t];
-    }
+    if (t === 'General') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
+    else { tax = taxBase * rates[t]; }
     document.getElementById('tax' + t).textContent = fmt(Math.round(tax));
   });
 
-  // 顯示一般土地的適用稅率
   if (generalTaxBase > 0) {
     const tier = getTier(generalTaxBase);
     document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
     document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
     document.getElementById('tierDisplay').classList.remove('pending');
-    // highlight tier table
     for (let i = 1; i <= 6; i++) {
       const r = document.getElementById('tr-' + i);
       if (r) r.classList.toggle('hit', i === tier.level);
@@ -445,35 +470,23 @@ function getTier(taxBase) {
 function calcGeneral(taxBase) {
   if (taxBase <= 0) return 0;
   const t = getTier(taxBase);
-  const tax = taxBase * t.rate - T * t.coef;
-  return Math.max(0, tax);
+  return Math.max(0, taxBase * t.rate - T * t.coef);
 }
 
-// ─── 建立級距表 ───
 function buildTierTable() {
   const ordinals = ['一','二','三','四','五','六'];
   const rows = [
-    [1, 0,     T,      0.010, 0],
-    [2, T+1,   T*6,    0.015, T*0.005],
-    [3, T*6+1, T*11,   0.025, T*0.065],
-    [4, T*11+1,T*16,   0.035, T*0.175],
-    [5, T*16+1,T*21,   0.045, T*0.335],
-    [6, T*21+1,null,   0.055, T*0.545]
+    [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
+    [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
   ];
-  let html = '';
-  rows.forEach(function(r, i) {
-    const [lv, lo, hi, rate, ded] = r;
-    const range = hi ? fmt(lo) + ' ~ ' + fmt(hi) : fmt(lo) + ' 以上';
-    html += '<tr id="tr-' + lv + '"><td>第' + ordinals[i] + '級</td><td>' + range + '</td><td>' + (rate*1000).toFixed(0) + '‰</td><td>' + fmt(ded) + '</td></tr>';
-  });
-  document.getElementById('tierBody').innerHTML = html;
+  document.getElementById('tierBody').innerHTML = rows.map(function(r,i){
+    const range = r[2] ? fmt(r[1])+' ~ '+fmt(r[2]) : fmt(r[1])+' 以上';
+    return '<tr id="tr-'+(i+1)+'"><td>第'+ordinals[i]+'級</td><td>'+range+'</td><td>'+(r[3]*1000).toFixed(0)+'‰</td><td>'+fmt(r[4])+'</td></tr>';
+  }).join('');
 }
 
-// ─── 清除 ───
 function clearAll() {
-  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
+  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('district').value = '';
   document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
   document.getElementById('landNo').value = '';
@@ -491,7 +504,6 @@ function fmt(n) {
   return Math.round(n).toLocaleString('zh-TW');
 }
 
-// ─── Init ───
 buildTierTable();
 </script>
 
