@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><!-- land-value-tax v1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地價稅試算 2026｜自用住宅 2‰ 即時計算｜鋮馨租賃</title>
+<meta name="description" content="免費線上地價稅試算，輸入公告地價與土地面積，自動計算自用住宅（2‰）或一般用地（累進稅率）應繳地價稅。每年 11 月繳納，新北中和鋮馨租賃。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<style>
+body{background:#fff}
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
+.nav-back{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}
+
+.hero{background:linear-gradient(135deg,#b45309 0%,#d97706 55%,#f59e0b 100%);padding:60px 24px 44px;text-align:center}
+.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero p{font-size:16px;color:rgba(255,255,255,.88);max-width:520px;margin:0 auto}
+@media(max-width:768px){.hero h1{font-size:30px}}
+
+.wrap{max-width:780px;margin:40px auto;padding:0 20px 80px}
+.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px}
+.section-label{font-size:14px;font-weight:700;color:#1d1d1f;margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid #f0f0f0}
+.section-label:first-of-type{margin-top:0}
+.field{margin-bottom:16px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:6px}
+.field label span{font-size:11px;font-weight:400;color:#6e6e73}
+.input-row{display:flex;align-items:center;gap:8px}
+.input-row input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+.input-row input[type=number]:focus{border-color:#b45309}
+.unit{font-size:13px;color:#6e6e73;white-space:nowrap;min-width:20px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:540px){.row2{grid-template-columns:1fr}}
+.toggle-row{display:flex;gap:0;border:1.5px solid #d2d2d7;border-radius:10px;overflow:hidden}
+.toggle-btn{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:500;color:#6e6e73;cursor:pointer;border:none;background:#fff;transition:all .2s;border-right:1px solid #d2d2d7}
+.toggle-btn:last-child{border-right:none}
+.toggle-btn.active{background:#b45309;color:#fff;font-weight:700}
+
+.result-main{background:linear-gradient(135deg,#b45309,#d97706);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+.result-main-label{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
+.result-main-value{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.03em}
+.result-main-sub{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+@media(max-width:540px){.result-grid{grid-template-columns:1fr 1fr}}
+.rc{background:#f5f5f7;border-radius:12px;padding:16px 12px;text-align:center}
+.rc-label{font-size:11px;color:#6e6e73;margin-bottom:5px}
+.rc-value{font-size:17px;font-weight:700;color:#1d1d1f}
+.rc-sub{font-size:10px;color:#aaa;margin-top:2px}
+.rc.hl{background:#b45309}
+.rc.hl .rc-label{color:rgba(255,255,255,.7)}
+.rc.hl .rc-value{color:#fff}
+.rc.hl .rc-sub{color:rgba(255,255,255,.5)}
+.detail-box{background:#f5f5f7;border-radius:12px;padding:18px 20px;font-size:13px;line-height:2}
+.detail-box .drow{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:3px 0}
+.detail-box .drow:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#b45309}
+.detail-box .drow span:last-child{font-weight:600}
+.info-box{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#92400e;line-height:1.75}
+.tip-box{background:#f0fdf4;border:1.5px solid #16A34A;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#166534;line-height:1.75}
+.warn-box{background:#fef2f2;border:1.5px solid #ef4444;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#991b1b;line-height:1.75}
+.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
+.rate-table{width:100%;border-collapse:collapse;font-size:12px}
+.rate-table th{background:#1d1d1f;color:#fff;padding:10px;text-align:center;font-weight:600}
+.rate-table th:first-child{text-align:left}
+.rate-table td{padding:9px 10px;text-align:center;border-bottom:.5px solid #f0f0f0;color:#1d1d1f}
+.rate-table td:first-child{text-align:left;color:#6e6e73;font-weight:500}
+.rate-table tr.active-row td{background:#fff7ed;color:#b45309;font-weight:700}
+.rate-table tr:last-child td{border-bottom:none}
+.cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+.advanced-section{display:none}
+.advanced-section.show{display:block}
+</style>
+  <script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cx468.com.tw/land-value-tax-calculator.html">
+<meta property="og:title" content="地價稅試算 2026｜自用住宅 2‰ 即時計算｜鋮馨租賃">
+<meta property="og:description" content="免費線上地價稅試算，自用住宅 2‰ 或一般用地累進稅率，輸入公告地價即時計算每年 11 月應繳金額。">
+<meta property="og:url" content="https://cx468.com.tw/land-value-tax-calculator.html">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+});
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "地價稅試算工具",
+  "url": "https://cx468.com.tw/land-value-tax-calculator.html",
+  "description": "免費線上地價稅試算，輸入公告地價與土地面積，自動計算自用住宅（2‰）或一般用地累進稅率應繳地價稅。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "inLanguage": "zh-TW",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"},
+  "provider": {"@type": "Organization", "name": "鋮馨租賃有限公司", "url": "https://cx468.com.tw"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"},
+    {"@type": "ListItem", "position": 2, "name": "房產試算工具", "item": "https://cx468.com.tw/tools.html"},
+    {"@type": "ListItem", "position": 3, "name": "地價稅試算"}
+  ]
+}
+</script>
+</head>
+<body>
+<div data-include="nav-tool"></div>
+<div class="hero">
+  <p class="eyebrow">Land Value Tax · 持有稅</p>
+  <h1>地價稅試算</h1>
+  <p>每年 11 月繳納，輸入公告地價即時算出應繳金額，含自用住宅 2‰ 優惠與一般用地累進稅率。</p>
+</div>
+<div class="wrap">
+
+<div class="card">
+  <div class="card-title">輸入資料</div>
+
+  <!-- 公告地價 -->
+  <div class="field">
+    <label>公告地價 <span>元／每平方公尺，查土地謄本或地政事務所</span></label>
+    <div class="input-row"><input type="number" id="announcedPrice" value="10000" min="0" step="100" oninput="calc()"><span class="unit">元/㎡</span></div>
+  </div>
+
+  <!-- 土地面積 -->
+  <div class="field">
+    <label>土地面積 <span>1坪 ≈ 3.3058㎡，查土地謄本「地積」欄</span></label>
+    <div class="input-row"><input type="number" id="area" value="100" min="0" step="0.1" oninput="calc()"><span class="unit">平方公尺</span></div>
+  </div>
+
+  <!-- 持分 -->
+  <div class="field">
+    <label>持分比例 <span id="fracDisplay">1／1 = 100%</span></label>
+    <div class="input-row" style="gap:8px">
+      <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分子</span>
+      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+      <span style="font-size:18px;color:#6e6e73;flex-shrink:0">／</span>
+      <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分母</span>
+      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+    </div>
+  </div>
+
+  <!-- 用途 -->
+  <div class="field">
+    <label>土地用途</label>
+    <div class="toggle-row" id="usageBtns">
+      <button class="toggle-btn active" onclick="setUsage('self')" id="uSelf">自用住宅</button>
+      <button class="toggle-btn" onclick="setUsage('general')" id="uGeneral">一般用地</button>
+      <button class="toggle-btn" onclick="setUsage('industrial')" id="uIndustrial">工業用地</button>
+      <button class="toggle-btn" onclick="setUsage('public')" id="uPublic">公設保留地</button>
+    </div>
+  </div>
+
+  <!-- 一般用地：累進起點地價 -->
+  <div class="advanced-section" id="advancedSection">
+    <div style="background:linear-gradient(135deg,#fff7ed,#fef9c3);border:1.5px solid #f59e0b;border-radius:16px;padding:18px 20px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:10px">累進起點地價（一般用地必填）</div>
+      <div class="field" style="margin-bottom:8px">
+        <label style="font-size:13px">累進起點地價 <span>向地方稅捐稽徵處查詢，或看繳稅通知單</span></label>
+        <div class="input-row"><input type="number" id="threshold" value="500000" min="1" step="10000" oninput="calc()"><span class="unit">元</span></div>
+      </div>
+      <div style="font-size:12px;color:#92400e;line-height:1.7">
+        💡 查詢方式：各縣市地方稅務局網站 → 地價稅 → 累進起點地價查詢，或致電 04-22289111（全國稅務查詢）
+      </div>
+    </div>
+  </div>
+
+  <!-- 申報地價自動顯示 -->
+  <div style="margin-top:18px;padding:14px 18px;background:#fff7ed;border-radius:10px;border:1px solid #f59e0b;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <span style="font-size:13px;font-weight:600;color:#92400e">申報地價（公告地價 × 80%，系統自動帶入）</span>
+    <span style="font-size:18px;font-weight:700;color:#b45309" id="declaredPriceDisplay">—</span>
+  </div>
+
+  <!-- 估算按鈕 -->
+  <div style="display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+    <button onclick="calc()" style="background:#b45309;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">地價稅估算</button>
+    <button onclick="clearAll()" style="background:#737373;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">清除資料</button>
+  </div>
+
+  <p style="font-size:13px;color:#dc2626;text-align:center;margin-top:18px;line-height:1.7;font-weight:500">
+    《貼心提醒》請先點「清除資料」清空欄位後再輸入，以避免殘留前一筆資料造成錯誤。
+  </p>
+</div>
+
+<!-- 結果 -->
+<div class="card">
+  <div class="card-title">試算結果</div>
+  <div class="result-main">
+    <div class="result-main-label">估算年繳地價稅</div>
+    <div class="result-main-value" id="taxResult">—</div>
+    <div class="result-main-sub" id="taxSub">請填入完整資料</div>
+  </div>
+  <div class="result-grid">
+    <div class="rc"><div class="rc-label">應稅地價</div><div class="rc-value" id="taxBase">—</div><div class="rc-sub">元</div></div>
+    <div class="rc"><div class="rc-label">每月相當於</div><div class="rc-value" id="monthlyEq">—</div><div class="rc-sub">元／月</div></div>
+    <div class="rc hl"><div class="rc-label">適用稅率</div><div class="rc-value" id="rateLabel">—</div><div class="rc-sub" id="usageLabel">—</div></div>
+  </div>
+  <div class="detail-box">
+    <div class="drow"><span>公告地價（每㎡）</span><span id="d-announced">—</span></div>
+    <div class="drow"><span>申報地價（每㎡）= 公告×80%</span><span id="d-declared">—</span></div>
+    <div class="drow"><span>土地面積 × 持分</span><span id="d-area">—</span></div>
+    <div class="drow"><span>應稅地價合計</span><span id="d-base">—</span></div>
+    <div class="drow"><span>適用稅率</span><span id="d-rate">—</span></div>
+    <div class="drow"><span>估算年繳地價稅</span><span id="d-tax">—</span></div>
+  </div>
+  <div id="infoBox" class="info-box" style="display:none"></div>
+  <div id="tipBox" class="tip-box" style="display:none"></div>
+  <div id="warnBox" class="warn-box" style="display:none"></div>
+  <div class="disclaimer">⚠️ 本試算依稅法規定公式估算，申報地價採公告地價 80%，實際稅額依地方稅捐稽徵處核定為準。如為公有地、空地附加稅等特殊情況，請向稅務機關確認。</div>
+</div>
+
+<!-- 稅率速查表 -->
+<div class="card">
+  <div class="card-title">地價稅稅率一覽</div>
+  <table class="rate-table">
+    <thead><tr><th>用途</th><th>稅率</th><th>條件</th></tr></thead>
+    <tbody>
+      <tr id="row-self"><td>自用住宅用地</td><td>2‰（優惠）</td><td>本人/配偶/直系親屬設籍，無出租無營業</td></tr>
+      <tr id="row-g1"><td>一般用地（第一級）</td><td>10‰</td><td>未超過累進起點地價</td></tr>
+      <tr id="row-g2"><td>一般用地（第二級）</td><td>15‰</td><td>超過1倍~未達5倍</td></tr>
+      <tr id="row-g3"><td>一般用地（第三級）</td><td>25‰</td><td>超過5倍~未達10倍</td></tr>
+      <tr id="row-g4"><td>一般用地（第四級）</td><td>35‰</td><td>超過10倍~未達15倍</td></tr>
+      <tr id="row-g5"><td>一般用地（第五級）</td><td>45‰</td><td>超過15倍~未達20倍</td></tr>
+      <tr id="row-g6"><td>一般用地（第六級）</td><td>55‰</td><td>超過20倍以上</td></tr>
+      <tr id="row-industrial"><td>工業用地</td><td>10‰</td><td>依法核准工業用地</td></tr>
+      <tr id="row-public"><td>公共設施保留地</td><td>免稅</td><td>依都市計畫法劃設</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:12px;color:#6e6e73;margin-top:12px;line-height:1.8">
+    一般用地稅額 = 應稅地價 × 稅率 − 累進起點地價 × 速算減除數 ｜ 空地另加徵 1–3 倍地價稅
+  </div>
+</div>
+
+<!-- 申報地價說明 -->
+<div class="card">
+  <div class="card-title">常見問題</div>
+  <div style="font-size:14px;line-height:2;color:#1d1d1f">
+    <p><strong>Q：申報地價在哪裡查？</strong><br>
+    A：土地謄本上會記載「申報地價」欄位，若未申報則以公告地價 80% 計算（約民國98年起適用）。</p>
+    <p style="margin-top:16px"><strong>Q：什麼情況適合申請自用住宅稅率？</strong><br>
+    A：土地上建有房屋，且本人、配偶或直系親屬在該址設有戶籍，且未出租未作營業使用。每人每戶只能申請一筆。<br>
+    ⚠️ 申請期限：地價稅開徵（11月）前 40 天，即每年 <strong>9月22日前</strong>提出申請，才能適用當年度。</p>
+    <p style="margin-top:16px"><strong>Q：地價稅什麼時候繳？</strong><br>
+    A：每年 11月1日～11月30日，逾期每逾3天加徵1%滯納金，最高加徵15%。</p>
+    <p style="margin-top:16px"><strong>Q：土地增值稅跟地價稅差在哪？</strong><br>
+    A：地價稅是每年持有就要繳的「持有稅」；土地增值稅是「賣地時」才繳的「交易稅」，兩者不同。</p>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h2>地價稅壓力大？先評估你的狀況。</h2>
+  <p>房產稅負偏高、資金周轉不靈，售後回租或貸款整合或許是你的出路。免費諮詢，不收任何費用。</p>
+  <div class="cta-row">
+    <a href="https://lin.ee/PHIfSoY" class="btn-green">加入 LINE 諮詢</a>
+    <a href="land-tax-calculator.html" class="btn-purple">土地增值稅試算 →</a>
+  </div>
+</div>
+</div>
+
+<script>
+let usageMode = 'self';
+
+function setUsage(u) {
+  usageMode = u;
+  ['self','general','industrial','public'].forEach(function(id) {
+    document.getElementById('u' + id.charAt(0).toUpperCase() + id.slice(1)).classList.remove('active');
+  });
+  const map = {self:'uSelf', general:'uGeneral', industrial:'uIndustrial', public:'uPublic'};
+  document.getElementById(map[u]).classList.add('active');
+  const adv = document.getElementById('advancedSection');
+  if (u === 'general') adv.classList.add('show');
+  else adv.classList.remove('show');
+  calc();
+}
+
+function updateFrac() {
+  const n = parseInt(document.getElementById('fracNum').value) || 1;
+  const d = parseInt(document.getElementById('fracDen').value) || 1;
+  const pct = (n / d * 100).toFixed(1).replace('.0', '');
+  document.getElementById('fracDisplay').textContent = n + '／' + d + ' = ' + pct + '%';
+  document.getElementById('fracDen').style.borderColor = n > d ? '#dc2626' : '#d2d2d7';
+  calc();
+}
+
+function fmt(n) {
+  if (isNaN(n) || n === null) return '—';
+  return Math.round(n).toLocaleString('zh-TW');
+}
+
+function clearAll() {
+  document.getElementById('announcedPrice').value = '';
+  document.getElementById('area').value = '';
+  document.getElementById('fracNum').value = '1';
+  document.getElementById('fracDen').value = '1';
+  document.getElementById('threshold').value = '500000';
+  setUsage('self');
+  updateFrac();
+}
+
+function calc() {
+  const announced = parseFloat(document.getElementById('announcedPrice').value) || 0;
+  const area = parseFloat(document.getElementById('area').value) || 0;
+  const n = parseInt(document.getElementById('fracNum').value) || 1;
+  const d = parseInt(document.getElementById('fracDen').value) || 1;
+  const frac = n / d;
+  const declared = announced * 0.8;
+  const taxBase = declared * area * frac;
+  const displayBase = fmt(taxBase) + ' 元';
+
+  document.getElementById('declaredPriceDisplay').textContent = fmt(declared) + ' 元/㎡';
+  document.getElementById('d-announced').textContent = fmt(announced) + ' 元/㎡';
+  document.getElementById('d-declared').textContent = fmt(declared) + ' 元/㎡';
+  document.getElementById('d-area').textContent = (area * frac).toFixed(2) + ' ㎡';
+  document.getElementById('d-base').textContent = displayBase;
+  document.getElementById('taxBase').textContent = fmt(taxBase);
+
+  const infoBox = document.getElementById('infoBox');
+  const tipBox = document.getElementById('tipBox');
+  const warnBox = document.getElementById('warnBox');
+  infoBox.style.display = 'none';
+  tipBox.style.display = 'none';
+  warnBox.style.display = 'none';
+
+  // Reset table highlights
+  ['row-self','row-g1','row-g2','row-g3','row-g4','row-g5','row-g6','row-industrial','row-public'].forEach(function(id) {
+    document.getElementById(id).classList.remove('active-row');
+  });
+
+  if (announced <= 0 || area <= 0) {
+    document.getElementById('taxResult').textContent = '—';
+    document.getElementById('taxSub').textContent = '請填入完整資料';
+    document.getElementById('rateLabel').textContent = '—';
+    document.getElementById('usageLabel').textContent = '—';
+    document.getElementById('monthlyEq').textContent = '—';
+    document.getElementById('d-rate').textContent = '—';
+    document.getElementById('d-tax').textContent = '—';
+    return;
+  }
+
+  let tax = 0, rateStr = '', usageStr = '', activeRow = '';
+
+  if (usageMode === 'self') {
+    tax = taxBase * 0.002;
+    rateStr = '2‰';
+    usageStr = '自用住宅';
+    activeRow = 'row-self';
+    infoBox.style.display = 'block';
+    infoBox.innerHTML = '<strong>自用住宅優惠稅率 2‰</strong><br>條件：本人、配偶或直系親屬設籍於此，且未出租、未作營業使用。<br>申請期限：每年地價稅開徵前 40 天（約 <strong>9 月 22 日前</strong>），才能適用當年度稅率。';
+  } else if (usageMode === 'industrial') {
+    tax = taxBase * 0.01;
+    rateStr = '10‰';
+    usageStr = '工業用地';
+    activeRow = 'row-industrial';
+  } else if (usageMode === 'public') {
+    tax = 0;
+    rateStr = '免稅';
+    usageStr = '公設保留地';
+    activeRow = 'row-public';
+    tipBox.style.display = 'block';
+    tipBox.innerHTML = '<strong>公共設施保留地：免徵地價稅</strong><br>依都市計畫法劃設為公共設施保留地，地價稅全免。請確認土地謄本上「使用分區」欄位。';
+  } else {
+    // 一般用地累進
+    const threshold = parseFloat(document.getElementById('threshold').value) || 0;
+    if (threshold <= 0) {
+      document.getElementById('taxResult').textContent = '請填入累進起點地價';
+      document.getElementById('taxSub').textContent = '一般用地需填入累進起點地價';
+      return;
+    }
+    const multiple = taxBase / threshold;
+    if (multiple <= 1) {
+      tax = taxBase * 0.01;
+      rateStr = '10‰';
+      activeRow = 'row-g1';
+    } else if (multiple <= 5) {
+      tax = taxBase * 0.015 - threshold * 0.05;
+      rateStr = '15‰';
+      activeRow = 'row-g2';
+    } else if (multiple <= 10) {
+      tax = taxBase * 0.025 - threshold * 0.55;
+      rateStr = '25‰';
+      activeRow = 'row-g3';
+    } else if (multiple <= 15) {
+      tax = taxBase * 0.035 - threshold * 1.55;
+      rateStr = '35‰';
+      activeRow = 'row-g4';
+    } else if (multiple <= 20) {
+      tax = taxBase * 0.045 - threshold * 3.55;
+      rateStr = '45‰';
+      activeRow = 'row-g5';
+    } else {
+      tax = taxBase * 0.055 - threshold * 7.55;
+      rateStr = '55‰';
+      activeRow = 'row-g6';
+    }
+    usageStr = '一般用地 ' + multiple.toFixed(1) + '倍';
+    if (tax > 0 && taxBase * 0.002 < tax) {
+      tipBox.style.display = 'block';
+      tipBox.innerHTML = '💡 <strong>節稅提示：</strong>若此土地符合自用住宅申請條件，適用 2‰ 稅率，估算年繳約 <strong>' + fmt(taxBase * 0.002) + ' 元</strong>，可節省 <strong>' + fmt(tax - taxBase * 0.002) + ' 元</strong>。建議向稅捐稽徵處確認資格。';
+    }
+  }
+
+  if (tax < 0) tax = 0;
+  document.getElementById('taxResult').textContent = tax === 0 && usageMode === 'public' ? '免徵' : fmt(tax) + ' 元';
+  document.getElementById('taxSub').textContent = usageStr + '｜年繳一次（11月）';
+  document.getElementById('rateLabel').textContent = rateStr;
+  document.getElementById('usageLabel').textContent = usageStr;
+  document.getElementById('monthlyEq').textContent = fmt(tax / 12);
+  document.getElementById('d-rate').textContent = rateStr;
+  document.getElementById('d-tax').textContent = tax === 0 && usageMode === 'public' ? '免徵' : fmt(tax) + ' 元';
+  if (activeRow) document.getElementById(activeRow).classList.add('active-row');
+}
+
+// Init
+updateFrac();
+calc();
+</script>
+<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
+  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
+    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="land-tax-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
+      <a href="realestate-tax-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">房地合一稅試算 →</a>
+      <a href="purchase-cost-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">購屋總費用試算 →</a>
+    </div>
+  </div>
+</section>
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>
