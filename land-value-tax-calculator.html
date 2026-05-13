@@ -144,6 +144,31 @@ else if(a.href.indexOf('tel:')===0)gtag('event','phone_click',{page_path:locatio
 
 <div class="wrap">
 
+<!-- 城市專屬試算器入口 -->
+<div style="background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 8px rgba(0,0,0,.05)">
+  <div style="font-size:11px;font-weight:700;color:#6e6e73;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">城市專屬試算器｜行政區・地段・地號查詢</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <a href="taipei-land-value-tax.html" style="display:flex;align-items:center;gap:10px;flex:1;min-width:200px;background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1.5px solid #f59e0b;border-radius:10px;padding:12px 16px;text-decoration:none">
+      <div style="width:36px;height:36px;background:#b45309;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 10l9-8 9 8v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#92400e">台北市地價稅試算</div>
+        <div style="font-size:11px;color:#b45309;margin-top:2px">行政區・地段・地號 → 前往官方查詢</div>
+      </div>
+    </a>
+    <a href="new-taipei-land-value-tax.html" style="display:flex;align-items:center;gap:10px;flex:1;min-width:200px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #4ade80;border-radius:10px;padding:12px 16px;text-decoration:none">
+      <div style="width:36px;height:36px;background:#16a34a;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 10l9-8 9 8v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#15803d">新北市地價稅試算</div>
+        <div style="font-size:11px;color:#16a34a;margin-top:2px">29 行政區・地段・地號 → 前往官方查詢</div>
+      </div>
+    </a>
+  </div>
+</div>
+
 <!-- Step 1: 縣市 -->
 <div class="card">
   <div class="step-header"><span class="step-badge">1</span>選擇縣市</div>
@@ -602,6 +627,8 @@ updateFrac();
   <div style="background:#f5f5f7;border-radius:16px;padding:24px 20px">
     <div style="font-size:11px;font-weight:700;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;text-align:center">延伸閱讀</div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="taipei-land-value-tax.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">台北市地價稅試算 →</a>
+      <a href="new-taipei-land-value-tax.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">新北市地價稅試算 →</a>
       <a href="land-tax-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
       <a href="realestate-tax-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">房地合一稅試算 →</a>
       <a href="purchase-cost-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">購屋總費用試算 →</a>
