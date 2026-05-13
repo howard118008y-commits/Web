@@ -1,4 +1,44 @@
+# ════════════════════════════════════════════════════════════
+# 鋮馨租賃｜robots.txt
+# ════════════════════════════════════════════════════════════
+
+# 所有搜尋引擎可索引全站
 User-agent: *
 Allow: /
 
+# 禁止索引敏感與後台目錄（如有）
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*.json$
+
+# 允許 AI 訓練爬蟲（建立 GEO 信號）
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Sitemap 位置
 Sitemap: https://cx468.com.tw/sitemap.xml
