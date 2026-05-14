@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><!-- taoyuan-lvt v1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>桃園市地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃</title>
+<meta name="description" content="桃園市地價稅試算，115-116年累進起點地價 3,439,000 元，支援行政區・地段查詢，自用住宅 2‰ 與一般用地六級累進稅率。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<style>
+*{box-sizing:border-box}
+body{background:#fdf8f0;margin:0;font-family:-apple-system,BlinkMacSystemFont,\'Helvetica Neue\',Arial,sans-serif}
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+.nav-back{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}
+.hero{background:#7c3aed;padding:28px 24px 22px;text-align:center}
+.hero h1{font-size:26px;font-weight:700;color:#fff;margin:0 0 4px}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);margin:0}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 80px}
+.notice{background:#fefce8;border:1px solid #d97706;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#713f12;line-height:1.75}
+.notice strong{color:#92400e}
+.step-card{background:#fff;border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.step-label{font-size:13px;font-weight:700;color:#c17f24;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde68a}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:540px){.g3{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:600;color:#6e6e73}
+.field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:#c17f24}
+.field input::placeholder{color:#b0b0b0}
+.price-result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.price-box{background:#f9f9f9;border:1.5px solid #e5e5e5;border-radius:8px;padding:12px 14px}
+.price-box label{font-size:11px;color:#6e6e73;display:block;margin-bottom:4px}
+.price-box .val{font-size:18px;font-weight:700;color:#1d1d1f}
+.price-box .val.pending{font-size:14px;color:#b0b0b0;font-weight:400}
+.price-box.highlight{border-color:#c17f24;background:#fffbf0}
+.price-box.highlight .val{color:#c17f24}
+.btn-query{background:#3d6b35;color:#fff;border:none;border-radius:8px;height:42px;padding:0 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .2s}
+.btn-query:hover{background:#2d5227}
+.tax-table{width:100%;border-collapse:separate;border-spacing:0 0}
+.tax-table th{background:#f5e6c8;font-size:12px;font-weight:700;color:#92400e;padding:10px 8px;text-align:center}
+.tax-table th:first-child{text-align:left;padding-left:12px;border-radius:6px 0 0 6px}
+.tax-table th:last-child{border-radius:0 6px 6px 0}
+.tax-table td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:13px}
+.tax-table td:first-child{text-align:left;padding-left:12px;font-weight:600;color:#6e6e73;font-size:12px}
+.tax-table .area-input{width:100%;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;text-align:center;outline:none;font-family:inherit}
+.tax-table .area-input:focus{border-color:#c17f24}
+.tax-table .course-price{font-size:13px;color:#1d1d1f;font-weight:500}
+.tax-table .rate-cell{font-size:12px;color:#2563eb;font-weight:600}
+.tax-table .tax-cell{font-size:15px;font-weight:700;color:#92400e}
+.result-row td{background:#fef3c7;font-weight:700;font-size:14px;color:#92400e;padding:12px 8px;border-bottom:none}
+.result-row td:first-child{border-radius:0 0 0 8px;padding-left:12px}
+.result-row td:last-child{border-radius:0 0 8px 0}
+.btn-row{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.btn-calc{background:#8b4513;color:#fff;border:none;border-radius:24px;height:48px;padding:0 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-calc:hover{background:#6d360f}
+.btn-outline{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-home{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center}
+.tier-wrap{background:#f9f9f9;border-radius:10px;padding:16px;margin-top:14px}
+.tier-title{font-size:11px;font-weight:700;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.tier-table{width:100%;border-collapse:collapse;font-size:11px}
+.tier-table th{background:#1d1d1f;color:#fff;padding:7px 8px;text-align:center;font-weight:600}
+.tier-table th:first-child{text-align:left}
+.tier-table td{padding:7px 8px;text-align:center;border-bottom:.5px solid #ececec;color:#1d1d1f}
+.tier-table td:first-child{text-align:left;color:#6e6e73}
+.tier-table tr.hit td{background:#fff7ed;color:#b45309;font-weight:700}
+.official-link{display:flex;align-items:center;gap:8px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:#1d4ed8;text-decoration:none}
+.official-link:hover{background:#dbeafe}
+.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:14px;padding:10px 14px;background:#f9f9f9;border-radius:8px;border:.5px solid #e5e5e5}
+</style>
+<script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cx468.com.tw/taoyuan-land-value-tax.html">
+<meta property="og:title" content="桃園市地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
+<meta property="og:description" content="桃園市地價稅試算，115-116年累進起點地價 3,439,000 元，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta property="og:url" content="https://cx468.com.tw/taoyuan-land-value-tax.html">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"桃園市地價稅試算","url":"https://cx468.com.tw/taoyuan-land-value-tax.html","description":"桃園市地價稅試算，115-116年累進起點地價 3,439,000 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"provider":{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"房產試算工具","item":"https://cx468.com.tw/tools.html"},{"@type":"ListItem","position":3,"name":"地價稅試算","item":"https://cx468.com.tw/land-value-tax-calculator.html"},{"@type":"ListItem","position":4,"name":"桃園市地價稅試算"}]}
+</script>
+</head>
+<body>
+<div data-include="nav-tool"></div>
+
+<div class="hero">
+  <h1>地價稅稅額試算</h1>
+  <p>桃園市・115-116年・鋮馨租賃</p>
+</div>
+
+<div class="wrap">
+
+<div class="notice">
+  <strong>⚠ 試算說明</strong><br>
+  本表試算之稅額，係依平均地權條例、土地稅法及其施行細則有關地價稅應繳稅額之計算公式試算，<strong>僅提供單筆地號簡易試算</strong>。若有 2 筆以上土地號且適用累進稅率者，因涉及分攤累進差額，故不適用本表。
+</div>
+
+<!-- STEP 1 -->
+<div class="step-card">
+  <div class="step-label">步驟一：查詢申報地價</div>
+
+  <div class="g3" style="align-items:flex-end">
+    <div class="field">
+      <label>行政區</label>
+      <select id="district" onchange="onDistrictChange()">
+        <option value="">請選擇</option>
+        <option value="01">桃園區</option>
+        <option value="02">大溪區</option>
+        <option value="03">中壢區</option>
+        <option value="04">楊梅區</option>
+        <option value="05">蘆竹區</option>
+        <option value="06">大園區</option>
+        <option value="07">龜山區</option>
+        <option value="08">八德區</option>
+        <option value="09">龍潭區</option>
+        <option value="10">平鎮區</option>
+        <option value="11">新屋區</option>
+        <option value="12">觀音區</option>
+        <option value="13">復興區</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>地段</label>
+      <select id="section" onchange="onSectionChange()">
+        <option value="">請先選擇行政區</option>
+      </select>
+    </div>
+    <div class="field" style="position:relative">
+      <label>地號（8碼）<span style="font-size:10px;color:#9ca3af;font-weight:400">例：00010000</span></label>
+      <input type="text" id="landNo" maxlength="8" placeholder="例：00010000" oninput="onLandNoInput(this)">
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <a href="https://www.tytax.gov.tw/Tax_Land.aspx?n=57&sms=10329" target="_blank" rel="noopener" class="official-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
+      前往桃園市地方稅務局查詢申報地價（選好行政區・地段・地號後點此）
+    </a>
+  </div>
+
+  <div class="price-result" id="priceResult">
+    <div class="price-box highlight">
+      <label>每平方公尺申報地價（元）</label>
+      <div class="val pending" id="priceDisplay">從官方系統查詢後填入</div>
+    </div>
+    <div class="price-box">
+      <label>一般土地級距</label>
+      <div class="val pending" id="tierDisplay">--</div>
+    </div>
+  </div>
+
+  <!-- 手動輸入申報地價 -->
+  <div style="margin-top:14px;padding:12px 14px;background:#f9f9f9;border-radius:8px;border:1px solid #e5e5e5">
+    <div style="font-size:12px;font-weight:600;color:#6e6e73;margin-bottom:8px">申報地價（從官方系統查到後填入）</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="field" style="flex:1;min-width:180px;margin:0">
+        <label>申報地價（元／㎡）</label>
+        <input type="number" id="manualDeclared" placeholder="例：20000" min="0" step="100" oninput="onManualInput()">
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:12px;color:#6e6e73;margin-bottom:4px">或從公告地價換算（×80%）</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;outline:none;font-family:inherit">
+          <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
+          <span id="convertedVal" style="font-size:13px;font-weight:700;color:#c17f24;white-space:nowrap">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step-card">
+  <div class="step-label">步驟二：輸入面積與試算結果</div>
+
+  <!-- 持分換算小工具 -->
+  <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+    <div style="font-size:12px;font-weight:700;color:#0369a1;margin-bottom:10px">📋 謄本持分換算（如您是持分共有，請先換算課稅面積）</div>
+    <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">
+      <div class="field" style="margin:0;flex:2;min-width:120px">
+        <label>謄本登記面積（㎡）</label>
+        <input type="number" id="totalArea" placeholder="例：200" min="0" step="0.01" oninput="calcProportional()">
+      </div>
+      <span style="font-size:18px;color:#6e6e73;padding-bottom:10px">×</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分子</label>
+        <input type="number" id="shareNumer" placeholder="例：50000" min="1" oninput="calcProportional()">
+      </div>
+      <span style="font-size:14px;color:#6e6e73;padding-bottom:10px">/</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分母</label>
+        <input type="number" id="shareDenom" placeholder="例：100000" min="1" oninput="calcProportional()">
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <span style="font-size:12px;color:#6e6e73">課稅面積 = </span>
+        <span id="proportionalResult" style="font-size:20px;font-weight:700;color:#0369a1">—</span>
+        <span style="font-size:12px;color:#6e6e73"> ㎡</span>
+      </div>
+      <button onclick="applyProportional()" id="applyBtn" disabled style="background:#0369a1;color:#fff;border:none;border-radius:8px;height:38px;padding:0 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;opacity:0.5">套用到一般土地欄位</button>
+    </div>
+  </div>
+
+  <table class="tax-table">
+    <thead>
+      <tr>
+        <th>稅地種類</th>
+        <th>一般土地</th>
+        <th>自用住宅用地</th>
+        <th>工業用地等</th>
+        <th>公共設施保留地</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>課稅面積<br><span style="font-size:10px;font-weight:400">（平方公尺）</span></td>
+        <td><input class="area-input" type="number" id="areaGeneral" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaSelf" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaIndustrial" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaPublic" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+      </tr>
+      <tr>
+        <td>課稅地價<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="cpGeneral">0</td>
+        <td class="course-price" id="cpSelf">0</td>
+        <td class="course-price" id="cpIndustrial">0</td>
+        <td class="course-price" id="cpPublic">0</td>
+      </tr>
+      <tr>
+        <td>適用稅率</td>
+        <td class="rate-cell" id="rateGeneral"><span style="color:#2563eb">10‰至55‰</span></td>
+        <td class="rate-cell">2‰</td>
+        <td class="rate-cell">10‰</td>
+        <td class="rate-cell">6‰</td>
+      </tr>
+      <tr class="result-row">
+        <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="tax-cell" id="taxGeneral">0</td>
+        <td class="tax-cell" id="taxSelf">0</td>
+        <td class="tax-cell" id="taxIndustrial">0</td>
+        <td class="tax-cell" id="taxPublic">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 一般土地級距表 -->
+  <div class="tier-wrap" id="tierWrap" style="display:none">
+    <div class="tier-title">桃園市・一般用地累進稅率級距表（115-116年，累進起點地價 3,439,000 元）</div>
+    <table class="tier-table">
+      <thead><tr><th>級次</th><th>課稅總地價範圍（元）</th><th>稅率</th><th>累進差額（元）</th></tr></thead>
+      <tbody id="tierBody"></tbody>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-calc" onclick="calcAll()">稅額試算</button>
+    <button class="btn-outline" onclick="clearAll()">清除資料</button>
+    <a href="land-value-tax-calculator.html" class="btn-home">回地價稅首頁</a>
+  </div>
+
+  <div class="disclaimer">⚠️ 本試算依財政部官方公式計算。115-116年桃園市累進起點地價為 3,439,000 元。實際稅額依桃園市稅務局核定為準。持有 2 筆以上土地者請洽稅務局或使用官方試算系統。</div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const T = 3439000;
+const SECTIONS = {
+  '01': ['桃園段武陵小段','桃園段中南小段','桃園段長美小段','桃園段公館頭小段','小檜溪段','中路段','大樹林段','埔子段埔子小段','埔子段北門埔子小段','和平段','西門段','中埔段','富國段','法政段','新埔段','慈文段','成功段','東國段','東門段','同安段','汴洲段','龍安段','長安段','中山段','昆明段','陽明段','介壽段','建國段','建新段','雲林段','大林段','福林段','桃鶯段','春日段','會稽段','大興段','寶山段','大有段','福元段','忠義段','中正段','延壽段','國強段','江南段','中平段','國聖段','三聖段','三元段','有恒段','鹽埕段','峨眉段','龍鳳段','龍祥段','延平段','青溪段','同德段','龍壽段','雙龍段','龍山段','玉山段','國際段','皮寮段','桃圳段','中德段','西埔段','八角段','星見段','水汴頭段','雲盟段','中路一段','中路二段','中路三段','八角店段','中路五段','三民段','桃合段'],
+  '02': ['烏塗窟段','月眉段','三層段坑底小段','三層段尾寮小段','三層段八結小段','三層段三層小段','三層段頭寮小段','田心子段下田心子小段','田心子段上田心子小段','缺子段缺子小段','缺子段粟子園小段','埔頂段','中正段','介壽段','和平段','員林段','武嶺段','康莊段','仁善段','仁武段','福山段','金瓜段','美華段','慈湖段','東湖段','社角段','仁愛段','廣福段','仁義段','僑愛段','松樹段','仁德段','大成段','仁文段','太武段','仁和段','大圳段','瑞源段','半屏段','大鶯段','瑞興段','東隆段','草厝江段','南興段','永昌段','隆德段','瑞安段','石園段','康義段','康安段','溪崁段','埔尾段','烏塗段','信義段','中華段','慈康段','一德段','中庄段','石屯段','坑底段','草嶺段','福安段','溪湖段','新峰段','八結段','環湖段','仁埔段'],
+  '03': ['興南段興南小段','興南段中壢老小段','興南段公坡小段','石頭段','三座屋段三座屋小段','三座屋段舊社小段','三民段','五權段','水尾段水尾小段','新街段','忠福段','中壢埔頂段','榮民段','忠義段','環東段','遠東段','成功段','仁愛段','復興段','忠孝段','大華段','仁美段','普義段','自立段','中原段','健行段','中北段','中工段','後寮段','內壢段','大崙段內厝子小段','山上段','內厝段','山下段','月眉段','西寮段','前寮段','東寮段','平寮段','中寮段','後興段','華興段','中興段','永興段','振興段','新興段','紫雲段','仁和段','仁祥段','仁德段','榮南段','普仁段','富強段','富台段','青平段','青昇段','青溪段','青芝段','福德段','上嶺段','山嶺段','雙嶺段','芭里段','大路段','啟文段','廣青段','萬能段','大江段','永清段','聖德段','興和段','洽溪段','崇德段','大崙段','興崙段','大享段','培英段','六和段','老街溪段','豐興段','中運段','普忠段','環北段'],
+  '04': ['草湳坡段草湳坡小段','草湳坡段埔心小段','頭重溪段','大金山下段大金山下小段','大金山下段月眉山下小段','二重溪段','楊梅段','伯公岡段','下陰影窩段','員笨段','四湖段','上湖段','楊湖段','楊富段','民富段','民生段','豐野段','新明段','國聯段','富岡段','梅高段','員富段','上田段','和平段','新榮段','高榮段','大平段','東流段','永福段','國寶段','秀才段','永寧段','田心段','高雙段','啟明段','仁美段','幼獅段','雙榮段','高上段','高獅段','高山段','白鶴段','水美段','頂湖段','金龍段','瑞上段','瑞原段','民有段','民豐段','員本段','長紅段','長岡嶺段','瑞湖段','梅獅段','瑞坪段','老莊段','東寧段','永楊段','新秀段','甡甡段','梅園段','新富段'],
+  '05': ['大竹圍段','南崁下段','新庄子段','坑子外段山腳小段','中興段','福興段','新興段','坑子口段海湖小段','坑子口段頭前小段','大竹段','大新段','錦中段','錦明段','南華段','錦興段','南崁段','南新段','南榮段','公埔段','長興段','南山段','長安段','五福段','六福段','羊稠段','河底段','富興段','水尾段','八股段','內興段','山鼻段','大興段','蘆興段','南竹段','南青段','富宏段','富竹段','新福段','開南段','文新段','德林段','文中段','竹中段','新中段','上興段','上竹段','宏華段','宏昌段','宏竹段','新鼻段','福厚段','富海段','海山段','出水段','大坑段','後壁段','坑口段','山腳段','公溝段','大古段','後坑段','草崎段','貓尾段','福山段','福臨段','南庄段','福德段','赤塗段','茄苳段','宏林段','源福段','誠聖段','富華段'],
+  '06': ['許厝港段','大園段','內海墘段','內海墘段特工區小段','埔心段埔心小段','埔心段海豐坡小段','埔心段三塊厝小段','大牛稠段大牛稠小段','大牛稠段倒厝子小段','橫山段橫山小段','橫山段尖山小段','橫山段湳子小段','圳股頭段後館小段','圳股頭段古亭小段','圳股頭段圳股頭小段','竹圍段崁腳小段','竹圍段海口小段','竹圍段三塊石小段','竹圍段四股小段','竹圍段拔子林小段','竹圍段田寮小段','竹圍段崁下小段','竹圍段海方厝小段','竹圍段竹圍小段','五塊厝段大埔小段','五塊厝段下埔小段','沙崙段沙崙小段','沙崙段埔頂小段','沙崙段後厝小段','沙崙段坡堵小段','北港段','中正段','北園段','中園段','東園段','西園段','南園段','青峰段','青山段','客運一段','客運二段','貨運段','田心段','長發段','溪洲段','溪海段','和平段','華興段','聖德段','港口段','潮音段','艋舺段','南港段','國際段','舊厝段','沙園段','菓林段','海沙段','油庫段','水源段','牛稠段','坑菓段','三民段','三石段','大海段','聖威段','福隆段','五結段','橫埔段','青埔段','橫湳段','福海段'],
+  '07': ['牛角坡段垹坡小段','新路坑段','山頂段','坪頂菜公堂段埤寮小段','坪頂下湖段','塔寮坑段大坑小段','塔寮坑段坑底小段','南崁頂段蕃子窩小段','新路段','樂善段','龜山段','中興段','自強段','大同段','壽山段','半嶺段','興華段','文化段','油廠段','山德段','山鶯段','山福段','華亞段','明興段','幸福段','海萍段','東嶺段','西嶺段','精忠段','陸光段','龍華段','迴龍段','楓樹段','公西段','警大段','下湖段','大崗段','公華段','頂湖段','南美段','南上段','蔗園段','煉油段','垹坡段','吉祥段','振三段','體大段','大埔段','福源段','樂捷段','善捷段','舊路坑一段','舊路坑二段','舊路坑三段','塔寮坑段','兔子坑段','大坑段','陳厝段','大嶺段','楓壽段','楓義段','龍壽段','文青段','興安段'],
+  '08': ['八塊段','大勇段','大仁段','大義段','同福段','東勇段','大忠段','永福段','大華段','大興段','力行段','青溪段','前程段','大福段','桃德段','大智段','廣福段','大成段','福國段','茄明段','高城段','高明段','茄苳段','永豐段','白鷺段','廣隆段','中華段','大明段','大發段','華興段','麻園段','瑞豐段','榮興段','大安段','大竹段','大和段','大庄段','興豐段','興隆段','福興段','興仁段','豐田段','明智段','溪尾段','廣興段','竹園段','營盤段','新霄裡段','龍友段','瑞祥段','瑞德段','豐德段','連城段','建國段','新興段','信勇段'],
+  '09': ['淮子埔段','九座寮段','黃泥塘段','八張犁段','三角林段','大坪段大坪小段','大坪段二坪小段','四方林段四方林小段','四方林段大湖底小段','石門段','黃龍段','凌雲段','上林段','北龍段','龍興段','東龍段','龍華段','南龍段','黃唐段','中山段','五福段','湖底段','大湖段','林坡段','佳安段','永福段','碧湖段','紅橋段','大平段','民有段','三坑段','永興段','中興段','武漢段','奉慈段','北興段','成功段','新烏樹林段','燈潭段','烏林段','潛龍段','龍祥段','干城段','上華段','龍吟段','建國段','逸園段','三元段','三林段','民豐段','九座段','九龍段','健行段','金龍段','高平段','龍源段','雙連段','富林段','文化段','中科段','聖德段','聖亭段','德龍段','梅龍段','竹龍段','八德段','洽水段','泥橋段','和原段','南坑段','北坑段','高原段','福源段','中原段','打鐵段'],
+  '10': ['平鎮段','宋屋段廣興小段','宋屋段高山下小段','南勢段','山子頂段','廣東段','廣西段','廣南段','廣北段','忠貞段','東社段','平東段','東安段','東北段','西社段','廣平段','廣德段','復旦段','義民段','廣豐段','延平段','德育段','振平段','環南段','北興段','正義段','關爺段','新勢段','新德段','新榮段','新富段','新貴段','廣仁段','新光段','莊敬段','東豐段','新生段','湧豐段','湧星段','湧光段','湧安段','三興段','富貴段','南華段','平南段','平安段','金星段','金鍊段','雙連段','中央段','高雙段','六和段','賦梅段','賦北段','台水段','鎮安段','平德段','三崇段','金龍段','金獅段','和平段','中庸段','鎮興段','中興段','興湧段','建安段','吉安段','新北段','北商段','東陵段','鎮東段','東金段','福林段','長安段'],
+  '11': ['犂頭洲段犂頭洲小段','埔頂段埔頂小段','埔頂段水碓小段','東勢段東勢小段','東勢段甲頭厝小段','東勢段上庄子小段','社子段','番婆坟段','十五間段十五間小段','十五間段十五間尾小段','大坡段大坡小段','大坡段三角堀小段','槺榔段上槺榔小段','槺榔段下槺榔小段','後庄段','蚵殼港段蚵殼港小段','蚵殼港段深圳小段','笨子港段笨子港小段','笨子港段埔子頂小段','笨子港段榕樹下小段','崁頭厝段崁頭厝小段','崁頭厝段下庄子小段','大牛欄段大牛欄小段','大牛欄段下埔頂小段','大牛欄段後湖小段','石牌嶺段','下田心子段下田心子小段','下田心子段赤牛欄小段','下田心子段員笨小段','石磊子段石磊子小段','石磊子段水流小段','新生段','新屋段新屋小段','新屋段後湖小段','清華段','啟文段','中山段','中華段','中正段','中興段','長祥段','頭洲段','新洲段','富九段','青田段','吉祥段','高洲段','永安段','山海段','福興段'],
+  '12': ['觀音段新坡下小段','崙坪段','草漯段','坑尾段','白沙屯段白沙屯小段','白沙屯段下庄子小段','下青埔段樹子腳小段','大潭段大潭小段','大潭段小飯壢小段','大潭段塘背小段','大潭段塘尾小段','茄苳坑段對面厝小段','茄苳坑段兩座屋小段','三座屋段三座屋小段','三座屋段橫圳頂小段','三座屋段新興小段','樹林子段樹林子小段','樹林子段崁頭子小段','樹林子段過溪子小段','新坡段新坡小段','育仁段','光明段','大堀段','藍埔段','金湖段','富源段','上大段','忠愛段','廣福段','新坡段','工業區段一小段','工業區段二小段','工業區段三小段','工業區段四小段','工業區段五小段','草新段','坡興段','新張段','大同段','廣興段','甘泉段','觀新段','潭工段','保潭段','新富段','觀塘段','觀玉段','忠富段','大湖段','中觀段','溪口段','草富段','塔腳段','廣大段','忠孝段','保障段','崙尾段','樹新段','富林段','埔頂段','下埔頂段','濱海段','樹林段','過溪段','成功段','草豊段','王厝段','茄苳段','潭尾段','草福段','富溪段','大觀段','白玉段'],
+  '13': ['水流東段','竹頭角段','拉號段','巴陵段','東眼山段','赫威段','達觀段','塔曼段','萱原段','四稜段','新興段','成福段','卡普段','宇內段','義興段','南插段','斷匯段','溪口段','枕頭山段','羅浮段','長興段','石牛段','那結段','李崠山段','里安段','鷹山段','塔卡段','夫婦山段','華陵段','哈崖段','彌榮段','卡拉段','嘎拉賀段','大曼段','澤仁段','溫泉段','大窩段','詩朗段','烏內段','雙橋段','佳蘭段','三民段','華興段','中島段','大利段','大灣段','羅馬段','比亞段','色霧段','卡維段','砂崙段','復華段','篙遶段','蘇竹段','爺亨梯田段','新光段','頭角段','霞云段'],
+};
+
+let currentDeclaredPrice = 0;
+
+const TIERS = [
+  {max:1,  rate:0.010, coef:0},
+  {max:6,  rate:0.015, coef:0.005},
+  {max:11, rate:0.025, coef:0.065},
+  {max:16, rate:0.035, coef:0.175},
+  {max:21, rate:0.045, coef:0.335},
+  {max:Infinity, rate:0.055, coef:0.545}
+];
+
+function onDistrictChange() {
+  const dv = document.getElementById(\'district\').value;
+  const sel = document.getElementById(\'section\');
+  sel.innerHTML = \'<option value="">請選擇地段</option>\';
+  if (dv && SECTIONS[dv]) {
+    SECTIONS[dv].forEach(function(s) {
+      const o = document.createElement(\'option\');
+      o.value = s; o.textContent = s;
+      sel.appendChild(o);
+    });
+  }
+  checkQueryBtn();
+  resetPrice();
+}
+
+function onSectionChange() { checkQueryBtn(); resetPrice(); }
+
+function onLandNoInput(el) {
+  el.value = el.value.replace(/[^0-9]/g, \'\').substring(0, 8);
+  checkQueryBtn();
+}
+
+function checkQueryBtn() {}
+
+function resetPrice() {
+  currentDeclaredPrice = 0;
+  document.getElementById(\'priceDisplay\').textContent = \'從官方系統查詢後填入\';
+  document.getElementById(\'priceDisplay\').classList.add(\'pending\');
+  document.getElementById(\'tierDisplay\').textContent = \'--\';
+  calcAll();
+}
+
+function onManualInput() {
+  const v = parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
+  currentDeclaredPrice = v;
+  const pd = document.getElementById(\'priceDisplay\');
+  if (v > 0) {
+    pd.textContent = fmt(v) + \' 元/㎡\';
+    pd.classList.remove(\'pending\');
+    pd.style.fontSize = \'18px\';
+    pd.style.color = \'#c17f24\';
+  } else { resetPrice(); }
+  calcAll();
+}
+
+function convertAnnounced() {
+  const ap = parseFloat(document.getElementById(\'announcedInput\').value) || 0;
+  const dp = ap * 0.8;
+  document.getElementById(\'convertedVal\').textContent = dp > 0 ? fmt(dp) + \' 元\' : \'—\';
+  if (dp > 0) {
+    document.getElementById(\'manualDeclared\').value = dp;
+    onManualInput();
+  }
+}
+
+function calcProportional() {
+  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
+  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
+  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
+  const applyBtn = document.getElementById(\'applyBtn\');
+  if (total > 0 && numer > 0 && denom > 0) {
+    const prop = total * numer / denom;
+    document.getElementById(\'proportionalResult\').textContent = prop.toFixed(2);
+    applyBtn.disabled = false; applyBtn.style.opacity = \'1\';
+  } else {
+    document.getElementById(\'proportionalResult\').textContent = \'—\';
+    applyBtn.disabled = true; applyBtn.style.opacity = \'0.5\';
+  }
+}
+
+function applyProportional() {
+  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
+  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
+  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
+  if (total > 0 && numer > 0 && denom > 0) {
+    document.getElementById(\'areaGeneral\').value = (total * numer / denom).toFixed(2);
+    calcAll();
+  }
+}
+
+function calcAll() {
+  const dp = currentDeclaredPrice || parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
+  const types = [\'General\',\'Self\',\'Industrial\',\'Public\'];
+  const rates = {General:null, Self:0.002, Industrial:0.010, Public:0.006};
+  let generalTaxBase = 0;
+  types.forEach(function(t) {
+    const area = parseFloat(document.getElementById(\'area\' + t).value) || 0;
+    const taxBase = dp * area;
+    document.getElementById(\'cp\' + t).textContent = fmt(taxBase);
+    let tax = 0;
+    if (t === \'General\') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
+    else { tax = taxBase * rates[t]; }
+    document.getElementById(\'tax\' + t).textContent = fmt(Math.round(tax));
+  });
+  if (generalTaxBase > 0) {
+    const tier = getTier(generalTaxBase);
+    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">\' + (tier.rate*1000).toFixed(0) + \'‰（第\' + tier.level + \'級）</span>\';
+    document.getElementById(\'tierDisplay\').textContent = \'第\' + tier.level + \'級（\' + (tier.rate*1000).toFixed(0) + \'‰）\';
+    document.getElementById(\'tierDisplay\').classList.remove(\'pending\');
+    for (let i=1;i<=6;i++) { const r=document.getElementById(\'tr-\'+i); if(r) r.classList.toggle(\'hit\',i===tier.level); }
+    document.getElementById(\'tierWrap\').style.display = \'block\';
+  } else {
+    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">10‰至55‰</span>\';
+    document.getElementById(\'tierDisplay\').textContent = \'--\';
+    document.getElementById(\'tierDisplay\').classList.add(\'pending\');
+  }
+}
+
+function getTier(taxBase) {
+  const multiple = taxBase / T;
+  let level = 1;
+  if (multiple <= 1) level=1;
+  else if (multiple <= 6) level=2;
+  else if (multiple <= 11) level=3;
+  else if (multiple <= 16) level=4;
+  else if (multiple <= 21) level=5;
+  else level=6;
+  return {level, rate:TIERS[level-1].rate, coef:TIERS[level-1].coef};
+}
+
+function calcGeneral(taxBase) {
+  if (taxBase <= 0) return 0;
+  const t = getTier(taxBase);
+  return Math.max(0, taxBase * t.rate - T * t.coef);
+}
+
+function buildTierTable() {
+  const ordinals = [\'一\',\'二\',\'三\',\'四\',\'五\',\'六\'];
+  const rows = [
+    [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
+    [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
+  ];
+  document.getElementById(\'tierBody\').innerHTML = rows.map(function(r,i){
+    const range = r[2] ? fmt(r[1])+ \' ~ \'+fmt(r[2]) : fmt(r[1])+\' 以上\';
+    return \'<tr id="tr-\'+(i+1)+\'"><td>第\'+ordinals[i]+\'級</td><td>\'+range+\'</td><td>\'+(r[3]*1000).toFixed(0)+\'‰</td><td>\'+fmt(r[4])+\'</td></tr>\';
+  }).join(\'\');
+}
+
+function clearAll() {
+  [\'areaGeneral\',\'areaSelf\',\'areaIndustrial\',\'areaPublic\',\'manualDeclared\',\'announcedInput\',\'totalArea\',\'shareNumer\',\'shareDenom\',\'landNo\'].forEach(id=>{document.getElementById(id).value=\'\'});
+  document.getElementById(\'convertedVal\').textContent = \'—\';
+  document.getElementById(\'proportionalResult\').textContent = \'—\';
+  document.getElementById(\'applyBtn\').disabled = true;
+  document.getElementById(\'applyBtn\').style.opacity = \'0.5\';
+  document.getElementById(\'district\').value = \'\';
+  document.getElementById(\'section\').innerHTML = \'<option value="">請先選擇行政區</option>\';
+  
+  currentDeclaredPrice = 0;
+  resetPrice();
+  [\'cpGeneral\',\'cpSelf\',\'cpIndustrial\',\'cpPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
+  [\'taxGeneral\',\'taxSelf\',\'taxIndustrial\',\'taxPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
+  document.getElementById(\'tierWrap\').style.display=\'none\';
+}
+
+function fmt(n) {
+  if (!n && n!==0) return \'—\';
+  return Math.round(n).toLocaleString(\'zh-TW\');
+}
+
+buildTierTable();
+
+</script>
+
+<section style="max-width:720px;margin:0 auto 40px;padding:0 16px">
+  <div style="background:#f5f5f7;border-radius:14px;padding:20px">
+    <div style="font-size:11px;font-weight:700;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="land-value-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">全台地價稅試算 →</a>
+      <a href="taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">台北市地價稅試算 →</a>
+      <a href="new-taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">新北市地價稅試算 →</a>
+      <a href="land-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
+    </div>
+  </div>
+</section>
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>
