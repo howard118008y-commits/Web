@@ -1,0 +1,61 @@
+{
+  "_comment": "地價稅累進起點地價設定檔。每兩年（奇數年 11 月前後）更新一次。更新後執行 python scripts/update_calculators.py",
+  "_last_updated": "2026-05-14",
+  "_next_update_due": "2027-10-01",
+  "cities": {
+    "taipei": {
+      "name": "台北市",
+      "file": "taipei-land-value-tax.html",
+      "T": 43957000,
+      "year": "115-116",
+      "est": false,
+      "source": "財政部稅務入口網",
+      "official_calc_url": "https://services.arpa.tpctax.dof.gov.taipei/ilCal/"
+    },
+    "new_taipei": {
+      "name": "新北市",
+      "file": "new-taipei-land-value-tax.html",
+      "T": 7878000,
+      "year": "115-116",
+      "est": false,
+      "source": "新北市政府稅務局",
+      "official_calc_url": "https://www.tax.ntpc.gov.tw/"
+    },
+    "taoyuan": {
+      "name": "桃園市",
+      "file": "taoyuan-land-value-tax.html",
+      "T": 3439000,
+      "year": "115-116",
+      "est": false,
+      "source": "財政部稅務入口網",
+      "official_calc_url": "https://www.tytax.gov.tw/Tax_Land.aspx?n=57&sms=10329"
+    },
+    "keelung": {
+      "name": "基隆市",
+      "file": "keelung-land-value-tax.html",
+      "T": 3548000,
+      "year": "115-116",
+      "est": false,
+      "source": "基隆市稅務局",
+      "official_calc_url": "https://www.kltb.gov.tw/tw/kltb1/291.html"
+    },
+    "hsinchu_city": {
+      "name": "新竹市",
+      "file": "hsinchu-city-land-value-tax.html",
+      "T": 5808000,
+      "year": "115-116",
+      "est": false,
+      "source": "新竹市地方稅務局",
+      "official_calc_url": "https://est.hcct.gov.tw/hsinchuTaxTrial/landtax.html"
+    },
+    "hsinchu_county": {
+      "name": "新竹縣",
+      "file": "hsinchu-county-land-value-tax.html",
+      "T": 1661000,
+      "year": "113-114",
+      "est": true,
+      "source": "新竹縣地方稅務局（115年待更新）",
+      "official_calc_url": "https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055"
+    }
+  }
+}

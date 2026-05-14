@@ -1,0 +1,77 @@
+name: 地價稅累進起點地價更新
+
+on:
+  # 手動觸發（每兩年更新時使用）
+  workflow_dispatch:
+    inputs:
+      city:
+        description: '要更新的城市 key（留空 = 全部）'
+        required: false
+        default: ''
+      year:
+        description: '新年度（例：117-118）'
+        required: false
+        default: ''
+      dry_run:
+        description: '只檢查，不寫入（true/false）'
+        required: false
+        default: 'false'
+
+  # 每年 11 月 1 日自動提醒檢查（奇數年才需實際更新）
+  schedule:
+    - cron: '0 1 1 11 *'   # UTC 01:00 = 台灣 09:00
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 執行更新腳本
+        id: update
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.city }}" ]; then
+            ARGS="$ARGS --city ${{ github.event.inputs.city }}"
+          fi
+          if [ -n "${{ github.event.inputs.year }}" ]; then
+            ARGS="$ARGS --year ${{ github.event.inputs.year }}"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --check"
+          fi
+          python scripts/update_calculators.py $ARGS
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+
+      - name: 偵測是否有檔案變更
+        id: changes
+        run: |
+          git diff --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit & Push（有變更才執行）
+        if: steps.changes.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add taipei-land-value-tax.html \
+                  new-taipei-land-value-tax.html \
+                  taoyuan-land-value-tax.html \
+                  keelung-land-value-tax.html \
+                  hsinchu-city-land-value-tax.html \
+                  hsinchu-county-land-value-tax.html
+          YEAR=$(python -c "import json; c=json.load(open('scripts/tax-config.json')); print(list(c['cities'].values())[0].get('year',''))")
+          git commit -m "Update 地價稅累進起點地價 ${YEAR}年 [bot]"
+          git push
+
+      - name: 無變更通知
+        if: steps.changes.outputs.changed == 'false'
+        run: echo "✓ 所有檔案均與設定檔一致，無需更新。"
