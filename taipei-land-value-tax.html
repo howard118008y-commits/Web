@@ -339,13 +339,9 @@ async function onDistrictChange() {
     const data = await res.json();
     sel.innerHTML = '<option value="">請選擇地段</option>';
     data.forEach(function(item) {
-      const code = item[1], name = item[2], sub = item[3];
-      let label;
-      if (['0707','0708','0709','0710'].includes(code)) {
-        label = '犁和' + (sub ? sub + '小段' : '段');
-      } else {
-        label = name + (sub ? sub : '') + '段';
-      }
+      const code = item[1], sub = item[3];
+      const baseName = ['0707','0708','0709','0710'].includes(code) ? '犁和' : item[2];
+      const label = sub ? baseName + '段' + sub + '小段' : baseName + '段';
       const o = document.createElement('option');
       o.value = code; o.textContent = label;
       sel.appendChild(o);
