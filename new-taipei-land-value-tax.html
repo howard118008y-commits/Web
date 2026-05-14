@@ -379,7 +379,7 @@ function onDistrictChange() {
   if (dv && SECTIONS[dv]) {
     SECTIONS[dv].forEach(function(s) {
       const o = document.createElement('option');
-      o.value = s[0]; o.textContent = s[1];
+      o.value = s[0]; o.textContent = s[0] + ' ' + s[1];
       sel.appendChild(o);
     });
   }
@@ -413,7 +413,7 @@ function queryPrice() {
   const distName = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
   const section = document.getElementById('section').value;
   const landNo = document.getElementById('landNo').value;
-  window.open('https://www.tax.ntpc.gov.tw/', '_blank');
+  window.open('https://einvdonate.tax.ntpc.gov.tw/Calculation/LandTax', '_blank');
   document.getElementById('priceDisplay').textContent = '請從官方系統查詢後填入下方手動輸入欄';
   document.getElementById('priceDisplay').classList.remove('pending');
   document.getElementById('priceDisplay').style.fontSize = '12px';
