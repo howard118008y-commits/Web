@@ -96,11 +96,11 @@
     "chiayi_city": {
       "name": "嘉義市",
       "file": "chiayi-city-land-value-tax.html",
-      "T": 4027000,
+      "T": 3957000,
       "year": "115-116",
       "est": false,
       "source": "嘉義市政府財政稅務局",
-      "official_calc_url": "https://www.citax.gov.tw/"
+      "official_calc_url": "https://www.citax.gov.tw/TaxCalculation/LandTax"
     },
     "miaoli": {
       "name": "苗栗縣",
