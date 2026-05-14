@@ -244,6 +244,13 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
         <td class="rate-cell">10‰</td>
         <td class="rate-cell">6‰</td>
       </tr>
+      <tr>
+        <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="deductGeneral">—</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+      </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
         <td class="tax-cell" id="taxGeneral">0</td>
@@ -400,12 +407,14 @@ function calcAll() {
   if (generalTaxBase > 0) {
     const tier = getTier(generalTaxBase);
     document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">\' + (tier.rate*1000).toFixed(0) + \'‰（第\' + tier.level + \'級）</span>\';
+    document.getElementById(\'deductGeneral\').textContent = fmt(Math.round(T * tier.coef));
     document.getElementById(\'tierDisplay\').textContent = \'第\' + tier.level + \'級（\' + (tier.rate*1000).toFixed(0) + \'‰）\';
     document.getElementById(\'tierDisplay\').classList.remove(\'pending\');
     for (let i=1;i<=6;i++) { const r=document.getElementById(\'tr-\'+i); if(r) r.classList.toggle(\'hit\',i===tier.level); }
     document.getElementById(\'tierWrap\').style.display = \'block\';
   } else {
     document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">10‰至55‰</span>\';
+    document.getElementById(\'deductGeneral\').textContent = \'—\';
     document.getElementById(\'tierDisplay\').textContent = \'--\';
     document.getElementById(\'tierDisplay\').classList.add(\'pending\');
   }
@@ -454,6 +463,7 @@ function clearAll() {
   resetPrice();
   [\'cpGeneral\',\'cpSelf\',\'cpIndustrial\',\'cpPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
   [\'taxGeneral\',\'taxSelf\',\'taxIndustrial\',\'taxPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
+  document.getElementById(\'deductGeneral\').textContent=\'—\';
   document.getElementById(\'tierWrap\').style.display=\'none\';
 }
 
