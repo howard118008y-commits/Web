@@ -1,6 +1,6 @@
 {
   "_comment": "地價稅累進起點地價設定檔。每兩年（奇數年 11 月前後）更新一次。更新後執行 python scripts/update_calculators.py",
-  "_last_updated": "2026-05-14",
+  "_last_updated": "2026-05-15",
   "_next_update_due": "2027-10-01",
   "cities": {
     "taipei": {
@@ -51,10 +51,10 @@
     "hsinchu_county": {
       "name": "新竹縣",
       "file": "hsinchu-county-land-value-tax.html",
-      "T": 1661000,
-      "year": "113-114",
-      "est": true,
-      "source": "新竹縣地方稅務局（115年待更新）",
+      "T": 1765000,
+      "year": "115-116",
+      "est": false,
+      "source": "新竹縣地方稅務局",
       "official_calc_url": "https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055"
     },
     "taichung": {

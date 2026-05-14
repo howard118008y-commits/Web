@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><!-- hsinchu-county-lvt v1 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>新竹縣地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃</title>
-<meta name="description" content="新竹縣地價稅試算，113-114年累進起點地價 1,661,000 元，支援行政區・地段查詢，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta name="description" content="新竹縣地價稅試算，115-116年累進起點地價 1,765,000 元，支援行政區・地段查詢，自用住宅 2‰ 與一般用地六級累進稅率。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <style>
 *{box-sizing:border-box}
@@ -75,16 +75,16 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://cx468.com.tw/hsinchu-county-land-value-tax.html">
 <meta property="og:title" content="新竹縣地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
-<meta property="og:description" content="新竹縣地價稅試算，113-114年累進起點地價 1,661,000 元，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta property="og:description" content="新竹縣地價稅試算，115-116年累進起點地價 1,765,000 元，自用住宅 2‰ 與一般用地六級累進稅率。">
 <meta property="og:url" content="https://cx468.com.tw/hsinchu-county-land-value-tax.html">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"新竹縣地價稅試算","url":"https://cx468.com.tw/hsinchu-county-land-value-tax.html","description":"新竹縣地價稅試算，113-114年累進起點地價 1,661,000 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"provider":{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"新竹縣地價稅試算","url":"https://cx468.com.tw/hsinchu-county-land-value-tax.html","description":"新竹縣地價稅試算，115-116年累進起點地價 1,765,000 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"provider":{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"房產試算工具","item":"https://cx468.com.tw/tools.html"},{"@type":"ListItem","position":3,"name":"地價稅試算","item":"https://cx468.com.tw/land-value-tax-calculator.html"},{"@type":"ListItem","position":4,"name":"新竹縣地價稅試算"}]}
@@ -95,7 +95,7 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
 
 <div class="hero">
   <h1>地價稅稅額試算</h1>
-  <p>新竹縣・113-114年（估算，以新竹縣稅務局公告為準）・鋮馨租賃</p>
+  <p>新竹縣・115-116年（估算，以新竹縣稅務局公告為準）・鋮馨租賃</p>
 </div>
 
 <div class="wrap">
@@ -141,11 +141,17 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
     </div>
   </div>
 
-  <div style="margin-top:12px">
-    <a href="https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055" target="_blank" rel="noopener" class="official-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
-      前往新竹縣地方稅務局查詢申報地價（選好行政區・地段・地號後點此）
-    </a>
+  <div style="margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button id="queryBtn" onclick="openOfficialQuery()" class="btn-query" disabled style="opacity:0.5;display:inline-flex;align-items:center;gap:6px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="white" stroke-width="2.2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
+      查詢申報地價
+    </button>
+    <span style="font-size:12px;color:#9ca3af">選好行政區・地段・地號（8碼）後啟用</span>
+  </div>
+  <div id="queryHint" style="display:none;margin-top:8px;font-size:12px;padding:10px 12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;line-height:1.8">
+    已開啟官方試算頁，請依序選擇：<br>
+    <span id="queryInfo" style="font-weight:700;color:#1e40af">—</span><br>
+    <a href="https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055" target="_blank" rel="noopener" style="color:#2563eb;font-size:11px">↗ 再次開啟官方試算頁</a>
   </div>
 
   <div class="price-result" id="priceResult">
@@ -244,6 +250,13 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
         <td class="rate-cell">10‰</td>
         <td class="rate-cell">6‰</td>
       </tr>
+      <tr>
+        <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="deductGeneral">—</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+      </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
         <td class="tax-cell" id="taxGeneral">0</td>
@@ -256,7 +269,7 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
 
   <!-- 一般土地級距表 -->
   <div class="tier-wrap" id="tierWrap" style="display:none">
-    <div class="tier-title">新竹縣・一般用地累進稅率級距表（113-114年，累進起點地價 1,661,000 元）</div>
+    <div class="tier-title">新竹縣・一般用地累進稅率級距表（115-116年，累進起點地價 1,765,000 元）</div>
     <table class="tier-table">
       <thead><tr><th>級次</th><th>課稅總地價範圍（元）</th><th>稅率</th><th>累進差額（元）</th></tr></thead>
       <tbody id="tierBody"></tbody>
@@ -269,13 +282,13 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
     <a href="land-value-tax-calculator.html" class="btn-home">回地價稅首頁</a>
   </div>
 
-  <div class="disclaimer">⚠️ 本試算依財政部官方公式計算。113-114年新竹縣累進起點地價為 1,661,000 元（估算，以新竹縣稅務局公告為準）。實際稅額依新竹縣稅務局核定為準。持有 2 筆以上土地者請洽稅務局或使用官方試算系統。</div>
+  <div class="disclaimer">⚠️ 本試算依財政部官方公式計算。115-116年新竹縣累進起點地價為 1,765,000 元（估算，以新竹縣稅務局公告為準）。實際稅額依新竹縣稅務局核定為準。持有 2 筆以上土地者請洽稅務局或使用官方試算系統。</div>
 </div>
 
 </div><!-- /wrap -->
 
 <script>
-const T = 1661000;
+const T = 1765000;
 const SECTIONS = {
   '02': [['0501','燥樹排段'],['0503','員崠子段員崠子小段'],['0504','下公舘段'],['0505','上公舘段'],['0506','鷄油林段'],['0507','竹東段竹東小段'],['0508','竹東段番社子小段'],['0510','三重埔段'],['0511','二重埔段'],['0512','麻園肚段'],['0513','頭重埔段'],['0514','下員山段'],['0515','柯子湖段'],['0516','東寧段'],['0517','仁愛段'],['0518','中山段'],['0519','中正段'],['0520','資源段'],['0633','竹美段'],['0634','竹中段'],['0635','富貴段'],['0636','明星段'],['0637','上員段'],['0638','重光段'],['0639','旭光段'],['0640','志學段'],['0641','四重段'],['0669','大林段'],['0709','下員段'],['0710','中員段'],['0711','陸豐段'],['0716','九莊段'],['0717','敦睦段'],['0718','油車窩段'],['0719','五豐段'],['0720','金福段'],['0721','國王段'],['0722','放翁段'],['0737','軟橋段'],['0738','北興段'],['0739','員崠段'],['0740','上舘段'],['0741','大鄉段'],['0742','杞林段'],['0751','指東段'],['0781','台泥段'],['1001','至善段'],['1007','光武段'],['1024','東河段']],
   '03': [['0202','坪林段'],['0203','上橫坑段'],['0204','下橫坑段'],['0205','下南片段'],['0207','大旱坑段大旱坑小段'],['0208','大旱坑段大東坑小段'],['0209','大旱坑段小東坑小段'],['0210','大旱坑段小北坑小段'],['0211','大旱坑段南坑小段'],['0212','老焿寮段'],['0213','燥坑段'],['0215','上南片段南片小段'],['0216','上南片段渡船頭小段'],['0217','拱子溝段'],['0219','三屯段上三屯小段'],['0221','十寮段十寮小段'],['0222','十寮段四寮小段'],['0223','十寮段七寮小段'],['0224','十寮段八寮小段'],['0225','十寮段糞箕窩小段'],['0226','湳湖段湳湖小段'],['0227','湳湖段十股小段'],['0228','湳湖段柑子樹下小段'],['0229','湖肚段'],['0230','十六張段十六張小段'],['0231','十六張段暗潭小段'],['0232','老社寮段'],['0233','石門段'],['0234','新城段'],['0235','苧子園段'],['0236','關西段關西小段'],['0241','馬武督段馬武督小段'],['0242','馬武督段六畜小段'],['0243','馬武督段赤柯山小段'],['0244','馬武督段大竹坑小段'],['0245','錦山段'],['0378','六福段'],['0392','關農段'],['0393','東安段'],['0394','光明段'],['0395','明德段'],['0396','中山段'],['0397','西安段'],['0398','正義段'],['0399','北山段'],['0462','仁安段'],['0463','東豐段'],['0464','東光段'],['0465','石光段'],['0466','大同壹段'],['0467','大同貳段'],['0473','高橋段'],['0474','店岡段']],
@@ -304,12 +317,12 @@ const TIERS = [
 ];
 
 function onDistrictChange() {
-  const dv = document.getElementById(\'district\').value;
-  const sel = document.getElementById(\'section\');
-  sel.innerHTML = \'<option value="">請選擇地段</option>\';
+  const dv = document.getElementById('district').value;
+  const sel = document.getElementById('section');
+  sel.innerHTML = '<option value="">請選擇地段</option>';
   if (dv && SECTIONS[dv]) {
     SECTIONS[dv].forEach(function(s) {
-      const o = document.createElement(\'option\');
+      const o = document.createElement('option');
       o.value = s[0]; o.textContent = s[1];
       sel.appendChild(o);
     });
@@ -321,93 +334,115 @@ function onDistrictChange() {
 function onSectionChange() { checkQueryBtn(); resetPrice(); }
 
 function onLandNoInput(el) {
-  el.value = el.value.replace(/[^0-9]/g, \'\').substring(0, 8);
+  el.value = el.value.replace(/[^0-9]/g, '').substring(0, 8);
   checkQueryBtn();
 }
 
-function checkQueryBtn() {}
+function checkQueryBtn() {
+  const d = document.getElementById('district').value;
+  const s = document.getElementById('section').value;
+  const ln = document.getElementById('landNo').value;
+  const btn = document.getElementById('queryBtn');
+  const ready = d && s && ln.length === 8;
+  btn.disabled = !ready;
+  btn.style.opacity = ready ? '1' : '0.5';
+  if (!ready) document.getElementById('queryHint').style.display = 'none';
+}
+
+function openOfficialQuery() {
+  const dSel = document.getElementById('district');
+  const sSel = document.getElementById('section');
+  const ln = document.getElementById('landNo').value;
+  const dName = dSel.options[dSel.selectedIndex].text;
+  const sName = sSel.options[sSel.selectedIndex].text;
+  document.getElementById('queryInfo').textContent = '行政區：' + dName + '　段：' + sName + '　地號：' + ln;
+  document.getElementById('queryHint').style.display = 'block';
+  window.open("https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055", '_blank', 'noopener');
+}
 
 function resetPrice() {
   currentDeclaredPrice = 0;
-  document.getElementById(\'priceDisplay\').textContent = \'從官方系統查詢後填入\';
-  document.getElementById(\'priceDisplay\').classList.add(\'pending\');
-  document.getElementById(\'tierDisplay\').textContent = \'--\';
+  document.getElementById('priceDisplay').textContent = '從官方系統查詢後填入';
+  document.getElementById('priceDisplay').classList.add('pending');
+  document.getElementById('tierDisplay').textContent = '--';
   calcAll();
 }
 
 function onManualInput() {
-  const v = parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
+  const v = parseFloat(document.getElementById('manualDeclared').value) || 0;
   currentDeclaredPrice = v;
-  const pd = document.getElementById(\'priceDisplay\');
+  const pd = document.getElementById('priceDisplay');
   if (v > 0) {
-    pd.textContent = fmt(v) + \' 元/㎡\';
-    pd.classList.remove(\'pending\');
-    pd.style.fontSize = \'18px\';
-    pd.style.color = \'#c17f24\';
+    pd.textContent = fmt(v) + ' 元/㎡';
+    pd.classList.remove('pending');
+    pd.style.fontSize = '18px';
+    pd.style.color = '#c17f24';
   } else { resetPrice(); }
   calcAll();
 }
 
 function convertAnnounced() {
-  const ap = parseFloat(document.getElementById(\'announcedInput\').value) || 0;
+  const ap = parseFloat(document.getElementById('announcedInput').value) || 0;
   const dp = ap * 0.8;
-  document.getElementById(\'convertedVal\').textContent = dp > 0 ? fmt(dp) + \' 元\' : \'—\';
+  document.getElementById('convertedVal').textContent = dp > 0 ? fmt(dp) + ' 元' : '—';
   if (dp > 0) {
-    document.getElementById(\'manualDeclared\').value = dp;
+    document.getElementById('manualDeclared').value = dp;
     onManualInput();
   }
 }
 
 function calcProportional() {
-  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
-  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
-  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
-  const applyBtn = document.getElementById(\'applyBtn\');
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  const applyBtn = document.getElementById('applyBtn');
   if (total > 0 && numer > 0 && denom > 0) {
     const prop = total * numer / denom;
-    document.getElementById(\'proportionalResult\').textContent = prop.toFixed(2);
-    applyBtn.disabled = false; applyBtn.style.opacity = \'1\';
+    document.getElementById('proportionalResult').textContent = prop.toFixed(2);
+    applyBtn.disabled = false; applyBtn.style.opacity = '1';
   } else {
-    document.getElementById(\'proportionalResult\').textContent = \'—\';
-    applyBtn.disabled = true; applyBtn.style.opacity = \'0.5\';
+    document.getElementById('proportionalResult').textContent = '—';
+    applyBtn.disabled = true; applyBtn.style.opacity = '0.5';
   }
 }
 
 function applyProportional() {
-  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
-  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
-  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
   if (total > 0 && numer > 0 && denom > 0) {
-    document.getElementById(\'areaGeneral\').value = (total * numer / denom).toFixed(2);
+    document.getElementById('areaGeneral').value = (total * numer / denom).toFixed(2);
     calcAll();
   }
 }
 
 function calcAll() {
-  const dp = currentDeclaredPrice || parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
-  const types = [\'General\',\'Self\',\'Industrial\',\'Public\'];
+  const dp = currentDeclaredPrice || parseFloat(document.getElementById('manualDeclared').value) || 0;
+  const types = ['General','Self','Industrial','Public'];
   const rates = {General:null, Self:0.002, Industrial:0.010, Public:0.006};
   let generalTaxBase = 0;
   types.forEach(function(t) {
-    const area = parseFloat(document.getElementById(\'area\' + t).value) || 0;
+    const area = parseFloat(document.getElementById('area' + t).value) || 0;
     const taxBase = dp * area;
-    document.getElementById(\'cp\' + t).textContent = fmt(taxBase);
+    document.getElementById('cp' + t).textContent = fmt(taxBase);
     let tax = 0;
-    if (t === \'General\') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
+    if (t === 'General') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
     else { tax = taxBase * rates[t]; }
-    document.getElementById(\'tax\' + t).textContent = fmt(Math.round(tax));
+    document.getElementById('tax' + t).textContent = fmt(Math.round(tax));
   });
   if (generalTaxBase > 0) {
     const tier = getTier(generalTaxBase);
-    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">\' + (tier.rate*1000).toFixed(0) + \'‰（第\' + tier.level + \'級）</span>\';
-    document.getElementById(\'tierDisplay\').textContent = \'第\' + tier.level + \'級（\' + (tier.rate*1000).toFixed(0) + \'‰）\';
-    document.getElementById(\'tierDisplay\').classList.remove(\'pending\');
-    for (let i=1;i<=6;i++) { const r=document.getElementById(\'tr-\'+i); if(r) r.classList.toggle(\'hit\',i===tier.level); }
-    document.getElementById(\'tierWrap\').style.display = \'block\';
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
+    document.getElementById('deductGeneral').textContent = fmt(Math.round(T * tier.coef));
+    document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
+    document.getElementById('tierDisplay').classList.remove('pending');
+    for (let i=1;i<=6;i++) { const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }
+    document.getElementById('tierWrap').style.display = 'block';
   } else {
-    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">10‰至55‰</span>\';
-    document.getElementById(\'tierDisplay\').textContent = \'--\';
-    document.getElementById(\'tierDisplay\').classList.add(\'pending\');
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
+    document.getElementById('deductGeneral').textContent = '—';
+    document.getElementById('tierDisplay').textContent = '--';
+    document.getElementById('tierDisplay').classList.add('pending');
   }
 }
 
@@ -430,36 +465,40 @@ function calcGeneral(taxBase) {
 }
 
 function buildTierTable() {
-  const ordinals = [\'一\',\'二\',\'三\',\'四\',\'五\',\'六\'];
+  const ordinals = ['一','二','三','四','五','六'];
   const rows = [
     [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
     [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
   ];
-  document.getElementById(\'tierBody\').innerHTML = rows.map(function(r,i){
-    const range = r[2] ? fmt(r[1])+ \' ~ \'+fmt(r[2]) : fmt(r[1])+\' 以上\';
-    return \'<tr id="tr-\'+(i+1)+\'"><td>第\'+ordinals[i]+\'級</td><td>\'+range+\'</td><td>\'+(r[3]*1000).toFixed(0)+\'‰</td><td>\'+fmt(r[4])+\'</td></tr>\';
-  }).join(\'\');
+  document.getElementById('tierBody').innerHTML = rows.map(function(r,i){
+    const range = r[2] ? fmt(r[1])+ ' ~ '+fmt(r[2]) : fmt(r[1])+' 以上';
+    return '<tr id="tr-'+(i+1)+'"><td>第'+ordinals[i]+'級</td><td>'+range+'</td><td>'+(r[3]*1000).toFixed(0)+'‰</td><td>'+fmt(r[4])+'</td></tr>';
+  }).join('');
 }
 
 function clearAll() {
-  [\'areaGeneral\',\'areaSelf\',\'areaIndustrial\',\'areaPublic\',\'manualDeclared\',\'announcedInput\',\'totalArea\',\'shareNumer\',\'shareDenom\',\'landNo\'].forEach(id=>{document.getElementById(id).value=\'\'});
-  document.getElementById(\'convertedVal\').textContent = \'—\';
-  document.getElementById(\'proportionalResult\').textContent = \'—\';
-  document.getElementById(\'applyBtn\').disabled = true;
-  document.getElementById(\'applyBtn\').style.opacity = \'0.5\';
-  document.getElementById(\'district\').value = \'\';
-  document.getElementById(\'section\').innerHTML = \'<option value="">請先選擇行政區</option>\';
+  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput','totalArea','shareNumer','shareDenom','landNo'].forEach(id=>{document.getElementById(id).value=''});
+  document.getElementById('convertedVal').textContent = '—';
+  document.getElementById('proportionalResult').textContent = '—';
+  document.getElementById('applyBtn').disabled = true;
+  document.getElementById('applyBtn').style.opacity = '0.5';
+  document.getElementById('district').value = '';
+  document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
+  document.getElementById('deductGeneral').textContent = '—';
+  document.getElementById('queryHint').style.display = 'none';
+  document.getElementById('queryBtn').disabled = true;
+  document.getElementById('queryBtn').style.opacity = '0.5';
   
   currentDeclaredPrice = 0;
   resetPrice();
-  [\'cpGeneral\',\'cpSelf\',\'cpIndustrial\',\'cpPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
-  [\'taxGeneral\',\'taxSelf\',\'taxIndustrial\',\'taxPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
-  document.getElementById(\'tierWrap\').style.display=\'none\';
+  ['cpGeneral','cpSelf','cpIndustrial','cpPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  ['taxGeneral','taxSelf','taxIndustrial','taxPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('tierWrap').style.display='none';
 }
 
 function fmt(n) {
-  if (!n && n!==0) return \'—\';
-  return Math.round(n).toLocaleString(\'zh-TW\');
+  if (!n && n!==0) return '—';
+  return Math.round(n).toLocaleString('zh-TW');
 }
 
 buildTierTable();

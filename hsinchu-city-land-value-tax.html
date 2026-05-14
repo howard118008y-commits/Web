@@ -81,7 +81,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"新竹市地價稅試算","url":"https://cx468.com.tw/hsinchu-city-land-value-tax.html","description":"新竹市地價稅試算，115-116年累進起點地價 5,808,000 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"provider":{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}
@@ -129,11 +129,17 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
     </div>
   </div>
 
-  <div style="margin-top:12px">
-    <a href="https://est.hcct.gov.tw/hsinchuTaxTrial/landtax.html" target="_blank" rel="noopener" class="official-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
-      前往新竹市地方稅務局查詢申報地價（選好行政區・地段・地號後點此）
-    </a>
+  <div style="margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button id="queryBtn" onclick="openOfficialQuery()" class="btn-query" disabled style="opacity:0.5;display:inline-flex;align-items:center;gap:6px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="white" stroke-width="2.2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
+      查詢申報地價
+    </button>
+    <span style="font-size:12px;color:#9ca3af">選好行政區・地段・地號（8碼）後啟用</span>
+  </div>
+  <div id="queryHint" style="display:none;margin-top:8px;font-size:12px;padding:10px 12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;line-height:1.8">
+    已開啟官方試算頁，請依序選擇：<br>
+    <span id="queryInfo" style="font-weight:700;color:#1e40af">—</span><br>
+    <a href="https://est.hcct.gov.tw/hsinchuTaxTrial/landtax.html" target="_blank" rel="noopener" style="color:#2563eb;font-size:11px">↗ 再次開啟官方試算頁</a>
   </div>
 
   <div class="price-result" id="priceResult">
@@ -232,6 +238,13 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
         <td class="rate-cell">10‰</td>
         <td class="rate-cell">6‰</td>
       </tr>
+      <tr>
+        <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="deductGeneral">—</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+      </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
         <td class="tax-cell" id="taxGeneral">0</td>
@@ -265,7 +278,7 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
 <script>
 const T = 5808000;
 const SECTIONS = {
-  '01': [['0001','東門段一小段'],['0002','東門段二小段'],['0003','東門段三小段'],['0004','榮光段一小段'],['0005','榮光段二小段'],['0006','榮光段三小段'],['0007','親仁段一小段'],['0008','親仁段二小段'],['0009','中央段'],['0010','復中段'],['0011','光華段'],['0012','民主段'],['0013','東山段一小段'],['0014','東山段二小段'],['0015','東光段'],['0016','中華段'],['0017','東明段'],['0018','光復段'],['0019','成功段'],['0023','二十張犁段二十張犁小段'],['0027','赤土崎段'],['0030','柴梳山段'],['0031','科園段科園小段'],['0032','科園段龍山小段'],['0033','南門段一小段'],['0034','南門段二小段'],['0035','南門段三小段'],['0036','南門段四小段'],['0037','竹蓮段'],['0038','新興段'],['0039','青草湖段'],['0040','西門段一小段'],['0041','西門段二小段'],['0042','西門段三小段'],['0043','聚吉段'],['0044','中雅段'],['0046','北門段'],['0047','中山段一小段'],['0048','中山段二小段'],['0049','中山段三小段'],['0050','民富段'],['0051','崙子段'],['0052','武陵段'],['0053','福林段'],['0055','自由段'],['0056','舊社段'],['0061','十塊寮段蟹仔埔小段'],['0067','牛埔段'],['0071','鹽水港段'],['0072','南隘段'],['0075','楊寮段南油車港小段'],['0076','浸水段'],['0079','忠孝段'],['0080','仁愛段'],['0081','信義段'],['0082','和平段'],['0083','唐高段'],['0084','中興段'],['0085','三姓段'],['0086','新莊段'],['0087','關東段'],['0088','長春段'],['0089','復興段'],['0090','光武段'],['0091','國道段'],['0092','民主段一小段'],['0093','香濱段'],['0094','香中段'],['0095','香美段'],['0096','大庄段'],['0097','美山段'],['0098','朝山段'],['0099','科學段一小段'],['0100','科學段二小段'],['0101','科學段三小段'],['0102','建華段'],['0103','育賢段'],['0104','光鎮段'],['0105','柴橋段'],['0106','曲溪段'],['0107','成德段'],['0108','新興段一小段'],['0109','朝山段一小段'],['0110','康朗段'],['0111','竹港段'],['0112','新港段'],['0113','康樂段'],['0114','南寮段'],['0115','中寮段'],['0116','西濱段'],['0117','海濱段'],['0118','港北段'],['0119','東濱段'],['0120','筧橋段'],['0121','古賢段'],['0122','新雅段'],['0123','富山段'],['0124','港南段'],['0125','華江段'],['0126','新航段'],['0127','虎林段'],['0128','虎山段'],['0129','南華段'],['0130','千甲段'],['0131','隆恩段'],['0132','水源段'],['0133','溪橋段'],['0134','前溪段'],['0135','金山段'],['0138','東橋段'],['0139','介壽段'],['0140','仙水段'],['0141','大學段'],['0142','仙宮段'],['0143','高翠段'],['0144','高峰段'],['0145','古峰段'],['0146','翠湖段'],['0147','南湖段'],['0148','雅溪段'],['0149','明湖段'],['0150','美城段'],['0151','東香段'],['0152','柑林段'],['0153','香村段'],['0154','力行段'],['0155','醫專段'],['0156','師院段'],['0157','南興段'],['0158','內湖段'],['0159','中隘段'],['0160','見樂段'],['0161','樹下段'],['0162','香雅段'],['0163','茄苳段'],['0164','延壽段'],['0165','大湖段'],['0166','海山段'],['0167','青山段'],['0168','長興段'],['0169','鹽水段'],['0170','五福段'],['0171','麗園段'],['0172','湖港段'],['0173','南港段'],['0174','海埔段'],['0175','科技段'],['0176','風空段'],['0177','南勢段'],['0178','台肥段'],['0179','金雅段'],['0180','士林段'],['0802','水田段']]
+  '01': [['0001','東門一'],['0002','東門二'],['0003','東門三'],['0004','榮光一'],['0005','榮光二'],['0006','榮光三'],['0007','親仁一'],['0008','親仁二'],['0009','中央'],['0010','復中'],['0011','光華'],['0012','民主'],['0013','東山一'],['0014','東山二'],['0015','東光'],['0016','中華'],['0017','東明'],['0018','光復'],['0019','成功'],['0023','二十張犁二十張'],['0027','赤土崎'],['0028','埔頂'],['0029','金山面'],['0030','柴梳山'],['0031','科園科園'],['0032','科園龍山'],['0033','南門一'],['0034','南門二'],['0035','南門三'],['0036','南門四'],['0037','竹蓮'],['0038','新興'],['0039','青草湖'],['0040','西門一'],['0041','西門二'],['0042','西門三'],['0043','聚吉'],['0044','中雅'],['0045','客雅'],['0046','北門'],['0047','中山一'],['0048','中山二'],['0049','中山三'],['0050','民富'],['0051','崙子'],['0052','武陵'],['0053','福林'],['0054','樹林頭'],['0055','自由'],['0056','舊社'],['0057','湳雅'],['0058','苦苓腳'],['0059','槺榔'],['0060','十塊寮十塊寮'],['0061','十塊寮蟹仔埔'],['0062','油車港'],['0063','沙崙'],['0064','吉羊崙'],['0065','舊港'],['0066','香山'],['0067','牛埔'],['0068','香山坑'],['0069','茄苳湖'],['0070','海山罟'],['0071','鹽水港'],['0072','南隘'],['0073','虎子山'],['0075','楊寮南油車港'],['0076','浸水'],['0077','榮新榮新'],['0078','榮新北區'],['0079','忠孝'],['0080','仁愛'],['0081','信義'],['0082','和平'],['0083','唐高'],['0084','中興'],['0085','三姓'],['0086','新莊'],['0087','關東'],['0088','長春'],['0089','復興'],['0090','光武'],['0091','國道'],['0092','民主一'],['0093','香濱'],['0094','香中'],['0095','香美'],['0096','大庄'],['0097','美山'],['0098','朝山'],['0099','科學一'],['0100','科學二'],['0101','科學三'],['0102','建華'],['0103','育賢'],['0104','光鎮'],['0105','柴橋'],['0106','曲溪'],['0107','成德'],['0108','新興一'],['0109','朝山一'],['0110','康朗'],['0111','竹港'],['0112','新港'],['0113','康樂'],['0114','南寮'],['0115','中寮'],['0116','西濱'],['0117','海濱'],['0118','港北'],['0119','東濱'],['0120','筧橋'],['0121','古賢'],['0122','新雅'],['0123','富山'],['0124','港南'],['0125','華江'],['0126','新航'],['0127','虎林'],['0128','虎山'],['0129','南華'],['0130','千甲'],['0131','隆恩'],['0132','水源'],['0133','溪橋'],['0134','前溪'],['0135','金山'],['0138','東橋'],['0139','介壽'],['0140','仙水'],['0141','大學'],['0142','仙宮'],['0143','高翠'],['0144','高峰'],['0145','古峰'],['0146','翠湖'],['0147','南湖'],['0148','雅溪'],['0149','明湖'],['0150','美城'],['0151','東香'],['0152','柑林'],['0153','香村'],['0154','力行'],['0155','醫專'],['0156','師院'],['0157','南興'],['0158','內湖'],['0159','中隘'],['0160','見樂'],['0161','樹下'],['0162','香雅'],['0163','茄苳'],['0164','延壽'],['0165','大湖'],['0166','海山'],['0167','青山'],['0168','長興'],['0169','鹽水'],['0170','五福'],['0171','麗園'],['0172','湖港'],['0173','南港'],['0174','海埔'],['0175','科技'],['0176','風空'],['0177','南勢'],['0178','台肥'],['0179','金雅'],['0180','士林'],['0804','三民']]
 };
 
 let currentDeclaredPrice = 0;
@@ -280,12 +293,12 @@ const TIERS = [
 ];
 
 function onDistrictChange() {
-  const dv = document.getElementById(\'district\').value;
-  const sel = document.getElementById(\'section\');
-  sel.innerHTML = \'<option value="">請選擇地段</option>\';
+  const dv = document.getElementById('district').value;
+  const sel = document.getElementById('section');
+  sel.innerHTML = '<option value="">請選擇地段</option>';
   if (dv && SECTIONS[dv]) {
     SECTIONS[dv].forEach(function(s) {
-      const o = document.createElement(\'option\');
+      const o = document.createElement('option');
       o.value = s[0]; o.textContent = s[1];
       sel.appendChild(o);
     });
@@ -297,93 +310,115 @@ function onDistrictChange() {
 function onSectionChange() { checkQueryBtn(); resetPrice(); }
 
 function onLandNoInput(el) {
-  el.value = el.value.replace(/[^0-9]/g, \'\').substring(0, 8);
+  el.value = el.value.replace(/[^0-9]/g, '').substring(0, 8);
   checkQueryBtn();
 }
 
-function checkQueryBtn() {}
+function checkQueryBtn() {
+  const d = document.getElementById('district').value;
+  const s = document.getElementById('section').value;
+  const ln = document.getElementById('landNo').value;
+  const btn = document.getElementById('queryBtn');
+  const ready = d && s && ln.length === 8;
+  btn.disabled = !ready;
+  btn.style.opacity = ready ? '1' : '0.5';
+  if (!ready) document.getElementById('queryHint').style.display = 'none';
+}
+
+function openOfficialQuery() {
+  const dSel = document.getElementById('district');
+  const sSel = document.getElementById('section');
+  const ln = document.getElementById('landNo').value;
+  const dName = dSel.options[dSel.selectedIndex].text;
+  const sName = sSel.options[sSel.selectedIndex].text;
+  document.getElementById('queryInfo').textContent = '行政區：' + dName + '　段：' + sName + '　地號：' + ln;
+  document.getElementById('queryHint').style.display = 'block';
+  window.open("https://est.hcct.gov.tw/hsinchuTaxTrial/landtax.html", '_blank', 'noopener');
+}
 
 function resetPrice() {
   currentDeclaredPrice = 0;
-  document.getElementById(\'priceDisplay\').textContent = \'從官方系統查詢後填入\';
-  document.getElementById(\'priceDisplay\').classList.add(\'pending\');
-  document.getElementById(\'tierDisplay\').textContent = \'--\';
+  document.getElementById('priceDisplay').textContent = '從官方系統查詢後填入';
+  document.getElementById('priceDisplay').classList.add('pending');
+  document.getElementById('tierDisplay').textContent = '--';
   calcAll();
 }
 
 function onManualInput() {
-  const v = parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
+  const v = parseFloat(document.getElementById('manualDeclared').value) || 0;
   currentDeclaredPrice = v;
-  const pd = document.getElementById(\'priceDisplay\');
+  const pd = document.getElementById('priceDisplay');
   if (v > 0) {
-    pd.textContent = fmt(v) + \' 元/㎡\';
-    pd.classList.remove(\'pending\');
-    pd.style.fontSize = \'18px\';
-    pd.style.color = \'#c17f24\';
+    pd.textContent = fmt(v) + ' 元/㎡';
+    pd.classList.remove('pending');
+    pd.style.fontSize = '18px';
+    pd.style.color = '#c17f24';
   } else { resetPrice(); }
   calcAll();
 }
 
 function convertAnnounced() {
-  const ap = parseFloat(document.getElementById(\'announcedInput\').value) || 0;
+  const ap = parseFloat(document.getElementById('announcedInput').value) || 0;
   const dp = ap * 0.8;
-  document.getElementById(\'convertedVal\').textContent = dp > 0 ? fmt(dp) + \' 元\' : \'—\';
+  document.getElementById('convertedVal').textContent = dp > 0 ? fmt(dp) + ' 元' : '—';
   if (dp > 0) {
-    document.getElementById(\'manualDeclared\').value = dp;
+    document.getElementById('manualDeclared').value = dp;
     onManualInput();
   }
 }
 
 function calcProportional() {
-  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
-  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
-  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
-  const applyBtn = document.getElementById(\'applyBtn\');
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  const applyBtn = document.getElementById('applyBtn');
   if (total > 0 && numer > 0 && denom > 0) {
     const prop = total * numer / denom;
-    document.getElementById(\'proportionalResult\').textContent = prop.toFixed(2);
-    applyBtn.disabled = false; applyBtn.style.opacity = \'1\';
+    document.getElementById('proportionalResult').textContent = prop.toFixed(2);
+    applyBtn.disabled = false; applyBtn.style.opacity = '1';
   } else {
-    document.getElementById(\'proportionalResult\').textContent = \'—\';
-    applyBtn.disabled = true; applyBtn.style.opacity = \'0.5\';
+    document.getElementById('proportionalResult').textContent = '—';
+    applyBtn.disabled = true; applyBtn.style.opacity = '0.5';
   }
 }
 
 function applyProportional() {
-  const total = parseFloat(document.getElementById(\'totalArea\').value) || 0;
-  const numer = parseFloat(document.getElementById(\'shareNumer\').value) || 0;
-  const denom = parseFloat(document.getElementById(\'shareDenom\').value) || 0;
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
   if (total > 0 && numer > 0 && denom > 0) {
-    document.getElementById(\'areaGeneral\').value = (total * numer / denom).toFixed(2);
+    document.getElementById('areaGeneral').value = (total * numer / denom).toFixed(2);
     calcAll();
   }
 }
 
 function calcAll() {
-  const dp = currentDeclaredPrice || parseFloat(document.getElementById(\'manualDeclared\').value) || 0;
-  const types = [\'General\',\'Self\',\'Industrial\',\'Public\'];
+  const dp = currentDeclaredPrice || parseFloat(document.getElementById('manualDeclared').value) || 0;
+  const types = ['General','Self','Industrial','Public'];
   const rates = {General:null, Self:0.002, Industrial:0.010, Public:0.006};
   let generalTaxBase = 0;
   types.forEach(function(t) {
-    const area = parseFloat(document.getElementById(\'area\' + t).value) || 0;
+    const area = parseFloat(document.getElementById('area' + t).value) || 0;
     const taxBase = dp * area;
-    document.getElementById(\'cp\' + t).textContent = fmt(taxBase);
+    document.getElementById('cp' + t).textContent = fmt(taxBase);
     let tax = 0;
-    if (t === \'General\') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
+    if (t === 'General') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
     else { tax = taxBase * rates[t]; }
-    document.getElementById(\'tax\' + t).textContent = fmt(Math.round(tax));
+    document.getElementById('tax' + t).textContent = fmt(Math.round(tax));
   });
   if (generalTaxBase > 0) {
     const tier = getTier(generalTaxBase);
-    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">\' + (tier.rate*1000).toFixed(0) + \'‰（第\' + tier.level + \'級）</span>\';
-    document.getElementById(\'tierDisplay\').textContent = \'第\' + tier.level + \'級（\' + (tier.rate*1000).toFixed(0) + \'‰）\';
-    document.getElementById(\'tierDisplay\').classList.remove(\'pending\');
-    for (let i=1;i<=6;i++) { const r=document.getElementById(\'tr-\'+i); if(r) r.classList.toggle(\'hit\',i===tier.level); }
-    document.getElementById(\'tierWrap\').style.display = \'block\';
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
+    document.getElementById('deductGeneral').textContent = fmt(Math.round(T * tier.coef));
+    document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
+    document.getElementById('tierDisplay').classList.remove('pending');
+    for (let i=1;i<=6;i++) { const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }
+    document.getElementById('tierWrap').style.display = 'block';
   } else {
-    document.getElementById(\'rateGeneral\').innerHTML = \'<span style="color:#2563eb">10‰至55‰</span>\';
-    document.getElementById(\'tierDisplay\').textContent = \'--\';
-    document.getElementById(\'tierDisplay\').classList.add(\'pending\');
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
+    document.getElementById('deductGeneral').textContent = '—';
+    document.getElementById('tierDisplay').textContent = '--';
+    document.getElementById('tierDisplay').classList.add('pending');
   }
 }
 
@@ -406,37 +441,41 @@ function calcGeneral(taxBase) {
 }
 
 function buildTierTable() {
-  const ordinals = [\'一\',\'二\',\'三\',\'四\',\'五\',\'六\'];
+  const ordinals = ['一','二','三','四','五','六'];
   const rows = [
     [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
     [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
   ];
-  document.getElementById(\'tierBody\').innerHTML = rows.map(function(r,i){
-    const range = r[2] ? fmt(r[1])+ \' ~ \'+fmt(r[2]) : fmt(r[1])+\' 以上\';
-    return \'<tr id="tr-\'+(i+1)+\'"><td>第\'+ordinals[i]+\'級</td><td>\'+range+\'</td><td>\'+(r[3]*1000).toFixed(0)+\'‰</td><td>\'+fmt(r[4])+\'</td></tr>\';
-  }).join(\'\');
+  document.getElementById('tierBody').innerHTML = rows.map(function(r,i){
+    const range = r[2] ? fmt(r[1])+ ' ~ '+fmt(r[2]) : fmt(r[1])+' 以上';
+    return '<tr id="tr-'+(i+1)+'"><td>第'+ordinals[i]+'級</td><td>'+range+'</td><td>'+(r[3]*1000).toFixed(0)+'‰</td><td>'+fmt(r[4])+'</td></tr>';
+  }).join('');
 }
 
 function clearAll() {
-  [\'areaGeneral\',\'areaSelf\',\'areaIndustrial\',\'areaPublic\',\'manualDeclared\',\'announcedInput\',\'totalArea\',\'shareNumer\',\'shareDenom\',\'landNo\'].forEach(id=>{document.getElementById(id).value=\'\'});
-  document.getElementById(\'convertedVal\').textContent = \'—\';
-  document.getElementById(\'proportionalResult\').textContent = \'—\';
-  document.getElementById(\'applyBtn\').disabled = true;
-  document.getElementById(\'applyBtn\').style.opacity = \'0.5\';
-  document.getElementById(\'district\').value = \'\';
-  document.getElementById(\'section\').innerHTML = \'<option value="">請先選擇行政區</option>\';
+  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput','totalArea','shareNumer','shareDenom','landNo'].forEach(id=>{document.getElementById(id).value=''});
+  document.getElementById('convertedVal').textContent = '—';
+  document.getElementById('proportionalResult').textContent = '—';
+  document.getElementById('applyBtn').disabled = true;
+  document.getElementById('applyBtn').style.opacity = '0.5';
+  document.getElementById('district').value = '';
+  document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
+  document.getElementById('deductGeneral').textContent = '—';
+  document.getElementById('queryHint').style.display = 'none';
+  document.getElementById('queryBtn').disabled = true;
+  document.getElementById('queryBtn').style.opacity = '0.5';
   document.getElementById('district').value = '01';
 onDistrictChange();
   currentDeclaredPrice = 0;
   resetPrice();
-  [\'cpGeneral\',\'cpSelf\',\'cpIndustrial\',\'cpPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
-  [\'taxGeneral\',\'taxSelf\',\'taxIndustrial\',\'taxPublic\'].forEach(id=>document.getElementById(id).textContent=\'0\');
-  document.getElementById(\'tierWrap\').style.display=\'none\';
+  ['cpGeneral','cpSelf','cpIndustrial','cpPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  ['taxGeneral','taxSelf','taxIndustrial','taxPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('tierWrap').style.display='none';
 }
 
 function fmt(n) {
-  if (!n && n!==0) return \'—\';
-  return Math.round(n).toLocaleString(\'zh-TW\');
+  if (!n && n!==0) return '—';
+  return Math.round(n).toLocaleString('zh-TW');
 }
 
 buildTierTable();

@@ -155,11 +155,17 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
     </div>
   </div>
 
-  <div style="margin-top:12px">
-    <a href="https://www.ctax.gov.tw/" target="_blank" rel="noopener" class="official-link">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
-      前往台中市政府地方稅務局查詢申報地價（選好行政區・地段・地號後點此）
-    </a>
+  <div style="margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button id="queryBtn" onclick="openOfficialQuery()" class="btn-query" disabled style="opacity:0.5;display:inline-flex;align-items:center;gap:6px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="white" stroke-width="2.2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
+      查詢申報地價
+    </button>
+    <span style="font-size:12px;color:#9ca3af">選好行政區・地段・地號（8碼）後啟用</span>
+  </div>
+  <div id="queryHint" style="display:none;margin-top:8px;font-size:12px;padding:10px 12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;line-height:1.8">
+    已開啟官方試算頁，請依序選擇：<br>
+    <span id="queryInfo" style="font-weight:700;color:#1e40af">—</span><br>
+    <a href="https://www.tax.taichung.gov.tw/taxtrial/landTaxTrial/taxTrail/" target="_blank" rel="noopener" style="color:#2563eb;font-size:11px">↗ 再次開啟官方試算頁</a>
   </div>
 
   <div class="price-result" id="priceResult">
@@ -258,6 +264,13 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
         <td class="rate-cell">10‰</td>
         <td class="rate-cell">6‰</td>
       </tr>
+      <tr>
+        <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="deductGeneral">—</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+      </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
         <td class="tax-cell" id="taxGeneral">0</td>
@@ -355,7 +368,27 @@ function onLandNoInput(el) {
   checkQueryBtn();
 }
 
-function checkQueryBtn() {}
+function checkQueryBtn() {
+  const d = document.getElementById('district').value;
+  const s = document.getElementById('section').value;
+  const ln = document.getElementById('landNo').value;
+  const btn = document.getElementById('queryBtn');
+  const ready = d && s && ln.length === 8;
+  btn.disabled = !ready;
+  btn.style.opacity = ready ? '1' : '0.5';
+  if (!ready) document.getElementById('queryHint').style.display = 'none';
+}
+
+function openOfficialQuery() {
+  const dSel = document.getElementById('district');
+  const sSel = document.getElementById('section');
+  const ln = document.getElementById('landNo').value;
+  const dName = dSel.options[dSel.selectedIndex].text;
+  const sName = sSel.options[sSel.selectedIndex].text;
+  document.getElementById('queryInfo').textContent = '行政區：' + dName + '　段：' + sName + '　地號：' + ln;
+  document.getElementById('queryHint').style.display = 'block';
+  window.open("https://www.tax.taichung.gov.tw/taxtrial/landTaxTrial/taxTrail/", '_blank', 'noopener');
+}
 
 function resetPrice() {
   currentDeclaredPrice = 0;
@@ -430,12 +463,14 @@ function calcAll() {
   if (generalTaxBase > 0) {
     const tier = getTier(generalTaxBase);
     document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
+    document.getElementById('deductGeneral').textContent = fmt(Math.round(T * tier.coef));
     document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
     document.getElementById('tierDisplay').classList.remove('pending');
     for (let i=1;i<=6;i++) { const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }
     document.getElementById('tierWrap').style.display = 'block';
   } else {
     document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
+    document.getElementById('deductGeneral').textContent = '—';
     document.getElementById('tierDisplay').textContent = '--';
     document.getElementById('tierDisplay').classList.add('pending');
   }
@@ -479,6 +514,10 @@ function clearAll() {
   document.getElementById('applyBtn').style.opacity = '0.5';
   document.getElementById('district').value = '';
   document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
+  document.getElementById('deductGeneral').textContent = '—';
+  document.getElementById('queryHint').style.display = 'none';
+  document.getElementById('queryBtn').disabled = true;
+  document.getElementById('queryBtn').style.opacity = '0.5';
   currentDeclaredPrice = 0;
   resetPrice();
   ['cpGeneral','cpSelf','cpIndustrial','cpPublic'].forEach(id=>document.getElementById(id).textContent='0');
