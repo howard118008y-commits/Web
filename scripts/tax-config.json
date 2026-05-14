@@ -56,6 +56,132 @@
       "est": true,
       "source": "新竹縣地方稅務局（115年待更新）",
       "official_calc_url": "https://www.chutax.gov.tw/landvaluetax.aspx?n=40&sms=9055"
+    },
+    "taichung": {
+      "name": "台中市",
+      "file": "taichung-land-value-tax.html",
+      "T": 1741000,
+      "year": "115-116",
+      "est": false,
+      "source": "台中市政府地方稅務局",
+      "official_calc_url": "https://www.ctax.gov.tw/"
+    },
+    "tainan": {
+      "name": "台南市",
+      "file": "tainan-land-value-tax.html",
+      "T": 2195000,
+      "year": "115-116",
+      "est": false,
+      "source": "財政部稅務入口網",
+      "official_calc_url": "https://www.tntax.gov.tw/"
+    },
+    "kaohsiung": {
+      "name": "高雄市",
+      "file": "kaohsiung-land-value-tax.html",
+      "T": 4032000,
+      "year": "115-116",
+      "est": false,
+      "source": "高雄市稅捐稽徵處",
+      "official_calc_url": "https://www.khtax.gov.tw/"
+    },
+    "yilan": {
+      "name": "宜蘭縣",
+      "file": "yilan-land-value-tax.html",
+      "T": 1241000,
+      "year": "107-108",
+      "est": true,
+      "source": "宜蘭縣政府財政稅務局（115年待更新）",
+      "official_calc_url": "https://www.iltb.gov.tw/"
+    },
+    "chiayi_city": {
+      "name": "嘉義市",
+      "file": "chiayi-city-land-value-tax.html",
+      "T": 4027000,
+      "year": "115-116",
+      "est": false,
+      "source": "嘉義市政府財政稅務局",
+      "official_calc_url": "https://www.citax.gov.tw/"
+    },
+    "miaoli": {
+      "name": "苗栗縣",
+      "file": "miaoli-land-value-tax.html",
+      "T": 1181000,
+      "year": "115-116",
+      "est": false,
+      "source": "苗栗縣政府財政稅務局",
+      "official_calc_url": "https://www.mlftax.gov.tw/"
+    },
+    "nantou": {
+      "name": "南投縣",
+      "file": "nantou-land-value-tax.html",
+      "T": 672000,
+      "year": "115-116",
+      "est": false,
+      "source": "南投縣政府地方稅務局",
+      "official_calc_url": "https://www.nttb.gov.tw/"
+    },
+    "changhua": {
+      "name": "彰化縣",
+      "file": "changhua-land-value-tax.html",
+      "T": 965000,
+      "year": "115-116",
+      "est": false,
+      "source": "彰化縣財政處",
+      "official_calc_url": "https://www.chantax.gov.tw/"
+    },
+    "yunlin": {
+      "name": "雲林縣",
+      "file": "yunlin-land-value-tax.html",
+      "T": 988000,
+      "year": "115-116",
+      "est": false,
+      "source": "雲林縣稅務局",
+      "official_calc_url": "https://www.yltb.gov.tw/"
+    },
+    "chiayi_county": {
+      "name": "嘉義縣",
+      "file": "chiayi-county-land-value-tax.html",
+      "T": 683000,
+      "year": "113-114",
+      "est": true,
+      "source": "嘉義縣政府（115年待更新）",
+      "official_calc_url": "https://www.chiayi.gov.tw/"
+    },
+    "pingtung": {
+      "name": "屏東縣",
+      "file": "pingtung-land-value-tax.html",
+      "T": 775000,
+      "year": "115-116",
+      "est": false,
+      "source": "屏東縣政府財政稅務局",
+      "official_calc_url": "https://www.pttax.gov.tw/"
+    },
+    "hualien": {
+      "name": "花蓮縣",
+      "file": "hualien-land-value-tax.html",
+      "T": 702000,
+      "year": "109-110",
+      "est": true,
+      "source": "花蓮縣地方稅務局（115年待更新）",
+      "official_calc_url": "https://www.hltb.gov.tw/"
+    },
+    "taitung": {
+      "name": "台東縣",
+      "file": "taitung-land-value-tax.html",
+      "T": 463000,
+      "year": "113-114",
+      "est": true,
+      "source": "台東縣稅務局（115年待更新）",
+      "official_calc_url": "https://ihouv.tttb.gov.tw/ilCalV/"
+    },
+    "penghu": {
+      "name": "澎湖縣",
+      "file": "penghu-land-value-tax.html",
+      "T": 410000,
+      "year": "115-116",
+      "est": false,
+      "source": "澎湖縣政府財政稅務局",
+      "official_calc_url": "https://www.phtax.gov.tw/"
     }
   }
 }

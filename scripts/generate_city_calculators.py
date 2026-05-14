@@ -1,0 +1,666 @@
+#!/usr/bin/env python3
+"""
+批次生成中南東部縣市地價稅試算器 HTML
+每個城市從 NLSC API 拉地段，用 keelung 模板生成
+"""
+
+import requests
+import xml.etree.ElementTree as ET
+import time
+import re
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).parent.parent
+NLSC_BASE = "https://api.nlsc.gov.tw/other"
+
+CITIES = {
+    'taichung': {
+        'name': '台中市', 'county': 'B', 'T': 1741000, 'year': '115-116', 'est': False,
+        'file': 'taichung-land-value-tax.html',
+        'official_url': 'https://www.ctax.gov.tw/',
+        'official_label': '前往台中市政府地方稅務局查詢申報地價',
+    },
+    'tainan': {
+        'name': '台南市', 'county': 'D', 'T': 2195000, 'year': '115-116', 'est': False,
+        'file': 'tainan-land-value-tax.html',
+        'official_url': 'https://www.tntax.gov.tw/',
+        'official_label': '前往台南市政府財政稅務局查詢申報地價',
+    },
+    'kaohsiung': {
+        'name': '高雄市', 'county': 'E', 'T': 4032000, 'year': '115-116', 'est': False,
+        'file': 'kaohsiung-land-value-tax.html',
+        'official_url': 'https://www.khtax.gov.tw/',
+        'official_label': '前往高雄市稅捐稽徵處查詢申報地價',
+    },
+    'yilan': {
+        'name': '宜蘭縣', 'county': 'G', 'T': 1241000, 'year': '107-108', 'est': True,
+        'file': 'yilan-land-value-tax.html',
+        'official_url': 'https://www.iltb.gov.tw/',
+        'official_label': '前往宜蘭縣政府財政稅務局查詢申報地價',
+    },
+    'chiayi_city': {
+        'name': '嘉義市', 'county': 'I', 'T': 4027000, 'year': '115-116', 'est': False,
+        'file': 'chiayi-city-land-value-tax.html',
+        'official_url': 'https://www.citax.gov.tw/',
+        'official_label': '前往嘉義市政府財政稅務局查詢申報地價',
+    },
+    'miaoli': {
+        'name': '苗栗縣', 'county': 'K', 'T': 1181000, 'year': '115-116', 'est': False,
+        'file': 'miaoli-land-value-tax.html',
+        'official_url': 'https://www.mlftax.gov.tw/',
+        'official_label': '前往苗栗縣政府財政稅務局查詢申報地價',
+    },
+    'nantou': {
+        'name': '南投縣', 'county': 'M', 'T': 672000, 'year': '115-116', 'est': False,
+        'file': 'nantou-land-value-tax.html',
+        'official_url': 'https://www.nttb.gov.tw/',
+        'official_label': '前往南投縣政府地方稅務局查詢申報地價',
+    },
+    'changhua': {
+        'name': '彰化縣', 'county': 'N', 'T': 965000, 'year': '115-116', 'est': False,
+        'file': 'changhua-land-value-tax.html',
+        'official_url': 'https://www.chantax.gov.tw/',
+        'official_label': '前往彰化縣財政處查詢申報地價',
+    },
+    'yunlin': {
+        'name': '雲林縣', 'county': 'P', 'T': 988000, 'year': '115-116', 'est': False,
+        'file': 'yunlin-land-value-tax.html',
+        'official_url': 'https://www.yltb.gov.tw/',
+        'official_label': '前往雲林縣稅務局查詢申報地價',
+    },
+    'chiayi_county': {
+        'name': '嘉義縣', 'county': 'Q', 'T': 683000, 'year': '113-114', 'est': True,
+        'file': 'chiayi-county-land-value-tax.html',
+        'official_url': 'https://www.chiayi.gov.tw/',
+        'official_label': '前往嘉義縣政府查詢申報地價',
+    },
+    'pingtung': {
+        'name': '屏東縣', 'county': 'T', 'T': 775000, 'year': '115-116', 'est': False,
+        'file': 'pingtung-land-value-tax.html',
+        'official_url': 'https://www.pttax.gov.tw/',
+        'official_label': '前往屏東縣政府財政稅務局查詢申報地價',
+    },
+    'hualien': {
+        'name': '花蓮縣', 'county': 'U', 'T': 702000, 'year': '109-110', 'est': True,
+        'file': 'hualien-land-value-tax.html',
+        'official_url': 'https://www.hltb.gov.tw/',
+        'official_label': '前往花蓮縣地方稅務局查詢申報地價',
+    },
+    'taitung': {
+        'name': '台東縣', 'county': 'V', 'T': 463000, 'year': '113-114', 'est': True,
+        'file': 'taitung-land-value-tax.html',
+        'official_url': 'https://ihouv.tttb.gov.tw/ilCalV/',
+        'official_label': '前往台東縣稅務局官方試算系統',
+    },
+    'penghu': {
+        'name': '澎湖縣', 'county': 'X', 'T': 410000, 'year': '115-116', 'est': False,
+        'file': 'penghu-land-value-tax.html',
+        'official_url': 'https://www.phtax.gov.tw/',
+        'official_label': '前往澎湖縣政府財政稅務局查詢申報地價',
+    },
+}
+
+
+def fetch_towns(county):
+    url = f"{NLSC_BASE}/ListTown/{county}"
+    r = requests.get(url, timeout=15)
+    r.raise_for_status()
+    root = ET.fromstring(r.content)
+    towns = {}
+    for item in root.findall('.//townItem'):
+        code = item.findtext('towncode', '').strip()
+        name = item.findtext('townname', '').strip()
+        if code and name:
+            towns[code] = name
+    return towns
+
+
+def fetch_sections(county, town_code):
+    url = f"{NLSC_BASE}/ListLandSection/{county}/{town_code}"
+    r = requests.get(url, timeout=15)
+    r.raise_for_status()
+    root = ET.fromstring(r.content)
+    sections = []
+    for item in root.findall('.//sectItem'):
+        code = item.findtext('sectcode', '').strip()
+        name = item.findtext('sectstr', '').strip()
+        if code and name:
+            sections.append([code, name])
+    return sections
+
+
+def js_sections(sections_dict):
+    lines = ['const SECTIONS = {']
+    keys = sorted(sections_dict.keys())
+    for i, k in enumerate(keys):
+        pairs = sections_dict[k]
+        comma = ',' if i < len(keys) - 1 else ''
+        inner = ','.join(f"['{c}','{n.replace(chr(39), chr(92)+chr(39))}']" for c, n in pairs)
+        lines.append(f"  '{k}': [{inner}]{comma}")
+    lines.append('};')
+    return '\n'.join(lines)
+
+
+def district_options(towns):
+    """Generate <option> elements for district dropdown"""
+    lines = []
+    for code in sorted(towns.keys()):
+        dv = code[-2:]  # strip county prefix, use last 2 digits
+        lines.append(f'        <option value="{dv}">{towns[code]}</option>')
+    return '\n'.join(lines)
+
+
+def generate_html(city_key, cfg, towns, sections_dict):
+    name = cfg['name']
+    T = cfg['T']
+    T_fmt = f"{T:,}"
+    year = cfg['year']
+    est = cfg['est']
+    file_slug = cfg['file'].replace('-land-value-tax.html', '')
+    official_url = cfg['official_url']
+    official_label = cfg['official_label']
+
+    est_warning = ''
+    if est:
+        est_warning = f'''
+<div style="margin-bottom:12px;padding:10px 14px;background:#fef9ec;border:1px solid #f59e0b;border-radius:8px;font-size:12px;color:#92400e">
+  ⚠️ <strong>{year}年</strong>累進起點地價數字為參考估值（最新官方公告尚未取得），請以各縣市稅務局公告為準。
+</div>'''
+
+    disclaimer_est = f'（{year}年參考估值，請以稅務局公告為準）' if est else ''
+
+    district_opts = district_options(towns)
+    sections_js = js_sections(sections_dict)
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><!-- {file_slug}-lvt v1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{name}地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃</title>
+<meta name="description" content="{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，支援行政區・地段查詢，自用住宅 2‰ 與一般用地六級累進稅率。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<style>
+*{{box-sizing:border-box}}
+body{{background:#fdf8f0;margin:0;font-family:-apple-system,BlinkMacSystemFont,\'Helvetica Neue\',Arial,sans-serif}}
+nav{{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}}
+img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}}
+.nav-back{{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}}
+.hero{{background:#0369a1;padding:28px 24px 22px;text-align:center}}
+.hero h1{{font-size:26px;font-weight:700;color:#fff;margin:0 0 4px}}
+.hero p{{font-size:13px;color:rgba(255,255,255,.8);margin:0}}
+.wrap{{max-width:720px;margin:0 auto;padding:20px 16px 80px}}
+.notice{{background:#fefce8;border:1px solid #d97706;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#713f12;line-height:1.75}}
+.notice strong{{color:#92400e}}
+.step-card{{background:#fff;border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}}
+.step-label{{font-size:13px;font-weight:700;color:#c17f24;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde68a}}
+.g3{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}}
+@media(max-width:540px){{.g3{{grid-template-columns:1fr 1fr}}}}
+.field{{display:flex;flex-direction:column;gap:5px}}
+.field label{{font-size:12px;font-weight:600;color:#6e6e73}}
+.field input,.field select{{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}}
+.field input:focus,.field select:focus{{border-color:#c17f24}}
+.field input::placeholder{{color:#b0b0b0}}
+.price-result{{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}}
+.price-box{{background:#f9f9f9;border:1.5px solid #e5e5e5;border-radius:8px;padding:12px 14px}}
+.price-box label{{font-size:11px;color:#6e6e73;display:block;margin-bottom:4px}}
+.price-box .val{{font-size:18px;font-weight:700;color:#1d1d1f}}
+.price-box .val.pending{{font-size:14px;color:#b0b0b0;font-weight:400}}
+.price-box.highlight{{border-color:#c17f24;background:#fffbf0}}
+.price-box.highlight .val{{color:#c17f24}}
+.tax-table{{width:100%;border-collapse:separate;border-spacing:0 0}}
+.tax-table th{{background:#f5e6c8;font-size:12px;font-weight:700;color:#92400e;padding:10px 8px;text-align:center}}
+.tax-table th:first-child{{text-align:left;padding-left:12px;border-radius:6px 0 0 6px}}
+.tax-table th:last-child{{border-radius:0 6px 6px 0}}
+.tax-table td{{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:13px}}
+.tax-table td:first-child{{text-align:left;padding-left:12px;font-weight:600;color:#6e6e73;font-size:12px}}
+.tax-table .area-input{{width:100%;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;text-align:center;outline:none;font-family:inherit}}
+.tax-table .area-input:focus{{border-color:#c17f24}}
+.tax-table .course-price{{font-size:13px;color:#1d1d1f;font-weight:500}}
+.tax-table .rate-cell{{font-size:12px;color:#2563eb;font-weight:600}}
+.tax-table .tax-cell{{font-size:15px;font-weight:700;color:#92400e}}
+.result-row td{{background:#fef3c7;font-weight:700;font-size:14px;color:#92400e;padding:12px 8px;border-bottom:none}}
+.result-row td:first-child{{border-radius:0 0 0 8px;padding-left:12px}}
+.result-row td:last-child{{border-radius:0 0 8px 0}}
+.btn-row{{display:flex;gap:12px;justify-content:center;margin-top:20px}}
+.btn-calc{{background:#8b4513;color:#fff;border:none;border-radius:24px;height:48px;padding:0 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}}
+.btn-calc:hover{{background:#6d360f}}
+.btn-outline{{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}}
+.btn-home{{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center}}
+.tier-wrap{{background:#f9f9f9;border-radius:10px;padding:16px;margin-top:14px}}
+.tier-title{{font-size:11px;font-weight:700;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}}
+.tier-table{{width:100%;border-collapse:collapse;font-size:11px}}
+.tier-table th{{background:#1d1d1f;color:#fff;padding:7px 8px;text-align:center;font-weight:600}}
+.tier-table th:first-child{{text-align:left}}
+.tier-table td{{padding:7px 8px;text-align:center;border-bottom:.5px solid #ececec;color:#1d1d1f}}
+.tier-table td:first-child{{text-align:left;color:#6e6e73}}
+.tier-table tr.hit td{{background:#fff7ed;color:#b45309;font-weight:700}}
+.official-link{{display:flex;align-items:center;gap:8px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:#1d4ed8;text-decoration:none}}
+.official-link:hover{{background:#dbeafe}}
+.disclaimer{{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:14px;padding:10px 14px;background:#f9f9f9;border-radius:8px;border:.5px solid #e5e5e5}}
+</style>
+<script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cx468.com.tw/{cfg['file']}">
+<meta property="og:title" content="{name}地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
+<meta property="og:description" content="{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta property="og:url" content="https://cx468.com.tw/{cfg['file']}">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
+</script>
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"WebApplication","name":"{name}地價稅試算","url":"https://cx468.com.tw/{cfg['file']}","description":"{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{{"@type":"Offer","price":"0","priceCurrency":"TWD"}},"provider":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}}}
+</script>
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"}},{{"@type":"ListItem","position":2,"name":"房產試算工具","item":"https://cx468.com.tw/tools.html"}},{{"@type":"ListItem","position":3,"name":"地價稅試算","item":"https://cx468.com.tw/land-value-tax-calculator.html"}},{{"@type":"ListItem","position":4,"name":"{name}地價稅試算"}}]}}
+</script>
+</head>
+<body>
+<div data-include="nav-tool"></div>
+
+<div class="hero">
+  <h1>地價稅稅額試算</h1>
+  <p>{name}・{year}年・鋮馨租賃</p>
+</div>
+
+<div class="wrap">
+{est_warning}
+<div class="notice">
+  <strong>⚠ 試算說明</strong><br>
+  本表試算之稅額，係依平均地權條例、土地稅法及其施行細則有關地價稅應繳稅額之計算公式試算，<strong>僅提供單筆地號簡易試算</strong>。若有 2 筆以上土地號且適用累進稅率者，因涉及分攤累進差額，故不適用本表。
+</div>
+
+<!-- STEP 1 -->
+<div class="step-card">
+  <div class="step-label">步驟一：查詢申報地價</div>
+
+  <div class="g3" style="align-items:flex-end">
+    <div class="field">
+      <label>行政區</label>
+      <select id="district" onchange="onDistrictChange()">
+        <option value="">請選擇</option>
+{district_opts}
+      </select>
+    </div>
+    <div class="field">
+      <label>地段</label>
+      <select id="section" onchange="onSectionChange()">
+        <option value="">請先選擇行政區</option>
+      </select>
+    </div>
+    <div class="field" style="position:relative">
+      <label>地號（8碼）<span style="font-size:10px;color:#9ca3af;font-weight:400">例：00010000</span></label>
+      <input type="text" id="landNo" maxlength="8" placeholder="例：00010000" oninput="onLandNoInput(this)">
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <a href="{official_url}" target="_blank" rel="noopener" class="official-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
+      {official_label}（選好行政區・地段・地號後點此）
+    </a>
+  </div>
+
+  <div class="price-result" id="priceResult">
+    <div class="price-box highlight">
+      <label>每平方公尺申報地價（元）</label>
+      <div class="val pending" id="priceDisplay">從官方系統查詢後填入</div>
+    </div>
+    <div class="price-box">
+      <label>一般土地級距</label>
+      <div class="val pending" id="tierDisplay">--</div>
+    </div>
+  </div>
+
+  <!-- 手動輸入申報地價 -->
+  <div style="margin-top:14px;padding:12px 14px;background:#f9f9f9;border-radius:8px;border:1px solid #e5e5e5">
+    <div style="font-size:12px;font-weight:600;color:#6e6e73;margin-bottom:8px">申報地價（從官方系統查到後填入）</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="field" style="flex:1;min-width:180px;margin:0">
+        <label>申報地價（元／㎡）</label>
+        <input type="number" id="manualDeclared" placeholder="例：20000" min="0" step="100" oninput="onManualInput()">
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:12px;color:#6e6e73;margin-bottom:4px">或從公告地價換算（×80%）</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;outline:none;font-family:inherit">
+          <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
+          <span id="convertedVal" style="font-size:13px;font-weight:700;color:#c17f24;white-space:nowrap">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step-card">
+  <div class="step-label">步驟二：輸入面積與試算結果</div>
+
+  <!-- 持分換算小工具 -->
+  <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+    <div style="font-size:12px;font-weight:700;color:#0369a1;margin-bottom:10px">📋 謄本持分換算（如您是持分共有，請先換算課稅面積）</div>
+    <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">
+      <div class="field" style="margin:0;flex:2;min-width:120px">
+        <label>謄本登記面積（㎡）</label>
+        <input type="number" id="totalArea" placeholder="例：200" min="0" step="0.01" oninput="calcProportional()">
+      </div>
+      <span style="font-size:18px;color:#6e6e73;padding-bottom:10px">×</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分子</label>
+        <input type="number" id="shareNumer" placeholder="例：50000" min="1" oninput="calcProportional()">
+      </div>
+      <span style="font-size:14px;color:#6e6e73;padding-bottom:10px">/</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分母</label>
+        <input type="number" id="shareDenom" placeholder="例：100000" min="1" oninput="calcProportional()">
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <span style="font-size:12px;color:#6e6e73">課稅面積 = </span>
+        <span id="proportionalResult" style="font-size:20px;font-weight:700;color:#0369a1">—</span>
+        <span style="font-size:12px;color:#6e6e73"> ㎡</span>
+      </div>
+      <button onclick="applyProportional()" id="applyBtn" disabled style="background:#0369a1;color:#fff;border:none;border-radius:8px;height:38px;padding:0 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;opacity:0.5">套用到一般土地欄位</button>
+    </div>
+  </div>
+
+  <table class="tax-table">
+    <thead>
+      <tr>
+        <th>稅地種類</th>
+        <th>一般土地</th>
+        <th>自用住宅用地</th>
+        <th>工業用地等</th>
+        <th>公共設施保留地</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>課稅面積<br><span style="font-size:10px;font-weight:400">（平方公尺）</span></td>
+        <td><input class="area-input" type="number" id="areaGeneral" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaSelf" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaIndustrial" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaPublic" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+      </tr>
+      <tr>
+        <td>課稅地價<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="cpGeneral">0</td>
+        <td class="course-price" id="cpSelf">0</td>
+        <td class="course-price" id="cpIndustrial">0</td>
+        <td class="course-price" id="cpPublic">0</td>
+      </tr>
+      <tr>
+        <td>適用稅率</td>
+        <td class="rate-cell" id="rateGeneral"><span style="color:#2563eb">10‰至55‰</span></td>
+        <td class="rate-cell">2‰</td>
+        <td class="rate-cell">10‰</td>
+        <td class="rate-cell">6‰</td>
+      </tr>
+      <tr class="result-row">
+        <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="tax-cell" id="taxGeneral">0</td>
+        <td class="tax-cell" id="taxSelf">0</td>
+        <td class="tax-cell" id="taxIndustrial">0</td>
+        <td class="tax-cell" id="taxPublic">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 一般土地級距表 -->
+  <div class="tier-wrap" id="tierWrap" style="display:none">
+    <div class="tier-title">{name}・一般用地累進稅率級距表（{year}年，累進起點地價 {T_fmt} 元）</div>
+    <table class="tier-table">
+      <thead><tr><th>級次</th><th>課稅總地價範圍（元）</th><th>稅率</th><th>累進差額（元）</th></tr></thead>
+      <tbody id="tierBody"></tbody>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-calc" onclick="calcAll()">稅額試算</button>
+    <button class="btn-outline" onclick="clearAll()">清除資料</button>
+    <a href="land-value-tax-calculator.html" class="btn-home">回地價稅首頁</a>
+  </div>
+
+  <div class="disclaimer">⚠️ 本試算依財政部官方公式計算。{year}年{name}累進起點地價為 {T_fmt} 元{disclaimer_est}。實際稅額依{name}稅務局核定為準。持有 2 筆以上土地者請洽稅務局或使用官方試算系統。</div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const T = {T};
+{sections_js}
+
+let currentDeclaredPrice = 0;
+
+const TIERS = [
+  {{max:1,  rate:0.010, coef:0}},
+  {{max:6,  rate:0.015, coef:0.005}},
+  {{max:11, rate:0.025, coef:0.065}},
+  {{max:16, rate:0.035, coef:0.175}},
+  {{max:21, rate:0.045, coef:0.335}},
+  {{max:Infinity, rate:0.055, coef:0.545}}
+];
+
+function onDistrictChange() {{
+  const dv = document.getElementById('district').value;
+  const sel = document.getElementById('section');
+  sel.innerHTML = '<option value="">請選擇地段</option>';
+  if (dv && SECTIONS[dv]) {{
+    SECTIONS[dv].forEach(function(s) {{
+      const o = document.createElement('option');
+      o.value = s[0]; o.textContent = s[1];
+      sel.appendChild(o);
+    }});
+  }}
+  checkQueryBtn();
+  resetPrice();
+}}
+
+function onSectionChange() {{ checkQueryBtn(); resetPrice(); }}
+
+function onLandNoInput(el) {{
+  el.value = el.value.replace(/[^0-9]/g, '').substring(0, 8);
+  checkQueryBtn();
+}}
+
+function checkQueryBtn() {{}}
+
+function resetPrice() {{
+  currentDeclaredPrice = 0;
+  document.getElementById('priceDisplay').textContent = '從官方系統查詢後填入';
+  document.getElementById('priceDisplay').classList.add('pending');
+  document.getElementById('tierDisplay').textContent = '--';
+  calcAll();
+}}
+
+function onManualInput() {{
+  const v = parseFloat(document.getElementById('manualDeclared').value) || 0;
+  currentDeclaredPrice = v;
+  const pd = document.getElementById('priceDisplay');
+  if (v > 0) {{
+    pd.textContent = fmt(v) + ' 元/㎡';
+    pd.classList.remove('pending');
+    pd.style.fontSize = '18px';
+    pd.style.color = '#c17f24';
+  }} else {{ resetPrice(); }}
+  calcAll();
+}}
+
+function convertAnnounced() {{
+  const ap = parseFloat(document.getElementById('announcedInput').value) || 0;
+  const dp = ap * 0.8;
+  document.getElementById('convertedVal').textContent = dp > 0 ? fmt(dp) + ' 元' : '—';
+  if (dp > 0) {{
+    document.getElementById('manualDeclared').value = dp;
+    onManualInput();
+  }}
+}}
+
+function calcProportional() {{
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  const applyBtn = document.getElementById('applyBtn');
+  if (total > 0 && numer > 0 && denom > 0) {{
+    const prop = total * numer / denom;
+    document.getElementById('proportionalResult').textContent = prop.toFixed(2);
+    applyBtn.disabled = false; applyBtn.style.opacity = '1';
+  }} else {{
+    document.getElementById('proportionalResult').textContent = '—';
+    applyBtn.disabled = true; applyBtn.style.opacity = '0.5';
+  }}
+}}
+
+function applyProportional() {{
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  if (total > 0 && numer > 0 && denom > 0) {{
+    document.getElementById('areaGeneral').value = (total * numer / denom).toFixed(2);
+    calcAll();
+  }}
+}}
+
+function calcAll() {{
+  const dp = currentDeclaredPrice || parseFloat(document.getElementById('manualDeclared').value) || 0;
+  const types = ['General','Self','Industrial','Public'];
+  const rates = {{General:null, Self:0.002, Industrial:0.010, Public:0.006}};
+  let generalTaxBase = 0;
+  types.forEach(function(t) {{
+    const area = parseFloat(document.getElementById('area' + t).value) || 0;
+    const taxBase = dp * area;
+    document.getElementById('cp' + t).textContent = fmt(taxBase);
+    let tax = 0;
+    if (t === 'General') {{ generalTaxBase = taxBase; tax = calcGeneral(taxBase); }}
+    else {{ tax = taxBase * rates[t]; }}
+    document.getElementById('tax' + t).textContent = fmt(Math.round(tax));
+  }});
+  if (generalTaxBase > 0) {{
+    const tier = getTier(generalTaxBase);
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
+    document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
+    document.getElementById('tierDisplay').classList.remove('pending');
+    for (let i=1;i<=6;i++) {{ const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }}
+    document.getElementById('tierWrap').style.display = 'block';
+  }} else {{
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
+    document.getElementById('tierDisplay').textContent = '--';
+    document.getElementById('tierDisplay').classList.add('pending');
+  }}
+}}
+
+function getTier(taxBase) {{
+  const multiple = taxBase / T;
+  let level = 1;
+  if (multiple <= 1) level=1;
+  else if (multiple <= 6) level=2;
+  else if (multiple <= 11) level=3;
+  else if (multiple <= 16) level=4;
+  else if (multiple <= 21) level=5;
+  else level=6;
+  return {{level, rate:TIERS[level-1].rate, coef:TIERS[level-1].coef}};
+}}
+
+function calcGeneral(taxBase) {{
+  if (taxBase <= 0) return 0;
+  const t = getTier(taxBase);
+  return Math.max(0, taxBase * t.rate - T * t.coef);
+}}
+
+function buildTierTable() {{
+  const ordinals = ['一','二','三','四','五','六'];
+  const rows = [
+    [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
+    [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
+  ];
+  document.getElementById('tierBody').innerHTML = rows.map(function(r,i){{
+    const range = r[2] ? fmt(r[1])+ ' ~ '+fmt(r[2]) : fmt(r[1])+' 以上';
+    return '<tr id="tr-'+(i+1)+'"><td>第'+ordinals[i]+'級</td><td>'+range+'</td><td>'+(r[3]*1000).toFixed(0)+'‰</td><td>'+fmt(r[4])+'</td></tr>';
+  }}).join('');
+}}
+
+function clearAll() {{
+  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput','totalArea','shareNumer','shareDenom','landNo'].forEach(id=>{{document.getElementById(id).value=''}});
+  document.getElementById('convertedVal').textContent = '—';
+  document.getElementById('proportionalResult').textContent = '—';
+  document.getElementById('applyBtn').disabled = true;
+  document.getElementById('applyBtn').style.opacity = '0.5';
+  document.getElementById('district').value = '';
+  document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
+  currentDeclaredPrice = 0;
+  resetPrice();
+  ['cpGeneral','cpSelf','cpIndustrial','cpPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  ['taxGeneral','taxSelf','taxIndustrial','taxPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('tierWrap').style.display='none';
+}}
+
+function fmt(n) {{
+  if (!n && n!==0) return '—';
+  return Math.round(n).toLocaleString('zh-TW');
+}}
+
+buildTierTable();
+
+</script>
+
+<section style="max-width:720px;margin:0 auto 40px;padding:0 16px">
+  <div style="background:#f5f5f7;border-radius:14px;padding:20px">
+    <div style="font-size:11px;font-weight:700;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="land-value-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">全台地價稅試算 →</a>
+      <a href="taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">台北市地價稅試算 →</a>
+      <a href="new-taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">新北市地價稅試算 →</a>
+      <a href="land-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
+    </div>
+  </div>
+</section>
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>'''
+
+    return html
+
+
+def main():
+    for city_key, cfg in CITIES.items():
+        county = cfg['county']
+        print(f"\n== {cfg['name']} ({county}) ==")
+
+        # Fetch town names
+        print(f"  Fetching towns...")
+        towns_raw = fetch_towns(county)
+        # remap: key = last 2 digits of towncode
+        towns = {code[-2:]: name for code, name in towns_raw.items()}
+        print(f"  {len(towns)} districts")
+        time.sleep(0.3)
+
+        # Fetch sections for each town
+        sections_dict = {}
+        for full_code in sorted(towns_raw.keys()):
+            dv = full_code[-2:]
+            print(f"  Fetching sections for {full_code} ({towns[dv]})...")
+            sects = fetch_sections(county, full_code)
+            if sects:
+                sections_dict[dv] = sects
+            print(f"    {len(sects)} sections")
+            time.sleep(0.25)
+
+        # Generate HTML
+        html = generate_html(city_key, cfg, towns, sections_dict)
+        filepath = ROOT_DIR / cfg['file']
+        filepath.write_text(html, encoding='utf-8')
+        print(f"  ✓ {cfg['file']} written ({len(html):,} chars)")
+
+    print("\n✓ 全部完成")
+
+
+if __name__ == '__main__':
+    main()

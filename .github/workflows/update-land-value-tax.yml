@@ -67,7 +67,21 @@ jobs:
                   taoyuan-land-value-tax.html \
                   keelung-land-value-tax.html \
                   hsinchu-city-land-value-tax.html \
-                  hsinchu-county-land-value-tax.html
+                  hsinchu-county-land-value-tax.html \
+                  taichung-land-value-tax.html \
+                  tainan-land-value-tax.html \
+                  kaohsiung-land-value-tax.html \
+                  yilan-land-value-tax.html \
+                  chiayi-city-land-value-tax.html \
+                  miaoli-land-value-tax.html \
+                  nantou-land-value-tax.html \
+                  changhua-land-value-tax.html \
+                  yunlin-land-value-tax.html \
+                  chiayi-county-land-value-tax.html \
+                  pingtung-land-value-tax.html \
+                  hualien-land-value-tax.html \
+                  taitung-land-value-tax.html \
+                  penghu-land-value-tax.html
           YEAR=$(python -c "import json; c=json.load(open('scripts/tax-config.json')); print(list(c['cities'].values())[0].get('year',''))")
           git commit -m "Update 地價稅累進起點地價 ${YEAR}年 [bot]"
           git push

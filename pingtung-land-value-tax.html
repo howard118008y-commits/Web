@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><!-- pingtung-lvt v1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>屏東縣地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃</title>
+<meta name="description" content="屏東縣地價稅試算，115-116年累進起點地價 775,000 元，支援行政區・地段查詢，自用住宅 2‰ 與一般用地六級累進稅率。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<style>
+*{box-sizing:border-box}
+body{background:#fdf8f0;margin:0;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+.nav-back{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}
+.hero{background:#0369a1;padding:28px 24px 22px;text-align:center}
+.hero h1{font-size:26px;font-weight:700;color:#fff;margin:0 0 4px}
+.hero p{font-size:13px;color:rgba(255,255,255,.8);margin:0}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 80px}
+.notice{background:#fefce8;border:1px solid #d97706;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#713f12;line-height:1.75}
+.notice strong{color:#92400e}
+.step-card{background:#fff;border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.step-label{font-size:13px;font-weight:700;color:#c17f24;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde68a}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:540px){.g3{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:600;color:#6e6e73}
+.field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:#c17f24}
+.field input::placeholder{color:#b0b0b0}
+.price-result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.price-box{background:#f9f9f9;border:1.5px solid #e5e5e5;border-radius:8px;padding:12px 14px}
+.price-box label{font-size:11px;color:#6e6e73;display:block;margin-bottom:4px}
+.price-box .val{font-size:18px;font-weight:700;color:#1d1d1f}
+.price-box .val.pending{font-size:14px;color:#b0b0b0;font-weight:400}
+.price-box.highlight{border-color:#c17f24;background:#fffbf0}
+.price-box.highlight .val{color:#c17f24}
+.tax-table{width:100%;border-collapse:separate;border-spacing:0 0}
+.tax-table th{background:#f5e6c8;font-size:12px;font-weight:700;color:#92400e;padding:10px 8px;text-align:center}
+.tax-table th:first-child{text-align:left;padding-left:12px;border-radius:6px 0 0 6px}
+.tax-table th:last-child{border-radius:0 6px 6px 0}
+.tax-table td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:13px}
+.tax-table td:first-child{text-align:left;padding-left:12px;font-weight:600;color:#6e6e73;font-size:12px}
+.tax-table .area-input{width:100%;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;text-align:center;outline:none;font-family:inherit}
+.tax-table .area-input:focus{border-color:#c17f24}
+.tax-table .course-price{font-size:13px;color:#1d1d1f;font-weight:500}
+.tax-table .rate-cell{font-size:12px;color:#2563eb;font-weight:600}
+.tax-table .tax-cell{font-size:15px;font-weight:700;color:#92400e}
+.result-row td{background:#fef3c7;font-weight:700;font-size:14px;color:#92400e;padding:12px 8px;border-bottom:none}
+.result-row td:first-child{border-radius:0 0 0 8px;padding-left:12px}
+.result-row td:last-child{border-radius:0 0 8px 0}
+.btn-row{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.btn-calc{background:#8b4513;color:#fff;border:none;border-radius:24px;height:48px;padding:0 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-calc:hover{background:#6d360f}
+.btn-outline{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-home{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center}
+.tier-wrap{background:#f9f9f9;border-radius:10px;padding:16px;margin-top:14px}
+.tier-title{font-size:11px;font-weight:700;color:#6e6e73;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.tier-table{width:100%;border-collapse:collapse;font-size:11px}
+.tier-table th{background:#1d1d1f;color:#fff;padding:7px 8px;text-align:center;font-weight:600}
+.tier-table th:first-child{text-align:left}
+.tier-table td{padding:7px 8px;text-align:center;border-bottom:.5px solid #ececec;color:#1d1d1f}
+.tier-table td:first-child{text-align:left;color:#6e6e73}
+.tier-table tr.hit td{background:#fff7ed;color:#b45309;font-weight:700}
+.official-link{display:flex;align-items:center;gap:8px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:#1d4ed8;text-decoration:none}
+.official-link:hover{background:#dbeafe}
+.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:14px;padding:10px 14px;background:#f9f9f9;border-radius:8px;border:.5px solid #e5e5e5}
+</style>
+<script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://cx468.com.tw/pingtung-land-value-tax.html">
+<meta property="og:title" content="屏東縣地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
+<meta property="og:description" content="屏東縣地價稅試算，115-116年累進起點地價 775,000 元，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta property="og:url" content="https://cx468.com.tw/pingtung-land-value-tax.html">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"屏東縣地價稅試算","url":"https://cx468.com.tw/pingtung-land-value-tax.html","description":"屏東縣地價稅試算，115-116年累進起點地價 775,000 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{"@type":"Offer","price":"0","priceCurrency":"TWD"},"provider":{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"房產試算工具","item":"https://cx468.com.tw/tools.html"},{"@type":"ListItem","position":3,"name":"地價稅試算","item":"https://cx468.com.tw/land-value-tax-calculator.html"},{"@type":"ListItem","position":4,"name":"屏東縣地價稅試算"}]}
+</script>
+</head>
+<body>
+<div data-include="nav-tool"></div>
+
+<div class="hero">
+  <h1>地價稅稅額試算</h1>
+  <p>屏東縣・115-116年・鋮馨租賃</p>
+</div>
+
+<div class="wrap">
+
+<div class="notice">
+  <strong>⚠ 試算說明</strong><br>
+  本表試算之稅額，係依平均地權條例、土地稅法及其施行細則有關地價稅應繳稅額之計算公式試算，<strong>僅提供單筆地號簡易試算</strong>。若有 2 筆以上土地號且適用累進稅率者，因涉及分攤累進差額，故不適用本表。
+</div>
+
+<!-- STEP 1 -->
+<div class="step-card">
+  <div class="step-label">步驟一：查詢申報地價</div>
+
+  <div class="g3" style="align-items:flex-end">
+    <div class="field">
+      <label>行政區</label>
+      <select id="district" onchange="onDistrictChange()">
+        <option value="">請選擇</option>
+        <option value="01">屏東市</option>
+        <option value="02">潮州鎮</option>
+        <option value="03">東港鎮</option>
+        <option value="04">恆春鎮</option>
+        <option value="05">萬丹鄉</option>
+        <option value="06">長治鄉</option>
+        <option value="07">麟洛鄉</option>
+        <option value="08">九如鄉</option>
+        <option value="09">里港鄉</option>
+        <option value="10">鹽埔鄉</option>
+        <option value="11">高樹鄉</option>
+        <option value="12">萬巒鄉</option>
+        <option value="13">內埔鄉</option>
+        <option value="14">竹田鄉</option>
+        <option value="15">新埤鄉</option>
+        <option value="16">枋寮鄉</option>
+        <option value="17">新園鄉</option>
+        <option value="18">崁頂鄉</option>
+        <option value="19">林邊鄉</option>
+        <option value="20">南州鄉</option>
+        <option value="21">佳冬鄉</option>
+        <option value="22">琉球鄉</option>
+        <option value="23">車城鄉</option>
+        <option value="24">滿州鄉</option>
+        <option value="25">枋山鄉</option>
+        <option value="26">三地門鄉</option>
+        <option value="27">霧臺鄉</option>
+        <option value="28">瑪家鄉</option>
+        <option value="29">泰武鄉</option>
+        <option value="30">來義鄉</option>
+        <option value="31">春日鄉</option>
+        <option value="32">獅子鄉</option>
+        <option value="33">牡丹鄉</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>地段</label>
+      <select id="section" onchange="onSectionChange()">
+        <option value="">請先選擇行政區</option>
+      </select>
+    </div>
+    <div class="field" style="position:relative">
+      <label>地號（8碼）<span style="font-size:10px;color:#9ca3af;font-weight:400">例：00010000</span></label>
+      <input type="text" id="landNo" maxlength="8" placeholder="例：00010000" oninput="onLandNoInput(this)">
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <a href="https://www.pttax.gov.tw/" target="_blank" rel="noopener" class="official-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
+      前往屏東縣政府財政稅務局查詢申報地價（選好行政區・地段・地號後點此）
+    </a>
+  </div>
+
+  <div class="price-result" id="priceResult">
+    <div class="price-box highlight">
+      <label>每平方公尺申報地價（元）</label>
+      <div class="val pending" id="priceDisplay">從官方系統查詢後填入</div>
+    </div>
+    <div class="price-box">
+      <label>一般土地級距</label>
+      <div class="val pending" id="tierDisplay">--</div>
+    </div>
+  </div>
+
+  <!-- 手動輸入申報地價 -->
+  <div style="margin-top:14px;padding:12px 14px;background:#f9f9f9;border-radius:8px;border:1px solid #e5e5e5">
+    <div style="font-size:12px;font-weight:600;color:#6e6e73;margin-bottom:8px">申報地價（從官方系統查到後填入）</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="field" style="flex:1;min-width:180px;margin:0">
+        <label>申報地價（元／㎡）</label>
+        <input type="number" id="manualDeclared" placeholder="例：20000" min="0" step="100" oninput="onManualInput()">
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:12px;color:#6e6e73;margin-bottom:4px">或從公告地價換算（×80%）</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;outline:none;font-family:inherit">
+          <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
+          <span id="convertedVal" style="font-size:13px;font-weight:700;color:#c17f24;white-space:nowrap">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step-card">
+  <div class="step-label">步驟二：輸入面積與試算結果</div>
+
+  <!-- 持分換算小工具 -->
+  <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+    <div style="font-size:12px;font-weight:700;color:#0369a1;margin-bottom:10px">📋 謄本持分換算（如您是持分共有，請先換算課稅面積）</div>
+    <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">
+      <div class="field" style="margin:0;flex:2;min-width:120px">
+        <label>謄本登記面積（㎡）</label>
+        <input type="number" id="totalArea" placeholder="例：200" min="0" step="0.01" oninput="calcProportional()">
+      </div>
+      <span style="font-size:18px;color:#6e6e73;padding-bottom:10px">×</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分子</label>
+        <input type="number" id="shareNumer" placeholder="例：50000" min="1" oninput="calcProportional()">
+      </div>
+      <span style="font-size:14px;color:#6e6e73;padding-bottom:10px">/</span>
+      <div class="field" style="margin:0;flex:1;min-width:80px">
+        <label>分母</label>
+        <input type="number" id="shareDenom" placeholder="例：100000" min="1" oninput="calcProportional()">
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <span style="font-size:12px;color:#6e6e73">課稅面積 = </span>
+        <span id="proportionalResult" style="font-size:20px;font-weight:700;color:#0369a1">—</span>
+        <span style="font-size:12px;color:#6e6e73"> ㎡</span>
+      </div>
+      <button onclick="applyProportional()" id="applyBtn" disabled style="background:#0369a1;color:#fff;border:none;border-radius:8px;height:38px;padding:0 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;opacity:0.5">套用到一般土地欄位</button>
+    </div>
+  </div>
+
+  <table class="tax-table">
+    <thead>
+      <tr>
+        <th>稅地種類</th>
+        <th>一般土地</th>
+        <th>自用住宅用地</th>
+        <th>工業用地等</th>
+        <th>公共設施保留地</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>課稅面積<br><span style="font-size:10px;font-weight:400">（平方公尺）</span></td>
+        <td><input class="area-input" type="number" id="areaGeneral" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaSelf" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaIndustrial" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td><input class="area-input" type="number" id="areaPublic" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+      </tr>
+      <tr>
+        <td>課稅地價<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="cpGeneral">0</td>
+        <td class="course-price" id="cpSelf">0</td>
+        <td class="course-price" id="cpIndustrial">0</td>
+        <td class="course-price" id="cpPublic">0</td>
+      </tr>
+      <tr>
+        <td>適用稅率</td>
+        <td class="rate-cell" id="rateGeneral"><span style="color:#2563eb">10‰至55‰</span></td>
+        <td class="rate-cell">2‰</td>
+        <td class="rate-cell">10‰</td>
+        <td class="rate-cell">6‰</td>
+      </tr>
+      <tr class="result-row">
+        <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="tax-cell" id="taxGeneral">0</td>
+        <td class="tax-cell" id="taxSelf">0</td>
+        <td class="tax-cell" id="taxIndustrial">0</td>
+        <td class="tax-cell" id="taxPublic">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 一般土地級距表 -->
+  <div class="tier-wrap" id="tierWrap" style="display:none">
+    <div class="tier-title">屏東縣・一般用地累進稅率級距表（115-116年，累進起點地價 775,000 元）</div>
+    <table class="tier-table">
+      <thead><tr><th>級次</th><th>課稅總地價範圍（元）</th><th>稅率</th><th>累進差額（元）</th></tr></thead>
+      <tbody id="tierBody"></tbody>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-calc" onclick="calcAll()">稅額試算</button>
+    <button class="btn-outline" onclick="clearAll()">清除資料</button>
+    <a href="land-value-tax-calculator.html" class="btn-home">回地價稅首頁</a>
+  </div>
+
+  <div class="disclaimer">⚠️ 本試算依財政部官方公式計算。115-116年屏東縣累進起點地價為 775,000 元。實際稅額依屏東縣稅務局核定為準。持有 2 筆以上土地者請洽稅務局或使用官方試算系統。</div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const T = 775000;
+const SECTIONS = {
+  '01': [['0004','大埔段一小段'],['0005','大埔段二小段'],['0006','大埔段三小段'],['0007','楠樹腳段一小段'],['0008','楠樹腳段二小段'],['0011','新街段一小段'],['0012','新街段二小段'],['0013','新街段三小段'],['0014','和平段'],['0015','舊街段一小段'],['0016','舊街段二小段'],['0017','舊街段三小段'],['0018','公園段一小段'],['0019','公園段二小段'],['0020','公園段三小段'],['0021','六塊厝段'],['0022','公館段'],['0023','溝美段'],['0025','街頭段二小段'],['0026','街頭段三小段'],['0027','街頭段四小段'],['0029','街頭段六小段'],['0030','勝興段'],['0031','福光段'],['0034','頭前溪段'],['0035','檳榔腳段一小段'],['0036','檳榔腳段二小段'],['0037','林子內段'],['0039','海豐段'],['0041','斯文段'],['0042','北勢段'],['0044','水源段一小段'],['0045','水源段二小段'],['0046','大連段'],['0047','復興段'],['0048','明正段'],['0049','灰磘段'],['0051','民和段'],['0052','大同段'],['0053','新生段'],['0054','歸仁段'],['0055','民生段'],['0056','清溪段'],['0057','瑞光段'],['0058','香揚段'],['0059','花園段'],['0060','林內段'],['0061','洛陽段'],['0062','新興段'],['0063','長春段'],['0064','建國段'],['0065','新屏段'],['0069','萬年段'],['0110','豐田段'],['0111','溝美段一小段'],['0131','大湖段一小段'],['0134','大慶段'],['0135','玉成段'],['0146','豐年段'],['0147','忠孝段'],['0148','和生段'],['0160','廣興段'],['0162','豐田段一小段'],['0163','正安段'],['0164','古松段'],['0165','大鵬段'],['0166','雲鵬段'],['0167','公勤段'],['0170','北勢段一小段'],['0175','福正段'],['0176','歸義段'],['0178','大春段'],['0179','頂柳段'],['0180','中柳段'],['0182','龍華段'],['0184','公興段'],['0185','新歸來段'],['0187','和興段'],['0188','金城段'],['0189','信興段'],['0191','香揚段一小段'],['0192','新海豐段'],['0193','三山段'],['0194','信和段'],['0199','新勝興段'],['1709','北興段'],['1713','舊酒廠段'],['1715','光明段'],['1716','機場段'],['1719','大溪段'],['1720','北平段'],['1721','大武營段'],['1722','新清溪段'],['1726','華富段'],['1727','田中段'],['1728','清進段'],['1730','新和生段'],['1732','大進段'],['1733','橋福段']],
+  '02': [['0301','五魁寮段'],['0302','八老爺段'],['0304','檨子腳段'],['0307','興美段'],['0391','五魁寮段一小段'],['0392','五魁寮段二小段'],['0439','五福段'],['0441','蓬萊段'],['0442','榮田段'],['0443','五魁段'],['0444','三星段'],['0445','中山段'],['0446','光華段'],['0448','四春段'],['0449','四塊厝段'],['0450','林後段'],['0451','明崙段'],['0452','崙東段'],['0453','崙潮段'],['0454','崙新段'],['0455','檨興段'],['0456','富春段'],['0479','愛國段'],['0480','建基段'],['0481','華興段'],['0482','潮中段'],['0490','三共段'],['0491','國中段'],['0492','延平段'],['0493','新五魁段'],['1510','新生段'],['1511','新榮段'],['1512','永春段'],['1513','明德段'],['1514','新光華段'],['1515','中洲段'],['1516','大同段'],['1517','光春段'],['1525','劉厝庄段'],['1526','八爺段']],
+  '03': [['0575','新忠段'],['0576','新孝段'],['0577','新仁段'],['0578','新愛段'],['0579','新信段'],['0580','龍帝段'],['0581','新帝段'],['0582','關帝段'],['0583','東新段'],['0584','船頭段'],['0585','大東段'],['0586','嘉南段'],['1000','新義段'],['1001','大鵬段'],['1003','新和段'],['1013','大潭新庄段'],['1014','大埔段'],['1015','三和段'],['1023','建安段'],['1028','超峰段'],['1034','三隆段'],['1035','嘉新段'],['1036','豐海段'],['1037','盛海段'],['1038','興盛段'],['1039','大東段一小段'],['1040','後寮溪段'],['1041','東隆段'],['1042','新帝段一小段'],['1043','福德段'],['1044','新信段一小段'],['1047','朝安段'],['1048','頂中段'],['1049','新勝段'],['1050','新福段']],
+  '04': [['0601','山腳段'],['0603','鼻子頭段'],['0604','龍泉水段'],['0605','鵝鑾鼻段'],['0661','鵝鑾鼻段二小段'],['0667','新厝段'],['0668','機場段'],['0669','五里亭段'],['0670','宣化段'],['0671','大埔段'],['0672','草埔段'],['0673','公順段'],['0674','西門段'],['0675','僑勇段'],['0681','恆東段'],['0682','恆西段'],['0683','恆南段'],['0685','大潭段'],['0688','白石坑段'],['0689','三台山段'],['0690','出火段'],['0721','墾丁段'],['0726','鵝鑾段'],['0727','後壁湖段'],['0728','大光段'],['0729','城西段'],['0730','城南段'],['0731','城北段'],['0732','湖內段'],['0733','德和段'],['0734','下水泉段'],['0735','新僑勇段'],['0736','頂水泉段'],['0737','白砂段'],['0738','一心段'],['0739','四溝段'],['0740','龍鑾段'],['0742','龍泉段'],['0743','紅柴坑段'],['0744','萬里桐段'],['0745','山海段'],['0746','龍水段'],['0750','東潭段'],['0751','茄湖段'],['0752','大平長壽段'],['0753','新四溝段'],['0754','城東段']],
+  '05': [['0075','頂林子段'],['0077','興化廍段'],['0084','甘棠門段一小段'],['0085','磚寮段'],['0106','新鐘段'],['0107','新林段'],['0108','新安段'],['0109','新全段'],['0112','萬興段'],['0113','崙頂段'],['0114','田厝段'],['0115','社安段'],['0116','香社段'],['0117','灣內段'],['0118','萬後段'],['0119','萬全段'],['0120','萬安段'],['0121','萬生段'],['0122','萬惠段'],['0123','寶厝段'],['0124','水泉段'],['0125','新福段'],['0132','社上段'],['0133','廣安段'],['0136','社北段'],['0137','社西段'],['0149','頂新段'],['0150','竹林段'],['0158','水仙段'],['0169','竹圍段'],['0181','頂竹段'],['0183','新社皮段'],['0186','上磚寮段'],['1723','興化段']],
+  '06': [['0086','長治段'],['0090','番子寮段'],['0091','華榮段'],['0151','長豐段'],['0152','新潭段'],['0153','永興段'],['0154','潭頭段'],['0155','崑崙段'],['0156','香潭段'],['0157','進興段'],['0168','榮興段'],['0171','榮華段'],['0177','農科段'],['0195','德華段'],['0196','德榮段'],['0197','竹葉林段'],['0198','復興段'],['1700','昌榮段'],['1701','協華段'],['1702','繁華段'],['1703','興華段'],['1704','繁昌段'],['1705','水源段'],['1707','繁興段'],['1708','華錦段']],
+  '07': [['0092','麟洛段'],['0138','麟忠段'],['0139','麟孝段'],['0140','麟仁段'],['0141','麟愛段'],['0142','麟信段'],['0143','麟義段'],['0144','麟和段'],['0145','麟平段'],['0172','玄聖段'],['0173','農場段'],['0174','徑仔段']],
+  '08': [['0094','玉水段'],['0095','九如段'],['0096','九清段'],['0100','耆老段'],['0104','下冷水坑段'],['0105','下冷水坑段一小段'],['0126','九智段'],['0127','九仁段'],['0128','九勇段'],['0129','九和段'],['0130','九平段'],['0161','下冷水坑段二小段'],['0190','九彭段'],['1706','九堤段'],['1710','玉泉段'],['1711','惠農段'],['1712','東庄段'],['1714','大坵段'],['1717','九明段'],['1718','冷水坑段'],['1724','九智段一小段'],['1725','九和段一小段'],['1729','九北段'],['1731','九昌段'],['1734','九富段']],
+  '09': [['0201','土庫段'],['0202','大港洋段'],['0205','瀰力肚段'],['0206','三張廍段'],['0236','鐵店段'],['0237','春林段'],['0238','永春段'],['0239','過江段'],['0240','里平段'],['0241','玉田段'],['0242','潮北段'],['0248','定國段'],['0276','新土庫段'],['0277','中萬甲段'],['0278','中和段'],['1344','磚仔地段'],['1345','茄苳腳段'],['1349','載興段'],['1350','光明段'],['1353','潮厝段'],['1369','江南段'],['1370','林仔頭段'],['1371','新中崙段']],
+  '10': [['0210','彭厝段'],['0249','新二段'],['0250','新德段'],['0251','新高段'],['0252','維新段'],['0253','塩南段'],['0254','塩中段'],['0255','塩北段'],['0274','高朗段'],['0275','新莊段'],['0279','彭新段'],['0280','彭北段'],['1321','仕絨段'],['1322','民意段'],['1323','鹽東段'],['1328','振興段'],['1329','久愛段'],['1330','高華段'],['1331','大仁東段'],['1332','大仁段'],['1333','彭南段'],['1334','洛陽段'],['1335','上洛陽段'],['1336','永隆段'],['1337','振北段'],['1338','興愛段']],
+  '11': [['0216','阿拔泉段'],['0243','豐源段'],['0244','南興段'],['0245','興中段'],['0246','長榮段'],['0256','新南段'],['1324','源泉段'],['1325','田庄段'],['1326','泰山段'],['1327','泰和段'],['1339','新田子段'],['1340','新泰山段'],['1341','南華段'],['1342','石獅公段'],['1343','廣興段'],['1346','新日段'],['1347','原田子段'],['1348','埔田段'],['1351','公平段'],['1352','蕉場段'],['1354','泰福段'],['1355','新豐段'],['1356','大山段'],['1357','大山寮段'],['1358','公園段'],['1359','萬興段'],['1360','源興段'],['1361','幸福段'],['1362','富貴段'],['1363','三王段'],['1364','竹圍段'],['1365','東振段'],['1366','長興段'],['1367','泰興段'],['1368','新加蚋埔段']],
+  '12': [['0310','五溝水段'],['0311','赤山段'],['0312','赤山段一小段'],['0313','新厝段'],['0314','新厝段一小段'],['0315','佳佐段'],['0316','佳佐段一小段'],['0472','新置段'],['0476','萬全段'],['0477','官倉段'],['0478','萬和段'],['1519','民生段'],['1520','佳和段'],['1521','頭溝水段'],['1522','鹿寮段'],['1523','見月段'],['1524','新和段'],['1529','永慶段'],['1530','西盛段'],['1531','大林段'],['1532','德勝段'],['1533','新庄段'],['1534','柑園段'],['1535','成德段'],['1536','三民段'],['1537','牛角灣段'],['1538','萬金段'],['1539','赤新段'],['1540','富山段'],['1541','新農段'],['1558','永平段']],
+  '13': [['0323','犂頭鏢段'],['0324','隘寮段'],['0325','番子厝段'],['0327','新埔段'],['0328','美和段'],['0388','新豐段'],['0415','壽比段'],['0416','興義段'],['0417','文化段'],['0418','光明段'],['0419','廣濟段'],['0420','學人段'],['0421','和興段'],['0422','富田段'],['0425','早角段'],['0426','龍頸段'],['0427','北寧段'],['0428','南寧段'],['0429','東寧段'],['0430','內田段'],['0431','復興段'],['0432','上龍泉段'],['0433','龍潭段'],['0434','昭勝段'],['0435','中勝段'],['0436','大新段'],['0437','中林段'],['0438','鴻德段'],['0460','圳頭段'],['0461','大興段'],['0462','建興段'],['0463','豐田段'],['0464','振豐段'],['0465','佳山段'],['0466','水門風景段'],['1518','上東勢段'],['1542','東勢段'],['1543','大和段'],['1544','農場段'],['1545','溝底段'],['1546','竹圍段'],['1547','八壽段'],['1549','科大段'],['1550','東片段'],['1552','新隘寮段'],['1553','新展段'],['1554','竹山段'],['1555','山水段'],['1559','黎東段'],['1560','黎明段'],['1561','黎新段'],['1562','上黎明段']],
+  '14': [['0329','竹田段'],['0332','南勢段一小段'],['0334','鳳山厝段'],['0336','新田段'],['0337','新勢段'],['0338','竹南段'],['0339','美崙段'],['0393','鳳明段'],['0414','竹鳳段'],['0423','溝子墘段一小段'],['0424','竹鳳段一小段'],['0440','鳳新段'],['0467','過溝段'],['0468','六巷段'],['0469','頓物段'],['0470','神農段'],['0471','水源段'],['1527','新街段'],['1528','竹洲段'],['1548','龍門段'],['1556','保隆段'],['1557','福安段']],
+  '15': [['0342','建功段'],['0343','南岸段'],['0345','糞箕湖段'],['0346','新力段'],['0411','新東段'],['0412','新華段'],['0413','新南段'],['0473','海豐段'],['0474','萬隆段'],['0475','上萬安段'],['1563','南豐段'],['1564','東興段'],['1566','南鐵段'],['1567','鏡庄段'],['1568','新建段'],['1569','箕湖段'],['1570','新餉潭段'],['1571','獅頭段']],
+  '16': [['0348','枋寮段北勢寮小段'],['0349','水底寮段'],['0350','大響營段'],['0351','大響營段一小段'],['0352','大響營段二小段'],['0353','北旗尾段'],['0389','東海段'],['0390','屏南段'],['0394','建興段'],['0395','新龍段'],['0396','德興段'],['0397','中山段'],['0398','隆山段'],['0399','保生段'],['0400','高田段'],['0401','北勢段'],['0402','中寮段'],['0406','天時段'],['0407','地利段'],['0408','人和段'],['0409','中華段'],['0410','沿海段'],['0819','南山段'],['0820','北玄段'],['0857','海鷗段'],['0862','新地段'],['0864','太源段'],['0866','內寮村段'],['0867','新開村段'],['0868','三民段'],['0869','隆山北段'],['0870','飛地段'],['0872','隆安段'],['0873','金榮段'],['0874','靶場段'],['0881','玉泉段'],['0883','枋農段']],
+  '17': [['0512','新吉段'],['0513','新洋段'],['0516','新利段'],['0544','新洋段一小段'],['0557','南龍段'],['0558','興龍段'],['0559','新生段'],['0560','五族段'],['0561','鹽龍段'],['0562','鹽埔段'],['0563','鹽洲段'],['0564','共和段'],['0565','鹽新段'],['1004','新南段'],['1005','港西段'],['1006','上烏龍段'],['1007','興厝段'],['1008','中興段'],['1009','中洲段'],['1010','仙吉段'],['1011','仙隆段'],['1012','新東段'],['1018','新房段'],['1019','五龍段'],['1020','港墘段'],['1021','新堤段'],['1022','五房段']],
+  '18': [['0587','頂忠段'],['0588','頂孝段'],['0589','頂仁段'],['0590','頂愛段'],['0591','頂信段'],['0592','頂義段'],['0593','頂和段'],['0594','頂安段'],['1032','港東段'],['1033','越溪段']],
+  '19': [['0547','復興段'],['0548','東林段'],['0549','光林段'],['0550','鎮林段'],['0551','永樂段'],['0552','中林段'],['0553','仁和段'],['0554','塭岸段'],['0555','富田段'],['1002','崎峰段'],['1024','銀放索段'],['1025','成功段'],['1026','鎮安段'],['1027','內庄段'],['1029','竹林段'],['1030','下庄段']],
+  '20': [['0595','七塊段'],['0596','萬華段'],['0597','南州段'],['0598','南糖段'],['0599','米崙段'],['1016','壽元段'],['1017','三千段'],['1031','同安段']],
+  '21': [['0534','佳冬段'],['0535','佳和段'],['0536','塭豐段'],['0537','石光見段'],['0540','武丁潭段'],['0546','屏北段'],['0556','復興段一小段'],['0801','萬建段'],['0802','佳興段'],['0803','六根段'],['0804','佳農段'],['0805','昌北段'],['0806','昌東段'],['0807','昌南段'],['0808','玉光段'],['0809','石光段'],['0821','武丁段'],['0822','武新段'],['0823','新埔段'],['0824','賴家段'],['0825','內館段'],['0865','塭仔段'],['0871','上埔頭段']],
+  '22': [['0567','白沙段'],['0568','本漁段'],['0569','花矸段'],['0570','相埔段'],['0571','天台段'],['0572','大寮段'],['0573','大南段']],
+  '23': [['0614','四重溪段'],['0615','保力段保力小段'],['0616','保力段山腳小段'],['0617','保力段竹社小段'],['0618','海口段'],['0676','興安段'],['0677','田中段'],['0678','新海口段'],['0679','興統段'],['0680','新車城段'],['0687','保新段'],['0691','尖山段'],['0692','水坑段'],['0693','海口山段'],['0694','石門埔段'],['0695','南勢湖山段'],['0725','射埔段'],['0741','保安段'],['0749','下四庄段'],['0755','溫泉東段'],['0756','溫泉西段']],
+  '24': [['0622','滿州段'],['0623','响林段'],['0624','港口段'],['0625','九棚段'],['0626','九個厝段'],['0627','猪朥束段'],['0628','射麻裡段'],['0696','大崎頂段'],['0697','加都魯段'],['0698','老佛山段'],['0699','九龍山段'],['0700','大山母段'],['0701','欖仁屋段'],['0702','鼻頭段'],['0703','水濁段'],['0722','滿林段'],['0723','花海段'],['0724','新滿州段'],['0757','新九棚段']],
+  '25': [['0826','七里段'],['0827','新枋山段'],['0828','平湖段'],['0854','加祿段'],['0855','新加祿堂段'],['0856','平埔厝段'],['0863','莿桐段'],['0875','舊庄段'],['0876','楓港東段'],['0877','新楓港段'],['0878','楓港西段']],
+  '26': [['0220','三地段'],['0221','安坡段'],['0222','阿烏段'],['0223','賽嘉段'],['0224','大社段'],['0225','達來段'],['0226','馬兒段'],['0227','口社段'],['0228','沙溪段'],['0229','德文段'],['0247','新馬兒段'],['0270','巴都都龍段'],['0271','都魯夫魯父段'],['0272','都風段'],['0273','馬發利段'],['0281','拉路啊路嵅段'],['0282','祝立夫夫段'],['0283','度嗎尼蘭段'],['0285','拉利碧段'],['0286','嘎拉谷籟段'],['0287','古拉芙蘭段'],['0288','大芙峨段'],['0289','報霧谷段'],['0290','德麻利瓦利瓦段'],['0295','瓦拉告段'],['0296','督阿哇鳴段'],['0297','答呢地段'],['0299','督嘎薩尼蘭段'],['1300','督阿哇那斯段'],['1301','撒個薩個段']],
+  '27': [['0230','霧台段'],['0231','佳暮段'],['0232','阿禮段'],['0233','去怒段'],['0234','好茶段'],['0235','大武段'],['0257','賀山段'],['0258','倫原段'],['0259','一場段'],['0260','歡喜段'],['0261','邊捕段'],['0262','大捕段'],['0263','魯南段'],['0264','拉夏段'],['0265','知山段'],['0266','境界段'],['0267','喬國段'],['0268','拉次段'],['1307','巴拉茲段'],['1308','烏朱魯段'],['1314','阿巴斯段'],['1316','阿魯啊呢段'],['1318','巴拉鳴紮呢段'],['1320','搭巴魯拉魯拉呢段']],
+  '28': [['0358','瑪家段'],['0359','北葉段'],['0360','涼山段'],['0361','筏灣段'],['0362','佳義段'],['0363','永樂段'],['0483','八大源段'],['0484','以馬翁段'],['0485','勒娃瞪段'],['0486','都達達樂段']],
+  '29': [['0364','泰武段'],['0365','萬安段'],['0366','佳平段'],['0367','平和段'],['0368','武潭段'],['0369','佳興段'],['0374','新平和段'],['0487','代竹瓦竹瓦段'],['0488','富給得段'],['0489','比悠瑪段'],['0494','達瓦力可遶段'],['0495','立瓦登段'],['0496','大拉瓦拉瓦段'],['0497','西阿路段'],['0498','代柱瓦段'],['0499','得布克段'],['1500','突阿拉印段'],['1501','熱棟段']],
+  '30': [['0370','來義段'],['0371','文樂段'],['0372','白鷺段'],['0373','丹林段'],['0375','望嘉段'],['0376','南和段'],['0377','古樓段'],['0378','義林段'],['0447','古社段'],['1502','武拉拉烏段'],['1503','巴楞蹦段'],['1504','拉佳段'],['1505','阿福隆灣段'],['1506','盧瑪盧麥段'],['1507','祈母土斯段'],['1508','吉沙巴帝亞段'],['1509','遮蔽亞蘭段'],['1551','新古樓段']],
+  '31': [['0380','力里段'],['0381','力南段'],['0382','歸崇段'],['0383','古華段'],['0384','七佳段'],['0386','士文段一小段'],['0812','烏福勒段'],['0818','大漢段'],['0829','久雅住段'],['0830','卡細优拉雅段'],['0831','補地滋段'],['0832','馬路法瑞段'],['0833','古哇巴樂段'],['0834','古拉拉奧段'],['0835','佳烏力拿瑪段'],['0882','佳樂喜段'],['0884','新七佳段'],['0887','春古段'],['0888','卡舒卡段']],
+  '32': [['0635','草埔段'],['0636','外獅段'],['0637','楓林段'],['0638','竹坑段'],['0639','丹路段'],['0640','獅子段'],['0641','新路段'],['0642','內文段'],['0643','南世段'],['0644','巴士墨段'],['0646','古道段'],['0647','鐵勁段'],['0810','南世段一小段'],['0811','雙流段'],['0813','拼得樂段'],['0814','茶卡啦段'],['0815','麻里巴段'],['0816','阿拉非段'],['0817','里龍西段'],['0836','麻优高段'],['0837','崩崁段'],['0838','阿优豐段'],['0839','霧里乙段'],['0840','佳歐夫段'],['0841','苦來油段'],['0842','耶美須段'],['0843','口坑段'],['0844','大牛坑段'],['0845','塔加寮段'],['0846','獅子頂段'],['0847','路知可段'],['0848','家新路段'],['0849','里龍段'],['0850','枋野段'],['0851','婆豬古段'],['0852','壽卡段'],['0853','內海段'],['0858','瀑麻漾段'],['0859','依泥日安段'],['0860','沙烏古段'],['0861','郎萊段'],['0879','竹林段'],['0880','凱地段'],['0885','就愛發揚段'],['0886','牡丹路段'],['0889','阿茲達斯段']],
+  '33': [['0648','四林段'],['0649','東源段'],['0650','牡丹段'],['0651','旭海段'],['0652','石門段'],['0653','高士段'],['0654','牡丹灣段'],['0655','四林格段'],['0656','高士佛段'],['0657','頂加芝來段'],['0658','八瑤段'],['0664','大梅段'],['0665','汝乃段'],['0666','里龍東段'],['0684','阿可里央段'],['0686','依卡烏蘇灣段'],['0704','發拉佳段'],['0705','奇黑呀段'],['0706','佳佛勒段'],['0707','佳路弓段'],['0708','佳拉烏忍段'],['0709','馬路里耐段'],['0710','卡勒的布段'],['0711','佳阿烏段'],['0712','卡茲達斯段'],['0713','奇發發烏段'],['0714','佳力普古段'],['0715','卡佳佳南段'],['0716','普力姆段'],['0717','馬查出可斯段'],['0718','奇卡佳段'],['0719','久路發尤段'],['0720','沙里央段'],['0747','牡林段'],['0748','瑪查蘭段']]
+};
+
+let currentDeclaredPrice = 0;
+
+const TIERS = [
+  {max:1,  rate:0.010, coef:0},
+  {max:6,  rate:0.015, coef:0.005},
+  {max:11, rate:0.025, coef:0.065},
+  {max:16, rate:0.035, coef:0.175},
+  {max:21, rate:0.045, coef:0.335},
+  {max:Infinity, rate:0.055, coef:0.545}
+];
+
+function onDistrictChange() {
+  const dv = document.getElementById('district').value;
+  const sel = document.getElementById('section');
+  sel.innerHTML = '<option value="">請選擇地段</option>';
+  if (dv && SECTIONS[dv]) {
+    SECTIONS[dv].forEach(function(s) {
+      const o = document.createElement('option');
+      o.value = s[0]; o.textContent = s[1];
+      sel.appendChild(o);
+    });
+  }
+  checkQueryBtn();
+  resetPrice();
+}
+
+function onSectionChange() { checkQueryBtn(); resetPrice(); }
+
+function onLandNoInput(el) {
+  el.value = el.value.replace(/[^0-9]/g, '').substring(0, 8);
+  checkQueryBtn();
+}
+
+function checkQueryBtn() {}
+
+function resetPrice() {
+  currentDeclaredPrice = 0;
+  document.getElementById('priceDisplay').textContent = '從官方系統查詢後填入';
+  document.getElementById('priceDisplay').classList.add('pending');
+  document.getElementById('tierDisplay').textContent = '--';
+  calcAll();
+}
+
+function onManualInput() {
+  const v = parseFloat(document.getElementById('manualDeclared').value) || 0;
+  currentDeclaredPrice = v;
+  const pd = document.getElementById('priceDisplay');
+  if (v > 0) {
+    pd.textContent = fmt(v) + ' 元/㎡';
+    pd.classList.remove('pending');
+    pd.style.fontSize = '18px';
+    pd.style.color = '#c17f24';
+  } else { resetPrice(); }
+  calcAll();
+}
+
+function convertAnnounced() {
+  const ap = parseFloat(document.getElementById('announcedInput').value) || 0;
+  const dp = ap * 0.8;
+  document.getElementById('convertedVal').textContent = dp > 0 ? fmt(dp) + ' 元' : '—';
+  if (dp > 0) {
+    document.getElementById('manualDeclared').value = dp;
+    onManualInput();
+  }
+}
+
+function calcProportional() {
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  const applyBtn = document.getElementById('applyBtn');
+  if (total > 0 && numer > 0 && denom > 0) {
+    const prop = total * numer / denom;
+    document.getElementById('proportionalResult').textContent = prop.toFixed(2);
+    applyBtn.disabled = false; applyBtn.style.opacity = '1';
+  } else {
+    document.getElementById('proportionalResult').textContent = '—';
+    applyBtn.disabled = true; applyBtn.style.opacity = '0.5';
+  }
+}
+
+function applyProportional() {
+  const total = parseFloat(document.getElementById('totalArea').value) || 0;
+  const numer = parseFloat(document.getElementById('shareNumer').value) || 0;
+  const denom = parseFloat(document.getElementById('shareDenom').value) || 0;
+  if (total > 0 && numer > 0 && denom > 0) {
+    document.getElementById('areaGeneral').value = (total * numer / denom).toFixed(2);
+    calcAll();
+  }
+}
+
+function calcAll() {
+  const dp = currentDeclaredPrice || parseFloat(document.getElementById('manualDeclared').value) || 0;
+  const types = ['General','Self','Industrial','Public'];
+  const rates = {General:null, Self:0.002, Industrial:0.010, Public:0.006};
+  let generalTaxBase = 0;
+  types.forEach(function(t) {
+    const area = parseFloat(document.getElementById('area' + t).value) || 0;
+    const taxBase = dp * area;
+    document.getElementById('cp' + t).textContent = fmt(taxBase);
+    let tax = 0;
+    if (t === 'General') { generalTaxBase = taxBase; tax = calcGeneral(taxBase); }
+    else { tax = taxBase * rates[t]; }
+    document.getElementById('tax' + t).textContent = fmt(Math.round(tax));
+  });
+  if (generalTaxBase > 0) {
+    const tier = getTier(generalTaxBase);
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
+    document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
+    document.getElementById('tierDisplay').classList.remove('pending');
+    for (let i=1;i<=6;i++) { const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }
+    document.getElementById('tierWrap').style.display = 'block';
+  } else {
+    document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
+    document.getElementById('tierDisplay').textContent = '--';
+    document.getElementById('tierDisplay').classList.add('pending');
+  }
+}
+
+function getTier(taxBase) {
+  const multiple = taxBase / T;
+  let level = 1;
+  if (multiple <= 1) level=1;
+  else if (multiple <= 6) level=2;
+  else if (multiple <= 11) level=3;
+  else if (multiple <= 16) level=4;
+  else if (multiple <= 21) level=5;
+  else level=6;
+  return {level, rate:TIERS[level-1].rate, coef:TIERS[level-1].coef};
+}
+
+function calcGeneral(taxBase) {
+  if (taxBase <= 0) return 0;
+  const t = getTier(taxBase);
+  return Math.max(0, taxBase * t.rate - T * t.coef);
+}
+
+function buildTierTable() {
+  const ordinals = ['一','二','三','四','五','六'];
+  const rows = [
+    [1,0,T,0.010,0],[2,T+1,T*6,0.015,T*0.005],[3,T*6+1,T*11,0.025,T*0.065],
+    [4,T*11+1,T*16,0.035,T*0.175],[5,T*16+1,T*21,0.045,T*0.335],[6,T*21+1,null,0.055,T*0.545]
+  ];
+  document.getElementById('tierBody').innerHTML = rows.map(function(r,i){
+    const range = r[2] ? fmt(r[1])+ ' ~ '+fmt(r[2]) : fmt(r[1])+' 以上';
+    return '<tr id="tr-'+(i+1)+'"><td>第'+ordinals[i]+'級</td><td>'+range+'</td><td>'+(r[3]*1000).toFixed(0)+'‰</td><td>'+fmt(r[4])+'</td></tr>';
+  }).join('');
+}
+
+function clearAll() {
+  ['areaGeneral','areaSelf','areaIndustrial','areaPublic','manualDeclared','announcedInput','totalArea','shareNumer','shareDenom','landNo'].forEach(id=>{document.getElementById(id).value=''});
+  document.getElementById('convertedVal').textContent = '—';
+  document.getElementById('proportionalResult').textContent = '—';
+  document.getElementById('applyBtn').disabled = true;
+  document.getElementById('applyBtn').style.opacity = '0.5';
+  document.getElementById('district').value = '';
+  document.getElementById('section').innerHTML = '<option value="">請先選擇行政區</option>';
+  currentDeclaredPrice = 0;
+  resetPrice();
+  ['cpGeneral','cpSelf','cpIndustrial','cpPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  ['taxGeneral','taxSelf','taxIndustrial','taxPublic'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('tierWrap').style.display='none';
+}
+
+function fmt(n) {
+  if (!n && n!==0) return '—';
+  return Math.round(n).toLocaleString('zh-TW');
+}
+
+buildTierTable();
+
+</script>
+
+<section style="max-width:720px;margin:0 auto 40px;padding:0 16px">
+  <div style="background:#f5f5f7;border-radius:14px;padding:20px">
+    <div style="font-size:11px;font-weight:700;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="land-value-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">全台地價稅試算 →</a>
+      <a href="taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">台北市地價稅試算 →</a>
+      <a href="new-taipei-land-value-tax.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">新北市地價稅試算 →</a>
+      <a href="land-tax-calculator.html" style="font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:9px 16px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
+    </div>
+  </div>
+</section>
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
