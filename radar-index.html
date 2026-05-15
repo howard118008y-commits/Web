@@ -53,17 +53,64 @@ nav .nav-logo span{color:var(--gold)!important}
 }
 
 /* ═══════════════════════════════════
-   SCI-FI HERO
+   3D SCI-FI HERO
 ═══════════════════════════════════ */
 .hero{
   position:relative;overflow:hidden;
-  padding:56px 0 64px;
+  padding:64px 0 80px;
   margin-bottom:60px;
   border-bottom:1px solid var(--line);
   text-align:center;
 }
 
-/* 掃描線 */
+/* ── 透視格線地板 ── */
+.hero-floor{
+  position:absolute;
+  bottom:0;left:0;right:0;height:52%;
+  overflow:hidden;pointer-events:none;z-index:0;
+}
+.hero-floor::before{
+  content:"";
+  position:absolute;
+  top:-90%;left:-40%;right:-40%;bottom:0;
+  background-image:
+    linear-gradient(rgba(6,182,212,0.22) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(6,182,212,0.12) 1px,transparent 1px);
+  background-size:100px 60px;
+  transform:perspective(260px) rotateX(68deg);
+  transform-origin:center bottom;
+  animation:gridPulse 5s ease-in-out infinite;
+}
+.hero-floor::after{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,var(--bg-deep) 0%,transparent 45%),
+    linear-gradient(to top,rgba(10,14,26,0.9) 0%,transparent 35%);
+}
+@keyframes gridPulse{
+  0%,100%{opacity:0.65}
+  50%{opacity:1}
+}
+
+/* ── 浮空光暈 ── */
+.hero-orb{
+  position:absolute;
+  top:18%;left:50%;transform:translateX(-50%);
+  width:600px;height:220px;border-radius:50%;
+  background:radial-gradient(ellipse,
+    rgba(201,169,97,0.07) 0%,
+    rgba(6,182,212,0.03) 55%,
+    transparent 72%);
+  pointer-events:none;z-index:1;
+  animation:orbPulse 7s ease-in-out infinite;
+}
+@keyframes orbPulse{
+  0%,100%{transform:translateX(-50%) scale(1);opacity:0.7}
+  50%{transform:translateX(-50%) scale(1.12);opacity:1}
+}
+
+/* ── 掃描線 ── */
 .hero-scan{
   position:absolute;left:0;right:0;height:1px;
   background:linear-gradient(90deg,
@@ -75,7 +122,7 @@ nav .nav-logo span{color:var(--gold)!important}
     rgba(6,182,212,0.0) 90%,
     transparent 100%);
   animation:heroScan 5s linear infinite;
-  pointer-events:none;z-index:2;
+  pointer-events:none;z-index:3;
 }
 @keyframes heroScan{
   0%{top:0;opacity:0}
@@ -84,13 +131,13 @@ nav .nav-logo span{color:var(--gold)!important}
   100%{top:100%;opacity:0}
 }
 
-/* 系統標籤列 */
+/* ── 系統標籤列 ── */
 .hero-sys{
   display:flex;align-items:center;justify-content:center;
   gap:12px;margin-bottom:32px;
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;letter-spacing:0.32em;color:var(--gold);
-  text-transform:uppercase;
+  text-transform:uppercase;position:relative;z-index:2;
 }
 .sys-dot{
   width:4px;height:4px;border-radius:50%;
@@ -104,60 +151,86 @@ nav .nav-logo span{color:var(--gold)!important}
   50%{opacity:1;transform:scale(1.4)}
 }
 
-/* 主標題框架 */
+/* ── 3D 主標題框架 ── */
 .hero-frame{
   display:inline-block;
-  position:relative;
-  padding:20px 44px 18px;
-  margin-bottom:16px;
+  position:relative;z-index:2;
+  padding:24px 52px 22px;
+  margin-bottom:20px;
+  background:rgba(10,14,26,0.35);
+  backdrop-filter:blur(6px);
+  /* 3D 深度陰影：多層向右下偏移 */
+  box-shadow:
+    3px 3px 0 rgba(201,169,97,0.14),
+    6px 6px 0 rgba(201,169,97,0.08),
+    10px 10px 0 rgba(201,169,97,0.04),
+    14px 14px 0 rgba(201,169,97,0.02),
+    0 24px 60px rgba(0,0,0,0.75),
+    0 0 40px rgba(201,169,97,0.06);
+  transform:perspective(1400px) rotateX(3deg);
 }
 /* 四角 bracket */
 .hero-frame::before{
   content:"";position:absolute;top:0;left:0;
-  width:20px;height:20px;
-  border-top:2px solid rgba(201,169,97,0.65);
-  border-left:2px solid rgba(201,169,97,0.65);
+  width:22px;height:22px;
+  border-top:2px solid rgba(201,169,97,0.8);
+  border-left:2px solid rgba(201,169,97,0.8);
 }
 .hero-frame::after{
   content:"";position:absolute;bottom:0;right:0;
-  width:20px;height:20px;
-  border-bottom:2px solid rgba(201,169,97,0.65);
-  border-right:2px solid rgba(201,169,97,0.65);
+  width:22px;height:22px;
+  border-bottom:2px solid rgba(201,169,97,0.8);
+  border-right:2px solid rgba(201,169,97,0.8);
 }
 .frame-tr{
   position:absolute;top:0;right:0;
-  width:20px;height:20px;
-  border-top:2px solid rgba(201,169,97,0.65);
-  border-right:2px solid rgba(201,169,97,0.65);
+  width:22px;height:22px;
+  border-top:2px solid rgba(201,169,97,0.8);
+  border-right:2px solid rgba(201,169,97,0.8);
 }
 .frame-bl{
   position:absolute;bottom:0;left:0;
-  width:20px;height:20px;
-  border-bottom:2px solid rgba(201,169,97,0.65);
-  border-left:2px solid rgba(201,169,97,0.65);
-}
-.hero-title{
-  font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:44px;color:var(--ink);letter-spacing:0.14em;
-  line-height:1.2;
-  text-shadow:
-    0 0 24px rgba(201,169,97,0.35),
-    0 0 60px rgba(201,169,97,0.12),
-    0 2px 4px rgba(0,0,0,0.5);
+  width:22px;height:22px;
+  border-bottom:2px solid rgba(201,169,97,0.8);
+  border-left:2px solid rgba(201,169,97,0.8);
 }
 
-/* 英文副標 */
+/* ── 3D 立體文字 ── */
+.hero-title{
+  font-family:"Noto Serif TC",serif;font-weight:900;
+  font-size:52px;color:#F2ECD8;letter-spacing:0.13em;
+  line-height:1.2;
+  /* 對角線多層陰影 → 3D 擠壓效果 */
+  text-shadow:
+    1px 2px 0 rgba(190,152,65,0.95),
+    2px 4px 0 rgba(172,136,48,0.88),
+    3px 6px 0 rgba(152,116,30,0.80),
+    4px 8px 0 rgba(132,96,12,0.72),
+    5px 10px 0 rgba(112,76,0,0.64),
+    6px 12px 0 rgba(92,56,0,0.55),
+    7px 14px 20px rgba(0,0,0,0.85),
+    0 0 50px rgba(201,169,97,0.22),
+    0 0 100px rgba(201,169,97,0.08);
+}
+
+/* ── 英文副標 ── */
 .hero-en{
   font-family:"IBM Plex Mono",monospace;font-weight:400;
   font-size:11px;letter-spacing:0.35em;
   color:var(--cyan);opacity:0.8;
-  margin-bottom:40px;
+  margin-bottom:44px;position:relative;z-index:2;
 }
 
-/* 數據列 */
+/* ── 3D 數據面板 ── */
 .hero-metrics{
   display:inline-flex;align-items:stretch;
-  margin-bottom:36px;
+  margin-bottom:36px;position:relative;z-index:2;
+  transform:perspective(700px) rotateX(12deg) translateY(-4px);
+  transform-origin:top center;
+  box-shadow:
+    0 24px 48px rgba(0,0,0,0.6),
+    0 8px 0 rgba(6,182,212,0.04),
+    0 0 0 1px rgba(201,169,97,0.08);
   border:1px solid var(--line);
 }
 .hero-metric{
@@ -370,6 +443,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
   <!-- ── SCI-FI HERO ── -->
   <div class="hero">
+    <div class="hero-floor"></div>
+    <div class="hero-orb"></div>
     <div class="hero-scan"></div>
 
     <div class="hero-sys">
