@@ -16,7 +16,7 @@
   --green: #5FBA7D; --yellow: #E5C77F; --orange: #E89348; --red: #D45A5A; --blue: #6BA8C9; --purple: #9B8AC4;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg-deep); color: var(--ink); font-family: "Noto Sans TC", sans-serif; font-weight: 400; font-size: 16px; min-height: 100vh; overflow-x: hidden; }
+body { background: var(--bg-deep); color: var(--ink); font-family: "Noto Sans TC", sans-serif; font-weight: 400; font-size: 16px; min-height: 100vh; overflow-x: hidden; padding-top: 48px; }
 body::before { content: ""; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.04) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(107, 168, 201, 0.03) 0%, transparent 40%); pointer-events: none; z-index: 0; }
 body::after { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(201, 169, 97, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 97, 0.02) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; z-index: 0; }
 .container { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 36px 44px; }
@@ -77,9 +77,34 @@ body::after { content: ""; position: fixed; inset: 0; background-image: linear-g
 .chart-insight .down-key { color: var(--green); font-weight: 500; }
 @media (max-width: 1024px) { .container { padding: 28px 24px; } .indicator-top { grid-template-columns: 1fr; gap: 28px; text-align: center; } .indicator-header-block { text-align: center; } .context-grid { grid-template-columns: repeat(2, 1fr); } .indicator-value { font-size: 56px; } }
 @media (max-width: 600px) { .indicator { padding: 32px 24px; } .indicator-value { font-size: 48px; } .context-grid { grid-template-columns: 1fr; } }
+/* nav overrides for dark bg */
+nav{background:rgba(10,14,26,0.95)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important;backdrop-filter:blur(12px)}
+nav .nav-logo span{color:var(--gold)!important}
+.nav-links a{color:var(--ink-mid)!important;opacity:1!important}
+.nav-links a:hover{color:var(--ink)!important}
+.nav-cta{background:var(--gold)!important;color:#0A0E1A!important}
+.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important}
+.cx-burger span{background:var(--ink)!important}
+.cx-mobile-menu{background:#0D1322!important}
+.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(201,169,97,0.12)!important}
 </style>
 </head>
 <body>
+<div id="nav-placeholder"></div>
+<script>
+fetch('nav.html').then(r=>r.text()).then(h=>{
+  var el=document.getElementById('nav-placeholder');
+  el.innerHTML=h;
+  el.querySelectorAll('script').forEach(function(orig){
+    var s=document.createElement('script');
+    s.textContent=orig.textContent;
+    document.head.appendChild(s);
+  });
+  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
+    .forEach(function(a){a.classList.remove('active');});
+});
+</script>
+
 <div class="container">
   <div class="batch-header">
     <div class="batch-title">第五批指標</div>

@@ -39,6 +39,7 @@ body {
   font-size: 16px;
   min-height: 100vh;
   overflow-x: hidden;
+  padding-top: 48px;
 }
 
 body::before {
@@ -518,9 +519,34 @@ body::after {
   .indicator-value { font-size: 48px; }
   .context-grid { grid-template-columns: 1fr; }
 }
+/* nav overrides for dark bg */
+nav{background:rgba(10,14,26,0.95)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important;backdrop-filter:blur(12px)}
+nav .nav-logo span{color:var(--gold)!important}
+.nav-links a{color:var(--ink-mid)!important;opacity:1!important}
+.nav-links a:hover{color:var(--ink)!important}
+.nav-cta{background:var(--gold)!important;color:#0A0E1A!important}
+.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important}
+.cx-burger span{background:var(--ink)!important}
+.cx-mobile-menu{background:#0D1322!important}
+.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(201,169,97,0.12)!important}
 </style>
 </head>
 <body>
+<div id="nav-placeholder"></div>
+<script>
+fetch('nav.html').then(r=>r.text()).then(h=>{
+  var el=document.getElementById('nav-placeholder');
+  el.innerHTML=h;
+  el.querySelectorAll('script').forEach(function(orig){
+    var s=document.createElement('script');
+    s.textContent=orig.textContent;
+    document.head.appendChild(s);
+  });
+  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
+    .forEach(function(a){a.classList.remove('active');});
+});
+</script>
+
 
 <div class="container">
 
