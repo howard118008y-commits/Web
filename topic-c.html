@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>風險預警 C系列 · 鋮馨房貸壓力雷達</title>
+<link rel="icon" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --bg-deep:#0B0818;--bg-panel:#120E22;--bg-elev:#1A1335;
+  --line:rgba(201,169,97,0.13);
+  --gold:#C9A961;--gold-bright:#E5C77F;--gold-dim:#8A7340;
+  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;
+  --accent:#D45A5A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle at 12% 40%,rgba(124,58,237,0.15) 0%,transparent 50%),
+    radial-gradient(circle at 80% 18%,rgba(212,90,90,0.08) 0%,transparent 45%);}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(212,90,90,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,58,237,0.03) 1px,transparent 1px);
+  background-size:52px 52px;}
+nav{background:rgba(11,8,24,0.95)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  height:48px!important;padding:0 24px!important;z-index:1000!important;
+  box-sizing:border-box!important;backdrop-filter:blur(12px)!important;}
+.nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important}
+.nav-logo span{color:var(--gold)!important;font-size:15px!important;font-weight:500!important}
+.nav-center{display:flex!important;align-items:center!important;gap:24px!important}
+.nav-links{display:flex!important;align-items:center!important}
+.nav-links a{color:var(--ink-mid)!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;transition:color .2s!important}
+.nav-links a:hover{color:var(--ink)!important}
+.nav-cta{background:var(--gold)!important;color:#0A0E1A!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:700!important;text-decoration:none!important;white-space:nowrap!important}
+.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important}
+@media(max-width:768px){.nav-center,.nav-radar-btn{display:none!important}}
+.page-wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:60px 32px 100px}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:48px}
+.breadcrumb a{color:var(--ink-dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb-sep{opacity:0.4}
+.topic-hero{margin-bottom:64px;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.topic-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.4em;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.topic-code::before{content:"";width:32px;height:1px;background:var(--accent)}
+.topic-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:48px;letter-spacing:0.1em;color:#fff;line-height:1.15;margin-bottom:10px;text-shadow:0 0 40px rgba(212,90,90,0.3)}
+.topic-en{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.3em;color:var(--accent);opacity:0.7;margin-bottom:28px}
+.topic-desc{font-size:15px;line-height:1.9;color:var(--ink-mid);max-width:680px;letter-spacing:0.04em}
+.topic-stats{display:flex;gap:0;margin-top:36px;border:1px solid rgba(212,90,90,0.22);border-radius:10px;overflow:hidden;background:rgba(212,90,90,0.05);width:fit-content}
+.topic-stat{padding:14px 30px;text-align:center;border-right:1px solid rgba(212,90,90,0.18)}
+.topic-stat:last-child{border-right:0}
+.stat-num{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:22px;color:var(--accent);text-shadow:0 0 14px rgba(212,90,90,0.5);margin-bottom:4px}
+.stat-label{font-size:11px;color:var(--ink-dim);letter-spacing:0.15em}
+.section-heading{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.section-heading-line{flex:1;height:1px;background:var(--line)}
+.section-heading-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
+.indicator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:64px}
+.ind-card{background:var(--bg-panel);border:1px solid rgba(201,169,97,0.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:24px 22px 22px;transition:background .2s}
+.ind-card:hover{background:var(--bg-elev)}
+.ind-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.3em;color:var(--accent);margin-bottom:10px;opacity:0.85}
+.ind-name{font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;color:var(--ink);letter-spacing:0.08em;margin-bottom:10px}
+.ind-desc{font-size:13px;line-height:1.85;color:var(--ink-dim);letter-spacing:0.03em}
+.topic-cta{text-align:center;padding:48px;background:var(--bg-panel);border:1px solid rgba(201,169,97,0.12);border-radius:12px}
+.cta-label{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.4em;color:var(--ink-dim);margin-bottom:16px;text-transform:uppercase}
+.cta-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;color:var(--ink);letter-spacing:0.1em;margin-bottom:24px}
+.cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-block;text-decoration:none;padding:12px 26px;border-radius:8px;font-size:14px;font-weight:700;letter-spacing:0.05em;transition:filter .2s}
+.cta-btn-primary{background:var(--accent);color:#fff}
+.cta-btn-primary:hover{filter:brightness(1.15)}
+.cta-btn-outline{border:1px solid rgba(201,169,97,0.32);color:var(--ink-mid)}
+.cta-btn-outline:hover{border-color:var(--gold);color:var(--ink)}
+@media(max-width:768px){
+  .page-wrap{padding:48px 20px 80px}
+  .topic-title{font-size:32px}
+  .indicator-grid{grid-template-columns:1fr}
+  .topic-stats{width:100%}.topic-stat{flex:1;padding:12px 14px}
+  .stat-num{font-size:18px}
+  .cta-buttons{flex-direction:column;align-items:center}
+  .topic-cta{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<script>
+fetch('nav.html').then(r=>r.text()).then(h=>{
+  var el=document.getElementById('nav-placeholder');
+  el.innerHTML=h;
+  el.querySelectorAll('script').forEach(function(orig){
+    var s=document.createElement('script');s.textContent=orig.textContent;document.head.appendChild(s);
+  });
+  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
+    .forEach(function(a){a.classList.remove('active');});
+});
+</script>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="radar-index.html">承辦知識庫</a>
+    <span class="breadcrumb-sep"> › </span>
+    <span>風險預警</span>
+  </div>
+
+  <div class="topic-hero">
+    <div class="topic-code">SERIES C · 風險預警 · RISK WARNING</div>
+    <div class="topic-title">風險預警</div>
+    <div class="topic-en">RISK WARNING · FINANCIAL STRESS · BUBBLE INDICATORS</div>
+    <div class="topic-desc">
+      用於識別房市潛在壓力與泡沫風險的預警指標群。這些指標大多具有領先性，能在市場正式崩跌前發出早期警示。對承辦人員而言，掌握這些訊號有助於在高風險時期提前調整授信策略。
+    </div>
+    <div class="topic-stats">
+      <div class="topic-stat"><div class="stat-num">4</div><div class="stat-label">監測指標</div></div>
+      <div class="topic-stat"><div class="stat-num">10Y</div><div class="stat-label">歷史走勢</div></div>
+      <div class="topic-stat"><div class="stat-num">C</div><div class="stat-label">指標系列</div></div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-heading-line"></div>
+    <div class="section-heading-text">監測指標 · INDICATORS</div>
+    <div class="section-heading-line"></div>
+  </div>
+
+  <div class="indicator-grid">
+
+    <div class="ind-card">
+      <div class="ind-code">C01 · C 系列</div>
+      <div class="ind-name">房貸逾放比</div>
+      <div class="ind-desc">銀行房貸逾期放款餘額占房貸總餘額的比率，是金融體系承受房市壓力的核心警報指標。逾放比持續攀升代表借款人還款能力惡化，歷史上每次金融危機前夕，此指標均會顯著上升。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">C02 · C 系列</div>
+      <div class="ind-name">房價所得比</div>
+      <div class="ind-desc">房屋總價相對於家庭年所得的倍數，是國際通用的居住負擔能力指標。台北市長期維持 15 倍以上，遠超過國際警戒值（5–6 倍），反映嚴重的資產泡沫化程度與投機性持有需求。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">C03 · C 系列</div>
+      <div class="ind-name">建照核發棟數</div>
+      <div class="ind-desc">政府每季核發新建物建造執照的數量，代表開發商對未來市場的信心與供給端預期。建照大量核發通常領先 2–4 年的實際供給增加，是評估未來供需平衡的重要前瞻指標。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">C04 · C 系列</div>
+      <div class="ind-name">建照 vs 使照差距</div>
+      <div class="ind-desc">建造執照與使用執照核發數量的累積差距，代表已動工但尚未完工的建案規模。差距持續擴大可能代表資金鏈問題或市場景氣驟變，是評估爛尾樓風險與建商財務壓力的關鍵指標。</div>
+    </div>
+
+  </div>
+
+  <div class="topic-cta">
+    <div class="cta-label">查看圖表 · VIEW CHARTS</div>
+    <div class="cta-title">開啟 C 系列雷達儀表板</div>
+    <div class="cta-buttons">
+      <a href="cx_batch4_C01-C04.html" class="cta-btn cta-btn-primary">C01–C04 完整版</a>
+      <a href="radar-index.html" class="cta-btn cta-btn-outline">← 返回知識庫目錄</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

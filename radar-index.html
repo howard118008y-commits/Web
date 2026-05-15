@@ -179,6 +179,7 @@ nav .nav-logo span{color:var(--gold)!important}
   border:1px solid rgba(124,58,237,0.28);
   padding:5px 13px;border-radius:3px;
   transition:border-color .2s,color .2s,background .2s;
+  text-decoration:none;display:inline-block;
 }
 .htag::before{content:"◆ ";font-size:6px;color:var(--violet);vertical-align:middle}
 .htag:hover{border-color:rgba(224,64,251,0.55);color:var(--pink);background:rgba(124,58,237,0.09)}
@@ -402,10 +403,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
 
       <div class="hero-tags">
-        <span class="htag">房貸金融</span>
-        <span class="htag">交易量價</span>
-        <span class="htag">風險預警</span>
-        <span class="htag">國際資金</span>
+        <a href="topic-a.html" class="htag">房貸金融</a>
+        <a href="topic-b.html" class="htag">交易量價</a>
+        <a href="topic-c.html" class="htag">風險預警</a>
+        <a href="topic-d.html" class="htag">國際資金</a>
       </div>
     </div>
 

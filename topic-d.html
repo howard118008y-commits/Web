@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國際資金 D系列 · 鋮馨房貸壓力雷達</title>
+<link rel="icon" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --bg-deep:#0B0818;--bg-panel:#120E22;--bg-elev:#1A1335;
+  --line:rgba(201,169,97,0.13);
+  --gold:#C9A961;--gold-bright:#E5C77F;--gold-dim:#8A7340;
+  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;
+  --accent:#9B8AC4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle at 12% 40%,rgba(155,138,196,0.15) 0%,transparent 50%),
+    radial-gradient(circle at 80% 18%,rgba(124,58,237,0.10) 0%,transparent 45%);}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(155,138,196,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(155,138,196,0.03) 1px,transparent 1px);
+  background-size:52px 52px;}
+nav{background:rgba(11,8,24,0.95)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  height:48px!important;padding:0 24px!important;z-index:1000!important;
+  box-sizing:border-box!important;backdrop-filter:blur(12px)!important;}
+.nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important}
+.nav-logo span{color:var(--gold)!important;font-size:15px!important;font-weight:500!important}
+.nav-center{display:flex!important;align-items:center!important;gap:24px!important}
+.nav-links{display:flex!important;align-items:center!important}
+.nav-links a{color:var(--ink-mid)!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;transition:color .2s!important}
+.nav-links a:hover{color:var(--ink)!important}
+.nav-cta{background:var(--gold)!important;color:#0A0E1A!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:700!important;text-decoration:none!important;white-space:nowrap!important}
+.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important}
+@media(max-width:768px){.nav-center,.nav-radar-btn{display:none!important}}
+.page-wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:60px 32px 100px}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:48px}
+.breadcrumb a{color:var(--ink-dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb-sep{opacity:0.4}
+.topic-hero{margin-bottom:64px;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.topic-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.4em;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.topic-code::before{content:"";width:32px;height:1px;background:var(--accent)}
+.topic-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:48px;letter-spacing:0.1em;color:#fff;line-height:1.15;margin-bottom:10px;text-shadow:0 0 40px rgba(155,138,196,0.35)}
+.topic-en{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.3em;color:var(--accent);opacity:0.7;margin-bottom:28px}
+.topic-desc{font-size:15px;line-height:1.9;color:var(--ink-mid);max-width:680px;letter-spacing:0.04em}
+.topic-stats{display:flex;gap:0;margin-top:36px;border:1px solid rgba(155,138,196,0.25);border-radius:10px;overflow:hidden;background:rgba(155,138,196,0.05);width:fit-content}
+.topic-stat{padding:14px 30px;text-align:center;border-right:1px solid rgba(155,138,196,0.18)}
+.topic-stat:last-child{border-right:0}
+.stat-num{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:22px;color:var(--accent);text-shadow:0 0 14px rgba(155,138,196,0.5);margin-bottom:4px}
+.stat-label{font-size:11px;color:var(--ink-dim);letter-spacing:0.15em}
+.section-heading{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.section-heading-line{flex:1;height:1px;background:var(--line)}
+.section-heading-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
+.indicator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:64px}
+.ind-card{background:var(--bg-panel);border:1px solid rgba(201,169,97,0.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:24px 22px 22px;transition:background .2s}
+.ind-card:hover{background:var(--bg-elev)}
+.ind-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.3em;color:var(--accent);margin-bottom:10px;opacity:0.85}
+.ind-name{font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;color:var(--ink);letter-spacing:0.08em;margin-bottom:10px}
+.ind-desc{font-size:13px;line-height:1.85;color:var(--ink-dim);letter-spacing:0.03em}
+.topic-cta{text-align:center;padding:48px;background:var(--bg-panel);border:1px solid rgba(201,169,97,0.12);border-radius:12px}
+.cta-label{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.4em;color:var(--ink-dim);margin-bottom:16px;text-transform:uppercase}
+.cta-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;color:var(--ink);letter-spacing:0.1em;margin-bottom:24px}
+.cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-block;text-decoration:none;padding:12px 26px;border-radius:8px;font-size:14px;font-weight:700;letter-spacing:0.05em;transition:filter .2s}
+.cta-btn-primary{background:var(--accent);color:#fff}
+.cta-btn-primary:hover{filter:brightness(1.15)}
+.cta-btn-outline{border:1px solid rgba(201,169,97,0.32);color:var(--ink-mid)}
+.cta-btn-outline:hover{border-color:var(--gold);color:var(--ink)}
+@media(max-width:768px){
+  .page-wrap{padding:48px 20px 80px}
+  .topic-title{font-size:32px}
+  .indicator-grid{grid-template-columns:1fr}
+  .topic-stats{width:100%}.topic-stat{flex:1;padding:12px 14px}
+  .stat-num{font-size:18px}
+  .cta-buttons{flex-direction:column;align-items:center}
+  .topic-cta{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<script>
+fetch('nav.html').then(r=>r.text()).then(h=>{
+  var el=document.getElementById('nav-placeholder');
+  el.innerHTML=h;
+  el.querySelectorAll('script').forEach(function(orig){
+    var s=document.createElement('script');s.textContent=orig.textContent;document.head.appendChild(s);
+  });
+  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
+    .forEach(function(a){a.classList.remove('active');});
+});
+</script>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="radar-index.html">承辦知識庫</a>
+    <span class="breadcrumb-sep"> › </span>
+    <span>國際資金</span>
+  </div>
+
+  <div class="topic-hero">
+    <div class="topic-code">SERIES D · 國際資金 · GLOBAL CAPITAL</div>
+    <div class="topic-title">國際資金</div>
+    <div class="topic-en">GLOBAL CAPITAL · MONETARY FLOW · MACRO SIGNALS</div>
+    <div class="topic-desc">
+      追蹤影響台灣房市的國際總體經濟訊號，包含美國利率政策、匯率動態、股市財富效應及通貨膨脹走向。台灣是高度開放的小型經濟體，美聯儲的一舉一動都可能透過資金流動對本地房市產生深遠影響。
+    </div>
+    <div class="topic-stats">
+      <div class="topic-stat"><div class="stat-num">4</div><div class="stat-label">監測指標</div></div>
+      <div class="topic-stat"><div class="stat-num">10Y</div><div class="stat-label">歷史走勢</div></div>
+      <div class="topic-stat"><div class="stat-num">D</div><div class="stat-label">指標系列</div></div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-heading-line"></div>
+    <div class="section-heading-text">監測指標 · INDICATORS</div>
+    <div class="section-heading-line"></div>
+  </div>
+
+  <div class="indicator-grid">
+
+    <div class="ind-card">
+      <div class="ind-code">D01 · D 系列</div>
+      <div class="ind-name">美十年期公債殖利率</div>
+      <div class="ind-desc">全球風險資產定價的基準利率，殖利率上升通常帶動全球房貸利率走高，壓抑購屋需求。2022–2023 年美債殖利率急速飆升至 5%，是台灣央行跟進升息、房市急速降溫的直接外部驅動因素。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">D02 · D 系列</div>
+      <div class="ind-name">美元台幣匯率</div>
+      <div class="ind-desc">台幣相對美元的匯率走勢，影響外資進出台灣房市的意願。台幣持續貶值時，以美元計價的外資購屋吸引力下降；台幣升值時，海外資金回流有助支撐資產價格，對豪宅市場影響尤為顯著。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">D03 · D 系列</div>
+      <div class="ind-name">台股加權指數</div>
+      <div class="ind-desc">台灣股市的財富效應與房市高度正相關。台股多頭行情帶來的資本利得，是台灣換屋潮與投資性購屋的重要動能。股市急速崩跌則往往先行壓縮購屋意願，是觀察房市短期轉折的輔助訊號。</div>
+    </div>
+
+    <div class="ind-card">
+      <div class="ind-code">D04 · D 系列</div>
+      <div class="ind-name">台灣 CPI 通膨指數</div>
+      <div class="ind-desc">台灣消費者物價指數年增率，反映實質通膨壓力。持續高通膨促使央行維持或升息立場，增加房貸成本；但同時也使部分資金轉向不動產避險，造成房市雙面效應，需結合其他指標綜合研判。</div>
+    </div>
+
+  </div>
+
+  <div class="topic-cta">
+    <div class="cta-label">查看圖表 · VIEW CHARTS</div>
+    <div class="cta-title">開啟 D 系列雷達儀表板</div>
+    <div class="cta-buttons">
+      <a href="cx_batch5_D01-D04.html" class="cta-btn cta-btn-primary">D01–D04 完整版</a>
+      <a href="radar-index.html" class="cta-btn cta-btn-outline">← 返回知識庫目錄</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
