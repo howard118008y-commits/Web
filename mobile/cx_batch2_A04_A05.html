@@ -70,8 +70,8 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
 /* ── 橫向滑動圖表 ── */
 .scroll-hint{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-dim);letter-spacing:0.15em;padding:6px 0 10px;opacity:0.7}
 .chart-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 4px}
-.chart-container{background:var(--bg-chart);border:1px solid var(--line-soft);padding:20px 20px 12px 72px;min-width:1200px}
-.chart-container svg{width:1200px;min-width:1200px;height:300px;display:block}
+.chart-container{background:var(--bg-chart);border:1px solid var(--line-soft);padding:10px 20px 8px 72px;min-width:1200px}
+.chart-container svg{width:1200px;min-width:1200px;height:160px;display:block}
 .chart-axis-info{display:flex;justify-content:space-between;margin-top:10px;padding:0 8px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-dim);letter-spacing:0.08em;min-width:1200px}
 
 /* ── 四格資訊（2×2）── */
@@ -143,7 +143,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
       <div class="scroll-hint">← 左右滑動查看完整走勢 →</div>
       <div class="chart-scroll-wrap">
         <div class="chart-container">
-          <svg viewBox="0 0 1200 320">
+          <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
             <defs>
               <linearGradient id="gradA04m" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#E89348" stop-opacity="0.25"/>
@@ -243,7 +243,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
       <div class="scroll-hint">← 左右滑動查看完整走勢 →</div>
       <div class="chart-scroll-wrap">
         <div class="chart-container">
-          <svg viewBox="0 0 1200 320">
+          <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
             <defs>
               <linearGradient id="gradA05m" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#E5C77F" stop-opacity="0.3"/>
