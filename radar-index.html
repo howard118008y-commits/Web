@@ -11,11 +11,12 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root {
-  --bg-deep:#0A0E1A;--bg-panel:#111726;--bg-elev:#161D30;
-  --line:rgba(201,169,97,0.15);--line-strong:rgba(201,169,97,0.35);
+  --bg-deep:#0B0818;--bg-panel:#120E22;--bg-elev:#1A1335;
+  --line:rgba(201,169,97,0.13);--line-strong:rgba(201,169,97,0.32);
   --gold:#C9A961;--gold-bright:#E5C77F;--gold-dim:#8A7340;
   --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;
   --cyan:#06B6D4;--orange:#E89348;--red:#D45A5A;--blue:#6BA8C9;--purple:#9B8AC4;
+  --violet:#7C3AED;--pink:#E040FB;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -27,15 +28,16 @@ body{
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
-    radial-gradient(circle at 20% 30%,rgba(201,169,97,0.04) 0%,transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(6,182,212,0.03) 0%,transparent 40%);
+    radial-gradient(circle at 15% 45%,rgba(124,58,237,0.20) 0%,transparent 52%),
+    radial-gradient(circle at 78% 12%,rgba(224,64,251,0.10) 0%,transparent 45%),
+    radial-gradient(circle at 55% 88%,rgba(6,182,212,0.06) 0%,transparent 40%);
 }
 body::after{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
-    linear-gradient(rgba(201,169,97,0.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,169,97,0.02) 1px,transparent 1px);
-  background-size:48px 48px;
+    linear-gradient(rgba(124,58,237,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,58,237,0.04) 1px,transparent 1px);
+  background-size:52px 52px;
 }
 
 nav{background:rgba(10,14,26,0.92)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important}
@@ -53,61 +55,32 @@ nav .nav-logo span{color:var(--gold)!important}
 }
 
 /* ═══════════════════════════════════
-   3D SCI-FI HERO
+   WAVE HERO
 ═══════════════════════════════════ */
 .hero{
   position:relative;overflow:hidden;
-  padding:64px 0 80px;
+  display:flex;align-items:center;gap:0;
+  min-height:500px;
+  padding:80px 0 100px;
   margin-bottom:60px;
   border-bottom:1px solid var(--line);
-  text-align:center;
 }
 
-/* ── 透視格線地板 ── */
-.hero-floor{
-  position:absolute;
-  bottom:0;left:0;right:0;height:52%;
-  overflow:hidden;pointer-events:none;z-index:0;
-}
-.hero-floor::before{
-  content:"";
-  position:absolute;
-  top:-90%;left:-40%;right:-40%;bottom:0;
-  background-image:
-    linear-gradient(rgba(6,182,212,0.22) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(6,182,212,0.12) 1px,transparent 1px);
-  background-size:100px 60px;
-  transform:perspective(260px) rotateX(68deg);
-  transform-origin:center bottom;
-  animation:gridPulse 5s ease-in-out infinite;
-}
-.hero-floor::after{
-  content:"";
-  position:absolute;inset:0;
-  background:
-    linear-gradient(to bottom,var(--bg-deep) 0%,transparent 45%),
-    linear-gradient(to top,rgba(10,14,26,0.9) 0%,transparent 35%);
-}
-@keyframes gridPulse{
-  0%,100%{opacity:0.65}
-  50%{opacity:1}
+/* Left content */
+.hero-left{
+  flex:0 0 440px;max-width:440px;
+  position:relative;z-index:2;
 }
 
-/* ── 浮空光暈 ── */
-.hero-orb{
-  position:absolute;
-  top:18%;left:50%;transform:translateX(-50%);
-  width:600px;height:220px;border-radius:50%;
-  background:radial-gradient(ellipse,
-    rgba(201,169,97,0.07) 0%,
-    rgba(6,182,212,0.03) 55%,
-    transparent 72%);
-  pointer-events:none;z-index:1;
-  animation:orbPulse 7s ease-in-out infinite;
+/* Right canvas */
+.hero-right{
+  flex:1;min-height:400px;
+  position:relative;
 }
-@keyframes orbPulse{
-  0%,100%{transform:translateX(-50%) scale(1);opacity:0.7}
-  50%{transform:translateX(-50%) scale(1.12);opacity:1}
+#hero-wave{
+  position:absolute;
+  inset:-30px -32px -30px -80px;
+  width:calc(100% + 112px);height:calc(100% + 60px);
 }
 
 /* ── 掃描線 ── */
@@ -115,159 +88,111 @@ nav .nav-logo span{color:var(--gold)!important}
   position:absolute;left:0;right:0;height:1px;
   background:linear-gradient(90deg,
     transparent 0%,
-    rgba(6,182,212,0.0) 10%,
-    rgba(6,182,212,0.5) 40%,
-    rgba(201,169,97,0.8) 50%,
-    rgba(6,182,212,0.5) 60%,
-    rgba(6,182,212,0.0) 90%,
+    rgba(124,58,237,0.0) 15%,
+    rgba(124,58,237,0.55) 35%,
+    rgba(224,64,251,0.9) 50%,
+    rgba(124,58,237,0.55) 65%,
+    rgba(124,58,237,0.0) 85%,
     transparent 100%);
-  animation:heroScan 5s linear infinite;
+  animation:heroScan 6s linear infinite;
   pointer-events:none;z-index:3;
 }
 @keyframes heroScan{
-  0%{top:0;opacity:0}
-  6%{opacity:1}
-  94%{opacity:1}
-  100%{top:100%;opacity:0}
+  0%{top:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{top:100%;opacity:0}
 }
 
 /* ── 系統標籤列 ── */
 .hero-sys{
-  display:flex;align-items:center;justify-content:center;
-  gap:12px;margin-bottom:32px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:24px;
   font-family:"IBM Plex Mono",monospace;
-  font-size:10px;letter-spacing:0.32em;color:var(--gold);
-  text-transform:uppercase;position:relative;z-index:2;
+  font-size:10px;letter-spacing:0.32em;
+  color:#A78BFA;text-transform:uppercase;
+  position:relative;z-index:2;
 }
 .sys-dot{
-  width:4px;height:4px;border-radius:50%;
-  background:var(--cyan);
+  width:5px;height:5px;border-radius:50%;
+  background:var(--violet);
+  box-shadow:0 0 7px rgba(124,58,237,0.9);
   animation:dotPulse 2s ease-in-out infinite;
 }
 .sys-dot:nth-child(3){animation-delay:.6s}
 .sys-dot:nth-child(5){animation-delay:1.2s}
 @keyframes dotPulse{
-  0%,100%{opacity:0.25;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.4)}
+  0%,100%{opacity:0.3;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.5)}
 }
 
-/* ── 3D 主標題框架 ── */
-.hero-frame{
-  display:inline-block;
-  position:relative;z-index:2;
-  padding:24px 52px 22px;
-  margin-bottom:20px;
-  background:rgba(10,14,26,0.35);
-  backdrop-filter:blur(6px);
-  /* 3D 深度陰影：多層向右下偏移 */
-  box-shadow:
-    3px 3px 0 rgba(201,169,97,0.14),
-    6px 6px 0 rgba(201,169,97,0.08),
-    10px 10px 0 rgba(201,169,97,0.04),
-    14px 14px 0 rgba(201,169,97,0.02),
-    0 24px 60px rgba(0,0,0,0.75),
-    0 0 40px rgba(201,169,97,0.06);
-  transform:perspective(1400px) rotateX(3deg);
-}
-/* 四角 bracket */
-.hero-frame::before{
-  content:"";position:absolute;top:0;left:0;
-  width:22px;height:22px;
-  border-top:2px solid rgba(201,169,97,0.8);
-  border-left:2px solid rgba(201,169,97,0.8);
-}
-.hero-frame::after{
-  content:"";position:absolute;bottom:0;right:0;
-  width:22px;height:22px;
-  border-bottom:2px solid rgba(201,169,97,0.8);
-  border-right:2px solid rgba(201,169,97,0.8);
-}
-.frame-tr{
-  position:absolute;top:0;right:0;
-  width:22px;height:22px;
-  border-top:2px solid rgba(201,169,97,0.8);
-  border-right:2px solid rgba(201,169,97,0.8);
-}
-.frame-bl{
-  position:absolute;bottom:0;left:0;
-  width:22px;height:22px;
-  border-bottom:2px solid rgba(201,169,97,0.8);
-  border-left:2px solid rgba(201,169,97,0.8);
-}
-
-/* ── 3D 立體文字 ── */
+/* ── 主標題 ── */
 .hero-title{
   font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:52px;color:#F2ECD8;letter-spacing:0.13em;
-  line-height:1.2;
-  /* 對角線多層陰影 → 3D 擠壓效果 */
+  font-size:54px;color:#fff;letter-spacing:0.10em;
+  line-height:1.15;margin-bottom:14px;
+  position:relative;z-index:2;
   text-shadow:
-    1px 2px 0 rgba(190,152,65,0.95),
-    2px 4px 0 rgba(172,136,48,0.88),
-    3px 6px 0 rgba(152,116,30,0.80),
-    4px 8px 0 rgba(132,96,12,0.72),
-    5px 10px 0 rgba(112,76,0,0.64),
-    6px 12px 0 rgba(92,56,0,0.55),
-    7px 14px 20px rgba(0,0,0,0.85),
-    0 0 50px rgba(201,169,97,0.22),
-    0 0 100px rgba(201,169,97,0.08);
+    0 0 40px rgba(124,58,237,0.55),
+    0 0 80px rgba(224,64,251,0.28),
+    0 2px 12px rgba(0,0,0,0.65);
 }
 
 /* ── 英文副標 ── */
 .hero-en{
-  font-family:"IBM Plex Mono",monospace;font-weight:400;
-  font-size:11px;letter-spacing:0.35em;
-  color:var(--cyan);opacity:0.8;
-  margin-bottom:44px;position:relative;z-index:2;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;letter-spacing:0.28em;
+  color:#A78BFA;opacity:0.75;
+  margin-bottom:38px;position:relative;z-index:2;
 }
 
-/* ── 3D 數據面板 ── */
+/* ── 數據面板 ── */
 .hero-metrics{
   display:inline-flex;align-items:stretch;
-  margin-bottom:36px;position:relative;z-index:2;
-  transform:perspective(700px) rotateX(12deg) translateY(-4px);
-  transform-origin:top center;
-  box-shadow:
-    0 24px 48px rgba(0,0,0,0.6),
-    0 8px 0 rgba(6,182,212,0.04),
-    0 0 0 1px rgba(201,169,97,0.08);
-  border:1px solid var(--line);
+  margin-bottom:32px;position:relative;z-index:2;
+  border:1px solid rgba(124,58,237,0.38);
+  border-radius:10px;overflow:hidden;
+  background:rgba(124,58,237,0.08);
+  backdrop-filter:blur(10px);
 }
 .hero-metric{
-  padding:18px 40px;text-align:center;
-  border-right:1px solid var(--line);
-  position:relative;
+  padding:16px 30px;text-align:center;
+  border-right:1px solid rgba(124,58,237,0.22);
 }
 .hero-metric:last-child{border-right:0}
-.hero-metric::before{
-  content:"";
-  position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(6,182,212,0.3),transparent);
-}
 .metric-num{
   font-family:"IBM Plex Mono",monospace;font-weight:500;
-  font-size:30px;letter-spacing:0.04em;
-  color:var(--gold-bright);line-height:1;margin-bottom:8px;
-  text-shadow:0 0 16px rgba(201,169,97,0.4);
+  font-size:28px;letter-spacing:0.04em;
+  color:var(--pink);line-height:1;margin-bottom:7px;
+  text-shadow:0 0 18px rgba(224,64,251,0.65);
 }
 .metric-label{
-  font-family:"Noto Serif TC",serif;font-size:11px;
-  color:var(--ink-dim);letter-spacing:0.22em;
+  font-family:"Noto Sans TC",sans-serif;font-size:11px;
+  color:#A78BFA;letter-spacing:0.18em;
 }
 
-/* 標籤群 */
+/* ── 標籤群 ── */
 .hero-tags{
-  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  display:flex;flex-wrap:wrap;gap:8px;
+  position:relative;z-index:2;
 }
 .htag{
   font-family:"IBM Plex Mono",monospace;font-size:10px;
-  letter-spacing:0.2em;color:var(--ink-mid);
-  border:1px solid rgba(201,169,97,0.18);
-  padding:5px 14px;
-  transition:border-color .2s,color .2s;
+  letter-spacing:0.18em;color:#A78BFA;
+  border:1px solid rgba(124,58,237,0.28);
+  padding:5px 13px;border-radius:3px;
+  transition:border-color .2s,color .2s,background .2s;
 }
-.htag::before{content:"◆ ";font-size:6px;color:var(--gold-dim);vertical-align:middle}
-.htag:hover{border-color:rgba(201,169,97,0.4);color:var(--ink)}
+.htag::before{content:"◆ ";font-size:6px;color:var(--violet);vertical-align:middle}
+.htag:hover{border-color:rgba(224,64,251,0.55);color:var(--pink);background:rgba(124,58,237,0.09)}
+
+/* ── 裝飾圓圈 ── */
+.hero-deco{
+  position:absolute;bottom:22px;right:48px;
+  display:flex;gap:12px;z-index:2;pointer-events:none;
+}
+.deco-ring{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid rgba(6,182,212,0.42);
+  box-shadow:0 0 10px rgba(6,182,212,0.15) inset,0 0 5px rgba(6,182,212,0.10);
+}
 
 /* ── Section heading ── */
 .section-heading{
@@ -404,12 +329,15 @@ nav .nav-logo span{color:var(--gold)!important}
 }
 
 /* Mobile */
-@media(max-width:768px){
-  .hero-title{font-size:28px}
-  .hero-frame{padding:14px 24px 12px}
-  .hero-frame::before,.hero-frame::after,.frame-tr,.frame-bl{width:14px;height:14px}
-  .hero-metrics{display:flex;width:100%}
-  .hero-metric{padding:14px 0;flex:1}
+@media(max-width:900px){
+  .hero{flex-direction:column;min-height:auto;padding:50px 0 70px}
+  .hero-left{flex:none;max-width:100%;width:100%}
+  .hero-right{width:100%;min-height:260px;flex:none;margin-top:16px}
+  #hero-wave{inset:0;width:100%;height:100%}
+  .hero-title{font-size:34px}
+  .hero-deco{right:24px;bottom:12px}
+  .hero-metrics{display:flex;width:100%;border-radius:8px}
+  .hero-metric{flex:1;padding:14px 10px}
   .metric-num{font-size:22px}
   .page-wrap{padding:48px 20px 80px}
   .tab-demo,.tab-a,.tab-b,.tab-c,.tab-d{width:100%}
@@ -441,49 +369,55 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
 <div class="page-wrap">
 
-  <!-- ── SCI-FI HERO ── -->
+  <!-- ── WAVE HERO ── -->
   <div class="hero">
-    <div class="hero-floor"></div>
-    <div class="hero-orb"></div>
     <div class="hero-scan"></div>
 
-    <div class="hero-sys">
-      <div class="sys-dot"></div>
-      CX-RADAR
-      <div class="sys-dot"></div>
-      知識庫結構
-      <div class="sys-dot"></div>
-      SYS · 2025
+    <div class="hero-left">
+      <div class="hero-sys">
+        <div class="sys-dot"></div>
+        CX-RADAR
+        <div class="sys-dot"></div>
+        知識庫結構
+        <div class="sys-dot"></div>
+        SYS · 2025
+      </div>
+
+      <div class="hero-title">鋮馨<br>房貸壓力雷達</div>
+      <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
+
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <div class="metric-num">18</div>
+          <div class="metric-label">市場指標</div>
+        </div>
+        <div class="hero-metric">
+          <div class="metric-num">A–D</div>
+          <div class="metric-label">指標系列</div>
+        </div>
+        <div class="hero-metric">
+          <div class="metric-num">10Y</div>
+          <div class="metric-label">完整走勢</div>
+        </div>
+      </div>
+
+      <div class="hero-tags">
+        <span class="htag">房貸金融</span>
+        <span class="htag">交易量價</span>
+        <span class="htag">風險預警</span>
+        <span class="htag">國際資金</span>
+      </div>
     </div>
 
-    <div class="hero-frame">
-      <span class="frame-tr"></span>
-      <span class="frame-bl"></span>
-      <div class="hero-title">鋮馨房貸壓力雷達</div>
+    <div class="hero-right">
+      <canvas id="hero-wave"></canvas>
     </div>
 
-    <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
-
-    <div class="hero-metrics">
-      <div class="hero-metric">
-        <div class="metric-num">18</div>
-        <div class="metric-label">市場指標</div>
-      </div>
-      <div class="hero-metric">
-        <div class="metric-num">A–D</div>
-        <div class="metric-label">指標系列</div>
-      </div>
-      <div class="hero-metric">
-        <div class="metric-num">10Y</div>
-        <div class="metric-label">完整走勢</div>
-      </div>
-    </div>
-
-    <div class="hero-tags">
-      <span class="htag">房貸金融</span>
-      <span class="htag">交易量價</span>
-      <span class="htag">風險預警</span>
-      <span class="htag">國際資金</span>
+    <div class="hero-deco">
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
     </div>
   </div>
 
@@ -570,5 +504,71 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
 
 </div>
+
+<script>
+/* ── Wave canvas animation ── */
+(function(){
+  var canvas=document.getElementById('hero-wave');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var t=0;
+
+  function resize(){
+    canvas.width=canvas.offsetWidth||600;
+    canvas.height=canvas.offsetHeight||400;
+  }
+
+  function lerp(a,b,f){return a+(b-a)*f;}
+
+  function draw(){
+    var W=canvas.width,H=canvas.height;
+    if(!W||!H){requestAnimationFrame(draw);return;}
+    ctx.clearRect(0,0,W,H);
+
+    var N=110;
+    for(var i=0;i<N;i++){
+      var p=i/N;
+      var dist=Math.abs(p-0.5)*2; /* 0=centre 1=edge */
+      var r,g,b,a;
+      if(dist<0.10){r=255;g=220;b=255;a=0.92;}
+      else if(dist<0.30){var f=(dist-0.10)/0.20;r=255;g=Math.round(lerp(220,90,f));b=255;a=lerp(0.88,0.80,f);}
+      else if(dist<0.55){var f=(dist-0.30)/0.25;r=Math.round(lerp(255,180,f));g=Math.round(lerp(90,25,f));b=255;a=lerp(0.78,0.55,f);}
+      else if(dist<0.78){var f=(dist-0.55)/0.23;r=Math.round(lerp(180,100,f));g=Math.round(lerp(25,10,f));b=255;a=lerp(0.50,0.25,f);}
+      else{var f=(dist-0.78)/0.22;r=90;g=10;b=210;a=lerp(0.22,0.02,f);}
+
+      ctx.beginPath();
+      ctx.strokeStyle='rgba('+r+','+g+','+b+','+Math.max(0,a).toFixed(2)+')';
+      ctx.lineWidth=0.9;
+
+      var yCenter=H*0.5;
+      var yOff=(p-0.5)*H*1.18;
+      var amp=Math.exp(-Math.pow(dist*2.8,2))*92+14;
+      var ph1=t+i*0.10;
+      var ph2=t*0.72+i*0.14;
+      var ph3=t*1.45+i*0.07;
+
+      for(var x=0;x<=W;x+=3){
+        var xn=x/W;
+        /* Gaussian bloom centred at ~55% of canvas width */
+        var env=Math.exp(-Math.pow(xn-0.52,2)/0.16)*1.75;
+        if(env>1.05)env=1.05;
+        var y=yCenter+yOff
+             +Math.sin(x*0.0068+ph1)*amp*env
+             +Math.sin(x*0.014+ph2)*(amp*0.38)*env
+             +Math.sin(x*0.022+ph3)*(amp*0.18)*env;
+        if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+
+    t+=0.009;
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize',resize);
+  draw();
+})();
+</script>
 </body>
 </html>
