@@ -753,7 +753,11 @@ function clearAll() {{
 
 
 def main():
+    import progress
+    progress.start("generate_house_tax.py", 3, task="生成新北市房屋稅試算器")
+
     print("Loading data...")
+    progress.update(1, message="載入資料中（建物構造、使用類別、單價、地段）…")
     structs, usetypes, usages, prices, sections = load_all()
     print(f"  structs: {len(structs)}")
     print(f"  usetypes: {sum(len(v) for v in usetypes.values())} entries")
@@ -761,12 +765,14 @@ def main():
     print(f"  sections: {len(sections)} districts")
 
     print("Generating HTML...")
+    progress.update(2, message="生成 HTML 中…")
     html = build_html(structs, usetypes, usages, prices, sections)
 
     out = ROOT_DIR / 'new-taipei-house-tax.html'
     out.write_text(html, encoding='utf-8')
     size = len(html)
     print(f"✓ {out.name} written ({size:,} bytes / {size//1024} KB)")
+    progress.done(f"✓ {out.name} 已寫入（{size//1024} KB）")
 
 
 if __name__ == '__main__':
