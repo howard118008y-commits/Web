@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>承辦知識庫結構 · 鋮馨房貸壓力雷達</title>
+<title>承辦知識庫 · 鋮馨房貸壓力雷達</title>
 <link rel="icon" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,41 +11,26 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root {
-  --bg-deep: #0A0E1A;
-  --bg-panel: #111726;
-  --bg-elev: #161D30;
-  --line: rgba(201,169,97,0.15);
-  --line-strong: rgba(201,169,97,0.35);
-  --gold: #C9A961;
-  --gold-bright: #E5C77F;
-  --gold-dim: #8A7340;
-  --ink: #E8E3D5;
-  --ink-mid: #B0AB9A;
-  --ink-dim: #7A7565;
-  --green: #5FBA7D;
-  --orange: #E89348;
-  --red: #D45A5A;
-  --blue: #6BA8C9;
-  --purple: #9B8AC4;
+  --bg-deep:#0A0E1A;--bg-panel:#111726;--bg-elev:#161D30;
+  --line:rgba(201,169,97,0.15);--line-strong:rgba(201,169,97,0.35);
+  --gold:#C9A961;--gold-bright:#E5C77F;--gold-dim:#8A7340;
+  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;
+  --cyan:#06B6D4;--orange:#E89348;--red:#D45A5A;--blue:#6BA8C9;--purple:#9B8AC4;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  background: var(--bg-deep);
-  color: var(--ink);
-  font-family: "Noto Sans TC", sans-serif;
-  min-height: 100vh;
-  padding-top: 48px;
+body{
+  background:var(--bg-deep);color:var(--ink);
+  font-family:"Noto Sans TC",sans-serif;
+  min-height:100vh;padding-top:48px;
 }
-
-body::before {
+body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
     radial-gradient(circle at 20% 30%,rgba(201,169,97,0.04) 0%,transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(107,168,201,0.03) 0%,transparent 40%);
+    radial-gradient(circle at 80% 70%,rgba(6,182,212,0.03) 0%,transparent 40%);
 }
-body::after {
+body::after{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
     linear-gradient(rgba(201,169,97,0.02) 1px,transparent 1px),
@@ -53,208 +38,306 @@ body::after {
   background-size:48px 48px;
 }
 
-/* nav overrides */
 nav{background:rgba(10,14,26,0.92)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important}
 nav .nav-logo span{color:var(--gold)!important}
 .nav-links a{color:var(--ink-mid)!important;opacity:1!important}
 .nav-links a:hover{color:var(--ink)!important}
 .nav-cta{background:var(--gold)!important;color:#0A0E1A!important}
-.nav-radar-btn{background:#1D6FA4!important;color:#fff!important}
+.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important}
 .cx-burger span{background:var(--ink)!important}
 
-.page-wrap {
+.page-wrap{
   position:relative;z-index:1;
   max-width:1100px;margin:0 auto;
   padding:60px 32px 100px;
 }
 
-/* ── Hero ── */
-.hero {
-  text-align:center;
-  padding:48px 0 52px;
-  border-bottom:1px solid var(--line);
+/* ═══════════════════════════════════
+   SCI-FI HERO
+═══════════════════════════════════ */
+.hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 64px;
   margin-bottom:60px;
+  border-bottom:1px solid var(--line);
+  text-align:center;
 }
-.hero-label {
+
+/* 掃描線 */
+.hero-scan{
+  position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(6,182,212,0.0) 10%,
+    rgba(6,182,212,0.5) 40%,
+    rgba(201,169,97,0.8) 50%,
+    rgba(6,182,212,0.5) 60%,
+    rgba(6,182,212,0.0) 90%,
+    transparent 100%);
+  animation:heroScan 5s linear infinite;
+  pointer-events:none;z-index:2;
+}
+@keyframes heroScan{
+  0%{top:0;opacity:0}
+  6%{opacity:1}
+  94%{opacity:1}
+  100%{top:100%;opacity:0}
+}
+
+/* 系統標籤列 */
+.hero-sys{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;margin-bottom:32px;
   font-family:"IBM Plex Mono",monospace;
+  font-size:10px;letter-spacing:0.32em;color:var(--gold);
+  text-transform:uppercase;
+}
+.sys-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--cyan);
+  animation:dotPulse 2s ease-in-out infinite;
+}
+.sys-dot:nth-child(3){animation-delay:.6s}
+.sys-dot:nth-child(5){animation-delay:1.2s}
+@keyframes dotPulse{
+  0%,100%{opacity:0.25;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.4)}
+}
+
+/* 主標題框架 */
+.hero-frame{
+  display:inline-block;
+  position:relative;
+  padding:20px 44px 18px;
+  margin-bottom:16px;
+}
+/* 四角 bracket */
+.hero-frame::before{
+  content:"";position:absolute;top:0;left:0;
+  width:20px;height:20px;
+  border-top:2px solid rgba(201,169,97,0.65);
+  border-left:2px solid rgba(201,169,97,0.65);
+}
+.hero-frame::after{
+  content:"";position:absolute;bottom:0;right:0;
+  width:20px;height:20px;
+  border-bottom:2px solid rgba(201,169,97,0.65);
+  border-right:2px solid rgba(201,169,97,0.65);
+}
+.frame-tr{
+  position:absolute;top:0;right:0;
+  width:20px;height:20px;
+  border-top:2px solid rgba(201,169,97,0.65);
+  border-right:2px solid rgba(201,169,97,0.65);
+}
+.frame-bl{
+  position:absolute;bottom:0;left:0;
+  width:20px;height:20px;
+  border-bottom:2px solid rgba(201,169,97,0.65);
+  border-left:2px solid rgba(201,169,97,0.65);
+}
+.hero-title{
+  font-family:"Noto Serif TC",serif;font-weight:900;
+  font-size:44px;color:var(--ink);letter-spacing:0.14em;
+  line-height:1.2;
+  text-shadow:
+    0 0 24px rgba(201,169,97,0.35),
+    0 0 60px rgba(201,169,97,0.12),
+    0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* 英文副標 */
+.hero-en{
+  font-family:"IBM Plex Mono",monospace;font-weight:400;
   font-size:11px;letter-spacing:0.35em;
-  color:var(--gold);margin-bottom:16px;text-transform:uppercase;
+  color:var(--cyan);opacity:0.8;
+  margin-bottom:40px;
 }
-.hero-title {
-  font-family:"Noto Serif TC",serif;font-weight:700;
-  font-size:38px;color:var(--ink);letter-spacing:0.12em;
-  margin-bottom:12px;line-height:1.3;
+
+/* 數據列 */
+.hero-metrics{
+  display:inline-flex;align-items:stretch;
+  margin-bottom:36px;
+  border:1px solid var(--line);
 }
-.hero-sub {
-  font-family:"Noto Serif TC",serif;font-weight:300;
-  font-size:15px;color:var(--ink-mid);
-  letter-spacing:0.1em;margin-bottom:24px;
+.hero-metric{
+  padding:18px 40px;text-align:center;
+  border-right:1px solid var(--line);
+  position:relative;
 }
-.hero-tag {
-  display:inline-block;padding:5px 14px;
-  font-family:"IBM Plex Mono",monospace;font-size:11px;
-  letter-spacing:0.2em;color:var(--gold);
-  border:1px solid var(--line-strong);
+.hero-metric:last-child{border-right:0}
+.hero-metric::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(6,182,212,0.3),transparent);
 }
+.metric-num{
+  font-family:"IBM Plex Mono",monospace;font-weight:500;
+  font-size:30px;letter-spacing:0.04em;
+  color:var(--gold-bright);line-height:1;margin-bottom:8px;
+  text-shadow:0 0 16px rgba(201,169,97,0.4);
+}
+.metric-label{
+  font-family:"Noto Serif TC",serif;font-size:11px;
+  color:var(--ink-dim);letter-spacing:0.22em;
+}
+
+/* 標籤群 */
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.htag{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:0.2em;color:var(--ink-mid);
+  border:1px solid rgba(201,169,97,0.18);
+  padding:5px 14px;
+  transition:border-color .2s,color .2s;
+}
+.htag::before{content:"◆ ";font-size:6px;color:var(--gold-dim);vertical-align:middle}
+.htag:hover{border-color:rgba(201,169,97,0.4);color:var(--ink)}
 
 /* ── Section heading ── */
-.section-heading {
-  display:flex;align-items:center;gap:16px;
-  margin-bottom:28px;
+.section-heading{
+  display:flex;align-items:center;gap:16px;margin-bottom:28px;
 }
-.section-heading-line {
-  flex:1;height:1px;background:var(--line);
-}
-.section-heading-text {
-  font-family:"IBM Plex Mono",monospace;
-  font-size:10px;letter-spacing:0.35em;
-  color:var(--ink-dim);text-transform:uppercase;white-space:nowrap;
+.section-heading-line{flex:1;height:1px;background:var(--line)}
+.section-heading-text{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:0.35em;color:var(--ink-dim);
+  text-transform:uppercase;white-space:nowrap;
 }
 
-/* ── Tab Stack ── */
-.tab-stack {
-  display:flex;flex-direction:column;gap:16px;
-}
+/* ══════════════════════════
+   TAB STACK
+══════════════════════════ */
+.tab-stack{display:flex;flex-direction:column;gap:14px}
 
-.tab-item {
+.tab-item{
   display:flex;align-items:center;gap:22px;
   text-decoration:none;
   border-radius:0 999px 999px 0;
   padding:22px 56px 22px 28px;
-  position:relative;
-  overflow:hidden;
-  transition:filter .25s ease, box-shadow .25s ease;
-  cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:filter .25s,box-shadow .25s;cursor:pointer;
 }
+.tab-demo{width:42%}
+.tab-a   {width:55%}
+.tab-b   {width:68%}
+.tab-c   {width:81%}
+.tab-d   {width:94%}
 
-/* width staircase — each step +13% */
-.tab-demo { width:42%; }
-.tab-a    { width:55%; }
-.tab-b    { width:68%; }
-.tab-c    { width:81%; }
-.tab-d    { width:94%; }
+.tab-item:hover{filter:brightness(1.14);box-shadow:0 4px 24px rgba(0,0,0,0.35)}
+.tab-item:hover .tab-arrow{transform:translateX(8px)}
 
-/* hover */
-.tab-item:hover { filter:brightness(1.14); box-shadow:0 4px 24px rgba(0,0,0,0.35); }
-.tab-item:hover .tab-arrow { transform:translateX(8px); }
-
-/* ── Series colour themes ── */
-/* DEMO */
-.tab-demo {
-  background:linear-gradient(100deg,rgba(232,147,72,0.18) 0%,rgba(232,147,72,0.05) 100%);
-  border:1px solid rgba(232,147,72,0.35);
-  border-left:4px solid var(--orange);
+/* DEMO — cyan */
+.tab-demo{
+  background:linear-gradient(100deg,rgba(6,182,212,0.14) 0%,rgba(6,182,212,0.03) 100%);
+  border:1px solid rgba(6,182,212,0.32);border-left:4px solid var(--cyan);
 }
-.tab-demo .tab-badge  { background:var(--orange);color:#0A0E1A; }
-.tab-demo .tab-title  { color:var(--orange); }
-.tab-demo .tab-arrow  { color:var(--orange); }
-.tab-demo .tab-codes  { color:rgba(232,147,72,0.7); }
+.tab-demo .tab-badge{background:var(--cyan);color:#0A0E1A}
+.tab-demo .tab-title{color:var(--cyan)}
+.tab-demo .tab-arrow{color:var(--cyan)}
+.tab-demo .tab-codes{color:rgba(6,182,212,0.7)}
 
-/* A */
-.tab-a {
+/* A — orange */
+.tab-a{
   background:linear-gradient(100deg,rgba(232,147,72,0.13) 0%,rgba(232,147,72,0.03) 100%);
-  border:1px solid rgba(232,147,72,0.28);
-  border-left:4px solid var(--orange);
+  border:1px solid rgba(232,147,72,0.28);border-left:4px solid var(--orange);
 }
-.tab-a .tab-badge  { background:rgba(232,147,72,0.82);color:#0A0E1A; }
-.tab-a .tab-title  { color:var(--orange); }
-.tab-a .tab-arrow  { color:var(--orange); }
-.tab-a .tab-codes  { color:rgba(232,147,72,0.65); }
+.tab-a .tab-badge{background:rgba(232,147,72,0.82);color:#0A0E1A}
+.tab-a .tab-title{color:var(--orange)}
+.tab-a .tab-arrow{color:var(--orange)}
+.tab-a .tab-codes{color:rgba(232,147,72,0.65)}
 
-/* B */
-.tab-b {
-  background:linear-gradient(100deg,rgba(107,168,201,0.16) 0%,rgba(107,168,201,0.04) 100%);
-  border:1px solid rgba(107,168,201,0.32);
-  border-left:4px solid var(--blue);
+/* B — blue */
+.tab-b{
+  background:linear-gradient(100deg,rgba(107,168,201,0.14) 0%,rgba(107,168,201,0.03) 100%);
+  border:1px solid rgba(107,168,201,0.3);border-left:4px solid var(--blue);
 }
-.tab-b .tab-badge  { background:var(--blue);color:#0A0E1A; }
-.tab-b .tab-title  { color:var(--blue); }
-.tab-b .tab-arrow  { color:var(--blue); }
-.tab-b .tab-codes  { color:rgba(107,168,201,0.7); }
+.tab-b .tab-badge{background:var(--blue);color:#0A0E1A}
+.tab-b .tab-title{color:var(--blue)}
+.tab-b .tab-arrow{color:var(--blue)}
+.tab-b .tab-codes{color:rgba(107,168,201,0.7)}
 
-/* C */
-.tab-c {
-  background:linear-gradient(100deg,rgba(212,90,90,0.16) 0%,rgba(212,90,90,0.04) 100%);
-  border:1px solid rgba(212,90,90,0.32);
-  border-left:4px solid var(--red);
+/* C — red */
+.tab-c{
+  background:linear-gradient(100deg,rgba(212,90,90,0.14) 0%,rgba(212,90,90,0.03) 100%);
+  border:1px solid rgba(212,90,90,0.3);border-left:4px solid var(--red);
 }
-.tab-c .tab-badge  { background:var(--red);color:#fff; }
-.tab-c .tab-title  { color:var(--red); }
-.tab-c .tab-arrow  { color:var(--red); }
-.tab-c .tab-codes  { color:rgba(212,90,90,0.7); }
+.tab-c .tab-badge{background:var(--red);color:#fff}
+.tab-c .tab-title{color:var(--red)}
+.tab-c .tab-arrow{color:var(--red)}
+.tab-c .tab-codes{color:rgba(212,90,90,0.7)}
 
-/* D */
-.tab-d {
-  background:linear-gradient(100deg,rgba(155,138,196,0.16) 0%,rgba(155,138,196,0.04) 100%);
-  border:1px solid rgba(155,138,196,0.32);
-  border-left:4px solid var(--purple);
+/* D — purple */
+.tab-d{
+  background:linear-gradient(100deg,rgba(155,138,196,0.14) 0%,rgba(155,138,196,0.03) 100%);
+  border:1px solid rgba(155,138,196,0.3);border-left:4px solid var(--purple);
 }
-.tab-d .tab-badge  { background:var(--purple);color:#fff; }
-.tab-d .tab-title  { color:var(--purple); }
-.tab-d .tab-arrow  { color:var(--purple); }
-.tab-d .tab-codes  { color:rgba(155,138,196,0.7); }
+.tab-d .tab-badge{background:var(--purple);color:#fff}
+.tab-d .tab-title{color:var(--purple)}
+.tab-d .tab-arrow{color:var(--purple)}
+.tab-d .tab-codes{color:rgba(155,138,196,0.7)}
 
-/* ── Badge circle ── */
-.tab-badge {
-  flex-shrink:0;
-  width:58px;height:58px;border-radius:50%;
+/* Badge */
+.tab-badge{
+  flex-shrink:0;width:58px;height:58px;border-radius:50%;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:2px;
 }
-.badge-letter {
+.badge-letter{
   font-family:"Noto Serif TC",serif;font-weight:700;
   font-size:20px;line-height:1;
 }
-.badge-letter.small {
+.badge-letter.small{
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;letter-spacing:0.08em;font-weight:500;
 }
-.badge-count {
+.badge-count{
   font-family:"IBM Plex Mono",monospace;
   font-size:9px;letter-spacing:0.04em;opacity:0.75;line-height:1;
 }
 
-/* ── Tab content ── */
-.tab-content { flex:1;min-width:0; }
-
-.tab-label {
-  font-family:"IBM Plex Mono",monospace;
-  font-size:10px;letter-spacing:0.3em;
-  color:var(--ink-dim);margin-bottom:5px;text-transform:uppercase;
+/* Content */
+.tab-content{flex:1;min-width:0}
+.tab-label{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:0.3em;color:var(--ink-dim);
+  margin-bottom:5px;text-transform:uppercase;
 }
-
-.tab-title {
+.tab-title{
   font-family:"Noto Serif TC",serif;font-weight:700;
   font-size:20px;letter-spacing:0.1em;margin-bottom:6px;
 }
-
-.tab-codes {
-  font-family:"IBM Plex Mono",monospace;
-  font-size:11px;letter-spacing:0.06em;
+.tab-codes{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:0.06em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
-/* ── Arrow ── */
-.tab-arrow {
-  flex-shrink:0;
-  font-family:"Noto Serif TC",serif;
+/* Arrow */
+.tab-arrow{
+  flex-shrink:0;font-family:"Noto Serif TC",serif;
   font-size:26px;font-weight:300;
-  transition:transform .2s;
-  margin-right:-24px;
+  transition:transform .2s;margin-right:-24px;
 }
 
-/* ── Footer ── */
-.footer-note {
+/* Footer */
+.footer-note{
   margin-top:64px;padding-top:28px;
   border-top:1px solid var(--line);
-  text-align:center;
-  font-family:"Noto Serif TC",serif;
+  text-align:center;font-family:"Noto Serif TC",serif;
   font-size:13px;color:var(--ink-dim);letter-spacing:0.12em;
 }
 
-/* ── Mobile ── */
+/* Mobile */
 @media(max-width:768px){
-  .hero-title{font-size:26px}
+  .hero-title{font-size:28px}
+  .hero-frame{padding:14px 24px 12px}
+  .hero-frame::before,.hero-frame::after,.frame-tr,.frame-bl{width:14px;height:14px}
+  .hero-metrics{display:flex;width:100%}
+  .hero-metric{padding:14px 0;flex:1}
+  .metric-num{font-size:22px}
   .page-wrap{padding:48px 20px 80px}
   .tab-demo,.tab-a,.tab-b,.tab-c,.tab-d{width:100%}
   .tab-badge{width:46px;height:46px}
@@ -273,13 +356,11 @@ nav .nav-logo span{color:var(--gold)!important}
 fetch('nav.html').then(r=>r.text()).then(h=>{
   var el=document.getElementById('nav-placeholder');
   el.innerHTML=h;
-  // innerHTML 不執行 <script>，需手動重跑每一個 script
   el.querySelectorAll('script').forEach(function(orig){
     var s=document.createElement('script');
     s.textContent=orig.textContent;
     document.head.appendChild(s);
   });
-  // 此頁無 active 連結
   document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
     .forEach(function(a){a.classList.remove('active');});
 });
@@ -287,25 +368,60 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
 <div class="page-wrap">
 
-  <!-- Hero -->
+  <!-- ── SCI-FI HERO ── -->
   <div class="hero">
-    <div class="hero-label">CX-RADAR · 知識庫結構</div>
-    <div class="hero-title">鋮馨房貸壓力雷達</div>
-    <div class="hero-sub">承辦知識庫 · A–D 系列 · 18 項市場指標</div>
-    <div class="hero-tag">房貸金融 · 交易量價 · 風險預警 · 國際資金</div>
+    <div class="hero-scan"></div>
+
+    <div class="hero-sys">
+      <div class="sys-dot"></div>
+      CX-RADAR
+      <div class="sys-dot"></div>
+      知識庫結構
+      <div class="sys-dot"></div>
+      SYS · 2025
+    </div>
+
+    <div class="hero-frame">
+      <span class="frame-tr"></span>
+      <span class="frame-bl"></span>
+      <div class="hero-title">鋮馨房貸壓力雷達</div>
+    </div>
+
+    <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="metric-num">18</div>
+        <div class="metric-label">市場指標</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-num">A–D</div>
+        <div class="metric-label">指標系列</div>
+      </div>
+      <div class="hero-metric">
+        <div class="metric-num">10Y</div>
+        <div class="metric-label">完整走勢</div>
+      </div>
+    </div>
+
+    <div class="hero-tags">
+      <span class="htag">房貸金融</span>
+      <span class="htag">交易量價</span>
+      <span class="htag">風險預警</span>
+      <span class="htag">國際資金</span>
+    </div>
   </div>
 
-  <!-- Section heading -->
+  <!-- ── Section heading ── -->
   <div class="section-heading">
     <div class="section-heading-line"></div>
     <div class="section-heading-text">選擇系列 · SELECT SERIES</div>
     <div class="section-heading-line"></div>
   </div>
 
-  <!-- Stacked tabs -->
+  <!-- ── Stacked Tabs ── -->
   <div class="tab-stack">
 
-    <!-- DEMO -->
     <a class="tab-item tab-demo" href="cx_radar_v4_demo.html">
       <div class="tab-badge">
         <span class="badge-letter small">DEMO</span>
@@ -319,7 +435,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="tab-arrow">›</div>
     </a>
 
-    <!-- A series -->
     <a class="tab-item tab-a" href="cx_batch2_A04_A05.html">
       <div class="tab-badge">
         <span class="badge-letter">A</span>
@@ -333,7 +448,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="tab-arrow">›</div>
     </a>
 
-    <!-- B series -->
     <a class="tab-item tab-b" href="cx_batch3_B01-B05.html">
       <div class="tab-badge">
         <span class="badge-letter">B</span>
@@ -347,7 +461,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="tab-arrow">›</div>
     </a>
 
-    <!-- C series -->
     <a class="tab-item tab-c" href="cx_batch4_C01-C04.html">
       <div class="tab-badge">
         <span class="badge-letter">C</span>
@@ -361,7 +474,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="tab-arrow">›</div>
     </a>
 
-    <!-- D series -->
     <a class="tab-item tab-d" href="cx_batch5_D01-D04.html">
       <div class="tab-badge">
         <span class="badge-letter">D</span>
