@@ -271,13 +271,17 @@ nav .nav-logo span{color:var(--gold)!important}
 <div id="nav-placeholder"></div>
 <script>
 fetch('nav.html').then(r=>r.text()).then(h=>{
-  document.getElementById('nav-placeholder').innerHTML=h;
-  var s=document.createElement('script');
-  s.textContent=`(function(){
-    var links=document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]');
-    links.forEach(function(a){a.classList.remove('active');});
-  })();`;
-  document.head.appendChild(s);
+  var el=document.getElementById('nav-placeholder');
+  el.innerHTML=h;
+  // innerHTML 不執行 <script>，需手動重跑每一個 script
+  el.querySelectorAll('script').forEach(function(orig){
+    var s=document.createElement('script');
+    s.textContent=orig.textContent;
+    document.head.appendChild(s);
+  });
+  // 此頁無 active 連結
+  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]')
+    .forEach(function(a){a.classList.remove('active');});
 });
 </script>
 
