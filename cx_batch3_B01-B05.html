@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鋮馨房貸壓力雷達 · 第三批</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0A0E1A; --bg-panel: #111726; --bg-elev: #161D30; --bg-chart: #0D1322;
+  --line: rgba(201, 169, 97, 0.15); --line-strong: rgba(201, 169, 97, 0.35); --line-soft: rgba(201, 169, 97, 0.08);
+  --gold: #C9A961; --gold-bright: #E5C77F; --gold-dim: #8A7340;
+  --ink: #E8E3D5; --ink-mid: #B0AB9A; --ink-dim: #7A7565;
+  --green: #5FBA7D; --yellow: #E5C77F; --orange: #E89348; --red: #D45A5A; --blue: #6BA8C9;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-deep); color: var(--ink); font-family: "Noto Sans TC", sans-serif; font-weight: 400; font-size: 16px; min-height: 100vh; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.04) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(107, 168, 201, 0.03) 0%, transparent 40%); pointer-events: none; z-index: 0; }
+body::after { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(201, 169, 97, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 97, 0.02) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; z-index: 0; }
+.container { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 36px 44px; }
+.batch-header { text-align: center; padding: 32px 0; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+.batch-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 28px; color: var(--ink); letter-spacing: 0.15em; margin-bottom: 8px; }
+.batch-sub { font-family: "Noto Serif TC", serif; font-weight: 300; font-size: 14px; color: var(--ink-mid); letter-spacing: 0.12em; }
+.batch-tag { display: inline-block; margin-top: 12px; padding: 4px 12px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--gold); border: 1px solid var(--line-strong); }
+.indicators { display: flex; flex-direction: column; gap: 48px; }
+.indicator { background: var(--bg-panel); border: 1px solid var(--line); border-left: 3px solid rgba(107, 168, 201, 0.4); padding: 44px 48px; position: relative; transition: all 0.3s ease; }
+.indicator:hover { border-color: var(--line-strong); background: var(--bg-elev); }
+.indicator-tag { position: absolute; top: 0; left: 48px; transform: translateY(-50%); background: var(--bg-deep); padding: 5px 16px; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.3em; color: var(--gold); border: 1px solid var(--line-strong); font-weight: 500; }
+.freq-tag { position: absolute; top: 36px; right: 48px; font-family: "Noto Serif TC", serif; font-size: 13px; color: var(--ink-dim); letter-spacing: 0.2em; padding: 4px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); }
+.accel-badge { position: absolute; top: -12px; right: 48px; font-family: "Noto Serif TC", serif; font-weight: 500; font-size: 13px; letter-spacing: 0.15em; padding: 4px 12px; background: var(--bg-deep); z-index: 2; }
+.accel-badge.warning { color: var(--orange); border: 1px solid rgba(232, 147, 72, 0.5); }
+.accel-badge.critical { color: var(--red); border: 1px solid rgba(212, 90, 90, 0.5); }
+.indicator-top { display: grid; grid-template-columns: 2fr 1.2fr 1.5fr; gap: 40px; padding-bottom: 32px; margin-bottom: 36px; border-bottom: 1px solid var(--line); align-items: end; }
+.indicator-header-block { padding-top: 8px; }
+.indicator-name { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 28px; color: var(--ink); margin-bottom: 10px; letter-spacing: 0.08em; line-height: 1.3; }
+.indicator-name-en { font-family: "Noto Serif TC", serif; font-weight: 300; font-size: 14px; color: var(--ink-mid); letter-spacing: 0.12em; margin-bottom: 8px; }
+.indicator-source { font-family: "Noto Sans TC", sans-serif; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.05em; }
+.indicator-value-block { text-align: center; }
+.indicator-value { font-family: "IBM Plex Mono", monospace; font-size: 72px; font-weight: 400; color: var(--ink); letter-spacing: -0.03em; line-height: 1; margin-bottom: 12px; }
+.indicator-value-suffix { font-size: 32px; color: var(--ink-mid); font-weight: 300; }
+.indicator-unit { font-family: "Noto Sans TC", sans-serif; font-size: 13px; color: var(--ink-mid); letter-spacing: 0.05em; line-height: 1.5; }
+.indicator-changes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.change-cell { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 8px; background: rgba(10, 14, 26, 0.4); border: 1px solid var(--line-soft); }
+.change-period { font-family: "Noto Serif TC", serif; font-size: 13px; color: var(--ink-dim); letter-spacing: 0.12em; }
+.change-value { font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 500; }
+.change-value.up { color: var(--red); }
+.change-value.down { color: var(--green); }
+.change-value.flat { color: var(--ink-mid); }
+.change-value.up-good { color: var(--green); }
+.change-value.down-bad { color: var(--red); }
+.chart-section-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
+.chart-section-zh { font-family: "Noto Serif TC", serif; font-weight: 500; font-size: 17px; color: var(--gold); letter-spacing: 0.15em; }
+.chart-section-en { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.chart-container { background: var(--bg-chart); border: 1px solid var(--line-soft); padding: 28px 28px 16px 80px; position: relative; }
+.chart-container svg { width: 100%; height: 320px; display: block; }
+.chart-axis-info { display: flex; justify-content: space-between; margin-top: 14px; padding: 0 12px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.context-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
+.context-cell { padding: 18px 20px; background: rgba(10, 14, 26, 0.5); border: 1px solid var(--line-soft); border-left: 3px solid var(--gold-dim); }
+.context-cell.now { border-left-color: var(--orange); background: rgba(232, 147, 72, 0.05); }
+.context-cell.high { border-left-color: var(--red); }
+.context-cell.low { border-left-color: var(--green); }
+.context-cell.forecast { border-left-color: var(--gold); background: rgba(201, 169, 97, 0.05); }
+.context-label { font-family: "Noto Serif TC", serif; font-size: 13px; color: var(--ink-dim); letter-spacing: 0.15em; margin-bottom: 10px; }
+.context-value { font-family: "IBM Plex Mono", monospace; font-size: 24px; font-weight: 500; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+.context-value.orange { color: var(--orange); }
+.context-value.red { color: var(--red); }
+.context-value.green { color: var(--green); }
+.context-value.gold { color: var(--gold); }
+.context-time { font-family: "Noto Sans TC", sans-serif; font-size: 13px; color: var(--ink-mid); letter-spacing: 0.05em; line-height: 1.5; }
+.chart-insight { margin-top: 28px; padding: 24px 28px; background: rgba(201, 169, 97, 0.04); border-left: 3px solid var(--gold-dim); font-family: "Noto Sans TC", sans-serif; font-size: 15px; line-height: 1.95; color: var(--ink); letter-spacing: 0.04em; font-weight: 300; }
+.chart-insight-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 15px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.chart-insight-title::before { content: "◆"; color: var(--gold); font-size: 10px; }
+.chart-insight .key { color: var(--gold-bright); font-weight: 500; }
+.chart-insight .up-key { color: var(--red); font-weight: 500; }
+.chart-insight .down-key { color: var(--green); font-weight: 500; }
+@media (max-width: 1024px) { .container { padding: 28px 24px; } .indicator-top { grid-template-columns: 1fr; gap: 28px; text-align: center; } .indicator-header-block { text-align: center; } .context-grid { grid-template-columns: repeat(2, 1fr); } .indicator-value { font-size: 56px; } }
+@media (max-width: 600px) { .indicator { padding: 32px 24px; } .indicator-value { font-size: 48px; } .context-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="batch-header">
+    <div class="batch-title">第三批指標</div>
+    <div class="batch-sub">B · 房市熱度指標 · 5 項</div>
+    <div class="batch-tag">B01 全國移轉 · B02 信義房價 · B03 國泰房價 · B04 六都移轉 · B05 內政部住宅</div>
+  </div>
+
+  <div class="indicators">
+
+    <!-- B01 全國買賣移轉棟數 -->
+    <div class="indicator">
+      <span class="indicator-tag">B · 01</span>
+      <span class="freq-tag">月公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">全國買賣移轉棟數</div>
+          <div class="indicator-name-en">National Building Transfer Count</div>
+          <div class="indicator-source">內政部地政司 · 房市交易量總指標</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value">21,618<span class="indicator-value-suffix"> 棟</span></div>
+          <div class="indicator-unit">2026 年 3 月 · 預估全年僅 26 萬棟</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">月增</span><span class="change-value up-good">+6.2%</span></div>
+          <div class="change-cell"><span class="change-period">季增</span><span class="change-value down-bad">-12.3%</span></div>
+          <div class="change-cell"><span class="change-period">年增</span><span class="change-value down-bad">-18.5%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">十年完整年成交量</span>
+        <span class="chart-section-en">2016 — 2027 · Annual Transaction</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="44" text-anchor="end">350K</text>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="104" text-anchor="end">300K</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(95,186,125,0.3)" stroke-width="0.8" stroke-dasharray="3 3"/>
+            <text x="-12" y="164" text-anchor="end" fill="#5FBA7D">健康 270K</text>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="224" text-anchor="end">240K</text>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <text x="-12" y="284" text-anchor="end">210K</text>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <text x="0" y="305">2016</text>
+            <text x="110" y="305">2017</text>
+            <text x="220" y="305">2018</text>
+            <text x="330" y="305">2019</text>
+            <text x="440" y="305">2020</text>
+            <text x="550" y="305">2021</text>
+            <text x="660" y="305">2022</text>
+            <text x="770" y="305">2023</text>
+            <text x="880" y="305">2024</text>
+            <text x="990" y="305">2025</text>
+            <text x="1080" y="305">2026E</text>
+            <text x="1200" y="305" text-anchor="end">2027E</text>
+          </g>
+          <line x1="990" y1="30" x2="990" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="990" y="30" width="210" height="260" fill="rgba(201,169,97,0.02)"/>
+          <text x="1000" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <g fill="#6BA8C9" opacity="0.7">
+            <rect x="20" y="200" width="80" height="80"/>
+            <rect x="120" y="160" width="80" height="120"/>
+            <rect x="220" y="135" width="80" height="145"/>
+            <rect x="320" y="140" width="80" height="140"/>
+            <rect x="430" y="160" width="80" height="120"/>
+            <rect x="540" y="65" width="80" height="215"/>
+            <rect x="650" y="100" width="80" height="180"/>
+            <rect x="760" y="140" width="80" height="140"/>
+            <rect x="870" y="180" width="80" height="100"/>
+          </g>
+          <rect x="980" y="220" width="80" height="60" fill="#6BA8C9"/>
+          <g fill="rgba(107,168,201,0.3)" stroke="#6BA8C9" stroke-width="1" stroke-dasharray="3 2">
+            <rect x="1080" y="200" width="80" height="80"/>
+            <rect x="1180" y="190" width="20" height="90"/>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="11" fill="#6BA8C9">
+            <text x="60" y="194" text-anchor="middle">245K</text>
+            <text x="160" y="154" text-anchor="middle">266K</text>
+            <text x="260" y="129" text-anchor="middle">277K</text>
+            <text x="360" y="134" text-anchor="middle">275K</text>
+            <text x="470" y="154" text-anchor="middle">266K</text>
+            <text x="580" y="59" text-anchor="middle" fill="#E89348" font-weight="500">348K</text>
+            <text x="690" y="94" text-anchor="middle">318K</text>
+            <text x="800" y="134" text-anchor="middle">288K</text>
+            <text x="910" y="174" text-anchor="middle">258K</text>
+            <text x="1020" y="214" text-anchor="middle">216K</text>
+            <text x="1120" y="194" text-anchor="middle" fill="rgba(229,199,127,0.8)">260K</text>
+          </g>
+          <text x="580" y="48" text-anchor="middle" font-family="Noto Serif TC" font-size="11" fill="#E89348">↑ 十年高峰</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：時間（年）· 含 2026/2027 預估</span>
+        <span>Y 軸：年度移轉棟數（千棟）· 綠線為健康水位 27 萬棟</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now">
+          <div class="context-label">當前位置</div>
+          <div class="context-value orange">21.6K / 月</div>
+          <div class="context-time">年化 216K · 萎縮中</div>
+        </div>
+        <div class="context-cell high">
+          <div class="context-label">十年高點</div>
+          <div class="context-value red">348K</div>
+          <div class="context-time">2021 · 房市最熱</div>
+        </div>
+        <div class="context-cell low">
+          <div class="context-label">十年低點</div>
+          <div class="context-value green">216K</div>
+          <div class="context-time">2025 · 即近一年</div>
+        </div>
+        <div class="context-cell forecast">
+          <div class="context-label">2026 預測</div>
+          <div class="context-value gold">260 — 280K</div>
+          <div class="context-time">回升則代表空頭轉折</div>
+        </div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        當前年化 216K 較 2021 高峰 348K 已 <span class="down-key">萎縮 38%</span>，是 2016 年以來最低水位。專家觀察：<span class="key">當買賣移轉降到波段低點，市場恐慌最濃，但卻是進場最佳時機</span>。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>2026 全年若回升至 27 萬棟以上，代表<span class="key">空頭轉瞬即過</span>；若續跌則房市回溫推遲。最近三個月已出現量增訊號（3 月 +6.2%），是<span class="key">復甦的初步證據</span>。<br><br>
+        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>交易量領先房價 3-6 個月，若 Q3 出現量增訊號，<span class="key">房貸需求將在 Q4 全面回升</span>，現在應提前準備行銷彈藥、強化代書合作管道。
+      </div>
+    </div>
+
+    <!-- B02 信義房價指數 -->
+    <div class="indicator">
+      <span class="indicator-tag">B · 02</span>
+      <span class="freq-tag">月公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">信義房價指數（大台北）</div>
+          <div class="indicator-name-en">Sinyi Greater Taipei House Price Index</div>
+          <div class="indicator-source">信義房屋／政大商學院 · 中古屋特徵價格模型</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value">176.93</div>
+          <div class="indicator-unit">基期 2011=100 · 累計上漲 76.93%</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">月增</span><span class="change-value up">+0.94%</span></div>
+          <div class="change-cell"><span class="change-period">季增</span><span class="change-value down">-0.32%</span></div>
+          <div class="change-cell"><span class="change-period">年增</span><span class="change-value down">-1.07%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">十年完整漲跌與未來路徑</span>
+        <span class="chart-section-en">2016 — 2027 · Monthly Index</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="44" text-anchor="end">185</text>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="104" text-anchor="end">160</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="164" text-anchor="end">140</text>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="224" text-anchor="end">120</text>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <text x="-12" y="284" text-anchor="end">100</text>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <text x="0" y="305">2016</text>
+            <text x="110" y="305">2017</text>
+            <text x="220" y="305">2018</text>
+            <text x="330" y="305">2019</text>
+            <text x="440" y="305">2020</text>
+            <text x="550" y="305">2021</text>
+            <text x="660" y="305">2022</text>
+            <text x="770" y="305">2023</text>
+            <text x="880" y="305">2024</text>
+            <text x="990" y="305">2025</text>
+            <text x="1080" y="305">2026</text>
+            <text x="1200" y="305" text-anchor="end">2027 預</text>
+          </g>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <defs>
+            <linearGradient id="gradB02" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#E5C77F" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#E5C77F" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0,265 L 110,255 L 220,240 L 330,225 L 440,200 L 550,150 L 660,100 L 770,75 L 880,50 L 990,42 L 1075,55 L 1075,290 L 0,290 Z" fill="url(#gradB02)"/>
+          <path d="M 0,265 L 110,255 L 220,240 L 330,225 L 440,200 L 550,150 L 660,100 L 770,75 L 880,50 L 990,42 L 1075,55" fill="none" stroke="#E5C77F" stroke-width="2.5"/>
+          <path d="M 1075,55 L 1140,60 L 1200,50" fill="none" stroke="#E5C77F" stroke-width="2" stroke-dasharray="5 4" opacity="0.6"/>
+          <path d="M 1075,45 L 1200,40 L 1200,65 L 1075,65 Z" fill="rgba(229,199,127,0.08)"/>
+          <circle cx="550" cy="150" r="4" fill="#E89348"/>
+          <text x="555" y="170" font-family="Noto Serif TC" font-size="11" fill="#E89348">2021 房市加速</text>
+          <circle cx="770" cy="75" r="4" fill="#E89348"/>
+          <text x="775" y="95" font-family="Noto Serif TC" font-size="11" fill="#E89348">2023 新青安推升</text>
+          <circle cx="990" cy="42" r="4" fill="#D45A5A"/>
+          <text x="995" y="32" font-family="Noto Serif TC" font-size="11" fill="#D45A5A">2025 歷史高點</text>
+          <circle cx="1075" cy="55" r="7" fill="#E5C77F"/>
+          <circle cx="1075" cy="55" r="14" fill="none" stroke="#E5C77F" stroke-width="1" opacity="0.5">
+            <animate attributeName="r" from="7" to="20" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="1075" y="40" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#E5C77F" font-weight="500">今日 176.93</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：時間（年）· 十年完整週期</span>
+        <span>Y 軸：指數值（2011=100）</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now">
+          <div class="context-label">當前位置</div>
+          <div class="context-value orange">176.93</div>
+          <div class="context-time">較高點回落 0.85%</div>
+        </div>
+        <div class="context-cell high">
+          <div class="context-label">十年高點</div>
+          <div class="context-value red">178.45</div>
+          <div class="context-time">2025.07 · 信用管制前</div>
+        </div>
+        <div class="context-cell low">
+          <div class="context-label">十年低點</div>
+          <div class="context-value green">100.21</div>
+          <div class="context-time">2016.01 · 基期附近</div>
+        </div>
+        <div class="context-cell forecast">
+          <div class="context-label">六個月預測</div>
+          <div class="context-value gold">173 — 180</div>
+          <div class="context-time">量縮價緩跌格局延續</div>
+        </div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        十年間大台北房價漲幅 <span class="up-key">+76.9%</span>，年複合報酬率約 5.9%。當前 176.93 距離 2025.07 高點 178.45 僅<span class="down-key"> 跌 0.85%</span>，<span class="key">並未真正進入空頭</span>。對比建照下滑訊號，價格修正幅度遠遠不足。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>在新青安退場、利率持續高檔的雙重壓力下，預測指數 6-12 個月將緩跌至 173-175 區間，<span class="key">幅度約 1-3%</span>；但因供給端萎縮（建照下滑），<span class="key">深度修正可能性低</span>，整體屬於「量縮價穩」格局。<br><br>
+        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>對客戶話術應強調「<span class="key">現在不是抄底時機，但也不需要過度恐慌</span>」。鋮馨真正的機會在<span class="key">幫客戶優化房貸結構</span>（整合貸款、再融資），而非單純等待房價暴跌。
+      </div>
+    </div>
+
+    <!-- B03 國泰房價指數 -->
+    <div class="indicator">
+      <span class="indicator-tag">B · 03</span>
+      <span class="freq-tag">季公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">國泰房價指數</div>
+          <div class="indicator-name-en">Cathay House Price Index</div>
+          <div class="indicator-source">國泰建設／政大不動產中心 · 預售屋與新成屋</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value">148.32</div>
+          <div class="indicator-unit">六都加權 · 基期 2021=100</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">月增</span><span class="change-value down">-0.42%</span></div>
+          <div class="change-cell"><span class="change-period">季增</span><span class="change-value down">-1.85%</span></div>
+          <div class="change-cell"><span class="change-period">年增</span><span class="change-value down">-3.21%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">六年新成屋價格軌跡</span>
+        <span class="chart-section-en">2021 — 2027 · Quarterly</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="44" text-anchor="end">160</text>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="104" text-anchor="end">145</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="164" text-anchor="end">130</text>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="224" text-anchor="end">115</text>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <text x="-12" y="284" text-anchor="end">100</text>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <text x="0" y="305">2021</text>
+            <text x="200" y="305">2022</text>
+            <text x="400" y="305">2023</text>
+            <text x="600" y="305">2024</text>
+            <text x="800" y="305">2025</text>
+            <text x="1000" y="305">2026</text>
+            <text x="1200" y="305" text-anchor="end">2027 預</text>
+          </g>
+          <line x1="1050" y1="30" x2="1050" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1050" y="30" width="150" height="260" fill="rgba(201,169,97,0.02)"/>
+          <text x="1060" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <defs>
+            <linearGradient id="gradB03" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#E5C77F" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#E5C77F" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0,280 L 100,240 L 200,200 L 300,150 L 400,115 L 500,85 L 600,70 L 700,55 L 800,42 L 900,55 L 1000,70 L 1050,85 L 1050,290 L 0,290 Z" fill="url(#gradB03)"/>
+          <path d="M 0,280 L 100,240 L 200,200 L 300,150 L 400,115 L 500,85 L 600,70 L 700,55 L 800,42 L 900,55 L 1000,70 L 1050,85" fill="none" stroke="#E5C77F" stroke-width="2.5"/>
+          <path d="M 1050,85 L 1125,110 L 1200,130" fill="none" stroke="#D45A5A" stroke-width="2" stroke-dasharray="5 4" opacity="0.6"/>
+          <circle cx="0" cy="280" r="4" fill="#5FBA7D"/>
+          <text x="10" y="275" font-family="Noto Serif TC" font-size="11" fill="#5FBA7D">基期 100</text>
+          <circle cx="800" cy="42" r="4" fill="#D45A5A"/>
+          <text x="805" y="32" font-family="Noto Serif TC" font-size="11" fill="#D45A5A">2025 高點 156.4</text>
+          <circle cx="1050" cy="85" r="7" fill="#E5C77F"/>
+          <circle cx="1050" cy="85" r="14" fill="none" stroke="#E5C77F" stroke-width="1" opacity="0.5">
+            <animate attributeName="r" from="7" to="20" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="1050" y="70" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#E5C77F" font-weight="500">今日 148.32</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：時間（季）</span>
+        <span>Y 軸：指數值（2021Q1=100）</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now">
+          <div class="context-label">當前位置</div>
+          <div class="context-value orange">148.32</div>
+          <div class="context-time">連續 4 季下跌</div>
+        </div>
+        <div class="context-cell high">
+          <div class="context-label">五年高點</div>
+          <div class="context-value red">156.4</div>
+          <div class="context-time">2025.Q1 · 建商讓利前</div>
+        </div>
+        <div class="context-cell low">
+          <div class="context-label">五年低點</div>
+          <div class="context-value green">100.0</div>
+          <div class="context-time">2021.Q1 · 基期</div>
+        </div>
+        <div class="context-cell forecast">
+          <div class="context-label">六個月預測</div>
+          <div class="context-value gold">144 — 148</div>
+          <div class="context-time">預售價格續跌空間 2-3%</div>
+        </div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        新成屋與預售屋市場 <span class="key">領先中古屋下行</span>，連續 4 季下跌反映建商讓利。當前 148.32 較高點 156.4 已 <span class="down-key">下跌 5.2%</span>，幅度大於中古屋（信義 -0.85%）。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>建商議價空間擴大，<span class="key">新案推案折扣可能達 10-15%</span>，預售屋讓利潮將延續到 2026 Q4。預測指數將在 144-148 區間震盪。<br><br>
+        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>客戶若想撿便宜，<span class="key">2026 Q3-Q4 是新成屋議價最佳時機</span>。鋮馨行銷話術可鎖定「建商讓利期入手」，特別針對換屋族與升級型客戶。
+      </div>
+    </div>
+
+    <!-- B04 六都買賣移轉棟數 -->
+    <div class="indicator">
+      <span class="indicator-tag">B · 04</span>
+      <span class="freq-tag">月公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">六都買賣移轉棟數</div>
+          <div class="indicator-name-en">6 Major Cities Transfer Count</div>
+          <div class="indicator-source">六直轄市地政局 · 占全國 78.6%</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value">16,989<span class="indicator-value-suffix"> 棟</span></div>
+          <div class="indicator-unit">2026 年 3 月 · 新北 4,128 棟居冠</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">月增</span><span class="change-value up-good">+6.0%</span></div>
+          <div class="change-cell"><span class="change-period">季增</span><span class="change-value down-bad">-10.8%</span></div>
+          <div class="change-cell"><span class="change-period">年增</span><span class="change-value down-bad">-13.5%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">六都市場份額比較</span>
+        <span class="chart-section-en">2026.03 · City Distribution</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="44" text-anchor="end">5,000</text>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="104" text-anchor="end">4,000</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="164" text-anchor="end">3,000</text>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="224" text-anchor="end">2,000</text>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <text x="-12" y="284" text-anchor="end">1,000</text>
+          </g>
+          <g font-family="Noto Serif TC" font-size="14" fill="#B0AB9A" letter-spacing="0.1em">
+            <rect x="30" y="55" width="160" height="225" fill="#6BA8C9" opacity="0.85"/>
+            <text x="110" y="305" text-anchor="middle">新北市</text>
+            <text x="110" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">4,128</text>
+            <text x="110" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">24.3%</text>
+            <rect x="220" y="90" width="160" height="190" fill="#6BA8C9" opacity="0.75"/>
+            <text x="300" y="305" text-anchor="middle">台中市</text>
+            <text x="300" y="83" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">3,712</text>
+            <text x="300" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">21.9%</text>
+            <rect x="410" y="120" width="160" height="160" fill="#6BA8C9" opacity="0.7"/>
+            <text x="490" y="305" text-anchor="middle">桃園市</text>
+            <text x="490" y="113" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">3,245</text>
+            <text x="490" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">19.1%</text>
+            <rect x="600" y="150" width="160" height="130" fill="#6BA8C9" opacity="0.65"/>
+            <text x="680" y="305" text-anchor="middle">高雄市</text>
+            <text x="680" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">2,816</text>
+            <text x="680" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">16.6%</text>
+            <rect x="790" y="195" width="160" height="85" fill="#6BA8C9" opacity="0.55"/>
+            <text x="870" y="305" text-anchor="middle">台北市</text>
+            <text x="870" y="188" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">1,985</text>
+            <text x="870" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">11.7%</text>
+            <rect x="980" y="240" width="160" height="40" fill="#6BA8C9" opacity="0.45"/>
+            <text x="1060" y="305" text-anchor="middle">台南市</text>
+            <text x="1060" y="233" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#6BA8C9" font-weight="600">1,103</text>
+            <text x="1060" y="295" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#7A7565">6.5%</text>
+          </g>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：六大直轄市</span>
+        <span>Y 軸：移轉棟數（棟）· 含市場份額</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now">
+          <div class="context-label">鋮馨主力區</div>
+          <div class="context-value orange">4,128 棟</div>
+          <div class="context-time">新北 · 占六都 24.3%</div>
+        </div>
+        <div class="context-cell high">
+          <div class="context-label">新北十年高點</div>
+          <div class="context-value red">7,242</div>
+          <div class="context-time">2021.11 · 較今日多 75%</div>
+        </div>
+        <div class="context-cell low">
+          <div class="context-label">新北十年低點</div>
+          <div class="context-value green">2,891</div>
+          <div class="context-time">2020.02 · 疫情衝擊</div>
+        </div>
+        <div class="context-cell forecast">
+          <div class="context-label">六個月預測</div>
+          <div class="context-value gold">3,800 — 4,500</div>
+          <div class="context-time">新北月成交量區間</div>
+        </div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        新北以 4,128 棟領先全國，是<span class="key">鋮馨主戰場</span>。雙北合計 6,113 棟，佔全國 28.3%。趨勢：<span class="key">六都集中度持續攀升</span>，蛋白縣市持續萎縮。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>新北未來 6 個月月成交量在 3,800-4,500 區間震盪，<span class="key">中和、永和、板橋、新店為核心區</span>。台中、桃園則是中部與北部副都心熱區，整體量能微幅復甦。<br><br>
+        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>板橋（鋮馨辦公室所在）與中和（食安心店面所在）<span class="key">交易最熱絡，雙基地優勢明顯</span>，可強化「在地專家」品牌定位。建議與雙北 5-10 公里範圍內的代書建立深度合作。
+      </div>
+    </div>
+
+    <!-- B05 內政部住宅價格指數 -->
+    <div class="indicator">
+      <span class="indicator-tag">B · 05</span>
+      <span class="freq-tag">季公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">內政部住宅價格指數</div>
+          <div class="indicator-name-en">MOI Residential Price Index</div>
+          <div class="indicator-source">內政部不動產資訊平台 · 實價登錄編製</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value">142.6</div>
+          <div class="indicator-unit">全國加權 · 基期 2016=100</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">月增</span><span class="change-value flat">N/A</span></div>
+          <div class="change-cell"><span class="change-period">季增</span><span class="change-value down">-0.45%</span></div>
+          <div class="change-cell"><span class="change-period">年增</span><span class="change-value down">-1.32%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">三大房價指數交叉驗證</span>
+        <span class="chart-section-en">2021 — 2027 · Cross-validation</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="44" text-anchor="end">180</text>
+            <line x1="0" y1="105" x2="1200" y2="105" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="109" text-anchor="end">160</text>
+            <line x1="0" y1="170" x2="1200" y2="170" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="174" text-anchor="end">140</text>
+            <line x1="0" y1="235" x2="1200" y2="235" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-12" y="239" text-anchor="end">120</text>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <text x="-12" y="284" text-anchor="end">100</text>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <text x="0" y="305">2021</text>
+            <text x="200" y="305">2022</text>
+            <text x="400" y="305">2023</text>
+            <text x="600" y="305">2024</text>
+            <text x="800" y="305">2025</text>
+            <text x="1000" y="305">2026</text>
+            <text x="1200" y="305" text-anchor="end">2027 預</text>
+          </g>
+          <line x1="1050" y1="30" x2="1050" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1050" y="30" width="150" height="260" fill="rgba(201,169,97,0.02)"/>
+          <path d="M 0,210 L 200,180 L 400,140 L 600,100 L 800,60 L 1000,65 L 1050,70 L 1125,75 L 1200,72" fill="none" stroke="#E5C77F" stroke-width="2.5"/>
+          <path d="M 0,235 L 200,210 L 400,175 L 600,140 L 800,110 L 1000,120 L 1050,130 L 1125,145 L 1200,155" fill="none" stroke="#E89348" stroke-width="2.5"/>
+          <path d="M 0,255 L 200,235 L 400,205 L 600,170 L 800,145 L 1000,155 L 1050,165 L 1125,173 L 1200,180" fill="none" stroke="#6BA8C9" stroke-width="2.5"/>
+          <path d="M 1050,70 L 1200,72" stroke="#E5C77F" stroke-width="2" stroke-dasharray="4 4" opacity="0.6" fill="none"/>
+          <path d="M 1050,130 L 1200,155" stroke="#E89348" stroke-width="2" stroke-dasharray="4 4" opacity="0.6" fill="none"/>
+          <path d="M 1050,165 L 1200,180" stroke="#6BA8C9" stroke-width="2" stroke-dasharray="4 4" opacity="0.6" fill="none"/>
+          <circle cx="1050" cy="70" r="6" fill="#E5C77F"/>
+          <circle cx="1050" cy="130" r="6" fill="#E89348"/>
+          <circle cx="1050" cy="165" r="6" fill="#6BA8C9"/>
+          <g font-family="Noto Serif TC" font-size="13" fill="#B0AB9A">
+            <rect x="780" y="35" width="400" height="60" fill="rgba(13,19,34,0.7)" stroke="rgba(201,169,97,0.2)" stroke-width="0.5"/>
+            <circle cx="800" cy="55" r="4" fill="#E5C77F"/>
+            <text x="810" y="60">信義（中古屋）176.93</text>
+            <circle cx="800" cy="78" r="4" fill="#E89348"/>
+            <text x="810" y="83">國泰（預售屋）148.32</text>
+            <circle cx="980" cy="55" r="4" fill="#6BA8C9"/>
+            <text x="990" y="60">內政部 142.6</text>
+            <text x="980" y="83" font-family="Noto Serif TC" font-size="11" fill="#7A7565">三指數同步</text>
+          </g>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：時間（季）</span>
+        <span>Y 軸：指數值（基期=100）· 三條線分別代表不同編製方法</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now">
+          <div class="context-label">當前位置</div>
+          <div class="context-value orange">142.6</div>
+          <div class="context-time">內政部 · 連 2 季下跌</div>
+        </div>
+        <div class="context-cell high">
+          <div class="context-label">十年高點</div>
+          <div class="context-value red">144.5</div>
+          <div class="context-time">2025.Q2 · 即近高峰</div>
+        </div>
+        <div class="context-cell low">
+          <div class="context-label">十年低點</div>
+          <div class="context-value green">100.0</div>
+          <div class="context-time">2016 · 基期</div>
+        </div>
+        <div class="context-cell forecast">
+          <div class="context-label">六個月預測</div>
+          <div class="context-value gold">140 — 144</div>
+          <div class="context-time">三指數同步盤整</div>
+        </div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        三大房價指數呈現「<span class="key">預售先跌、中古抗跌、官方居中</span>」的層次。十年來累計漲幅：信義 76.9%、國泰 48.3%、內政 42.6%。三指數<span class="key">同步顯示下行訊號</span>，可信度高。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>未來 6 個月三指數皆預期續跌 1-3%，但因供給端緊縮（建照下滑 22.8%），<span class="key">深度修正可能性低</span>。整體判斷：<span class="key">2026 是「軟著陸」格局，非「硬空頭」</span>。<br><br>
+        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>鋮馨對客戶的話術應強調「<span class="key">三大指數交叉驗證下行訊號真實但溫和</span>」，避免恐慌話術。重點放在「議價空間擴大，現在是優化貸款條件的好時機」。
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
