@@ -630,9 +630,14 @@ buildTierTable();
 
 
 def main():
-    for city_key, cfg in CITIES.items():
+    import progress
+    cities = list(CITIES.items())
+    progress.start("generate_city_calculators.py", len(cities), task="生成縣市地價稅試算器")
+
+    for i, (city_key, cfg) in enumerate(cities):
         county = cfg['county']
         print(f"\n== {cfg['name']} ({county}) ==")
+        progress.update(i, task=f"處理 {cfg['name']}", message=f"拉取 {cfg['name']} 行政區資料…")
 
         # Fetch town names
         print(f"  Fetching towns...")
@@ -644,9 +649,11 @@ def main():
 
         # Fetch sections for each town
         sections_dict = {}
-        for full_code in sorted(towns_raw.keys()):
+        town_list = sorted(towns_raw.keys())
+        for j, full_code in enumerate(town_list):
             dv = full_code[-2:]
             print(f"  Fetching sections for {full_code} ({towns[dv]})...")
+            progress.update(i, task=f"處理 {cfg['name']}", message=f"  地段 {j+1}/{len(town_list)}：{towns[dv]}")
             sects = fetch_sections(county, full_code)
             if sects:
                 sections_dict[dv] = sects
@@ -658,7 +665,9 @@ def main():
         filepath = ROOT_DIR / cfg['file']
         filepath.write_text(html, encoding='utf-8')
         print(f"  ✓ {cfg['file']} written ({len(html):,} chars)")
+        progress.update(i + 1, task=f"完成 {cfg['name']}", message=f"✓ {cfg['file']} 已寫入")
 
+    progress.done("✓ 全部縣市完成！")
     print("\n✓ 全部完成")
 
 
