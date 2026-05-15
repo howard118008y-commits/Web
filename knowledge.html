@@ -21,7 +21,7 @@
 /* Category tabs */
 .cat-bar{background:#f5f5f7;padding:1.5rem 2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
 
-.cat-btn{font-size:13px;font-weight:500;padding:7px 18px;border-radius:20px;border:none;cursor:pointer;background:#fff;color:#1d1d1f;border:.5px solid #d2d2d7;transition:all .2s}
+.cat-btn{font-size:13px;font-weight:500;padding:7px 18px;border-radius:20px;border:none;cursor:pointer;background:#fff;color:#1d1d1f;border:.5px solid #d2d2d7;transition:all .2s;text-decoration:none;display:inline-block}
 
 .cat-btn.active,.cat-btn:hover{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
 
@@ -139,12 +139,12 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 </section>
 
 <div class="cat-bar">
-  <button class="cat-btn active">全部文章</button>
-  <button class="cat-btn">售後回租</button>
-  <button class="cat-btn">貸款整合</button>
-  <button class="cat-btn">包租代管</button>
-  <button class="cat-btn">信用修復</button>
-  <button class="cat-btn">民間轉銀行</button>
+  <a class="cat-btn active" href="knowledge.html">全部文章</a>
+  <a class="cat-btn" href="sale-leaseback.html">售後回租</a>
+  <a class="cat-btn" href="article-loan-integration.html">貸款整合</a>
+  <a class="cat-btn" href="article-rental-management.html">包租代管</a>
+  <a class="cat-btn" href="article-credit-repair.html">信用修復</a>
+  <a class="cat-btn" href="private-to-bank.html">民間轉銀行</a>
 </div>
 
 <div class="articles-wrap">
