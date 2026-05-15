@@ -33,9 +33,11 @@ body.cx-menu-open .cx-social-dock{display:none}
 .nav-radar-btn:hover{filter:brightness(1.12);box-shadow:0 3px 16px rgba(29,143,214,0.5)}
 
 
+.nav-center{display:flex;align-items:center;gap:24px}
+
 @media(max-width:768px){
   .cx-burger{display:flex}
-  nav .nav-links,nav .nav-cta,nav .nav-radar-btn{display:none!important}
+  nav .nav-center,nav .nav-radar-btn{display:none!important}
   nav .nav-logo span{font-size:14px}
 }
 </style>
@@ -44,16 +46,18 @@ body.cx-menu-open .cx-social-dock{display:none}
     <img src="favicon-192.png" alt="鋮馨" style="height:34px;width:34px;object-fit:contain;border-radius:4px;">
     <span style="font-size:15px;font-weight:500;"><span style="color:#c8102e;font-weight:700;">鋮</span>馨租賃有限公司</span>
   </a>
-  <div class="nav-links">
-    <a href="index.html" data-page="index">首頁</a>
-    <a href="services.html" data-page="services">服務項目</a>
-    <a href="tools.html" data-page="tools">小工具</a>
-    <a href="knowledge.html" data-page="knowledge">知識專欄</a>
-    <a href="about.html" data-page="about">關於我們</a>
-    <a href="faq.html" data-page="faq">常見問題</a>
-    <a href="contact.html" data-page="contact">聯絡我們</a>
+  <div class="nav-center">
+    <div class="nav-links">
+      <a href="index.html" data-page="index">首頁</a>
+      <a href="services.html" data-page="services">服務項目</a>
+      <a href="tools.html" data-page="tools">小工具</a>
+      <a href="knowledge.html" data-page="knowledge">知識專欄</a>
+      <a href="about.html" data-page="about">關於我們</a>
+      <a href="faq.html" data-page="faq">常見問題</a>
+      <a href="contact.html" data-page="contact">聯絡我們</a>
+    </div>
+    <a href="evaluate.html" class="nav-cta">免費評估</a>
   </div>
-  <a href="evaluate.html" class="nav-cta">免費評估</a>
   <a href="radar-index.html" class="nav-radar-btn">承辦知識庫</a>
   <button type="button" class="cx-burger" aria-label="開啟選單" aria-expanded="false" data-cx-burger>
     <span></span><span></span><span></span>
