@@ -330,10 +330,12 @@ nav .nav-logo span{color:var(--gold)!important}
 /* Footer */
 .footer-note{
   margin-top:64px;padding-top:28px;
-  border-top:1px solid var(--line);
+  border-top:1px solid rgba(201,169,97,0.40);
   text-align:center;font-family:"Noto Serif TC",serif;
-  font-size:13px;color:var(--ink-dim);letter-spacing:0.12em;
+  font-size:13px;color:var(--gold);letter-spacing:0.12em;
+  text-shadow:0 0 18px rgba(201,169,97,0.25);
 }
+.footer-note span{color:rgba(201,169,97,0.55);}
 
 /* Mobile */
 @media(max-width:900px){
@@ -500,7 +502,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
 
   <div class="footer-note">
-    鋮馨租賃有限公司 · 房貸儀表板 · 房貸儀表板<br>
+    鋮馨租賃有限公司 · 房貸儀表板<br>
     <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;display:block;">A 系列 房貸金融 · B 系列 交易量價 · C 系列 風險預警 · D 系列 國際資金</span>
   </div>
 
