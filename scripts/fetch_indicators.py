@@ -27,6 +27,12 @@ try:
 except ImportError:
     HAS_XLRD = False
 
+try:
+    import openpyxl
+    HAS_OPENPYXL = True
+except ImportError:
+    HAS_OPENPYXL = False
+
 BASE      = Path(__file__).resolve().parent.parent
 DATA_FILE = BASE / 'cx_data.json'
 TODAY     = date.today()
@@ -263,23 +269,49 @@ def fetch_A03():
 
 
 def fetch_A04():
-    """不動產放款集中度 — CBC 央行月報（HTML 解析）"""
-    r = get('https://www.cbc.gov.tw/tw/lp-640-1-1-20.html')
-    if r and HAS_BS4:
-        soup = BeautifulSoup(r.text, 'lxml')
-        text = soup.get_text()
-        # 不動產放款集中度通常是 30~45% 之間的兩位數百分比
-        for m in re.finditer(r'(\d{2}\.\d{1,2})%?', text):
-            v = float(m.group(1))
-            if 28 < v < 45:
-                if v > 38:
-                    status, note = 'red',    f'{v:.2f}%，集中度過高，監管壓力大'
-                elif v > 36:
-                    status, note = 'yellow', f'{v:.2f}%，接近上限，持續下降中'
-                else:
-                    status, note = 'green',  f'{v:.2f}%，跌破36%，創多年新低'
-                return dict(value=f'{v:.2f}%', status=status, note=note,
-                            updated=THIS_MONTH)
+    """不動產放款集中度 — CBC 不動產貸款相關資訊.xlsx（每月更新）"""
+    if not HAS_OPENPYXL:
+        print("  openpyxl not installed, skip A04")
+        return None
+    try:
+        import urllib.parse
+        filename = urllib.parse.quote('不動產貸款相關資訊.xlsx')
+        url = f'https://www.cbc.gov.tw/public/data/Ebanking/{filename}'
+        r = get(url, timeout=20)
+        if not r:
+            return None
+        wb = openpyxl.load_workbook(io.BytesIO(r.content), data_only=True)
+        ws = wb.active
+        ratio   = None
+        updated = None
+        prev_row_date = None
+        for row in ws.iter_rows(values_only=True):
+            for cell in row:
+                if cell and isinstance(cell, str):
+                    # 日期格式 '115年3月底'
+                    dm = re.search(r'(\d{2,3})年(\d{1,2})月', cell)
+                    if dm:
+                        yr_ad = int(dm.group(1)) + 1911
+                        mo    = int(dm.group(2))
+                        prev_row_date = f'{yr_ad}-{mo:02d}'
+                    # 比率行：包含 '不動產貸款占總放款比率'
+                    if '不動產貸款占總放款比率' in cell:
+                        for v in row:
+                            if isinstance(v, (int, float)) and 0.2 < v < 0.6:
+                                ratio   = v
+                                updated = prev_row_date
+                                break
+        if ratio and updated:
+            pct = ratio * 100
+            if pct > 38:
+                status, note = 'red',    f'{pct:.2f}%，集中度過高，監管壓力大'
+            elif pct > 36:
+                status, note = 'yellow', f'{pct:.2f}%，接近上限，持續下降中'
+            else:
+                status, note = 'green',  f'跌破36%，{pct:.2f}%，創14年新低'
+            return dict(value=f'{pct:.2f}%', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  A04 CBC XLSX: {e}")
     return None
 
 
