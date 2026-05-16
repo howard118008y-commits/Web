@@ -123,6 +123,12 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
+/* ── CTA 諮詢條 ── */
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn:hover{background:var(--gold-bright);}
+@media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -151,7 +157,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="indicators">
 
     <!-- A04 不動產放款集中度 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="A04">
       <span class="indicator-tag">A · 04</span>
       <span class="freq-tag">月公布</span>
       <span class="accel-badge critical">⚡ 超限 6.7pp</span>
@@ -263,10 +269,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>9 家銀行已進警戒線，<span class="key">12 月理監事會可能微鬆「銀行自主管理」</span>但 30% 上限不會動，集中度將緩降不會回到正常區間，預期 6 個月內仍維持 36-37% 區間。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>公股授信偏緊將持續，鋮馨應強化<span class="key">民營銀行與信合社合作管道</span>。傳統產業客戶、收入證明不漂亮的案件，<span class="key">直接送公股碰壁機率高</span>，要先評估客戶條件再分流送件。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- A05 新青安貸款占比 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="A05">
       <span class="indicator-tag">A · 05</span>
       <span class="freq-tag">月公布</span>
       <span class="accel-badge warning">⏰ 7 月退場倒數</span>
@@ -373,9 +383,32 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>距離 <span class="key">7 月 31 日申請截止</span>剩 77 天，預期 5-6 月將出現末班車衝刺，占比可能短暫回升至 44-46%。<span class="key">8 月後將急跌至 5% 以下</span>，僅剩已核准案件陸續撥款，2027 年後幾近歸零。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的關鍵行動：</strong>立刻盤點 CRM 名單，<span class="key">優先電聯符合資格客戶</span>（首購、未滿 40 歲、家戶年所得 130 萬以下、無自有住宅），協助他們在 6 月底前完成送件。錯過末班車的客戶要轉介到一般房貸與整合貸款。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
   </div>
 </div>
+<script>
+/* ── cx_data.json → 更新最後更新日期 ── */
+(function(){
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map={};
+      data.indicators.forEach(function(d){map[d.code]=d;});
+      document.querySelectorAll('[data-cx-code]').forEach(function(el){
+        var code=el.getAttribute('data-cx-code');
+        var ind=map[code];
+        if(!ind)return;
+        var tag=el.querySelector('.freq-tag');
+        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>

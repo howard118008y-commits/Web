@@ -1,0 +1,29 @@
+{
+  "generated": "2026-05-16",
+  "series": {
+    "A": { "label": "房貸金融", "en": "BANKING" },
+    "B": { "label": "交易量價", "en": "VOLUME & PRICE" },
+    "C": { "label": "風險預警", "en": "RISK WARNING" },
+    "D": { "label": "國際資金", "en": "GLOBAL CAPITAL" }
+  },
+  "indicators": [
+    { "code": "A01", "series": "A", "name": "央行重貼現率",       "value": "2.00%",     "status": "yellow", "note": "連8次凍漲，維持不變",            "updated": "2026-03" },
+    { "code": "A02", "series": "A", "name": "房貸利率",           "value": "2.32%",     "status": "yellow", "note": "創17年新高，成本壓力大",          "updated": "2026-02" },
+    { "code": "A03", "series": "A", "name": "新增房貸金額",       "value": "590億/月",  "status": "red",    "note": "Q1年減26.5%，創3年新低",          "updated": "2026-03" },
+    { "code": "A04", "series": "A", "name": "不動產放款集中度",   "value": "35.56%",    "status": "green",  "note": "跌破36%，創14年新低",             "updated": "2026-03" },
+    { "code": "A05", "series": "A", "name": "新青安貸款占比",     "value": "下滑中",    "status": "yellow", "note": "占比連2月下滑，7月政策到期",      "updated": "2026-01" },
+    { "code": "B01", "series": "B", "name": "買賣移轉棟數",       "value": "60,403棟",  "status": "red",    "note": "Q1年減4.3%，史上第三低",          "updated": "2026-03" },
+    { "code": "B02", "series": "B", "name": "信義房價指數",       "value": "Q1最新",    "status": "yellow", "note": "量縮但價格仍具支撐",              "updated": "2026-Q1" },
+    { "code": "B03", "series": "B", "name": "國泰房價指數",       "value": "Q1最新",    "status": "yellow", "note": "預售市場趨緩",                    "updated": "2026-Q1" },
+    { "code": "B04", "series": "B", "name": "六都移轉棟數",       "value": "年減3.7%",  "status": "red",    "note": "台中年減16.5%最大",              "updated": "2026-02" },
+    { "code": "B05", "series": "B", "name": "六都房價",           "value": "23.5倍",    "status": "red",    "note": "台北26.67倍，遠超國際合理值",    "updated": "2026-Q1" },
+    { "code": "C01", "series": "C", "name": "房貸逾放比",         "value": "0.08%",     "status": "red",    "note": "逾放件數年增60%，隱性風險擴散",  "updated": "2026-Q1" },
+    { "code": "C02", "series": "C", "name": "房價所得比",         "value": "23.5倍",    "status": "red",    "note": "台北26.67倍，遠超合理值",        "updated": "2025-Q4" },
+    { "code": "C03", "series": "C", "name": "建照核發",           "value": "12.5萬戶",  "status": "yellow", "note": "年減11.3%，創7年新低",           "updated": "2025-11" },
+    { "code": "C04", "series": "C", "name": "建照 vs 使照",       "value": "使照>建照", "status": "yellow", "note": "交屋潮湧現，短期供給增加",        "updated": "2025-11" },
+    { "code": "D01", "series": "D", "name": "美十年期公債殖利率", "value": "4.534%",    "status": "red",    "note": "高位持續，資金成本壓力大",        "updated": "2026-05" },
+    { "code": "D02", "series": "D", "name": "美元台幣匯率",       "value": "31.58",     "status": "yellow", "note": "台幣12月貶值4.5%，近期趨穩",     "updated": "2026-05" },
+    { "code": "D03", "series": "D", "name": "台股加權指數",       "value": "39,521點",  "status": "green",  "note": "高位維持，市場信心穩定",          "updated": "2026-04" },
+    { "code": "D04", "series": "D", "name": "台灣CPI",            "value": "1.74%",     "status": "yellow", "note": "4月通膨回升，需持續觀察",         "updated": "2026-04" }
+  ]
+}

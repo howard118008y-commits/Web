@@ -110,6 +110,12 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
+/* ── CTA 諮詢條 ── */
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn:hover{background:var(--gold-bright);}
+@media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -138,7 +144,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="indicators">
 
     <!-- B01 全國買賣移轉棟數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="B01">
       <span class="indicator-tag">B · 01</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -256,10 +262,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>2026 全年若回升至 27 萬棟以上，代表<span class="key">空頭轉瞬即過</span>；若續跌則房市回溫推遲。最近三個月已出現量增訊號（3 月 +6.2%），是<span class="key">復甦的初步證據</span>。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>交易量領先房價 3-6 個月，若 Q3 出現量增訊號，<span class="key">房貸需求將在 Q4 全面回升</span>，現在應提前準備行銷彈藥、強化代書合作管道。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- B02 信義房價指數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="B02">
       <span class="indicator-tag">B · 02</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -369,10 +379,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>在新青安退場、利率持續高檔的雙重壓力下，預測指數 6-12 個月將緩跌至 173-175 區間，<span class="key">幅度約 1-3%</span>；但因供給端萎縮（建照下滑），<span class="key">深度修正可能性低</span>，整體屬於「量縮價穩」格局。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>對客戶話術應強調「<span class="key">現在不是抄底時機，但也不需要過度恐慌</span>」。鋮馨真正的機會在<span class="key">幫客戶優化房貸結構</span>（整合貸款、再融資），而非單純等待房價暴跌。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- B03 國泰房價指數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="B03">
       <span class="indicator-tag">B · 03</span>
       <span class="freq-tag">季公布</span>
       <div class="indicator-top">
@@ -474,10 +488,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>建商議價空間擴大，<span class="key">新案推案折扣可能達 10-15%</span>，預售屋讓利潮將延續到 2026 Q4。預測指數將在 144-148 區間震盪。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>客戶若想撿便宜，<span class="key">2026 Q3-Q4 是新成屋議價最佳時機</span>。鋮馨行銷話術可鎖定「建商讓利期入手」，特別針對換屋族與升級型客戶。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- B04 六都買賣移轉棟數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="B04">
       <span class="indicator-tag">B · 04</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -574,10 +592,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>新北未來 6 個月月成交量在 3,800-4,500 區間震盪，<span class="key">中和、永和、板橋、新店為核心區</span>。台中、桃園則是中部與北部副都心熱區，整體量能微幅復甦。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>板橋（鋮馨辦公室所在）與中和（食安心店面所在）<span class="key">交易最熱絡，雙基地優勢明顯</span>，可強化「在地專家」品牌定位。建議與雙北 5-10 公里範圍內的代書建立深度合作。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- B05 內政部住宅價格指數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="B05">
       <span class="indicator-tag">B · 05</span>
       <span class="freq-tag">季公布</span>
       <div class="indicator-top">
@@ -678,9 +700,32 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>未來 6 個月三指數皆預期續跌 1-3%，但因供給端緊縮（建照下滑 22.8%），<span class="key">深度修正可能性低</span>。整體判斷：<span class="key">2026 是「軟著陸」格局，非「硬空頭」</span>。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>鋮馨對客戶的話術應強調「<span class="key">三大指數交叉驗證下行訊號真實但溫和</span>」，避免恐慌話術。重點放在「議價空間擴大，現在是優化貸款條件的好時機」。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
   </div>
 </div>
+<script>
+/* ── cx_data.json → 更新最後更新日期 ── */
+(function(){
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map={};
+      data.indicators.forEach(function(d){map[d.code]=d;});
+      document.querySelectorAll('[data-cx-code]').forEach(function(el){
+        var code=el.getAttribute('data-cx-code');
+        var ind=map[code];
+        if(!ind)return;
+        var tag=el.querySelector('.freq-tag');
+        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>

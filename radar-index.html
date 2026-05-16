@@ -319,6 +319,26 @@ nav .nav-logo span{color:var(--gold)!important}
 }
 .footer-note span{color:rgba(201,169,97,0.55);}
 
+/* ── 18項指標總覽 ── */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.series-block{border:1px solid rgba(201,169,97,0.11);background:rgba(201,169,97,0.025);border-radius:4px;overflow:hidden}
+.sb-header{display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid rgba(201,169,97,0.09)}
+.sb-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:12px;font-weight:700;flex-shrink:0}
+.sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1}
+.sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:#F87171;letter-spacing:0.1em;flex-shrink:0}
+.ov-row{display:flex;align-items:center;gap:9px;padding:8px 15px;border-bottom:1px solid rgba(201,169,97,0.05);transition:background .15s}
+.ov-row:last-child{border-bottom:0}
+.ov-row:hover{background:rgba(201,169,97,0.04)}
+.ov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ov-dot.green{background:#4ADE80;box-shadow:0 0 5px rgba(74,222,128,0.5)}
+.ov-dot.yellow{background:#FCD34D;box-shadow:0 0 5px rgba(252,211,77,0.5)}
+.ov-dot.red{background:#F87171;box-shadow:0 0 5px rgba(248,113,113,0.5)}
+.ov-code{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);min-width:24px;flex-shrink:0}
+.ov-name{flex:1;font-size:11px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-val{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.ov-date{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);white-space:nowrap;flex-shrink:0;margin-left:4px}
+.ov-meta{margin-top:10px;margin-bottom:60px;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.2em;color:var(--ink-dim)}
+
 /* Mobile */
 @media(max-width:900px){
   .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:60px 0 80px;position:relative}
@@ -338,6 +358,7 @@ nav .nav-logo span{color:var(--gold)!important}
   .tab-title{font-size:17px}
   .tab-codes{font-size:10px}
   .tab-arrow{font-size:22px;margin-right:-28px}
+  .overview-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -481,12 +502,71 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
   </div>
 
+  <!-- ── 18項指標總覽 ── -->
+  <div class="section-heading" style="margin-top:60px">
+    <div class="section-heading-line"></div>
+    <div class="section-heading-text">18 項指標 · 即時狀態總覽</div>
+    <div class="section-heading-line"></div>
+  </div>
+  <div class="overview-grid" id="overview-grid">
+    <div style="grid-column:1/-1;padding:20px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--ink-dim)">載入中…</div>
+  </div>
+  <div class="ov-meta" id="ov-meta"></div>
+
   <div class="footer-note">
     鋮馨租賃有限公司 · 房貸儀表板<br>
     <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;display:block;">A 系列 房貸金融 · B 系列 交易量價 · C 系列 風險預警 · D 系列 國際資金</span>
   </div>
 
 </div>
+
+<script>
+/* ── 18項指標總覽 fetch ── */
+(function(){
+  var SC = {
+    A:{color:'#E89348',bg:'rgba(232,147,72,0.14)',label:'房貸金融',en:'BANKING'},
+    B:{color:'#6BA8C9',bg:'rgba(107,168,201,0.14)',label:'交易量價',en:'VOL & PRICE'},
+    C:{color:'#D45A5A',bg:'rgba(212,90,90,0.14)',label:'風險預警',en:'RISK WARNING'},
+    D:{color:'#9B8AC4',bg:'rgba(155,138,196,0.14)',label:'國際資金',en:'GLOBAL CAP'}
+  };
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var grid=document.getElementById('overview-grid');
+      var meta=document.getElementById('ov-meta');
+      if(!grid)return;
+      var grp={A:[],B:[],C:[],D:[]};
+      data.indicators.forEach(function(d){if(grp[d.series])grp[d.series].push(d);});
+      var html='';
+      ['A','B','C','D'].forEach(function(s){
+        var sc=SC[s],inds=grp[s];
+        var reds=inds.filter(function(i){return i.status==='red';}).length;
+        html+='<div class="series-block">';
+        html+='<div class="sb-header">';
+        html+='<div class="sb-badge" style="background:'+sc.bg+';color:'+sc.color+'">'+s+'</div>';
+        html+='<div class="sb-title" style="color:'+sc.color+'">'+sc.label+'&nbsp;<span style="color:var(--ink-dim);font-size:8px">'+sc.en+'</span></div>';
+        if(reds)html+='<div class="sb-warn">⚠ '+reds+'項紅燈</div>';
+        html+='</div>';
+        inds.forEach(function(ind){
+          html+='<div class="ov-row">';
+          html+='<span class="ov-dot '+ind.status+'"></span>';
+          html+='<span class="ov-code">'+ind.code+'</span>';
+          html+='<span class="ov-name">'+ind.name+'</span>';
+          html+='<span class="ov-val">'+ind.value+'</span>';
+          html+='<span class="ov-date">'+ind.updated+'</span>';
+          html+='</div>';
+        });
+        html+='</div>';
+      });
+      grid.innerHTML=html;
+      if(meta&&data.generated)meta.textContent='DATA · '+data.generated;
+    })
+    .catch(function(){
+      var g=document.getElementById('overview-grid');
+      if(g)g.innerHTML='<div style="grid-column:1/-1;padding:16px;font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--ink-dim)">請在網站上查看最新數據</div>';
+    });
+})();
+</script>
 
 <script>
 /* ── Wave canvas animation ── */

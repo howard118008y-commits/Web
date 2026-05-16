@@ -556,6 +556,12 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
+/* ── CTA 諮詢條 ── */
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn:hover{background:var(--gold-bright);}
+@media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -608,7 +614,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="indicators">
 
     <!-- ========== A01 央行重貼現率 ========== -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="A01">
       <span class="indicator-tag">A · 01</span>
       <span class="freq-tag">月公布</span>
 
@@ -736,10 +742,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         央行從 2024 Q3 啟動升息週期，三年內累計 <span class="up-key">+87.5bp</span>，目前 2.00% 已是 <span class="key">2008 年以來高點</span>。對照 2020 年低點 1.125%，現在客戶承擔的利率壓力比 6 年前重 <span class="key">77.8%</span>。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>12 月理監事會關鍵，央行可能小幅降息 0.125%-0.25% 以回應房貸鬆綁訴求，但通膨黏性可能讓央行繼續觀望。<span class="key">未來 6 個月維持平台期的機率最高</span>，2027 上半年才有實質降息可能。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- ========== A02 五大行庫房貸利率 ========== -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="A02">
       <span class="indicator-tag">A · 02</span>
       <span class="freq-tag">月公布</span>
       <span class="accel-badge critical">⚡ 17 年新高</span>
@@ -866,10 +876,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         當前 2.306% 為 <span class="key">2009 年 1 月以來最高</span>，較疫情低點 1.36% 上升 <span class="up-key">+95 個基點</span>，幅度高達 <span class="up-key">+70%</span>。以 1,000 萬房貸計算，月還款比疫情低點時 <span class="up-key">多支出約 5,200 元</span>。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>新青安 7 月退場後，<span class="key">低利率貸款比重降低將進一步推高加權平均</span>，可能在 2026 Q3 突破 2.4%。客戶若有送件需求，<span class="key">6 月底前是相對低點</span>，建議業務團隊優先處理利率敏感型客戶。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- ========== A03 五大行庫單月新增房貸 ========== -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="A03">
       <span class="indicator-tag">A · 03</span>
       <span class="freq-tag">月公布</span>
 
@@ -1059,6 +1073,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>7 月新青安申請截止前，<span class="key">5-6 月可能出現「末班車效應」</span>，月成交可衝至 700-800 億；但 8 月後將快速回落，預估 Q4 月均約 450-500 億。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>5-6 月案件量可能爆增，<span class="key">要提前準備人力配置與資料文件流程</span>。8 月後反而要趕緊轉向開發整合貸款、再融資等非新青安客群。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
   </div>
@@ -1085,5 +1103,24 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   setInterval(updateClock, 1000);
 </script>
 
+<script>
+/* ── cx_data.json → 更新最後更新日期 ── */
+(function(){
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map={};
+      data.indicators.forEach(function(d){map[d.code]=d;});
+      document.querySelectorAll('[data-cx-code]').forEach(function(el){
+        var code=el.getAttribute('data-cx-code');
+        var ind=map[code];
+        if(!ind)return;
+        var tag=el.querySelector('.freq-tag');
+        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>

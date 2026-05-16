@@ -110,6 +110,12 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
+/* ── CTA 諮詢條 ── */
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn:hover{background:var(--gold-bright);}
+@media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -138,7 +144,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="indicators">
 
     <!-- C01 房貸逾放比 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="C01">
       <span class="indicator-tag">C · 01</span>
       <span class="freq-tag">月公布</span>
       <span class="accel-badge warning">↗ 預警上升</span>
@@ -246,10 +252,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>隨著房價修正、景氣未明，<span class="key">逾放比將緩步上升</span>，預估 12 個月內到 0.15-0.20%。<span class="key">真正警戒值是 0.5% 以上</span>，距離尚遠，2008 金融海嘯時曾達 1.5%。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的意義：</strong>違約風險仍極低，<span class="key">不需過度緊縮審核標準</span>。但對自備款不足、收入不穩的客戶應加強壓力測試，特別是<span class="key">傳統產業、自雇者、新青安第一波借款者</span>三類客戶需追蹤違約動向。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- C02 房價所得比 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="C02">
       <span class="indicator-tag">C · 02</span>
       <span class="freq-tag">季公布</span>
       <div class="indicator-top">
@@ -346,10 +356,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>薪資年增約 2-3%，但房價即使修正 1-3%，房價所得比仍會緩升。<span class="key">2026 全國可能突破 10 倍</span>，象徵性意義重大。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的關鍵：</strong>客戶年齡層往下移、購屋區域往外擴<span class="key">是不可逆趨勢</span>。<span class="key">桃園、新北周邊（樹林、土城、汐止、淡水）將成熱區</span>，鋮馨業務應提前布局這些區域的代書合作。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- C03 建照核發 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="C03">
       <span class="indicator-tag">C · 03</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -456,10 +470,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>選擇性信用管制持續，建商保守觀望態度將延續到 2026 Q4。預期 6 個月內維持 6,500-8,500 宅區間，<span class="key">短期內難見復甦</span>。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的長期意義：</strong><span class="key">2027-2029 新成屋供給將出現「供給斷層」</span>，到時新成屋稀缺、中古屋需求將大幅提升。這對鋮馨是 2-3 年後的<span class="key">利多訊號</span>，建議現在開始強化中古屋整合貸款、二胎房貸的產品線。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- C04 使照核發 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="C04">
       <span class="indicator-tag">C · 04</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -562,9 +580,32 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>根據建造期 2-3 年的對應關係，<span class="up-key">2028 年新成屋供給可能跌至 7,000 宅/月，比現在再少 40%</span>。供需逆轉訊號明確。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的長期布局：</strong><span class="key">「供給斷層」是未來 3 年最確定的趨勢</span>。鋮馨應在 2026 提前簽更多代書合作、強化中古屋業務，迎接 2027-2028 的供給緊縮利多。<span class="key">這個訊號比短期房價漲跌重要 10 倍</span>。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
   </div>
 </div>
+<script>
+/* ── cx_data.json → 更新最後更新日期 ── */
+(function(){
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map={};
+      data.indicators.forEach(function(d){map[d.code]=d;});
+      document.querySelectorAll('[data-cx-code]').forEach(function(el){
+        var code=el.getAttribute('data-cx-code');
+        var ind=map[code];
+        if(!ind)return;
+        var tag=el.querySelector('.freq-tag');
+        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>

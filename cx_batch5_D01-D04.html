@@ -110,6 +110,12 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
+/* ── CTA 諮詢條 ── */
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn:hover{background:var(--gold-bright);}
+@media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -138,7 +144,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="indicators">
 
     <!-- D01 美國十年期公債 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="D01">
       <span class="indicator-tag">D · 01</span>
       <span class="freq-tag">即時</span>
       <span class="accel-badge warning">↗ 加速</span>
@@ -246,10 +252,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>Fed 對降息時點存在分歧，<span class="key">市場一邊預期 2026 下半年降息 2 碼，一邊擔憂通膨黏性</span>。預測未來 6 個月於 4.20-4.60% 區間波動。<br><br>
         <strong style="color: var(--gold-bright);">對台灣的傳導：</strong>美債殖利率每升 50bp，<span class="up-key">台灣公債殖利率約跟升 30-40bp</span>，將推升銀行資金成本。<span class="key">若美債續升，台灣房貸利率有進一步上升空間</span>，本來預期央行降息救房市的可能性會延後。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- D02 美元兌新台幣 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="D02">
       <span class="indicator-tag">D · 02</span>
       <span class="freq-tag">即時</span>
       <div class="indicator-top">
@@ -356,10 +366,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>在中美關係改善、外資回流訊號下，台幣可能進一步升值至 30.8-31.0。但央行為保護出口會適度干預，<span class="key">突破 30 是心理關卡</span>。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的影響：</strong>台幣升值代表熱錢流入，過去經驗顯示熱錢流入會推升資產價格（股市、房市）。但<span class="up-key">央行擔心熱錢推升房價，可能祭出更嚴選擇性信用管制</span>。<span class="key">這對你的高 LTV 案件、第二屋以上案件是個提防訊號</span>，建議審慎評估這類客戶的還款能力。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- D03 台股加權指數 -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="D03">
       <span class="indicator-tag">D · 03</span>
       <span class="freq-tag">每日</span>
       <div class="indicator-top">
@@ -468,10 +482,14 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>AI 題材續強支撐指數，但獲利了結壓力大，未來 6 個月於 22,000-24,500 區間震盪。<span class="key">關鍵變數是外資態度與台積電財報</span>。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的傳導：</strong>股市每跌 10%，房市財富效應減弱，<span class="up-key">購屋意願下降約 5-8%</span>。<span class="key">建議監控外資連續賣超天數</span>，若達 10 日以上將是房市購買力的警訊。客戶若提到「股市賺到頭期款」要特別注意還款穩定性。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
     <!-- D04 台灣 CPI -->
-    <div class="indicator">
+    <div class="indicator" data-cx-code="D04">
       <span class="indicator-tag">D · 04</span>
       <span class="freq-tag">月公布</span>
       <div class="indicator-top">
@@ -578,9 +596,32 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>未來 6 個月維持 2.0-2.3% 區間，<span class="key">短期內回不到央行 2% 目標</span>。2026 H2 若油價走低、電價回穩，年底有機會跌破 2%。<br><br>
         <strong style="color: var(--gold-bright);">對你業務的關鍵意義：</strong>CPI 高於 2% <span class="key">就是央行不敢降息的最大理由</span>。市場期待的「央行救房市降息」短期難實現，<span class="key">客戶要做好高利率持續一年以上的心理準備</span>。鋮馨應主打「整合貸款降月付」、「轉貸省息」等產品，幫客戶在高利環境下優化現金流。
       </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
     </div>
 
   </div>
 </div>
+<script>
+/* ── cx_data.json → 更新最後更新日期 ── */
+(function(){
+  fetch('cx_data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map={};
+      data.indicators.forEach(function(d){map[d.code]=d;});
+      document.querySelectorAll('[data-cx-code]').forEach(function(el){
+        var code=el.getAttribute('data-cx-code');
+        var ind=map[code];
+        if(!ind)return;
+        var tag=el.querySelector('.freq-tag');
+        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>
