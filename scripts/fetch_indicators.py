@@ -21,6 +21,12 @@ try:
 except ImportError:
     HAS_BS4 = False
 
+try:
+    import xlrd
+    HAS_XLRD = True
+except ImportError:
+    HAS_XLRD = False
+
 BASE      = Path(__file__).resolve().parent.parent
 DATA_FILE = BASE / 'cx_data.json'
 TODAY     = date.today()
@@ -145,41 +151,114 @@ def fetch_A01():
                 updated=dt[:7] if dt else THIS_MONTH)
 
 
+def _fetch_5newloan_data():
+    """CBC 五大銀行新承做放款金額與利率 XLS
+    抓取流程：lp-528-1 → 最新 cp-528 → dl-XXXXX(5newloan.xls) → xlrd 解析
+    回傳 (updated, mtg_rate_pct, mtg_amount_mln) 或 None
+    """
+    if not HAS_XLRD:
+        print("  xlrd not installed, skip 5newloan")
+        return None
+    try:
+        # Step 1: 取得最新一期新聞稿 URL
+        r1 = get('https://www.cbc.gov.tw/tw/lp-528-1.html')
+        if not r1:
+            return None
+        m1 = re.search(r'href="(/tw/cp-528-\d+-\w+-\d+\.html)"', r1.text)
+        if not m1:
+            return None
+        article_url = 'https://www.cbc.gov.tw' + m1.group(1)
+
+        # Step 2: 取得新聞稿頁面，找 5newloan.xls 下載連結
+        r2 = get(article_url)
+        if not r2:
+            return None
+        # 配對 title="5newloan.xls" 的 <a href="..."> 或 class="xls" 緊接在 5newloan span 後
+        xls_m = re.search(
+            r'href="(https://www\.cbc\.gov\.tw/tw/dl-\d+[^"]+)"[^>]*title="5newloan\.xls"',
+            r2.text)
+        if not xls_m:
+            xls_m = re.search(
+                r'title="5newloan\.xls"[^>]*href="(https://www\.cbc\.gov\.tw/tw/dl-\d+[^"]+)"',
+                r2.text)
+        if not xls_m:
+            # 備用：找 5newloan span 附近的 class="xls" 連結
+            xls_m = re.search(
+                r'5newloan.*?<a\s+href="(https://www\.cbc\.gov\.tw/tw/dl-\d+[^"]+)"[^>]*class="xls"',
+                r2.text, re.DOTALL)
+        if not xls_m:
+            print("  5newloan: XLS link not found")
+            return None
+
+        # Step 3: 下載並解析 XLS
+        r3 = get(xls_m.group(1))
+        if not r3:
+            return None
+        wb = xlrd.open_workbook(file_contents=r3.content)
+        ws = wb.sheet_by_index(0)
+
+        for i in range(ws.nrows - 2, 2, -1):
+            row = ws.row_values(i)
+            date_str = str(row[0]).strip() if row[0] else ''
+            if '/' not in date_str:
+                continue
+            try:
+                rate   = float(row[2]) if row[2] else 0.0
+                amount = float(row[1]) if row[1] else 0.0
+                if rate > 0 and amount > 0:
+                    yr_roc_str, mo_str = date_str.split('/')
+                    year_ad  = int(yr_roc_str) + 1911
+                    updated  = f'{year_ad}-{int(mo_str):02d}'
+                    # 也傳回同月去年資料（row[2] 同欄、i-12）
+                    prev_amount = None
+                    if i >= 12:
+                        prev_row = ws.row_values(i - 12)
+                        try:
+                            prev_amount = float(prev_row[1])
+                        except Exception:
+                            pass
+                    return (updated, rate, amount, prev_amount)
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"  5newloan: {e}")
+    return None
+
+
 def fetch_A02():
-    """五大銀行平均房貸利率 — CBC 央行統計月報（HTML 解析）"""
-    # 央行每月公布「五大銀行新承做購屋貸款加權平均利率」
-    urls_to_try = [
-        'https://www.cbc.gov.tw/tw/lp-640-1-1-20.html',
-        'https://www.cbc.gov.tw/tw/cp-725-168266-a4e5a-1.html',
-    ]
-    for url in urls_to_try:
-        r = get(url)
-        if r and HAS_BS4:
-            soup = BeautifulSoup(r.text, 'lxml')
-            # 找含「購屋」or「房貸利率」附近的數字
-            text = soup.get_text()
-            # 典型格式：2.32% 或 2.320%，在 1.5~4.0% 之間
-            candidates = []
-            for m in re.finditer(r'(\d\.\d{2,3})%?', text):
-                v = float(m.group(1))
-                if 1.5 < v < 4.0:
-                    candidates.append(v)
-            if candidates:
-                v = max(candidates)  # 取最大值（通常是最新的房貸利率）
-                if v > 2.5:
-                    status, note = 'red',    f'{v:.3f}%，創歷史高點，購屋成本沉重'
-                elif v > 2.0:
-                    status, note = 'yellow', f'{v:.3f}%，偏高，借款人壓力增加'
-                else:
-                    status, note = 'green',  f'{v:.3f}%，利率合理'
-                return dict(value=f'{v:.3f}%', status=status, note=note,
-                            updated=THIS_MONTH)
+    """五大銀行新承做購屋貸款利率 — CBC 5newloan.xls"""
+    result = _fetch_5newloan_data()
+    if result:
+        updated, rate, _, _ = result
+        if rate > 2.5:
+            status, note = 'red',    f'{rate:.3f}%，創歷史高點，購屋成本沉重'
+        elif rate > 2.0:
+            status, note = 'yellow', f'{rate:.3f}%，創17年新高，成本壓力大'
+        else:
+            status, note = 'green',  f'{rate:.3f}%，利率合理'
+        return dict(value=f'{rate:.3f}%', status=status, note=note, updated=updated)
     return None
 
 
 def fetch_A03():
-    """五大銀行新增房貸金額 — 央行月報（待開發）"""
-    # 此數據每月約月中由央行公布，數據埋在複雜的 HTML/PDF，暫不自動抓取
+    """五大銀行新增購屋貸款金額 — CBC 5newloan.xls（同 A02 數據源）"""
+    result = _fetch_5newloan_data()
+    if result:
+        updated, _, amount_mln, prev_amount_mln = result
+        amount_yi = amount_mln / 100   # 百萬 → 億
+        yoy_note = ''
+        if prev_amount_mln and prev_amount_mln > 0:
+            chg = (amount_mln - prev_amount_mln) / prev_amount_mln * 100
+            yoy_note = f'，年{"增" if chg > 0 else "減"}{abs(chg):.1f}%'
+        if amount_yi < 450:
+            status, note = 'red',    f'Q1年減，{amount_yi:.0f}億/月{yoy_note}，創3年新低'
+        elif amount_yi < 650:
+            status, note = 'red',    f'{amount_yi:.0f}億/月{yoy_note}，量縮明顯'
+        elif amount_yi < 850:
+            status, note = 'yellow', f'{amount_yi:.0f}億/月{yoy_note}'
+        else:
+            status, note = 'green',  f'{amount_yi:.0f}億/月{yoy_note}'
+        return dict(value=f'{amount_yi:.0f}億/月', status=status, note=note, updated=updated)
     return None
 
 
