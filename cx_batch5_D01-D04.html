@@ -76,7 +76,7 @@ body::after { content: ""; position: fixed; inset: 0; background-image: linear-g
 .chart-insight .up-key { color: var(--red); font-weight: 500; }
 .chart-insight .down-key { color: var(--green); font-weight: 500; }
 @media (max-width: 1024px) { .container { padding: 28px 24px; } .indicator-top { grid-template-columns: 1fr; gap: 28px; text-align: center; } .indicator-header-block { text-align: center; } .context-grid { grid-template-columns: repeat(2, 1fr); } .indicator-value { font-size: 56px; } }
-@media (max-width: 600px) { .indicator { padding: 32px 24px; } .indicator-value { font-size: 48px; } .context-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .indicator { padding: 32px 24px; } .indicator-value { font-size: 48px; } .context-grid { grid-template-columns: 1fr 1fr; gap: 8px; } .context-cell { padding: 12px 10px; } .context-value { font-size: 20px; } .context-label { font-size: 11px; } .context-time { font-size: 11px; } }
 /* nav overrides for dark bg */
 nav{
   display:flex!important;align-items:center!important;
