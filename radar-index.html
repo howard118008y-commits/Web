@@ -88,23 +88,6 @@ nav .nav-logo span{color:var(--gold)!important}
   width:calc(100% + 112px);height:calc(100% + 60px);
 }
 
-/* ── 掃描線 ── */
-.hero-scan{
-  position:absolute;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,
-    transparent 0%,
-    rgba(201,169,97,0.0) 15%,
-    rgba(201,169,97,0.50) 35%,
-    rgba(229,199,127,0.88) 50%,
-    rgba(201,169,97,0.50) 65%,
-    rgba(201,169,97,0.0) 85%,
-    transparent 100%);
-  animation:heroScan 6s linear infinite;
-  pointer-events:none;z-index:3;
-}
-@keyframes heroScan{
-  0%{top:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{top:100%;opacity:0}
-}
 
 /* ── 系統標籤列 ── */
 .hero-sys{
@@ -379,8 +362,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
   <!-- ── WAVE HERO ── -->
   <div class="hero">
-    <div class="hero-scan"></div>
-
     <div class="hero-left">
       <div class="hero-sys">
         <div class="sys-dot"></div>
