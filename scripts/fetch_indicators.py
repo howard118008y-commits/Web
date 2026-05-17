@@ -79,7 +79,7 @@ def fred_last(series):
     """FRED CSV 最新值（無需 API key）— 只解析 YYYY-MM-DD,number 格式行"""
     try:
         url = f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}'
-        r = requests.get(url, timeout=20, headers=HEADERS)
+        r = requests.get(url, timeout=55, headers=HEADERS)
         valid = []
         for line in r.text.strip().splitlines():
             parts = line.split(',')
@@ -106,7 +106,7 @@ def quarter_str(date_str):
         return date_str[:7]
 
 def get(url, **kwargs):
-    kwargs.setdefault('timeout', 15)
+    kwargs.setdefault('timeout', 55)
     try:
         r = requests.get(url, headers=HEADERS, **kwargs)
         r.raise_for_status()
@@ -121,7 +121,7 @@ def fetch_A01():
     """央行重貼現率 — CBC Open Data API set_id=6022"""
     try:
         url = 'https://cpx.cbc.gov.tw/api/OpenData/DataSet?set_id=6022'
-        r = requests.get(url, headers=HEADERS, timeout=15)
+        r = requests.get(url, headers=HEADERS, timeout=55)
         data = r.json()
         if isinstance(data, list) and data:
             latest = data[0]  # 最新一筆在最前面
@@ -277,7 +277,7 @@ def fetch_A04():
         import urllib.parse
         filename = urllib.parse.quote('不動產貸款相關資訊.xlsx')
         url = f'https://www.cbc.gov.tw/public/data/Ebanking/{filename}'
-        r = get(url, timeout=20)
+        r = get(url, timeout=55)
         if not r:
             return None
         wb = openpyxl.load_workbook(io.BytesIO(r.content), data_only=True)
@@ -335,7 +335,7 @@ def _fetch_moi_b0x():
 
     import zipfile
     url = 'https://statis.moi.gov.tw/micst/report/324050.ods'
-    r = get(url, timeout=30)
+    r = get(url, timeout=55)
     if not r:
         return None
     try:
@@ -602,7 +602,7 @@ def _fetch_pip_housing():
     if not HAS_BS4:
         return None
     from bs4 import BeautifulSoup
-    r = get('https://pip.moi.gov.tw/Publicize/Info/E1050', timeout=20)
+    r = get('https://pip.moi.gov.tw/Publicize/Info/E1050', timeout=55)
     if not r:
         return None
     soup = BeautifulSoup(r.text, 'lxml')
@@ -720,7 +720,7 @@ def _parse_statis_building(rptid):
 
     import zipfile
     url = f'https://statis.moi.gov.tw/micst/report/{rptid}.ods'
-    r = get(url, timeout=30)
+    r = get(url, timeout=55)
     if not r:
         return None
     try:
@@ -814,7 +814,7 @@ def fetch_C03():
 
     try:
         r = get('https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=11086',
-                timeout=20)
+                timeout=55)
         if r and r.text.strip():
             rows = list(csv.reader(io.StringIO(r.text.lstrip('﻿'))))
             for row in reversed(rows[1:]):
@@ -862,7 +862,7 @@ def fetch_C04():
 
     try:
         r = get('https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=11087',
-                timeout=20)
+                timeout=55)
         if r and r.text.strip():
             rows = list(csv.reader(io.StringIO(r.text.lstrip('﻿'))))
             for row in reversed(rows[1:]):
@@ -902,7 +902,7 @@ def fetch_D02():
     val = None
     try:
         r = requests.get('https://open.er-api.com/v6/latest/USD',
-                         timeout=10, headers=HEADERS)
+                         timeout=55, headers=HEADERS)
         val = r.json()['rates'].get('TWD')
     except Exception:
         pass
@@ -930,7 +930,7 @@ def fetch_D03():
         ds  = TODAY.strftime('%Y%m%d')
         url = (f'https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST'
                f'?date={ds}&response=json')
-        r   = requests.get(url, timeout=10, headers=HEADERS)
+        r   = requests.get(url, timeout=55, headers=HEADERS)
         d   = r.json()
         rows = d.get('data', [])
         if rows:
@@ -960,7 +960,7 @@ def fetch_D04():
     # 主計總處每月初發布上月 CPI，XML 檔路徑每月更新
     # DGBAS_CPI_XML 常數定義在本檔案頂部，每月新資料發布後需更新路徑
     try:
-        r = requests.get(DGBAS_CPI_XML, headers=HEADERS, timeout=20)
+        r = requests.get(DGBAS_CPI_XML, headers=HEADERS, timeout=55)
         if r.status_code == 200 and r.content:
             root = ET.fromstring(r.content)
             obs_list = []
@@ -1002,7 +1002,7 @@ def fetch_D04():
         url = ('https://nstatdb.dgbas.gov.tw/dgbasAll/webMain.aspx'
                '?sys=100&funid=qryout&funid2=A040101010'
                '&cycle=41&outkind=11&outmode=8&fldlst=111111111111')
-        r = requests.get(url, timeout=20, headers=HEADERS)
+        r = requests.get(url, timeout=55, headers=HEADERS)
         if HAS_BS4 and r.status_code == 200:
             soup = BeautifulSoup(r.text, 'lxml')
             tds  = soup.find_all('td')
