@@ -588,26 +588,83 @@ def fetch_B04():
     return None
 
 
+_PIP_HOUSING_CACHE = None   # pip.moi.gov.tw E1050 解析結果快取
+_STATIS_BUILDING_CACHE = {}  # statis.moi.gov.tw 建照/使照 ODS 快取 {rptid: dict}
+
+
+def _fetch_pip_housing():
+    """抓取 pip.moi.gov.tw/Publicize/Info/E1050 房價負擔能力指標 HTML 表格
+    回傳 {'period':'2025-Q3', 'national':9.71, 'cities':{'台北市':14.98, ...}}
+    """
+    global _PIP_HOUSING_CACHE
+    if _PIP_HOUSING_CACHE is not None:
+        return _PIP_HOUSING_CACHE
+    if not HAS_BS4:
+        return None
+    from bs4 import BeautifulSoup
+    r = get('https://pip.moi.gov.tw/Publicize/Info/E1050', timeout=20)
+    if not r:
+        return None
+    soup = BeautifulSoup(r.text, 'lxml')
+    tbl = soup.find('table', id='t1')
+    if not tbl:
+        return None
+
+    period = THIS_MONTH
+    caption = tbl.find('caption')
+    if caption:
+        m = re.search(r'(\d{2,3})年第([1-4])季', caption.get_text())
+        if m:
+            yr_ad = int(m.group(1)) + 1911
+            period = f'{yr_ad}-Q{m.group(2)}'
+
+    CITY_MAP = {
+        '新北市': '新北市', '臺北市': '台北市', '桃園市': '桃園市',
+        '臺中市': '台中市', '臺南市': '台南市', '高雄市': '高雄市',
+    }
+    national = None
+    cities   = {}
+    for row in tbl.find_all('tr'):
+        tds = row.find_all('td')
+        if len(tds) < 5:
+            continue
+        city_raw = tds[0].get_text(strip=True)
+        try:
+            ratio = float(tds[4].get_text(strip=True))
+        except ValueError:
+            continue
+        if city_raw == '全國':
+            national = ratio
+        elif city_raw in CITY_MAP:
+            cities[CITY_MAP[city_raw]] = ratio
+
+    if national is None:
+        return None
+    _PIP_HOUSING_CACHE = {'period': period, 'national': national, 'cities': cities}
+    return _PIP_HOUSING_CACHE
+
+
 def fetch_B05():
-    """六都房價所得比 — 內政部（季報）"""
+    """六都房價所得比 — pip.moi.gov.tw E1050 (內政部房價負擔能力指標)"""
     try:
-        r = get('https://pip.moi.gov.tw/Publicize/Info/E1050')
-        if r and HAS_BS4:
-            soup = BeautifulSoup(r.text, 'lxml')
-            # 找「XX 倍」形式，合理範圍 8~30 倍
-            for m in re.finditer(r'(\d{1,2}\.\d{1,2})\s*倍', r.text):
-                v = float(m.group(1))
-                if 8 < v < 30:
-                    if v > 20:
-                        status, note = 'red',    f'全台 {v} 倍，遠超國際合理值(5倍)'
-                    elif v > 12:
-                        status, note = 'yellow', f'全台 {v} 倍，購屋負擔沉重'
-                    else:
-                        status, note = 'green',  f'全台 {v} 倍'
-                    return dict(value=f'{v}倍', status=status, note=note,
-                                updated=quarter_str(TODAY.strftime('%Y-%m-%d')))
+        d = _fetch_pip_housing()
+        if not d or not d.get('cities'):
+            return None
+        cities = d['cities']
+        period = d['period']
+        worst_city = max(cities, key=cities.get)
+        worst_val  = cities[worst_city]
+        avg_6 = sum(cities.values()) / len(cities)
+        note  = f'{worst_city}{worst_val:.2f}倍，六都均值{avg_6:.2f}倍'
+        if worst_val > 12:
+            status = 'red'
+        elif worst_val > 8:
+            status = 'yellow'
+        else:
+            status = 'green'
+        return dict(value=f'{worst_val:.2f}倍', status=status, note=note, updated=period)
     except Exception as e:
-        print(f"  B05 MOI: {e}")
+        print(f"  B05 pip: {e}")
     return None
 
 
@@ -616,8 +673,7 @@ def fetch_C01():
     try:
         r = get('https://www.banking.gov.tw/ch/home.jsp?id=296&parentpath=0,4,132')
         if r and HAS_BS4:
-            soup = BeautifulSoup(r.text, 'lxml')
-            # 逾放比通常是 0.XX% 形式
+            from bs4 import BeautifulSoup
             for m in re.finditer(r'(\d+\.\d{2})%', r.text):
                 v = float(m.group(1))
                 if 0.01 < v < 5.0:
@@ -635,58 +691,190 @@ def fetch_C01():
 
 
 def fetch_C02():
-    """房價所得比 — 內政部（季報）"""
-    # 正確值約 15~30 倍，MOI 網站動態載入不易 scraping，手動維護
+    """房價所得比（全國）— pip.moi.gov.tw E1050 (內政部房價負擔能力指標)"""
+    try:
+        d = _fetch_pip_housing()
+        if not d or d.get('national') is None:
+            return None
+        v = d['national']
+        period = d['period']
+        if v > 12:
+            status, note = 'red',    f'全國{v:.2f}倍，嚴重超出負擔能力'
+        elif v > 8:
+            status, note = 'yellow', f'全國{v:.2f}倍，購屋負擔沉重'
+        else:
+            status, note = 'green',  f'全國{v:.2f}倍'
+        return dict(value=f'{v:.2f}倍', status=status, note=note, updated=period)
+    except Exception as e:
+        print(f"  C02 pip: {e}")
     return None
 
 
+def _parse_statis_building(rptid):
+    """解析 statis.moi.gov.tw 建照/使照 ODS，回傳 {ytd, n_months, prev_ytd, year}
+    328010 = 建造執照, 328050 = 使用執照；column 3 = 宅數
+    """
+    global _STATIS_BUILDING_CACHE
+    if rptid in _STATIS_BUILDING_CACHE:
+        return _STATIS_BUILDING_CACHE[rptid]
+
+    import zipfile
+    url = f'https://statis.moi.gov.tw/micst/report/{rptid}.ods'
+    r = get(url, timeout=30)
+    if not r:
+        return None
+    try:
+        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+            xml_content = zf.read('content.xml')
+    except Exception as e:
+        print(f"  {rptid} ODS zip: {e}")
+        return None
+
+    root = ET.fromstring(xml_content)
+    ns = {
+        'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0',
+        'text':  'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
+    }
+
+    def ctext(cell):
+        return ' '.join(t.text or '' for t in cell.findall('.//text:p', ns)).strip()
+
+    def cint(cells, idx):
+        if idx < len(cells):
+            v = ctext(cells[idx]).replace(',', '').replace('－', '').strip()
+            return int(v) if v.isdigit() else None
+        return None
+
+    rows = root.findall('.//table:table-row', ns)
+    year_data = {}
+    current_yr = None
+
+    for row in rows:
+        cells = row.findall('table:table-cell', ns)
+        if not cells:
+            continue
+        v0 = ctext(cells[0])
+        yr_m = re.search(r'\b(20\d{2})\b', v0)
+        if yr_m and '年' in v0 and '月' not in v0:
+            yr = int(yr_m.group(1))
+            if 2015 <= yr <= TODAY.year + 1:
+                current_yr = yr
+                year_data[yr] = {'ytd': cint(cells, 3), 'months': []}
+                continue
+        if current_yr and re.match(r'[一二三四五六七八九十]+[　\s]*月', v0):
+            val = cint(cells, 3)
+            if val is not None:
+                year_data[current_yr]['months'].append(val)
+
+    if not year_data:
+        return None
+
+    years = sorted(year_data.keys())
+    ly     = years[-1]
+    latest = year_data[ly]
+    n      = len(latest['months'])
+    ytd    = latest['ytd'] or (sum(latest['months']) if latest['months'] else None)
+    prev_ytd = None
+    if ly - 1 in year_data:
+        pm = year_data[ly - 1]['months'][:n]
+        if pm:
+            prev_ytd = sum(pm)
+        elif n == 12 and year_data[ly - 1].get('ytd'):
+            prev_ytd = year_data[ly - 1]['ytd']
+
+    result = {'ytd': ytd, 'n_months': n, 'prev_ytd': prev_ytd, 'year': ly}
+    _STATIS_BUILDING_CACHE[rptid] = result
+    return result
+
+
 def fetch_C03():
-    """建照核發 — 內政部統計月報"""
+    """建照核發 — statis.moi.gov.tw 328010，備用 data.moi.gov.tw"""
+    try:
+        d = _parse_statis_building('328010')
+        if d and d.get('ytd') and d.get('n_months'):
+            n, ytd, prev_ytd, yr = d['n_months'], d['ytd'], d['prev_ytd'], d['year']
+            ann = ytd / n * 12
+            yoy_str = ''
+            if prev_ytd and prev_ytd > 0:
+                yoy = (ytd - prev_ytd) / prev_ytd * 100
+                yoy_str = f'，年{"增" if yoy >= 0 else "減"}{abs(yoy):.1f}%'
+            period_map = {3: 'Q1', 6: 'Q2', 9: '前3季', 12: '全年'}
+            period  = period_map.get(n, f'前{n}月')
+            updated = (f'{yr}-Q{n//3}' if n in (3,6,9) else
+                       str(yr) if n == 12 else f'{yr}-{n:02d}')
+            if ann < 100000:
+                status, note = 'red',    f'{period}核發{ytd:,}戶{yoy_str}，年化不足10萬'
+            elif ann < 140000:
+                status, note = 'yellow', f'{period}核發{ytd:,}戶{yoy_str}，建照減少'
+            else:
+                status, note = 'green',  f'{period}核發{ytd:,}戶{yoy_str}'
+            return dict(value=f'{ytd:,}戶', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  C03 statis: {e}")
+
     try:
         r = get('https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=11086',
                 timeout=20)
-        if r and r.status_code == 200 and r.text.strip():
+        if r and r.text.strip():
             rows = list(csv.reader(io.StringIO(r.text.lstrip('﻿'))))
-            if len(rows) > 1:
-                # 找最後一筆有效數字列
-                for row in reversed(rows[1:]):
-                    cols = [c.strip().replace(',', '') for c in row]
-                    nums = [c for c in cols if c.isdigit() and int(c) > 0]
-                    if nums:
-                        val = int(nums[-1])
-                        ann = val * 12
-                        if ann < 130000:
-                            status, note = 'red',    f'月均{val:,}棟，年化13萬以下，創7年低'
-                        elif ann < 160000:
-                            status, note = 'yellow', f'月均{val:,}棟，建商保守減量'
-                        else:
-                            status, note = 'green',  f'月均{val:,}棟，供給正常'
-                        return dict(value=f'{val:,}棟', status=status, note=note,
-                                    updated=THIS_MONTH)
+            for row in reversed(rows[1:]):
+                nums = [c.strip().replace(',','') for c in row
+                        if c.strip().replace(',','').isdigit() and int(c.strip().replace(',','')) > 0]
+                if nums:
+                    val = int(nums[-1])
+                    ann = val * 12
+                    if ann < 130000:
+                        status, note = 'red',    f'月均{val:,}戶，年化13萬以下'
+                    elif ann < 160000:
+                        status, note = 'yellow', f'月均{val:,}戶，建商保守減量'
+                    else:
+                        status, note = 'green',  f'月均{val:,}戶，供給正常'
+                    return dict(value=f'{val:,}戶', status=status, note=note,
+                                updated=THIS_MONTH)
     except Exception as e:
-        print(f"  C03 MOI: {e}")
+        print(f"  C03 MOI fallback: {e}")
     return None
 
 
 def fetch_C04():
-    """使照核發 — 內政部統計月報"""
+    """使照核發 — statis.moi.gov.tw 328050，備用 data.moi.gov.tw"""
+    try:
+        d_c4 = _parse_statis_building('328050')
+        if d_c4 and d_c4.get('ytd') and d_c4.get('n_months'):
+            n, ytd, prev_ytd, yr = d_c4['n_months'], d_c4['ytd'], d_c4['prev_ytd'], d_c4['year']
+            yoy_str = ''
+            if prev_ytd and prev_ytd > 0:
+                yoy = (ytd - prev_ytd) / prev_ytd * 100
+                yoy_str = f'，年{"增" if yoy >= 0 else "減"}{abs(yoy):.1f}%'
+            period_map = {3: 'Q1', 6: 'Q2', 9: '前3季', 12: '全年'}
+            period  = period_map.get(n, f'前{n}月')
+            updated = (f'{yr}-Q{n//3}' if n in (3,6,9) else
+                       str(yr) if n == 12 else f'{yr}-{n:02d}')
+            # 建照數量（比較用）
+            d_c3 = _parse_statis_building('328010')
+            c3_ytd = d_c3['ytd'] if d_c3 and d_c3.get('ytd') else 0
+            compare = '使照>建照，交屋潮持續' if ytd > c3_ytd else '使照<建照，供給將增'
+            note = f'{period}核發{ytd:,}戶{yoy_str}，{compare}'
+            status = 'yellow'
+            return dict(value=f'{ytd:,}戶', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  C04 statis: {e}")
+
     try:
         r = get('https://data.moi.gov.tw/MoiOD/System/DownloadFile.aspx?DATA=11087',
                 timeout=20)
-        if r and r.status_code == 200 and r.text.strip():
+        if r and r.text.strip():
             rows = list(csv.reader(io.StringIO(r.text.lstrip('﻿'))))
-            if len(rows) > 1:
-                for row in reversed(rows[1:]):
-                    cols = [c.strip().replace(',', '') for c in row]
-                    nums = [c for c in cols if c.isdigit() and int(c) > 0]
-                    if nums:
-                        val = int(nums[-1])
-                        status = 'yellow'
-                        note = f'月均{val:,}棟，使照>建照，交屋潮持續'
-                        return dict(value=f'{val:,}棟', status=status, note=note,
-                                    updated=THIS_MONTH)
+            for row in reversed(rows[1:]):
+                nums = [c.strip().replace(',','') for c in row
+                        if c.strip().replace(',','').isdigit() and int(c.strip().replace(',','')) > 0]
+                if nums:
+                    val = int(nums[-1])
+                    return dict(value=f'{val:,}戶', status='yellow',
+                                note=f'月均{val:,}戶，使照>建照，交屋潮持續',
+                                updated=THIS_MONTH)
     except Exception as e:
-        print(f"  C04 MOI: {e}")
+        print(f"  C04 MOI fallback: {e}")
     return None
 
 

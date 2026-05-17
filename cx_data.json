@@ -70,8 +70,8 @@
       "name": "買賣移轉棟數",
       "value": "60,403棟",
       "status": "red",
-      "note": "Q1年減4.3%，史上第三低",
-      "updated": "2026-03"
+      "note": "Q1共60,403棟，年減4.3%，年化不足25萬",
+      "updated": "2026-Q1"
     },
     {
       "code": "B02",
@@ -95,19 +95,19 @@
       "code": "B04",
       "series": "B",
       "name": "六都移轉棟數",
-      "value": "年減3.7%",
-      "status": "red",
-      "note": "台中年減16.5%最大",
-      "updated": "2026-02"
+      "value": "47,002棟",
+      "status": "yellow",
+      "note": "Q1六都年減2.2%，台中市年減18.6%最多",
+      "updated": "2026-Q1"
     },
     {
       "code": "B05",
       "series": "B",
       "name": "六都房價",
-      "value": "23.5倍",
+      "value": "14.98倍",
       "status": "red",
-      "note": "台北26.67倍，遠超國際合理值",
-      "updated": "2026-Q1"
+      "note": "台北市14.98倍，六都均值11.06倍",
+      "updated": "2025-Q3"
     },
     {
       "code": "C01",
@@ -122,28 +122,28 @@
       "code": "C02",
       "series": "C",
       "name": "房價所得比",
-      "value": "23.5倍",
-      "status": "red",
-      "note": "台北26.67倍，遠超合理值",
-      "updated": "2025-Q4"
+      "value": "9.71倍",
+      "status": "yellow",
+      "note": "全國9.71倍，購屋負擔沉重",
+      "updated": "2025-Q3"
     },
     {
       "code": "C03",
       "series": "C",
       "name": "建照核發",
-      "value": "12.5萬戶",
-      "status": "yellow",
-      "note": "年減11.3%，創7年新低",
-      "updated": "2025-11"
+      "value": "24,658戶",
+      "status": "red",
+      "note": "Q1核發24,658戶，年減30.0%，年化不足10萬",
+      "updated": "2026-Q1"
     },
     {
       "code": "C04",
       "series": "C",
       "name": "建照 vs 使照",
-      "value": "使照>建照",
+      "value": "31,798戶",
       "status": "yellow",
-      "note": "交屋潮湧現，短期供給增加",
-      "updated": "2025-11"
+      "note": "Q1核發31,798戶，年增0.6%，使照>建照，交屋潮持續",
+      "updated": "2026-Q1"
     },
     {
       "code": "D01",
