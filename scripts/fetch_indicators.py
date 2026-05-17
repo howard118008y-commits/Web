@@ -320,35 +320,199 @@ def fetch_A05():
     return None
 
 
+_MOI_B0X_CACHE = None   # 快取同一次執行中的 ODS 解析結果
+
+def _fetch_moi_b0x():
+    """下載並解析 statis.moi.gov.tw 內政統計月報 4.5-辦理建物所有權登記 ODS
+    回傳 dict: {
+      'b01': {'ytd':int, 'n_months':int, 'prev_ytd':int},
+      'b04': {'curr':{city:int}, 'prev':{city:int}, 'period':'Q1'/...}
+    }
+    """
+    global _MOI_B0X_CACHE
+    if _MOI_B0X_CACHE is not None:
+        return _MOI_B0X_CACHE
+
+    import zipfile
+    url = 'https://statis.moi.gov.tw/micst/report/324050.ods'
+    r = get(url, timeout=30)
+    if not r:
+        return None
+    try:
+        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+            xml_content = zf.read('content.xml')
+    except Exception as e:
+        print(f"  B0x ODS zip: {e}")
+        return None
+
+    root = ET.fromstring(xml_content)
+    ns = {
+        'table': 'urn:oasis:names:tc:opendocument:xmlns:table:1.0',
+        'text':  'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
+    }
+
+    def ctext(cell):
+        return ' '.join(t.text or '' for t in cell.findall('.//text:p', ns)).strip()
+
+    def cint(cells, idx):
+        if idx < len(cells):
+            v = ctext(cells[idx]).replace(',', '').replace('－', '').strip()
+            return int(v) if v.isdigit() else None
+        return None
+
+    rows = root.findall('.//table:table-row', ns)
+
+    # ── B01: 國家月別合計 (Sheet 1 前半段) ──────────────────────────────────
+    year_data = {}
+    current_yr = None
+    for row in rows:
+        cells = row.findall('table:table-cell', ns)
+        if not cells:
+            continue
+        v0 = ctext(cells[0])
+        yr_m = re.search(r'(\d{4})', v0)
+        if yr_m and '年' in v0 and '月' not in v0:
+            yr = int(yr_m.group(1))
+            if 2010 <= yr <= TODAY.year + 1:
+                current_yr = yr
+                ytd = cint(cells, 5)
+                year_data[yr] = {'ytd': ytd, 'months': []}
+                continue
+        if current_yr and re.match(r'[一二三四五六七八九十]+[　\s]*月', v0):
+            val = cint(cells, 5)
+            if val is not None:
+                year_data[current_yr]['months'].append(val)
+
+    b01 = None
+    years = sorted(year_data.keys())
+    if years:
+        ly = years[-1]
+        latest = year_data[ly]
+        n = len(latest['months'])
+        ytd = latest['ytd'] or sum(latest['months'])
+        prev_ytd = None
+        if ly - 1 in year_data:
+            pm = year_data[ly - 1]['months'][:n]
+            if pm:
+                prev_ytd = sum(pm)
+        b01 = {'ytd': ytd, 'n_months': n, 'prev_ytd': prev_ytd, 'year': ly}
+
+    # ── B04: 六都累積 (區域別部分) ──────────────────────────────────────────
+    SIX = ['新 北 市', '臺 北 市', '桃 園 市', '臺 中 市', '臺 南 市', '高 雄 市']
+    SIX_LABELS = ['新北市', '台北市', '桃園市', '台中市', '台南市', '高雄市']
+
+    cur_yr_roc  = TODAY.year - 1911
+    prev_yr_roc = cur_yr_roc - 1
+
+    curr_ytd_start    = None
+    prev_annual_start = None
+    prev_mo_starts    = {}
+
+    for i, row in enumerate(rows):
+        cells = row.findall('table:table-cell', ns)
+        if not cells:
+            continue
+        v0 = ctext(cells[0])
+        if re.search(rf'{cur_yr_roc}年\s*\d+\s*-\s*\d+月', v0) and curr_ytd_start is None:
+            curr_ytd_start = i
+        elif re.search(rf'{prev_yr_roc}年\s*1\s*-\s*12月', v0) and prev_annual_start is None:
+            prev_annual_start = i
+        elif prev_annual_start and re.match(r'^\d+月$', v0):
+            mo = int(v0.replace('月', ''))
+            if mo not in prev_mo_starts:
+                prev_mo_starts[mo] = i
+
+    curr_cities = {}
+    if curr_ytd_start:
+        for i in range(curr_ytd_start + 1, curr_ytd_start + 35):
+            if i >= len(rows):
+                break
+            cells = rows[i].findall('table:table-cell', ns)
+            v0 = ctext(cells[0]) if cells else ''
+            if re.match(r'^\d+月$', v0):
+                break
+            v1 = ctext(cells[1]) if len(cells) > 1 else ''
+            for j, city in enumerate(SIX):
+                if city in v1:
+                    val = cint(cells, 6)
+                    if val is not None:
+                        curr_cities[SIX_LABELS[j]] = val
+
+    prev_q1_cities = {c: 0 for c in SIX_LABELS}
+    n_months_region = len(curr_cities) and b01['n_months'] if b01 else 3
+    for mo in range(1, n_months_region + 1):
+        mo_start = prev_mo_starts.get(mo)
+        if not mo_start:
+            continue
+        for i in range(mo_start + 1, mo_start + 35):
+            if i >= len(rows):
+                break
+            cells = rows[i].findall('table:table-cell', ns)
+            v0 = ctext(cells[0]) if cells else ''
+            if re.match(r'^\d+月$', v0) and i > mo_start + 1:
+                break
+            v1 = ctext(cells[1]) if len(cells) > 1 else ''
+            for j, city in enumerate(SIX):
+                if city in v1:
+                    val = cint(cells, 6)
+                    if val is not None:
+                        prev_q1_cities[SIX_LABELS[j]] += val
+
+    # Determine period string for B04
+    nm = b01['n_months'] if b01 else 3
+    if nm == 3:
+        period = 'Q1'
+    elif nm == 6:
+        period = 'Q2'
+    elif nm == 9:
+        period = '前3季'
+    else:
+        period = f'前{nm}月'
+
+    b04 = {'curr': curr_cities, 'prev': prev_q1_cities, 'period': period}
+
+    _MOI_B0X_CACHE = {'b01': b01, 'b04': b04}
+    return _MOI_B0X_CACHE
+
+
 def fetch_B01():
-    """全國買賣移轉棟數 — 內政部不動產平台"""
-    # 嘗試 pip.moi.gov.tw 統計 API
-    endpoints = [
-        'https://pip.moi.gov.tw/Api/TransactionCount/GetMonthList',
-        'https://pip.moi.gov.tw/Api/E3010/GetData',
-    ]
-    for url in endpoints:
-        r = get(url)
-        if r:
-            try:
-                data = r.json()
-                if isinstance(data, list) and data:
-                    latest = data[-1]
-                    val = (latest.get('Total') or latest.get('棟數')
-                           or latest.get('count') or latest.get('transferCount'))
-                    if val:
-                        val = int(str(val).replace(',', ''))
-                        ann = val * 12
-                        if ann < 250000:
-                            status, note = 'red',    f'月均{val:,}棟，年化低於25萬，量縮嚴重'
-                        elif ann < 300000:
-                            status, note = 'yellow', f'月均{val:,}棟，交易量偏低'
-                        else:
-                            status, note = 'green',  f'月均{val:,}棟，交易量正常'
-                        return dict(value=f'{val:,}棟', status=status, note=note,
-                                    updated=THIS_MONTH)
-            except Exception as e:
-                print(f"  B01 API parse {url}: {e}")
+    """全國買賣移轉棟數 — 內政部統計月報 (statis.moi.gov.tw 4.5-辦理建物所有權登記)"""
+    try:
+        d = _fetch_moi_b0x()
+        if not d or not d.get('b01'):
+            return None
+        b = d['b01']
+        ytd, n, prev_ytd, yr = b['ytd'], b['n_months'], b['prev_ytd'], b['year']
+        if not ytd or not n:
+            return None
+
+        ann = ytd / n * 12
+        yoy_str = ''
+        if prev_ytd and prev_ytd > 0:
+            yoy = (ytd - prev_ytd) / prev_ytd * 100
+            yoy_str = f'，年{"增" if yoy >= 0 else "減"}{abs(yoy):.1f}%'
+
+        if n == 3:
+            period, updated = 'Q1', f'{yr}-Q1'
+        elif n == 6:
+            period, updated = 'Q2', f'{yr}-Q2'
+        elif n == 9:
+            period, updated = '前3季', f'{yr}-Q3'
+        elif n == 12:
+            period, updated = '全年', str(yr)
+        else:
+            period, updated = f'前{n}月', f'{yr}-{n:02d}'
+
+        if ann < 250000:
+            status, note = 'red',    f'{period}共{ytd:,}棟{yoy_str}，年化不足25萬'
+        elif ann < 320000:
+            status, note = 'yellow', f'{period}共{ytd:,}棟{yoy_str}'
+        else:
+            status, note = 'green',  f'{period}共{ytd:,}棟{yoy_str}'
+
+        return dict(value=f'{ytd:,}棟', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  B01 statis.moi: {e}")
     return None
 
 
@@ -365,7 +529,62 @@ def fetch_B03():
 
 
 def fetch_B04():
-    """六都移轉棟數 — 內政部（待開發）"""
+    """六都移轉棟數 — 內政部統計月報 (statis.moi.gov.tw 4.5-辦理建物所有權登記)"""
+    try:
+        d = _fetch_moi_b0x()
+        if not d or not d.get('b04'):
+            return None
+        b = d['b04']
+        curr, prev, period = b['curr'], b['prev'], b['period']
+        if not curr:
+            return None
+
+        total_curr = sum(curr.values())
+        total_prev = sum(prev.values())
+
+        yoy_str = ''
+        worst_city, worst_yoy = '', 0.0
+        if total_prev > 0:
+            total_yoy = (total_curr - total_prev) / total_prev * 100
+            yoy_str = f'年{"增" if total_yoy >= 0 else "減"}{abs(total_yoy):.1f}%'
+            # Find city with largest drop
+            for city in curr:
+                p = prev.get(city, 0)
+                if p > 0:
+                    cy = (curr[city] - p) / p * 100
+                    if cy < worst_yoy:
+                        worst_yoy = cy
+                        worst_city = city
+
+        note_parts = [f'{period}六都{yoy_str}']
+        if worst_city:
+            note_parts.append(f'{worst_city}年減{abs(worst_yoy):.1f}%最多')
+        note = '，'.join(note_parts)
+
+        b01 = d.get('b01', {})
+        yr = b01.get('year', TODAY.year) if b01 else TODAY.year
+        nm = b01.get('n_months', 3) if b01 else 3
+        if nm == 3:
+            updated = f'{yr}-Q1'
+        elif nm == 6:
+            updated = f'{yr}-Q2'
+        else:
+            updated = f'{yr}-{nm:02d}'
+
+        if total_prev > 0:
+            total_yoy_val = (total_curr - total_prev) / total_prev * 100
+            if total_yoy_val < -10:
+                status = 'red'
+            elif total_yoy_val < 0:
+                status = 'yellow'
+            else:
+                status = 'green'
+        else:
+            status = 'yellow'
+
+        return dict(value=f'{total_curr:,}棟', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  B04 statis.moi: {e}")
     return None
 
 
