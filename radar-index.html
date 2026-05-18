@@ -613,15 +613,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       var p=i/N;
       var dist=Math.abs(p-0.5)*2; /* 0=centre 1=edge */
       var r,g,b,a;
-      if(dist<0.10){r=255;g=235;b=185;a=0.92;}
-      else if(dist<0.30){var f=(dist-0.10)/0.20;r=255;g=Math.round(lerp(235,195,f));b=Math.round(lerp(185,120,f));a=lerp(0.88,0.80,f);}
-      else if(dist<0.55){var f=(dist-0.30)/0.25;r=Math.round(lerp(255,210,f));g=Math.round(lerp(195,155,f));b=Math.round(lerp(120,70,f));a=lerp(0.78,0.52,f);}
-      else if(dist<0.78){var f=(dist-0.55)/0.23;r=Math.round(lerp(210,150,f));g=Math.round(lerp(155,110,f));b=Math.round(lerp(70,35,f));a=lerp(0.48,0.22,f);}
-      else{var f=(dist-0.78)/0.22;r=120;g=85;b=25;a=lerp(0.20,0.02,f);}
+      if(dist<0.10){r=240;g=232;b=215;a=0.48;}
+      else if(dist<0.30){var f=(dist-0.10)/0.20;r=Math.round(lerp(240,220,f));g=Math.round(lerp(232,215,f));b=Math.round(lerp(215,195,f));a=lerp(0.44,0.34,f);}
+      else if(dist<0.55){var f=(dist-0.30)/0.25;r=Math.round(lerp(220,200,f));g=Math.round(lerp(215,190,f));b=Math.round(lerp(195,165,f));a=lerp(0.30,0.16,f);}
+      else if(dist<0.78){var f=(dist-0.55)/0.23;r=Math.round(lerp(200,175,f));g=Math.round(lerp(190,165,f));b=Math.round(lerp(165,140,f));a=lerp(0.13,0.05,f);}
+      else{var f=(dist-0.78)/0.22;r=175;g=165;b=145;a=lerp(0.04,0.01,f);}
 
       ctx.beginPath();
       ctx.strokeStyle='rgba('+r+','+g+','+b+','+Math.max(0,a).toFixed(2)+')';
-      ctx.lineWidth=0.9;
+      ctx.lineWidth=0.75;
 
       var yCenter=H*0.5;
       var yOff=(p-0.5)*H*1.18;
