@@ -337,22 +337,44 @@ nav .nav-logo span{color:var(--gold)!important}
 .footer-note span{color:rgba(201,169,97,0.55);}
 
 /* ── 18項指標總覽 ── */
-.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-.series-block{border:1px solid rgba(201,169,97,0.11);background:rgba(201,169,97,0.025);border-radius:4px;overflow:hidden}
-.sb-header{display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid rgba(201,169,97,0.09)}
-.sb-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:12px;font-weight:700;flex-shrink:0}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.series-block{
+  border:1px solid rgba(201,169,97,0.14);
+  background:rgba(10,12,24,0.6);
+  border-radius:12px;overflow:hidden;
+  position:relative;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3);
+  transition:box-shadow .2s,border-color .2s;
+}
+.series-block:hover{border-color:rgba(201,169,97,0.28);box-shadow:0 6px 32px rgba(0,0,0,0.45)}
+.series-block::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--sb-accent,rgba(201,169,97,0.5));
+}
+.sb-header{display:flex;align-items:center;gap:10px;padding:13px 16px 13px 18px;border-bottom:1px solid rgba(201,169,97,0.09)}
+.sb-badge{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:700;flex-shrink:0}
 .sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1}
-.sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:#F87171;letter-spacing:0.1em;flex-shrink:0}
-.ov-row{display:flex;align-items:center;gap:9px;padding:8px 15px;border-bottom:1px solid rgba(201,169,97,0.05);transition:background .15s}
+.sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:#F87171;letter-spacing:0.1em;flex-shrink:0;
+  background:rgba(248,113,113,0.1);padding:2px 7px;border-radius:4px;border:1px solid rgba(248,113,113,0.25);}
+@keyframes redPulse{0%,100%{box-shadow:0 0 4px rgba(248,113,113,0.5)}50%{box-shadow:0 0 10px rgba(248,113,113,1),0 0 18px rgba(248,113,113,0.4)}}
+@keyframes greenGlow{0%,100%{box-shadow:0 0 4px rgba(74,222,128,0.4)}50%{box-shadow:0 0 8px rgba(74,222,128,0.8)}}
+.ov-row{display:flex;align-items:center;gap:9px;padding:10px 16px 10px 18px;border-bottom:1px solid rgba(201,169,97,0.05);transition:background .18s,padding-left .18s}
 .ov-row:last-child{border-bottom:0}
-.ov-row:hover{background:rgba(201,169,97,0.04)}
-.ov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.ov-dot.green{background:#4ADE80;box-shadow:0 0 5px rgba(74,222,128,0.5)}
+.ov-row:hover{background:rgba(201,169,97,0.06);padding-left:22px}
+.ov-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ov-dot.green{background:#4ADE80;animation:greenGlow 2.8s ease-in-out infinite}
 .ov-dot.yellow{background:#FCD34D;box-shadow:0 0 5px rgba(252,211,77,0.5)}
-.ov-dot.red{background:#F87171;box-shadow:0 0 5px rgba(248,113,113,0.5)}
-.ov-code{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);min-width:24px;flex-shrink:0}
-.ov-name{flex:1;font-size:11px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ov-val{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.ov-dot.red{background:#F87171;animation:redPulse 1.6s ease-in-out infinite}
+.ov-code{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);min-width:28px;flex-shrink:0}
+.ov-name{flex:1;font-size:12px;color:var(--ink);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-val{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.ov-val.sg{color:#4ADE80;text-shadow:0 0 8px rgba(74,222,128,0.4)}
+.ov-val.sy{color:#FCD34D;text-shadow:0 0 8px rgba(252,211,77,0.3)}
+.ov-val.sr{color:#F87171;text-shadow:0 0 8px rgba(248,113,113,0.4)}
+.ov-trend{font-size:11px;flex-shrink:0;margin-left:2px;line-height:1}
+.ov-trend.up{color:#4ADE80}
+.ov-trend.flat{color:#FCD34D}
+.ov-trend.dn{color:#F87171}
 .ov-date{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);white-space:nowrap;flex-shrink:0;margin-left:4px}
 .ov-meta{margin-top:10px;margin-bottom:60px;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.2em;color:var(--ink-dim)}
 
@@ -561,18 +583,22 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       ['A','B','C','D'].forEach(function(s){
         var sc=SC[s],inds=grp[s];
         var reds=inds.filter(function(i){return i.status==='red';}).length;
-        html+='<div class="series-block">';
+        var trendMap={green:{cls:'up',arrow:'↑'},yellow:{cls:'flat',arrow:'→'},red:{cls:'dn',arrow:'↓'}};
+        html+='<div class="series-block" style="--sb-accent:'+sc.color+'">';
         html+='<div class="sb-header">';
         html+='<div class="sb-badge" style="background:'+sc.bg+';color:'+sc.color+'">'+s+'</div>';
         html+='<div class="sb-title" style="color:'+sc.color+'">'+sc.label+'&nbsp;<span style="color:var(--ink-dim);font-size:8px">'+sc.en+'</span></div>';
         if(reds)html+='<div class="sb-warn">⚠ '+reds+'項紅燈</div>';
         html+='</div>';
         inds.forEach(function(ind){
+          var tr=trendMap[ind.status]||{cls:'flat',arrow:'→'};
+          var vc={'green':'sg','yellow':'sy','red':'sr'}[ind.status]||'';
           html+='<div class="ov-row">';
           html+='<span class="ov-dot '+ind.status+'"></span>';
           html+='<span class="ov-code">'+ind.code+'</span>';
           html+='<span class="ov-name">'+ind.name+'</span>';
-          html+='<span class="ov-val">'+ind.value+'</span>';
+          html+='<span class="ov-val '+vc+'">'+ind.value+'</span>';
+          html+='<span class="ov-trend '+tr.cls+'">'+tr.arrow+'</span>';
           html+='<span class="ov-date">'+ind.updated+'</span>';
           html+='</div>';
         });
