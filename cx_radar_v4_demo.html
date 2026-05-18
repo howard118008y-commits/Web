@@ -453,6 +453,7 @@ body::after {
 .context-value.red { color: var(--red); }
 .context-value.green { color: var(--green); }
 .context-value.gold { color: var(--gold); }
+.context-value.blue { color: var(--blue); }
 
 .context-time {
   font-family: "Noto Sans TC", sans-serif;
@@ -1135,7 +1136,323 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
     </div>
 
+    <!-- ── A04 不動產放款集中度 ── -->
+    <div class="indicator" data-cx-code="A04">
+      <span class="indicator-tag">A · 04</span>
+      <span class="freq-tag" style="background:rgba(212,90,90,0.15);color:#D45A5A;border-color:rgba(212,90,90,0.35);">季公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">不動產放款集中度</div>
+          <div class="indicator-name-en">Real Estate Loan Concentration</div>
+          <div class="indicator-source">資料來源：金管會銀行局 · 銀行授信集中度監控</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value" style="color:#D45A5A;">35.56<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-unit" style="color:rgba(212,90,90,0.8);">⚠ 超越 30% 政策警戒線 · 金管會持續關注</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">七日</span><span class="change-value flat">±0</span></div>
+          <div class="change-cell"><span class="change-period">三十日</span><span class="change-value down">−0.18%</span></div>
+          <div class="change-cell"><span class="change-period">九十日</span><span class="change-value down">−0.42%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">各季集中度走勢與政策警戒線</span>
+        <span class="chart-section-en">2020Q1 — 2026Q1 · Quarterly Trend</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <!-- 背景格線 -->
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="44" text-anchor="end">40%</text>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="104" text-anchor="end">37%</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="164" text-anchor="end">34%</text>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="224" text-anchor="end">31%</text>
+            <line x1="0" y1="265" x2="1200" y2="265" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <text x="-8" y="269" text-anchor="end">28%</text>
+          </g>
+          <!-- 警戒線 30% -->
+          <line x1="0" y1="238" x2="1200" y2="238" stroke="rgba(212,90,90,0.55)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="1210" y="242" font-family="Noto Serif TC" font-size="11" fill="rgba(212,90,90,0.8)" text-anchor="start">30% 警戒</text>
+          <!-- X 軸標籤 -->
+          <g font-family="IBM Plex Mono" font-size="11" fill="#7A7565">
+            <text x="48" y="305">20Q1</text><text x="144" y="305">20Q3</text>
+            <text x="240" y="305">21Q1</text><text x="336" y="305">21Q3</text>
+            <text x="432" y="305">22Q1</text><text x="528" y="305">22Q3</text>
+            <text x="624" y="305">23Q1</text><text x="720" y="305">23Q3</text>
+            <text x="816" y="305">24Q1</text><text x="912" y="305">24Q3</text>
+            <text x="1008" y="305">25Q1</text><text x="1104" y="305">26Q1</text>
+          </g>
+          <!-- 柱狀圖 — 顏色依超警戒線與否 -->
+          <g>
+            <rect x="24" y="230" width="52" height="55" fill="rgba(95,186,125,0.6)" rx="2"/>
+            <rect x="120" y="218" width="52" height="67" fill="rgba(95,186,125,0.6)" rx="2"/>
+            <rect x="216" y="210" width="52" height="75" fill="rgba(229,199,127,0.6)" rx="2"/>
+            <rect x="312" y="195" width="52" height="90" fill="rgba(229,199,127,0.6)" rx="2"/>
+            <rect x="408" y="182" width="52" height="103" fill="rgba(229,199,127,0.65)" rx="2"/>
+            <rect x="504" y="168" width="52" height="117" fill="rgba(232,147,72,0.65)" rx="2"/>
+            <rect x="600" y="150" width="52" height="135" fill="rgba(212,90,90,0.65)" rx="2"/>
+            <rect x="696" y="138" width="52" height="147" fill="rgba(212,90,90,0.7)" rx="2"/>
+            <rect x="792" y="128" width="52" height="157" fill="rgba(212,90,90,0.75)" rx="2"/>
+            <rect x="888" y="122" width="52" height="163" fill="rgba(212,90,90,0.8)" rx="2"/>
+            <rect x="984" y="118" width="52" height="167" fill="rgba(212,90,90,0.85)" rx="2"/>
+            <rect x="1080" y="112" width="52" height="173" fill="rgba(212,90,90,0.9)" rx="2"/>
+          </g>
+          <!-- 連線趨勢 -->
+          <polyline points="50,257 146,244 242,246 338,240 434,233 530,224 626,218 722,212 818,204 914,199 1010,195 1106,188"
+            fill="none" stroke="rgba(232,147,72,0.7)" stroke-width="2" stroke-linejoin="round"/>
+          <!-- 今日點 -->
+          <circle cx="1106" cy="188" r="6" fill="#D45A5A"/>
+          <text x="1106" y="178" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#D45A5A" font-weight="500">35.56%</text>
+          <!-- 數值標籤 -->
+          <text x="50" y="225" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="rgba(95,186,125,0.85)">28.2%</text>
+          <text x="1106" y="108" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="rgba(212,90,90,0.85)">35.6%</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：季度 · 2020Q1–2026Q1 &nbsp;｜&nbsp; 虛線：30% 政策警戒線</span>
+        <span>Y 軸：不動產放款占總放款比率（%）</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now"><div class="context-label">當前水位</div><div class="context-value red">35.56%</div><div class="context-time">2026 Q1 · 高於警戒線 5.56pp</div></div>
+        <div class="context-cell high"><div class="context-label">近三年高點</div><div class="context-value red">36.2%</div><div class="context-time">2025 Q3 · 觸頂回落中</div></div>
+        <div class="context-cell low"><div class="context-label">近三年低點</div><div class="context-value green">30.4%</div><div class="context-time">2022 Q2 · 政策效果顯現</div></div>
+        <div class="context-cell forecast"><div class="context-label">六個月預測</div><div class="context-value gold">34.5 — 35.0%</div><div class="context-time">緩降趨勢 · 仍超警戒</div></div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        不動產放款集中度 35.56% 已連續 <span class="key">12 季超越 30% 警戒線</span>，顯示銀行業對房地產授信高度集中。金管會 2025 年起對超標銀行實施差別提存，預期 2026 年下半年集中度將緩步下降，但短期仍屬<span class="up-key">偏高風險區</span>。對房貸承辦而言，這意味銀行核貸態度趨於保守，成數與利率空間均受壓縮。
+      </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">集中度偏高影響核貸成數 · 了解如何為客戶爭取最佳條件</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
+    </div>
+
+    <!-- ── A05 新青安貸款佔比 ── -->
+    <div class="indicator" data-cx-code="A05">
+      <span class="indicator-tag">A · 05</span>
+      <span class="freq-tag">月公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">新青安貸款佔比</div>
+          <div class="indicator-name-en">Youth Housing Loan Share</div>
+          <div class="indicator-source">資料來源：內政部統計處 · 政策性貸款追蹤</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value" style="color:#E5C77F;">下滑中<span class="indicator-value-suffix" style="font-size:18px;margin-left:6px;">↓</span></div>
+          <div class="indicator-unit">佔整體房貸比率 · 2026.01 數據</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">七日</span><span class="change-value flat">±0</span></div>
+          <div class="change-cell"><span class="change-period">三十日</span><span class="change-value down">−2.1%</span></div>
+          <div class="change-cell"><span class="change-period">九十日</span><span class="change-value down">−6.4%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">新青安申請量 vs 整體房貸月趨勢</span>
+        <span class="chart-section-en">2023.07 — 2026.01 · Monthly Volume</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E89348" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#E89348" stop-opacity="0.02"/>
+            </linearGradient>
+            <linearGradient id="areaGrad2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6BA8C9" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#6BA8C9" stop-opacity="0.02"/>
+            </linearGradient>
+          </defs>
+          <!-- 格線 -->
+          <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
+            <line x1="0" y1="60" x2="1200" y2="60" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="64" text-anchor="end">高</text>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="164" text-anchor="end">中</text>
+            <line x1="0" y1="255" x2="1200" y2="255" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <text x="-8" y="259" text-anchor="end">低</text>
+          </g>
+          <!-- X 軸月份 -->
+          <g font-family="IBM Plex Mono" font-size="10" fill="#7A7565">
+            <text x="0" y="305">23.07</text><text x="110" y="305">23.10</text>
+            <text x="220" y="305">24.01</text><text x="330" y="305">24.04</text>
+            <text x="440" y="305">24.07</text><text x="550" y="305">24.10</text>
+            <text x="660" y="305">25.01</text><text x="770" y="305">25.04</text>
+            <text x="880" y="305">25.07</text><text x="990" y="305">25.10</text>
+            <text x="1100" y="305">26.01</text>
+          </g>
+          <!-- 整體房貸面積圖（藍） -->
+          <path d="M 0,200 C 50,185 100,170 150,165 S 250,155 300,152 S 400,148 450,145 S 550,140 600,138 S 700,135 750,133 S 850,130 900,132 S 1000,138 1050,142 S 1150,148 1200,150 L 1200,280 L 0,280 Z"
+            fill="url(#areaGrad2)" stroke="none"/>
+          <path d="M 0,200 C 50,185 100,170 150,165 S 250,155 300,152 S 400,148 450,145 S 550,140 600,138 S 700,135 750,133 S 850,130 900,132 S 1000,138 1050,142 S 1150,148 1200,150"
+            fill="none" stroke="#6BA8C9" stroke-width="1.5" opacity="0.6"/>
+          <!-- 新青安申請量（橘色面積） -->
+          <path d="M 0,255 C 40,245 80,220 120,195 S 200,155 240,125 S 320,85 360,75 S 440,68 480,72 S 560,80 600,90 S 680,105 720,118 S 800,135 840,148 S 920,162 960,172 S 1040,183 1080,190 S 1150,198 1200,202 L 1200,280 L 0,280 Z"
+            fill="url(#areaGrad)" stroke="none"/>
+          <path d="M 0,255 C 40,245 80,220 120,195 S 200,155 240,125 S 320,85 360,75 S 440,68 480,72 S 560,80 600,90 S 680,105 720,118 S 800,135 840,148 S 920,162 960,172 S 1040,183 1080,190 S 1150,198 1200,202"
+            fill="none" stroke="#E89348" stroke-width="2.5"/>
+          <!-- 峰值標記 -->
+          <circle cx="360" cy="75" r="5" fill="#E89348"/>
+          <text x="360" y="65" text-anchor="middle" font-family="Noto Serif TC" font-size="11" fill="#E89348">峰值</text>
+          <text x="360" y="54" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#E89348">2024.01</text>
+          <!-- 今日點 -->
+          <circle cx="1200" cy="202" r="6" fill="#E5C77F"/>
+          <text x="1190" y="192" text-anchor="end" font-family="IBM Plex Mono" font-size="12" fill="#E5C77F">下滑中</text>
+          <!-- 圖例 -->
+          <rect x="20" y="30" width="12" height="4" fill="#E89348" rx="2"/>
+          <text x="38" y="36" font-family="Noto Serif TC" font-size="11" fill="var(--ink-mid)">新青安申請量</text>
+          <rect x="160" y="30" width="12" height="4" fill="#6BA8C9" rx="2"/>
+          <text x="178" y="36" font-family="Noto Serif TC" font-size="11" fill="var(--ink-mid)">整體房貸量</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>橘線：新青安申請量 &nbsp;｜&nbsp; 藍線：整體房貸總量</span>
+        <span>X 軸：月份（2023.07 起）</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now"><div class="context-label">當前趨勢</div><div class="context-value gold">下滑中</div><div class="context-time">2026.01 · 連三季減少</div></div>
+        <div class="context-cell high"><div class="context-label">申請峰值</div><div class="context-value orange">2024.01</div><div class="context-time">政策推出初期熱潮</div></div>
+        <div class="context-cell low"><div class="context-label">峰後降幅</div><div class="context-value red">−6.4%</div><div class="context-time">近 90 日累計下滑</div></div>
+        <div class="context-cell forecast"><div class="context-label">政策展望</div><div class="context-value gold">可能調整</div><div class="context-time">2026 年補貼條件預期收緊</div></div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        新青安貸款 2024 年初達申請峰值後持續回落，主因補貼資格審查趨嚴與<span class="key">申請戶已遞減至準資格族群</span>。2026 年內政部預計調整利率補貼上限，將進一步壓低新案量。對承辦人而言，依賴新青安轉介的案源將萎縮，需<span class="up-key">提前布局一般房貸戶資源</span>。
+      </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">新青安補貼收緊 · 提早規劃讓您的客戶把握最後視窗</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
+    </div>
+
+  </div><!-- /indicators A -->
+
+  <!-- ══ B 系列 ══ -->
+  <div class="section-title" style="margin-top:64px;">
+    <div>
+      <div class="section-title-zh" style="color:#6BA8C9;">B · 交易量價指標</div>
+      <div class="section-title-en" style="color:rgba(107,168,201,0.7);">直接反映市場冷熱的房市溫度計</div>
+    </div>
+    <div class="section-line" style="background:linear-gradient(90deg,rgba(107,168,201,0.45),transparent);"></div>
   </div>
+
+  <div class="indicators">
+
+    <!-- ── B01 買賣移轉棟數 ── -->
+    <div class="indicator" data-cx-code="B01">
+      <span class="indicator-tag" style="background:rgba(107,168,201,0.18);color:#6BA8C9;border:1px solid rgba(107,168,201,0.35);">B · 01</span>
+      <span class="freq-tag" style="background:rgba(107,168,201,0.1);color:#6BA8C9;border-color:rgba(107,168,201,0.3);">季公布</span>
+      <div class="indicator-top">
+        <div class="indicator-header-block">
+          <div class="indicator-name">買賣移轉棟數</div>
+          <div class="indicator-name-en">Real Estate Transfer Volume</div>
+          <div class="indicator-source">資料來源：內政部地政司 · 不動產交易統計</div>
+        </div>
+        <div class="indicator-value-block">
+          <div class="indicator-value" style="color:#6BA8C9;">60,403<span class="indicator-value-suffix">棟</span></div>
+          <div class="indicator-unit">2026 Q1 · 較去年同期 +4.2%</div>
+        </div>
+        <div class="indicator-changes">
+          <div class="change-cell"><span class="change-period">七日</span><span class="change-value flat">±0</span></div>
+          <div class="change-cell"><span class="change-period">單季</span><span class="change-value up">+4.2%</span></div>
+          <div class="change-cell"><span class="change-period">年增率</span><span class="change-value up">+8.7%</span></div>
+        </div>
+      </div>
+      <div class="chart-section-title">
+        <span class="chart-section-zh">歷年季交易量與趨勢線</span>
+        <span class="chart-section-en">2018Q1 — 2026Q1 · Quarterly Transactions</span>
+      </div>
+      <div class="chart-container">
+        <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6BA8C9" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#6BA8C9" stop-opacity="0.4"/>
+            </linearGradient>
+            <linearGradient id="barGradHi" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#4ADE80" stop-opacity="0.4"/>
+            </linearGradient>
+          </defs>
+          <g font-family="IBM Plex Mono" font-size="11" fill="#7A7565">
+            <line x1="0" y1="50" x2="1200" y2="50" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="54" text-anchor="end">9萬</text>
+            <line x1="0" y1="120" x2="1200" y2="120" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="124" text-anchor="end">7萬</text>
+            <line x1="0" y1="190" x2="1200" y2="190" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <text x="-8" y="194" text-anchor="end">5萬</text>
+            <line x1="0" y1="260" x2="1200" y2="260" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <text x="-8" y="264" text-anchor="end">3萬</text>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="9" fill="#7A7565">
+            <text x="14" y="305">18Q1</text><text x="72" y="305">Q3</text>
+            <text x="130" y="305">19Q1</text><text x="188" y="305">Q3</text>
+            <text x="246" y="305">20Q1</text><text x="304" y="305">Q3</text>
+            <text x="362" y="305">21Q1</text><text x="420" y="305">Q3</text>
+            <text x="478" y="305">22Q1</text><text x="536" y="305">Q3</text>
+            <text x="594" y="305">23Q1</text><text x="652" y="305">Q3</text>
+            <text x="710" y="305">24Q1</text><text x="768" y="305">Q3</text>
+            <text x="826" y="305">25Q1</text><text x="884" y="305">Q3</text>
+            <text x="942" y="305">26Q1</text>
+          </g>
+          <!-- 柱狀 (Q1=深色 Q3=淺色) -->
+          <g>
+            <rect x="8"   y="155" width="42" height="120" fill="url(#barGrad)" rx="3"/>
+            <rect x="66"  y="135" width="42" height="140" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="124" y="148" width="42" height="127" fill="url(#barGrad)" rx="3"/>
+            <rect x="182" y="138" width="42" height="137" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="240" y="178" width="42" height="97"  fill="url(#barGrad)" rx="3"/>
+            <rect x="298" y="158" width="42" height="117" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="356" y="78"  width="42" height="197" fill="url(#barGradHi)" rx="3"/>
+            <rect x="414" y="58"  width="42" height="217" fill="url(#barGradHi)" rx="3" opacity="0.85"/>
+            <rect x="472" y="108" width="42" height="167" fill="url(#barGrad)" rx="3"/>
+            <rect x="530" y="128" width="42" height="147" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="588" y="148" width="42" height="127" fill="url(#barGrad)" rx="3"/>
+            <rect x="646" y="138" width="42" height="137" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="704" y="132" width="42" height="143" fill="url(#barGrad)" rx="3"/>
+            <rect x="762" y="118" width="42" height="157" fill="url(#barGrad)" rx="3" opacity="0.7"/>
+            <rect x="820" y="115" width="42" height="160" fill="url(#barGradHi)" rx="3"/>
+            <rect x="878" y="108" width="42" height="167" fill="url(#barGradHi)" rx="3" opacity="0.85"/>
+            <rect x="936" y="105" width="42" height="170" fill="url(#barGradHi)" rx="3"/>
+          </g>
+          <!-- 趨勢線 -->
+          <polyline points="29,215 87,205 145,212 203,207 261,227 319,217 377,178 435,168 493,192 551,202 609,212 667,207 725,204 783,197 841,195 899,192 957,190"
+            fill="none" stroke="rgba(107,168,201,0.8)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+          <!-- 峰值 -->
+          <circle cx="435" cy="168" r="5" fill="#4ADE80"/>
+          <text x="435" y="158" text-anchor="middle" font-family="Noto Serif TC" font-size="11" fill="#4ADE80">2021高峰</text>
+          <!-- 今日 -->
+          <circle cx="957" cy="190" r="7" fill="#6BA8C9"/>
+          <text x="957" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#6BA8C9" font-weight="500">6.0萬棟</text>
+        </svg>
+      </div>
+      <div class="chart-axis-info">
+        <span>X 軸：季度（2018Q1–2026Q1）&nbsp;｜&nbsp; 綠色 = 近 5 年高量期</span>
+        <span>Y 軸：買賣移轉棟數（萬棟）</span>
+      </div>
+      <div class="context-grid">
+        <div class="context-cell now"><div class="context-label">當前量能</div><div class="context-value blue" style="color:#6BA8C9;">60,403棟</div><div class="context-time">2026 Q1 · 年增 +8.7%</div></div>
+        <div class="context-cell high"><div class="context-label">近五年高峰</div><div class="context-value green">~92,000棟</div><div class="context-time">2021 Q3 · 解封後爆量</div></div>
+        <div class="context-cell low"><div class="context-label">近五年低谷</div><div class="context-value red">~46,000棟</div><div class="context-time">2022 Q2 · 升息衝擊期</div></div>
+        <div class="context-cell forecast"><div class="context-label">下季預測</div><div class="context-value gold">62,000 ± 3,000</div><div class="context-time">緩增格局 · 剛需支撐</div></div>
+      </div>
+      <div class="chart-insight">
+        <div class="chart-insight-title">當前處境解讀</div>
+        買賣移轉棟數 2026 Q1 達 60,403 棟，年增 8.7%，顯示市場回溫但仍<span class="key">未回到 2021 年榮景水位</span>。交易量持續正成長，剛需買盤穩定，但投資性需求受高利率壓制。對承辦人而言，量能回升代表<span class="up-key">新案詢問度提高</span>，是積極開發新客戶的良機。
+      </div>
+      <div class="cta-strip">
+        <span class="cta-strip-text">市場量能回升，是深耕客戶的最佳時機 · 立即預約評估</span>
+        <a href="#" class="cta-strip-btn">免費諮詢 →</a>
+      </div>
+    </div>
+
+  </div><!-- /indicators B -->
 
   <footer class="footer">
     <div>鋮馨租賃有限公司 · 內部風險情報系統</div>
