@@ -77,10 +77,13 @@ nav .nav-logo span{color:var(--gold)!important}
   position:relative;z-index:2;
 }
 
+/* Hero video background */
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.38;pointer-events:none;}
+
 /* Right canvas */
 .hero-right{
   flex:1;min-height:400px;
-  position:relative;
+  position:relative;z-index:2;
 }
 #hero-wave{
   position:absolute;
@@ -381,6 +384,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
 <!-- ── WAVE HERO ── -->
 <div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video-hero.mp4" type="video/mp4">
+  </video>
   <div class="hero-left">
     <div class="hero-sys">
       <div class="sys-dot"></div>
