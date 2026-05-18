@@ -65,9 +65,9 @@ nav .nav-logo span{color:var(--gold)!important}
 .hero{
   position:relative;overflow:hidden;
   display:flex;align-items:center;gap:0;
-  min-height:calc(100vh - 48px);
-  padding:80px 0 100px;
-  margin-bottom:60px;
+  min-height:500px;
+  padding:80px max(32px, calc((100vw - 1036px) / 2)) 100px max(32px, calc((100vw - 1036px) / 2));
+  margin-bottom:0;
   border-bottom:1px solid var(--line);
 }
 
@@ -341,7 +341,7 @@ nav .nav-logo span{color:var(--gold)!important}
 
 /* Mobile */
 @media(max-width:900px){
-  .hero{flex-direction:row;flex-wrap:nowrap;min-height:calc(100svh - 48px);padding:60px 0 80px;position:relative}
+  .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:60px 20px 80px;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}
   .hero-right{position:absolute;inset:0;width:100%;height:100%;opacity:0.6;z-index:1}
   #hero-wave{inset:0;width:100%;height:100%}
@@ -379,51 +379,51 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 });
 </script>
 
-<div class="page-wrap">
+<!-- ── WAVE HERO ── -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-sys">
+      <div class="sys-dot"></div>
+      房貸儀表板
+      <div class="sys-dot"></div>
+      知識庫結構
+      <div class="sys-dot"></div>
+      SYS · 2025
+    </div>
 
-  <!-- ── WAVE HERO ── -->
-  <div class="hero">
-    <div class="hero-left">
-      <div class="hero-sys">
-        <div class="sys-dot"></div>
-        房貸儀表板
-        <div class="sys-dot"></div>
-        知識庫結構
-        <div class="sys-dot"></div>
-        SYS · 2025
+    <div class="hero-title">房貸<br>儀表板</div>
+    <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="metric-num">18</div>
+        <div class="metric-label">市場指標</div>
       </div>
-
-      <div class="hero-title">房貸<br>儀表板</div>
-      <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
-
-      <div class="hero-metrics">
-        <div class="hero-metric">
-          <div class="metric-num">18</div>
-          <div class="metric-label">市場指標</div>
-        </div>
-        <div class="hero-metric">
-          <div class="metric-num">A–D</div>
-          <div class="metric-label">指標系列</div>
-        </div>
-        <div class="hero-metric">
-          <div class="metric-num">10Y</div>
-          <div class="metric-label">完整走勢</div>
-        </div>
+      <div class="hero-metric">
+        <div class="metric-num">A–D</div>
+        <div class="metric-label">指標系列</div>
       </div>
-
-      <div class="hero-tags">
-        <a href="topic-a.html" class="htag">房貸金融</a>
-        <a href="topic-b.html" class="htag">交易量價</a>
-        <a href="topic-c.html" class="htag">風險預警</a>
-        <a href="topic-d.html" class="htag">國際資金</a>
+      <div class="hero-metric">
+        <div class="metric-num">10Y</div>
+        <div class="metric-label">完整走勢</div>
       </div>
     </div>
 
-    <div class="hero-right">
-      <canvas id="hero-wave"></canvas>
+    <div class="hero-tags">
+      <a href="topic-a.html" class="htag">房貸金融</a>
+      <a href="topic-b.html" class="htag">交易量價</a>
+      <a href="topic-c.html" class="htag">風險預警</a>
+      <a href="topic-d.html" class="htag">國際資金</a>
     </div>
-
   </div>
+
+  <div class="hero-right">
+    <canvas id="hero-wave"></canvas>
+  </div>
+
+</div>
+
+<div class="page-wrap">
 
   <!-- ── Section heading ── -->
   <div class="section-heading">
