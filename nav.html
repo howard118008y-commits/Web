@@ -1,15 +1,101 @@
+<meta name="robots" content="noindex">
+<style>
+/* === 手機版漢堡選單 === */
+.cx-burger{display:none;background:none;border:0;width:44px;height:44px;padding:0;cursor:pointer;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:5px;font-family:inherit}
+.cx-burger span{display:block;width:22px;height:2px;background:#1d1d1f;border-radius:2px;transition:transform .3s ease,opacity .3s ease}
+.cx-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.cx-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.cx-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.cx-mobile-menu{display:none;position:fixed;inset:60px 0 0 0;background:#fff;z-index:99;padding:24px 24px 40px;flex-direction:column;gap:0;overflow-y:auto;animation:cxMenuSlide .25s ease}
+.cx-mobile-menu.cx-open{display:flex}
+@keyframes cxMenuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.cx-mobile-menu a{font-size:18px;font-weight:600;color:#1d1d1f;padding:18px 4px;border-bottom:.5px solid #e8e8ed;text-decoration:none;display:flex;justify-content:space-between;align-items:center}
+.cx-mobile-menu a::after{content:"›";color:#c7c7cc;font-size:22px;font-weight:300}
+.cx-mobile-menu a.cx-mobile-cta{margin-top:18px;background:#16A34A;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
+.cx-mobile-menu a.cx-mobile-cta::after{content:""}
+.cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%);color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
+.cx-mobile-menu a.cx-mobile-radar::after{content:""}
+.cx-mobile-menu a.active{color:#c8102e}
+body.cx-menu-open{overflow:hidden}
+body.cx-menu-open .cx-social-dock{display:none}
+
+/* 房貸儀表板按鈕 — 漸層高級藍 */
+.nav-radar-btn{
+  font-size:12px;font-weight:600;
+  background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%);
+  color:#fff;padding:6px 14px;border-radius:20px;
+  white-space:nowrap;letter-spacing:.03em;
+  text-decoration:none;
+  box-shadow:0 2px 10px rgba(29,111,164,0.35);
+  transition:filter .2s,box-shadow .2s;
+}
+.nav-radar-btn:hover{filter:brightness(1.12);box-shadow:0 3px 16px rgba(29,143,214,0.5)}
+
+
+.nav-center{display:flex;align-items:center;gap:24px}
+
+@media(max-width:768px){
+  .cx-burger{display:flex}
+  nav .nav-center,nav .nav-radar-btn{display:none!important}
+  nav .nav-logo span{font-size:14px}
+}
+</style>
 <nav>
   <a class="nav-logo" href="index.html">
     <img src="favicon-192.png" alt="鋮馨" style="height:34px;width:34px;object-fit:contain;border-radius:4px;">
     <span style="font-size:15px;font-weight:500;"><span style="color:#c8102e;font-weight:700;">鋮</span>馨租賃有限公司</span>
   </a>
-  <div class="nav-links">
-    <a href="index.html" data-page="index">首頁</a>
-    <a href="services.html" data-page="services">服務項目</a>
-    <a href="about.html" data-page="about">關於我們</a>
-    <a href="knowledge.html" data-page="knowledge">知識專欄</a>
-    <a href="faq.html" data-page="faq">常見問題</a>
-    <a href="contact.html" data-page="contact">聯絡我們</a>
+  <div class="nav-center">
+    <div class="nav-links">
+      <a href="index.html" data-page="index">首頁</a>
+      <a href="services.html" data-page="services">服務項目</a>
+      <a href="tools.html" data-page="tools">小工具</a>
+      <a href="knowledge.html" data-page="knowledge">知識專欄</a>
+      <a href="about.html" data-page="about">關於我們</a>
+      <a href="faq.html" data-page="faq">常見問題</a>
+      <a href="contact.html" data-page="contact">聯絡我們</a>
+    </div>
+    <a href="evaluate.html" class="nav-cta">免費評估</a>
   </div>
-  <a href="evaluate.html" class="nav-cta">免費評估</a>
+  <a href="radar-index.html" class="nav-radar-btn">房貸儀表板</a>
+  <button type="button" class="cx-burger" aria-label="開啟選單" aria-expanded="false" data-cx-burger>
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="cx-mobile-menu" data-cx-mobile-menu aria-hidden="true">
+  <a href="index.html" data-page="index">首頁</a>
+  <a href="services.html" data-page="services">服務項目</a>
+  <a href="tools.html" data-page="tools">小工具</a>
+  <a href="knowledge.html" data-page="knowledge">知識專欄</a>
+  <a href="about.html" data-page="about">關於我們</a>
+  <a href="faq.html" data-page="faq">常見問題</a>
+  <a href="contact.html" data-page="contact">聯絡我們</a>
+  <a href="evaluate.html" class="cx-mobile-cta">免費評估</a>
+  <a href="radar-index.html" class="cx-mobile-radar">📊 房貸儀表板</a>
+</div>
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    var burger = e.target.closest('[data-cx-burger]');
+    var menu = document.querySelector('[data-cx-mobile-menu]');
+    if (!menu) return;
+    if (burger) {
+      var open = !menu.classList.contains('cx-open');
+      menu.classList.toggle('cx-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.classList.toggle('cx-menu-open', open);
+      return;
+    }
+    var inLink = e.target.closest('[data-cx-mobile-menu] a');
+    if (inLink) {
+      menu.classList.remove('cx-open');
+      var b = document.querySelector('[data-cx-burger]');
+      if (b) b.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-hidden','true');
+      document.body.classList.remove('cx-menu-open');
+    }
+  });
+})();
+</script>
