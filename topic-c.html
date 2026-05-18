@@ -49,8 +49,6 @@ nav{background:rgba(11,8,24,0.96)!important;border-bottom:.5px solid rgba(201,16
 .btn-fill:hover{filter:brightness(1.12)}
 .btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1.5px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.72);padding:13px 22px;border-radius:6px;font-size:14px;font-weight:500;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
-.hero-right{flex:1;height:440px;position:relative;}
-#iso-canvas{position:absolute;inset:-20px -40px -20px -30px;width:calc(100% + 70px);height:calc(100% + 40px);}
 .stats-strip{background:linear-gradient(180deg,#100520 0%,#120E22 100%);border-top:1px solid rgba(212,90,90,0.18);border-bottom:1px solid rgba(212,90,90,0.18);padding:56px 0;position:relative;z-index:1;}
 .stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
 .stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
@@ -81,7 +79,6 @@ nav{background:rgba(11,8,24,0.96)!important;border-bottom:.5px solid rgba(201,16
 @media(max-width:900px){
   .hero-inner{flex-direction:column;padding:52px 24px 90px;gap:0;min-height:540px;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}.hero-right{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:0.55;height:auto}
-  #iso-canvas{position:absolute;inset:0;width:100%;height:100%}
   .hero-title{font-size:38px}.stats-inner{gap:32px}.stat-circles{gap:22px}
   .content-wrap{padding:60px 24px 80px}.cards-grid{grid-template-columns:1fr}
   .cta-box{padding:40px 24px}.cta-btns{flex-direction:column;align-items:center}
@@ -111,9 +108,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <a href="cx_batch4_C01-C04.html" class="btn-fill">查看雷達圖表 →</a>
         <a href="radar-index.html" class="btn-ghost">← 返回目錄</a>
       </div>
-    </div>
-    <div class="hero-right">
-      <canvas id="iso-canvas" data-top="#FF9898" data-left="#C84040" data-right="#7A0808"></canvas>
     </div>
   </div>
 </div>
@@ -193,17 +187,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
 </div>
 
-<script>
-(function(){
-  var canvas=document.getElementById('iso-canvas');if(!canvas)return;
-  var ctx=canvas.getContext('2d');var cT=canvas.dataset.top,cL=canvas.dataset.left,cR=canvas.dataset.right;var t=0;
-  var C=[[55,22,10,18,0.2],[118,16,14,30,1.5],[182,13,11,22,2.8],[248,26,13,25,0.7],[292,16,9,18,3.1],[38,106,20,40,0.4],[93,86,26,55,1.2],[148,71,22,50,2.0],[202,81,18,42,0.9],[256,66,24,48,1.8],[292,86,16,35,3.0],[26,191,16,28,1.6],[82,166,22,45,0.3],[136,151,28,60,2.4],[190,161,24,52,1.1],[240,151,20,42,2.7],[286,171,18,38,0.6],[68,261,18,30,2.2],[126,246,22,40,1.4],[176,236,20,35,0.1],[226,256,16,28,2.9],[270,251,18,32,1.7]];
-  C.sort(function(a,b){return(a[1]+a[3])-(b[1]+b[3])});
-  function resize(){canvas.width=canvas.offsetWidth||600;canvas.height=canvas.offsetHeight||440;}
-  function cube(cx,cy,s,h,a){ctx.globalAlpha=a;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+s,cy+s*.5);ctx.lineTo(cx,cy+s);ctx.lineTo(cx-s,cy+s*.5);ctx.closePath();ctx.fillStyle=cT;ctx.fill();ctx.beginPath();ctx.moveTo(cx-s,cy+s*.5);ctx.lineTo(cx,cy+s);ctx.lineTo(cx,cy+s+h);ctx.lineTo(cx-s,cy+s*.5+h);ctx.closePath();ctx.fillStyle=cL;ctx.fill();ctx.beginPath();ctx.moveTo(cx+s,cy+s*.5);ctx.lineTo(cx,cy+s);ctx.lineTo(cx,cy+s+h);ctx.lineTo(cx+s,cy+s*.5+h);ctx.closePath();ctx.fillStyle=cR;ctx.fill();ctx.globalAlpha=1;}
-  function draw(){var W=canvas.width,H=canvas.height,sx=W/320,sy=H/340;ctx.clearRect(0,0,W,H);t+=.006;for(var i=0;i<C.length;i++){var c=C[i],fy=Math.sin(t*.85+c[4])*5,a=.72+Math.sin(t*.55+c[4])*.14;cube(c[0]*sx,(c[1]+fy)*sy,c[2]*Math.min(sx,sy),c[3]*sy,Math.max(0,a));}requestAnimationFrame(draw);}
-  resize();window.addEventListener('resize',resize);draw();
-})();
-</script>
+
 </body>
 </html>
