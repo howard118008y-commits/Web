@@ -590,7 +590,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var reds=inds.filter(function(i){return i.status==='red';}).length;
         var trendMap={green:{cls:'up',arrow:'↑'},yellow:{cls:'flat',arrow:'→'},red:{cls:'dn',arrow:'↓'}};
         var seriesLink={A:'topic-a.html',B:'topic-b.html',C:'topic-c.html',D:'topic-d.html'};
-        html+='<a class="series-block" href="'+seriesLink[s]+'" style="--sb-accent:'+sc.color+';display:block;text-decoration:none;color:inherit">';
+        html+='<div class="series-block" style="--sb-accent:'+sc.color+'" onclick="location.href=\''+seriesLink[s]+'\'" role="link" tabindex="0">';
         html+='<div class="sb-header">';
         html+='<div class="sb-badge" style="background:'+sc.bg+';color:'+sc.color+'">'+s+'</div>';
         html+='<div class="sb-title" style="color:'+sc.color+'">'+sc.label+'&nbsp;<span style="color:var(--ink-dim);font-size:8px">'+sc.en+'</span></div>';
@@ -608,7 +608,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           html+='<span class="ov-date">'+ind.updated+'</span>';
           html+='</div>';
         });
-        html+='</a>';
+        html+='</div>';
       });
       grid.innerHTML=html;
       if(meta&&data.generated)meta.textContent='DATA · '+data.generated;
