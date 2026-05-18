@@ -344,9 +344,14 @@ nav .nav-logo span{color:var(--gold)!important}
   border-radius:12px;overflow:hidden;
   position:relative;
   box-shadow:0 4px 24px rgba(0,0,0,0.3);
-  transition:box-shadow .2s,border-color .2s;
+  transition:box-shadow .22s,border-color .22s,transform .22s;
+  cursor:pointer;
 }
-.series-block:hover{border-color:rgba(201,169,97,0.28);box-shadow:0 6px 32px rgba(0,0,0,0.45)}
+.series-block:hover{
+  border-color:rgba(201,169,97,0.38);
+  box-shadow:0 8px 36px rgba(0,0,0,0.5);
+  transform:translateY(-3px);
+}
 .series-block::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--sb-accent,rgba(201,169,97,0.5));
@@ -584,7 +589,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var sc=SC[s],inds=grp[s];
         var reds=inds.filter(function(i){return i.status==='red';}).length;
         var trendMap={green:{cls:'up',arrow:'↑'},yellow:{cls:'flat',arrow:'→'},red:{cls:'dn',arrow:'↓'}};
-        html+='<div class="series-block" style="--sb-accent:'+sc.color+'">';
+        var seriesLink={A:'topic-a.html',B:'topic-b.html',C:'topic-c.html',D:'topic-d.html'};
+        html+='<a class="series-block" href="'+seriesLink[s]+'" style="--sb-accent:'+sc.color+';display:block;text-decoration:none;color:inherit">';
         html+='<div class="sb-header">';
         html+='<div class="sb-badge" style="background:'+sc.bg+';color:'+sc.color+'">'+s+'</div>';
         html+='<div class="sb-title" style="color:'+sc.color+'">'+sc.label+'&nbsp;<span style="color:var(--ink-dim);font-size:8px">'+sc.en+'</span></div>';
@@ -602,7 +608,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           html+='<span class="ov-date">'+ind.updated+'</span>';
           html+='</div>';
         });
-        html+='</div>';
+        html+='</a>';
       });
       grid.innerHTML=html;
       if(meta&&data.generated)meta.textContent='DATA · '+data.generated;
