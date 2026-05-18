@@ -562,6 +562,7 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
 .cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
 .cta-strip-btn:hover{background:var(--gold-bright);}
 @media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
+@media(max-width:700px){#cx-guide{padding:20px 18px 18px;}#cx-guide [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important;}}
 </style>
 </head>
 <body>
@@ -602,6 +603,61 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
     </div>
   </header>
+
+  <!-- ── 導讀引導 ── -->
+  <div id="cx-guide" style="
+    background:linear-gradient(135deg,rgba(201,169,97,0.06) 0%,rgba(107,168,201,0.04) 100%);
+    border:1px solid rgba(201,169,97,0.22);
+    border-radius:14px;padding:28px 32px 24px;margin-bottom:44px;position:relative;
+  ">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;color:var(--gold);letter-spacing:0.18em;">
+        📖 &nbsp;如何閱讀這份儀表板
+      </div>
+      <button onclick="document.getElementById('cx-guide').style.display='none'" style="
+        background:none;border:1px solid rgba(201,169,97,0.3);color:var(--ink-mid);
+        font-size:12px;padding:5px 14px;border-radius:20px;cursor:pointer;
+        font-family:'IBM Plex Mono',monospace;letter-spacing:0.1em;
+        transition:border-color .2s,color .2s;
+      " onmouseover="this.style.borderColor='rgba(201,169,97,0.7)';this.style.color='#E8E3D5'"
+         onmouseout="this.style.borderColor='rgba(201,169,97,0.3)';this.style.color=''">
+        知道了 ✓
+      </button>
+    </div>
+
+    <!-- 三步驟 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
+      <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;border-left:3px solid var(--gold);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.2em;margin-bottom:8px;">STEP 1</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;">看當前數值</div>
+        <div style="font-size:12px;color:var(--ink-mid);line-height:1.7;">頁面中央的大數字就是最新市場數據，旁邊的燈號代表健康程度。</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;border-left:3px solid var(--blue);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:0.2em;margin-bottom:8px;">STEP 2</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;">看短期變化</div>
+        <div style="font-size:12px;color:var(--ink-mid);line-height:1.7;">右側的「七日 / 三十日 / 九十日」欄位，顯示近期數字上漲或下降了多少。</div>
+      </div>
+      <div style="background:rgba(0,0,0,0.25);border-radius:10px;padding:16px 18px;border-left:3px solid #9B8AC4;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9B8AC4;letter-spacing:0.2em;margin-bottom:8px;">STEP 3</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;">看長期走勢</div>
+        <div style="font-size:12px;color:var(--ink-mid);line-height:1.7;">下方折線圖涵蓋 10 年歷史與未來 1 年預測，可判斷目前位置是高點還是低點。</div>
+      </div>
+    </div>
+
+    <!-- 燈號圖例 -->
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--ink-dim);letter-spacing:0.1em;margin-right:8px;">燈號說明</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(95,186,125,0.1);border:1px solid rgba(95,186,125,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:#5FBA7D;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#5FBA7D;flex-shrink:0;"></span>正常・數值健康
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(229,199,127,0.1);border:1px solid rgba(229,199,127,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:#E5C77F;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#E5C77F;flex-shrink:0;"></span>留意・需觀察趨勢
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(212,90,90,0.1);border:1px solid rgba(212,90,90,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:#D45A5A;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#D45A5A;flex-shrink:0;"></span>警示・建議諮詢專業評估
+      </span>
+    </div>
+  </div>
 
   <div class="section-title">
     <div>
