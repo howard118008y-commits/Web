@@ -381,4 +381,18 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- 法律頁面 -->
+  <url>
+    <loc>https://cx468.com.tw/privacy-policy.html</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/terms-of-service.html</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
