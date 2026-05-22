@@ -12,6 +12,10 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /*.json$
 
+# Google 搜尋（明列以對齊 AI 爬蟲清單）
+User-agent: Googlebot
+Allow: /
+
 # 允許 AI 訓練爬蟲（建立 GEO 信號）
 User-agent: GPTBot
 Allow: /
