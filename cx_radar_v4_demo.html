@@ -1073,15 +1073,35 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <rect x="1010" y="195" width="14" height="85"/>
             <rect x="1026" y="220" width="14" height="60"/>
           </g>
-          <rect x="1042" y="170" width="14" height="110" fill="#6BA8C9"/>
-          <text x="1049" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#6BA8C9" font-weight="500">590</text>
+          <!-- ▼▼▼ A03 預測區段改版：刪掉原「末班車衝高柱」，整段換成以下 ▼▼▼ -->
 
-          <!-- 預測柱（5-6 月末班車效應） -->
-          <g fill="rgba(232,147,72,0.4)" stroke="#E89348" stroke-width="0.8">
-            <rect x="1075" y="120" width="14" height="160"/>
-            <rect x="1091" y="100" width="14" height="180"/>
-          </g>
-          <text x="1090" y="92" text-anchor="middle" font-family="Noto Serif TC" font-size="11" fill="#E89348" font-weight="500">↑ 末班車</text>
+          <!-- 4 月實際柱（533.36 億；fill 請對齊你既有月柱的顏色）-->
+          <rect x="1044.5" y="184" width="11" height="106" rx="2" fill="rgba(201,169,97,0.55)"/>
+
+          <!-- 預測分隔線 + 背景區（金色虛線，比照 A01/A02）-->
+          <line x1="1058" y1="30" x2="1058" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1058" y="30" width="142" height="260" fill="rgba(201,169,97,0.02)"/>
+          <text x="1066" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">觀察區間</text>
+
+          <!-- 5-6 月不確定性扇形（450—750 億，半透明，不畫成確定衝高）-->
+          <path d="M 1058,184 L 1100,119 L 1100,209 Z" fill="rgba(232,147,72,0.1)"/>
+          <path d="M 1058,184 L 1100,164" fill="none" stroke="#E89348" stroke-width="2" stroke-dasharray="5 4" opacity="0.6"/>
+          <text x="1104" y="122" font-family="IBM Plex Mono" font-size="10" fill="rgba(232,147,72,0.7)">750</text>
+          <text x="1104" y="212" font-family="IBM Plex Mono" font-size="10" fill="rgba(232,147,72,0.7)">450</text>
+
+          <!-- 4 月「當前」脈動標記（比照 A01/A02 的今日點）-->
+          <circle cx="1050" cy="184" r="14" fill="none" stroke="#E89348" stroke-width="1" opacity="0.5">
+            <animate attributeName="r" from="14" to="22" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1050" cy="184" r="4" fill="#E89348"/>
+          <text x="1050" y="170" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#E89348" font-weight="500">4月 533億</text>
+
+          <!-- 月份標籤 -->
+          <text x="1050" y="305" text-anchor="middle" font-family="Noto Serif TC" font-size="10" fill="rgba(229,199,127,0.5)">4月</text>
+          <text x="1080" y="305" text-anchor="middle" font-family="Noto Serif TC" font-size="10" fill="rgba(232,147,72,0.5)">5-6月預</text>
+
+          <!-- ▲▲▲ A03 預測區段改版結束 ▲▲▲ -->
 
           <g fill="rgba(107,168,201,0.3)">
             <rect x="1115" y="190" width="14" height="90"/>
