@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>謄本判讀 v0.1（測試中）｜鋮馨租賃</title>
+<meta name="description" content="鋮馨內部測試中：台灣地政電子謄本自動判讀工具">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://cx468.com.tw/tools-lab/deed-reader.html">
+<style>
+:root{
+  --bg:#0d1117; --card:#161b22; --line:rgba(255,255,255,0.08);
+  --gold:#e6b84a; --gold-dim:rgba(230,184,74,0.7);
+  --txt:#e6e6e9; --txt-dim:rgba(255,255,255,0.6); --txt-faint:rgba(255,255,255,0.4);
+  --red:#d45a5a; --orange:#e89348; --green:#5fba7d; --blue:#6ba8c9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,'Noto Sans TC',sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:60px 24px 120px}
+.crumb{font-size:13px;color:var(--txt-faint);margin-bottom:32px}
+.crumb a{color:var(--gold-dim);text-decoration:none}
+.crumb a:hover{color:var(--gold)}
+
+.hero{margin-bottom:48px}
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);background:rgba(107,168,201,0.12);border:1px solid rgba(107,168,201,0.3);padding:5px 12px;border-radius:14px;margin-bottom:18px}
+h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#fff}
+.tagline{font-size:16px;color:var(--txt-dim);margin-bottom:0}
+
+.warn{background:rgba(212,90,90,0.08);border:1px solid rgba(212,90,90,0.3);border-radius:12px;padding:18px 24px;margin-bottom:48px;color:#ff9999;font-size:14px}
+.warn b{color:#ffb3b3}
+
+.upload-panel{background:var(--card);border:2px dashed rgba(255,255,255,0.15);border-radius:16px;padding:60px 32px;text-align:center;margin-bottom:64px}
+.upload-icon{font-size:42px;opacity:0.4;margin-bottom:16px}
+.upload-title{font-size:18px;font-weight:600;color:var(--txt-dim);margin-bottom:8px}
+.upload-desc{font-size:13px;color:var(--txt-faint);margin-bottom:24px}
+.upload-btn{display:inline-block;background:rgba(255,255,255,0.05);color:var(--txt-faint);font-size:14px;padding:12px 28px;border-radius:24px;border:1px solid var(--line);cursor:not-allowed}
+
+.section-h{font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin:64px 0 24px;padding-bottom:12px;border-bottom:1px solid rgba(230,184,74,0.2)}
+
+.rule-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.rule-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
+.rule-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--gold);background:rgba(230,184,74,0.1);padding:3px 10px;border-radius:10px;margin-bottom:10px}
+.rule-name{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px}
+.rule-desc{font-size:13px;color:var(--txt-dim);line-height:1.65;margin:0}
+
+.signals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.signal{padding:20px 22px;border-radius:12px;border:1px solid}
+.signal.red{background:rgba(212,90,90,0.08);border-color:rgba(212,90,90,0.3)}
+.signal.yel{background:rgba(232,147,72,0.08);border-color:rgba(232,147,72,0.3)}
+.signal.gre{background:rgba(95,186,125,0.08);border-color:rgba(95,186,125,0.3)}
+.signal-h{font-size:14px;font-weight:700;margin-bottom:8px}
+.signal.red .signal-h{color:#ff8080}
+.signal.yel .signal-h{color:#ffb37a}
+.signal.gre .signal-h{color:#8fd5a8}
+.signal-body{font-size:12px;color:var(--txt-dim);line-height:1.65}
+
+.boundary{background:rgba(107,168,201,0.05);border:1px solid rgba(107,168,201,0.25);border-radius:12px;padding:22px 26px;margin-top:16px;font-size:13px;color:var(--txt-dim);line-height:1.8}
+.boundary b{color:var(--blue)}
+
+.foot{margin-top:80px;padding-top:32px;border-top:1px solid var(--line);font-size:13px;color:var(--txt-faint)}
+.foot a{color:var(--gold-dim);text-decoration:none;margin-right:18px}
+.foot a:hover{color:var(--gold)}
+
+@media(max-width:680px){
+  .rule-grid,.signals{grid-template-columns:1fr}
+  h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb">
+    <a href="/tools-lab.html">總工具</a> · 謄本判讀
+  </div>
+
+  <div class="hero">
+    <span class="eyebrow">v0.1 · 規則書已就位 · 接案邏輯開發中</span>
+    <h1>謄本判讀</h1>
+    <p class="tagline">
+      上傳台灣地政電子謄本，自動抽取欄位、判讀風險、即時試算總建坪／土增稅／LTV。
+    </p>
+  </div>
+
+  <div class="warn">
+    <b>⚠️ 測試中工具</b><br>
+    本工具仍在開發。輸出之反推本金、車位坪、增值稅、估值皆為「概估」性質。
+    最終值以債權人、稅捐稽徵機關、估價來源核定為準。請承辦人勿將本工具輸出直接作為對外承諾。
+  </div>
+
+  <!-- 上傳區（暫禁用，等接案邏輯）-->
+  <div class="upload-panel">
+    <div class="upload-icon">📄</div>
+    <div class="upload-title">上傳謄本 PDF</div>
+    <div class="upload-desc">支援政府線上文字版 PDF · 影像版（OCR）下版本支援</div>
+    <span class="upload-btn">功能開發中</span>
+  </div>
+
+  <!-- 判讀流程 -->
+  <div class="section-h">判讀流程（依 rules.md 規範）</div>
+  <div class="rule-grid">
+    <div class="rule-card">
+      <span class="rule-tag">A · 抽取層</span>
+      <div class="rule-name">事實欄位抽取</div>
+      <p class="rule-desc">標示部（地號/門牌/面積/共有部分）、所有權部（所有權人/取得原因/持分）、他項權利部（抵押權/設定金額/債權人/共同擔保）。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">B · 債權人分類</span>
+      <div class="rule-name">六類自動歸戶</div>
+      <p class="rule-desc">統編純數字 8 碼 → 銀行/融資/信合社/農漁會/保險；統編英文字母開頭 → 個人金主（高風險訊號）。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">C · 反推本金</span>
+      <div class="rule-name">設定金額 ÷ 係數</div>
+      <p class="rule-desc">機構 ÷1.2、個人金主輸出區間 [÷2, ÷1.5]。剩餘本金以攤還推估，標明寬限期等失真因子。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">A2 · 即時試算</span>
+      <div class="rule-name">總建坪 / 車位 / 土增稅</div>
+      <p class="rule-desc">總建坪 = （主建物+附屬+共有持分）× 0.3025。土增稅同時輸出一般稅率版與自用版，皆標概估。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">A3 · 估值合體</span>
+      <div class="rule-name">LTV / 殘值 / 鳥瞰</div>
+      <p class="rule-desc">不自建 AVM，接好時價或實價登錄。LTV = 負債/估值、殘值 = 估值−負債、整體鳥瞰 = 同人多屋合計。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">E · 跨文件關聯</span>
+      <div class="rule-name">同人辨識 / 共同擔保</div>
+      <p class="rule-desc">統編比對同一人；共同擔保互列建號 → 視為同一案、債務合併計算一次，避免重複灌水。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">F · 異動索引</span>
+      <div class="rule-name">時間軸風險</div>
+      <p class="rule-desc">重建設定/塗銷時間序列，偵測「金主走馬燈」、預告登記時間貼合分析；謄本綠燈 + 異動索引紅燈 → 上修為紅燈。</p>
+    </div>
+    <div class="rule-card">
+      <span class="rule-tag">D · 三色燈</span>
+      <div class="rule-name">風險訊號輸出</div>
+      <p class="rule-desc">主輸出為三色燈（見下）；風險分數權重待定，暫不寫死。</p>
+    </div>
+  </div>
+
+  <!-- 三色燈 -->
+  <div class="section-h">D · 風險三色燈</div>
+  <div class="signals">
+    <div class="signal red">
+      <div class="signal-h">🔴 紅燈</div>
+      <div class="signal-body">查封/假扣押/破產登記；普通抵押權清償日已過期；設定金額 &gt; 估值；整體 LTV &gt; 90%。</div>
+    </div>
+    <div class="signal yel">
+      <div class="signal-h">🟠 黃燈</div>
+      <div class="signal-body">預告登記（金主鎖權訊號）；個人金主進場；買進即套現；異動索引短期密集設定/塗銷。</div>
+    </div>
+    <div class="signal gre">
+      <div class="signal-h">🟢 綠燈</div>
+      <div class="signal-body">純金融機構往來；無限制登記、無逾期；LTV 健康；持分完整。</div>
+    </div>
+  </div>
+
+  <!-- 邊界 -->
+  <div class="section-h">G · 邊界與待補（誠實標註）</div>
+  <div class="boundary">
+    <b>不自建估值模型</b>：接好時價或實價登錄。<br>
+    <b>限制登記第二段</b>：謄本僅得查封案號／法院／債權人；案情須調法院卷宗，產品自動產生待辦。<br>
+    <b>車位型態</b>：平面/機械須查建案，謄本不載。<br>
+    <b>OCR 範圍</b>：MVP 先支援政府線上文字版 PDF，影像版（地政臨櫃掃描）後續處理。<br>
+    <b>三類謄本</b>：遮罩規則與二類不同，另行處理。<br>
+    <b>增值稅精算</b>：需承辦補件（實際申報現值/持有年限/自用資格）。
+  </div>
+
+  <div class="foot">
+    <a href="deed-reader-rules.md">📘 規則書 rules.md v1.0</a>
+    <a href="/tools-lab.html">← 回 總工具</a>
+  </div>
+</div>
+</body>
+</html>

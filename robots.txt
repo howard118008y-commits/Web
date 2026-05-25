@@ -12,6 +12,10 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /*.json$
 
+# 測試中工具區（不對外公開、未列入主站導覽）
+Disallow: /tools-lab/
+Disallow: /tools-lab.html
+
 # Google 搜尋（明列以對齊 AI 爬蟲清單）
 User-agent: Googlebot
 Allow: /
