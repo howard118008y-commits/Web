@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-24",
+  "generated": "2026-05-25",
   "series": {
     "A": {
       "label": "房貸金融",
@@ -158,9 +158,9 @@
       "code": "D02",
       "series": "D",
       "name": "美元台幣匯率",
-      "value": "31.49",
+      "value": "31.48",
       "status": "green",
-      "note": "31.49，台幣相對強勢",
+      "note": "31.48，台幣相對強勢",
       "updated": "2026-05"
     },
     {
