@@ -29,11 +29,18 @@ h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#
 .warn{background:rgba(212,90,90,0.08);border:1px solid rgba(212,90,90,0.3);border-radius:12px;padding:18px 24px;margin-bottom:48px;color:#ff9999;font-size:14px}
 .warn b{color:#ffb3b3}
 
-.upload-panel{background:var(--card);border:2px dashed rgba(255,255,255,0.15);border-radius:16px;padding:60px 32px;text-align:center;margin-bottom:64px}
+.upload-panel{background:var(--card);border:2px dashed rgba(255,255,255,0.15);border-radius:16px;padding:48px 32px;text-align:center;margin-bottom:32px}
 .upload-icon{font-size:42px;opacity:0.4;margin-bottom:16px}
 .upload-title{font-size:18px;font-weight:600;color:var(--txt-dim);margin-bottom:8px}
 .upload-desc{font-size:13px;color:var(--txt-faint);margin-bottom:24px}
-.upload-btn{display:inline-block;background:rgba(255,255,255,0.05);color:var(--txt-faint);font-size:14px;padding:12px 28px;border-radius:24px;border:1px solid var(--line);cursor:not-allowed}
+.file-input{display:block;margin:0 auto 18px;color:var(--txt-dim);font-size:13px;max-width:360px}
+.file-input::file-selector-button{background:rgba(230,184,74,0.1);color:var(--gold);border:1px solid rgba(230,184,74,0.35);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;margin-right:12px;font-family:inherit}
+.file-input::file-selector-button:hover{background:rgba(230,184,74,0.18)}
+.run-btn{display:inline-block;background:var(--gold);color:#15171c;font-size:14px;font-weight:600;padding:12px 36px;border-radius:24px;border:none;cursor:pointer;transition:opacity 0.2s}
+.run-btn:hover{opacity:0.88}
+.run-btn:disabled{background:rgba(255,255,255,0.08);color:var(--txt-faint);cursor:not-allowed}
+.status-box{margin:24px auto 0;max-width:560px;font-size:13px;color:var(--txt-dim);min-height:20px}
+.result-box{margin-bottom:32px}
 
 .section-h{font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin:64px 0 24px;padding-bottom:12px;border-bottom:1px solid rgba(230,184,74,0.2)}
 
@@ -87,13 +94,16 @@ h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#
     最終值以債權人、稅捐稽徵機關、估價來源核定為準。請承辦人勿將本工具輸出直接作為對外承諾。
   </div>
 
-  <!-- 上傳區（暫禁用，等接案邏輯）-->
+  <!-- 上傳區 -->
   <div class="upload-panel">
     <div class="upload-icon">📄</div>
     <div class="upload-title">上傳謄本 PDF</div>
-    <div class="upload-desc">支援政府線上文字版 PDF · 影像版（OCR）下版本支援</div>
-    <span class="upload-btn">功能開發中</span>
+    <div class="upload-desc">支援政府線上文字版 PDF · 可一次選多份（共同擔保案件）· PDF 不上傳，僅瀏覽器端抽文字</div>
+    <input type="file" id="deedFile" class="file-input" accept="application/pdf" multiple>
+    <button id="runBtn" class="run-btn">開始判讀</button>
+    <div id="statusBox" class="status-box"></div>
   </div>
+  <div id="resultBox" class="result-box"></div>
 
   <!-- 判讀流程 -->
   <div class="section-h">判讀流程（依 rules.md 規範）</div>
@@ -173,5 +183,81 @@ h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#
     <a href="/tools-lab.html">← 回 總工具</a>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+<script>
+const WORKER_URL = "https://cx468-deed-reader.howard118008y.workers.dev";
+const fileInput = document.getElementById("deedFile");
+const runBtn = document.getElementById("runBtn");
+const statusBox = document.getElementById("statusBox");
+const resultBox = document.getElementById("resultBox");
+let extractedText = "";
+
+if (fileInput) {
+  fileInput.addEventListener("change", async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    setStatus("正在讀取 PDF 文字…");
+    try {
+      const texts = [];
+      for (const f of files) texts.push(await extractPdfText(f));
+      extractedText = texts.join("\n\n===== 下一份謄本 =====\n\n");
+      setStatus(`已讀取 ${files.length} 份，可開始判讀。`);
+    } catch (err) {
+      setStatus("PDF 讀取失敗：" + err.message + "（可能是影像版，目前僅支援文字版）");
+    }
+  });
+}
+if (runBtn) {
+  runBtn.addEventListener("click", async () => {
+    if (!extractedText) { setStatus("請先選擇謄本 PDF。"); return; }
+    setStatus("AI 判讀中，請稍候…");
+    runBtn.disabled = true;
+    try {
+      const resp = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deedText: extractedText }),
+      });
+      const data = await resp.json();
+      if (data.error) { setStatus("判讀失敗：" + data.error); if (data.raw) console.log(data.raw); }
+      else { setStatus("判讀完成。"); renderResult(data); }
+    } catch (err) { setStatus("連線失敗：" + err.message); }
+    finally { runBtn.disabled = false; }
+  });
+}
+async function extractPdfText(file) {
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+  let full = "";
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    full += content.items.map((it) => it.str).join(" ") + "\n";
+  }
+  if (full.trim().length < 50) throw new Error("幾乎抽不到文字");
+  return full;
+}
+function setStatus(msg) { if (statusBox) statusBox.textContent = msg; }
+function renderResult(d) {
+  if (!resultBox) return;
+  const v = d.verdict || {}, s = d.synthesis || {};
+  const c = { "紅": "#e0584f", "黃": "#e0a23b", "綠": "#5db98b" }[v.light] || "#888";
+  resultBox.innerHTML =
+    `<div style="border:1px solid ${c};border-radius:8px;padding:18px;margin-top:16px;background:#15171c;color:#e8e6e0">
+      <div style="font-size:20px;color:${c};font-weight:600">綜合燈號：${v.light || "—"}</div>
+      <div style="margin:8px 0;color:#9aa0ab">${v.recommendation || ""}</div>
+      <div style="font-family:monospace;margin-top:10px">LTV：${s.ltv ?? "—"}　|　殘值：${s.residual_value ?? "—"}　|　負債合計：${s.total_debt_estimate ?? "—"}</div>
+      <div style="margin-top:10px;color:#9aa0ab">原因：${(v.reasons || []).join("、") || "—"}</div>
+      <div style="margin-top:8px;color:#e0a23b">待辦：${(v.todos || []).join("、") || "—"}</div>
+    </div>
+    <details style="margin-top:12px;color:#646a76"><summary>完整 JSON（除錯用）</summary>
+    <pre style="white-space:pre-wrap;font-size:12px">${JSON.stringify(d, null, 2).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</pre></details>`;
+}
+</script>
 </body>
 </html>
