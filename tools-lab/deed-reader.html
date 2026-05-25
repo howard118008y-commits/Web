@@ -7,6 +7,9 @@
 <meta name="description" content="鋮馨內部測試中：台灣地政電子謄本自動判讀工具">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://cx468.com.tw/tools-lab/deed-reader.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0d1117; --card:#161b22; --line:rgba(255,255,255,0.08);
@@ -243,20 +246,206 @@ async function extractPdfText(file) {
   return full;
 }
 function setStatus(msg) { if (statusBox) statusBox.textContent = msg; }
+
 function renderResult(d) {
-  if (!resultBox) return;
-  const v = d.verdict || {}, s = d.synthesis || {};
-  const c = { "紅": "#e0584f", "黃": "#e0a23b", "綠": "#5db98b" }[v.light] || "#888";
-  resultBox.innerHTML =
-    `<div style="border:1px solid ${c};border-radius:8px;padding:18px;margin-top:16px;background:#15171c;color:#e8e6e0">
-      <div style="font-size:20px;color:${c};font-weight:600">綜合燈號：${v.light || "—"}</div>
-      <div style="margin:8px 0;color:#9aa0ab">${v.recommendation || ""}</div>
-      <div style="font-family:monospace;margin-top:10px">LTV：${s.ltv ?? "—"}　|　殘值：${s.residual_value ?? "—"}　|　負債合計：${s.total_debt_estimate ?? "—"}</div>
-      <div style="margin-top:10px;color:#9aa0ab">原因：${(v.reasons || []).join("、") || "—"}</div>
-      <div style="margin-top:8px;color:#e0a23b">待辦：${(v.todos || []).join("、") || "—"}</div>
+  const box = document.getElementById("resultBox");
+  if (!box) return;
+
+  const v = d.verdict || {};
+  const s = d.synthesis || {};
+  const owner = d.owner || {};
+  const parcels = d.parcels || [];
+  const encs = d.encumbrances || [];
+  const tax = d.tax_estimate || {};
+  const val = d.valuation || {};
+  const hist = d.history_index || {};
+
+  const LIGHT = {
+    "紅": { c: "#e0584f", bg: "rgba(224,88,79,.10)", label: "High Risk", icon: "⚠" },
+    "黃": { c: "#e0a23b", bg: "rgba(224,162,59,.10)", label: "Caution", icon: "!" },
+    "綠": { c: "#5db98b", bg: "rgba(93,185,139,.10)", label: "Clear", icon: "✓" },
+  };
+  const L = LIGHT[v.light] || { c: "#888", bg: "rgba(136,136,136,.1)", label: "—", icon: "·" };
+
+  const fmt = (n) => (n === null || n === undefined || n === "") ? "—"
+    : (typeof n === "number" ? n.toLocaleString("zh-TW") : n);
+  const money = (n) => (n === null || n === undefined || n === "") ? "—" : "$" + Number(n).toLocaleString("zh-TW");
+  const esc = (str) => String(str ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+  const parcelCards = parcels.map((p) => {
+    const a = p.area || {};
+    return `
+      <div class="cx-pcard">
+        <div class="cx-pc-head">
+          <span class="cx-tag">${esc(p.type || "")}</span>
+          <span class="cx-pc-id">${esc(p.address || p.id || "")}</span>
+        </div>
+        <div class="cx-pc-grid">
+          <div><span class="k">用途</span><span class="vv">${esc(p.usage || "—")}</span></div>
+          <div><span class="k">建材</span><span class="vv">${esc(p.material || "—")}</span></div>
+          <div><span class="k">樓層</span><span class="vv">${esc(p.floor || "—")}</span></div>
+          <div><span class="k">屋齡</span><span class="vv num">${p.age_years ? p.age_years + " 年" : "—"}</span></div>
+          <div><span class="k">持分</span><span class="vv num">${esc(p.ownership_scope || "—")}</span></div>
+          <div><span class="k">取得</span><span class="vv">${esc(p.acquire_reason || "—")} ${esc(p.acquire_date || "")}</span></div>
+          <div><span class="k">總建坪</span><span class="vv num gold">${a.total_ping ?? "—"} <small>坪</small></span></div>
+          <div><span class="k">車位坪</span><span class="vv num">${a.parking_present ? (a.parking_ping ?? "概估") : "無車位"}</span></div>
+        </div>
+        ${p.notes ? `<div class="cx-pc-note">${esc(p.notes)}</div>` : ""}
+        ${(p.restrictions && p.restrictions.length) ? p.restrictions.map(r =>
+          `<div class="cx-restrict">⚠ 限制登記：${esc(r.kind)}　${esc(r.date || "")}　${esc(r.creditor_or_claimant || "")}</div>`
+        ).join("") : ""}
+      </div>`;
+  }).join("");
+
+  const debtRows = encs.map((e) => {
+    const pe = Array.isArray(e.principal_estimate)
+      ? `${fmt(e.principal_estimate[0])}~${fmt(e.principal_estimate[1])}`
+      : fmt(e.principal_estimate);
+    return `
+      <tr>
+        <td>${esc(e.creditor || "")}<span class="cx-ctag">${esc(e.creditor_class || "")}</span></td>
+        <td>${esc(e.right_kind || "")}</td>
+        <td>${esc(e.setting_date || "")}</td>
+        <td class="num">${money(e.setting_amount)}</td>
+        <td class="num gold">${pe === "—" ? "—" : "$" + pe} <small>(${esc(e.ratio_used || "")})</small></td>
+      </tr>
+      ${e.is_common_collateral ? `<tr class="cx-subrow"><td colspan="5">共同擔保：${(e.common_collateral_targets || []).map(esc).join("、")}　設定金額不重複計算</td></tr>` : ""}`;
+  }).join("");
+
+  const taxBlock = `
+    <div class="cx-tax">
+      <div class="cx-tax-row">
+        <div><span class="k">土增稅（一般版）</span><span class="vv num gold">${money(tax.general_tax)}</span></div>
+        <div><span class="k">土增稅（自用版）</span><span class="vv num gold">${money(tax.self_use_tax)}</span></div>
+      </div>
+      ${(tax.general_tax === null) ? `<div class="cx-tax-note">※ 本件取得原因為繼承／無本次移轉行為，當下無土增稅可計；實際出售時點再核算。</div>` : ""}
+      ${(tax.assumptions && tax.assumptions.length) ? `<div class="cx-assume">假設：${tax.assumptions.map(esc).join("；")}</div>` : ""}
+    </div>`;
+
+  const synthBlock = `
+    <div class="cx-synth">
+      <div class="cx-synth-cell"><span class="k">估值</span><span class="vv num">${val.total_value ? money(val.total_value) + " 萬" : "—"}</span><span class="sub">${esc(val.source || "未提供")}</span></div>
+      <div class="cx-synth-cell"><span class="k">負債合計</span><span class="vv num gold">${money(s.total_debt_estimate)}</span></div>
+      <div class="cx-synth-cell"><span class="k">LTV 已用成數</span><span class="vv num">${s.ltv ?? "—"}</span></div>
+      <div class="cx-synth-cell"><span class="k">殘值</span><span class="vv num">${s.residual_value ? money(s.residual_value) : "—"}</span></div>
     </div>
-    <details style="margin-top:12px;color:#646a76"><summary>完整 JSON（除錯用）</summary>
-    <pre style="white-space:pre-wrap;font-size:12px">${JSON.stringify(d, null, 2).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</pre></details>`;
+    ${(!val.total_value) ? `<div class="cx-tax-note">※ 未接估值來源，LTV／殘值待補好時價或實價登錄後自動計算。</div>` : ""}`;
+
+  const histBlock = hist.available ? `
+    <div class="cx-sec"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div>
+      <div class="cx-pc-note">階段：${esc(hist.phase || "—")}${hist.money_lender_carousel ? "　🔴 偵測到金主走馬燈" : ""}</div>
+      <div class="cx-pc-note">${esc(hist.timeline_summary || "")}</div>
+    </div>` : `<div class="cx-sec"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div><div class="cx-pc-note" style="color:#646a76">未提供異動索引。${(v.todos||[]).some(t=>t.includes("異動索引")) ? "建議申請以檢視歷史設定／塗銷紀錄。" : ""}</div></div>`;
+
+  box.innerHTML = `
+  <style>
+    .cx-report{--gold:#c9a24b;--ink:#e8e6e0;--dim:#9aa0ab;--faint:#646a76;--line:#2a2e38;--panel:#15171c;--panel2:#1b1e25;
+      font-family:'Noto Sans TC',sans-serif;color:var(--ink);margin-top:20px}
+    .cx-report .num{font-family:'IBM Plex Mono',monospace}
+    .cx-report .gold{color:var(--gold)}
+    .cx-report small{font-size:11px;color:var(--faint)}
+    .cx-verdict{border:1px solid ${L.c};background:${L.bg};border-radius:8px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden}
+    .cx-verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:${L.c}}
+    .cx-vlight{flex-shrink:0;width:50px;height:50px;border-radius:50%;background:${L.c};display:grid;place-items:center;font-size:22px;color:#fff;box-shadow:0 0 20px ${L.c}66}
+    .cx-vlabel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:${L.c};text-transform:uppercase}
+    .cx-vmain{font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;color:#fff;margin:3px 0 6px}
+    .cx-vdesc{font-size:13.5px;color:var(--dim);line-height:1.7}
+    .cx-sec{margin-top:22px}
+    .cx-sec-h{display:flex;align-items:center;gap:10px;font-family:'Noto Serif TC',serif;font-size:16px;font-weight:600;margin-bottom:12px}
+    .cx-sec-h .idx{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:1px 7px}
+    .cx-pcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:15px 16px;margin-bottom:10px}
+    .cx-pc-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+    .cx-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:1px 6px}
+    .cx-pc-id{font-size:14px;color:var(--ink)}
+    .cx-pc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 14px}
+    .cx-pc-grid>div{display:flex;flex-direction:column;gap:3px}
+    .cx-pc-grid .k{font-size:10px;letter-spacing:1px;color:var(--faint)}
+    .cx-pc-grid .vv{font-size:14px;color:var(--ink)}
+    .cx-pc-note{font-size:11.5px;color:var(--faint);margin-top:11px;line-height:1.6;font-family:'IBM Plex Mono',monospace}
+    .cx-restrict{font-size:12.5px;color:#e0584f;margin-top:8px;background:rgba(224,88,79,.08);padding:7px 10px;border-radius:4px}
+    .cx-dtable{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+    .cx-dtable th{background:var(--panel2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--faint);text-align:left;padding:10px 12px;font-weight:500}
+    .cx-dtable td{background:var(--panel);padding:11px 12px;border-top:1px solid var(--line);color:var(--ink)}
+    .cx-dtable td.num{text-align:right}
+    .cx-ctag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5db98b;border:1px solid rgba(93,185,139,.4);padding:1px 5px;border-radius:3px;margin-left:7px}
+    .cx-subrow td{background:var(--panel2)!important;color:var(--faint)!important;font-size:11px;font-family:'IBM Plex Mono',monospace}
+    .cx-tax,.cx-synth{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:15px 16px}
+    .cx-tax-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .cx-tax-row .k,.cx-synth .k{font-size:10px;letter-spacing:1px;color:var(--faint);display:block;margin-bottom:4px}
+    .cx-tax-row .vv,.cx-synth .vv{font-size:18px}
+    .cx-tax-note{font-size:11.5px;color:var(--gold);margin-top:10px;line-height:1.6}
+    .cx-assume{font-size:11px;color:var(--faint);margin-top:8px;line-height:1.6}
+    .cx-synth{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .cx-synth-cell{display:flex;flex-direction:column}
+    .cx-synth-cell .sub{font-size:10px;color:var(--faint);margin-top:2px}
+    .cx-reco{background:linear-gradient(180deg,var(--panel),var(--panel2));border-left:3px solid var(--gold);border-radius:6px;padding:18px 20px;margin-top:22px}
+    .cx-reco .rl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+    .cx-reco .rmain{font-size:14.5px;color:#fff;line-height:1.7;margin-bottom:12px}
+    .cx-reco .reasons{font-size:12.5px;color:var(--dim);line-height:1.8}
+    .cx-todos{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+    .cx-todos .tl{font-size:11px;letter-spacing:2px;color:var(--gold);font-family:'IBM Plex Mono',monospace;margin-bottom:8px}
+    .cx-todos ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+    .cx-todos li{font-size:12.5px;color:var(--dim);padding-left:18px;position:relative;line-height:1.6}
+    .cx-todos li::before{content:"→";position:absolute;left:0;color:var(--gold)}
+    .cx-foot{margin-top:18px;font-size:11px;color:var(--faint);font-family:'IBM Plex Mono',monospace;line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
+    @media(max-width:640px){.cx-pc-grid{grid-template-columns:1fr 1fr}.cx-synth{grid-template-columns:1fr 1fr}.cx-tax-row{grid-template-columns:1fr}}
+  </style>
+
+  <div class="cx-report">
+    <div class="cx-verdict">
+      <div class="cx-vlight">${L.icon}</div>
+      <div>
+        <div class="cx-vlabel">綜合研判　${L.label}</div>
+        <div class="cx-vmain">綜合燈號：${esc(v.light || "—")}</div>
+        <div class="cx-vdesc">${esc(v.recommendation || "")}</div>
+      </div>
+    </div>
+
+    <div class="cx-sec">
+      <div class="cx-sec-h"><span class="idx">A</span>標的識別　<small style="font-weight:400">所有權人 ${esc(owner.name || "")}　${esc(owner.id_birthplace || "")}</small></div>
+      ${parcelCards}
+    </div>
+
+    <div class="cx-sec">
+      <div class="cx-sec-h"><span class="idx">B</span>債務結構</div>
+      <table class="cx-dtable">
+        <thead><tr><th>權利人</th><th>種類</th><th>設定日</th><th style="text-align:right">設定金額</th><th style="text-align:right">反推本金</th></tr></thead>
+        <tbody>${debtRows || `<tr><td colspan="5" style="color:var(--faint)">無設定</td></tr>`}</tbody>
+      </table>
+    </div>
+
+    <div class="cx-sec">
+      <div class="cx-sec-h"><span class="idx">A2</span>即時試算 · 土地增值稅</div>
+      ${taxBlock}
+    </div>
+
+    <div class="cx-sec">
+      <div class="cx-sec-h"><span class="idx">A3</span>估值 × 負債 合體</div>
+      ${synthBlock}
+    </div>
+
+    ${histBlock}
+
+    <div class="cx-reco">
+      <div class="rl">承作研判　Recommendation</div>
+      <div class="rmain">${esc(v.recommendation || "")}</div>
+      <div class="reasons">燈號原因：${(v.reasons || []).map(esc).join("、") || "—"}</div>
+      <div class="cx-todos">
+        <div class="tl">待辦事項　TODO</div>
+        <ul>${(v.todos || []).map(t => `<li>${esc(t)}</li>`).join("") || "<li>—</li>"}</ul>
+      </div>
+    </div>
+
+    <div class="cx-foot">
+      本報告由 AI 依電子謄本明文自動判讀，屬內部輔助參考，非正式估價或法律意見；推估值應經承辦覆核，並以地政／稅捐／債權人之最新記載為準。<br>
+      鋮馨租賃有限公司　Cheng Xin Leasing Co., Ltd.
+    </div>
+
+    <details style="margin-top:14px;color:var(--faint)">
+      <summary style="cursor:pointer;font-size:12px">完整 JSON（除錯用）</summary>
+      <pre style="white-space:pre-wrap;font-size:11px;color:#646a76">${esc(JSON.stringify(d, null, 2))}</pre>
+    </details>
+  </div>`;
 }
 </script>
 </body>
