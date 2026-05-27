@@ -7,3 +7,10 @@ img/_original/
 # Editor
 .vscode/
 *.swp
+
+# Claude Code local memory (project knowledge graph, not for sharing)
+.claude/memory.json
+
+# Claude Code session caches
+.claude/cache/
+.claude/sessions/
