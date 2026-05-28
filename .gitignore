@@ -14,3 +14,8 @@ img/_original/
 # Claude Code session caches
 .claude/cache/
 .claude/sessions/
+
+# LVR observatory pipeline cache (zips, intermediate pickle/csv)
+# Note: 產物 lvr-charts/ + lvr-data/ + lvr-observatory.html 會 commit；cache 不會
+scripts/lvr/_cache/
+scripts/lvr/__pycache__/
