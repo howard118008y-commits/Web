@@ -1,12 +1,15 @@
 """
-從內政部「不動產成交案件實際資訊資料供應系統」下載指定季別的全國 CSV ZIP。
+從內政部「不動產成交案件實際資訊資料供應系統」下載指定季別 + 當期 mini-package。
 
-下載 115年第1季 (2026 Q1) + 114年第4季 (2025 Q4)，
-共涵蓋 2025-10 到 2026-03 之實價登錄資料。
+兩階段：
+1. 季別下載（非本期 tab）：113S1 ~ 115S1 共 9 季，已存在則 skip
+2. 當期下載（本期 tab）：最新 10 天 mini-package，每次 action 都拉一份
 
-下載完存到 output/lvr_115S1.zip / output/lvr_114S4.zip。
+mini-package 命名：lvr_mini_YYYYMMDD.zip
+analyze_lvr.py 會用 編號 dedupe 處理重複交易。
 """
 
+from datetime import datetime
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
@@ -71,6 +74,64 @@ def download_season(page, season: str) -> Path:
         raise
 
 
+def download_current_period(page) -> Path:
+    """下載「本期下載」tab 的最新 10 天 mini-package（全國 CSV zip）。"""
+    print(f"\n=== 下載當期 mini-package ===")
+    # 切回「本期下載」tab
+    page.click("a:has-text('本期下載')")
+    page.wait_for_selector("#fileFormatId", state="visible", timeout=15_000)
+    page.wait_for_timeout(800)
+
+    page.select_option("#fileFormatId", "csv")
+    print("  → 格式：csv")
+
+    # 本期 tab 預設選「全國」radio，保險再勾一次
+    page.evaluate(
+        r"""() => {
+          document.querySelectorAll('input[type=radio]').forEach(el => {
+            if (el.offsetParent !== null && /全國/.test(el.parentElement?.innerText || '')) {
+              el.checked = true;
+            }
+          });
+        }"""
+    )
+
+    today = datetime.now().strftime("%Y%m%d")
+    target = OUT_DIR / f"lvr_mini_{today}.zip"
+    if target.exists():
+        print(f"  → 已存在 {target.name}（今日已抓過），跳過")
+        return target
+
+    # 找當前 visible 的 preDownload() button（本期 tab 是 <a>、非本期是 <input>）
+    btns = page.locator('[onclick*="preDownload"]')
+    btn_to_click = None
+    for i in range(btns.count()):
+        b = btns.nth(i)
+        if b.is_visible():
+            btn_to_click = b
+            break
+    if btn_to_click is None:
+        print("  ⚠ 找不到 visible 下載 button，跳過 mini-package")
+        return None
+
+    try:
+        with page.expect_download(timeout=60_000) as dl_info:
+            btn_to_click.click()
+            try:
+                page.wait_for_selector("#modal-confirm-confirm", state="visible", timeout=3_000)
+                print("  → 偵測到 modal，按確定")
+                page.click("#modal-confirm-confirm")
+            except PWTimeout:
+                pass
+        dl_info.value.save_as(str(target))
+        size_mb = target.stat().st_size / 1024 / 1024
+        print(f"  ✓ 已存：{target.name}（{size_mb:.1f} MB）")
+        return target
+    except PWTimeout:
+        print(f"  ⚠ 當期下載逾時（季別資料已就緒，繼續）")
+        return None
+
+
 def main() -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -85,12 +146,19 @@ def main() -> None:
         page.goto(URL, wait_until="networkidle", timeout=30_000)
         page.wait_for_timeout(1500)
 
+        # 階段 1：季別下載（已存在 skip）
         for season in SEASONS:
             target = OUT_DIR / f"lvr_{season}.zip"
             if target.exists():
                 print(f"\n=== {season}：已存在 {target.name}，跳過 ===")
                 continue
             download_season(page, season)
+
+        # 階段 2：當期 mini-package（失敗不致命）
+        try:
+            download_current_period(page)
+        except Exception as e:
+            print(f"  ⚠ mini-package 階段失敗，繼續：{e}")
 
         browser.close()
 

@@ -1,9 +1,10 @@
-name: LVR Observatory Weekly Update
+name: LVR Observatory Update
 
 on:
   schedule:
-    # 每週一 09:00 Taipei time（01:00 UTC）
-    - cron: '0 1 * * 1'
+    # 內政部每月 1/11/21 公告 mini-package；本站每月 2/12/22 抓
+    # 09:00 Taipei time = 01:00 UTC
+    - cron: '0 1 2,12,22 * *'
   workflow_dispatch:  # 允許手動觸發
 
 permissions:

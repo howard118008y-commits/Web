@@ -1,7 +1,7 @@
 <!--
-  Page: 實價登錄觀察室 (LVR Observatory)
+  Page: 實價登錄觀察室 v2 (LVR Observatory)
   Status: READY
-  Generated: 2026-05-29 06:08
+  Generated: 2026-05-29 06:35
   Data source: 內政部不動產交易實價查詢服務網
 -->
 <!DOCTYPE html>
@@ -9,9 +9,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>實價登錄觀察室 2026｜中和周邊 5 區房價追蹤｜鋮馨租賃</title>
-<meta name="description" content="中和、永和、板橋、新店、土城近兩年實價登錄資料整理：單價中位數、月成交量、跨季趨勢。資料來源：內政部不動產交易實價查詢服務網。每週一自動更新。">
+<title>實價登錄觀察室 2026｜雙北 36 區房價追蹤｜鋮馨租賃</title>
+<meta name="description" content="台北市 + 新北市 36 區實價登錄追蹤：單價中位數、年增率 YoY、跨季趨勢、屋齡價值散布。資料來源：內政部不動產交易實價查詢服務網。每月 2/12/22 自動更新。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+else if(a.href.match(/\.csv$/i)){gtag('event','csv_download',{page_path:location.pathname,file_name:decodeURIComponent(a.href.split('/').pop())});}
+else if(a.closest('.cta-strip')){gtag('event','cta_click',{page_path:location.pathname,cta_text:(a.innerText||'').trim().substring(0,50),cta_url:a.href});}
+});
+</script>
+
 <style>
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
@@ -20,7 +34,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .hero{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);padding:60px 24px 44px;text-align:center}
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 .hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
-.hero p{font-size:17px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 6px}
+.hero p{font-size:17px;color:rgba(255,255,255,.85);max-width:600px;margin:0 auto 6px}
 .hero .meta{font-size:13px;color:rgba(255,255,255,.7);margin-top:14px}
 @media(max-width:768px){.hero h1{font-size:32px}}
 
@@ -31,7 +45,6 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.kpi-grid{grid-template-columns:1fr}}
-
 .kpi-card{background:#fff;border-radius:18px;padding:20px 18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
 .kpi-town{font-size:14px;font-weight:700;color:#1d1d1f;margin-bottom:10px}
 .kpi-main{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f0f0f3}
@@ -47,10 +60,25 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .chart-card h3{font-size:16px;font-weight:600;color:#1d1d1f;margin:0 0 6px}
 .chart-card p.chart-note{font-size:12px;color:#6e6e73;margin:0 0 14px;line-height:1.5}
 .chart-card img{width:100%;height:auto;display:block;border-radius:10px}
-
 .chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
 @media(max-width:780px){.chart-row{grid-template-columns:1fr}}
 .chart-row .chart-card{margin-bottom:0}
+
+/* Ranking table */
+.rank-card{background:#fff;border-radius:18px;padding:18px 4px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.rank-card h3{font-size:16px;font-weight:600;color:#1d1d1f;margin:0 18px 6px}
+.rank-card p.rank-note{font-size:12px;color:#6e6e73;margin:0 18px 14px;line-height:1.5}
+.rank-table-wrap{overflow-x:auto}
+table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1f;min-width:680px}
+.rank-table th{background:#f5f5f7;color:#6e6e73;font-weight:600;text-align:left;padding:10px 12px;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1.5px solid #e8e8ed;position:sticky;top:0}
+.rank-table th:hover{background:#ebebef;color:#1d1d1f}
+.rank-table th .arrow{margin-left:4px;opacity:.4;font-size:10px}
+.rank-table th.sorted .arrow{opacity:1;color:#7C3AED}
+.rank-table td{padding:9px 12px;border-bottom:.5px solid #f0f0f3;white-space:nowrap}
+.rank-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+.rank-table tr.low-sample td{color:#86868b}
+.rank-table tr:hover{background:#fafafc}
+.badge-low{display:inline-block;font-size:10px;color:#86868b;background:#f0f0f3;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500}
 
 .download-card{background:#f5f5f7;border-radius:16px;padding:24px}
 .download-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
@@ -73,92 +101,94 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <div data-include="nav-tool"></div>
 
 <div class="hero">
-  <p class="eyebrow">LVR Observatory</p>
+  <p class="eyebrow">LVR Observatory · v2</p>
   <h1>實價登錄觀察室</h1>
-  <p>中和、永和、板橋、新店、土城 — 正常住宅成交資料追蹤</p>
-  <p class="meta">資料涵蓋 113Q1 ~ 115Q1　·　近 6 月有效樣本 669 筆　·　更新於 2026-05-29 06:08</p>
+  <p>台北市 + 新北市 36 區｜正常住宅成交資料追蹤</p>
+  <p class="meta">資料涵蓋 113Q1 ~ mini_20260529　·　近 6 月有效樣本 3,115 筆　·　涵蓋 36 個行政區　·　更新於 2026-05-29 06:35</p>
 </div>
 
 <div class="obs-wrap">
 
-  <div class="section-title">5 區當前快照（近 180 天 正常住宅）</div>
+  <div class="section-title">5 精選區當前快照（近 180 天 正常住宅）</div>
   <div class="kpi-grid">
 
     <div class="kpi-card" style="border-top:4px solid #7C3AED">
       <div class="kpi-town">中和區</div>
       <div class="kpi-main">
-        <div class="kpi-value">54.4<span class="kpi-unit">萬/坪</span></div>
+        <div class="kpi-value">53.6<span class="kpi-unit">萬/坪</span></div>
         <div class="kpi-label">單價中位數</div>
       </div>
-      <div class="kpi-row"><span>總價中位</span><b>1,350 萬</b></div>
-      <div class="kpi-row"><span>建坪中位</span><b>26.4 坪</b></div>
-      <div class="kpi-row"><span>近 6 月成交</span><b>170 筆</b></div>
+      <div class="kpi-row"><span>總價中位</span><b>1,330 萬</b></div>
+      <div class="kpi-row"><span>建坪中位</span><b>26.5 坪</b></div>
+      <div class="kpi-row"><span>近 6 月成交</span><b>193 筆</b></div>
       <div class="kpi-change">2 年變化 <span style="color:#16A34A;font-weight:700">▲ 17.1%</span></div>
     </div>
-    
 
     <div class="kpi-card" style="border-top:4px solid #2563EB">
       <div class="kpi-town">永和區</div>
       <div class="kpi-main">
-        <div class="kpi-value">58.4<span class="kpi-unit">萬/坪</span></div>
+        <div class="kpi-value">57.0<span class="kpi-unit">萬/坪</span></div>
         <div class="kpi-label">單價中位數</div>
       </div>
-      <div class="kpi-row"><span>總價中位</span><b>1,685 萬</b></div>
-      <div class="kpi-row"><span>建坪中位</span><b>29.6 坪</b></div>
-      <div class="kpi-row"><span>近 6 月成交</span><b>73 筆</b></div>
+      <div class="kpi-row"><span>總價中位</span><b>1,682 萬</b></div>
+      <div class="kpi-row"><span>建坪中位</span><b>29.7 坪</b></div>
+      <div class="kpi-row"><span>近 6 月成交</span><b>88 筆</b></div>
       <div class="kpi-change">2 年變化 <span style="color:#16A34A;font-weight:700">▲ 2.9%</span></div>
     </div>
-    
 
     <div class="kpi-card" style="border-top:4px solid #16A34A">
       <div class="kpi-town">板橋區</div>
       <div class="kpi-main">
-        <div class="kpi-value">53.9<span class="kpi-unit">萬/坪</span></div>
+        <div class="kpi-value">54.6<span class="kpi-unit">萬/坪</span></div>
         <div class="kpi-label">單價中位數</div>
       </div>
-      <div class="kpi-row"><span>總價中位</span><b>1,515 萬</b></div>
+      <div class="kpi-row"><span>總價中位</span><b>1,550 萬</b></div>
       <div class="kpi-row"><span>建坪中位</span><b>29.9 坪</b></div>
-      <div class="kpi-row"><span>近 6 月成交</span><b>188 筆</b></div>
+      <div class="kpi-row"><span>近 6 月成交</span><b>223 筆</b></div>
       <div class="kpi-change">2 年變化 <span style="color:#16A34A;font-weight:700">▲ 6.4%</span></div>
     </div>
-    
 
     <div class="kpi-card" style="border-top:4px solid #F59E0B">
       <div class="kpi-town">新店區</div>
       <div class="kpi-main">
-        <div class="kpi-value">44.2<span class="kpi-unit">萬/坪</span></div>
+        <div class="kpi-value">45.0<span class="kpi-unit">萬/坪</span></div>
         <div class="kpi-label">單價中位數</div>
       </div>
-      <div class="kpi-row"><span>總價中位</span><b>1,365 萬</b></div>
-      <div class="kpi-row"><span>建坪中位</span><b>32.9 坪</b></div>
-      <div class="kpi-row"><span>近 6 月成交</span><b>149 筆</b></div>
+      <div class="kpi-row"><span>總價中位</span><b>1,438 萬</b></div>
+      <div class="kpi-row"><span>建坪中位</span><b>33.0 坪</b></div>
+      <div class="kpi-row"><span>近 6 月成交</span><b>173 筆</b></div>
       <div class="kpi-change">2 年變化 <span style="color:#EF4444;font-weight:700">▼ 4.1%</span></div>
     </div>
-    
 
     <div class="kpi-card" style="border-top:4px solid #EF4444">
       <div class="kpi-town">土城區</div>
       <div class="kpi-main">
-        <div class="kpi-value">48.2<span class="kpi-unit">萬/坪</span></div>
+        <div class="kpi-value">48.3<span class="kpi-unit">萬/坪</span></div>
         <div class="kpi-label">單價中位數</div>
       </div>
-      <div class="kpi-row"><span>總價中位</span><b>1,435 萬</b></div>
-      <div class="kpi-row"><span>建坪中位</span><b>30.7 坪</b></div>
-      <div class="kpi-row"><span>近 6 月成交</span><b>89 筆</b></div>
+      <div class="kpi-row"><span>總價中位</span><b>1,420 萬</b></div>
+      <div class="kpi-row"><span>建坪中位</span><b>29.6 坪</b></div>
+      <div class="kpi-row"><span>近 6 月成交</span><b>105 筆</b></div>
       <div class="kpi-change">2 年變化 <span style="color:#16A34A;font-weight:700">▲ 33.3%</span></div>
     </div>
-    
 
   </div>
 
-  <div class="section-title">跨季趨勢</div>
+  <div class="section-title">近 1 年單價變化（年增率 YoY）</div>
   <div class="chart-card">
-    <h3>5 區單價中位數跨季變化（113Q1 → 115Q1）</h3>
-    <p class="chart-note">每點為該季正常住宅單價中位數。樣本量過小的季別可能波動較大，建議搭配筆數判讀。</p>
-    <img src="lvr-charts/chart_quarterly_trend.png" alt="5 區單價中位數跨季趨勢">
+    <h3>115Q1 vs 114Q1 單價中位數年增率</h3>
+    <p class="chart-note">綠 = 上漲、紅 = 下跌。比較同季別（去年同期 vs 今年）避開季節性偏差，比跨季更能反映真實趨勢。</p>
+    <img src="lvr-charts/chart_yoy_change.png" alt="5 精選區與雙北平均年增率 YoY">
   </div>
 
-  <div class="section-title">區別比較（近 180 天）</div>
+  <div class="section-title">雙北全市平均跨季趨勢</div>
+  <div class="chart-card">
+    <h3>台北市 vs 新北市 9 季均價</h3>
+    <p class="chart-note">每點為該季全市正常住宅單價中位數，已排除特殊交易與極端值。</p>
+    <img src="lvr-charts/chart_city_trend.png" alt="雙北全市平均跨季趨勢">
+  </div>
+
+  <div class="section-title">5 精選區比較（近 180 天）</div>
   <div class="chart-row">
     <div class="chart-card">
       <h3>單價中位數</h3>
@@ -172,7 +202,14 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
     </div>
   </div>
 
-  <div class="section-title">交易量與結構</div>
+  <div class="section-title">屋齡價值散布（雙北全區）</div>
+  <div class="chart-card">
+    <h3>屋齡 vs 單價（每點為一筆成交）</h3>
+    <p class="chart-note">屋齡 0 年附近為新成屋／預售移轉；30 年以上多為老公寓。台北市（深色）整體價位高於新北市（紫色），但新北市新成屋與台北市老公寓部分價位帶有重疊。</p>
+    <img src="lvr-charts/chart_age_price_scatter.png" alt="屋齡與單價散布圖">
+  </div>
+
+  <div class="section-title">交易量與結構（5 精選區）</div>
   <div class="chart-card">
     <h3>近 12 個月月成交量（5 區堆疊）</h3>
     <p class="chart-note">堆疊長條反映整體市場活躍度。內政部 open data 發布有 30–50 天延遲，最近 1~2 個月筆數會偏低。</p>
@@ -184,15 +221,80 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
     <img src="lvr-charts/chart_building_types.png" alt="5 區建物型態組成堆疊長條">
   </div>
 
+  <div class="section-title">雙北全區排名表（近 180 天）</div>
+  <div class="rank-card">
+    <h3>36 個行政區排名</h3>
+    <p class="rank-note">點欄位標題排序。樣本 &lt; 30 筆者標「樣本少」、僅供參考；2 年漲幅 = 115Q1 vs 113Q1 單價中位數變化。</p>
+    <div class="rank-table-wrap">
+      <table class="rank-table" id="rankTable">
+        <thead>
+          <tr>
+            <th data-sort-type="num" data-sort-default="asc">排名<span class="arrow">▲▼</span></th>
+            <th data-sort-type="str">區別<span class="arrow">▲▼</span></th>
+            <th data-sort-type="str">縣市<span class="arrow">▲▼</span></th>
+            <th data-sort-type="num">樣本<span class="arrow">▲▼</span></th>
+            <th data-sort-type="num" class="sorted" data-sort-default="desc">單價中位<span class="arrow">▼</span></th>
+            <th data-sort-type="num">單價平均<span class="arrow">▲▼</span></th>
+            <th data-sort-type="num">總價中位<span class="arrow">▲▼</span></th>
+            <th data-sort-type="num">屋齡中位<span class="arrow">▲▼</span></th>
+            <th data-sort-type="num">2 年漲幅<span class="arrow">▲▼</span></th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr><td class="num">1</td><td><b>中正區</b></td><td>台北市</td><td class="num" data-sort="42">42</td><td class="num" data-sort="125.8">125.8</td><td class="num" data-sort="117.9">117.9</td><td class="num" data-sort="3164.0">3,164</td><td class="num" data-sort="14.4">14.4</td><td class="num" data-sort="23.7" style="color:#16A34A;font-weight:600">▲ 23.7%</td></tr>
+      <tr><td class="num">2</td><td><b>大安區</b></td><td>台北市</td><td class="num" data-sort="125">125</td><td class="num" data-sort="108.0">108.0</td><td class="num" data-sort="113.9">113.9</td><td class="num" data-sort="3260.0">3,260</td><td class="num" data-sort="39.6">39.6</td><td class="num" data-sort="9.4" style="color:#16A34A;font-weight:600">▲ 9.4%</td></tr>
+      <tr><td class="num">3</td><td><b>信義區</b></td><td>台北市</td><td class="num" data-sort="78">78</td><td class="num" data-sort="92.9">92.9</td><td class="num" data-sort="97.8">97.8</td><td class="num" data-sort="2478.0">2,478</td><td class="num" data-sort="42.3">42.3</td><td class="num" data-sort="13.9" style="color:#16A34A;font-weight:600">▲ 13.9%</td></tr>
+      <tr><td class="num">4</td><td><b>松山區</b></td><td>台北市</td><td class="num" data-sort="78">78</td><td class="num" data-sort="87.8">87.8</td><td class="num" data-sort="92.1">92.1</td><td class="num" data-sort="2843.0">2,843</td><td class="num" data-sort="40.6">40.6</td><td class="num" data-sort="24.9" style="color:#16A34A;font-weight:600">▲ 24.9%</td></tr>
+      <tr><td class="num">5</td><td><b>中山區</b></td><td>台北市</td><td class="num" data-sort="122">122</td><td class="num" data-sort="81.7">81.7</td><td class="num" data-sort="82.6">82.6</td><td class="num" data-sort="2029.0">2,029</td><td class="num" data-sort="40.2">40.2</td><td class="num" data-sort="13.2" style="color:#16A34A;font-weight:600">▲ 13.2%</td></tr>
+      <tr><td class="num">6</td><td><b>大同區</b></td><td>台北市</td><td class="num" data-sort="37">37</td><td class="num" data-sort="76.8">76.8</td><td class="num" data-sort="84.2">84.2</td><td class="num" data-sort="1878.0">1,878</td><td class="num" data-sort="20.2">20.2</td><td class="num" data-sort="8.3" style="color:#16A34A;font-weight:600">▲ 8.3%</td></tr>
+      <tr><td class="num">7</td><td><b>內湖區</b></td><td>台北市</td><td class="num" data-sort="102">102</td><td class="num" data-sort="72.5">72.5</td><td class="num" data-sort="77.4">77.4</td><td class="num" data-sort="2340.0">2,340</td><td class="num" data-sort="28.9">28.9</td><td class="num" data-sort="34.1" style="color:#16A34A;font-weight:600">▲ 34.1%</td></tr>
+      <tr><td class="num">8</td><td><b>南港區</b></td><td>台北市</td><td class="num" data-sort="36">36</td><td class="num" data-sort="71.9">71.9</td><td class="num" data-sort="81.2">81.2</td><td class="num" data-sort="2586.0">2,586</td><td class="num" data-sort="20.6">20.6</td><td class="num" data-sort="28.5" style="color:#16A34A;font-weight:600">▲ 28.5%</td></tr>
+      <tr><td class="num">9</td><td><b>士林區</b></td><td>台北市</td><td class="num" data-sort="102">102</td><td class="num" data-sort="69.8">69.8</td><td class="num" data-sort="76.2">76.2</td><td class="num" data-sort="2236.0">2,236</td><td class="num" data-sort="40.9">40.9</td><td class="num" data-sort="15.9" style="color:#16A34A;font-weight:600">▲ 15.9%</td></tr>
+      <tr><td class="num">10</td><td><b>萬華區</b></td><td>台北市</td><td class="num" data-sort="69">69</td><td class="num" data-sort="63.5">63.5</td><td class="num" data-sort="66.7">66.7</td><td class="num" data-sort="1510.0">1,510</td><td class="num" data-sort="38.8">38.8</td><td class="num" data-sort="3.4" style="color:#16A34A;font-weight:600">▲ 3.4%</td></tr>
+      <tr><td class="num">11</td><td><b>文山區</b></td><td>台北市</td><td class="num" data-sort="85">85</td><td class="num" data-sort="61.4">61.4</td><td class="num" data-sort="64.3">64.3</td><td class="num" data-sort="1650.0">1,650</td><td class="num" data-sort="37.1">37.1</td><td class="num" data-sort="15.9" style="color:#16A34A;font-weight:600">▲ 15.9%</td></tr>
+      <tr><td class="num">12</td><td><b>北投區</b></td><td>台北市</td><td class="num" data-sort="102">102</td><td class="num" data-sort="59.6">59.6</td><td class="num" data-sort="64.0">64.0</td><td class="num" data-sort="1759.0">1,759</td><td class="num" data-sort="31.0">31.0</td><td class="num" data-sort="16.1" style="color:#16A34A;font-weight:600">▲ 16.1%</td></tr>
+      <tr><td class="num">13</td><td><b>三重區</b></td><td>新北市</td><td class="num" data-sort="169">169</td><td class="num" data-sort="58.3">58.3</td><td class="num" data-sort="57.5">57.5</td><td class="num" data-sort="1502.0">1,502</td><td class="num" data-sort="25.5">25.5</td><td class="num" data-sort="23.6" style="color:#16A34A;font-weight:600">▲ 23.6%</td></tr>
+      <tr><td class="num">14</td><td><b>永和區</b></td><td>新北市</td><td class="num" data-sort="88">88</td><td class="num" data-sort="57.0">57.0</td><td class="num" data-sort="59.9">59.9</td><td class="num" data-sort="1682.0">1,682</td><td class="num" data-sort="40.0">40.0</td><td class="num" data-sort="2.9" style="color:#16A34A;font-weight:600">▲ 2.9%</td></tr>
+      <tr><td class="num">15</td><td><b>板橋區</b></td><td>新北市</td><td class="num" data-sort="223">223</td><td class="num" data-sort="54.6">54.6</td><td class="num" data-sort="58.6">58.6</td><td class="num" data-sort="1550.0">1,550</td><td class="num" data-sort="20.7">20.7</td><td class="num" data-sort="6.4" style="color:#16A34A;font-weight:600">▲ 6.4%</td></tr>
+      <tr><td class="num">16</td><td><b>中和區</b></td><td>新北市</td><td class="num" data-sort="193">193</td><td class="num" data-sort="53.6">53.6</td><td class="num" data-sort="55.2">55.2</td><td class="num" data-sort="1330.0">1,330</td><td class="num" data-sort="31.1">31.1</td><td class="num" data-sort="17.1" style="color:#16A34A;font-weight:600">▲ 17.1%</td></tr>
+      <tr><td class="num">17</td><td><b>蘆洲區</b></td><td>新北市</td><td class="num" data-sort="64">64</td><td class="num" data-sort="50.0">50.0</td><td class="num" data-sort="53.5">53.5</td><td class="num" data-sort="1420.0">1,420</td><td class="num" data-sort="30.0">30.0</td><td class="num" data-sort="29.5" style="color:#16A34A;font-weight:600">▲ 29.5%</td></tr>
+      <tr><td class="num">18</td><td><b>土城區</b></td><td>新北市</td><td class="num" data-sort="105">105</td><td class="num" data-sort="48.3">48.3</td><td class="num" data-sort="48.9">48.9</td><td class="num" data-sort="1420.0">1,420</td><td class="num" data-sort="30.9">30.9</td><td class="num" data-sort="33.3" style="color:#16A34A;font-weight:600">▲ 33.3%</td></tr>
+      <tr><td class="num">19</td><td><b>新莊區</b></td><td>新北市</td><td class="num" data-sort="214">214</td><td class="num" data-sort="48.2">48.2</td><td class="num" data-sort="49.4">49.4</td><td class="num" data-sort="1418.0">1,418</td><td class="num" data-sort="31.4">31.4</td><td class="num" data-sort="17.2" style="color:#16A34A;font-weight:600">▲ 17.2%</td></tr>
+      <tr><td class="num">20</td><td><b>林口區</b></td><td>新北市</td><td class="num" data-sort="78">78</td><td class="num" data-sort="46.5">46.5</td><td class="num" data-sort="46.0">46.0</td><td class="num" data-sort="1728.0">1,728</td><td class="num" data-sort="11.8">11.8</td><td class="num" data-sort="11.3" style="color:#16A34A;font-weight:600">▲ 11.3%</td></tr>
+      <tr><td class="num">21</td><td><b>新店區</b></td><td>新北市</td><td class="num" data-sort="173">173</td><td class="num" data-sort="45.0">45.0</td><td class="num" data-sort="47.6">47.6</td><td class="num" data-sort="1438.0">1,438</td><td class="num" data-sort="29.4">29.4</td><td class="num" data-sort="-4.1" style="color:#EF4444;font-weight:600">▼ 4.1%</td></tr>
+      <tr class="low-sample"><td class="num">22</td><td><b>泰山區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="29">29</td><td class="num" data-sort="43.7">43.7</td><td class="num" data-sort="42.9">42.9</td><td class="num" data-sort="1402.0">1,402</td><td class="num" data-sort="29.4">29.4</td><td class="num" data-sort="25.2" style="color:#16A34A;font-weight:600">▲ 25.2%</td></tr>
+      <tr><td class="num">23</td><td><b>汐止區</b></td><td>新北市</td><td class="num" data-sort="174">174</td><td class="num" data-sort="40.0">40.0</td><td class="num" data-sort="41.9">41.9</td><td class="num" data-sort="1274.0">1,274</td><td class="num" data-sort="29.0">29.0</td><td class="num" data-sort="7.2" style="color:#16A34A;font-weight:600">▲ 7.2%</td></tr>
+      <tr><td class="num">24</td><td><b>三峽區</b></td><td>新北市</td><td class="num" data-sort="65">65</td><td class="num" data-sort="40.0">40.0</td><td class="num" data-sort="40.4">40.4</td><td class="num" data-sort="1300.0">1,300</td><td class="num" data-sort="18.8">18.8</td><td class="num" data-sort="8.2" style="color:#16A34A;font-weight:600">▲ 8.2%</td></tr>
+      <tr><td class="num">25</td><td><b>五股區</b></td><td>新北市</td><td class="num" data-sort="58">58</td><td class="num" data-sort="37.9">37.9</td><td class="num" data-sort="38.3">38.3</td><td class="num" data-sort="1454.0">1,454</td><td class="num" data-sort="10.2">10.2</td><td class="num" data-sort="35.5" style="color:#16A34A;font-weight:600">▲ 35.5%</td></tr>
+      <tr><td class="num">26</td><td><b>樹林區</b></td><td>新北市</td><td class="num" data-sort="48">48</td><td class="num" data-sort="35.4">35.4</td><td class="num" data-sort="37.6">37.6</td><td class="num" data-sort="1262.0">1,262</td><td class="num" data-sort="28.1">28.1</td><td class="num" data-sort="0.8" style="color:#16A34A;font-weight:600">▲ 0.8%</td></tr>
+      <tr><td class="num">27</td><td><b>淡水區</b></td><td>新北市</td><td class="num" data-sort="305">305</td><td class="num" data-sort="32.4">32.4</td><td class="num" data-sort="32.3">32.3</td><td class="num" data-sort="1070.0">1,070</td><td class="num" data-sort="14.4">14.4</td><td class="num" data-sort="15.2" style="color:#16A34A;font-weight:600">▲ 15.2%</td></tr>
+      <tr><td class="num">28</td><td><b>鶯歌區</b></td><td>新北市</td><td class="num" data-sort="36">36</td><td class="num" data-sort="31.8">31.8</td><td class="num" data-sort="32.0">32.0</td><td class="num" data-sort="1245.0">1,245</td><td class="num" data-sort="7.4">7.4</td><td class="num" data-sort="15.1" style="color:#16A34A;font-weight:600">▲ 15.1%</td></tr>
+      <tr class="low-sample"><td class="num">29</td><td><b>深坑區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="13">13</td><td class="num" data-sort="31.0">31.0</td><td class="num" data-sort="31.3">31.3</td><td class="num" data-sort="850.0">850</td><td class="num" data-sort="33.4">33.4</td><td class="num" data-sort="15.9" style="color:#16A34A;font-weight:600">▲ 15.9%</td></tr>
+      <tr><td class="num">30</td><td><b>八里區</b></td><td>新北市</td><td class="num" data-sort="31">31</td><td class="num" data-sort="26.1">26.1</td><td class="num" data-sort="27.9">27.9</td><td class="num" data-sort="965.0">965</td><td class="num" data-sort="27.2">27.2</td><td class="num" data-sort="-9.0" style="color:#EF4444;font-weight:600">▼ 9.0%</td></tr>
+      <tr class="low-sample"><td class="num">31</td><td><b>金山區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="15">15</td><td class="num" data-sort="13.6">13.6</td><td class="num" data-sort="16.8">16.8</td><td class="num" data-sort="438.0">438</td><td class="num" data-sort="28.5">28.5</td><td class="num" data-sort="-6.6" style="color:#EF4444;font-weight:600">▼ 6.6%</td></tr>
+      <tr class="low-sample"><td class="num">32</td><td><b>三芝區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="27">27</td><td class="num" data-sort="13.4">13.4</td><td class="num" data-sort="13.7">13.7</td><td class="num" data-sort="280.0">280</td><td class="num" data-sort="29.6">29.6</td><td class="num" data-sort="-2.4" style="color:#EF4444;font-weight:600">▼ 2.4%</td></tr>
+      <tr class="low-sample"><td class="num">33</td><td><b>瑞芳區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="13">13</td><td class="num" data-sort="12.1">12.1</td><td class="num" data-sort="13.0">13.0</td><td class="num" data-sort="380.0">380</td><td class="num" data-sort="29.2">29.2</td><td class="num" data-sort="-1.2" style="color:#EF4444;font-weight:600">▼ 1.2%</td></tr>
+      <tr class="low-sample"><td class="num">34</td><td><b>石門區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="1">1</td><td class="num" data-sort="10.7">10.7</td><td class="num" data-sort="10.7">10.7</td><td class="num" data-sort="260.0">260</td><td class="num" data-sort="46.9">46.9</td><td class="num" data-sort="28.5" style="color:#16A34A;font-weight:600">▲ 28.5%</td></tr>
+      <tr class="low-sample"><td class="num">35</td><td><b>貢寮區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="1">1</td><td class="num" data-sort="10.7">10.7</td><td class="num" data-sort="10.7">10.7</td><td class="num" data-sort="180.0">180</td><td class="num" data-sort="28.9">28.9</td><td class="num" data-sort="3.1" style="color:#16A34A;font-weight:600">▲ 3.1%</td></tr>
+      <tr class="low-sample"><td class="num">36</td><td><b>萬里區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="14">14</td><td class="num" data-sort="9.4">9.4</td><td class="num" data-sort="11.0">11.0</td><td class="num" data-sort="208.0">208</td><td class="num" data-sort="45.0">45.0</td><td class="num" data-sort="-38.0" style="color:#EF4444;font-weight:600">▼ 38.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="section-title">原始資料下載</div>
   <div class="download-card">
-    <div style="font-size:14px;color:#1d1d1f">每區近 180 天「正常住宅」明細 CSV，包含地址、建物型態、坪數、總價、單價、格局、屋齡、樓層：</div>
+    <div style="font-size:14px;color:#1d1d1f;margin-bottom:4px"><b>5 精選區明細</b>（近 180 天，含地址、建物型態、坪數、總價、單價、屋齡、格局、樓層）：</div>
     <div class="download-grid">
       <a href="lvr-data/中和區_正常住宅_近180天.csv">中和區 CSV</a>
       <a href="lvr-data/永和區_正常住宅_近180天.csv">永和區 CSV</a>
       <a href="lvr-data/板橋區_正常住宅_近180天.csv">板橋區 CSV</a>
       <a href="lvr-data/新店區_正常住宅_近180天.csv">新店區 CSV</a>
       <a href="lvr-data/土城區_正常住宅_近180天.csv">土城區 CSV</a>
+    </div>
+    <div style="font-size:14px;color:#1d1d1f;margin:18px 0 4px"><b>雙北全區排名</b>：</div>
+    <div class="download-grid">
+      <a href="lvr-data/雙北全區排名_近180天.csv">36 區排名 CSV</a>
     </div>
   </div>
 
@@ -201,15 +303,16 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
     <h4>資料來源</h4>
     <ul>
       <li>內政部不動產交易實價查詢服務網（plvr.land.moi.gov.tw）開放資料。</li>
-      <li>每月 1、11、21 日由內政部公告，本站每週一自動同步。</li>
-      <li>因登錄與公告流程，資料較實際交易日延遲約 30–50 天。</li>
+      <li>每月 1、11、21 日由內政部公告，本站於 2/12/22 自動同步（每月 3 次）。</li>
+      <li>因登錄與公告流程，最新資料較實際交易日延遲約 30–50 天。</li>
     </ul>
     <h4 style="margin-top:14px">「正常住宅」清洗規則</h4>
     <ul>
       <li>限 交易標的 = 房地（排除純車位、純土地）</li>
       <li>限 主要用途含「住」字（排除商業用、工業用、其他用途）</li>
       <li>排除備註含「親友、員工、共有人、特殊交易、瑕疵、急需處分、公益」之關係人交易</li>
-      <li>排除總價 &lt; 100 萬、單價 &lt; 5 萬/坪、單價 &gt; 200 萬/坪 之極端值</li>
+      <li>排除總價 &lt; 100 萬、單價 &lt; 5 萬/坪、單價 &gt; 400 萬/坪 之極端值</li>
+      <li>編號重複者保留首筆（mini-package 增量更新時 dedupe）</li>
     </ul>
     <h4 style="margin-top:14px">免責聲明</h4>
     <ul>
@@ -243,6 +346,52 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
+
+<script>
+// Sortable ranking table
+(function() {
+  var table = document.getElementById('rankTable');
+  if (!table) return;
+  var tbody = table.querySelector('tbody');
+  var headers = table.querySelectorAll('th');
+  var currentSort = {col: 4, dir: 'desc'};  // 預設按單價中位 desc
+
+  function sortBy(col, type, dir) {
+    var rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort(function(a, b) {
+      var ca = a.children[col];
+      var cb = b.children[col];
+      var va = ca.getAttribute('data-sort') !== null ? ca.getAttribute('data-sort') : ca.innerText.trim();
+      var vb = cb.getAttribute('data-sort') !== null ? cb.getAttribute('data-sort') : cb.innerText.trim();
+      if (type === 'num') {
+        va = parseFloat(va.replace(/,/g,'')) || 0;
+        vb = parseFloat(vb.replace(/,/g,'')) || 0;
+      }
+      if (va < vb) return dir === 'asc' ? -1 : 1;
+      if (va > vb) return dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    rows.forEach(function(r) { tbody.appendChild(r); });
+    headers.forEach(function(h, i) {
+      h.classList.toggle('sorted', i === col);
+      var arrow = h.querySelector('.arrow');
+      if (arrow) arrow.textContent = (i === col) ? (dir === 'asc' ? '▲' : '▼') : '▲▼';
+    });
+    currentSort = {col: col, dir: dir};
+  }
+
+  headers.forEach(function(h, i) {
+    h.addEventListener('click', function() {
+      var type = h.getAttribute('data-sort-type') || 'str';
+      var defaultDir = h.getAttribute('data-sort-default') || (type === 'num' ? 'desc' : 'asc');
+      var dir = (currentSort.col === i)
+        ? (currentSort.dir === 'asc' ? 'desc' : 'asc')
+        : defaultDir;
+      sortBy(i, type, dir);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
