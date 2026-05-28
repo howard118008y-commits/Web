@@ -1,0 +1,223 @@
+<!--
+  Page: 二胎試算 (Second Mortgage Calculator)
+  Status: READY
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二胎試算 2026｜可貸金額 × 月付一次算清｜鋮馨租賃</title>
+<meta name="description" content="銀行二胎拒絕？不知道房子還能借多少？輸入房屋市價、一胎本金，立即算出民間二胎可貸金額與月付金額。鋮馨租賃專業承辦，LINE 線上諮詢。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<style>
+/* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
+.nav-back{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}
+
+/* HERO — purple→blue→green gradient */
+.hero{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);padding:60px 24px 44px;text-align:center}
+.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero p{font-size:17px;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto}
+@media(max-width:768px){
+  .hero h1{font-size:32px}
+}
+
+.calc-wrap{max-width:760px;margin:40px auto;padding:0 20px 80px}
+
+.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:24px}
+
+.field{margin-bottom:24px}
+.field label{display:block;font-size:15px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
+.field-note{font-size:12px;color:#6e6e73;margin-bottom:8px}
+.input-row{display:flex;align-items:center;gap:10px}
+.input-row input[type=number]{flex:1;height:48px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 14px;font-size:16px;color:#1d1d1f;transition:border-color .2s;outline:none;background:#fff}
+.input-row input[type=number]:focus{border-color:#7C3AED}
+.unit{font-size:14px;color:#6e6e73;white-space:nowrap;min-width:28px}
+
+input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#2563EB);cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:#6e6e73;margin-top:4px}
+
+/* RESULTS */
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+@media(max-width:500px){
+  .result-grid{grid-template-columns:1fr}
+}
+.result-card{background:#f5f5f7;border-radius:14px;padding:20px 16px;text-align:center}
+.result-card.hl-purple{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff}
+.result-card.hl-green{background:#16A34A;color:#fff}
+.result-label{font-size:12px;font-weight:500;letter-spacing:.05em;opacity:.85;margin-bottom:6px}
+.result-value{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.result-sub{font-size:11px;opacity:.7;margin-top:4px}
+
+.calc-note{font-size:12px;color:#6e6e73;line-height:1.6;padding:14px 16px;background:#f5f5f7;border-radius:10px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div data-include="nav-tool"></div>
+
+<div class="hero">
+  <p class="eyebrow">Second Mortgage Calculator</p>
+  <h1>二胎試算</h1>
+  <p>輸入房屋市價與一胎本金，立即試算二胎可貸金額與每月本利攤還。</p>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="card">
+    <div class="card-title">輸入條件</div>
+
+    <div class="field">
+      <label>房屋市價</label>
+      <div class="input-row">
+        <input type="number" id="market" value="1500" min="100" max="20000" step="50" oninput="syncSlider('market','marketSlider');calculate()">
+        <span class="unit">萬元</span>
+      </div>
+      <input type="range" id="marketSlider" min="200" max="10000" step="50" value="1500" oninput="syncInput('marketSlider','market');calculate()">
+      <div class="range-labels"><span>200萬</span><span>1億</span></div>
+    </div>
+
+    <div class="field">
+      <label>一胎剩餘本金</label>
+      <div class="input-row">
+        <input type="number" id="first" value="800" min="0" max="20000" step="50" oninput="syncSlider('first','firstSlider');calculate()">
+        <span class="unit">萬元</span>
+      </div>
+      <input type="range" id="firstSlider" min="0" max="9000" step="50" value="800" oninput="syncInput('firstSlider','first');calculate()">
+      <div class="range-labels"><span>0</span><span>9000萬</span></div>
+    </div>
+
+    <div class="field">
+      <label>估價成數</label>
+      <div class="field-note">銀行依屋況、地段、屋齡評估，一般落於 70–85%</div>
+      <div class="input-row">
+        <input type="number" id="ltv" value="80" min="50" max="95" step="1" oninput="syncSlider('ltv','ltvSlider');calculate()">
+        <span class="unit">%</span>
+      </div>
+      <input type="range" id="ltvSlider" min="50" max="95" step="1" value="80" oninput="syncInput('ltvSlider','ltv');calculate()">
+      <div class="range-labels"><span>50%</span><span>95%</span></div>
+    </div>
+
+    <div class="field">
+      <label>年利率</label>
+      <div class="field-note">民間二胎實務區間 8–12%，實際利率依個案財務狀況評估</div>
+      <div class="input-row">
+        <input type="number" id="rate" value="9.5" min="3" max="20" step="0.1" oninput="syncSlider('rate','rateSlider');calculate()">
+        <span class="unit">%</span>
+      </div>
+      <input type="range" id="rateSlider" min="6" max="18" step="0.1" value="9.5" oninput="syncInput('rateSlider','rate');calculate()">
+      <div class="range-labels"><span>6%</span><span>18%</span></div>
+    </div>
+
+    <div class="field">
+      <label>貸款年限</label>
+      <div class="input-row">
+        <input type="number" id="years" value="7" min="1" max="20" step="1" oninput="syncSlider('years','yearsSlider');calculate()">
+        <span class="unit">年</span>
+      </div>
+      <input type="range" id="yearsSlider" min="1" max="15" step="1" value="7" oninput="syncInput('yearsSlider','years');calculate()">
+      <div class="range-labels"><span>1年</span><span>15年</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">試算結果</div>
+    <div class="result-grid">
+      <div class="result-card hl-purple">
+        <div class="result-label">預估可貸金額</div>
+        <div class="result-value" id="loanable">—</div>
+        <div class="result-sub">市價 × 成數 − 一胎</div>
+      </div>
+      <div class="result-card hl-green">
+        <div class="result-label">每月本利攤還</div>
+        <div class="result-value" id="monthly">—</div>
+        <div class="result-sub">元／月</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">總利息支出</div>
+        <div class="result-value" id="interest">—</div>
+        <div class="result-sub">元</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">總還款金額</div>
+        <div class="result-value" id="total">—</div>
+        <div class="result-sub">元</div>
+      </div>
+    </div>
+    <div class="calc-note">
+      本試算結果僅供參考。實際可貸金額、利率、條件依個案不動產條件、財務狀況與市場情況而定。本公司為融資租賃業者，非金融機構，最終核貸由金融機構決定。
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <h2>想了解你的二胎方案？</h2>
+    <p>民間借款轉銀行、二胎整合，線上諮詢專業評估。</p>
+    <div class="cta-row">
+      <a href="https://lin.ee/PHIfSoY" class="btn-green">加入 LINE 線上諮詢</a>
+      <a href="tel:+886-931-087-996" class="btn-purple">直接來電</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function syncSlider(a,b){document.getElementById(b).value=document.getElementById(a).value}
+function syncInput(a,b){document.getElementById(b).value=document.getElementById(a).value}
+function fmt(n){return Math.round(n).toLocaleString('zh-TW')}
+
+function calcLoanable(marketValue, ltvPercent, firstMortgageBalance){
+  var maxLoan = marketValue * (ltvPercent / 100);
+  return Math.max(0, maxLoan - firstMortgageBalance);
+}
+
+function calcMonthlyPayment(principal, annualRatePercent, years){
+  if(principal <= 0 || years <= 0) return 0;
+  var n = years * 12;
+  var r = annualRatePercent / 100 / 12;
+  if(r === 0) return principal / n;
+  var f = Math.pow(1 + r, n);
+  return (principal * r * f) / (f - 1);
+}
+
+function calculate(){
+  var market = (parseFloat(document.getElementById('market').value) || 0) * 10000;
+  var first  = (parseFloat(document.getElementById('first').value)  || 0) * 10000;
+  var ltv    = parseFloat(document.getElementById('ltv').value)    || 0;
+  var rate   = parseFloat(document.getElementById('rate').value)   || 0;
+  var years  = parseInt(document.getElementById('years').value, 10) || 0;
+
+  var loanable = calcLoanable(market, ltv, first);
+  var monthly  = calcMonthlyPayment(loanable, rate, years);
+  var total    = monthly * years * 12;
+  var interest = total - loanable;
+
+  document.getElementById('loanable').textContent = fmt(loanable);
+  document.getElementById('monthly').textContent  = fmt(monthly);
+  document.getElementById('interest').textContent = fmt(interest);
+  document.getElementById('total').textContent    = fmt(total);
+}
+calculate();
+</script>
+
+<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
+  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
+    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <a href="article-second-mortgage.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎房貸完整指南 →</a>
+      <a href="second-mortgage.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎服務介紹 →</a>
+      <a href="mortgage-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">一胎房貸試算 →</a>
+    </div>
+  </div>
+</section>
+
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+
+</body>
+</html>
