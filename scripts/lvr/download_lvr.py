@@ -143,7 +143,10 @@ def main() -> None:
         page = ctx.new_page()
 
         print(f"→ 開啟 {URL}")
-        page.goto(URL, wait_until="networkidle", timeout=30_000)
+        # 用 domcontentloaded 而非 networkidle：政府站 analytics 永不 idle
+        # 60s timeout：CI runner 到台灣站較慢
+        page.goto(URL, wait_until="domcontentloaded", timeout=60_000)
+        page.wait_for_selector("#fileFormatId", state="visible", timeout=30_000)
         page.wait_for_timeout(1500)
 
         # 階段 1：季別下載（已存在 skip）
