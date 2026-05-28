@@ -25,6 +25,7 @@ CHART_DEST_DIR = CX468_DIR / "lvr-charts"
 HTML_DEST = CX468_DIR / "lvr-observatory.html"
 DATA_DEST_DIR = CX468_DIR / "lvr-data"
 CARDS_DEST_DIR = CX468_DIR / "lvr-social-cards"
+AI_REPORT_PATH = CX468_DIR / "lvr-data" / "週報_最新.txt"
 
 FOCUS_TOWNS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]
 COLORS = {
@@ -49,11 +50,32 @@ def load_window_data() -> dict:
     return data
 
 
+def load_ai_report() -> str:
+    """讀 AI 週報純文字檔（若存在）。"""
+    if AI_REPORT_PATH.exists():
+        text = AI_REPORT_PATH.read_text(encoding="utf-8").strip()
+        return text
+    return ""
+
+
 def build_html(generated_at: str, season_label: str,
-               window_data: dict, deep: dict) -> str:
+               window_data: dict, deep: dict, ai_report: str = "") -> str:
     # 把 4 窗資料壓進一個 JS 物件
     data_json = json.dumps(window_data, ensure_ascii=False, default=str)
     n_districts_180 = len(window_data[180]["ranking"])
+
+    # AI 摘要 section（若有）
+    ai_section_html = ""
+    if ai_report:
+        # 轉成 HTML 段落
+        paragraphs = [p.strip() for p in ai_report.split("\n") if p.strip()]
+        para_html = "".join(f"<p>{p}</p>" for p in paragraphs)
+        ai_section_html = f"""
+  <div class="section-title">本期 AI 摘要</div>
+  <div class="ai-card">
+    <div class="ai-badge">✨ Claude AI 自動產生</div>
+    {para_html}
+  </div>"""
 
     return f"""<!--
   Page: 實價登錄觀察室 v3 (LVR Observatory)
@@ -168,6 +190,16 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
 .cta-strip h2{{font-size:20px;font-weight:700;margin:0 0 8px;color:#fff}}
 .cta-strip p{{font-size:14px;color:rgba(255,255,255,.85);margin:0 0 18px}}
 .cta-strip a.btn-on-gradient{{display:inline-block;background:#fff;color:#7C3AED;font-weight:600;padding:10px 22px;border-radius:980px;text-decoration:none;font-size:14px;margin:0 6px}}
+
+.family-nav{{display:flex;gap:8px;padding:14px 18px;background:#f5f5f7;border-radius:12px;margin-bottom:18px;flex-wrap:wrap}}
+.family-nav a{{font-size:13px;font-weight:600;color:#6e6e73;text-decoration:none;padding:8px 14px;border-radius:980px;background:transparent;transition:all .2s}}
+.family-nav a:hover{{background:#fff;color:#1d1d1f}}
+.family-nav a.active{{background:#7C3AED;color:#fff}}
+
+.ai-card{{background:linear-gradient(135deg,#EFF6FF,#F3E8FF);border-radius:18px;padding:24px;border-left:6px solid #7C3AED;margin-bottom:18px}}
+.ai-badge{{display:inline-block;font-size:11px;font-weight:700;color:#7C3AED;background:rgba(255,255,255,.7);padding:4px 10px;border-radius:980px;margin-bottom:12px;letter-spacing:.04em}}
+.ai-card p{{font-size:14px;color:#1d1d1f;line-height:1.8;margin:0 0 10px}}
+.ai-card p:last-child{{margin-bottom:0;font-size:11px;color:#6e6e73;font-style:italic}}
 </style>
 </head>
 <body>
@@ -183,6 +215,12 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
 
 <div class="obs-wrap">
 
+  <div class="family-nav">
+    <a href="lvr-observatory.html" class="active">觀察室（買賣）</a>
+    <a href="lvr-presale.html">預售屋</a>
+    <a href="lvr-rental.html">租金報酬</a>
+  </div>
+{ai_section_html}
   <div class="section-title">
     5 精選區當前快照
     <div class="window-toggle" data-target="kpi">
@@ -548,7 +586,8 @@ def main() -> None:
 
     season_label = df["__season"].max().replace("S", "Q") if not df.empty else "?"
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
-    html = build_html(generated_at, season_label, window_data, deep)
+    ai_report = load_ai_report()
+    html = build_html(generated_at, season_label, window_data, deep, ai_report)
 
     CHART_DEST_DIR.mkdir(exist_ok=True)
     DATA_DEST_DIR.mkdir(exist_ok=True)

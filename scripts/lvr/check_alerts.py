@@ -1,11 +1,15 @@
 """
-偵測 YoY 突破 ±20% 的行政區，透過 LINE Messaging API 推送警示。
+偵測 YoY 突破 ±20% 的行政區，state-aware：只通知「本期新進入 / 新恢復」的區。
+透過 LINE Messaging API 推送。
 
-環境變數（需設成 GitHub Action secret）：
-- LINE_CHANNEL_ACCESS_TOKEN  (LINE Developers Console → Messaging API channel)
-- LINE_USER_ID               (你個人 LINE 的 User ID，透過 webhook event 抓)
+State 檔：_cache/alert_state.json （前次警示的區清單）
+- 跨 run 透過 actions/cache 持久化
 
-若任一未設，僅 print 警示內容、不發推播（CI 不致命）。
+環境變數：
+- LINE_CHANNEL_ACCESS_TOKEN  (LINE Developers Console)
+- LINE_USER_ID               (你個人 LINE User ID)
+
+未設則僅 print log。
 """
 
 import json
@@ -13,39 +17,68 @@ import os
 import sys
 import urllib.error
 import urllib.request
+from datetime import datetime
 from pathlib import Path
-from typing import List
+from typing import List, Set
 
 import pandas as pd
 
 OUT_DIR = Path(__file__).resolve().parent / "_cache"
-THRESHOLD = 20.0  # ±20%
-MIN_SAMPLE = 30   # 樣本太小不算
+STATE_FILE = OUT_DIR / "alert_state.json"
+THRESHOLD = 20.0
+MIN_SAMPLE = 30
 WINDOW_FOR_ALERT = 180
 
 
-def format_message(gainers: List[dict], losers: List[dict]) -> str:
-    lines = ["📊 實價登錄 YoY 異常警示", "─" * 22]
-    if not gainers and not losers:
-        lines.append("本週 75 區無區域 YoY 突破 ±20%（穩定）")
+def load_previous_state() -> dict:
+    if not STATE_FILE.exists():
+        return {"alerts": []}
+    try:
+        return json.loads(STATE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {"alerts": []}
+
+
+def save_state(current_alerts: List[dict]) -> None:
+    STATE_FILE.write_text(
+        json.dumps({
+            "last_run": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "alerts": current_alerts,
+        }, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+
+
+def town_key(r: dict) -> str:
+    """區域唯一識別。"""
+    return f"{r['縣市']}/{r['鄉鎮市區']}"
+
+
+def format_diff_message(new_in: List[dict], recovered: List[dict],
+                         persistent_count: int) -> str:
+    lines = ["📊 實價登錄 YoY 警示（狀態變化）", "─" * 22]
+    if not new_in and not recovered:
+        lines.append(f"本期無新警示變化（{persistent_count} 區持續突破 ±{THRESHOLD}%）")
         return "\n".join(lines)
 
-    lines.append(f"75 區中 {len(gainers) + len(losers)} 個區域突破 ±20%")
+    if new_in:
+        lines.append(f"⚠ 新進入警示 ({len(new_in)} 區)：")
+        for r in new_in[:15]:
+            arrow = "▲" if r["1年漲幅"] > 0 else "▼"
+            lines.append(f"  {arrow} {r['鄉鎮市區']}（{r['縣市']}） {r['1年漲幅']:+.1f}% (n={int(r['n'])})")
+        if len(new_in) > 15:
+            lines.append(f"  …另 {len(new_in)-15} 區")
+        lines.append("")
+    if recovered:
+        lines.append(f"✓ 回到正常區間 ({len(recovered)} 區)：")
+        for r in recovered[:15]:
+            lines.append(f"  {r['鄉鎮市區']}（{r['縣市']}） 已退出 ±{THRESHOLD}% 區間")
+        if len(recovered) > 15:
+            lines.append(f"  …另 {len(recovered)-15} 區")
+        lines.append("")
+    if persistent_count:
+        lines.append(f"（另有 {persistent_count} 區持續突破中，本次不重複通知）")
     lines.append("")
-    if gainers:
-        lines.append(f"▲ 漲幅 ({len(gainers)} 區)：")
-        for r in gainers[:10]:
-            lines.append(f"  {r['鄉鎮市區']}（{r['縣市']}） +{r['1年漲幅']:.1f}% (n={int(r['n'])})")
-        if len(gainers) > 10:
-            lines.append(f"  …另 {len(gainers)-10} 區")
-        lines.append("")
-    if losers:
-        lines.append(f"▼ 跌幅 ({len(losers)} 區)：")
-        for r in losers[:10]:
-            lines.append(f"  {r['鄉鎮市區']}（{r['縣市']}） {r['1年漲幅']:.1f}% (n={int(r['n'])})")
-        if len(losers) > 10:
-            lines.append(f"  …另 {len(losers)-10} 區")
-        lines.append("")
     lines.append("完整報告 → cx468.com.tw/lvr-observatory.html")
     return "\n".join(lines)
 
@@ -68,7 +101,8 @@ def push_line(text: str, token: str, user_id: str) -> bool:
             print(f"  ✓ LINE push 成功（HTTP {resp.status}）")
             return True
     except urllib.error.HTTPError as e:
-        print(f"  ✗ LINE push 失敗（HTTP {e.code}）：{e.read().decode('utf-8', errors='ignore')[:200]}")
+        msg = e.read().decode("utf-8", errors="ignore")[:200]
+        print(f"  ✗ LINE push 失敗（HTTP {e.code}）：{msg}")
         return False
     except Exception as e:
         print(f"  ✗ LINE push 失敗：{e}")
@@ -82,35 +116,52 @@ def main() -> int:
         return 1
 
     ranking = pd.read_pickle(pkl)
-    # 篩有 1年漲幅 + 樣本 OK
     valid = ranking.dropna(subset=["1年漲幅"])
     valid = valid[valid["n"] >= MIN_SAMPLE]
 
-    gainers = valid[valid["1年漲幅"] >= THRESHOLD].sort_values("1年漲幅", ascending=False)
-    losers = valid[valid["1年漲幅"] <= -THRESHOLD].sort_values("1年漲幅")
+    # 當前警示集合（含原始 row data）
+    current_alerts = valid[(valid["1年漲幅"] >= THRESHOLD) | (valid["1年漲幅"] <= -THRESHOLD)]
+    current_records = current_alerts.to_dict("records")
+    current_keys: Set[str] = {town_key(r) for r in current_records}
 
-    print(f"→ 檢測：YoY ≥ +{THRESHOLD}% → {len(gainers)} 區、YoY ≤ -{THRESHOLD}% → {len(losers)} 區")
+    # 讀前次 state
+    prev = load_previous_state()
+    prev_keys: Set[str] = {town_key(r) for r in prev.get("alerts", [])}
 
-    message = format_message(gainers.to_dict("records"), losers.to_dict("records"))
-    print("\n----- 警示訊息 -----")
-    print(message)
-    print("--------------------\n")
+    # Diff
+    new_in_keys = current_keys - prev_keys
+    recovered_keys = prev_keys - current_keys
+    persistent_keys = current_keys & prev_keys
 
-    # 存一份 log
-    log_path = OUT_DIR / "alerts_last.txt"
-    log_path.write_text(message, encoding="utf-8")
+    new_in = [r for r in current_records if town_key(r) in new_in_keys]
+    recovered = [r for r in prev.get("alerts", []) if town_key(r) in recovered_keys]
+    new_in.sort(key=lambda r: abs(r.get("1年漲幅", 0)), reverse=True)
+
+    print(f"→ 當前警示 {len(current_alerts)} 區；前次 {len(prev_keys)} 區")
+    print(f"  新進入 {len(new_in_keys)}、回到正常 {len(recovered_keys)}、持續 {len(persistent_keys)}")
+
+    msg = format_diff_message(new_in, recovered, len(persistent_keys))
+    print("\n----- 訊息 -----")
+    print(msg)
+    print("----------------\n")
+
+    # 寫 log + 新 state
+    (OUT_DIR / "alerts_last.txt").write_text(msg, encoding="utf-8")
+    save_state([{
+        "縣市": r["縣市"], "鄉鎮市區": r["鄉鎮市區"], "1年漲幅": float(r["1年漲幅"]), "n": int(r["n"]),
+    } for r in current_records])
 
     token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     user_id = os.environ.get("LINE_USER_ID", "").strip()
     if not token or not user_id:
-        print("⚠ LINE_CHANNEL_ACCESS_TOKEN 或 LINE_USER_ID 未設，跳過推播")
+        print("⚠ LINE 環境變數未設，跳過推播")
         return 0
 
-    if not gainers.empty or not losers.empty:
-        push_line(message, token, user_id)
+    # 只在「有變化」時推播；都沒變不擾人
+    if new_in or recovered:
+        push_line(msg, token, user_id)
     else:
-        print("  → 無異常區，依設定不推播平靜訊息")
-
+        print("  → 無狀態變化，依設定不推播")
     return 0
 
 

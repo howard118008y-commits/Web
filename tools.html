@@ -42,6 +42,19 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .tool-cta{font-size:13px;font-weight:600}
 
+/* 1 大工具：實價資料中心 */
+.data-hub{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);border-radius:20px;padding:34px 30px;color:#fff;margin-bottom:40px;box-shadow:0 6px 24px rgba(124,58,237,.18)}
+.data-hub .hub-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.data-hub h2{font-size:28px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-.02em}
+.data-hub p.hub-sub{font-size:15px;color:rgba(255,255,255,.88);margin:0 0 22px;line-height:1.6}
+.data-hub-stats{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:22px;font-size:12px;color:rgba(255,255,255,.85)}
+.data-hub-stats b{color:#fff;font-size:20px;font-weight:700;margin-right:4px}
+.data-hub-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.data-hub-tabs{grid-template-columns:1fr}}
+.data-hub-tabs a{display:block;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:16px 18px;text-decoration:none;color:#fff;transition:background .2s,transform .2s}
+.data-hub-tabs a:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.data-hub-tabs .tab-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.data-hub-tabs .tab-desc{font-size:12px;color:rgba(255,255,255,.82);line-height:1.4}
 
 .cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
 </style>
@@ -129,13 +142,39 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
 <div class="hero">
   <p class="eyebrow">Free Tools · 鋮馨租賃</p>
-  <h1>9 個房產<br>免費試算工具</h1>
-  <p>從買房到出租，每個財務決策前先算清楚。</p>
+  <h1>1 個資料中心<br>+ 10 個試算工具</h1>
+  <p>實價追蹤 + 財務試算，買房賣房前先把數字算清楚。</p>
 </div>
 
 <div class="wrap">
 
-  <p class="group-label">買房・賣房</p>
+  <!-- 1 大工具：實價資料中心 -->
+  <div class="data-hub">
+    <div class="hub-eyebrow">★ Data Hub · 1 大工具</div>
+    <h2>實價資料中心</h2>
+    <p class="hub-sub">台北 + 新北 + 台中 + 桃園，4 縣市 75 行政區實價追蹤。買賣、預售、租金一站全覽，每月 3 次自動更新（2/12/22 號）。</p>
+    <div class="data-hub-stats">
+      <div><b>75</b> 行政區</div>
+      <div><b>290k+</b> 筆資料</div>
+      <div><b>9 季</b> 跨期追蹤</div>
+    </div>
+    <div class="data-hub-tabs">
+      <a href="lvr-observatory.html">
+        <div class="tab-title">買賣觀察室 →</div>
+        <div class="tab-desc">YoY 年增率、跨季趨勢、新店深度解析、6 張社群圖卡</div>
+      </a>
+      <a href="lvr-presale.html">
+        <div class="tab-title">預售屋觀察 →</div>
+        <div class="tab-desc">4 縣市預售案件實價單價追蹤，已排除解約</div>
+      </a>
+      <a href="lvr-rental.html">
+        <div class="tab-title">租金報酬 →</div>
+        <div class="tab-desc">月租中位 + 年化報酬率估算（年租 ÷ 售價）</div>
+      </a>
+    </div>
+  </div>
+
+  <p class="group-label">10 個試算小工具｜買房・賣房</p>
   <div class="grid">
 
     <a href="purchase-cost-calculator.html" class="tool-card">
@@ -174,18 +213,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       <div class="tool-cta" style="color:#7C3AED">立即試算 ›</div>
     </a>
 
-    <a href="lvr-observatory.html" class="tool-card">
-      <div class="icon-wrap" style="background:linear-gradient(135deg,#2563EB,#16A34A)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 17l5-5 4 4 7-9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h5v5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="tool-name">實價登錄觀察室</div>
-      <div class="tool-desc">中和、永和、板橋、新店、土城近兩年成交價追蹤，跨季趨勢、月成交量、建物型態組成一目了然。</div>
-      <div class="tool-cta" style="color:#2563EB">看市場 ›</div>
-    </a>
-
   </div>
 
-  <p class="group-label">貸款・財務規劃</p>
+  <p class="group-label">10 個試算小工具｜貸款・財務規劃</p>
   <div class="grid">
 
     <a href="mortgage-calculator.html" class="tool-card">
@@ -217,7 +247,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
   </div>
 
-  <p class="group-label">投資・租賃分析</p>
+  <p class="group-label">10 個試算小工具｜投資・租賃分析</p>
   <div class="grid">
 
     <a href="rental-yield-calculator.html" class="tool-card">

@@ -53,11 +53,15 @@ jobs:
         working-directory: scripts/lvr
         run: python download_lvr.py
 
-      - name: Analyze + clean
+      - name: Analyze 買賣 + clean
         working-directory: scripts/lvr
         run: python analyze_lvr.py
 
-      - name: Generate charts
+      - name: Analyze 預售 + 租屋
+        working-directory: scripts/lvr
+        run: python analyze_extras.py
+
+      - name: Generate charts (買賣)
         working-directory: scripts/lvr
         run: python make_charts.py
 
@@ -65,15 +69,25 @@ jobs:
         working-directory: scripts/lvr
         run: python make_social_cards.py
 
+      - name: Generate AI weekly report (Claude API)
+        working-directory: scripts/lvr
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_ai_report.py
+
       - name: Build observatory HTML
         working-directory: scripts/lvr
         run: python build_observatory.py
+
+      - name: Build 預售 + 租屋 HTML
+        working-directory: scripts/lvr
+        run: python build_extras.py
 
       - name: Commit + push (if changed)
         run: |
           git config user.name "LVR Observatory Bot"
           git config user.email "lvr-bot@users.noreply.github.com"
-          git add lvr-observatory.html lvr-charts/ lvr-data/ lvr-social-cards/
+          git add lvr-observatory.html lvr-presale.html lvr-rental.html lvr-charts/ lvr-data/ lvr-social-cards/
           if git diff --staged --quiet; then
             echo "✓ No content changes — skipping commit."
           else

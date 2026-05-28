@@ -1,0 +1,214 @@
+<!--
+  Page: 預售屋觀察 (LVR Presale)
+  Status: READY  Generated: 2026-05-29 07:17
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預售屋觀察｜雙北・台中・桃園 預售單價追蹤｜鋮馨租賃</title>
+<meta name="description" content="台北、新北、台中、桃園四縣市 預售屋實價登錄單價追蹤。資料來源：內政部不動產交易實價查詢服務網。每月 2/12/22 自動更新。">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname});}
+else if(a.href.match(/\.csv$/i)||a.href.match(/\.json$/i)){gtag('event','data_download',{page_path:location.pathname,file_name:decodeURIComponent(a.href.split('/').pop())});}
+});
+</script>
+<style>
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+.nav-back{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}
+
+.hero{padding:60px 24px 44px;text-align:center;color:#fff}
+.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero p{font-size:17px;color:rgba(255,255,255,.85);max-width:600px;margin:0 auto 6px}
+.hero .meta{font-size:13px;color:rgba(255,255,255,.7);margin-top:14px}
+@media(max-width:768px){.hero h1{font-size:32px}}
+
+.obs-wrap{max-width:1120px;margin:40px auto;padding:0 20px 80px}
+.section-title{font-size:13px;font-weight:700;color:#6e6e73;letter-spacing:.08em;text-transform:uppercase;margin:36px 0 14px 4px}
+.section-title:first-child{margin-top:0}
+
+/* family nav */
+.family-nav{display:flex;gap:8px;padding:14px 18px;background:#f5f5f7;border-radius:12px;margin-bottom:14px;flex-wrap:wrap}
+.family-nav a{font-size:13px;font-weight:600;color:#6e6e73;text-decoration:none;padding:8px 14px;border-radius:980px;background:transparent;transition:all .2s}
+.family-nav a:hover{background:#fff;color:#1d1d1f}
+.family-nav a.active{background:#7C3AED;color:#fff}
+
+/* top KPIs (city) */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+@media(max-width:780px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{background:#fff;border-radius:18px;padding:20px 18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.kpi-city{font-size:12px;font-weight:700;color:#1d1d1f;margin-bottom:10px;letter-spacing:.04em}
+.kpi-value{font-size:28px;font-weight:700;color:#1d1d1f;letter-spacing:-.02em;line-height:1}
+.kpi-unit{font-size:12px;font-weight:500;color:#6e6e73;margin-left:4px}
+.kpi-label{font-size:11px;color:#6e6e73;margin-top:4px}
+.kpi-sub{font-size:11px;color:#6e6e73;margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f3}
+
+/* Ranking */
+.rank-card{background:#fff;border-radius:18px;padding:18px 4px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.rank-card-head{display:flex;justify-content:space-between;align-items:center;padding:0 18px;margin-bottom:6px;flex-wrap:wrap;gap:10px}
+.rank-card h3{font-size:16px;font-weight:600;color:#1d1d1f;margin:0}
+.rank-card p.rank-note{font-size:12px;color:#6e6e73;margin:0 18px 14px;line-height:1.5}
+.city-chips{display:flex;gap:6px;flex-wrap:wrap}
+.city-chip{font-size:12px;font-weight:600;color:#6e6e73;background:#f5f5f7;padding:6px 12px;border-radius:980px;cursor:pointer;border:none;transition:all .2s}
+.city-chip.active{background:#7C3AED;color:#fff}
+.rank-table-wrap{overflow-x:auto}
+table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1f;min-width:680px}
+.rank-table th{background:#f5f5f7;color:#6e6e73;font-weight:600;text-align:left;padding:10px 12px;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1.5px solid #e8e8ed}
+.rank-table th:hover{background:#ebebef;color:#1d1d1f}
+.rank-table th .arrow{margin-left:4px;opacity:.4;font-size:10px}
+.rank-table th.sorted .arrow{opacity:1;color:#7C3AED}
+.rank-table td{padding:9px 12px;border-bottom:.5px solid #f0f0f3;white-space:nowrap}
+.rank-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+.rank-table tr.low-sample td{color:#86868b}
+.rank-table tr:hover{background:#fafafc}
+.badge-low{display:inline-block;font-size:10px;color:#86868b;background:#f0f0f3;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500}
+
+.download-card{background:#f5f5f7;border-radius:16px;padding:24px}
+.download-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.download-grid a{font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500}
+.download-grid a:hover{border-color:#7C3AED;color:#7C3AED}
+
+.notes{background:#f5f5f7;border-radius:16px;padding:22px;font-size:13px;color:#1d1d1f;line-height:1.7}
+.notes h4{font-size:14px;font-weight:700;margin:0 0 10px;color:#1d1d1f}
+.notes ul{margin:0;padding-left:20px;color:#3a3a3c}
+.notes li{margin-bottom:5px}
+
+.hero{background:linear-gradient(135deg,#0EA5E9 0%,#7C3AED 60%,#EC4899 100%)}
+</style>
+</head>
+<body>
+<div data-include="nav-tool"></div>
+<div class="hero">
+  <p class="eyebrow">Presale Observation</p>
+  <h1>預售屋觀察</h1>
+  <p>雙北 + 台中 + 桃園｜預售案件實價單價追蹤</p>
+  <p class="meta">資料涵蓋 113Q1 ~ 115Q1　·　69 行政區　·　更新於 2026-05-29 07:17</p>
+</div>
+
+<div class="obs-wrap">
+<div class="family-nav"><a href="lvr-observatory.html" class="">觀察室（買賣）</a><a href="lvr-presale.html" class="active">預售屋</a><a href="lvr-rental.html" class="">租金報酬</a></div>
+
+  <div class="section-title">4 縣市預售屋市中位數</div>
+  <div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #0F172A">
+            <div class="kpi-city">台北市</div>
+            <div class="kpi-value">129.0<span class="kpi-unit">萬/坪</span></div>
+            <div class="kpi-label">市中位單價</div>
+            <div class="kpi-sub">最高：大安區 186.8 萬/坪　·　樣本 927</div>
+          </div><div class="kpi-card" style="border-top:4px solid #7C3AED">
+            <div class="kpi-city">新北市</div>
+            <div class="kpi-value">68.6<span class="kpi-unit">萬/坪</span></div>
+            <div class="kpi-label">市中位單價</div>
+            <div class="kpi-sub">最高：新店區 93.2 萬/坪　·　樣本 1,930</div>
+          </div><div class="kpi-card" style="border-top:4px solid #16A34A">
+            <div class="kpi-city">台中市</div>
+            <div class="kpi-value">41.5<span class="kpi-unit">萬/坪</span></div>
+            <div class="kpi-label">市中位單價</div>
+            <div class="kpi-sub">最高：西區 69.8 萬/坪　·　樣本 1,057</div>
+          </div><div class="kpi-card" style="border-top:4px solid #F59E0B">
+            <div class="kpi-city">桃園市</div>
+            <div class="kpi-value">38.3<span class="kpi-unit">萬/坪</span></div>
+            <div class="kpi-label">市中位單價</div>
+            <div class="kpi-sub">最高：桃園區 49.8 萬/坪　·　樣本 1,558</div>
+          </div></div>
+
+  <div class="section-title">全區排名（近 180 天）</div>
+  <div class="rank-card">
+    <div class="rank-card-head">
+      <h3>69 區預售單價</h3>
+      <div class="city-chips" id="presaleChips">
+        <button class="city-chip active" data-city="all">全部</button>
+        <button class="city-chip" data-city="台北市">台北市</button>
+        <button class="city-chip" data-city="新北市">新北市</button>
+        <button class="city-chip" data-city="台中市">台中市</button>
+        <button class="city-chip" data-city="桃園市">桃園市</button>
+      </div>
+    </div>
+    <p class="rank-note">已排除「解除契約」案件。樣本 &lt; 30 標「樣本少」。</p>
+    <div class="rank-table-wrap">
+      <table class="rank-table" id="presaleTable">
+        <thead><tr>
+          <th data-type="num">排名<span class="arrow">▲▼</span></th>
+          <th data-type="str">區別<span class="arrow">▲▼</span></th>
+          <th data-type="str">縣市<span class="arrow">▲▼</span></th>
+          <th data-type="num">樣本<span class="arrow">▲▼</span></th>
+          <th data-type="num" class="sorted">單價中位<span class="arrow">▼</span></th>
+          <th data-type="num">總價中位<span class="arrow">▲▼</span></th>
+          <th data-type="num">建坪中位<span class="arrow">▲▼</span></th>
+        </tr></thead>
+        <tbody><tr data-city="台北市"><td class="num">1</td><td><b>大安區</b></td><td>台北市</td><td class="num" data-sort="78">78</td><td class="num" data-sort="186.8">186.8</td><td class="num" data-sort="6869.0">6,869</td><td class="num" data-sort="47.5">47.5</td></tr><tr class="low-sample" data-city="台北市"><td class="num">2</td><td><b>中正區</b> <span class="badge-low">樣本少</span></td><td>台北市</td><td class="num" data-sort="29">29</td><td class="num" data-sort="166.8">166.8</td><td class="num" data-sort="4970.0">4,970</td><td class="num" data-sort="30.4">30.4</td></tr><tr data-city="台北市"><td class="num">3</td><td><b>中山區</b></td><td>台北市</td><td class="num" data-sort="108">108</td><td class="num" data-sort="157.1">157.1</td><td class="num" data-sort="5520.0">5,520</td><td class="num" data-sort="43.0">43.0</td></tr><tr class="low-sample" data-city="台北市"><td class="num">4</td><td><b>信義區</b> <span class="badge-low">樣本少</span></td><td>台北市</td><td class="num" data-sort="11">11</td><td class="num" data-sort="146.5">146.5</td><td class="num" data-sort="4921.0">4,921</td><td class="num" data-sort="34.2">34.2</td></tr><tr data-city="台北市"><td class="num">5</td><td><b>松山區</b></td><td>台北市</td><td class="num" data-sort="53">53</td><td class="num" data-sort="145.0">145.0</td><td class="num" data-sort="5900.0">5,900</td><td class="num" data-sort="47.3">47.3</td></tr><tr data-city="台北市"><td class="num">6</td><td><b>南港區</b></td><td>台北市</td><td class="num" data-sort="84">84</td><td class="num" data-sort="133.9">133.9</td><td class="num" data-sort="4086.0">4,086</td><td class="num" data-sort="37.6">37.6</td></tr><tr class="low-sample" data-city="台北市"><td class="num">7</td><td><b>內湖區</b> <span class="badge-low">樣本少</span></td><td>台北市</td><td class="num" data-sort="5">5</td><td class="num" data-sort="124.0">124.0</td><td class="num" data-sort="5080.0">5,080</td><td class="num" data-sort="47.8">47.8</td></tr><tr data-city="台北市"><td class="num">8</td><td><b>大同區</b></td><td>台北市</td><td class="num" data-sort="54">54</td><td class="num" data-sort="115.8">115.8</td><td class="num" data-sort="3663.0">3,663</td><td class="num" data-sort="33.4">33.4</td></tr><tr data-city="台北市"><td class="num">9</td><td><b>萬華區</b></td><td>台北市</td><td class="num" data-sort="46">46</td><td class="num" data-sort="112.6">112.6</td><td class="num" data-sort="3128.0">3,128</td><td class="num" data-sort="28.4">28.4</td></tr><tr data-city="台北市"><td class="num">10</td><td><b>北投區</b></td><td>台北市</td><td class="num" data-sort="176">176</td><td class="num" data-sort="110.0">110.0</td><td class="num" data-sort="4064.0">4,064</td><td class="num" data-sort="46.0">46.0</td></tr><tr data-city="台北市"><td class="num">11</td><td><b>文山區</b></td><td>台北市</td><td class="num" data-sort="134">134</td><td class="num" data-sort="108.7">108.7</td><td class="num" data-sort="4162.0">4,162</td><td class="num" data-sort="43.9">43.9</td></tr><tr data-city="新北市"><td class="num">12</td><td><b>新店區</b></td><td>新北市</td><td class="num" data-sort="196">196</td><td class="num" data-sort="93.2">93.2</td><td class="num" data-sort="3220.0">3,220</td><td class="num" data-sort="40.9">40.9</td></tr><tr data-city="新北市"><td class="num">13</td><td><b>永和區</b></td><td>新北市</td><td class="num" data-sort="196">196</td><td class="num" data-sort="91.6">91.6</td><td class="num" data-sort="2650.0">2,650</td><td class="num" data-sort="33.5">33.5</td></tr><tr data-city="台北市"><td class="num">14</td><td><b>士林區</b></td><td>台北市</td><td class="num" data-sort="149">149</td><td class="num" data-sort="85.5">85.5</td><td class="num" data-sort="2476.0">2,476</td><td class="num" data-sort="33.3">33.3</td></tr><tr class="low-sample" data-city="新北市"><td class="num">15</td><td><b>蘆洲區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="1">1</td><td class="num" data-sort="81.0">81.0</td><td class="num" data-sort="1480.0">1,480</td><td class="num" data-sort="18.3">18.3</td></tr><tr data-city="新北市"><td class="num">16</td><td><b>汐止區</b></td><td>新北市</td><td class="num" data-sort="54">54</td><td class="num" data-sort="77.7">77.7</td><td class="num" data-sort="1886.0">1,886</td><td class="num" data-sort="29.8">29.8</td></tr><tr data-city="新北市"><td class="num">17</td><td><b>中和區</b></td><td>新北市</td><td class="num" data-sort="74">74</td><td class="num" data-sort="77.4">77.4</td><td class="num" data-sort="2682.0">2,682</td><td class="num" data-sort="39.9">39.9</td></tr><tr data-city="新北市"><td class="num">18</td><td><b>三重區</b></td><td>新北市</td><td class="num" data-sort="225">225</td><td class="num" data-sort="75.4">75.4</td><td class="num" data-sort="2100.0">2,100</td><td class="num" data-sort="33.3">33.3</td></tr><tr data-city="新北市"><td class="num">19</td><td><b>板橋區</b></td><td>新北市</td><td class="num" data-sort="314">314</td><td class="num" data-sort="73.8">73.8</td><td class="num" data-sort="2295.0">2,295</td><td class="num" data-sort="38.7">38.7</td></tr><tr data-city="新北市"><td class="num">20</td><td><b>新莊區</b></td><td>新北市</td><td class="num" data-sort="150">150</td><td class="num" data-sort="72.1">72.1</td><td class="num" data-sort="2274.0">2,274</td><td class="num" data-sort="36.1">36.1</td></tr><tr data-city="新北市"><td class="num">21</td><td><b>土城區</b></td><td>新北市</td><td class="num" data-sort="64">64</td><td class="num" data-sort="70.8">70.8</td><td class="num" data-sort="1918.0">1,918</td><td class="num" data-sort="35.8">35.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">22</td><td><b>西區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="11">11</td><td class="num" data-sort="69.8">69.8</td><td class="num" data-sort="3798.0">3,798</td><td class="num" data-sort="63.1">63.1</td></tr><tr data-city="台中市"><td class="num">23</td><td><b>南屯區</b></td><td>台中市</td><td class="num" data-sort="185">185</td><td class="num" data-sort="69.7">69.7</td><td class="num" data-sort="2668.0">2,668</td><td class="num" data-sort="47.5">47.5</td></tr><tr class="low-sample" data-city="新北市"><td class="num">24</td><td><b>樹林區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="26">26</td><td class="num" data-sort="66.5">66.5</td><td class="num" data-sort="1822.0">1,822</td><td class="num" data-sort="30.5">30.5</td></tr><tr data-city="台中市"><td class="num">25</td><td><b>南區</b></td><td>台中市</td><td class="num" data-sort="39">39</td><td class="num" data-sort="63.9">63.9</td><td class="num" data-sort="1980.0">1,980</td><td class="num" data-sort="36.0">36.0</td></tr><tr data-city="台中市"><td class="num">26</td><td><b>西屯區</b></td><td>台中市</td><td class="num" data-sort="151">151</td><td class="num" data-sort="62.3">62.3</td><td class="num" data-sort="2280.0">2,280</td><td class="num" data-sort="41.6">41.6</td></tr><tr class="low-sample" data-city="台中市"><td class="num">27</td><td><b>北區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="24">24</td><td class="num" data-sort="61.4">61.4</td><td class="num" data-sort="2176.0">2,176</td><td class="num" data-sort="43.9">43.9</td></tr><tr data-city="新北市"><td class="num">28</td><td><b>林口區</b></td><td>新北市</td><td class="num" data-sort="225">225</td><td class="num" data-sort="60.9">60.9</td><td class="num" data-sort="1928.0">1,928</td><td class="num" data-sort="35.8">35.8</td></tr><tr data-city="新北市"><td class="num">29</td><td><b>泰山區</b></td><td>新北市</td><td class="num" data-sort="126">126</td><td class="num" data-sort="60.3">60.3</td><td class="num" data-sort="2277.0">2,277</td><td class="num" data-sort="42.9">42.9</td></tr><tr class="low-sample" data-city="新北市"><td class="num">30</td><td><b>三峽區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="27">27</td><td class="num" data-sort="55.8">55.8</td><td class="num" data-sort="1629.0">1,629</td><td class="num" data-sort="36.1">36.1</td></tr><tr class="low-sample" data-city="台中市"><td class="num">31</td><td><b>中區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="4">4</td><td class="num" data-sort="55.6">55.6</td><td class="num" data-sort="1840.0">1,840</td><td class="num" data-sort="37.6">37.6</td></tr><tr class="low-sample" data-city="新北市"><td class="num">32</td><td><b>五股區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="29">29</td><td class="num" data-sort="54.2">54.2</td><td class="num" data-sort="1410.0">1,410</td><td class="num" data-sort="30.4">30.4</td></tr><tr data-city="台中市"><td class="num">33</td><td><b>北屯區</b></td><td>台中市</td><td class="num" data-sort="282">282</td><td class="num" data-sort="52.9">52.9</td><td class="num" data-sort="1688.0">1,688</td><td class="num" data-sort="37.8">37.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">34</td><td><b>東區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="2">2</td><td class="num" data-sort="50.5">50.5</td><td class="num" data-sort="1249.0">1,249</td><td class="num" data-sort="28.3">28.3</td></tr><tr data-city="桃園市"><td class="num">35</td><td><b>桃園區</b></td><td>桃園市</td><td class="num" data-sort="465">465</td><td class="num" data-sort="49.8">49.8</td><td class="num" data-sort="1569.0">1,569</td><td class="num" data-sort="34.9">34.9</td></tr><tr data-city="新北市"><td class="num">36</td><td><b>鶯歌區</b></td><td>新北市</td><td class="num" data-sort="57">57</td><td class="num" data-sort="49.3">49.3</td><td class="num" data-sort="1560.0">1,560</td><td class="num" data-sort="35.4">35.4</td></tr><tr data-city="台中市"><td class="num">37</td><td><b>太平區</b></td><td>台中市</td><td class="num" data-sort="36">36</td><td class="num" data-sort="49.2">49.2</td><td class="num" data-sort="1985.0">1,985</td><td class="num" data-sort="46.2">46.2</td></tr><tr data-city="桃園市"><td class="num">38</td><td><b>中壢區</b></td><td>桃園市</td><td class="num" data-sort="219">219</td><td class="num" data-sort="49.0">49.0</td><td class="num" data-sort="1530.0">1,530</td><td class="num" data-sort="37.7">37.7</td></tr><tr data-city="台中市"><td class="num">39</td><td><b>烏日區</b></td><td>台中市</td><td class="num" data-sort="39">39</td><td class="num" data-sort="47.6">47.6</td><td class="num" data-sort="1885.0">1,885</td><td class="num" data-sort="43.6">43.6</td></tr><tr data-city="桃園市"><td class="num">40</td><td><b>龜山區</b></td><td>桃園市</td><td class="num" data-sort="89">89</td><td class="num" data-sort="47.3">47.3</td><td class="num" data-sort="1577.0">1,577</td><td class="num" data-sort="35.8">35.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">41</td><td><b>大里區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="9">9</td><td class="num" data-sort="46.2">46.2</td><td class="num" data-sort="1626.0">1,626</td><td class="num" data-sort="41.8">41.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">42</td><td><b>大雅區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="5">5</td><td class="num" data-sort="43.5">43.5</td><td class="num" data-sort="2038.0">2,038</td><td class="num" data-sort="48.1">48.1</td></tr><tr data-city="桃園市"><td class="num">43</td><td><b>八德區</b></td><td>桃園市</td><td class="num" data-sort="69">69</td><td class="num" data-sort="42.4">42.4</td><td class="num" data-sort="1286.0">1,286</td><td class="num" data-sort="35.5">35.5</td></tr><tr class="low-sample" data-city="台中市"><td class="num">44</td><td><b>大肚區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="1">1</td><td class="num" data-sort="42.0">42.0</td><td class="num" data-sort="1070.0">1,070</td><td class="num" data-sort="29.2">29.2</td></tr><tr class="low-sample" data-city="新北市"><td class="num">45</td><td><b>八里區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="17">17</td><td class="num" data-sort="41.9">41.9</td><td class="num" data-sort="1368.0">1,368</td><td class="num" data-sort="37.2">37.2</td></tr><tr class="low-sample" data-city="台中市"><td class="num">46</td><td><b>潭子區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="19">19</td><td class="num" data-sort="41.5">41.5</td><td class="num" data-sort="1728.0">1,728</td><td class="num" data-sort="44.3">44.3</td></tr><tr class="low-sample" data-city="台中市"><td class="num">47</td><td><b>豐原區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="25">25</td><td class="num" data-sort="41.4">41.4</td><td class="num" data-sort="1570.0">1,570</td><td class="num" data-sort="46.1">46.1</td></tr><tr data-city="桃園市"><td class="num">48</td><td><b>龍潭區</b></td><td>桃園市</td><td class="num" data-sort="73">73</td><td class="num" data-sort="40.7">40.7</td><td class="num" data-sort="1611.0">1,611</td><td class="num" data-sort="45.1">45.1</td></tr><tr class="low-sample" data-city="台中市"><td class="num">49</td><td><b>新社區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="1">1</td><td class="num" data-sort="40.6">40.6</td><td class="num" data-sort="2300.0">2,300</td><td class="num" data-sort="56.6">56.6</td></tr><tr data-city="桃園市"><td class="num">50</td><td><b>蘆竹區</b></td><td>桃園市</td><td class="num" data-sort="148">148</td><td class="num" data-sort="40.4">40.4</td><td class="num" data-sort="1404.0">1,404</td><td class="num" data-sort="37.2">37.2</td></tr><tr data-city="新北市"><td class="num">51</td><td><b>淡水區</b></td><td>新北市</td><td class="num" data-sort="142">142</td><td class="num" data-sort="39.1">39.1</td><td class="num" data-sort="1316.0">1,316</td><td class="num" data-sort="37.1">37.1</td></tr><tr class="low-sample" data-city="台中市"><td class="num">52</td><td><b>神岡區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="10">10</td><td class="num" data-sort="38.3">38.3</td><td class="num" data-sort="1452.0">1,452</td><td class="num" data-sort="40.6">40.6</td></tr><tr data-city="台中市"><td class="num">53</td><td><b>沙鹿區</b></td><td>台中市</td><td class="num" data-sort="36">36</td><td class="num" data-sort="36.4">36.4</td><td class="num" data-sort="1279.0">1,279</td><td class="num" data-sort="43.4">43.4</td></tr><tr data-city="桃園市"><td class="num">54</td><td><b>平鎮區</b></td><td>桃園市</td><td class="num" data-sort="115">115</td><td class="num" data-sort="36.3">36.3</td><td class="num" data-sort="1392.0">1,392</td><td class="num" data-sort="40.9">40.9</td></tr><tr class="low-sample" data-city="台中市"><td class="num">55</td><td><b>大甲區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="24">24</td><td class="num" data-sort="35.2">35.2</td><td class="num" data-sort="1152.0">1,152</td><td class="num" data-sort="35.4">35.4</td></tr><tr class="low-sample" data-city="台中市"><td class="num">56</td><td><b>石岡區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="3">3</td><td class="num" data-sort="34.8">34.8</td><td class="num" data-sort="1458.0">1,458</td><td class="num" data-sort="41.9">41.9</td></tr><tr data-city="桃園市"><td class="num">57</td><td><b>大園區</b></td><td>桃園市</td><td class="num" data-sort="82">82</td><td class="num" data-sort="34.4">34.4</td><td class="num" data-sort="1082.0">1,082</td><td class="num" data-sort="36.1">36.1</td></tr><tr class="low-sample" data-city="台中市"><td class="num">58</td><td><b>東勢區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="6">6</td><td class="num" data-sort="32.1">32.1</td><td class="num" data-sort="2169.0">2,169</td><td class="num" data-sort="62.8">62.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">59</td><td><b>外埔區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="9">9</td><td class="num" data-sort="31.5">31.5</td><td class="num" data-sort="1126.0">1,126</td><td class="num" data-sort="37.2">37.2</td></tr><tr class="low-sample" data-city="台中市"><td class="num">60</td><td><b>后里區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="24">24</td><td class="num" data-sort="30.6">30.6</td><td class="num" data-sort="969.0">969</td><td class="num" data-sort="34.4">34.4</td></tr><tr data-city="桃園市"><td class="num">61</td><td><b>楊梅區</b></td><td>桃園市</td><td class="num" data-sort="176">176</td><td class="num" data-sort="30.6">30.6</td><td class="num" data-sort="1026.0">1,026</td><td class="num" data-sort="35.8">35.8</td></tr><tr class="low-sample" data-city="台中市"><td class="num">62</td><td><b>龍井區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="13">13</td><td class="num" data-sort="30.4">30.4</td><td class="num" data-sort="1029.0">1,029</td><td class="num" data-sort="37.7">37.7</td></tr><tr data-city="桃園市"><td class="num">63</td><td><b>大溪區</b></td><td>桃園市</td><td class="num" data-sort="41">41</td><td class="num" data-sort="29.2">29.2</td><td class="num" data-sort="868.0">868</td><td class="num" data-sort="32.8">32.8</td></tr><tr class="low-sample" data-city="桃園市"><td class="num">64</td><td><b>新屋區</b> <span class="badge-low">樣本少</span></td><td>桃園市</td><td class="num" data-sort="21">21</td><td class="num" data-sort="29.1">29.1</td><td class="num" data-sort="970.0">970</td><td class="num" data-sort="32.9">32.9</td></tr><tr data-city="台中市"><td class="num">65</td><td><b>清水區</b></td><td>台中市</td><td class="num" data-sort="48">48</td><td class="num" data-sort="28.6">28.6</td><td class="num" data-sort="1086.0">1,086</td><td class="num" data-sort="42.7">42.7</td></tr><tr class="low-sample" data-city="台中市"><td class="num">66</td><td><b>霧峰區</b> <span class="badge-low">樣本少</span></td><td>台中市</td><td class="num" data-sort="17">17</td><td class="num" data-sort="28.3">28.3</td><td class="num" data-sort="908.0">908</td><td class="num" data-sort="33.6">33.6</td></tr><tr data-city="桃園市"><td class="num">67</td><td><b>觀音區</b></td><td>桃園市</td><td class="num" data-sort="60">60</td><td class="num" data-sort="28.1">28.1</td><td class="num" data-sort="752.0">752</td><td class="num" data-sort="29.3">29.3</td></tr><tr class="low-sample" data-city="新北市"><td class="num">68</td><td><b>金山區</b> <span class="badge-low">樣本少</span></td><td>新北市</td><td class="num" data-sort="7">7</td><td class="num" data-sort="26.4">26.4</td><td class="num" data-sort="1164.0">1,164</td><td class="num" data-sort="46.9">46.9</td></tr><tr data-city="台中市"><td class="num">69</td><td><b>梧棲區</b></td><td>台中市</td><td class="num" data-sort="34">34</td><td class="num" data-sort="24.7">24.7</td><td class="num" data-sort="1078.0">1,078</td><td class="num" data-sort="46.2">46.2</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-title">原始資料下載</div>
+  <div class="download-card">
+    <div style="font-size:14px;color:#1d1d1f">4 縣市預售屋全區排名（含解約篩除）：</div>
+    <div class="download-grid">
+      <a href="lvr-data/presale_ranking_w180.json">預售排名 JSON（近 180 天）</a>
+    </div>
+  </div>
+
+  <div class="section-title">資料說明</div>
+  <div class="notes">
+    <h4>資料來源</h4>
+    <ul>
+      <li>內政部「不動產成交案件實際資訊」開放資料 _b.csv（預售屋備查）。</li>
+      <li>已排除「解除契約」案件（建商解約者不計入有效成交）。</li>
+      <li>每月 2/12/22 自動同步。</li>
+    </ul>
+    <h4 style="margin-top:14px">免責聲明</h4>
+    <ul>
+      <li>本頁為市場觀察，非投資建議。預售屋價格反映建商定價，與成屋成交價可能有結構性差距。</li>
+      <li>本公司為融資租賃業者，非金融機構，最終核貸由金融機構決定。</li>
+    </ul>
+  </div>
+</div>
+
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+
+<script>
+// chip filter + sortable table for presale
+(function() {
+  const tbody = document.querySelector('#presaleTable tbody');
+  const all = Array.from(tbody.querySelectorAll('tr'));
+  let active = 'all';
+  function apply() {
+    all.forEach(tr => tr.style.display = (active === 'all' || tr.dataset.city === active) ? '' : 'none');
+  }
+  document.querySelectorAll('#presaleChips .city-chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('#presaleChips .city-chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active'); active = c.dataset.city; apply();
+  }));
+  document.querySelectorAll('#presaleTable th').forEach((th, idx) => {
+    let dir = 'desc';
+    th.addEventListener('click', () => {
+      const type = th.dataset.type;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        let va = a.children[idx].dataset.sort ?? a.children[idx].innerText.trim();
+        let vb = b.children[idx].dataset.sort ?? b.children[idx].innerText.trim();
+        if (type === 'num') { va = parseFloat(va.replace(/,/g, '')) || 0; vb = parseFloat(vb.replace(/,/g, '')) || 0; }
+        return dir === 'asc' ? (va < vb ? -1 : va > vb ? 1 : 0) : (va > vb ? -1 : va < vb ? 1 : 0);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      document.querySelectorAll('#presaleTable th').forEach(t => t.classList.remove('sorted'));
+      th.classList.add('sorted');
+      dir = dir === 'asc' ? 'desc' : 'asc';
+    });
+  });
+})();
+</script>
+</body>
+</html>
