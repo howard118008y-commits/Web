@@ -1,34 +1,35 @@
 """
-解析 output/lvr_*.zip 中的台北市 + 新北市買賣主表，
-過濾「正常住宅」+ 計算屋齡，產出 clean df + 5 精選區明細 + 41 區排名表。
+解析 output/lvr_*.zip — 北市 + 新北市 + 台中市 + 桃園市 4 縣市買賣主表。
 
-清洗規則（排除）：
-- 交易標的非「房地」(排除純車位、純土地等)
-- 備註含 親友/員工/共有人/特殊交易/瑕疵/急需處分/公益
-- 主要用途非住家用
-- 總價 < 100 萬 (極可能異常)
-- 單價 < 5 萬/坪 或 > 400 萬/坪 (涵蓋台北精華區豪宅)
-- 編號重複（mini-package 增量時 dedupe）
+產出：
+- clean_df.pkl                          清洗後完整 df (4 城 × 9 季 + mini)
+- ranking_w{30,90,180,365}.pkl          4 種時間窗 ranking table
+- ranking_w{30,90,180,365}.json         同上，給網頁 JS 用
+- 5_focus_kpis_w{...}.json              5 精選區 KPI per window
+- shindian_deep.pkl                     新店區 113S1 vs 115S1 深度比較
+- {town}_正常住宅_近180天.csv             5 精選明細
 """
 
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 from zipfile import ZipFile
+import json
 
 import pandas as pd
 
 OUT_DIR = Path(__file__).resolve().parent / "_cache"
-OUT_DIR.mkdir(exist_ok=True)
 PINGS = 3.305785
 
-FOCUS_TOWNS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]  # 5 精選保留
-LOOKBACK_DAYS = 180
+FOCUS_TOWNS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]
+WINDOWS = [30, 90, 180, 365]
 EXCLUDE_NOTE_KEYWORDS = ["親友", "員工", "共有人", "特殊交易", "瑕疵", "急需處分", "公益"]
 
 CITY_FILES = {
     "台北市": "a_lvr_land_a.csv",
     "新北市": "f_lvr_land_a.csv",
+    "台中市": "b_lvr_land_a.csv",
+    "桃園市": "h_lvr_land_a.csv",
 }
 
 
@@ -59,28 +60,19 @@ def load_main_csv(zip_path: Path, csv_name: str, city: str) -> pd.DataFrame:
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     n0 = len(df)
     df = df.copy()
-
-    # 編號 dedupe（多份 zip 可能有重複交易）
     if "編號" in df.columns:
         df = df.drop_duplicates(subset=["編號"], keep="first")
     n_dedup = len(df)
 
     df["交易日期"] = df["交易年月日"].apply(roc_to_date)
     df = df.dropna(subset=["交易日期"])
-    n1 = len(df)
-
     df["建築完成日期"] = df["建築完成年月"].apply(roc_to_date)
     df["屋齡"] = ((df["交易日期"] - df["建築完成日期"]).dt.days / 365.25).round(1)
 
     df = df[df["交易標的"].fillna("").str.contains("房地", regex=False)]
-    n2 = len(df)
-
     note = df["備註"].fillna("")
     df = df[~note.apply(lambda x: any(k in x for k in EXCLUDE_NOTE_KEYWORDS))]
-    n3 = len(df)
-
     df = df[df["主要用途"].fillna("").str.contains("住", regex=False)]
-    n4 = len(df)
 
     for col in ["總價元", "單價元平方公尺", "建物移轉總面積平方公尺"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -92,28 +84,25 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df[df["總價_萬"] >= 100]
     df = df[(df["單價_萬每坪"] >= 5) & (df["單價_萬每坪"] <= 400)]
-    n5 = len(df)
 
-    print(
-        f"  清洗：{n0:,} → dedupe {n_dedup:,} → 有效日期 {n1:,} → 限房地 {n2:,} → "
-        f"排除特殊 {n3:,} → 限住家用 {n4:,} → 排除極端值 {n5:,}"
-    )
+    print(f"  清洗：{n0:,} → dedupe {n_dedup:,} → 最終 {len(df):,}")
     return df
 
 
-def summarize_town(df: pd.DataFrame, town: str) -> Optional[dict]:
+def town_kpi(df: pd.DataFrame, town: str) -> Optional[dict]:
     sub = df[df["鄉鎮市區"] == town]
     if sub.empty:
         return None
     return {
         "鄉鎮市區": town,
         "縣市": sub["縣市"].iloc[0],
-        "n": len(sub),
-        "單價中位": round(sub["單價_萬每坪"].median(), 1),
-        "單價平均": round(sub["單價_萬每坪"].mean(), 1),
-        "總價中位": round(sub["總價_萬"].median(), 0),
-        "建坪中位": round(sub["建坪"].median(), 1),
-        "屋齡中位": round(sub["屋齡"].dropna().median(), 1) if sub["屋齡"].notna().any() else None,
+        "n": int(len(sub)),
+        "單價中位": round(float(sub["單價_萬每坪"].median()), 1),
+        "單價平均": round(float(sub["單價_萬每坪"].mean()), 1),
+        "總價中位": round(float(sub["總價_萬"].median()), 0),
+        "建坪中位": round(float(sub["建坪"].median()), 1),
+        "屋齡中位": (round(float(sub["屋齡"].dropna().median()), 1)
+                  if sub["屋齡"].notna().any() else None),
     }
 
 
@@ -125,86 +114,162 @@ def cross_quarter_change(df: pd.DataFrame, town: str) -> Optional[float]:
     return round((by_q["115S1"] - by_q["113S1"]) / by_q["113S1"] * 100, 1)
 
 
+def yoy_change(df: pd.DataFrame, town: str) -> Optional[float]:
+    sub = df[df["鄉鎮市區"] == town]
+    by_q = sub.groupby("__season")["單價_萬每坪"].median()
+    if "114S1" not in by_q.index or "115S1" not in by_q.index:
+        return None
+    return round((by_q["115S1"] - by_q["114S1"]) / by_q["114S1"] * 100, 1)
+
+
+def build_window(df: pd.DataFrame, days: int) -> tuple:
+    """回傳該時間窗的 ranking_df + focus_kpis dict。"""
+    cutoff = datetime.now() - timedelta(days=days)
+    df_w = df[df["交易日期"] >= cutoff]
+
+    rows = []
+    for town in sorted(df_w["鄉鎮市區"].dropna().unique()):
+        s = town_kpi(df_w, town)
+        if not s:
+            continue
+        s["2年漲幅"] = cross_quarter_change(df, town)
+        s["1年漲幅"] = yoy_change(df, town)
+        rows.append(s)
+    cols = ["鄉鎮市區", "縣市", "n", "單價中位", "單價平均", "總價中位",
+            "建坪中位", "屋齡中位", "2年漲幅", "1年漲幅"]
+    if not rows:
+        ranking = pd.DataFrame(columns=cols)
+    else:
+        ranking = pd.DataFrame(rows).sort_values("單價中位", ascending=False)
+
+    focus_kpis = {}
+    for town in FOCUS_TOWNS:
+        s = town_kpi(df_w, town)
+        if s:
+            s["2年漲幅"] = cross_quarter_change(df, town)
+            s["1年漲幅"] = yoy_change(df, town)
+            focus_kpis[town] = s
+
+    return ranking, focus_kpis
+
+
+def shindian_deep(df: pd.DataFrame) -> dict:
+    """新店區 113S1 vs 115S1 深度分布比較。"""
+    sd_113 = df[(df["鄉鎮市區"] == "新店區") & (df["__season"] == "113S1")]
+    sd_115 = df[(df["鄉鎮市區"] == "新店區") & (df["__season"] == "115S1")]
+
+    def stats(s):
+        return {
+            "n": int(len(s)),
+            "median": round(float(s["單價_萬每坪"].median()), 1) if len(s) else None,
+            "mean": round(float(s["單價_萬每坪"].mean()), 1) if len(s) else None,
+            "median_total": round(float(s["總價_萬"].median()), 0) if len(s) else None,
+            "median_age": (round(float(s["屋齡"].dropna().median()), 1)
+                           if s["屋齡"].notna().any() else None),
+            "median_ping": round(float(s["建坪"].median()), 1) if len(s) else None,
+            "building_type": s["建物型態"].value_counts().to_dict() if len(s) else {},
+            "age_buckets": age_bucket_counts(s),
+            "price_buckets": price_bucket_counts(s),
+        }
+    return {
+        "113S1": stats(sd_113),
+        "115S1": stats(sd_115),
+        "delta": {
+            "n": int(len(sd_115)) - int(len(sd_113)),
+            "median_pct": (
+                round((sd_115["單價_萬每坪"].median() - sd_113["單價_萬每坪"].median())
+                      / sd_113["單價_萬每坪"].median() * 100, 1)
+                if len(sd_115) and len(sd_113) else None
+            ),
+        }
+    }
+
+
+def age_bucket_counts(s: pd.DataFrame) -> dict:
+    buckets = {"0–5 年（新成屋）": 0, "5–15 年": 0, "15–30 年": 0,
+               "30–45 年": 0, "45+ 年（老屋）": 0, "未知": 0}
+    for v in s["屋齡"]:
+        if pd.isna(v):
+            buckets["未知"] += 1
+        elif v < 5:
+            buckets["0–5 年（新成屋）"] += 1
+        elif v < 15:
+            buckets["5–15 年"] += 1
+        elif v < 30:
+            buckets["15–30 年"] += 1
+        elif v < 45:
+            buckets["30–45 年"] += 1
+        else:
+            buckets["45+ 年（老屋）"] += 1
+    return buckets
+
+
+def price_bucket_counts(s: pd.DataFrame) -> dict:
+    buckets = {"<30 萬/坪": 0, "30–45": 0, "45–60": 0, "60–80": 0, "80+": 0}
+    for v in s["單價_萬每坪"]:
+        if v < 30: buckets["<30 萬/坪"] += 1
+        elif v < 45: buckets["30–45"] += 1
+        elif v < 60: buckets["45–60"] += 1
+        elif v < 80: buckets["60–80"] += 1
+        else: buckets["80+"] += 1
+    return buckets
+
+
 def main() -> None:
     zip_files = sorted(OUT_DIR.glob("lvr_*.zip"))
     if not zip_files:
-        print("✗ 找不到 output/lvr_*.zip")
-        return
+        raise SystemExit("✗ 找不到 output/lvr_*.zip")
 
-    print(f"→ 載入 {len(zip_files)} 個季別檔案 × 2 縣市")
+    print(f"→ 載入 {len(zip_files)} 個 zip × {len(CITY_FILES)} 縣市")
     frames = []
     for zp in zip_files:
         for city, csv in CITY_FILES.items():
             try:
-                df = load_main_csv(zp, csv, city)
-                frames.append(df)
+                frames.append(load_main_csv(zp, csv, city))
             except KeyError:
                 print(f"  ⚠ {zp.name} 缺 {csv}（{city}）")
     df_raw = pd.concat(frames, ignore_index=True)
-    print(f"→ 合計原始 {len(df_raw):,} 筆\n→ 套用清洗規則：")
+    print(f"→ 合計原始 {len(df_raw):,} 筆\n→ 清洗：")
     df = clean(df_raw)
 
-    cutoff = datetime.now() - timedelta(days=LOOKBACK_DAYS)
-    df_recent = df[df["交易日期"] >= cutoff].copy()
-
-    # ===== 5 精選區詳細 =====
+    # 印一份 180 天 ranking 摘要看看
     print(f"\n{'=' * 76}")
-    print(f"  5 精選區｜正常住宅買賣摘要（近 {LOOKBACK_DAYS} 天）")
+    print(f"  4 縣市 全區 ranking｜TOP 15（近 180 天，按單價中位降序）")
     print(f"{'=' * 76}")
-    print(f"{'區別':<8}{'筆數':>6}{'單價中位':>10}{'單價平均':>10}{'總價中位':>10}{'建坪中位':>10}{'屋齡中位':>10}")
-    print("-" * 76)
-    for town in FOCUS_TOWNS:
-        s = summarize_town(df_recent, town)
-        if not s:
-            continue
-        print(f"{town:<8}{s['n']:>6}{s['單價中位']:>10.1f}{s['單價平均']:>10.1f}"
-              f"{s['總價中位']:>10,.0f}{s['建坪中位']:>10.1f}"
-              f"{(s['屋齡中位'] or 0):>10.1f}")
+    ranking_180, focus_180 = build_window(df, 180)
+    print(ranking_180[["鄉鎮市區", "縣市", "n", "單價中位", "1年漲幅", "2年漲幅"]].head(15).to_string(index=False))
+    print(f"  全部 {len(ranking_180)} 區")
 
-    # ===== 雙北 41 區排名 =====
-    print(f"\n{'=' * 76}")
-    print(f"  雙北全區排名｜TOP 15（按單價中位數降序）")
-    print(f"{'=' * 76}")
-    all_towns = sorted(df_recent["鄉鎮市區"].dropna().unique())
-    rows = []
-    for town in all_towns:
-        s = summarize_town(df_recent, town)
-        if not s:
-            continue
-        s["2年漲幅"] = cross_quarter_change(df, town)
-        rows.append(s)
-    ranking_df = pd.DataFrame(rows).sort_values("單價中位", ascending=False)
-    print(ranking_df.head(15).to_string(index=False))
-    print(f"\n  全部 {len(ranking_df)} 區，前 15 已列出")
+    # 產 4 個窗
+    print(f"\n→ 產出 4 個時間窗 ranking：")
+    for w in WINDOWS:
+        ranking, focus = build_window(df, w)
+        ranking.to_pickle(OUT_DIR / f"ranking_w{w}.pkl")
+        ranking.to_json(OUT_DIR / f"ranking_w{w}.json",
+                        orient="records", force_ascii=False)
+        with open(OUT_DIR / f"focus_kpis_w{w}.json", "w", encoding="utf-8") as f:
+            json.dump(focus, f, ensure_ascii=False, indent=2, default=str)
+        print(f"  ✓ w={w}：{len(ranking)} 區")
 
-    # ===== 跨季 YoY 變化（5 精選 + 雙北平均）=====
-    print(f"\n{'=' * 76}")
-    print(f"  跨季單價中位數｜季別 × 5 精選 + 雙北平均")
-    print(f"{'=' * 76}")
-    by_q_focus = (
-        df[df["鄉鎮市區"].isin(FOCUS_TOWNS)]
-        .groupby(["__season", "鄉鎮市區"])["單價_萬每坪"]
-        .median()
-        .unstack("鄉鎮市區")
-        .reindex(columns=FOCUS_TOWNS)
-        .round(1)
-        .sort_index()
-    )
-    by_q_city = df.groupby(["__season", "縣市"])["單價_萬每坪"].median().unstack("縣市").round(1).sort_index()
-    combined = pd.concat([by_q_focus, by_q_city], axis=1)
-    print(combined.to_string())
+    # 新店深度解析
+    print(f"\n→ 新店區 113S1 vs 115S1 深度解析")
+    sd = shindian_deep(df)
+    with open(OUT_DIR / "shindian_deep.json", "w", encoding="utf-8") as f:
+        json.dump(sd, f, ensure_ascii=False, indent=2, default=str)
+    pd.to_pickle(sd, OUT_DIR / "shindian_deep.pkl")
+    print(f"  113S1：n={sd['113S1']['n']}、中位 {sd['113S1']['median']}、屋齡中位 {sd['113S1']['median_age']}")
+    print(f"  115S1：n={sd['115S1']['n']}、中位 {sd['115S1']['median']}、屋齡中位 {sd['115S1']['median_age']}")
+    print(f"  Δ：n {sd['delta']['n']:+d}、中位 {sd['delta']['median_pct']:+.1f}%")
 
-    # 存清洗後 pickle + 排名 + 5 精選 CSV
-    pkl = OUT_DIR / "clean_df.pkl"
-    df.to_pickle(pkl)
-    ranking_df.to_pickle(OUT_DIR / "ranking_recent.pkl")
-    print(f"\n✓ 已存：clean_df.pkl（{len(df):,}）、ranking_recent.pkl（{len(ranking_df)} 區）")
-
+    # clean_df + 5 精選明細
+    df.to_pickle(OUT_DIR / "clean_df.pkl")
+    cutoff = datetime.now() - timedelta(days=180)
+    df_recent = df[df["交易日期"] >= cutoff]
     for town in FOCUS_TOWNS:
         sub = df_recent[df_recent["鄉鎮市區"] == town]
         if sub.empty:
             continue
-        out_csv = OUT_DIR / f"{town}_正常住宅_近{LOOKBACK_DAYS}天.csv"
+        out_csv = OUT_DIR / f"{town}_正常住宅_近180天.csv"
         keep = [
             "交易日期", "縣市", "鄉鎮市區", "土地位置建物門牌", "建物型態",
             "建坪", "屋齡", "總價_萬", "單價_萬每坪",
@@ -214,12 +279,7 @@ def main() -> None:
         sub[keep].sort_values("交易日期", ascending=False).to_csv(
             out_csv, index=False, encoding="utf-8-sig"
         )
-    print(f"✓ 已存 {len(FOCUS_TOWNS)} 個精選區明細 CSV")
-
-    # 全 41 區排名表 CSV
-    rank_csv = OUT_DIR / f"雙北全區排名_近{LOOKBACK_DAYS}天.csv"
-    ranking_df.to_csv(rank_csv, index=False, encoding="utf-8-sig")
-    print(f"✓ 已存：{rank_csv.name}")
+    print(f"\n✓ 已存：clean_df.pkl、5 精選 CSV、4 窗 ranking、shindian_deep")
 
 
 if __name__ == "__main__":

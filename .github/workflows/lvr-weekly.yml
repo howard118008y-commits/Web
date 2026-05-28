@@ -61,6 +61,10 @@ jobs:
         working-directory: scripts/lvr
         run: python make_charts.py
 
+      - name: Generate social media cards (1080×1350)
+        working-directory: scripts/lvr
+        run: python make_social_cards.py
+
       - name: Build observatory HTML
         working-directory: scripts/lvr
         run: python build_observatory.py
@@ -69,10 +73,18 @@ jobs:
         run: |
           git config user.name "LVR Observatory Bot"
           git config user.email "lvr-bot@users.noreply.github.com"
-          git add lvr-observatory.html lvr-charts/ lvr-data/
+          git add lvr-observatory.html lvr-charts/ lvr-data/ lvr-social-cards/
           if git diff --staged --quiet; then
             echo "✓ No content changes — skipping commit."
-            exit 0
+          else
+            git commit -m "chore(lvr): weekly observatory update $(date -u +%Y-%m-%d)"
+            git push
           fi
-          git commit -m "chore(lvr): weekly observatory update $(date -u +%Y-%m-%d)"
-          git push
+
+      - name: Check YoY ±20% alerts (LINE push)
+        # 即使 commit step 沒變動，alerts 仍每次跑（穩定情況也 print log）
+        working-directory: scripts/lvr
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python check_alerts.py
