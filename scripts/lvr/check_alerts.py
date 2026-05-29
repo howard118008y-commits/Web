@@ -145,23 +145,30 @@ def main() -> int:
     print(msg)
     print("----------------\n")
 
-    # 寫 log + 新 state
+    # 寫 log（state 留到 push 完成後再更新）
     (OUT_DIR / "alerts_last.txt").write_text(msg, encoding="utf-8")
-    save_state([{
-        "縣市": r["縣市"], "鄉鎮市區": r["鄉鎮市區"], "1年漲幅": float(r["1年漲幅"]), "n": int(r["n"]),
-    } for r in current_records])
+
+    state_records = [{
+        "縣市": r["縣市"], "鄉鎮市區": r["鄉鎮市區"],
+        "1年漲幅": float(r["1年漲幅"]), "n": int(r["n"]),
+    } for r in current_records]
 
     token = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "").strip()
     user_id = os.environ.get("LINE_USER_ID", "").strip()
     if not token or not user_id:
         print("⚠ LINE 環境變數未設，跳過推播")
+        save_state(state_records)  # 沒設 LINE 就直接記 state、避免每次都當「新」
         return 0
 
-    # 只在「有變化」時推播；都沒變不擾人
     if new_in or recovered:
-        push_line(msg, token, user_id)
+        ok = push_line(msg, token, user_id)
+        if ok:
+            save_state(state_records)
+        else:
+            print("  ⚠ push 失敗，state 不更新（下次跑會再嘗試）")
     else:
         print("  → 無狀態變化，依設定不推播")
+        save_state(state_records)  # 沒變化也要保存 state（保持最新）
     return 0
 
 
