@@ -25,7 +25,7 @@ import pandas as pd
 
 OUT_DIR = Path(__file__).resolve().parent / "_cache"
 STATE_FILE = OUT_DIR / "alert_state.json"
-THRESHOLD = 20.0
+THRESHOLD = 30.0  # 只在 YoY 突破 ±30%（重大變動）才推；省 LINE quota
 MIN_SAMPLE = 30
 WINDOW_FOR_ALERT = 180
 
@@ -57,30 +57,24 @@ def town_key(r: dict) -> str:
 
 def format_diff_message(new_in: List[dict], recovered: List[dict],
                          persistent_count: int) -> str:
-    lines = ["📊 實價登錄 YoY 警示（狀態變化）", "─" * 22]
+    """精簡訊息：只列 TOP 1 漲 + TOP 1 跌 + 總筆數，省 LINE quota。"""
     if not new_in and not recovered:
-        lines.append(f"本期無新警示變化（{persistent_count} 區持續突破 ±{THRESHOLD}%）")
-        return "\n".join(lines)
+        return f"📊 LVR 警示｜本期無 ±{THRESHOLD:.0f}% 突破變化"
+
+    lines = [f"📊 LVR ±{THRESHOLD:.0f}% 警示｜新 {len(new_in)} / 退出 {len(recovered)}"]
 
     if new_in:
-        lines.append(f"⚠ 新進入警示 ({len(new_in)} 區)：")
-        for r in new_in[:15]:
-            arrow = "▲" if r["1年漲幅"] > 0 else "▼"
-            lines.append(f"  {arrow} {r['鄉鎮市區']}（{r['縣市']}） {r['1年漲幅']:+.1f}% (n={int(r['n'])})")
-        if len(new_in) > 15:
-            lines.append(f"  …另 {len(new_in)-15} 區")
-        lines.append("")
+        gainers = [r for r in new_in if r["1年漲幅"] > 0]
+        losers = [r for r in new_in if r["1年漲幅"] < 0]
+        if gainers:
+            top = max(gainers, key=lambda r: r["1年漲幅"])
+            lines.append(f"▲ 漲最強：{top['鄉鎮市區']}({top['縣市']}) +{top['1年漲幅']:.1f}%")
+        if losers:
+            bot = min(losers, key=lambda r: r["1年漲幅"])
+            lines.append(f"▼ 跌最深：{bot['鄉鎮市區']}({bot['縣市']}) {bot['1年漲幅']:.1f}%")
     if recovered:
-        lines.append(f"✓ 回到正常區間 ({len(recovered)} 區)：")
-        for r in recovered[:15]:
-            lines.append(f"  {r['鄉鎮市區']}（{r['縣市']}） 已退出 ±{THRESHOLD}% 區間")
-        if len(recovered) > 15:
-            lines.append(f"  …另 {len(recovered)-15} 區")
-        lines.append("")
-    if persistent_count:
-        lines.append(f"（另有 {persistent_count} 區持續突破中，本次不重複通知）")
-    lines.append("")
-    lines.append("完整報告 → cx468.com.tw/lvr-observatory.html")
+        lines.append(f"✓ 已回穩：{len(recovered)} 區")
+    lines.append("→ cx468.com.tw/lvr-observatory.html")
     return "\n".join(lines)
 
 
