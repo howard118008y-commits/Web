@@ -90,10 +90,21 @@ jobs:
           git add lvr-observatory.html lvr-presale.html lvr-rental.html lvr-charts/ lvr-data/ lvr-social-cards/
           if git diff --staged --quiet; then
             echo "✓ No content changes — skipping commit."
-          else
-            git commit -m "chore(lvr): weekly observatory update $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          git commit -m "chore(lvr): weekly observatory update $(date -u +%Y-%m-%d)"
+          # Retry push with rebase to avoid race with other CRON workflows
+          for attempt in 1 2 3 4 5; do
+            echo "→ Push attempt $attempt"
+            if git pull --rebase --autostash origin main && git push origin main; then
+              echo "✓ Push successful on attempt $attempt"
+              exit 0
+            fi
+            echo "  ⚠ Push attempt $attempt failed, retrying in 10s..."
+            sleep 10
+          done
+          echo "✗ Push failed after 5 attempts"
+          exit 1
 
       - name: Check YoY ±20% alerts (LINE push)
         # 即使 commit step 沒變動，alerts 仍每次跑（穩定情況也 print log）
