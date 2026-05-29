@@ -39,11 +39,12 @@ def load_previous_state() -> dict:
         return {"alerts": []}
 
 
-def save_state(current_alerts: List[dict]) -> None:
+def save_state(current_alerts: List[dict], push_ok: bool = True) -> None:
     STATE_FILE.write_text(
         json.dumps({
             "last_run": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "alerts": current_alerts,
+            "last_push_ok": push_ok,
         }, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
@@ -145,7 +146,6 @@ def main() -> int:
     print(msg)
     print("----------------\n")
 
-    # 寫 log（state 留到 push 完成後再更新）
     (OUT_DIR / "alerts_last.txt").write_text(msg, encoding="utf-8")
 
     state_records = [{
@@ -157,18 +157,24 @@ def main() -> int:
     user_id = os.environ.get("LINE_USER_ID", "").strip()
     if not token or not user_id:
         print("⚠ LINE 環境變數未設，跳過推播")
-        save_state(state_records)  # 沒設 LINE 就直接記 state、避免每次都當「新」
+        save_state(state_records, push_ok=True)  # 不算失敗、避免下次強推
         return 0
 
-    if new_in or recovered:
+    # 強制重推條件：上次 push 失敗 + 目前仍有警示 → 不管 diff，再試一次
+    # 舊 state（沒此欄位）視為 False = 「不確定上次有沒有成功」→ 觸發重推保護
+    last_push_ok = prev.get("last_push_ok", False)
+    force_retry = current_records and not last_push_ok
+    if force_retry:
+        print(f"  ⚠ 偵測上次 push 失敗、強制重推 {len(current_records)} 筆當前警示")
+
+    if new_in or recovered or force_retry:
         ok = push_line(msg, token, user_id)
-        if ok:
-            save_state(state_records)
-        else:
-            print("  ⚠ push 失敗，state 不更新（下次跑會再嘗試）")
+        save_state(state_records, push_ok=ok)
+        if not ok:
+            print("  ⚠ 本次 push 又失敗，下次跑會再試")
     else:
         print("  → 無狀態變化，依設定不推播")
-        save_state(state_records)  # 沒變化也要保存 state（保持最新）
+        save_state(state_records, push_ok=True)
     return 0
 
 
