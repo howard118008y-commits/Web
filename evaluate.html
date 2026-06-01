@@ -437,6 +437,8 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       return;
     }
     var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
+    // 同步通知自家後端推 LINE 給工作機（best-effort，失敗不影響主流程）
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(){});}catch(e){}
     fetch('https://api.web3forms.com/submit',{
       method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
     })
