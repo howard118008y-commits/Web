@@ -168,6 +168,28 @@
 
 ---
 
+## 開發與部署守則 (Dev & Deploy Rules)
+
+> 來自實際踩過的坑，每次動這個專案都要遵守。
+
+### 部署驗證 (Deployment)
+- 改完任何 HTML/CSS **不要只說「完成」**。GitHub Pages 約 1–2 分鐘生效，要提醒使用者**無痕/清快取**重開，確認「指定的那個元素」真的出現、行為正確。
+- 注意三類「改了看不到」：瀏覽器快取、缺視覺分隔、`include.js` 片段（nav/footer/lead-form 等）沒載入。
+- git 部署只 `git add` 本次相關檔，**禁止 `git add -A`**（此 repo 常有 `.mcp.json`、`tools-lab/`、`docs/` 等不相關變更）。push 前先 `git fetch && git rebase origin/main`（遠端有自動數據 commit）。可用 `/deploy`。
+
+### MCP 與 Git
+- **永遠不要把 `.mcp.json` 加入 `.gitignore`**（使用者明確要求追蹤）。
+- 設定 Memory / Context7 MCP 後，提醒使用者 **PATH/MCP 變更需完整重啟 Claude Code** 才生效。
+
+### 效能 (Performance)
+- 不要在沒有「前後量測」下改 render 順序或套實驗性 PageSpeed 優化。優先安全做法（如 font preload + swap）。**任何讓分數下降的改動立即回滾**。
+
+### 影片嵌入 (Video Embeds)
+- 本地 MP4 ↔ YouTube 互換時，**保留原始檔/引用**，避免影片消失；換完務必確認 live 頁仍能播放。
+
+---
+
 ## 變更紀錄 (Changelog)
 
+- 2026-06-02：新增「開發與部署守則」（部署驗證、MCP/Git、效能、影片嵌入），來自使用洞察。
 - 2026-05-11：初稿建立，確立「中小企業數位工具化」核心策略方向。
