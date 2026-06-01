@@ -88,7 +88,12 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1f;min-width:760px}
 .rank-table th{background:#f5f5f7;color:#6e6e73;font-weight:600;text-align:left;padding:10px 12px;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1.5px solid #e8e8ed;position:sticky;top:0}
 .rank-table th:hover{background:#ebebef;color:#1d1d1f}
-.rank-table th .arrow{margin-left:4px;opacity:.4;font-size:10px}
+.rank-table th .arrow{display:inline-block;width:7px;height:13px;margin-left:5px;position:relative;vertical-align:-2px;opacity:.4}
+.rank-table th .arrow::before,.rank-table th .arrow::after{content:"";position:absolute;left:0;width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent}
+.rank-table th .arrow::before{top:1px;border-bottom:5px solid currentColor}
+.rank-table th .arrow::after{bottom:1px;border-top:5px solid currentColor}
+.rank-table th .arrow.asc::after{display:none}
+.rank-table th .arrow.desc::before{display:none}
 .rank-table th.sorted .arrow{opacity:1;color:#7C3AED}
 .rank-table td{padding:9px 12px;border-bottom:.5px solid #f0f0f3;white-space:nowrap}
 .rank-table td.num{text-align:right;font-variant-numeric:tabular-nums}
@@ -144,7 +149,7 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1
 
   <div class="section-title">本期 AI 摘要</div>
   <div class="ai-card">
-    <div class="ai-badge">✨ Claude AI 自動產生</div>
+    <div class="ai-badge">Claude AI 自動產生</div>
     <p>本期雙北、台中、桃園共 75 個行政區實價登錄數據顯示，市場呈現明顯的區域分化現象。台中市與北台灣部分區域漲幅突破 20%，而新北市新店區則錄得逾年同期跌幅，反映不同區域市場動能的差異。</p><p>**漲幅警示**</p><p>依資料顯示，本期有 5 個行政區突破年增 20% 警示門檻。其中台中市北屯區領漲，年漲幅達 +32.0%，單價中位數 30.9 萬/坪，樣本數 249 筆具參考性；潭子區緊隨其後 +31.3%。台北市中正區 +31.2%、北投區 +22.1%，加上新北市土城區 +25.6%，均顯示台灣側邊與郊區帶動成長動能。</p><p>**跌幅警示**</p><p>新店區以 -14.9% 年跌幅為雙北重點關注區域，台中西區 -14.6% 次之。值得注意的是，此等跌幅與傳統市場衰退的機制不同。</p><p>**結構觀察**</p><p>新店區特別值得深入觀察。依 113 年第 1 季至 115 年第 1 季的追蹤，成交量從 850 筆跌至 460 筆，跌幅高達 45.9%。更關鍵的是成交品結構改變：屋齡中位數從 16.5 年躍升至 25.9 年，反映新成屋供應消失、中古屋佔比提升。單價中位數同期從 53.2 萬/坪降至 51.0 萬/坪（-4.1%），此下降實為結構性而非市場性，乃新品推案量萎縮所致。預售屋端，大安區領漲 186.8 萬/坪，中正、中山區亦超 150 萬/坪，反映蛋黃區新案價格堅挺。租金報酬端，大安區以 2,172 元/坪/月、年化 2.42% 領先，顯示租售間仍存在結構性價差。</p><p>（資料：內政部實價登錄，已排除特殊交易與極端值）</p>
   </div>
   <div class="section-title">
@@ -163,9 +168,9 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1
     <div class="spotlight-header">為何新店單價中位數下降？</div>
     <h3>不是房市衰退，是成交品結構改變</h3>
     <p class="insight">
-      113Q1 → 115Q1 新店區成交筆數從 <b>850</b> 降到 <b>460</b>（-390 筆，成交量縮 45%），
+      113Q1 至 115Q1 新店區成交筆數從 <b>850</b> 降到 <b>460</b>（-390 筆，成交量縮 45%），
       單價中位數從 <b>53.2</b> 降到 <b>51.0</b> 萬/坪（-4.1%）。
-      但更關鍵的是 <b>屋齡中位數從 16.5 年 → 25.9 年（+9.4 年）</b>——
+      但更關鍵的是 <b>屋齡中位數從 16.5 年 至 25.9 年（+9.4 年）</b>——
       113 期由新成屋（重劃區開案）帶量，115 期新成屋移轉停止，老屋佔比上升，中位數自然回歸老屋常態值。
     </p>
   </div>
@@ -247,15 +252,15 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1
       <table class="rank-table" id="rankTable">
         <thead>
           <tr>
-            <th data-key="__rank" data-type="num">排名<span class="arrow">▲▼</span></th>
-            <th data-key="鄉鎮市區" data-type="str">區別<span class="arrow">▲▼</span></th>
-            <th data-key="縣市" data-type="str">縣市<span class="arrow">▲▼</span></th>
-            <th data-key="n" data-type="num">樣本<span class="arrow">▲▼</span></th>
-            <th data-key="單價中位" data-type="num" class="sorted">單價中位<span class="arrow">▼</span></th>
-            <th data-key="總價中位" data-type="num">總價中位<span class="arrow">▲▼</span></th>
-            <th data-key="屋齡中位" data-type="num">屋齡中位<span class="arrow">▲▼</span></th>
-            <th data-key="1年漲幅" data-type="num">1 年漲幅<span class="arrow">▲▼</span></th>
-            <th data-key="2年漲幅" data-type="num">2 年漲幅<span class="arrow">▲▼</span></th>
+            <th data-key="__rank" data-type="num">排名<span class="arrow"></span></th>
+            <th data-key="鄉鎮市區" data-type="str">區別<span class="arrow"></span></th>
+            <th data-key="縣市" data-type="str">縣市<span class="arrow"></span></th>
+            <th data-key="n" data-type="num">樣本<span class="arrow"></span></th>
+            <th data-key="單價中位" data-type="num" class="sorted">單價中位<span class="arrow"></span></th>
+            <th data-key="總價中位" data-type="num">總價中位<span class="arrow"></span></th>
+            <th data-key="屋齡中位" data-type="num">屋齡中位<span class="arrow"></span></th>
+            <th data-key="1年漲幅" data-type="num">1 年漲幅<span class="arrow"></span></th>
+            <th data-key="2年漲幅" data-type="num">2 年漲幅<span class="arrow"></span></th>
           </tr>
         </thead>
         <tbody id="rankBody"></tbody>
@@ -322,7 +327,7 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1
   <div class="cta-strip">
     <h2>想知道你的房子在當前行情下能借多少？</h2>
     <p>用我們的二胎可貸額度試算，輸入市價與一胎本金即時看結果。</p>
-    <a href="second-mortgage-calculator.html" class="btn-on-gradient">二胎額度試算 →</a>
+    <a href="second-mortgage-calculator.html" class="btn-on-gradient">二胎額度試算</a>
     <a href="https://lin.ee/PHIfSoY" class="btn-on-gradient">LINE 線上諮詢</a>
   </div>
 
@@ -332,10 +337,10 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1
   <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
     <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-      <a href="mortgage-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">一胎房貸試算 →</a>
-      <a href="second-mortgage-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎可貸額度 →</a>
-      <a href="affordability-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">貸款負擔能力 →</a>
-      <a href="tools.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">回工具總覽 →</a>
+      <a href="mortgage-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">一胎房貸試算</a>
+      <a href="second-mortgage-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎可貸額度</a>
+      <a href="affordability-calculator.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">貸款負擔能力</a>
+      <a href="tools.html" style="font-size:14px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">回工具總覽</a>
     </div>
   </div>
 </section>
@@ -369,7 +374,7 @@ function renderKPI() {
     const chg = k['2年漲幅'];
     let chgHtml = '—';
     if (chg !== null && chg !== undefined) {
-      const arrow = chg > 0 ? '▲' : (chg < 0 ? '▼' : '—');
+      const arrow = chg > 0 ? '漲' : (chg < 0 ? '跌' : '—');
       const c = chg > 0 ? '#16A34A' : (chg < 0 ? '#EF4444' : '#6e6e73');
       chgHtml = '<span style="color:'+c+';font-weight:700">'+arrow+' '+Math.abs(chg).toFixed(1)+'%</span>';
     }
@@ -416,7 +421,7 @@ function renderRank() {
     const badge = low ? ' <span class="badge-low">樣本少</span>' : '';
     function pctCell(v) {
       if (v === null || v === undefined) return '<td class="num">—</td>';
-      const arrow = v > 0 ? '▲' : (v < 0 ? '▼' : '—');
+      const arrow = v > 0 ? '漲' : (v < 0 ? '跌' : '—');
       const c = v > 0 ? '#16A34A' : (v < 0 ? '#EF4444' : '#6e6e73');
       return `<td class="num" style="color:${c};font-weight:600">${arrow} ${Math.abs(v).toFixed(1)}%</td>`;
     }
@@ -439,10 +444,10 @@ function renderRank() {
     const arrow = th.querySelector('.arrow');
     if (k === state.sort.key) {
       th.classList.add('sorted');
-      if (arrow) arrow.textContent = state.sort.dir === 'asc' ? '▲' : '▼';
+      if (arrow) arrow.className = 'arrow ' + (state.sort.dir === 'asc' ? 'asc' : 'desc');
     } else {
       th.classList.remove('sorted');
-      if (arrow) arrow.textContent = '▲▼';
+      if (arrow) arrow.className = 'arrow';
     }
   });
   // update heading
