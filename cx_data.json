@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-31",
+  "generated": "2026-06-01",
   "series": {
     "A": {
       "label": "房貸金融",
@@ -158,19 +158,19 @@
       "code": "D02",
       "series": "D",
       "name": "美元台幣匯率",
-      "value": "31.44",
+      "value": "31.48",
       "status": "green",
-      "note": "31.44，台幣相對強勢",
-      "updated": "2026-05"
+      "note": "31.48，台幣相對強勢",
+      "updated": "2026-06"
     },
     {
       "code": "D03",
       "series": "D",
       "name": "台股加權指數",
-      "value": "44,733點",
+      "value": "45,483點",
       "status": "green",
-      "note": "44,733點，台股高位，市場信心穩定",
-      "updated": "2026-05"
+      "note": "45,483點，台股高位，市場信心穩定",
+      "updated": "2026-06"
     },
     {
       "code": "D04",
