@@ -15,6 +15,7 @@ CX468_DIR = Path(__file__).resolve().parent.parent.parent
 OUT_DIR = CX468_DIR / "scripts" / "lvr" / "_cache"
 DATA_DEST_DIR = CX468_DIR / "lvr-data"
 LOW_SAMPLE = 30
+SHOP_MIN = 5  # 店面樣本低於此值不顯示中位（太少不具參考性）
 
 CITIES = ["台北市", "新北市", "台中市", "桃園市"]
 CITY_COLORS = {"台北市": "#0F172A", "新北市": "#7C3AED",
@@ -311,6 +312,13 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
         y = r.get("年化報酬率")
         y_html = ('<td class="num">—</td>' if pd.isna(y)
                   else f'<td class="num" data-sort="{y}"><b>{y:.2f}%</b></td>')
+        shop = r.get("店面月租中位")
+        shop_n = r.get("店面n") or 0
+        if pd.isna(shop) or shop_n < SHOP_MIN:
+            shop_html = '<td class="num">—</td>'
+        else:
+            shop_badge = ' <span class="badge-low">樣本少</span>' if shop_n < LOW_SAMPLE else ''
+            shop_html = f'<td class="num" data-sort="{shop}">{shop:,.0f}{shop_badge}</td>'
         rows_html += (
             f'<tr{cls} data-city="{r["縣市"]}">'
             f'<td class="num">{i}</td>'
@@ -318,6 +326,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
             f'<td>{r["縣市"]}</td>'
             f'<td class="num" data-sort="{r["n"]}">{int(r["n"])}</td>'
             f'<td class="num" data-sort="{r["月租中位"]}">{r["月租中位"]:,.0f}</td>'
+            f'{shop_html}'
             f'<td class="num" data-sort="{r["月租每坪中位"]}">{r["月租每坪中位"]:,.0f}</td>'
             f'<td class="num" data-sort="{r["建坪中位"]}">{r["建坪中位"]:.1f}</td>'
             f'{y_html}'
@@ -368,7 +377,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
         <button class="city-chip" data-city="桃園市">桃園市</button>
       </div>
     </div>
-    <p class="rank-note">年化報酬率 = 月租每坪 × 12 ÷ 同區買賣中位售價（元/坪）× 100%。供參考估算，非保證投報。樣本 &lt; {LOW_SAMPLE} 標「樣本少」。</p>
+    <p class="rank-note">年化報酬率 = 月租每坪 × 12 ÷ 同區買賣中位售價（元/坪）× 100%。供參考估算，非保證投報。樣本 &lt; {LOW_SAMPLE} 標「樣本少」。「住家月租中位」為住家用整租月租；「店面月租中位」為建物型態店面／商業用整間月租（樣本 &lt; {SHOP_MIN} 以「—」表示）。</p>
     <div class="rank-table-wrap">
       <table class="rank-table" id="rentalTable">
         <thead><tr>
@@ -376,7 +385,8 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
           <th data-type="str">區別<span class="arrow">▲▼</span></th>
           <th data-type="str">縣市<span class="arrow">▲▼</span></th>
           <th data-type="num">樣本<span class="arrow">▲▼</span></th>
-          <th data-type="num">月租中位<span class="arrow">▲▼</span></th>
+          <th data-type="num">住家月租中位<span class="arrow">▲▼</span></th>
+          <th data-type="num">店面月租中位<span class="arrow">▲▼</span></th>
           <th data-type="num" class="sorted">月租每坪<span class="arrow">▼</span></th>
           <th data-type="num">建坪中位<span class="arrow">▲▼</span></th>
           <th data-type="num">年化報酬率<span class="arrow">▲▼</span></th>
@@ -399,8 +409,9 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
     <h4>資料來源</h4>
     <ul>
       <li>內政部「不動產租賃實際資訊」開放資料 _c.csv。</li>
-      <li>月租為「總額元」欄位（已排除月租 &lt; 3,000 或 &gt; 200,000 異常值）。</li>
-      <li>年化報酬率為估算，未計入房屋稅、地價稅、管理費、空置率等實質成本。</li>
+      <li>住家月租為「總額元」欄位（已排除月租 &lt; 3,000 或 &gt; 200,000 異常值）。</li>
+      <li>店面月租中位取建物型態含「店面」或主要用途含「商」之案件「總額元」（範圍 5,000 ~ 1,000,000），各區店面成交量普遍偏少，僅供概略參考。</li>
+      <li>年化報酬率為估算，以住家月租計算，未計入房屋稅、地價稅、管理費、空置率等實質成本。</li>
     </ul>
     <h4 style="margin-top:14px">免責聲明</h4>
     <ul>

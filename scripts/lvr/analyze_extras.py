@@ -121,8 +121,51 @@ def clean_rental(df: pd.DataFrame) -> pd.DataFrame:
     # 排除每坪月租 < 200 元 (異常低) 或 > 5000 (豪宅異常)
     df = df[(df["月租_元每坪"] >= 200) & (df["月租_元每坪"] <= 5000)]
 
-    print(f"  租屋清洗：{n0:,} → {len(df):,}")
+    print(f"  租屋清洗（住家）：{n0:,} → {len(df):,}")
     return df
+
+
+def clean_rental_shop(df: pd.DataFrame) -> pd.DataFrame:
+    """店面租賃清洗：建物型態含『店面』或主要用途含『商』，月租放寬範圍。
+
+    店面整間月租跨度遠大於住家，故只取總額元、放寬上界，不套每坪/坪數過濾。
+    """
+    df = df.copy()
+    n0 = len(df)
+    type_col = df["建物型態"].fillna("") if "建物型態" in df.columns else pd.Series("", index=df.index)
+    use_col = df["主要用途"].fillna("") if "主要用途" in df.columns else pd.Series("", index=df.index)
+    is_shop = type_col.str.contains("店面", regex=False) | use_col.str.contains("商", regex=False)
+    df = df[is_shop].copy()
+
+    df["總額元"] = pd.to_numeric(df["總額元"], errors="coerce")
+    df = df.dropna(subset=["總額元"])
+    df["月租_元"] = df["總額元"]
+    # 店面月租跨度大：放寬到 5,000 ~ 1,000,000
+    df = df[(df["月租_元"] >= 5000) & (df["月租_元"] <= 1_000_000)]
+
+    print(f"  租屋清洗（店面）：{n0:,} → {len(df):,}")
+    return df
+
+
+def build_shop_lookup(df_shop: pd.DataFrame, days: int = LOOKBACK_DAYS) -> dict:
+    """各區店面月租中位 + 樣本數（近 N 天），回傳 {鄉鎮市區: (中位, n)}。"""
+    if df_shop.empty:
+        return {}
+    cutoff = datetime.now() - timedelta(days=days)
+    dw = df_shop[df_shop["交易日期"] >= cutoff]
+    out = {}
+    for town, sub in dw.groupby("鄉鎮市區"):
+        out[str(town)] = (round(float(sub["月租_元"].median()), 0), int(len(sub)))
+    return out
+
+
+def add_shop_rent(rental_rank: pd.DataFrame, shop_lookup: dict) -> pd.DataFrame:
+    """把店面月租中位 + 樣本數對應進住家排名表。無店面資料的區為 None / 0。"""
+    rental_rank["店面月租中位"] = rental_rank["鄉鎮市區"].map(
+        lambda t: shop_lookup.get(t, (None, 0))[0])
+    rental_rank["店面n"] = rental_rank["鄉鎮市區"].map(
+        lambda t: shop_lookup.get(t, (None, 0))[1])
+    return rental_rank
 
 
 def town_summary(df: pd.DataFrame, town: str, kind: str) -> Optional[dict]:
@@ -214,6 +257,13 @@ def main() -> None:
     rental.to_pickle(OUT_DIR / "rental_clean.pkl")
     rental_rank = build_ranking(rental, "rental")
     rental_rank = add_yield(rental_rank)
+
+    # 店面行情（與住家分開算，對應進排名表）
+    rental_shop = clean_rental_shop(rental_raw)
+    shop_lookup = build_shop_lookup(rental_shop)
+    rental_rank = add_shop_rent(rental_rank, shop_lookup)
+    print(f"  店面：{len(shop_lookup)} 區有資料")
+
     rental_rank.to_pickle(OUT_DIR / "rental_ranking_w180.pkl")
     rental_rank.to_json(OUT_DIR / "rental_ranking_w180.json",
                          orient="records", force_ascii=False)
