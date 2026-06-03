@@ -32,6 +32,11 @@ COLORS = {
     "中和區": "#7C3AED", "永和區": "#2563EB", "板橋區": "#16A34A",
     "新店區": "#F59E0B", "土城區": "#EF4444",
 }
+# 卡片超連結到區域百科頁（slug 須與 scripts/build_area_pages.py 一致）
+AREA_SLUG = {
+    "中和區": "zhonghe", "永和區": "yonghe", "板橋區": "banqiao",
+    "新店區": "xindian", "土城區": "tucheng",
+}
 CITIES = ["台北市", "新北市", "台中市", "桃園市"]
 WINDOWS = [30, 90, 180, 365]
 LOW_SAMPLE_THRESHOLD = 30
@@ -129,6 +134,10 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 .kpi-grid{{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}}
 @media(max-width:900px){{.kpi-grid{{grid-template-columns:repeat(2,1fr)}}}}
 @media(max-width:480px){{.kpi-grid{{grid-template-columns:1fr}}}}
+.kpi-link{{text-decoration:none;color:inherit;display:block}}
+.kpi-link .kpi-card{{transition:transform .15s ease,box-shadow .15s ease}}
+.kpi-link:hover .kpi-card{{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.10)}}
+.kpi-cta{{font-size:11px;font-weight:600;color:#0071e3;margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f3}}
 .kpi-card{{background:#fff;border-radius:18px;padding:20px 18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}}
 .kpi-town{{font-size:14px;font-weight:700;color:#1d1d1f;margin-bottom:10px}}
 .kpi-main{{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f0f0f3}}
@@ -423,6 +432,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
 const WINDOW_DATA = {data_json};
 const FOCUS_TOWNS = {json.dumps(FOCUS_TOWNS, ensure_ascii=False)};
 const COLORS = {json.dumps(COLORS, ensure_ascii=False)};
+const AREA_SLUG = {json.dumps(AREA_SLUG, ensure_ascii=False)};
 
 let state = {{
   kpiWindow: {DEFAULT_WINDOW},
@@ -437,8 +447,9 @@ function renderKPI() {{
   grid.innerHTML = FOCUS_TOWNS.map(t => {{
     const k = focus[t];
     const color = COLORS[t];
+    const href = 'area-' + (AREA_SLUG[t] || '') + '.html';
     if (!k) {{
-      return '<div class="kpi-card" style="opacity:.5"><div class="kpi-town">'+t+'</div><div class="kpi-empty">本窗無資料</div></div>';
+      return '<a class="kpi-link" href="'+href+'"><div class="kpi-card" style="opacity:.5"><div class="kpi-town">'+t+'</div><div class="kpi-empty">本窗無資料</div></div></a>';
     }}
     const chg = k['2年漲幅'];
     let chgHtml = '—';
@@ -448,6 +459,7 @@ function renderKPI() {{
       chgHtml = '<span style="color:'+c+';font-weight:700">'+arrow+' '+Math.abs(chg).toFixed(1)+'%</span>';
     }}
     return `
+      <a class="kpi-link" href="${{href}}">
       <div class="kpi-card" style="border-top:4px solid ${{color}}">
         <div class="kpi-town">${{t}}</div>
         <div class="kpi-main">
@@ -458,7 +470,9 @@ function renderKPI() {{
         <div class="kpi-row"><span>建坪中位</span><b>${{k['建坪中位'].toFixed(1)}} 坪</b></div>
         <div class="kpi-row"><span>樣本</span><b>${{k['n']}} 筆</b></div>
         <div class="kpi-change">2 年變化 ${{chgHtml}}</div>
-      </div>`;
+        <div class="kpi-cta">看 ${{t}}房市與生活機能 →</div>
+      </div>
+      </a>`;
   }}).join('');
 }}
 

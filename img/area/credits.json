@@ -1,0 +1,37 @@
+{
+  "zhonghe": {
+    "author": "Taiwankengo",
+    "license": "CC BY-SA 3.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:%E7%83%98%E7%88%90%E5%9C%B0%E5%8D%97%E5%B1%B1%E7%A6%8F%E5%BE%B7%E5%AE%AEDSC_0245.jpg",
+    "landmark": "南山福德宮",
+    "file": "烘爐地南山福德宮DSC_0245.jpg"
+  },
+  "yonghe": {
+    "author": "人人生來平等",
+    "license": "CC BY-SA 4.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:2025.08.04_Lehua_Night_Market.jpg",
+    "landmark": "樂華夜市",
+    "file": "2025.08.04_Lehua_Night_Market.jpg"
+  },
+  "banqiao": {
+    "author": "Art PH Chen",
+    "license": "CC BY-SA 4.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E5%AE%B6%E8%8A%B1%E5%9C%92%E4%B8%80%E6%99%AF.jpg",
+    "landmark": "林本源園邸",
+    "file": "林家花園一景.jpg"
+  },
+  "xindian": {
+    "author": "Ken Marshall",
+    "license": "CC BY 2.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:Bitan_Xindian_Taiwan.jpg",
+    "landmark": "碧潭",
+    "file": "Bitan_Xindian_Taiwan.jpg"
+  },
+  "tucheng": {
+    "author": "阿道",
+    "license": "CC BY-SA 4.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:Mahavira_Hall_of_Chengtian_Temple-02.2025-04-14.jpg",
+    "landmark": "承天禪寺",
+    "file": "Mahavira_Hall_of_Chengtian_Temple-02.2025-04-14.jpg"
+  }
+}
