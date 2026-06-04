@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-03",
+  "generated": "2026-06-04",
   "series": {
     "A": {
       "label": "房貸金融",
@@ -149,27 +149,27 @@
       "code": "D01",
       "series": "D",
       "name": "美十年期公債殖利率",
-      "value": "4.455%",
+      "value": "4.491%",
       "status": "yellow",
-      "note": "4.455%，利率偏高，需持續觀察",
+      "note": "4.491%，利率偏高，需持續觀察",
       "updated": "2026-06"
     },
     {
       "code": "D02",
       "series": "D",
       "name": "美元台幣匯率",
-      "value": "31.46",
-      "status": "green",
-      "note": "31.46，台幣相對強勢",
+      "value": "31.50",
+      "status": "yellow",
+      "note": "31.50，台幣承壓，近期趨穩",
       "updated": "2026-06"
     },
     {
       "code": "D03",
       "series": "D",
       "name": "台股加權指數",
-      "value": "45,557點",
+      "value": "46,459點",
       "status": "green",
-      "note": "45,557點，台股高位，市場信心穩定",
+      "note": "46,459點，台股高位，市場信心穩定",
       "updated": "2026-06"
     },
     {
