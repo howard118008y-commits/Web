@@ -164,6 +164,16 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>預售屋觀察｜雙北・台中・桃園 預售單價追蹤｜鋮馨租賃</title>
+<link rel="canonical" href="https://cx468.com.tw/lvr-presale.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="預售屋觀察｜雙北・台中・桃園 預售單價追蹤｜鋮馨租賃">
+<meta property="og:description" content="台北、新北、台中、桃園四縣市預售屋實價登錄單價追蹤。資料來源：內政部，每月更新。">
+<meta property="og:url" content="https://cx468.com.tw/lvr-presale.html">
+<meta property="og:image" content="https://cx468.com.tw/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"Dataset","name":"預售屋實價登錄觀察 — 雙北・台中・桃園","description":"台北、新北、台中、桃園四縣市預售屋實價登錄單價追蹤，資料來源內政部不動產交易實價查詢服務網，每月2/12/22更新。","url":"https://cx468.com.tw/lvr-presale.html","keywords":["預售屋","實價登錄","預售單價","台北","新北","台中","桃園"],"creator":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw/"}},"isBasedOn":"內政部不動產交易實價查詢服務網","spatialCoverage":{{"@type":"Place","name":"台北市、新北市、台中市、桃園市"}},"inLanguage":"zh-TW"}}
+</script>
 <meta name="description" content="台北、新北、台中、桃園四縣市 預售屋實價登錄單價追蹤。資料來源：內政部不動產交易實價查詢服務網。每月 2/12/22 自動更新。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 {ga_block()}
@@ -344,6 +354,16 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>租金報酬觀察｜雙北・台中・桃園 月租 + 年化報酬率｜鋮馨租賃</title>
+<link rel="canonical" href="https://cx468.com.tw/lvr-rental.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="租金報酬觀察｜雙北・台中・桃園 月租 + 年化報酬率｜鋮馨租賃">
+<meta property="og:description" content="台北、新北、台中、桃園四縣市租金實價登錄追蹤，含年化報酬率（年租/售價）估算。資料來源：內政部。">
+<meta property="og:url" content="https://cx468.com.tw/lvr-rental.html">
+<meta property="og:image" content="https://cx468.com.tw/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"Dataset","name":"租金報酬實價登錄觀察 — 雙北・台中・桃園","description":"台北、新北、台中、桃園四縣市租金實價登錄追蹤，含年化報酬率（年租/售價）估算，資料來源內政部不動產交易實價查詢服務網。","url":"https://cx468.com.tw/lvr-rental.html","keywords":["租金","實價登錄","年化報酬率","包租","台北","新北","台中","桃園"],"creator":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw/"}},"isBasedOn":"內政部不動產交易實價查詢服務網","spatialCoverage":{{"@type":"Place","name":"台北市、新北市、台中市、桃園市"}},"inLanguage":"zh-TW"}}
+</script>
 <meta name="description" content="台北、新北、台中、桃園四縣市租金實價登錄追蹤，含年化報酬率（年租 / 售價）估算。資料來源：內政部不動產交易實價查詢服務網。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 {ga_block()}

@@ -94,6 +94,16 @@ def build_html(generated_at: str, season_label: str,
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>實價登錄觀察室 2026｜北中桃四縣市房價追蹤｜鋮馨租賃</title>
+<link rel="canonical" href="https://cx468.com.tw/lvr-observatory.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="實價登錄觀察室 2026｜北中桃四縣市房價追蹤｜鋮馨租賃">
+<meta property="og:description" content="台北市+新北市+台中市+桃園市共75行政區實價登錄追蹤：YoY 年增率、跨縣市趨勢、新店區深度解析，每月更新。">
+<meta property="og:url" content="https://cx468.com.tw/lvr-observatory.html">
+<meta property="og:image" content="https://cx468.com.tw/lvr-charts/chart_city_trend.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"Dataset","name":"實價登錄觀察室 — 台北・新北・台中・桃園 住宅成交追蹤","description":"涵蓋台北市、新北市、台中市、桃園市共75個行政區的內政部實價登錄正常住宅成交資料，提供單價中位數、YoY 年增率、跨縣市跨季趨勢與行政區排名，每月2/12/22更新。","url":"https://cx468.com.tw/lvr-observatory.html","keywords":["實價登錄","房價","單價中位數","年增率","台北市","新北市","台中市","桃園市"],"creator":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw/"}},"isBasedOn":"內政部不動產交易實價查詢服務網","spatialCoverage":{{"@type":"Place","name":"台北市、新北市、台中市、桃園市"}},"license":"https://cx468.com.tw/","inLanguage":"zh-TW"}}
+</script>
 <meta name="description" content="台北市 + 新北市 + 台中市 + 桃園市 共 75 行政區實價登錄追蹤：時間窗 30/90/180/365 切換、YoY 年增率、跨縣市趨勢、新店區深度解析。每月 2/12/22 自動更新。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 
