@@ -20,6 +20,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from cjk_font import setup_cjk
+
 OUT_DIR = Path(__file__).resolve().parent / "_cache"
 CHART_DIR = OUT_DIR / "charts"
 CHART_DIR.mkdir(exist_ok=True)
@@ -33,10 +35,7 @@ COLORS = {
 }
 LOOKBACK_DAYS = 180
 
-plt.rcParams["font.sans-serif"] = [
-    "PingFang TC", "Heiti TC", "Noto Sans CJK TC", "Noto Sans TC", "DejaVu Sans"
-]
-plt.rcParams["axes.unicode_minus"] = False
+setup_cjk()  # 設定中文字型（含 CI/Ubuntu 的 Noto 路徑註冊）— 避免圖表中文變 □□□
 plt.rcParams["figure.dpi"] = 100
 plt.rcParams["savefig.dpi"] = 144
 plt.rcParams["savefig.bbox"] = "tight"

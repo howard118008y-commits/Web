@@ -275,6 +275,7 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
   }});
 }})();
 </script>
+<script src="include.js" defer></script>
 </body>
 </html>"""
 
@@ -456,6 +457,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
   }});
 }})();
 </script>
+<script src="include.js" defer></script>
 </body>
 </html>"""
 

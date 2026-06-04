@@ -583,6 +583,7 @@ renderKPI();
 renderRank();
 </script>
 
+<script src="include.js" defer></script>
 </body>
 </html>
 """

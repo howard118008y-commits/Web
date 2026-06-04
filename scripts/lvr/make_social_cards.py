@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import pandas as pd
 
+from cjk_font import setup_cjk
+
 OUT_DIR = Path(__file__).resolve().parent / "_cache"
 CARD_DIR = OUT_DIR / "social-cards"
 CARD_DIR.mkdir(exist_ok=True)
@@ -32,10 +34,7 @@ DARK = "#1d1d1f"
 GREY = "#6e6e73"
 LIGHT_BG = "#FAFAFA"
 
-plt.rcParams["font.sans-serif"] = [
-    "PingFang TC", "Heiti TC", "Noto Sans CJK TC", "Noto Sans TC", "DejaVu Sans"
-]
-plt.rcParams["axes.unicode_minus"] = False
+setup_cjk()  # 設定中文字型（含 CI/Ubuntu 的 Noto 路徑註冊）— 避免圖卡中文變 □□□
 plt.rcParams["savefig.dpi"] = 100
 plt.rcParams["savefig.bbox"] = "tight"
 plt.rcParams["savefig.pad_inches"] = 0
