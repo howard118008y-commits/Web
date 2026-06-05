@@ -32,11 +32,13 @@
 
 .articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 
-.art-card{border-radius:16px;overflow:hidden;background:#fff;border:.5px solid #e5e5e7;transition:transform .3s,box-shadow .3s}
+.art-card{position:relative;border-radius:16px;overflow:hidden;background:#fff;border:.5px solid #e5e5e7;transition:transform .3s,box-shadow .3s}
 
 .art-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
 
-.art-card-img{width:100%;height:200px;object-fit:cover;display:block}
+.art-card-img{width:100%;height:200px;object-fit:cover;display:block;filter:brightness(.8) saturate(.82) contrast(1.05)}
+.art-card::before{content:"";position:absolute;top:0;left:0;right:0;height:200px;background:linear-gradient(to top,rgba(10,14,26,.66) 0%,rgba(10,14,26,.22) 55%,rgba(10,14,26,.06) 100%);z-index:1;pointer-events:none}
+.art-card.featured::before{height:300px}
 
 .art-card-body{padding:1.25rem 1.5rem 1.5rem}
 
@@ -86,6 +88,7 @@
   .articles-grid{grid-template-columns:1fr}
   .art-card.featured{grid-column:span 1}
   .art-card.featured .art-card-img{height:200px}
+  .art-card.featured::before{height:200px}
 }
 </style>
   <script src="include.js" defer></script>
