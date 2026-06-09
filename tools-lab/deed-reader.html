@@ -187,17 +187,8 @@ h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#
   </div>
 </div>
 
-<!-- ============================================================
-     鋮馨謄本判讀 — 前端腳本 v3（原生列印不切斷 + 補齊欄位）
-     變更重點：
-       1. 移除 html2pdf（會切頁），改用瀏覽器原生列印 window.print()
-          搭配 @media print + break-inside:avoid，分頁不切斷區塊、字型正確清晰。
-       2. 報告按鈕改為「🖨 列印 / 存成 PDF」：按下後只印報告本體。
-       3. 補齊欄位：持分坪 share_ping、債務每筆確定期日/清償日/債務人、
-          所有權人完整資訊、flags 提醒清單。
-============================================================ -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -261,8 +252,18 @@ async function extractPdfText(file) {
 }
 function setStatus(msg) { if (statusBox) statusBox.textContent = msg; }
 
-// 原生列印：瀏覽器排版引擎，分頁不切斷、字型清晰
-function printReport() { window.print(); }
+function downloadReportPDF() {
+  const node = document.getElementById("cxReportInner");
+  if (!node) return;
+  const name = (lastData && lastData.case_id ? lastData.case_id : "標的體檢報告") + ".pdf";
+  html2pdf().set({
+    margin: 8,
+    filename: name,
+    image: { type: "jpeg", quality: 0.95 },
+    html2canvas: { scale: 2, backgroundColor: "#0d1117" },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  }).from(node).save();
+}
 
 function renderResult(d) {
   const box = document.getElementById("resultBox");
@@ -270,7 +271,6 @@ function renderResult(d) {
   const v = d.verdict || {}, s = d.synthesis || {}, owner = d.owner || {};
   const parcels = d.parcels || [], encs = d.encumbrances || [];
   const tax = d.tax_estimate || {}, val = d.valuation || {}, hist = d.history_index || {};
-  const flags = d.flags || [];
   const LIGHT = {
     "紅": { c: "#e0584f", bg: "rgba(224,88,79,.10)", label: "High Risk", icon: "⚠" },
     "黃": { c: "#e0a23b", bg: "rgba(224,162,59,.10)", label: "Caution", icon: "!" },
@@ -283,12 +283,6 @@ function renderResult(d) {
 
   const parcelCards = parcels.map((p) => {
     const a = p.area || {};
-    const isLand = (p.type === "土地");
-    const areaCells = isLand
-      ? `<div><span class="k">整筆基地坪</span><span class="vv num">${a.land_total_ping ?? "—"} <small>坪</small></span></div>
-         <div><span class="k">土地持分坪</span><span class="vv num gold">${a.land_share_ping ?? a.share_ping ?? "—"} <small>坪</small></span></div>`
-      : `<div><span class="k">總建坪（整間）</span><span class="vv num gold">${a.total_ping ?? "—"} <small>坪</small></span></div>
-         <div><span class="k">持分坪</span><span class="vv num">${a.share_ping ?? "—"} <small>坪</small></span></div>`;
     return `<div class="cx-pcard">
       <div class="cx-pc-head"><span class="cx-tag">${esc(p.type || "")}</span><span class="cx-pc-id">${esc(p.address || p.id || "")}</span></div>
       <div class="cx-pc-grid">
@@ -298,12 +292,11 @@ function renderResult(d) {
         <div><span class="k">屋齡</span><span class="vv num">${p.age_years ? p.age_years + " 年" : "—"}</span></div>
         <div><span class="k">持分</span><span class="vv num">${esc(p.ownership_scope || "—")}</span></div>
         <div><span class="k">取得</span><span class="vv">${esc(p.acquire_reason || "—")} ${esc(p.acquire_date || "")}</span></div>
-        ${areaCells}
-        <div><span class="k">車位</span><span class="vv num">${a.parking_present ? (a.parking_ping ?? "概估") + " 坪" : "無車位"}</span></div>
-        <div><span class="k">車位編號/型態</span><span class="vv">${a.parking_present ? (esc(a.parking_id || "—") + " / " + esc(a.parking_type || "待確認")) : "—"}</span></div>
+        <div><span class="k">總建坪</span><span class="vv num gold">${a.total_ping ?? "—"} <small>坪</small></span></div>
+        <div><span class="k">車位坪</span><span class="vv num">${a.parking_present ? (a.parking_ping ?? "概估") : "無車位"}</span></div>
       </div>
       ${p.notes ? `<div class="cx-pc-note">${esc(p.notes)}</div>` : ""}
-      ${(p.restrictions && p.restrictions.length) ? p.restrictions.map(r => `<div class="cx-restrict">⚠ 限制登記：${esc(r.kind)}　${esc(r.date || "")}　${esc(r.creditor_or_claimant || "")}${r.case_number ? "　案號 " + esc(r.case_number) : ""}</div>`).join("") : ""}
+      ${(p.restrictions && p.restrictions.length) ? p.restrictions.map(r => `<div class="cx-restrict">⚠ 限制登記：${esc(r.kind)}　${esc(r.date || "")}　${esc(r.creditor_or_claimant || "")}</div>`).join("") : ""}
     </div>`;
   }).join("");
 
@@ -313,10 +306,8 @@ function renderResult(d) {
       <td>${esc(e.creditor || "")}<span class="cx-ctag">${esc(e.creditor_class || "")}</span></td>
       <td>${esc(e.right_kind || "")}</td><td>${esc(e.setting_date || "")}</td>
       <td class="num">${money(e.setting_amount)}</td>
-      <td class="num gold">${pe === "—" ? "—" : "$" + pe}<small>(${esc(e.ratio_used || "")})</small></td>
-    </tr>
-    <tr class="cx-detrow"><td colspan="5">確定期日：${esc(e.maturity_date || "—")}　清償日：${esc(e.clearance_date || "—")}　債務人：${esc(e.debtor || e.creditor_id || "—")}${e.is_overdue ? "　<span style='color:#e0584f'>⚠ 已逾清償日</span>" : ""}</td></tr>
-    ${e.is_common_collateral ? `<tr class="cx-subrow"><td colspan="5">共同擔保：${(e.common_collateral_targets || []).map(esc).join("、")}　設定金額不重複計算</td></tr>` : ""}`;
+      <td class="num gold">${pe === "—" ? "—" : "$" + pe} <small>(${esc(e.ratio_used || "")})</small></td>
+    </tr>${e.is_common_collateral ? `<tr class="cx-subrow"><td colspan="5">共同擔保：${(e.common_collateral_targets || []).map(esc).join("、")}　設定金額不重複計算</td></tr>` : ""}`;
   }).join("");
 
   const taxBlock = `<div class="cx-tax">
@@ -333,24 +324,19 @@ function renderResult(d) {
     <div class="cx-synth-cell"><span class="k">負債合計</span><span class="vv num gold">${money(s.total_debt_estimate)}</span></div>
     <div class="cx-synth-cell"><span class="k">LTV 已用成數</span><span class="vv num">${s.ltv ?? "—"}</span></div>
     <div class="cx-synth-cell"><span class="k">殘值</span><span class="vv num">${s.residual_value ? money(s.residual_value) : "—"}</span></div>
-  </div>
-  ${s.portfolio_view ? `<div class="cx-pc-note" style="margin-top:10px">整體鳥瞰：${esc(s.portfolio_view)}</div>` : ""}
-  ${(!val.total_value) ? `<div class="cx-tax-note">※ 未接估值來源，LTV／殘值待補好時價或實價登錄後自動計算。</div>` : ""}`;
+  </div>${(!val.total_value) ? `<div class="cx-tax-note">※ 未接估值來源，LTV／殘值待補好時價或實價登錄後自動計算。</div>` : ""}`;
 
   const histBlock = hist.available
-    ? `<div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div><div class="cx-pc-note">階段：${esc(hist.phase || "—")}${hist.money_lender_carousel ? "　🔴 偵測到金主走馬燈" : ""}</div><div class="cx-pc-note">${esc(hist.timeline_summary || "")}</div></div>`
-    : `<div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div><div class="cx-pc-note" style="color:#646a76">未提供異動索引。${(v.todos || []).some(t => t.includes("異動索引")) ? "建議申請以檢視歷史設定／塗銷紀錄。" : ""}</div></div>`;
-
-  const flagsBlock = flags.length ? `<div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">!</span>判讀提醒 Flags</div>
-    <ul class="cx-flags">${flags.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>` : "";
+    ? `<div class="cx-sec"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div><div class="cx-pc-note">階段：${esc(hist.phase || "—")}${hist.money_lender_carousel ? "　🔴 偵測到金主走馬燈" : ""}</div><div class="cx-pc-note">${esc(hist.timeline_summary || "")}</div></div>`
+    : `<div class="cx-sec"><div class="cx-sec-h"><span class="idx">F</span>異動索引</div><div class="cx-pc-note" style="color:#646a76">未提供異動索引。${(v.todos || []).some(t => t.includes("異動索引")) ? "建議申請以檢視歷史設定／塗銷紀錄。" : ""}</div></div>`;
 
   box.innerHTML = `
   <style>
     .cx-report{--gold:#c9a24b;--ink:#e8e6e0;--dim:#9aa0ab;--faint:#646a76;--line:#2a2e38;--panel:#15171c;--panel2:#1b1e25;font-family:'Noto Sans TC',sans-serif;color:var(--ink);margin-top:20px}
-    .cx-report .num{font-family:'IBM Plex Mono',monospace}.cx-report .gold{color:var(--gold)}.cx-report small{font-size:11px;color:var(--faint);margin-left:3px}
-    .cx-pbar{display:flex;justify-content:flex-end;margin-bottom:12px}
-    .cx-pbtn{background:var(--gold);color:#1a1a1a;border:none;border-radius:6px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
-    .cx-pbtn:hover{filter:brightness(1.08)}
+    .cx-report .num{font-family:'IBM Plex Mono',monospace}.cx-report .gold{color:var(--gold)}.cx-report small{font-size:11px;color:var(--faint)}
+    .cx-dlbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+    .cx-dlbtn{background:var(--gold);color:#1a1a1a;border:none;border-radius:6px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+    .cx-dlbtn:hover{filter:brightness(1.08)}
     .cx-verdict{border:1px solid ${L.c};background:${L.bg};border-radius:8px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden}
     .cx-verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:${L.c}}
     .cx-vlight{flex-shrink:0;width:50px;height:50px;border-radius:50%;background:${L.c};display:grid;place-items:center;font-size:22px;color:#fff;box-shadow:0 0 20px ${L.c}66}
@@ -375,7 +361,6 @@ function renderResult(d) {
     .cx-dtable td{background:var(--panel);padding:11px 12px;border-top:1px solid var(--line);color:var(--ink)}
     .cx-dtable td.num{text-align:right}
     .cx-ctag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5db98b;border:1px solid rgba(93,185,139,.4);padding:1px 5px;border-radius:3px;margin-left:7px}
-    .cx-detrow td{background:var(--panel)!important;color:var(--dim)!important;font-size:11px;border-top:none!important;padding-top:0!important;font-family:'IBM Plex Mono',monospace}
     .cx-subrow td{background:var(--panel2)!important;color:var(--faint)!important;font-size:11px;font-family:'IBM Plex Mono',monospace}
     .cx-tax,.cx-synth{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:15px 16px}
     .cx-tax-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -385,7 +370,6 @@ function renderResult(d) {
     .cx-assume{font-size:11px;color:var(--faint);margin-top:8px;line-height:1.6}
     .cx-synth{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     .cx-synth-cell{display:flex;flex-direction:column}.cx-synth-cell .sub{font-size:10px;color:var(--faint);margin-top:2px}
-    .cx-flags{margin:0;padding-left:18px;font-size:12.5px;color:var(--dim);line-height:1.8}
     .cx-reco{background:linear-gradient(180deg,var(--panel),var(--panel2));border-left:3px solid var(--gold);border-radius:6px;padding:18px 20px;margin-top:22px}
     .cx-reco .rl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
     .cx-reco .rmain{font-size:14.5px;color:#fff;line-height:1.7;margin-bottom:12px}
@@ -397,47 +381,26 @@ function renderResult(d) {
     .cx-todos li::before{content:"→";position:absolute;left:0;color:var(--gold)}
     .cx-foot{margin-top:18px;font-size:11px;color:var(--faint);font-family:'IBM Plex Mono',monospace;line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
     @media(max-width:640px){.cx-pc-grid{grid-template-columns:1fr 1fr}.cx-synth{grid-template-columns:1fr 1fr}.cx-tax-row{grid-template-columns:1fr}}
-
-    /* ====== 列印控制：分頁不切斷、隱藏非報告元素、白底黑字省墨可改 ====== */
-    @media print {
-      body * { visibility: hidden; }
-      #resultBox, #resultBox * { visibility: visible; }
-      #resultBox { position: absolute; left: 0; top: 0; width: 100%; }
-      .cx-pbar { display: none !important; }
-      .cx-verdict, .cx-pcard, .cx-dtable, .cx-tax, .cx-synth,
-      .cx-reco, .cx-sec, .cx-block, tr { break-inside: avoid; page-break-inside: avoid; }
-      .cx-report { margin-top: 0; }
-      @page { margin: 12mm; }
-    }
   </style>
   <div class="cx-report">
-    <div class="cx-pbar"><button class="cx-pbtn" onclick="printReport()">🖨 列印 / 存成 PDF</button></div>
-    <div class="cx-verdict cx-block">
-      <div class="cx-vlight">${L.icon}</div>
-      <div><div class="cx-vlabel">綜合研判　${L.label}</div><div class="cx-vmain">綜合燈號：${esc(v.light || "—")}</div><div class="cx-vdesc">${esc(v.recommendation || "")}</div></div>
-    </div>
-    <div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">A</span>標的識別</div>
-      <div class="cx-pcard" style="padding:12px 16px">
-        <div class="cx-pc-grid">
-          <div><span class="k">所有權人</span><span class="vv">${esc(owner.name || "—")}</span></div>
-          <div><span class="k">統一編號</span><span class="vv num">${esc(owner.id_number || "—")}</span></div>
-          <div><span class="k">出生地（字號）</span><span class="vv">${esc(owner.id_birthplace || "—")}</span></div>
-          <div><span class="k">性別</span><span class="vv">${esc(owner.id_sex || "—")}</span></div>
-        </div>
+    <div class="cx-dlbar"><button class="cx-dlbtn" onclick="downloadReportPDF()">⬇ 下載 PDF 報告</button></div>
+    <div id="cxReportInner" style="background:#0d1117;padding:4px">
+      <div class="cx-verdict">
+        <div class="cx-vlight">${L.icon}</div>
+        <div><div class="cx-vlabel">綜合研判　${L.label}</div><div class="cx-vmain">綜合燈號：${esc(v.light || "—")}</div><div class="cx-vdesc">${esc(v.recommendation || "")}</div></div>
       </div>
-      ${parcelCards}
+      <div class="cx-sec"><div class="cx-sec-h"><span class="idx">A</span>標的識別　<small style="font-weight:400">所有權人 ${esc(owner.name || "")}　${esc(owner.id_birthplace || "")}</small></div>${parcelCards}</div>
+      <div class="cx-sec"><div class="cx-sec-h"><span class="idx">B</span>債務結構</div>
+        <table class="cx-dtable"><thead><tr><th>權利人</th><th>種類</th><th>設定日</th><th style="text-align:right">設定金額</th><th style="text-align:right">反推本金</th></tr></thead>
+        <tbody>${debtRows || `<tr><td colspan="5" style="color:var(--faint)">無設定</td></tr>`}</tbody></table></div>
+      <div class="cx-sec"><div class="cx-sec-h"><span class="idx">A2</span>即時試算 · 土地增值稅</div>${taxBlock}</div>
+      <div class="cx-sec"><div class="cx-sec-h"><span class="idx">A3</span>估值 × 負債 合體</div>${synthBlock}</div>
+      ${histBlock}
+      <div class="cx-reco"><div class="rl">承作研判　Recommendation</div><div class="rmain">${esc(v.recommendation || "")}</div>
+        <div class="reasons">燈號原因：${(v.reasons || []).map(esc).join("、") || "—"}</div>
+        <div class="cx-todos"><div class="tl">待辦事項　TODO</div><ul>${(v.todos || []).map(t => `<li>${esc(t)}</li>`).join("") || "<li>—</li>"}</ul></div></div>
+      <div class="cx-foot">本報告由 AI 依電子謄本明文自動判讀，屬內部輔助參考，非正式估價或法律意見；推估值應經承辦覆核，並以地政／稅捐／債權人之最新記載為準。<br>鋮馨租賃有限公司　Cheng Xin Leasing Co., Ltd.</div>
     </div>
-    <div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">B</span>債務結構</div>
-      <table class="cx-dtable"><thead><tr><th>權利人</th><th>種類</th><th>設定日</th><th style="text-align:right">設定金額</th><th style="text-align:right">反推本金</th></tr></thead>
-      <tbody>${debtRows || `<tr><td colspan="5" style="color:var(--faint)">無設定</td></tr>`}</tbody></table></div>
-    <div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">A2</span>即時試算 · 土地增值稅</div>${taxBlock}</div>
-    <div class="cx-sec cx-block"><div class="cx-sec-h"><span class="idx">A3</span>估值 × 負債 合體</div>${synthBlock}</div>
-    ${histBlock}
-    ${flagsBlock}
-    <div class="cx-reco cx-block"><div class="rl">承作研判　Recommendation</div><div class="rmain">${esc(v.recommendation || "")}</div>
-      <div class="reasons">燈號原因：${(v.reasons || []).map(esc).join("、") || "—"}</div>
-      <div class="cx-todos"><div class="tl">待辦事項　TODO</div><ul>${(v.todos || []).map(t => `<li>${esc(t)}</li>`).join("") || "<li>—</li>"}</ul></div></div>
-    <div class="cx-foot">本報告由 AI 依電子謄本明文自動判讀，屬內部輔助參考，非正式估價或法律意見；推估值應經承辦覆核，並以地政／稅捐／債權人之最新記載為準。<br>鋮馨租賃有限公司　Cheng Xin Leasing Co., Ltd.</div>
     <details style="margin-top:14px;color:var(--faint)"><summary style="cursor:pointer;font-size:12px">完整 JSON（除錯用）</summary>
       <pre style="white-space:pre-wrap;font-size:11px;color:#646a76">${esc(JSON.stringify(d, null, 2))}</pre></details>
   </div>`;
