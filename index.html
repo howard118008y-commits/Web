@@ -13,11 +13,11 @@
 
 .hero{position:relative;overflow:hidden;background:#000;margin-top:48px}
 
-.hero img{width:100%;display:block;height:560px;object-fit:cover;object-position:center 60%;opacity:.65}
+.hero img{width:100%;display:block;height:80vh;object-fit:cover;object-position:center 68%;opacity:.65}
 
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.04) 0%,rgba(0,0,0,.55) 100%)}
 
-.hero-body{position:absolute;bottom:0;left:0;right:0;padding:2.75rem 3rem;text-align:center}
+.hero-body{position:absolute;top:0;bottom:0;left:0;right:0;padding:2.75rem 3rem;text-align:center;display:flex;align-items:center}
 
 .hero-eyebrow{font-size:12px;color:rgba(255,255,255,.65);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
 
@@ -154,11 +154,11 @@
 
 
 @media(max-width:768px){
-  .hero img{height:380px;object-position:center 50%}
-  .hero-body{padding:1.75rem 1.25rem}
+  .hero img{height:72vh;object-position:center 62%}
+  .hero-body{padding:1.25rem 1.25rem;align-items:flex-start}
   .hero-eyebrow{font-size:11px}
   .hero-h1{font-size:30px;letter-spacing:-.02em}
-  .hero-sub{font-size:14px;margin-bottom:1.25rem}
+  .hero-sub{font-size:14px;margin-bottom:.5rem}
   .btn-row{flex-direction:column;align-items:center;gap:8px}
   .btn-white,.btn-ghost{width:100%;max-width:260px;text-align:center;padding:13px 20px}
   .sec-header{padding:3rem 1.25rem 1.75rem}
@@ -189,7 +189,7 @@
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:.5rem}
   #geo-content{padding:48px 16px !important}
   #seo-content{padding:48px 16px !important}
-  #faq{padding:48px 16px !important}
+  #faq{padding:80px 16px !important}
 }
 
 
@@ -207,11 +207,11 @@
 
 .diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1040px;margin:0 auto;padding:0 16px}
 .diag-card{display:block;background:#f5f5f7;border-radius:18px;padding:26px 22px;text-decoration:none;border:1px solid transparent;transition:border-color .2s,box-shadow .2s,transform .2s}
-.diag-card:hover{border-color:#c8102e;box-shadow:0 6px 24px rgba(200,16,46,.10);transform:translateY(-2px)}
-.diag-q{font-size:11px;font-weight:700;color:#c8102e;letter-spacing:.06em;margin-bottom:10px}
+.diag-card:hover{border-color:#C61B1C;box-shadow:0 6px 24px rgba(198,27,28,.10);transform:translateY(-2px)}
+.diag-q{font-size:11px;font-weight:700;color:#6b6b6b;letter-spacing:.06em;margin-bottom:10px}
 .diag-t{font-size:19px;font-weight:700;color:#1d1d1f;line-height:1.45;letter-spacing:-.01em;margin-bottom:12px}
 .diag-s{font-size:13px;color:#6e6e73;line-height:1.6;margin-bottom:16px}
-.diag-go{font-size:13px;font-weight:600;color:#c8102e}
+.diag-go{font-size:13px;font-weight:600;color:#1a1a1a}
 
 .nbadge{display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,.5);border:.5px solid rgba(255,255,255,.18);border-radius:9px;padding:7px 13px;margin-bottom:1rem;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .nbadge b{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1}
@@ -225,13 +225,13 @@
 .proof-hook{font-size:15px;font-weight:700;color:#1d1d1f;line-height:1.5;margin-bottom:16px}
 .proof-stat{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .proof-from{font-size:14px;color:#86868b;text-decoration:line-through}
-.proof-arrow{color:#c8102e;font-weight:700}
-.proof-to{font-size:22px;font-weight:700;color:#16A34A;letter-spacing:-.01em}
+.proof-arrow{color:#C61B1C;font-weight:700}
+.proof-to{font-size:22px;font-weight:700;color:#1a1a1a;letter-spacing:-.01em}
 .proof-note{font-size:11px;color:#a1a1a6;line-height:1.5}
 
 .proc{max-width:1040px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .proc-step{background:#f5f5f7;border-radius:16px;padding:24px 20px}
-.proc-n{font-size:12px;font-weight:700;color:#c8102e;letter-spacing:.04em;margin-bottom:10px}
+.proc-n{font-size:12px;font-weight:700;color:#6b6b6b;letter-spacing:.04em;margin-bottom:10px}
 .proc-t{font-size:16px;font-weight:700;color:#1d1d1f;margin-bottom:6px}
 .proc-d{font-size:13px;color:#6e6e73;line-height:1.55}
 
@@ -247,22 +247,22 @@
 .wf-wrap{max-width:1120px;margin:0 auto;padding:0 16px}
 .wf-feature{display:grid;grid-template-columns:1.15fr .85fr;background:#f4f0ea;border:1px solid #eae5dc;border-radius:14px;overflow:hidden;margin-bottom:16px;text-decoration:none}
 .wf-feature-body{padding:46px 44px;display:flex;flex-direction:column;justify-content:center}
-.wf-eyebrow{font-size:11px;font-weight:700;color:#c8102e;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.wf-eyebrow{font-size:11px;font-weight:700;color:#6b6b6b;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
 .wf-feature h3{font-size:32px;font-weight:700;color:#1d1d1f;letter-spacing:-.02em;line-height:1.18;margin-bottom:12px}
 .wf-feature p{font-size:15px;color:#6e6e73;line-height:1.65;margin-bottom:22px;max-width:390px}
-.wf-feature-cta{align-self:flex-start;background:#c8102e;color:#fff;font-size:14px;font-weight:600;padding:12px 26px;border-radius:980px}
+.wf-feature-cta{align-self:flex-start;background:#C61B1C;color:#fff;font-size:14px;font-weight:600;padding:12px 26px;border-radius:980px}
 .wf-feature-aside{background:#ece4d8;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;gap:8px}
-.wf-feature-aside .big{font-size:42px;font-weight:700;color:#c8102e;letter-spacing:-.02em;line-height:1}
+.wf-feature-aside .big{font-size:42px;font-weight:700;color:#1a1a1a;letter-spacing:-.02em;line-height:1}
 .wf-feature-aside .cap{font-size:13px;color:#8a7a64;font-weight:600;letter-spacing:.02em}
 
 .wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .wf-card{display:flex;flex-direction:column;background:#fff;border:1px solid #e7e4df;border-radius:12px;padding:28px 24px;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s}
 .wf-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px);border-color:#dcd8d2}
 .wf-ico{width:44px;height:44px;margin-bottom:18px}
-.wf-stat{font-size:13px;font-weight:700;color:#c8102e;margin-bottom:7px;letter-spacing:-.01em}
+.wf-stat{font-size:13px;font-weight:700;color:#6b6b6b;margin-bottom:7px;letter-spacing:-.01em}
 .wf-card h4{font-size:18px;font-weight:700;color:#1d1d1f;line-height:1.32;margin-bottom:9px;letter-spacing:-.01em}
 .wf-card p{font-size:13px;color:#6e6e73;line-height:1.6;margin-bottom:18px;flex:1}
-.wf-go{font-size:14px;font-weight:600;color:#c8102e;margin-top:auto}
+.wf-go{font-size:14px;font-weight:600;color:#1a1a1a;margin-top:auto}
 .wf-go::after{content:" ›"}
 
 @media(max-width:900px){.wf-grid{grid-template-columns:1fr 1fr}}
@@ -273,6 +273,81 @@
   .wf-feature-aside{padding:26px;flex-direction:row;gap:14px}
   .wf-feature-aside .big{font-size:34px}
   .wf-grid{grid-template-columns:1fr;gap:12px}
+}
+/* hero 二胎增貸主線 */
+.hero-flex{display:flex;align-items:center;gap:2.5rem;max-width:1180px;margin:0 auto;width:100%}
+.hero-left{flex:1;min-width:0;text-align:left}
+.hero-right{width:310px;flex-shrink:0}
+.hero-flex .btn-row{justify-content:flex-start}
+/* 增貸空間快速試算 */
+.hcalc{background:rgba(10,10,10,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:.5px solid rgba(255,255,255,.16);border-radius:16px;padding:18px 16px}
+.hcalc-hd{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:13px}
+.hcalc-row{margin-bottom:10px}
+.hcalc-lbl{font-size:11px;color:rgba(255,255,255,.52);display:flex;justify-content:space-between;margin-bottom:4px}
+.hcalc-v{font-size:13px;font-weight:700;color:#fff}
+.hcalc-sl{width:100%;height:3px;border-radius:2px;outline:none;cursor:pointer;accent-color:#C61B1C;display:block;margin:4px 0 0}
+.hcalc-out{background:rgba(198,27,28,.12);border:.5px solid rgba(198,27,28,.30);border-radius:10px;padding:10px 12px;margin-top:8px}
+.hcalc-out-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
+.hcalc-out-lbl{font-size:10px;color:rgba(255,255,255,.46)}
+.hcalc-out-num{font-size:15px;font-weight:700;color:#ff8080;letter-spacing:-.01em}
+.hcalc-disc{font-size:9px;color:rgba(255,255,255,.28);margin-top:8px;line-height:1.5}
+.hero-calc-mob{display:none;background:#0d0d0d;padding:12px 16px 16px}
+@media(max-width:768px){
+  .hero-flex{flex-direction:column;gap:.75rem}
+  .hero-right{display:none}
+  .hero-flex .btn-row{align-items:flex-start}
+  .hero-calc-mob{display:block;background:transparent;padding:0;margin-bottom:.75rem}
+}
+
+/* index-only lead form (system palette: black + #C61B1C + beige) */
+.ilf-wrap{background:#f7f4f0;max-width:none;margin:0;padding:80px 24px}
+.ilf-inner{max-width:640px;margin:0 auto}
+.ilf-wrap .ilf-section-label{font-size:12px;color:#6b6b6b;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.ilf-wrap .ilf-section-title{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f;margin-bottom:40px;text-align:center}
+.ilf-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.ilf-privacy{display:flex;gap:12px;align-items:flex-start;background:#f9f7f5;border:1px solid rgba(198,27,28,.18);border-radius:14px;padding:16px 18px;margin-bottom:28px}
+.ilf-privacy .ilf-lock{font-size:20px;line-height:1.4;flex-shrink:0}
+.ilf-privacy p{font-size:13px;color:#1d1d1f;line-height:1.65;margin:0}
+.ilf-privacy a{color:#1d1d1f;font-weight:600}
+.ilf-field{margin-bottom:20px}
+.ilf-field label{display:block;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
+.ilf-field label .ilf-opt{font-weight:400;color:#86868b;font-size:12px}
+.ilf-field label .ilf-req{color:#C61B1C;margin-left:2px}
+.ilf-field input{width:100%;font-size:16px;color:#1d1d1f;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
+.ilf-field input:focus{outline:none;border-color:#C61B1C;background:#fff}
+.ilf-consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 24px}
+.ilf-consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#1d1d1f}
+.ilf-consent label{font-size:13px;color:#6e6e73;line-height:1.6}
+.ilf-consent a{color:#1d1d1f;font-weight:600}
+.ilf-submit{width:100%;background:#1d1d1f;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.ilf-submit:hover{opacity:.85}
+.ilf-submit:disabled{opacity:.5;cursor:not-allowed}
+.ilf-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
+.ilf-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
+.ilf-msg.ok{display:block;background:#f9f7f5;color:#1d1d1f;border:1px solid #d2d2d7}
+.ilf-msg.ok a,.ilf-msg.err a{color:#C61B1C;font-weight:600}
+.ilf-msg.err{display:block;background:#fdf0f1;color:#C61B1C;border:1px solid rgba(198,27,28,.3)}
+.ilf-hp{position:absolute!important;left:-9999px!important;opacity:0}
+@media(max-width:768px){
+  .ilf-wrap{padding:56px 16px}
+  .ilf-card{padding:28px 20px}
+  .ilf-wrap .ilf-section-title{font-size:26px}
+}
+/* index.html only: 首屏藍色異色中性化——房貸儀表板按鈕改為透明底細框，消除唯一藍色干擾 */
+.nav-radar-btn{background:transparent!important;color:#2a2a2a!important;border:1px solid #d9d6d1!important;box-shadow:none!important;}
+.nav-radar-btn:hover{filter:none!important;box-shadow:none!important;background:rgba(0,0,0,.04)!important;}
+/* === 區段節奏系統 === */
+.s-pad{padding:140px 24px}
+.s-wrap{max-width:1180px;margin:0 auto}
+.s-head{margin-bottom:2.5rem}
+.s-head .sec-title{text-align:left}
+.s-eyebrow{display:block;font-size:11px;font-weight:700;color:#C61B1C;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.ilf-wrap{padding:140px 24px!important}
+.ilf-wrap .ilf-section-label{color:#C61B1C!important;letter-spacing:.12em!important;text-align:left!important}
+.ilf-wrap .ilf-section-title{text-align:left!important}
+@media(max-width:768px){
+  .s-pad{padding:80px 16px}
+  .ilf-wrap{padding:80px 16px!important}
 }
 </style>
 
@@ -310,7 +385,7 @@
   },
   "geo": {"@type":"GeoCoordinates","latitude":24.9935,"longitude":121.4977},
   "telephone": "02-2249-0517",
-  "email": "cx468@gmail.com",
+  "email": "cx468468@gmail.com",
   "openingHoursSpecification": [
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}
   ],
@@ -460,17 +535,58 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
     <img src="img/hero.jpg" alt="烘爐地俯瞰新北市夜景" fetchpriority="high" loading="eager"/>
     <div class="hero-overlay"></div>
     <div class="hero-body">
-      <div class="hero-eyebrow">鋮馨租賃有限公司 · 新北市中和 · 20+ 年</div>
-      <h1 class="hero-h1">銀行說不的時候，<br>你的房子還能說話。</h1>
-      <p class="hero-sub">名下有房就能評估。售後回租・貸款整合・民間轉銀行。</p>
-      <div class="btn-row">
-        <a href="evaluate.html" class="btn-white">免費評估我的狀況</a>
-        <a href="#diagnosis" class="btn-ghost">我適合哪一種？</a>
+      <div class="hero-flex">
+        <div class="hero-left">
+          <div class="hero-eyebrow">鋮馨租賃有限公司 · 新北市中和 · 20+ 年</div>
+          <h1 class="hero-h1">名下有房，<br>增貸空間還有多少？</h1>
+          <p class="hero-sub">輸入房屋現值，30 秒估出可增貸空間與月付區間。</p>
+          <div class="hero-calc-mob">
+            <div class="hcalc">
+              <div class="hcalc-hd">增貸空間快速試算</div>
+              <div class="hcalc-row">
+                <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hm-hv-disp">800 萬</span></div>
+                <input type="range" class="hcalc-sl" id="hm-hv" min="100" max="5000" step="50" value="800">
+              </div>
+              <div class="hcalc-row">
+                <div class="hcalc-lbl"><span>現有房貸餘額</span><span class="hcalc-v" id="hm-rl-disp">200 萬</span></div>
+                <input type="range" class="hcalc-sl" id="hm-rl" min="0" max="4000" step="50" value="200">
+              </div>
+              <div class="hcalc-out">
+                <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hm-loan">—</span></div>
+                <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hm-mo">—</span></div>
+              </div>
+              <div class="hcalc-disc">估算基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <a href="https://lin.ee/PHIfSoY" class="btn-white">LINE 線上諮詢</a>
+            <a href="tel:0222490517" class="btn-ghost">電話諮詢</a>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:14px;letter-spacing:.02em;">依個案不動產條件、財務狀況與市場情況而定 · 本公司非金融機構</p>
+        </div>
+        <div class="hero-right">
+          <div class="hcalc">
+            <div class="hcalc-hd">增貸空間快速試算</div>
+            <div class="hcalc-row">
+              <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hd-hv-disp">800 萬</span></div>
+              <input type="range" class="hcalc-sl" id="hd-hv" min="100" max="5000" step="50" value="800">
+            </div>
+            <div class="hcalc-row">
+              <div class="hcalc-lbl"><span>現有房貸餘額</span><span class="hcalc-v" id="hd-rl-disp">200 萬</span></div>
+              <input type="range" class="hcalc-sl" id="hd-rl" min="0" max="4000" step="50" value="200">
+            </div>
+            <div class="hcalc-out">
+              <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hd-loan">—</span></div>
+              <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hd-mo">—</span></div>
+            </div>
+            <div class="hcalc-disc">估算基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+          </div>
+        </div>
       </div>
-      <p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:14px;letter-spacing:.02em;">初步評估完全免費 · 面談不收費 · 全台服務</p>
     </div>
   </div>
 </section>
+
 
 <!-- 數字信任條 -->
 <section class="numbar">
@@ -483,9 +599,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 </section>
 
 <!-- 自我診斷三問（對應三大族群） -->
-<section id="diagnosis">
-  <div class="sec-header">
-    <div class="sec-label">30 秒自我診斷</div>
+<section id="diagnosis" class="s-pad">
+  <div class="s-head s-wrap">
+    <div class="s-eyebrow">30 秒自我診斷</div>
     <h2 class="sec-title">你是不是，<br>正卡在這三件事裡？</h2>
   </div>
   <div class="diag-grid">
@@ -510,9 +626,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   </div>
 </section>
 
-<section id="services">
-  <div class="sec-header">
-    <div class="sec-label">鋮馨租賃有限公司 · 核心服務</div>
+<section id="services" class="s-pad">
+  <div class="s-head s-wrap">
+    <div class="s-eyebrow">鋮馨租賃有限公司 · 核心服務</div>
     <h2 class="sec-title">你的房子，<br>能為你做的事。</h2>
   </div>
   <div class="wf-wrap">
@@ -522,11 +638,11 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       <div class="wf-feature-body">
         <div class="wf-eyebrow">核心服務 · Buy-Leaseback</div>
         <h3>賣掉房子，<br>還是住在原本的家</h3>
-        <p>售後回租：把資產淨值還給你，同時保留居住與未來買回的權利。信用不完美也能先評估。</p>
+        <p>售後回租：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利。信用不完美也能先評估。</p>
         <span class="wf-feature-cta">了解售後回租 ›</span>
       </div>
       <div class="wf-feature-aside">
-        <svg width="86" height="86" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7" stroke="#c8102e" stroke-width="1.4"/><path d="M5 9.5V19h14V9.5" stroke="#c8102e" stroke-width="1.4"/><path d="M9.5 19v-4a2.5 2.5 0 0 1 5 0v4z" fill="#C8945A" stroke="none"/></svg>
+        <svg width="86" height="86" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7" stroke="#C61B1C" stroke-width="1.4"/><path d="M5 9.5V19h14V9.5" stroke="#C61B1C" stroke-width="1.4"/><path d="M9.5 19v-4a2.5 2.5 0 0 1 5 0v4z" fill="#C8945A" stroke="none"/></svg>
         <div class="big">市值 7–9 成</div>
         <div class="cap">可動用淨值</div>
       </div>
@@ -535,28 +651,28 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
     <!-- 4：乾淨小圖示卡（紅＋金） -->
     <div class="wf-grid">
       <a class="wf-card" href="services.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8" stroke="#c8102e" stroke-width="1.7"/><path d="M4 12h8" stroke="#c8102e" stroke-width="1.7"/><path d="M4 17h8" stroke="#c8102e" stroke-width="1.7"/><path d="M12 7c5 0 3 5 8 5" stroke="#c8102e" stroke-width="1.7"/><path d="M12 17c5 0 3-5 8-5" stroke="#c8102e" stroke-width="1.7"/><circle cx="20" cy="12" r="1.9" fill="#C8945A"/></svg>
+        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 12h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 17h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M12 7c5 0 3 5 8 5" stroke="#C61B1C" stroke-width="1.7"/><path d="M12 17c5 0 3-5 8-5" stroke="#C61B1C" stroke-width="1.7"/><circle cx="20" cy="12" r="1.9" fill="#C8945A"/></svg>
         <div class="wf-stat">月付 6萬 → 2.8萬</div>
         <h4>貸款整合</h4>
         <p>信貸、卡循、民間借款整合為一筆低利率房貸，月付有機會下降，依個案而定。</p>
         <span class="wf-go">查看整合方案</span>
       </a>
       <a class="wf-card" href="private-to-bank.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4.5H4z" fill="#C8945A" stroke="none"/><path d="M4 9.5h16" stroke="#c8102e" stroke-width="1.7"/><path d="M6 11v6M10 11v6M14 11v6M18 11v6" stroke="#c8102e" stroke-width="1.7"/><path d="M4 19h16" stroke="#c8102e" stroke-width="1.7"/></svg>
+        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4.5H4z" fill="#C8945A" stroke="none"/><path d="M4 9.5h16" stroke="#C61B1C" stroke-width="1.7"/><path d="M6 11v6M10 11v6M14 11v6M18 11v6" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 19h16" stroke="#C61B1C" stroke-width="1.7"/></svg>
         <div class="wf-stat">月息 1–2% → 年息 2–3%</div>
         <h4>民間轉銀行</h4>
         <p>把高利率民間借款分階段轉進銀行體系，讓本金有機會開始往下走。</p>
         <span class="wf-go">了解更多</span>
       </a>
       <a class="wf-card" href="contact.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5-6-10a6 6 0 1 1 12 0c0 5-6 10-6 10z" stroke="#c8102e" stroke-width="1.7"/><circle cx="12" cy="11" r="2.3" fill="#C8945A" stroke="none"/></svg>
+        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5-6-10a6 6 0 1 1 12 0c0 5-6 10-6 10z" stroke="#C61B1C" stroke-width="1.7"/><circle cx="12" cy="11" r="2.3" fill="#C8945A" stroke="none"/></svg>
         <div class="wf-stat">中和 · 中正路 468 號</div>
         <h4>實體辦公室 · 預約拜訪</h4>
         <p>看得到人、找得到門牌。免費評估，面談不收費。</p>
         <span class="wf-go">預約諮詢</span>
       </a>
       <a class="wf-card" href="contact.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z" stroke="#c8102e" stroke-width="1.7"/><path d="M8.8 12l2.2 2.2 4.2-4.2" stroke="#C8945A" stroke-width="2"/></svg>
+        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z" stroke="#C61B1C" stroke-width="1.7"/><path d="M8.8 12l2.2 2.2 4.2-4.2" stroke="#C8945A" stroke-width="2"/></svg>
         <div class="wf-stat">評估 → 簽約 → 買回</div>
         <h4>全流程陪同規劃</h4>
         <p>從評估、簽約、清償到買回，每個步驟都有專人確認。</p>
@@ -568,9 +684,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 </section>
 
 <!-- 數字成果（去識別化情境示意） -->
-<section style="padding:4.5rem 0 1rem;">
-  <div class="sec-header" style="padding:0 2rem 2rem;">
-    <div class="sec-label">處理前 → 處理後</div>
+<section class="s-pad">
+  <div class="s-head s-wrap">
+    <div class="s-eyebrow">處理前 → 處理後</div>
     <h2 class="sec-title">數字會說話。</h2>
   </div>
   <div class="proof-grid">
@@ -594,9 +710,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 </section>
 
 <!-- 流程四步 -->
-<section style="padding:4rem 0;background:#fff;">
-  <div class="sec-header" style="padding:0 2rem 2.25rem;">
-    <div class="sec-label">怎麼開始</div>
+<section class="s-pad" style="background:#fff;">
+  <div class="s-head s-wrap">
+    <div class="s-eyebrow">怎麼開始</div>
     <h2 class="sec-title">四步，把資產<br>變回現金流。</h2>
   </div>
   <div class="proc">
@@ -607,18 +723,81 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   </div>
 </section>
 
-<!-- 收束 CTA -->
-<a class="banner" href="https://cx468.com.tw/evaluate.html" style="margin-top:1rem;">
-  <img src="img/banner-city.jpg" alt="烘爐地全景俯瞰新北市"/>
-  <div class="banner-body">
-    <div class="banner-label">新北市中和 · 烘爐地俯瞰全景</div>
-    <div class="banner-title">這片城市裡，<br>每一棟房子都是你的資產。</div>
-    <span class="banner-btn">免費評估我的狀況</span>
+<!-- index-only lead form: 3-field, system palette -->
+<div class="ilf-wrap" id="form">
+ <div class="ilf-inner">
+  <div class="ilf-section-label">線上填寫</div>
+  <h2 class="ilf-section-title">留下資料，<br>專人主動與你聯繫。</h2>
+  <div class="ilf-card">
+   <div class="ilf-privacy">
+    <span class="ilf-lock">🔒</span>
+    <p><strong>你的隱私，我們認真對待。</strong>資料採加密傳輸，僅用於本次聯繫，不會外流或轉售。本表單<strong>不索取身分證字號</strong>等高敏感資料。詳見<a href="privacy-policy.html">隱私權政策</a>。</p>
+   </div>
+   <form id="ilfForm" novalidate>
+    <input type="hidden" name="access_key" value="b2959b73-847e-4a81-bd4f-e3a9de65713a">
+    <input type="hidden" name="subject" value="鋮馨官網｜LINE諮詢申請">
+    <input type="hidden" name="from_name" value="鋮馨官網">
+    <input type="checkbox" name="botcheck" class="ilf-hp" tabindex="-1" autocomplete="off">
+    <div class="ilf-field">
+     <label>怎麼稱呼您<span class="ilf-req">*</span></label>
+     <input type="text" name="Name" required placeholder="例：王先生 / 陳小姐">
+    </div>
+    <div class="ilf-field">
+     <label>聯絡電話<span class="ilf-req">*</span></label>
+     <input type="tel" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
+    </div>
+    <div class="ilf-field">
+     <label>LINE ID <span class="ilf-opt">（選填，方便用 LINE 聯繫）</span></label>
+     <input type="text" name="LINE_ID" placeholder="你的 LINE ID">
+    </div>
+    <div class="ilf-consent">
+     <input type="checkbox" id="ilfConsent" required>
+     <label for="ilfConsent">我已閱讀並同意<a href="privacy-policy.html">隱私權政策</a>，並同意鋮馨租賃使用上述資料與我聯繫。</label>
+    </div>
+    <button type="submit" class="ilf-submit" id="ilfBtn">LINE 線上諮詢</button>
+    <p class="ilf-foot">送出後專人將於 1–2 個工作日內與你聯繫｜不申請不收費</p>
+   </form>
+   <div class="ilf-msg" id="ilfMsg"></div>
   </div>
-</a>
-
-<!-- 免費評估表單（共用元件） -->
-<div data-include="lead-form"></div>
+ </div>
+</div>
+<script>
+(function(){
+  var form=document.getElementById('ilfForm');
+  if(!form)return;
+  var btn=document.getElementById('ilfBtn');
+  var msg=document.getElementById('ilfMsg');
+  var consent=document.getElementById('ilfConsent');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    msg.className='ilf-msg';msg.innerHTML='';
+    if(!form.checkValidity()||!consent.checked){
+      msg.className='ilf-msg err';
+      msg.innerHTML=consent.checked?'請填寫必填欄位（標示 * 者）。':'請先勾選同意隱私權政策。';
+      return;
+    }
+    var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(){});}catch(e){}
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+    })
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(j.success){
+        form.style.display='none';
+        msg.className='ilf-msg ok';
+        msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+        if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'ilf'});
+      }else{throw new Error(j.message||'送出失敗');}
+    })
+    .catch(function(){
+      btn.disabled=false;btn.textContent=orig;
+      msg.className='ilf-msg err';
+      msg.innerHTML='送出失敗，請稍後再試，或直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+    });
+  });
+})();
+</script>
 
 <section id="geo-content" style="background:#1d1d1f;padding:80px 24px;">
   <div style="max-width:720px;margin:0 auto;">
@@ -664,7 +843,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
 
 <!-- 房貸工具區 -->
-<section style="background:#fff;padding:80px 24px;">
+<section class="s-pad" style="background:#fff;">
   <style>
     .htools-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
     .htool-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f5f5f7;border-radius:12px;padding:13px 18px;text-decoration:none;transition:background .15s,transform .15s}
@@ -675,21 +854,21 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
     @media(max-width:820px){.htools-grid{grid-template-columns:1fr}.htool-feature{min-height:auto!important}}
   </style>
   <div style="max-width:1080px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:600;color:#6e6e73;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">免費工具</p>
+    <div class="s-eyebrow">免費工具</div>
     <h2 style="font-size:40px;font-weight:700;color:#1d1d1f;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1;">房產試算工具</h2>
     <p style="font-size:17px;color:#6e6e73;margin-bottom:40px;">常用計算工具，幫你快速評估財務決策，一站算清。</p>
     <div class="htools-grid">
 
-      <a class="htool-feature" href="mortgage-calculator.html" style="display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(140deg,#7C3AED 0%,#2563EB 100%);border-radius:22px;padding:36px 34px;text-decoration:none;min-height:360px;box-shadow:0 10px 34px rgba(124,58,237,.24);">
+      <a class="htool-feature" href="mortgage-calculator.html" style="display:flex;flex-direction:column;justify-content:space-between;background:#1d1d1f;border-radius:22px;padding:36px 34px;text-decoration:none;min-height:360px;box-shadow:0 10px 34px rgba(0,0,0,.28);">
         <div>
-          <div style="width:60px;height:60px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;">
+          <div style="width:60px;height:60px;background:rgba(198,27,28,.14);border:1px solid rgba(198,27,28,.36);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8"/><path d="M8 12h8M8 8h4M8 16h6" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
-          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">最常用 · 主打工具</div>
+          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">最常用 · 主打工具</div>
           <div style="font-size:32px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1;">房貸試算表</div>
-          <div style="font-size:15px;color:rgba(255,255,255,.88);line-height:1.75;max-width:360px;">輸入金額、利率、年限，立刻算出每月應繳、總利息與逐年攤還明細，還能做 <strong style="color:#fff;">民間 vs 銀行</strong> 月付對比，看整合前後差多少。</div>
+          <div style="font-size:15px;color:rgba(255,255,255,.72);line-height:1.75;max-width:360px;">輸入金額、利率、年限，立刻算出每月應繳、總利息與逐年攤還明細，還能做 <strong style="color:#fff;">民間 vs 銀行</strong> 月付對比，看整合前後差多少。</div>
         </div>
-        <span style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:28px;background:#fff;color:#7C3AED;font-weight:700;font-size:15px;padding:13px 30px;border-radius:980px;">立即試算 →</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:28px;background:#C61B1C;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:980px;">立即試算 →</span>
       </a>
 
       <div style="display:flex;flex-direction:column;gap:8px;">
@@ -707,9 +886,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   </div>
 </section>
 
-<section id="faq" style="background:#f5f5f7;padding:80px 24px;">
+<section id="faq" class="s-pad" style="background:#f5f5f7;">
   <div style="max-width:720px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:600;color:#6e6e73;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">常見問題</p>
+    <div class="s-eyebrow">常見問題</div>
     <h2 style="font-size:40px;font-weight:700;color:#1d1d1f;letter-spacing:-.025em;margin-bottom:48px;line-height:1.1;">你想知道的，<br>我們都回答。</h2>
     <div style="display:flex;flex-direction:column;gap:0;">
 
@@ -795,7 +974,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       </div>
       <div class="contact-item">
         <span class="contact-label">信箱</span>
-        <span class="contact-value">jaroma1314@gmail.com ／ cx468@gmail.com</span>
+        <span class="contact-value">jaroma1314@gmail.com ／ cx468468@gmail.com</span>
       </div>
       <div class="contact-item">
         <span class="contact-label">地址</span>
@@ -816,5 +995,56 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
 </a>
+<script>
+(function(){
+  function bindCalc(hvId,rlId,loId,moId,hvdId,rldId){
+    var hvEl=document.getElementById(hvId),rlEl=document.getElementById(rlId);
+    if(!hvEl||!rlEl)return;
+    function run(){
+      var hv=+hvEl.value||0,rl=+rlEl.value||0;
+      var minL=Math.max(0,Math.round(hv*.60-rl));
+      var maxL=Math.max(0,Math.round(hv*.75-rl));
+      document.getElementById(hvdId).textContent=hv.toLocaleString()+'萬';
+      document.getElementById(rldId).textContent=rl.toLocaleString()+'萬';
+      var loEl=document.getElementById(loId),moEl=document.getElementById(moId);
+      if(!loEl||!moEl)return;
+      if(maxL<=0){loEl.textContent='需個案評估';moEl.textContent='—';return;}
+      function f(n){return n>=10000?(n/10000).toFixed(1)+'萬':n.toLocaleString();}
+      var minMo=Math.round(minL*58/1000)*1000;
+      var maxMo=Math.round(maxL*63/1000)*1000;
+      if(minL<=0){
+        loEl.textContent='最多約'+maxL.toLocaleString()+'萬';
+        moEl.textContent='約'+f(maxMo)+'/月';
+      }else{
+        loEl.textContent=minL.toLocaleString()+'–'+maxL.toLocaleString()+'萬';
+        moEl.textContent='約'+f(minMo)+'–'+f(maxMo)+'/月';
+      }
+    }
+    hvEl.addEventListener('input',run);rlEl.addEventListener('input',run);run();
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    bindCalc('hd-hv','hd-rl','hd-loan','hd-mo','hd-hv-disp','hd-rl-disp');
+    bindCalc('hm-hv','hm-rl','hm-loan','hm-mo','hm-hv-disp','hm-rl-disp');
+  });
+})();
+</script>
+<script>
+/* index.html only: 此頁首屏為增貸區塊，依合規規則將 nav CTA 改為中性詞 */
+(function(){
+  function patchNavCta(){
+    var d=document.querySelector('a.nav-cta');
+    var m=document.querySelector('a.cx-mobile-cta');
+    if(d){d.textContent='LINE 諮詢';}
+    if(m){m.textContent='LINE 諮詢';}
+    return !!(d||m);
+  }
+  if(!patchNavCta()){
+    var ob=new MutationObserver(function(){
+      if(patchNavCta()){ob.disconnect();}
+    });
+    ob.observe(document.documentElement,{childList:true,subtree:true});
+  }
+})();
+</script>
 </body>
 </html>
