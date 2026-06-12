@@ -6,19 +6,22 @@
 <title>房貸試算 2026｜本息攤還 vs 寬限期月付一次算清｜鋮馨租賃</title>
 <meta name="description" content="免費房貸試算工具，輸入貸款金額、利率、年期，立刻算出每月房貸本息攤還金額、總利息、寬限期效果。新北中和鋮馨租賃，提供貸款整合與民間轉銀行諮詢，免費評估不申請不收費。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}
+.nav-back{font-size:14px;color:#C61B1C;text-decoration:none;font-weight:500}
 
 
 /* HERO — purple→blue gradient */
-.hero{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);padding:60px 24px 44px;text-align:center}
+.hero{background:#0e0e10;padding:60px 24px 44px;text-align:center}
 
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 
-.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
 
 .hero p{font-size:17px;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto}
 
@@ -45,14 +48,14 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .input-row input[type=number]{flex:1;height:48px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 14px;font-size:16px;color:#1d1d1f;transition:border-color .2s;outline:none;background:#fff}
 
-.input-row input[type=number]:focus{border-color:#7C3AED}
+.input-row input[type=number]:focus{border-color:#C61B1C}
 
 .unit{font-size:14px;color:#6e6e73;white-space:nowrap;min-width:28px}
 
 
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
 
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#2563EB);cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#141414;cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
 
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:#6e6e73;margin-top:4px}
 
@@ -62,7 +65,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 .tab{flex:1;padding:9px;text-align:center;font-size:14px;font-weight:500;color:#6e6e73;border-radius:9px;cursor:pointer;border:none;background:transparent;transition:all .2s}
 
-.tab.active{background:#fff;color:#7C3AED;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.tab.active{background:#fff;color:#C61B1C;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 
 
 /* RESULTS */
@@ -74,7 +77,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 .result-card{background:#f5f5f7;border-radius:14px;padding:20px 16px;text-align:center}
 
-.result-card.hl-purple{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff}
+.result-card.hl-purple{background:#141414;color:#fff}
 
 .result-card.hl-green{background:#16A34A;color:#fff}
 
@@ -104,7 +107,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 .bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
 
-.bar-blue{background:linear-gradient(90deg,#7C3AED,#2563EB)}
+.bar-blue{background:linear-gradient(90deg,#C61B1C,#1a1a1a)}
 
 .bar-red{background:#ff3b30}
 
@@ -132,14 +135,14 @@ tr:hover td{background:#fafafa}
 
 
 /* CTA */
-.cta-strip{background:linear-gradient(135deg,#1d1d1f 0%,#2d1b5e 100%);border-radius:20px;padding:40px 28px;text-align:center;margin-top:24px}
+.cta-strip{background:#0e0e10;border-radius:20px;padding:40px 28px;text-align:center;margin-top:24px}
 
 .cta-strip h3{font-size:24px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.02em}
 
 
 
 
-.btn-purple{background:#7C3AED;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-purple{background:#C61B1C;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 </style>
   <script src="include.js" defer></script>
 
@@ -228,8 +231,8 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 </div>
 
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f0f7ff;border:1px solid #d3e3f7;border-left:5px solid #2563EB;border-radius:14px;padding:22px 24px;margin:24px auto;">
-      <div style="font-size:13px;font-weight:700;color:#2563EB;letter-spacing:.04em;margin-bottom:9px;">⚡ 快速答案</div>
+    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #C61B1C;border-radius:0;padding:22px 24px;margin:24px auto;">
+      <div style="font-size:13px;font-weight:700;color:#C61B1C;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
       <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px;"><strong>房貸月付，看本金、利率、年限三個數字。</strong>輸入貸款金額、年利率與年限，這張表會算出每月應繳、總利息與逐年攤還明細。想比較銀行 vs 民間、或試算負債整合後的月付，調整利率欄即可一目了然。</p>
       <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
         <li><strong>三要素</strong>：本金、年利率、貸款年限決定月付。</li>
@@ -323,7 +326,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       <div class="compare-bar-wrap">
         <div class="compare-label-row">
           <span>銀行貸款月付</span>
-          <span id="bankMonthlyLabel" style="color:#2563EB;font-weight:600"></span>
+          <span id="bankMonthlyLabel" style="color:#1a1a1a;font-weight:600"></span>
         </div>
         <div class="bar-track"><div class="bar-fill bar-blue" id="bankBar" style="width:30%"></div></div>
       </div>

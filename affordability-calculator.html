@@ -6,17 +6,20 @@
 <title>房貸負擔能力試算｜DBR／DSR 安全線一次看｜鋮馨租賃</title>
 <meta name="description" content="我能貸多少？線上負擔能力試算依銀行 DBR、DSR 規範，輸入月收入與既有負債，立刻算出可承擔貸款金額與安全月付。新北中和鋮馨租賃，貸款整合與民間轉銀行專業諮詢。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#2563EB;text-decoration:none;font-weight:500}
+.nav-back{font-size:14px;color:#1a1a1a;text-decoration:none;font-weight:500}
 
-.hero{background:linear-gradient(135deg,#1e3a5f 0%,#2563EB 60%,#7C3AED 100%);padding:60px 24px 44px;text-align:center}
+.hero{background:#0e0e10;padding:60px 24px 44px;text-align:center}
 
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 
-.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
 
 .hero p{font-size:16px;color:rgba(255,255,255,.88);max-width:520px;margin:0 auto}
 
@@ -44,7 +47,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .irow input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
 
-.irow input:focus{border-color:#2563EB}
+.irow input:focus{border-color:#1a1a1a}
 
 .unit{font-size:13px;color:#6e6e73;white-space:nowrap}
 
@@ -54,15 +57,15 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .row2{grid-template-columns:1fr}
 }
 
-.income-strip{background:linear-gradient(135deg,#eff6ff,#f3f0ff);border:1.5px solid #2563EB;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.income-strip{background:linear-gradient(135deg,#eff6ff,#f3f0ff);border:1.5px solid #1a1a1a;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 .strip-item{text-align:center}
 
-.strip-big{font-size:32px;font-weight:700;color:#2563EB}
+.strip-big{font-size:32px;font-weight:700;color:#1a1a1a}
 
 .strip-label{font-size:11px;color:#6e6e73;margin-top:2px}
 
-.res-main{background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+.res-main{background:linear-gradient(135deg,#1a1a1a,#C61B1C);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
 
 .res-main-lbl{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:6px}
 
@@ -84,13 +87,13 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .rc-sub{font-size:10px;color:#aaa;margin-top:2px}
 
-.rc.blu{background:#2563EB}
+.rc.blu{background:#1a1a1a}
 
 .rc.blu .rc-lbl,.rc.blu .rc-sub{color:rgba(255,255,255,.7)}
 
 .rc.blu .rc-val{color:#fff}
 
-.rc.pur{background:#7C3AED}
+.rc.pur{background:#C61B1C}
 
 .rc.pur .rc-lbl,.rc.pur .rc-sub{color:rgba(255,255,255,.7)}
 
@@ -100,15 +103,15 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .dr{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:3px 0}
 
-.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#2563EB}
+.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#1a1a1a}
 
-.info-box{background:#eff6ff;border:1.5px solid #2563EB;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#1e3a5f;line-height:1.75}
+.info-box{background:#eff6ff;border:1.5px solid #1a1a1a;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#1e3a5f;line-height:1.75}
 
 .warn-box{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#92400e;line-height:1.75}
 
 .slider-wrap{margin-top:8px}
 
-.slider-wrap input[type=range]{width:100%;accent-color:#2563EB;cursor:pointer}
+.slider-wrap input[type=range]{width:100%;accent-color:#1a1a1a;cursor:pointer}
 
 .slider-labels{display:flex;justify-content:space-between;font-size:11px;color:#aaa;margin-top:4px}
 
@@ -123,9 +126,9 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 
 
-.btn-blue{background:#2563EB;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-blue{background:#1a1a1a;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 
-.btn-purple{background:#7C3AED;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-purple{background:#C61B1C;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 </style>
   <script src="include.js" defer></script>
 
@@ -213,8 +216,8 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
 <div class="wrap">
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f0f7ff;border:1px solid #d3e3f7;border-left:5px solid #2563EB;border-radius:14px;padding:22px 24px;margin:24px auto;">
-      <div style="font-size:13px;font-weight:700;color:#2563EB;letter-spacing:.04em;margin-bottom:9px;">⚡ 快速答案</div>
+    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #C61B1C;border-radius:0;padding:22px 24px;margin:24px auto;">
+      <div style="font-size:13px;font-weight:700;color:#C61B1C;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
       <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px;"><strong>能借多少，看你的收入扛得起多少月付。</strong>銀行用 DBR／DSR 看你的負債佔收入比例。輸入月收入與既有月付，這張工具會估算你還有多少貸款空間、月付到哪會超過銀行常見門檻（DBR 不宜超過月收入 22 倍、DSR 多在 55% 上下）。</p>
       <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
         <li><strong>看什麼</strong>：負債佔收入比（DBR／DSR）。</li>
@@ -266,7 +269,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
     <div class="field">
       <label>貸款成數（自動計算）</label>
       <div class="irow" style="height:46px;background:#f5f5f7;border-radius:10px;padding:0 12px;align-items:center">
-        <span style="font-size:15px;font-weight:600;color:#2563EB" id="ltvDisplay">8 成</span>
+        <span style="font-size:15px;font-weight:600;color:#1a1a1a" id="ltvDisplay">8 成</span>
       </div>
     </div>
   </div>

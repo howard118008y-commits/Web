@@ -14,16 +14,19 @@
 <meta property="og:url" content="https://cx468.com.tw/second-mortgage-calculator.html">
 <meta name="description" content="銀行二胎拒絕？不知道房子還能借多少？輸入房屋市價、一胎本金，立即算出民間二胎可貸金額與月付金額。鋮馨租賃專業承辦，LINE 線上諮詢。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}
+.nav-back{font-size:14px;color:#C61B1C;text-decoration:none;font-weight:500}
 
 /* HERO — purple→blue→green gradient */
-.hero{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);padding:60px 24px 44px;text-align:center}
+.hero{background:#0e0e10;padding:60px 24px 44px;text-align:center}
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
 .hero p{font-size:17px;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto}
 @media(max-width:768px){
   .hero h1{font-size:32px}
@@ -39,11 +42,11 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .field-note{font-size:12px;color:#6e6e73;margin-bottom:8px}
 .input-row{display:flex;align-items:center;gap:10px}
 .input-row input[type=number]{flex:1;height:48px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 14px;font-size:16px;color:#1d1d1f;transition:border-color .2s;outline:none;background:#fff}
-.input-row input[type=number]:focus{border-color:#7C3AED}
+.input-row input[type=number]:focus{border-color:#C61B1C}
 .unit{font-size:14px;color:#6e6e73;white-space:nowrap;min-width:28px}
 
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#2563EB);cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#141414;cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:#6e6e73;margin-top:4px}
 
 /* RESULTS */
@@ -52,7 +55,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   .result-grid{grid-template-columns:1fr}
 }
 .result-card{background:#f5f5f7;border-radius:14px;padding:20px 16px;text-align:center}
-.result-card.hl-purple{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff}
+.result-card.hl-purple{background:#141414;color:#fff}
 .result-card.hl-green{background:#16A34A;color:#fff}
 .result-label{font-size:12px;font-weight:500;letter-spacing:.05em;opacity:.85;margin-bottom:6px}
 .result-value{font-size:24px;font-weight:700;letter-spacing:-.02em}
@@ -84,8 +87,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 </div>
 
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f0f7ff;border:1px solid #d3e3f7;border-left:5px solid #2563EB;border-radius:14px;padding:22px 24px;margin:24px auto;">
-      <div style="font-size:13px;font-weight:700;color:#2563EB;letter-spacing:.04em;margin-bottom:9px;">⚡ 快速答案</div>
+    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #C61B1C;border-radius:0;padding:22px 24px;margin:24px auto;">
+      <div style="font-size:13px;font-weight:700;color:#C61B1C;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
       <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px;"><strong>二胎能借多少，看房子的剩餘淨值。</strong>二胎額度概算＝房屋現值 × 可貸成數 − 第一順位房貸餘額。輸入房屋現值、第一胎餘額與成數，就能估算二胎可動用金額。利率通常高於第一胎、低於信貸，實際依個案與金融機構核定。</p>
       <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
         <li><strong>額度</strong>：看房屋淨值（現值 − 第一胎餘額）。</li>

@@ -6,17 +6,20 @@
 <title>租金報酬率試算 2026｜總投報 vs 淨投報一次比｜鋮馨租賃</title>
 <meta name="description" content="免費租金投資報酬率計算機，輸入購屋總價、月租金、管理費、稅金，立刻算出毛投報率與淨投報率。新北中和鋮馨租賃，包租代管專業諮詢，協助屋主精算每年實領金額。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
 .nav-back{font-size:14px;color:#16A34A;text-decoration:none;font-weight:500}
 
-.hero{background:linear-gradient(135deg,#16A34A 0%,#2563EB 60%,#0ea5e9 100%);padding:60px 24px 44px;text-align:center}
+.hero{background:#0e0e10;padding:60px 24px 44px;text-align:center}
 
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 
-.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
 
 .hero p{font-size:16px;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto}
 
@@ -54,7 +57,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .row2{grid-template-columns:1fr}
 }
 
-.res-main{background:linear-gradient(135deg,#16A34A,#2563EB);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+.res-main{background:#141414;border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
 
 .res-main-lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
 
@@ -82,7 +85,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .rc.grn .rc-val{color:#fff}
 
-.rc.blu{background:#2563EB}
+.rc.blu{background:#1a1a1a}
 
 .rc.blu .rc-lbl,.rc.blu .rc-sub{color:rgba(255,255,255,.65)}
 
@@ -108,7 +111,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .gauge-track{height:12px;background:#e8e8ed;border-radius:6px;overflow:hidden}
 
-.gauge-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#16A34A,#2563EB);transition:width .5s ease}
+.gauge-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#16A34A,#1a1a1a);transition:width .5s ease}
 
 .disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
 
@@ -118,7 +121,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 
 
-.btn-blue{background:#2563EB;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-blue{background:#1a1a1a;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 </style>
   <script src="include.js" defer></script>
 
@@ -206,8 +209,8 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
 <div class="wrap">
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f0f7ff;border:1px solid #d3e3f7;border-left:5px solid #2563EB;border-radius:14px;padding:22px 24px;margin:24px auto;">
-      <div style="font-size:13px;font-weight:700;color:#2563EB;letter-spacing:.04em;margin-bottom:9px;">⚡ 快速答案</div>
+    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #C61B1C;border-radius:0;padding:22px 24px;margin:24px auto;">
+      <div style="font-size:13px;font-weight:700;color:#C61B1C;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
       <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px;"><strong>租金報酬率＝年租金 ÷ 房屋總價。</strong>輸入購屋總價與月租金，就能算出年化報酬率，評估這間房當包租公划不划算。較精確的看法會再扣掉持有成本（稅、管理費、空租期）看淨報酬。</p>
       <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
         <li><strong>公式</strong>：年租金 ÷ 房屋總價 = 毛報酬率。</li>
