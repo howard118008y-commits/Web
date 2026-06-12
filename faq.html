@@ -24,7 +24,7 @@
       "name": "什麼是售後回租？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "售後回租（Sale and Leaseback）是指屋主將房屋出售後，同時與買方簽訂租約，繼續以租客身分居住在原本的家。屋主可立即取得大筆現金，生活不受影響，適合急需資金但不想搬家的屋主。"
+        "text": "售後回租（Sale and Leaseback）是屋主將房屋出售並過戶給投資方，同時簽訂租約繼續居住，並保有日後依約買回的權利，可快速取得大筆資金。是否適合依個案不動產條件與財務狀況評估。"
       }
     },
     {
@@ -197,39 +197,44 @@
 
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-.faq-hero{background:#1d1d1f;margin-top:48px;padding:72px 2rem 60px;text-align:center}
+/* === 精品編輯系統（與首頁 v2 同語彙） === */
+.nav-radar-btn{background:transparent!important;color:#2a2a2a!important;border:1px solid #d9d6d1!important;box-shadow:none!important}
+.faq-hero{background:#0e0e10;margin-top:48px;padding:110px 2rem 90px;text-align:center}
 
-.faq-hero-label{font-size:12px;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.faq-hero-label{font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.26em;text-transform:uppercase;margin-bottom:1rem}
 
-.faq-hero h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:.75rem}
+.faq-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:46px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.3;margin-bottom:.9rem}
 
-.faq-hero-sub{font-size:18px;color:rgba(255,255,255,.65);margin-bottom:2rem}
+.faq-hero-sub{font-size:14.5px;color:rgba(255,255,255,.65);letter-spacing:.04em;margin-bottom:2.2rem}
 
-.faq-search{display:flex;gap:0;max-width:480px;margin:0 auto;background:#fff;border-radius:980px;overflow:hidden;padding:4px 4px 4px 20px}
+.faq-search{display:flex;gap:0;max-width:480px;margin:0 auto;background:#fff;border-radius:0;overflow:hidden;padding:4px 4px 4px 20px}
 
 .faq-search input{flex:1;border:none;outline:none;font-size:14px;background:transparent}
 
-.faq-search button{background:#c8102e;color:#fff;border:none;padding:8px 20px;border-radius:980px;font-size:13px;font-weight:600;cursor:pointer}
+.faq-search button{background:#141414;color:#fff;border:none;padding:8px 22px;border-radius:0;font-size:12px;font-weight:600;letter-spacing:.1em;cursor:pointer}
 
 
 .faq-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem 5rem}
 
 
-.cat-label{font-size:11px;font-weight:700;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #f0f0f0}
+.cat-label{font-size:10px;font-weight:600;color:#a1a1a6;letter-spacing:.26em;text-transform:uppercase;margin:3rem 0 1rem;padding-bottom:.6rem;border-bottom:1px solid #e3e3e6}
 
 
-.faq-item{border-bottom:.5px solid #e5e5e7;padding:0}
+.faq-item{border-bottom:1px solid #e3e3e6;padding:0}
 
 .faq-q{width:100%;background:none;border:none;text-align:left;padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:1rem}
 
-.faq-q-text{font-size:17px;font-weight:600;letter-spacing:-.01em;color:#1d1d1f;line-height:1.4}
+.faq-q-text{font-family:"Noto Serif TC","Songti TC",serif;font-size:16.5px;font-weight:600;letter-spacing:.01em;color:#141414;line-height:1.5}
 
-.faq-icon{width:28px;height:28px;border-radius:50%;background:#f5f5f7;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s,background .3s}
+.faq-icon{width:28px;height:28px;border-radius:0;background:#f6f5f3;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s,background .3s}
 
 .faq-icon svg{transition:transform .3s}
 
-.faq-item.open .faq-icon{background:#1d1d1f}
+.faq-item.open .faq-icon{background:#141414}
 
 .faq-item.open .faq-icon svg{transform:rotate(45deg)}
 
@@ -239,20 +244,20 @@
 
 .faq-a-inner{padding:0 0 1.25rem;font-size:15px;line-height:1.8;color:#3d3d3f}
 
-.faq-a-inner a{color:#0071e3;text-decoration:underline}
+.faq-a-inner a{color:#141414;font-weight:600;text-decoration:underline}
 
 .faq-item.open .faq-a{max-height:400px}
 
 
-.faq-cta{background:#f5f5f7;border-radius:24px;padding:3rem;text-align:center;margin-top:3rem}
+.faq-cta{background:#f6f5f3;border:1px solid #e3e3e6;border-radius:0;padding:3.5rem 3rem;text-align:center;margin-top:3.5rem}
 
-.faq-cta h2{font-size:32px;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}
+.faq-cta h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:28px;font-weight:600;letter-spacing:.01em;margin-bottom:.9rem}
 
 .faq-cta p{font-size:16px;color:#6e6e73;margin-bottom:1.75rem}
 
-.faq-cta a{display:inline-block;background:#1d1d1f;color:#fff;padding:12px 32px;border-radius:980px;font-size:15px;font-weight:600;margin:0 6px}
+.faq-cta a{display:inline-block;background:#141414;color:#fff;padding:13px 32px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:.12em;margin:0 6px}
 
-.faq-cta a.secondary{background:transparent;color:#1d1d1f;border:1.5px solid #d2d2d7}
+.faq-cta a.secondary{background:transparent;color:#141414;border:1px solid #c9c9ce}
 
 
 
@@ -324,7 +329,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       <span class="faq-q-text">什麼是售後回租？</span>
       <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round"/></svg></span>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">售後回租（Sale and Leaseback）是指屋主將房屋出售後，同時與買方簽訂租約，繼續以租客身分居住在原本的家。屋主可立即取得大筆現金，生活完全不受影響，是信用有瑕疵或急需資金屋主的重要選擇。<br><br>詳細說明請見：<a href="article-sale-leaseback-guide.html">售後回租完整指南</a></div></div>
+    <div class="faq-a"><div class="faq-a-inner">售後回租（Sale and Leaseback）是屋主將房屋出售並過戶給投資方，同時簽訂租約繼續居住，並保有日後依約買回的權利，可快速取得大筆資金。信用有瑕疵或急需資金的屋主可先評估，是否適合依個案而定。<br><br>詳細說明請見：<a href="article-sale-leaseback-guide.html">售後回租完整指南</a></div></div>
   </div>
 
   <div class="faq-item">
