@@ -4,26 +4,93 @@
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="M9TV172QZHbueNhoE9McEgEAGYZy11HJrxRCtJ63XUw">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="preload" as="image" href="img/hero.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-d.jpg" imagesrcset="img/hero-m.jpg 1000w, img/hero-d.jpg 2200w" fetchpriority="high">
 <title>鋮馨租賃有限公司｜貸款整合．售後回租｜包租代管</title>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta name="description" content="新北市租屋、包租代管專業服務｜鋮馨租賃有限公司，提供不動產售後回租、貸款整合規劃、房屋出租管理。協助屋主安心出租、整合多筆貸款、降低月付壓力。新北市中和，全台服務，免費評估。">
-<link rel="stylesheet" href="style.css">
 <style>
+/* === inlined style.css（首頁解耦複本：本頁不載入共用 style.css，改動不波及他頁） === */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:#c8102e;font-weight:700}
+.nav-links{display:flex;gap:1.75rem}
+.nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
+.nav-links a:hover{opacity:1}
+.nav-links a.active{opacity:1;font-weight:600;color:#c8102e}
+.nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
+.btn-line{display:inline-block;background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
+.btn-green{background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
+.btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
+.btn-white{background:#fff;color:#1d1d1f;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
+.btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
+.btn-row,.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-strip{background:#1d1d1f;padding:80px 24px;text-align:center}
+.cta-strip h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-bottom:16px}
+.cta-strip p{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.page-hero{margin-top:48px;background:#000;padding:80px 2rem 72px;text-align:center;position:relative;overflow:hidden}
+.page-hero>*{position:relative;z-index:1}
+.page-eyebrow{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.page-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:16px}
+.page-sub{font-size:18px;color:rgba(255,255,255,.7);max-width:540px;margin:0 auto 32px;line-height:1.6}
+footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
+.footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:2rem;max-width:1280px;margin-left:auto;margin-right:auto}
+.footer-col-title{font-size:10px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.1rem}
+.footer-link{display:block;font-size:12px;color:#9b9ba0;margin-bottom:.55rem;letter-spacing:.04em}
+.footer-link:hover{color:#f5f5f7}
+.contact-label{font-size:10px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.18em;display:block;margin-bottom:4px}
+.contact-value{font-size:12px;color:#9b9ba0;line-height:1.7;letter-spacing:.03em}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;border-top:1px solid rgba(255,255,255,.12);padding-top:1.5rem;margin-top:2rem;max-width:1280px;margin-left:auto;margin-right:auto}
+.copyright{font-size:11px;color:#86868b;letter-spacing:.04em}
+.footer-links-row{display:flex;gap:1.5rem}
+.footer-link-sm{font-size:11px;color:#86868b}
+.footer-link-sm:hover{color:#f5f5f7}
+.mobile-line-fab{display:none}
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .page-h1{font-size:30px}
+  .page-sub{font-size:15px}
+  .cta-strip h2{font-size:28px}
+  .footer-cols{grid-template-columns:1fr}
+  footer{padding:1.75rem 1.25rem 5rem}
+  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
+}
+/* === end inlined style.css === */
 
-.hero{position:relative;overflow:hidden;background:#000;margin-top:48px}
-
-.hero img{width:100%;display:block;height:80vh;object-fit:cover;object-position:center 68%;opacity:.65}
-
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.04) 0%,rgba(0,0,0,.55) 100%)}
-
-.hero-body{position:absolute;top:0;bottom:0;left:0;right:0;padding:2.75rem 3rem;text-align:center;display:flex;align-items:center}
-
-.hero-eyebrow{font-size:12px;color:rgba(255,255,255,.65);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
-
-.hero-h1{font-size:54px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:.75rem}
-
-.hero-sub{font-size:18px;color:rgba(255,255,255,.82);letter-spacing:-.01em;margin-bottom:1.75rem}
+/* === 精品 hero：全幅攝影、襯線巨型字、低語氣 === */
+.serif{font-family:"Noto Serif TC","Songti TC",serif}
+.hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:#0a0a0c}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(.9) contrast(1.05) brightness(.95)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.66) 0%,rgba(8,8,12,.22) 34%,rgba(8,8,12,.06) 56%,rgba(8,8,12,.46) 100%)}
+.hero-body{position:absolute;inset:0;display:flex;align-items:flex-end;padding:0 64px 84px}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:500;color:rgba(255,255,255,.74);letter-spacing:.26em;text-transform:uppercase;margin-bottom:1.6rem}
+.hero-eyebrow::before{content:"";width:36px;height:1px;background:rgba(255,255,255,.55)}
+.hero-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:70px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.16;margin-bottom:1.2rem;text-shadow:0 2px 28px rgba(0,0,0,.25)}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.82);letter-spacing:.06em;margin-bottom:2.4rem}
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-left{animation:heroIn 1.1s cubic-bezier(.22,.61,.36,1) .15s both}
+.hero-right{animation:heroIn 1.1s cubic-bezier(.22,.61,.36,1) .45s both}
+@media(prefers-reduced-motion:reduce){.hero-left,.hero-right{animation:none}}
+/* hero 內按鈕：精品矩形、細框 */
+.hero .btn-white{background:#fff;color:#111;border-radius:2px;padding:13px 30px;font-size:13px;font-weight:600;letter-spacing:.14em}
+.hero .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:2px;padding:13px 30px;font-size:13px;font-weight:500;letter-spacing:.14em}
+.hero .btn-white:hover{background:rgba(255,255,255,.88)}
+.hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+/* nav 透明疊在 hero 上（僅此頁 scoped，不動共用 nav 檔） */
+nav{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+body.at-top nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
+body.at-top nav .nav-logo span,body.at-top nav .nav-links a{color:#fff}
+body.at-top nav .nav-links a.active{color:#fff;opacity:1}
+body.at-top nav .nav-cta{background:rgba(255,255,255,.14);border:.5px solid rgba(255,255,255,.45);color:#fff}
+body.at-top nav .nav-radar-btn{color:#fff!important;border-color:rgba(255,255,255,.45)!important;background:transparent!important}
+body.at-top nav .cx-burger span{background:#fff}
 
 
 
@@ -32,7 +99,7 @@
 
 .sec-label{font-size:12px;color:#86868b;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.75rem}
 
-.sec-title{font-size:44px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f}
+.sec-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:46px;font-weight:600;letter-spacing:.01em;line-height:1.25;color:#141414}
 
 .card-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px 8px}
 
@@ -133,11 +200,11 @@
 .t-btn-white{background:rgba(255,255,255,.18);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;border:.5px solid rgba(255,255,255,.4);backdrop-filter:blur(8px)}
 
 
-.disclaimer-title{font-size:11px;font-weight:500;color:#86868b;margin-bottom:.5rem}
+.disclaimer-title{font-size:10px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.8rem;max-width:1280px;margin-left:auto;margin-right:auto}
 
-.disclaimer{font-size:11px;color:#86868b;line-height:1.75;margin-bottom:1.75rem}
+.disclaimer{font-size:11px;color:#86868b;line-height:1.85;margin-bottom:2rem;letter-spacing:.03em;max-width:1280px;margin-left:auto;margin-right:auto}
 
-.footer-divider{border:none;border-top:.5px solid #424245;margin:0 0 1.75rem}
+.footer-divider{border:none;border-top:1px solid rgba(255,255,255,.12);margin:0 auto 2rem;max-width:1280px}
 
 
 
@@ -154,13 +221,14 @@
 
 
 @media(max-width:768px){
-  .hero img{height:72vh;object-position:center 62%}
-  .hero-body{padding:1.25rem 1.25rem;align-items:flex-start}
-  .hero-eyebrow{font-size:11px}
-  .hero-h1{font-size:30px;letter-spacing:-.02em}
-  .hero-sub{font-size:14px;margin-bottom:.5rem}
-  .btn-row{flex-direction:column;align-items:center;gap:8px}
-  .btn-white,.btn-ghost{width:100%;max-width:260px;text-align:center;padding:13px 20px}
+  .hero{height:auto;min-height:100svh}
+  .hero img{object-position:center 42%}
+  .hero-body{position:relative;inset:auto;padding:108px 22px 40px;align-items:flex-end;min-height:100svh}
+  .hero-eyebrow{font-size:10px;letter-spacing:.2em;margin-bottom:1rem}
+  .hero-h1{font-size:34px;line-height:1.22;margin-bottom:.75rem}
+  .hero-sub{font-size:13.5px;margin-bottom:1.1rem}
+  .btn-row{flex-direction:column;align-items:stretch;gap:9px}
+  .hero .btn-white,.hero .btn-ghost{width:100%;max-width:none;text-align:center;padding:14px 20px}
   .sec-header{padding:3rem 1.25rem 1.75rem}
   .sec-title{font-size:26px}
   .card-row{grid-template-columns:1fr;padding:0 8px 8px}
@@ -197,21 +265,22 @@
 .card-sm{display:block;cursor:pointer}
 .banner{display:block;cursor:pointer}
 
-/* === redesign 元件（草稿） === */
-.numbar{background:#fff;border-bottom:.5px solid #d2d2d7}
-.numbar-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.numbar-it{padding:22px 14px;text-align:center;border-right:.5px solid #ededf0}
+/* === 編輯系統：襯線＋髮絲線（全頁統一） === */
+.numbar{background:#fff;border-bottom:1px solid #e3e3e6}
+.numbar-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.numbar-it{padding:34px 14px;text-align:center;border-right:1px solid #e3e3e6}
 .numbar-it:last-child{border-right:none}
-.numbar-n{font-size:27px;font-weight:700;color:#1d1d1f;letter-spacing:-.02em}
-.numbar-l{font-size:12px;color:#6e6e73;margin-top:3px;line-height:1.4}
+.numbar-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:30px;font-weight:600;color:#141414;letter-spacing:.02em}
+.numbar-l{font-size:11px;color:#86868b;margin-top:7px;line-height:1.4;letter-spacing:.14em}
 
-.diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1040px;margin:0 auto;padding:0 16px}
-.diag-card{display:block;background:#f5f5f7;border-radius:18px;padding:26px 22px;text-decoration:none;border:1px solid transparent;transition:border-color .2s,box-shadow .2s,transform .2s}
-.diag-card:hover{border-color:#C61B1C;box-shadow:0 6px 24px rgba(198,27,28,.10);transform:translateY(-2px)}
-.diag-q{font-size:11px;font-weight:700;color:#6b6b6b;letter-spacing:.06em;margin-bottom:10px}
-.diag-t{font-size:19px;font-weight:700;color:#1d1d1f;line-height:1.45;letter-spacing:-.01em;margin-bottom:12px}
-.diag-s{font-size:13px;color:#6e6e73;line-height:1.6;margin-bottom:16px}
-.diag-go{font-size:13px;font-weight:600;color:#1a1a1a}
+.diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1280px;margin:0 auto;padding:0 64px;border-top:1px solid #e3e3e6}
+.diag-card{display:block;background:transparent;border-radius:0;padding:42px 36px 46px;text-decoration:none;border-right:1px solid #e3e3e6;transition:background .3s}
+.diag-card:last-child{border-right:none}
+.diag-card:hover{background:#fafafa}
+.diag-q{font-size:10px;font-weight:600;color:#C61B1C;letter-spacing:.24em;text-transform:uppercase;margin-bottom:16px}
+.diag-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:21px;font-weight:600;color:#141414;line-height:1.5;letter-spacing:.01em;margin-bottom:12px}
+.diag-s{font-size:13px;color:#6e6e73;line-height:1.75;letter-spacing:.02em;margin-bottom:18px}
+.diag-go{font-size:11.5px;font-weight:600;color:#141414;letter-spacing:.12em}
 
 .nbadge{display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,.5);border:.5px solid rgba(255,255,255,.18);border-radius:9px;padding:7px 13px;margin-bottom:1rem;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .nbadge b{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1}
@@ -220,27 +289,32 @@
 .card-lg,.card-sm{transition:transform .25s ease,box-shadow .25s ease}
 .card-lg:hover,.card-sm:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.18)}
 
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1040px;margin:0 auto;padding:0 16px}
-.proof-card{background:#fff;border:.5px solid #e3e3e6;border-radius:18px;padding:24px 22px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.proof-hook{font-size:15px;font-weight:700;color:#1d1d1f;line-height:1.5;margin-bottom:16px}
-.proof-stat{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.proof-from{font-size:14px;color:#86868b;text-decoration:line-through}
-.proof-arrow{color:#C61B1C;font-weight:700}
-.proof-to{font-size:22px;font-weight:700;color:#1a1a1a;letter-spacing:-.01em}
-.proof-note{font-size:11px;color:#a1a1a6;line-height:1.5}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1280px;margin:0 auto;padding:0 64px;border-top:1px solid #e3e3e6}
+.proof-card{background:transparent;border:none;border-right:1px solid #e3e3e6;border-radius:0;padding:42px 36px 46px;box-shadow:none}
+.proof-card:last-child{border-right:none}
+.proof-hook{font-size:13.5px;font-weight:500;color:#6e6e73;line-height:1.7;letter-spacing:.02em;margin-bottom:22px}
+.proof-stat{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.proof-from{font-size:13px;color:#a1a1a6;text-decoration:line-through;letter-spacing:.02em}
+.proof-arrow{color:#C61B1C;font-weight:600}
+.proof-to{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414;letter-spacing:.01em}
+.proof-note{font-size:10.5px;color:#a1a1a6;line-height:1.6;letter-spacing:.02em}
 
-.proc{max-width:1040px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.proc-step{background:#f5f5f7;border-radius:16px;padding:24px 20px}
-.proc-n{font-size:12px;font-weight:700;color:#6b6b6b;letter-spacing:.04em;margin-bottom:10px}
-.proc-t{font-size:16px;font-weight:700;color:#1d1d1f;margin-bottom:6px}
-.proc-d{font-size:13px;color:#6e6e73;line-height:1.55}
+.proc{max-width:1280px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #e3e3e6}
+.proc-step{background:transparent;border-radius:0;border-right:1px solid #e3e3e6;padding:42px 32px 46px}
+.proc-step:last-child{border-right:none}
+.proc-n{font-size:10px;font-weight:600;color:#C61B1C;letter-spacing:.24em;margin-bottom:16px}
+.proc-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#141414;margin-bottom:10px;letter-spacing:.01em}
+.proc-d{font-size:13px;color:#6e6e73;line-height:1.75;letter-spacing:.02em}
 
 @media(max-width:768px){
   .numbar-in{grid-template-columns:1fr 1fr}
-  .numbar-it{border-bottom:.5px solid #ededf0}
+  .numbar-it{border-bottom:1px solid #e3e3e6;padding:24px 10px}
   .numbar-it:nth-child(2){border-right:none}
-  .numbar-n{font-size:22px}
-  .diag-grid,.proof-grid,.proc{grid-template-columns:1fr;gap:10px}
+  .numbar-it:nth-child(3),.numbar-it:nth-child(4){border-bottom:none}
+  .numbar-n{font-size:24px}
+  .diag-grid,.proof-grid,.proc{grid-template-columns:1fr;gap:0;padding:0 22px}
+  .diag-card,.proof-card,.proc-step{border-right:none;border-bottom:1px solid #e3e3e6;padding:28px 4px 32px}
+  .diag-card:last-child,.proof-card:last-child,.proc-step:last-child{border-bottom:none}
 }
 
 /* === 核心服務：Wells Fargo 風（乾淨白底、無照片、小線條圖示） === */
@@ -275,51 +349,55 @@
   .wf-grid{grid-template-columns:1fr;gap:12px}
 }
 /* hero 二胎增貸主線 */
-.hero-flex{display:flex;align-items:center;gap:2.5rem;max-width:1180px;margin:0 auto;width:100%}
-.hero-left{flex:1;min-width:0;text-align:left}
-.hero-right{width:310px;flex-shrink:0}
+.hero-flex{display:flex;align-items:flex-end;justify-content:space-between;gap:3.5rem;max-width:1280px;margin:0 auto;width:100%}
+.hero-left{flex:1;min-width:0;text-align:left;max-width:720px}
+.hero-right{width:340px;flex-shrink:0}
 .hero-flex .btn-row{justify-content:flex-start}
-/* 增貸空間快速試算 */
-.hcalc{background:rgba(10,10,10,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:.5px solid rgba(255,255,255,.16);border-radius:16px;padding:18px 16px}
-.hcalc-hd{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:13px}
-.hcalc-row{margin-bottom:10px}
-.hcalc-lbl{font-size:11px;color:rgba(255,255,255,.52);display:flex;justify-content:space-between;margin-bottom:4px}
-.hcalc-v{font-size:13px;font-weight:700;color:#fff}
-.hcalc-sl{width:100%;height:3px;border-radius:2px;outline:none;cursor:pointer;accent-color:#C61B1C;display:block;margin:4px 0 0}
-.hcalc-out{background:rgba(198,27,28,.12);border:.5px solid rgba(198,27,28,.30);border-radius:10px;padding:10px 12px;margin-top:8px}
-.hcalc-out-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
-.hcalc-out-lbl{font-size:10px;color:rgba(255,255,255,.46)}
-.hcalc-out-num{font-size:15px;font-weight:700;color:#ff8080;letter-spacing:-.01em}
-.hcalc-disc{font-size:9px;color:rgba(255,255,255,.28);margin-top:8px;line-height:1.5}
-.hero-calc-mob{display:none;background:#0d0d0d;padding:12px 16px 16px}
+/* 增貸空間・即時估算（精品玻璃儀表） */
+.hcalc{background:rgba(10,10,14,.52);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.16);border-radius:3px;padding:26px 24px 20px}
+.hcalc-hd{font-family:"Noto Serif TC","Songti TC",serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.92);letter-spacing:.3em;margin-bottom:18px}
+.hcalc-hd::after{content:"";display:block;width:28px;height:1px;background:#C61B1C;margin-top:10px}
+.hcalc-row{margin-bottom:14px}
+.hcalc-lbl{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.06em;display:flex;justify-content:space-between;margin-bottom:6px}
+.hcalc-v{font-size:13px;font-weight:600;color:#fff;letter-spacing:.02em}
+.hcalc-sl{width:100%;height:2px;border-radius:1px;outline:none;cursor:pointer;accent-color:#C61B1C;display:block;margin:4px 0 0}
+.hcalc-out{border-top:1px solid rgba(255,255,255,.16);padding:12px 2px 2px;margin-top:16px}
+.hcalc-out-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0}
+.hcalc-out-lbl{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.08em}
+.hcalc-out-num{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#fff;letter-spacing:.01em}
+.hcalc-disc{font-size:9.5px;color:rgba(255,255,255,.42);margin-top:12px;line-height:1.6;letter-spacing:.02em}
+.hero-calc-mob{display:none}
 @media(max-width:768px){
-  .hero-flex{flex-direction:column;gap:.75rem}
+  .hero-flex{flex-direction:column;align-items:stretch;gap:1rem}
   .hero-right{display:none}
-  .hero-flex .btn-row{align-items:flex-start}
-  .hero-calc-mob{display:block;background:transparent;padding:0;margin-bottom:.75rem}
+  .hero-flex .btn-row{align-items:stretch}
+  .hero-calc-mob{display:block;margin-bottom:1.2rem}
+  .hcalc{padding:20px 18px 16px}
+  .hcalc-hd{font-size:12px;margin-bottom:14px}
+  .hcalc-out-num{font-size:17px}
 }
 
-/* index-only lead form (system palette: black + #C61B1C + beige) */
-.ilf-wrap{background:#f7f4f0;max-width:none;margin:0;padding:80px 24px}
+/* index-only lead form（精品版式：襯線＋髮絲線＋矩形） */
+.ilf-wrap{background:#f6f5f3;max-width:none;margin:0;padding:80px 24px}
 .ilf-inner{max-width:640px;margin:0 auto}
-.ilf-wrap .ilf-section-label{font-size:12px;color:#6b6b6b;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
-.ilf-wrap .ilf-section-title{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f;margin-bottom:40px;text-align:center}
-.ilf-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
-.ilf-privacy{display:flex;gap:12px;align-items:flex-start;background:#f9f7f5;border:1px solid rgba(198,27,28,.18);border-radius:14px;padding:16px 18px;margin-bottom:28px}
-.ilf-privacy .ilf-lock{font-size:20px;line-height:1.4;flex-shrink:0}
-.ilf-privacy p{font-size:13px;color:#1d1d1f;line-height:1.65;margin:0}
-.ilf-privacy a{color:#1d1d1f;font-weight:600}
-.ilf-field{margin-bottom:20px}
-.ilf-field label{display:block;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
-.ilf-field label .ilf-opt{font-weight:400;color:#86868b;font-size:12px}
+.ilf-wrap .ilf-section-label{font-size:11px;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:16px;text-align:center}
+.ilf-wrap .ilf-section-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#141414;margin-bottom:40px;text-align:center}
+.ilf-card{background:#fff;border:1px solid #e3e3e6;border-radius:0;padding:48px 44px;box-shadow:none}
+.ilf-privacy{display:flex;gap:12px;align-items:flex-start;background:#fafafa;border:1px solid #e3e3e6;border-radius:0;padding:16px 18px;margin-bottom:30px}
+.ilf-privacy .ilf-lock{font-size:18px;line-height:1.4;flex-shrink:0}
+.ilf-privacy p{font-size:12.5px;color:#3a3a3c;line-height:1.7;margin:0;letter-spacing:.02em}
+.ilf-privacy a{color:#141414;font-weight:600;text-decoration:underline}
+.ilf-field{margin-bottom:22px}
+.ilf-field label{display:block;font-size:13px;font-weight:600;color:#141414;margin-bottom:9px;letter-spacing:.06em}
+.ilf-field label .ilf-opt{font-weight:400;color:#86868b;font-size:11.5px}
 .ilf-field label .ilf-req{color:#C61B1C;margin-left:2px}
-.ilf-field input{width:100%;font-size:16px;color:#1d1d1f;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
-.ilf-field input:focus{outline:none;border-color:#C61B1C;background:#fff}
-.ilf-consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 24px}
-.ilf-consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#1d1d1f}
-.ilf-consent label{font-size:13px;color:#6e6e73;line-height:1.6}
-.ilf-consent a{color:#1d1d1f;font-weight:600}
-.ilf-submit{width:100%;background:#1d1d1f;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.ilf-field input{width:100%;font-size:16px;color:#141414;background:#fff;border:1px solid #d9d9de;border-radius:0;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .2s}
+.ilf-field input:focus{outline:none;border-color:#141414}
+.ilf-consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 26px}
+.ilf-consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#141414}
+.ilf-consent label{font-size:12.5px;color:#6e6e73;line-height:1.7}
+.ilf-consent a{color:#141414;font-weight:600;text-decoration:underline}
+.ilf-submit{width:100%;background:#141414;color:#fff;font-size:14px;font-weight:600;border:none;border-radius:0;padding:17px;cursor:pointer;letter-spacing:.18em;transition:opacity .2s}
 .ilf-submit:hover{opacity:.85}
 .ilf-submit:disabled{opacity:.5;cursor:not-allowed}
 .ilf-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
@@ -341,9 +419,9 @@
 .s-wrap{max-width:1180px;margin:0 auto}
 .s-head{margin-bottom:2.5rem}
 .s-head .sec-title{text-align:left}
-.s-eyebrow{display:block;font-size:11px;font-weight:700;color:#C61B1C;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.s-eyebrow{display:block;font-size:11px;font-weight:500;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
 .ilf-wrap{padding:140px 24px!important}
-.ilf-wrap .ilf-section-label{color:#C61B1C!important;letter-spacing:.12em!important;text-align:left!important}
+.ilf-wrap .ilf-section-label{color:#8a8a8e!important;letter-spacing:.24em!important;text-align:left!important}
 .ilf-wrap .ilf-section-title{text-align:left!important}
 @media(max-width:768px){
   .s-pad{padding:80px 16px}
@@ -443,7 +521,7 @@
       "name": "不動產售後回租和一般房屋買賣有什麼差別？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "一般買賣是永久轉移所有權，售後回租則保有買回選擇權，屋主可在約定期限內以原價或約定價格買回不動產。這讓屋主在取得資金的同時，不必永久失去房產，且繼續居住不需搬遷，是靈活的不動產資產運用方式。"
+        "text": "一般買賣永久轉移所有權；售後回租是將房屋過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，屋主可在約定期限內依約買回。是否適合依個案評估。"
       }
     },
     {
@@ -532,17 +610,20 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
 <section id="hero">
   <div class="hero">
-    <img src="img/hero.jpg" alt="烘爐地俯瞰新北市夜景" fetchpriority="high" loading="eager"/>
+    <picture>
+      <source media="(max-width:768px)" srcset="img/hero-m.jpg">
+      <img src="img/hero-d.jpg" alt="暮色下的台北河濱與 101 天際線" fetchpriority="high" loading="eager"/>
+    </picture>
     <div class="hero-overlay"></div>
     <div class="hero-body">
       <div class="hero-flex">
         <div class="hero-left">
-          <div class="hero-eyebrow">鋮馨租賃有限公司 · 新北市中和 · 20+ 年</div>
+          <div class="hero-eyebrow">鋮馨租賃有限公司 — 新北市中和 · 深耕二十年</div>
           <h1 class="hero-h1">名下有房，<br>增貸空間還有多少？</h1>
-          <p class="hero-sub">輸入房屋現值，30 秒估出可增貸空間與月付區間。</p>
+          <p class="hero-sub">兩個數字，三十秒，估出可增貸空間與月付區間。</p>
           <div class="hero-calc-mob">
             <div class="hcalc">
-              <div class="hcalc-hd">增貸空間快速試算</div>
+              <div class="hcalc-hd">增貸空間・即時估算</div>
               <div class="hcalc-row">
                 <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hm-hv-disp">800 萬</span></div>
                 <input type="range" class="hcalc-sl" id="hm-hv" min="100" max="5000" step="50" value="800">
@@ -555,18 +636,18 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
                 <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hm-loan">—</span></div>
                 <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hm-mo">—</span></div>
               </div>
-              <div class="hcalc-disc">估算基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+              <div class="hcalc-disc">估算・僅供參考，以審核為準。基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
             </div>
           </div>
           <div class="btn-row">
             <a href="https://lin.ee/PHIfSoY" class="btn-white">LINE 線上諮詢</a>
             <a href="tel:0222490517" class="btn-ghost">電話諮詢</a>
           </div>
-          <p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:14px;letter-spacing:.02em;">依個案不動產條件、財務狀況與市場情況而定 · 本公司非金融機構</p>
+          <p style="font-size:11px;color:rgba(255,255,255,.52);margin-top:16px;letter-spacing:.06em;">依個案不動產條件、財務狀況與市場情況而定 · 本公司非金融機構</p>
         </div>
         <div class="hero-right">
           <div class="hcalc">
-            <div class="hcalc-hd">增貸空間快速試算</div>
+            <div class="hcalc-hd">增貸空間・即時估算</div>
             <div class="hcalc-row">
               <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hd-hv-disp">800 萬</span></div>
               <input type="range" class="hcalc-sl" id="hd-hv" min="100" max="5000" step="50" value="800">
@@ -579,13 +660,20 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
               <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hd-loan">—</span></div>
               <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hd-mo">—</span></div>
             </div>
-            <div class="hcalc-disc">估算基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+            <div class="hcalc-disc">估算・僅供參考，以審核為準。基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+/* index.html only：hero 全幅時 nav 透明，捲動後回到白底（scoped，不動共用 nav 檔） */
+(function(){
+  function onScroll(){document.body.classList.toggle('at-top',window.scrollY<60);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
 
 
 <!-- 數字信任條 -->
@@ -626,65 +714,116 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   </div>
 </section>
 
-<section id="services" class="s-pad">
-  <div class="s-head s-wrap">
-    <div class="s-eyebrow">鋮馨租賃有限公司 · 核心服務</div>
-    <h2 class="sec-title">你的房子，<br>能為你做的事。</h2>
+<section id="services" class="s-pad" style="padding-left:0;padding-right:0;">
+  <style>
+    /* === 雙主打影像並列（五家式 image-led diptych） === */
+    .duo-head{max-width:1280px;margin:0 auto 64px;padding:0 64px}
+    .duo-eyebrow{font-size:11px;font-weight:500;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
+    .duo-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:46px;font-weight:600;color:#141414;letter-spacing:.01em;line-height:1.25}
+    .duo{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+    .duo-panel{position:relative;display:block;height:78vh;min-height:540px;overflow:hidden;background:#0a0a0c}
+    .duo-panel img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.04) brightness(.92);transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
+    .duo-panel:hover img{transform:scale(1.045)}
+    .duo-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.72) 0%,rgba(8,8,12,.26) 36%,rgba(8,8,12,.04) 62%)}
+    .duo-body{position:absolute;left:0;right:0;bottom:0;padding:0 48px 52px}
+    .duo-tag{font-size:10px;font-weight:500;color:rgba(255,255,255,.66);letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px}
+    .duo-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.3;margin-bottom:12px}
+    .duo-d{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.75;letter-spacing:.03em;max-width:430px;margin-bottom:24px}
+    .duo-cta{display:inline-block;font-size:12px;font-weight:600;color:#fff;letter-spacing:.18em;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.55);transition:border-color .3s}
+    .duo-panel:hover .duo-cta{border-color:#fff}
+    /* 次要路徑：髮絲線安靜清單 */
+    .quiet{max-width:1280px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid #e3e3e6;margin-top:2px}
+    .quiet-it{display:block;padding:40px 36px 44px;border-right:1px solid #e3e3e6;transition:background .3s}
+    .quiet-it:last-child{border-right:none}
+    .quiet-it:hover{background:#fafafa}
+    .quiet-n{font-size:10px;font-weight:500;color:#a1a1a6;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+    .quiet-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:20px;font-weight:600;color:#141414;margin-bottom:10px;letter-spacing:.01em}
+    .quiet-d{font-size:13px;color:#6e6e73;line-height:1.7;letter-spacing:.02em;margin-bottom:16px}
+    .quiet-go{font-size:11.5px;font-weight:600;color:#141414;letter-spacing:.14em}
+    .quiet-go::after{content:" →"}
+    @media(max-width:768px){
+      .duo-head{margin-bottom:36px;padding:0 22px}
+      .duo-title{font-size:30px}
+      .duo{grid-template-columns:1fr}
+      .duo-panel{height:64vh;min-height:420px}
+      .duo-body{padding:0 22px 36px}
+      .duo-t{font-size:26px}
+      .duo-d{font-size:13px;margin-bottom:18px}
+      .quiet{grid-template-columns:1fr;padding:0 22px}
+      .quiet-it{border-right:none;border-bottom:1px solid #e3e3e6;padding:28px 4px 30px}
+      .quiet-it:last-child{border-bottom:none}
+    }
+  </style>
+  <div class="duo-head">
+    <div class="duo-eyebrow">核心服務</div>
+    <h2 class="duo-title">你的房子，<br>能為你做的事。</h2>
   </div>
-  <div class="wf-wrap">
-
-    <!-- 1：旗艦服務 售後回租 -->
-    <a class="wf-feature" href="sale-leaseback.html">
-      <div class="wf-feature-body">
-        <div class="wf-eyebrow">核心服務 · Buy-Leaseback</div>
-        <h3>賣掉房子，<br>還是住在原本的家</h3>
-        <p>售後回租：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利。信用不完美也能先評估。</p>
-        <span class="wf-feature-cta">了解售後回租 ›</span>
-      </div>
-      <div class="wf-feature-aside">
-        <svg width="86" height="86" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7" stroke="#C61B1C" stroke-width="1.4"/><path d="M5 9.5V19h14V9.5" stroke="#C61B1C" stroke-width="1.4"/><path d="M9.5 19v-4a2.5 2.5 0 0 1 5 0v4z" fill="#C8945A" stroke="none"/></svg>
-        <div class="big">市值 7–9 成</div>
-        <div class="cap">可動用淨值</div>
+  <div class="duo">
+    <a class="duo-panel" href="sale-leaseback.html">
+      <img src="img/svc-leaseback.jpg" alt="台灣巷弄裡的家" loading="lazy">
+      <div class="duo-shade"></div>
+      <div class="duo-body">
+        <div class="duo-tag">Sale-Leaseback</div>
+        <div class="duo-t">賣掉房子，<br>還是住在原本的家。</div>
+        <p class="duo-d">售後回租：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利。可取得約市值 7–9 成的資金，信用不完美也能先評估。</p>
+        <span class="duo-cta">了解售後回租</span>
       </div>
     </a>
-
-    <!-- 4：乾淨小圖示卡（紅＋金） -->
-    <div class="wf-grid">
-      <a class="wf-card" href="services.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 12h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 17h8" stroke="#C61B1C" stroke-width="1.7"/><path d="M12 7c5 0 3 5 8 5" stroke="#C61B1C" stroke-width="1.7"/><path d="M12 17c5 0 3-5 8-5" stroke="#C61B1C" stroke-width="1.7"/><circle cx="20" cy="12" r="1.9" fill="#C8945A"/></svg>
-        <div class="wf-stat">月付 6萬 → 2.8萬</div>
-        <h4>貸款整合</h4>
-        <p>信貸、卡循、民間借款整合為一筆低利率房貸，月付有機會下降，依個案而定。</p>
-        <span class="wf-go">查看整合方案</span>
-      </a>
-      <a class="wf-card" href="private-to-bank.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l8 4.5H4z" fill="#C8945A" stroke="none"/><path d="M4 9.5h16" stroke="#C61B1C" stroke-width="1.7"/><path d="M6 11v6M10 11v6M14 11v6M18 11v6" stroke="#C61B1C" stroke-width="1.7"/><path d="M4 19h16" stroke="#C61B1C" stroke-width="1.7"/></svg>
-        <div class="wf-stat">月息 1–2% → 年息 2–3%</div>
-        <h4>民間轉銀行</h4>
-        <p>把高利率民間借款分階段轉進銀行體系，讓本金有機會開始往下走。</p>
-        <span class="wf-go">了解更多</span>
-      </a>
-      <a class="wf-card" href="contact.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5-6-10a6 6 0 1 1 12 0c0 5-6 10-6 10z" stroke="#C61B1C" stroke-width="1.7"/><circle cx="12" cy="11" r="2.3" fill="#C8945A" stroke="none"/></svg>
-        <div class="wf-stat">中和 · 中正路 468 號</div>
-        <h4>實體辦公室 · 預約拜訪</h4>
-        <p>看得到人、找得到門牌。免費評估，面談不收費。</p>
-        <span class="wf-go">預約諮詢</span>
-      </a>
-      <a class="wf-card" href="contact.html">
-        <svg class="wf-ico" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z" stroke="#C61B1C" stroke-width="1.7"/><path d="M8.8 12l2.2 2.2 4.2-4.2" stroke="#C8945A" stroke-width="2"/></svg>
-        <div class="wf-stat">評估 → 簽約 → 買回</div>
-        <h4>全流程陪同規劃</h4>
-        <p>從評估、簽約、清償到買回，每個步驟都有專人確認。</p>
-        <span class="wf-go">聯繫我們</span>
-      </a>
-    </div>
-
+    <a class="duo-panel" href="https://lin.ee/PHIfSoY">
+      <img src="img/svc-equity.jpg" alt="台北豪宅建築" loading="lazy">
+      <div class="duo-shade"></div>
+      <div class="duo-body">
+        <div class="duo-tag">Second Mortgage</div>
+        <div class="duo-t">房貸繳了這些年，<br>淨值還能再做一次規劃。</div>
+        <p class="duo-d">二胎增貸：以房屋淨值評估第二順位貸款空間，資金用途自由。可貸額度與利率依個案不動產條件與金融機構審核而定。</p>
+        <span class="duo-cta">LINE 線上諮詢</span>
+      </div>
+    </a>
+  </div>
+  <div class="quiet">
+    <a class="quiet-it" href="services.html">
+      <div class="quiet-n">Consolidation</div>
+      <div class="quiet-t">貸款整合</div>
+      <p class="quiet-d">信貸、卡循、民間借款整合為一筆房貸，月付有機會下降，依個案而定。</p>
+      <span class="quiet-go">查看整合方案</span>
+    </a>
+    <a class="quiet-it" href="private-to-bank.html">
+      <div class="quiet-n">Private to Bank</div>
+      <div class="quiet-t">民間轉銀行</div>
+      <p class="quiet-d">把高利率民間借款分階段轉進銀行體系，讓本金有機會開始往下走。</p>
+      <span class="quiet-go">了解更多</span>
+    </a>
+    <a class="quiet-it" href="contact.html">
+      <div class="quiet-n">Office</div>
+      <div class="quiet-t">實體辦公室・預約拜訪</div>
+      <p class="quiet-d">中和中正路 468 號。看得到人、找得到門牌，面談不收費。</p>
+      <span class="quiet-go">預約諮詢</span>
+    </a>
   </div>
 </section>
 
-<!-- 數字成果（去識別化情境示意） -->
-<section class="s-pad">
+<!-- 數字成果（去識別化情境示意）：深色攝影數據帶 -->
+<section class="s-pad proof-dark">
+  <style>
+    .proof-dark{position:relative;overflow:hidden;background:#0a0a0c}
+    .proof-dark .proof-bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.7) contrast(1.06) brightness(.5)}
+    .proof-dark::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,8,12,.55),rgba(8,8,12,.78))}
+    .proof-dark>.s-head,.proof-dark>.proof-grid,.proof-dark>p{position:relative;z-index:2}
+    .proof-dark .s-eyebrow{color:rgba(255,255,255,.6)}
+    .proof-dark .sec-title{color:#fff}
+    .proof-dark .proof-grid{border-top:1px solid rgba(255,255,255,.22)}
+    .proof-dark .proof-card{border-right-color:rgba(255,255,255,.22)}
+    .proof-dark .proof-card:last-child{border-right:none}
+    .proof-dark .proof-hook{color:rgba(255,255,255,.72)}
+    .proof-dark .proof-from{color:rgba(255,255,255,.5)}
+    .proof-dark .proof-arrow{color:#e05a5b}
+    .proof-dark .proof-to{color:#fff}
+    .proof-dark .proof-note{color:rgba(255,255,255,.45)}
+    @media(max-width:768px){
+      .proof-dark .proof-card{border-bottom-color:rgba(255,255,255,.22)}
+    }
+  </style>
+  <img class="proof-bgimg" src="img/proof-bg.jpg" alt="" loading="lazy" aria-hidden="true">
   <div class="s-head s-wrap">
     <div class="s-eyebrow">處理前 → 處理後</div>
     <h2 class="sec-title">數字會說話。</h2>
@@ -706,7 +845,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
       <div class="proof-note">情境示意。轉貸成數與利率最終由金融機構決定。</div>
     </div>
   </div>
-  <p style="text-align:center;font-size:12px;color:#a1a1a6;max-width:680px;margin:22px auto 0;padding:0 20px;line-height:1.6;">以上為去識別化情境示意，非個別承諾。實際結果依不動產條件、財務狀況與市場情況而定；本公司非金融機構，最終核貸由金融機構決定。</p>
+  <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.5);max-width:680px;margin:26px auto 0;padding:0 20px;line-height:1.7;letter-spacing:.03em;">以上為去識別化情境示意，非個別承諾。實際結果依不動產條件、財務狀況與市場情況而定；本公司非金融機構，最終核貸由金融機構決定。</p>
 </section>
 
 <!-- 流程四步 -->
@@ -720,6 +859,29 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
     <div class="proc-step"><div class="proc-n">STEP 2</div><div class="proc-t">提案說明</div><div class="proc-d">依不動產與財務狀況，提出可行方案與費用。</div></div>
     <div class="proc-step"><div class="proc-n">STEP 3</div><div class="proc-t">簽約執行</div><div class="proc-d">條件確認後簽約，專人陪同每個步驟。</div></div>
     <div class="proc-step"><div class="proc-n">STEP 4</div><div class="proc-t">資金到位</div><div class="proc-d">一般約 2–4 週完成，依個案而定。</div></div>
+  </div>
+</section>
+
+<!-- 影像 CTA 帶（第二影像時刻） -->
+<section class="band">
+  <style>
+    .band{position:relative;height:54vh;min-height:420px;overflow:hidden;background:#0a0a0c}
+    .band img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;filter:saturate(.88) contrast(1.04) brightness(.82)}
+    .band-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.55) 0%,rgba(8,8,12,.25) 50%,rgba(8,8,12,.30) 100%)}
+    .band-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+    .band-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.02em;line-height:1.45;margin-bottom:30px;text-wrap:balance}
+    .band-cta{display:inline-block;background:#fff;color:#141414;font-size:13px;font-weight:600;letter-spacing:.16em;padding:14px 36px;border-radius:0}
+    .band-cta:hover{background:rgba(255,255,255,.88)}
+    @media(max-width:768px){
+      .band{height:48vh;min-height:360px}
+      .band-t{font-size:24px;margin-bottom:24px}
+    }
+  </style>
+  <img src="img/band.jpg" alt="台北住宅與河岸公園" loading="lazy">
+  <div class="band-shade"></div>
+  <div class="band-body">
+    <div class="band-t">房子不只是住所，<br>也是你最大的底氣。</div>
+    <a class="band-cta" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>
   </div>
 </section>
 
@@ -806,7 +968,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
     <!-- 租屋 -->
     <div style="margin-bottom:56px;">
-      <h2 style="font-size:28px;font-weight:700;color:#f5f5f7;margin-bottom:14px;letter-spacing:-.02em;">租屋・包租代管</h2>
+      <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">租屋・包租代管</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
         鋮馨租賃是新北市專業<strong style="color:#f5f5f7;">租屋管理</strong>與<strong style="color:#f5f5f7;">包租代管</strong>公司，協助屋主將閒置房產轉為穩定現金流。我們負責租客開發、合約簽訂、每月收租、維修通報，讓房東完全無後顧之憂。服務範圍涵蓋新北市中和、板橋、永和、新莊及全台各地。
       </p>
@@ -816,9 +978,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
     <!-- 不動產 -->
     <div style="margin-bottom:56px;">
-      <h2 style="font-size:28px;font-weight:700;color:#f5f5f7;margin-bottom:14px;letter-spacing:-.02em;">不動產・售後回租</h2>
+      <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">不動產・售後回租</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
-        鋮馨租賃提供<strong style="color:#f5f5f7;">不動產售後回租</strong>服務，讓屋主在不放棄居住權的前提下，快速取得不動產資產變現的資金。從估價、簽約、清償到買回，每個步驟均有專人確認，是靈活運用<strong style="color:#f5f5f7;">不動產</strong>資產的最佳方案。
+        鋮馨租賃提供<strong style="color:#f5f5f7;">不動產售後回租</strong>服務：房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，協助屋主快速取得資金。從估價、簽約、清償到買回，每個步驟均有專人確認，是靈活運用<strong style="color:#f5f5f7;">不動產</strong>資產的方式之一，是否適合依個案評估。
       </p>
     </div>
 
@@ -826,14 +988,14 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
     <!-- 貸款 -->
     <div style="margin-bottom:56px;">
-      <h2 style="font-size:28px;font-weight:700;color:#f5f5f7;margin-bottom:14px;letter-spacing:-.02em;">貸款・整合規劃</h2>
+      <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">貸款・整合規劃</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
         多筆<strong style="color:#f5f5f7;">貸款</strong>壓力大？鋮馨租賃協助整合信貸、信用卡、民間借款為一筆低利率房貸，月付有機會下降（實際依個案核貸條件而定）。即使信用條件不完美，只要名下有不動產，即可免費評估<strong style="color:#f5f5f7;">貸款整合</strong>方案，並規劃逐步轉入銀行體系的完整路徑。
       </p>
     </div>
 
     <div style="text-align:center;margin-top:8px;">
-      <a href="https://lin.ee/PHIfSoY" target="_blank" style="display:inline-block;background:#fff;color:#1d1d1f;padding:14px 36px;border-radius:980px;font-size:15px;font-weight:600;">加入 LINE 免費諮詢</a>
+      <a href="https://lin.ee/PHIfSoY" target="_blank" style="display:inline-block;background:#fff;color:#141414;padding:14px 36px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:.16em;">加入 LINE 免費諮詢</a>
       <p style="font-size:13px;color:#6e6e73;margin-top:16px;">新北市中和區中正路468號・02-2249-0517・全台服務</p>
     </div>
 
@@ -845,30 +1007,28 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <!-- 房貸工具區 -->
 <section class="s-pad" style="background:#fff;">
   <style>
-    .htools-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
-    .htool-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f5f5f7;border-radius:12px;padding:13px 18px;text-decoration:none;transition:background .15s,transform .15s}
-    .htool-row:hover{background:#ececf0;transform:translateX(2px)}
-    .htool-row .n{font-size:15px;font-weight:600;color:#1d1d1f;display:block}
-    .htool-row .d{font-size:12px;color:#6e6e73;margin-top:2px;display:block}
-    .htool-row .a{color:#7C3AED;font-weight:700;font-size:16px;flex-shrink:0}
+    .htools-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2px;align-items:stretch}
+    .htool-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-bottom:1px solid #e3e3e6;border-radius:0;padding:15px 6px;text-decoration:none;transition:background .25s}
+    .htool-row:first-child{border-top:1px solid #e3e3e6}
+    .htool-row:hover{background:#fafafa}
+    .htool-row .n{font-size:14.5px;font-weight:600;color:#141414;display:block;letter-spacing:.02em}
+    .htool-row .d{font-size:12px;color:#86868b;margin-top:3px;display:block;letter-spacing:.02em}
+    .htool-row .a{color:#141414;font-weight:500;font-size:16px;flex-shrink:0;padding-right:6px}
     @media(max-width:820px){.htools-grid{grid-template-columns:1fr}.htool-feature{min-height:auto!important}}
   </style>
   <div style="max-width:1080px;margin:0 auto;">
     <div class="s-eyebrow">免費工具</div>
-    <h2 style="font-size:40px;font-weight:700;color:#1d1d1f;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1;">房產試算工具</h2>
-    <p style="font-size:17px;color:#6e6e73;margin-bottom:40px;">常用計算工具，幫你快速評估財務決策，一站算清。</p>
+    <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:42px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:14px;line-height:1.25;">房產試算工具</h2>
+    <p style="font-size:15px;color:#6e6e73;margin-bottom:48px;letter-spacing:.03em;">常用計算工具，幫你快速評估財務決策，一站算清。</p>
     <div class="htools-grid">
 
-      <a class="htool-feature" href="mortgage-calculator.html" style="display:flex;flex-direction:column;justify-content:space-between;background:#1d1d1f;border-radius:22px;padding:36px 34px;text-decoration:none;min-height:360px;box-shadow:0 10px 34px rgba(0,0,0,.28);">
+      <a class="htool-feature" href="mortgage-calculator.html" style="display:flex;flex-direction:column;justify-content:space-between;background:#141414;border-radius:0;padding:46px 44px;text-decoration:none;min-height:360px;">
         <div>
-          <div style="width:60px;height:60px;background:rgba(198,27,28,.14);border:1px solid rgba(198,27,28,.36);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8"/><path d="M8 12h8M8 8h4M8 16h6" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">最常用 · 主打工具</div>
-          <div style="font-size:32px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1;">房貸試算表</div>
-          <div style="font-size:15px;color:rgba(255,255,255,.72);line-height:1.75;max-width:360px;">輸入金額、利率、年限，立刻算出每月應繳、總利息與逐年攤還明細，還能做 <strong style="color:#fff;">民間 vs 銀行</strong> 月付對比，看整合前後差多少。</div>
+          <div style="font-size:10px;font-weight:500;color:rgba(255,255,255,.55);letter-spacing:.26em;text-transform:uppercase;margin-bottom:16px;">最常用 · 主打工具</div>
+          <div style="font-family:'Noto Serif TC','Songti TC',serif;font-size:32px;font-weight:600;color:#fff;letter-spacing:.01em;margin-bottom:16px;line-height:1.25;">房貸試算表</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.72);line-height:1.85;max-width:360px;letter-spacing:.02em;">輸入金額、利率、年限，立刻算出每月應繳、總利息與逐年攤還明細，還能做 <strong style="color:#fff;">民間 vs 銀行</strong> 月付對比，看整合前後差多少。</div>
         </div>
-        <span style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:28px;background:#C61B1C;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:980px;">立即試算 →</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:30px;background:#fff;color:#141414;font-weight:600;font-size:13px;padding:13px 30px;border-radius:0;letter-spacing:.14em;">立即試算 →</span>
       </a>
 
       <div style="display:flex;flex-direction:column;gap:8px;">
@@ -879,53 +1039,53 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
         <a class="htool-row" href="land-value-tax-calculator.html"><span><span class="n">地價稅試算</span><span class="d">每年持有土地的地價稅</span></span><span class="a">›</span></a>
         <a class="htool-row" href="new-taipei-house-tax.html"><span><span class="n">房屋稅試算</span><span class="d">持有房屋稅，含自住優惠稅率</span></span><span class="a">›</span></a>
         <a class="htool-row" href="rental-yield-calculator.html"><span><span class="n">租金報酬試算</span><span class="d">年化報酬率，包租公必算</span></span><span class="a">›</span></a>
-        <a class="htool-row" href="tools.html" style="background:#1d1d1f;justify-content:center;"><span class="n" style="color:#fff;">查看全部 10+1 小工具 →</span></a>
+        <a class="htool-row" href="tools.html" style="background:#141414;justify-content:center;border-bottom:none;margin-top:14px;padding:16px;"><span class="n" style="color:#fff;letter-spacing:.14em;">查看全部 10+1 小工具 →</span></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<section id="faq" class="s-pad" style="background:#f5f5f7;">
+<section id="faq" class="s-pad" style="background:#f6f5f3;">
   <div style="max-width:720px;margin:0 auto;">
     <div class="s-eyebrow">常見問題</div>
-    <h2 style="font-size:40px;font-weight:700;color:#1d1d1f;letter-spacing:-.025em;margin-bottom:48px;line-height:1.1;">你想知道的，<br>我們都回答。</h2>
+    <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:42px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:48px;line-height:1.3;">你想知道的，<br>我們都回答。</h2>
     <div style="display:flex;flex-direction:column;gap:0;">
 
-      <details style="border-top:1px solid #d2d2d7;padding:20px 0;" open>
-        <summary style="font-size:17px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <details style="border-top:1px solid #ddddd8;padding:26px 0;" open>
+        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
           什麼是不動產售後回租？
           <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
         </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">屋主將名下不動產出售給投資方，同時簽訂租約繼續居住使用，並保有未來買回的權利。可讓屋主快速取得資金，同時不失去居住權，適合急需資金但不想永久失去房產的屋主。</p>
+        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">屋主將名下不動產過戶給投資方，同時簽訂租約繼續居住，並保有日後依約買回的權利，可快速取得資金。是否適合，依個案不動產條件與財務狀況評估。</p>
       </details>
 
-      <details style="border-top:1px solid #d2d2d7;padding:20px 0;">
-        <summary style="font-size:17px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
+        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
           需要什麼條件才能申請？
           <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
         </summary>
         <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">名下有不動產即可申請評估。即使信用條件不完美、有多筆貸款或曾遭銀行拒貸，仍可重新評估。我們提供免費評估，依不動產現況與個人財務狀況量身規劃。</p>
       </details>
 
-      <details style="border-top:1px solid #d2d2d7;padding:20px 0;">
-        <summary style="font-size:17px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
+        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
           貸款整合能幫我做什麼？
           <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
         </summary>
         <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">將多筆高利率貸款（信貸、信用卡、民間借款）整合為一筆以不動產擔保的低利率貸款，有助降低每月還款金額（實際依個案核貸條件而定），並規劃轉入銀行體系的完整路徑，長期有機會節省利息支出。</p>
       </details>
 
-      <details style="border-top:1px solid #d2d2d7;padding:20px 0;">
-        <summary style="font-size:17px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
+        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
           評估費用多少？流程怎麼走？
           <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
         </summary>
         <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">初步評估完全免費，面談不收費。流程：LINE 聯繫 → 免費評估 → 提案說明 → 簽約執行 → 資金到位。全程專人陪同，透明無隱藏費用。</p>
       </details>
 
-      <details style="border-top:1px solid #d2d2d7;border-bottom:1px solid #d2d2d7;padding:20px 0;">
-        <summary style="font-size:17px;font-weight:600;color:#1d1d1f;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <details style="border-top:1px solid #ddddd8;border-bottom:1px solid #ddddd8;padding:26px 0;">
+        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
           服務範圍在哪裡？
           <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
         </summary>
@@ -934,7 +1094,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 
     </div>
     <div style="margin-top:40px;text-align:center;">
-      <a href="https://lin.ee/PHIfSoY" target="_blank" style="display:inline-block;background:#1d1d1f;color:#fff;padding:14px 32px;border-radius:980px;font-size:15px;font-weight:500;">加入 LINE 免費諮詢</a>
+      <a href="https://lin.ee/PHIfSoY" target="_blank" style="display:inline-block;background:#141414;color:#fff;padding:14px 34px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:.16em;">加入 LINE 免費諮詢</a>
     </div>
   </div>
 </section>
