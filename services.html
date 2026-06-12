@@ -14,42 +14,58 @@
 <meta property="og:url" content="https://cx468.com.tw/services.html">
 <link rel="canonical" href="https://cx468.com.tw/services.html">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-.services-grid{max-width:1080px;margin:0 auto;padding:80px 24px}
+/* === 精品編輯系統（與首頁 v2 同語彙） === */
+.page-hero{background:#0e0e10;padding:120px 2rem 96px}
+.page-eyebrow{letter-spacing:.26em;color:rgba(255,255,255,.6)}
+.page-h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;letter-spacing:.01em;line-height:1.25}
+.page-sub{font-size:15px;letter-spacing:.04em;line-height:1.8}
+.page-hero .btn-line{background:#fff;color:#141414;border-radius:0;font-size:13px;font-weight:600;letter-spacing:.14em;padding:14px 32px}
+.nav-radar-btn{background:transparent!important;color:#2a2a2a!important;border:1px solid #d9d6d1!important;box-shadow:none!important}
 
-.svc-block{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:96px}
+.services-grid{max-width:1160px;margin:0 auto;padding:110px 24px 40px}
+
+.svc-block{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:130px}
 
 .svc-block.reverse{direction:rtl}
 
 .svc-block.reverse>*{direction:ltr}
 
-.svc-img{border-radius:24px;overflow:hidden;height:380px;background:#1d1d1f;position:relative}
+.svc-img{border-radius:0;overflow:hidden;height:440px;background:#0a0a0c;position:relative}
 
-.svc-img img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.svc-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.04) brightness(.94);transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
+.svc-block:hover .svc-img img{transform:scale(1.04)}
 
-.svc-badge{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:12px;margin-bottom:16px;letter-spacing:.05em}
+.svc-badge{display:inline-block;font-size:10px;font-weight:600;padding:0;border-radius:0;margin-bottom:14px;letter-spacing:.26em;text-transform:uppercase}
 
-.badge-blue{background:rgba(0,113,227,.12);color:#0071e3;border:.5px solid rgba(0,113,227,.25)}
+.badge-blue{background:transparent;color:#8a8a8e;border:none}
 
-.badge-red{background:rgba(200,16,46,.1);color:#c8102e;border:.5px solid rgba(200,16,46,.22)}
+.badge-red{background:transparent;color:#C61B1C;border:none}
 
-.badge-gold{background:rgba(212,163,38,.18);color:#b8860b;border:.5px solid rgba(212,163,38,.3)}
+.badge-gold{background:transparent;color:#8a8a8e;border:none}
 
-.svc-num{font-size:11px;color:#86868b;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+.svc-num{font-size:10px;color:#a1a1a6;letter-spacing:.24em;margin-bottom:10px;text-transform:uppercase}
 
-.svc-title{font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:#1d1d1f;margin-bottom:16px}
+.svc-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;letter-spacing:.01em;line-height:1.35;color:#141414;margin-bottom:18px}
 
-.svc-desc{font-size:16px;color:#6e6e73;line-height:1.75;margin-bottom:24px}
+.svc-desc{font-size:14.5px;color:#6e6e73;line-height:1.85;letter-spacing:.02em;margin-bottom:26px}
 
-.svc-points{list-style:none;margin-bottom:28px}
+.svc-points{list-style:none;margin-bottom:30px;border-top:1px solid #e3e3e6}
 
-.svc-points li{font-size:14px;color:#1d1d1f;padding:8px 0;border-bottom:.5px solid #f0f0f0;display:flex;gap:10px;align-items:flex-start}
+.svc-points li{font-size:13.5px;color:#141414;padding:11px 0;border-bottom:1px solid #e3e3e6;display:flex;gap:10px;align-items:flex-start;letter-spacing:.02em}
 
-.svc-points li::before{content:"✓";color:#06C755;font-weight:700;flex-shrink:0;margin-top:1px}
+.svc-points li::before{content:"—";color:#C61B1C;font-weight:600;flex-shrink:0}
 
-.svc-link{font-size:14px;font-weight:600;color:#0071e3;display:inline-flex;align-items:center;gap:4px}
+.svc-link{font-size:12px;font-weight:600;color:#141414;display:inline-block;letter-spacing:.16em;padding-bottom:6px;border-bottom:1px solid #141414}
 
-.svc-link::after{content:"›";font-size:18px}
+.svc-link::after{content:""}
+
+.cta-strip h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;letter-spacing:.01em}
+.cta-strip .btn-green{background:#fff;color:#141414;border-radius:0;font-size:13px;font-weight:600;letter-spacing:.14em}
+.cta-strip .btn-outline{border-radius:0;font-size:13px;letter-spacing:.1em;border:1px solid rgba(255,255,255,.45)}
 
 
 
@@ -153,7 +169,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   <!-- 服務一：包租代管 -->
   <div class="svc-block">
     <div class="svc-img">
-      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="鋮馨租賃包租代管｜屋主免管理一站式出租" loading="lazy">
+      <img src="img/band.jpg" alt="鋮馨租賃包租代管｜屋主免管理一站式出租" loading="lazy">
     </div>
     <div>
       <div class="svc-num">服務 01</div>
@@ -174,18 +190,18 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   <!-- 服務二：售後回租 -->
   <div class="svc-block reverse">
     <div class="svc-img">
-      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="鋮馨不動產售後回租｜賣屋仍保有居住權" loading="lazy">
+      <img src="img/svc-leaseback.jpg" alt="鋮馨不動產售後回租｜過戶後簽租約續住並保有買回權利" loading="lazy">
     </div>
     <div>
       <div class="svc-num">服務 02</div>
       <span class="svc-badge badge-red">售後回租</span>
       <h2 class="svc-title">賣掉房子，<br>仍然住在裡面。</h2>
-      <p class="svc-desc">將名下不動產出售給投資方，同時簽訂長期租約繼續居住使用，並保有未來買回的選擇權。快速取得大額資金，同時不必搬家、不失去生活環境，是急需資金屋主的最佳解方。</p>
+      <p class="svc-desc">將名下不動產出售並過戶給投資方，同時簽訂租約繼續居住，並保有日後依約買回的權利。在不中斷生活的前提下快速取得大額資金，是否適合依個案不動產與財務狀況評估。</p>
       <ul class="svc-points">
-        <li>快速取得不動產市值 7–9 成資金</li>
-        <li>繼續居住，生活品質不受影響</li>
-        <li>保有未來買回選擇權，彈性靈活</li>
-        <li>信用條件不完美仍可辦理</li>
+        <li>可取得約市值 7–9 成資金，依物件條件核定</li>
+        <li>過戶後簽租約，原地續住</li>
+        <li>保有日後依約買回的權利</li>
+        <li>信用條件不完美仍可評估</li>
         <li>全程專人規劃，透明無隱費</li>
       </ul>
       <a href="https://lin.ee/PHIfSoY" class="svc-link">了解售後回租條件</a>
@@ -195,17 +211,17 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   <!-- 服務三：貸款整合 -->
   <div class="svc-block">
     <div class="svc-img">
-      <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80" alt="貸款整合規劃｜多筆變一筆降低月付" loading="lazy">
+      <img src="img/svc-consolidate.jpg" alt="貸款整合規劃｜多筆變一筆降低月付" loading="lazy">
     </div>
     <div>
       <div class="svc-num">服務 03</div>
       <span class="svc-badge badge-gold">貸款整合</span>
-      <h2 class="svc-title">多筆變一筆，<br>利率大幅降低。</h2>
-      <p class="svc-desc">將信貸、信用卡循環、民間借款等多筆高利率負債，整合為一筆低利率房屋抵押貸款。每月還款金額大幅下降，同時規劃完整的銀行轉件路徑，長期節省數十萬利息支出。</p>
+      <h2 class="svc-title">多筆變一筆，<br>月付有機會下降。</h2>
+      <p class="svc-desc">將信貸、信用卡循環、民間借款等多筆高利率負債，整合為一筆以不動產擔保的房屋貸款。月付有機會明顯下降，並規劃逐步轉入銀行體系的路徑；實際條件依個案財務狀況，由金融機構核定。</p>
       <ul class="svc-points">
-        <li>整合多筆貸款，月付金額可降低 30–50%</li>
-        <li>民間借款轉銀行體系，利率從 15% 降至 3%</li>
-        <li>整合逾 40 家銀行與金融管道，核貸成功率高</li>
+        <li>整合多筆貸款，月付有機會降低 30–50%（依個案而定）</li>
+        <li>民間借款分階段轉入銀行體系，利率由金融機構核定</li>
+        <li>整合逾 40 家銀行與金融管道</li>
         <li>曾遭拒貸仍可重新評估申請</li>
         <li>免費試算，不申請不收費</li>
       </ul>
