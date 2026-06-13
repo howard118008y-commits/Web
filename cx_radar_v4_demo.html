@@ -16,16 +16,16 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-deep: #0A0E1A;
-  --bg-panel: #111726;
-  --bg-elev: #161D30;
-  --bg-chart: #0D1322;
-  --line: rgba(201, 169, 97, 0.15);
-  --line-strong: rgba(201, 169, 97, 0.35);
-  --line-soft: rgba(201, 169, 97, 0.08);
-  --gold: #C9A961;
-  --gold-bright: #E5C77F;
-  --gold-dim: #8A7340;
+  --bg-deep: #0e0e10;
+  --bg-panel: #141416;
+  --bg-elev: #1b1b1e;
+  --bg-chart: #121214;
+  --line: rgba(255, 255, 255, 0.15);
+  --line-strong: rgba(255, 255, 255, 0.35);
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --gold: #FFFFFF;
+  --gold-bright: #FFFFFF;
+  --gold-dim: rgba(255,255,255,0.45);
   --ink: #E8E3D5;
   --ink-mid: #B0AB9A;
   --ink-dim: #7A7565;
@@ -54,7 +54,7 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(107, 168, 201, 0.03) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
@@ -65,8 +65,8 @@ body::after {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 169, 97, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 169, 97, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
   z-index: 0;
@@ -431,7 +431,7 @@ body::after {
 .context-cell.now { border-left-color: var(--orange); background: rgba(232, 147, 72, 0.05); }
 .context-cell.high { border-left-color: var(--red); }
 .context-cell.low { border-left-color: var(--green); }
-.context-cell.forecast { border-left-color: var(--gold); background: rgba(201, 169, 97, 0.05); }
+.context-cell.forecast { border-left-color: var(--gold); background: rgba(255, 255, 255, 0.05); }
 
 .context-label {
   font-family: "Noto Serif TC", serif;
@@ -468,7 +468,7 @@ body::after {
 .chart-insight {
   margin-top: 28px;
   padding: 24px 28px;
-  background: rgba(201, 169, 97, 0.04);
+  background: rgba(255, 255, 255, 0.04);
   border-left: 3px solid var(--gold-dim);
   font-family: "Noto Sans TC", sans-serif;
   font-size: 15px;
@@ -539,7 +539,7 @@ nav{
   height:48px!important;padding:0 24px!important;
   z-index:1000!important;box-sizing:border-box!important;
   background:rgba(10,14,26,0.95)!important;
-  border-bottom:.5px solid rgba(201,169,97,0.2)!important;
+  border-bottom:.5px solid rgba(255,255,255,0.2)!important;
   backdrop-filter:blur(12px)!important;
 }
 .nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important;flex-shrink:0}
@@ -549,19 +549,19 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
 .nav-links{display:flex!important;align-items:center!important}
 .nav-links a{color:var(--ink-mid)!important;opacity:1!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;white-space:nowrap}
 .nav-links a:hover{color:var(--ink)!important}
-.nav-cta{background:var(--gold)!important;color:#0A0E1A!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap}
-.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap;flex-shrink:0}
+.nav-cta{background:#fff!important;color:#141414!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap}
+.nav-radar-btn{background:transparent!important;border:1px solid rgba(255,255,255,0.6)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap;flex-shrink:0}
 .cx-burger span{background:var(--ink)!important}
-.cx-mobile-menu{background:#0D1322!important}
-.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(201,169,97,0.12)!important}
+.cx-mobile-menu{background:#121214!important}
+.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(255,255,255,0.12)!important}
 @media(max-width:600px){
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
 /* ── CTA 諮詢條 ── */
-.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.04);}
 .cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
-.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0e0e10;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
 .cta-strip-btn:hover{background:var(--gold-bright);}
 @media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 @media(max-width:700px){#cx-guide{padding:20px 18px 18px;}#cx-guide [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important;}}
@@ -590,7 +590,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div>
       <div class="brand-mark">鋮馨租賃有限公司</div>
       <div class="brand-title">房貸儀表板</div>
-      <div class="brand-sub">內部風險情報儀表板 · v0.4 設計示範版</div>
+      <div class="brand-sub">房貸市場儀表板 · v0.4 設計示範版</div>
       <div class="demo-tag">DEMO · 前 3 項指標 · 完整版將擴充至 18 項</div>
     </div>
     <div class="meta">
@@ -608,8 +608,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
   <!-- ── 導讀引導 ── -->
   <div id="cx-guide" style="
-    background:linear-gradient(135deg,rgba(201,169,97,0.06) 0%,rgba(107,168,201,0.04) 100%);
-    border:1px solid rgba(201,169,97,0.22);
+    background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(107,168,201,0.04) 100%);
+    border:1px solid rgba(255,255,255,0.22);
     border-radius:14px;padding:28px 32px 24px;margin-bottom:44px;position:relative;
   ">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
@@ -617,12 +617,12 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         📖 &nbsp;如何閱讀這份儀表板
       </div>
       <button onclick="document.getElementById('cx-guide').style.display='none'" style="
-        background:none;border:1px solid rgba(201,169,97,0.3);color:var(--ink-mid);
+        background:none;border:1px solid rgba(255,255,255,0.3);color:var(--ink-mid);
         font-size:12px;padding:5px 14px;border-radius:20px;cursor:pointer;
         font-family:'IBM Plex Mono',monospace;letter-spacing:0.1em;
         transition:border-color .2s,color .2s;
-      " onmouseover="this.style.borderColor='rgba(201,169,97,0.7)';this.style.color='#E8E3D5'"
-         onmouseout="this.style.borderColor='rgba(201,169,97,0.3)';this.style.color=''">
+      " onmouseover="this.style.borderColor='rgba(255,255,255,0.7)';this.style.color='#E8E3D5'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color=''">
         知道了 ✓
       </button>
     </div>
@@ -701,15 +701,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <!-- Y 軸 -->
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">2.50%</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">2.00%</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">1.50%</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">1.00%</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">0.50%</text>
           </g>
 
@@ -730,9 +730,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           </g>
 
           <!-- 預測區分隔 -->
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
 
           <!-- 主階梯線 -->
           <path d="M 0,160 L 220,160 L 220,176 L 440,176 L 440,200 L 660,200 L 660,160 L 880,160 L 880,124 L 990,124 L 990,100 L 1075,100"
@@ -801,7 +801,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>3 月理事會已維持利率不動、立場偏鴿，6 月理事會為下一觀察點。<span class="key">未來 6 個月維持平台期的機率最高</span>，2027 上半年才有實質降息可能。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -836,15 +836,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">2.40%</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">2.10%</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">1.80%</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">1.50%</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">1.20%</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -866,9 +866,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <line x1="0" y1="68" x2="1200" y2="68" stroke="rgba(212,90,90,0.3)" stroke-width="0.8" stroke-dasharray="4 4"/>
           <text x="12" y="62" font-family="Noto Serif TC" font-size="12" fill="#D45A5A">17 年新高水位 2.31%</text>
 
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
 
           <defs>
             <linearGradient id="gradA02" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -935,7 +935,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">預期：</strong>新青安將於 <span class="key">2026 年 7 月 31 日退場</span>，<span class="key">低利率貸款比重降低將進一步推高加權平均</span>，可能在 2026 Q3 突破 2.4%。客戶若有送件需求，<span class="key">6 月底前是相對低點</span>，建議業務團隊優先處理利率敏感型客戶。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -969,15 +969,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">1,000 億</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">800 億</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">600 億</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">400 億</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">200 億</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -990,9 +990,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <text x="1200" y="305" text-anchor="end">預測</text>
           </g>
 
-          <line x1="1050" y1="30" x2="1050" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1050" y="30" width="150" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1060" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1050" y1="30" x2="1050" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1050" y="30" width="150" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1060" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
 
           <!-- 平均線 -->
           <line x1="0" y1="160" x2="1050" y2="160" stroke="rgba(229,199,127,0.25)" stroke-width="0.5" stroke-dasharray="2 4"/>
@@ -1077,12 +1077,12 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <!-- ▼▼▼ A03 預測區段改版：刪掉原「末班車衝高柱」，整段換成以下 ▼▼▼ -->
 
           <!-- 4 月實際柱（533.36 億；fill 請對齊你既有月柱的顏色）-->
-          <rect x="1044.5" y="184" width="11" height="106" rx="2" fill="rgba(201,169,97,0.55)"/>
+          <rect x="1044.5" y="184" width="11" height="106" rx="2" fill="rgba(255,255,255,0.55)"/>
 
           <!-- 預測分隔線 + 背景區（金色虛線，比照 A01/A02）-->
-          <line x1="1058" y1="30" x2="1058" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1058" y="30" width="142" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1066" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">觀察區間</text>
+          <line x1="1058" y1="30" x2="1058" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1058" y="30" width="142" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1066" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">觀察區間</text>
 
           <!-- 5-6 月不確定性扇形（450—750 億，半透明，不畫成確定衝高）-->
           <path d="M 1058,184 L 1100,119 L 1100,209 Z" fill="rgba(232,147,72,0.1)"/>
@@ -1149,10 +1149,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <div class="chart-insight-title">當前處境解讀</div>
         當前 533 億較 2021 年高峰 950 億 <span class="down-key">縮減 44%</span>，市場交易明顯冷卻。第一季累計 <span class="key">1,525.5 億，創 3 年新低</span>，4 月單月降至 533 億、延續縮減。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>新青安將於 2026 年 7 月 31 日截止，5-6 月為末班車觀察窗口，量能可能在 <span class="key">450-750 億</span>間波動；惟 4 月已續縮至 <span class="down-key">533 億</span>、末班車尚未顯現，後續仍需觀察。<br><br>
-        <strong style="color: var(--gold-bright);">對你業務的意義：</strong>新青安 7 月底截止前，若末班車買盤回籠，5-6 月案件量可能短線升溫，<span class="key">人力與文件流程宜先備好</span>；惟 4 月量能仍縮，亦須留意旺季不旺。中長期不論末班車是否顯現，主軸都在轉向<span class="key">整合貸款、再融資等非新青安客群</span>——這塊不受新青安退場影響，是更穩的基本盤。
+        <strong style="color: var(--gold-bright);">市場意涵：</strong>新青安 7 月底截止前，若末班車買盤回籠，5-6 月市場案件量可能短線升溫，<span class="key">有意申辦者宜及早備齊文件</span>；惟 4 月量能仍縮，亦須留意旺季不旺。中長期而言，<span class="key">不受新青安退場影響的整合貸款、再融資需求</span>，是市場更穩定的基本盤。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -1185,15 +1185,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <!-- 背景格線 -->
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="44" text-anchor="end">40%</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="104" text-anchor="end">37%</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="164" text-anchor="end">34%</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="224" text-anchor="end">31%</text>
-            <line x1="0" y1="265" x2="1200" y2="265" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <line x1="0" y1="265" x2="1200" y2="265" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
             <text x="-8" y="269" text-anchor="end">28%</text>
           </g>
           <!-- 警戒線 30% -->
@@ -1246,10 +1246,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
       <div class="chart-insight">
         <div class="chart-insight-title">當前處境解讀</div>
-        不動產放款集中度 35.56% 已連續 <span class="key">12 季超越 30% 警戒線</span>，顯示銀行業對房地產授信高度集中。金管會 2025 年起對超標銀行實施差別提存，預期 2026 年下半年集中度將緩步下降，但短期仍屬<span class="up-key">偏高風險區</span>。對房貸承辦而言，這意味銀行核貸態度趨於保守，成數與利率空間均受壓縮。
+        不動產放款集中度 35.56% 已連續 <span class="key">12 季超越 30% 警戒線</span>，顯示銀行業對房地產授信高度集中。金管會 2025 年起對超標銀行實施差別提存，預期 2026 年下半年集中度將緩步下降，但短期仍屬<span class="up-key">偏高風險區</span>。對申貸者而言，這意味銀行核貸態度趨於保守，成數與利率空間均受壓縮。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">集中度偏高影響核貸成數 · 了解如何為客戶爭取最佳條件</span>
+        <span class="cta-strip-text">集中度偏高影響核貸成數 · 了解你的貸款條件還有哪些優化空間</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -1292,11 +1292,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           </defs>
           <!-- 格線 -->
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="60" x2="1200" y2="60" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="60" x2="1200" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="64" text-anchor="end">高</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="164" text-anchor="end">中</text>
-            <line x1="0" y1="255" x2="1200" y2="255" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <line x1="0" y1="255" x2="1200" y2="255" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
             <text x="-8" y="259" text-anchor="end">低</text>
           </g>
           <!-- X 軸月份 -->
@@ -1344,7 +1344,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
       <div class="chart-insight">
         <div class="chart-insight-title">當前處境解讀</div>
-        新青安貸款 2024 年初達申請峰值後持續回落，主因補貼資格審查趨嚴與<span class="key">申請戶已遞減至準資格族群</span>。2026 年內政部預計調整利率補貼上限，將進一步壓低新案量。對承辦人而言，依賴新青安轉介的案源將萎縮，需<span class="up-key">提前布局一般房貸戶資源</span>。
+        新青安貸款 2024 年初達申請峰值後持續回落，主因補貼資格審查趨嚴與<span class="key">申請戶已遞減至準資格族群</span>。2026 年內政部預計調整利率補貼上限，將進一步壓低新案量。整體而言，新青安在市場案源中的占比將逐步萎縮，<span class="up-key">一般房貸與既有屋主的融資需求</span>重新成為市場主軸。
       </div>
       <div class="cta-strip">
         <span class="cta-strip-text">新青安補貼收緊 · 提早規劃讓您的客戶把握最後視窗</span>
@@ -1402,13 +1402,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             </linearGradient>
           </defs>
           <g font-family="IBM Plex Mono" font-size="11" fill="#7A7565">
-            <line x1="0" y1="50" x2="1200" y2="50" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="50" x2="1200" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="54" text-anchor="end">9萬</text>
-            <line x1="0" y1="120" x2="1200" y2="120" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="120" x2="1200" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="124" text-anchor="end">7萬</text>
-            <line x1="0" y1="190" x2="1200" y2="190" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="190" x2="1200" y2="190" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-8" y="194" text-anchor="end">5萬</text>
-            <line x1="0" y1="260" x2="1200" y2="260" stroke="rgba(201,169,97,0.08)" stroke-width="0.5"/>
+            <line x1="0" y1="260" x2="1200" y2="260" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
             <text x="-8" y="264" text-anchor="end">3萬</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="9" fill="#7A7565">
@@ -1465,10 +1465,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       </div>
       <div class="chart-insight">
         <div class="chart-insight-title">當前處境解讀</div>
-        買賣移轉棟數 2026 Q1 達 60,403 棟，年增 8.7%，顯示市場回溫但仍<span class="key">未回到 2021 年榮景水位</span>。交易量持續正成長，剛需買盤穩定，但投資性需求受高利率壓制。對承辦人而言，量能回升代表<span class="up-key">新案詢問度提高</span>，是積極開發新客戶的良機。
+        買賣移轉棟數 2026 Q1 達 60,403 棟，年增 8.7%，顯示市場回溫但仍<span class="key">未回到 2021 年榮景水位</span>。交易量持續正成長，剛需買盤穩定，但投資性需求受高利率壓制。對市場而言，量能回升代表<span class="up-key">詢問與看屋活動增加</span>，買賣雙方的議價與比較也會更活躍。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">市場量能回升，是深耕客戶的最佳時機 · 立即預約評估</span>
+        <span class="cta-strip-text">市場量能回升，正是檢視貸款條件的好時機 · 立即預約評估</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -1476,7 +1476,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div><!-- /indicators B -->
 
   <footer class="footer">
-    <div>鋮馨租賃有限公司 · 內部風險情報系統</div>
+    <div>鋮馨租賃有限公司 · 房貸市場儀表板</div>
     <div style="margin-top: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">房貸儀表板 v0.4 設計示範 · 完整版將擴充至 18 項指標</div>
   </footer>
 
@@ -1517,5 +1517,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 })();
 </script>
 <script src="cx-line-modal.js" defer></script>
+<div style="max-width:1200px;margin:0 auto;padding:8px 24px 56px;position:relative;z-index:1">
+  <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.85;letter-spacing:0.02em;max-width:760px;margin:0 auto">
+    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁解讀與預測為市場觀察性質，僅供參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+  </div>
+</div>
 </body>
 </html>

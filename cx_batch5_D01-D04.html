@@ -21,16 +21,16 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-deep: #0A0E1A; --bg-panel: #111726; --bg-elev: #161D30; --bg-chart: #0D1322;
-  --line: rgba(201, 169, 97, 0.15); --line-strong: rgba(201, 169, 97, 0.35); --line-soft: rgba(201, 169, 97, 0.08);
-  --gold: #C9A961; --gold-bright: #E5C77F; --gold-dim: #8A7340;
+  --bg-deep: #0e0e10; --bg-panel: #141416; --bg-elev: #1b1b1e; --bg-chart: #121214;
+  --line: rgba(255, 255, 255, 0.15); --line-strong: rgba(255, 255, 255, 0.35); --line-soft: rgba(255, 255, 255, 0.08);
+  --gold: #FFFFFF; --gold-bright: #FFFFFF; --gold-dim: rgba(255,255,255,0.45);
   --ink: #E8E3D5; --ink-mid: #B0AB9A; --ink-dim: #7A7565;
   --green: #5FBA7D; --yellow: #E5C77F; --orange: #E89348; --red: #D45A5A; --blue: #6BA8C9; --purple: #9B8AC4;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: var(--bg-deep); color: var(--ink); font-family: "Noto Sans TC", sans-serif; font-weight: 400; font-size: 16px; min-height: 100vh; overflow-x: hidden; padding-top: 48px; }
-body::before { content: ""; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.04) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(107, 168, 201, 0.03) 0%, transparent 40%); pointer-events: none; z-index: 0; }
-body::after { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(201, 169, 97, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 97, 0.02) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; z-index: 0; }
+body::before { content: ""; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(107, 168, 201, 0.03) 0%, transparent 40%); pointer-events: none; z-index: 0; }
+body::after { content: ""; position: fixed; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; z-index: 0; }
 .container { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 36px 44px; }
 .batch-header { text-align: center; padding: 32px 0; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
 .batch-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 28px; color: var(--ink); letter-spacing: 0.15em; margin-bottom: 8px; }
@@ -73,7 +73,7 @@ body::after { content: ""; position: fixed; inset: 0; background-image: linear-g
 .context-cell.now { border-left-color: var(--orange); background: rgba(232, 147, 72, 0.05); }
 .context-cell.high { border-left-color: var(--red); }
 .context-cell.low { border-left-color: var(--green); }
-.context-cell.forecast { border-left-color: var(--gold); background: rgba(201, 169, 97, 0.05); }
+.context-cell.forecast { border-left-color: var(--gold); background: rgba(255, 255, 255, 0.05); }
 .context-label { font-family: "Noto Serif TC", serif; font-size: 13px; color: var(--ink-dim); letter-spacing: 0.15em; margin-bottom: 10px; }
 .context-value { font-family: "IBM Plex Mono", monospace; font-size: 24px; font-weight: 500; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
 .context-value.orange { color: var(--orange); }
@@ -81,7 +81,7 @@ body::after { content: ""; position: fixed; inset: 0; background-image: linear-g
 .context-value.green { color: var(--green); }
 .context-value.gold { color: var(--gold); }
 .context-time { font-family: "Noto Sans TC", sans-serif; font-size: 13px; color: var(--ink-mid); letter-spacing: 0.05em; line-height: 1.5; }
-.chart-insight { margin-top: 28px; padding: 24px 28px; background: rgba(201, 169, 97, 0.04); border-left: 3px solid var(--gold-dim); font-family: "Noto Sans TC", sans-serif; font-size: 15px; line-height: 1.95; color: var(--ink); letter-spacing: 0.04em; font-weight: 300; }
+.chart-insight { margin-top: 28px; padding: 24px 28px; background: rgba(255, 255, 255, 0.04); border-left: 3px solid var(--gold-dim); font-family: "Noto Sans TC", sans-serif; font-size: 15px; line-height: 1.95; color: var(--ink); letter-spacing: 0.04em; font-weight: 300; }
 .chart-insight-title { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 15px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 .chart-insight-title::before { content: "◆"; color: var(--gold); font-size: 10px; }
 .chart-insight .key { color: var(--gold-bright); font-weight: 500; }
@@ -97,7 +97,7 @@ nav{
   height:48px!important;padding:0 24px!important;
   z-index:1000!important;box-sizing:border-box!important;
   background:rgba(10,14,26,0.95)!important;
-  border-bottom:.5px solid rgba(201,169,97,0.2)!important;
+  border-bottom:.5px solid rgba(255,255,255,0.2)!important;
   backdrop-filter:blur(12px)!important;
 }
 .nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important;flex-shrink:0}
@@ -107,19 +107,19 @@ nav .nav-logo span{color:var(--gold)!important;font-size:14px!important;font-wei
 .nav-links{display:flex!important;align-items:center!important}
 .nav-links a{color:var(--ink-mid)!important;opacity:1!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;white-space:nowrap}
 .nav-links a:hover{color:var(--ink)!important}
-.nav-cta{background:var(--gold)!important;color:#0A0E1A!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap}
-.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap;flex-shrink:0}
+.nav-cta{background:#fff!important;color:#141414!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap}
+.nav-radar-btn{background:transparent!important;border:1px solid rgba(255,255,255,0.6)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap;flex-shrink:0}
 .cx-burger span{background:var(--ink)!important}
-.cx-mobile-menu{background:#0D1322!important}
-.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(201,169,97,0.12)!important}
+.cx-mobile-menu{background:#121214!important}
+.cx-mobile-menu a{color:var(--ink)!important;border-bottom-color:rgba(255,255,255,0.12)!important}
 @media(max-width:600px){
   .chart-container{padding:12px 8px 8px 36px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .chart-container svg{width:780px;min-width:780px;height:280px;}
 }
 /* ── CTA 諮詢條 ── */
-.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(201,169,97,0.22);background:rgba(201,169,97,0.04);}
+.cta-strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 22px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.04);}
 .cta-strip-text{font-family:"Noto Sans TC",sans-serif;font-size:13px;color:var(--ink-mid);letter-spacing:0.06em;}
-.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0A0E1A;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
+.cta-strip-btn{flex-shrink:0;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;color:#0e0e10;background:var(--gold);padding:8px 22px;text-decoration:none;letter-spacing:0.10em;transition:background .2s;}
 .cta-strip-btn:hover{background:var(--gold-bright);}
 @media(max-width:600px){.cta-strip{flex-direction:column;align-items:flex-start;}.cta-strip-text{font-size:12px;}}
 </style>
@@ -180,15 +180,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">5.5%</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">4.5%</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">3.5%</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">2.5%</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">0.5%</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -205,9 +205,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <text x="1080" y="305">2026</text>
             <text x="1200" y="305" text-anchor="end">2027 預</text>
           </g>
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
           <defs>
             <linearGradient id="gradD01" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#9B8AC4" stop-opacity="0.25"/>
@@ -262,7 +262,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <strong style="color: var(--gold-bright);">對台灣的傳導：</strong>美債殖利率每升 50bp，<span class="up-key">台灣公債殖利率約跟升 30-40bp</span>，將推升銀行資金成本。<span class="key">若美債續升，台灣房貸利率有進一步上升空間</span>，本來預期央行降息救房市的可能性會延後。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -294,15 +294,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">33.0元</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">32.0元</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">31.0元</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">30.0元</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">27.5元</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -319,9 +319,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <text x="1080" y="305">2026</text>
             <text x="1200" y="305" text-anchor="end">2027 預</text>
           </g>
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
           <defs>
             <linearGradient id="gradD02" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#6BA8C9" stop-opacity="0.2"/>
@@ -373,10 +373,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <div class="chart-insight-title">當前處境解讀</div>
         當前 31.428 處於十年區間 <span class="key">中位</span>，台幣相對東亞貨幣偏強。對比 2021 強勢期 27.66 與 2022 弱勢期 32.85，當前位於兩者中點。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>在中美關係改善、外資回流訊號下，台幣可能進一步升值至 30.8-31.0。但央行為保護出口會適度干預，<span class="key">突破 30 是心理關卡</span>。<br><br>
-        <strong style="color: var(--gold-bright);">對你業務的影響：</strong>台幣升值代表熱錢流入，過去經驗顯示熱錢流入會推升資產價格（股市、房市）。但<span class="up-key">央行擔心熱錢推升房價，可能祭出更嚴選擇性信用管制</span>。<span class="key">這對你的高 LTV 案件、第二屋以上案件是個提防訊號</span>，建議審慎評估這類客戶的還款能力。
+        <strong style="color: var(--gold-bright);">市場意涵：</strong>台幣升值代表熱錢流入，過去經驗顯示熱錢流入會推升資產價格（股市、房市）。但<span class="up-key">央行擔心熱錢推升房價，可能祭出更嚴選擇性信用管制</span>。<span class="key">高成數貸款與第二屋以上的申貸條件可能進一步收緊</span>，相關規劃宜預留彈性、審慎評估還款能力。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -408,15 +408,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">25K點</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">20K點</text>
-            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="164" text-anchor="end">15K點</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">10K點</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">5K點</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -433,9 +433,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <text x="1080" y="305">2026</text>
             <text x="1200" y="305" text-anchor="end">2027 預</text>
           </g>
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
           <defs>
             <linearGradient id="gradD03" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#6BA8C9" stop-opacity="0.25"/>
@@ -489,10 +489,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <div class="chart-insight-title">當前處境解讀</div>
         十年累計漲幅 <span class="up-key">+199%</span>，遠超房價同期 76.9% 漲幅，<span class="key">財富效應仍是房市購買力來源</span>。當前外資連賣 5 日累計 82 億，<span class="key">情緒轉趨保守</span>。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>AI 題材續強支撐指數，但獲利了結壓力大，未來 6 個月於 22,000-24,500 區間震盪。<span class="key">關鍵變數是外資態度與台積電財報</span>。<br><br>
-        <strong style="color: var(--gold-bright);">對你業務的傳導：</strong>股市每跌 10%，房市財富效應減弱，<span class="up-key">購屋意願下降約 5-8%</span>。<span class="key">建議監控外資連續賣超天數</span>，若達 10 日以上將是房市購買力的警訊。客戶若提到「股市賺到頭期款」要特別注意還款穩定性。
+        <strong style="color: var(--gold-bright);">市場意涵：</strong>經驗上股市每跌 10%，房市財富效應減弱，<span class="up-key">購屋意願下降約 5-8%</span>。<span class="key">外資連續賣超達 10 日以上</span>，常是房市購買力轉弱的警訊。以股市獲利充當頭期款的購屋規劃，須特別留意波動下的還款穩定性。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -524,15 +524,15 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-container">
         <svg viewBox="0 0 1200 320" preserveAspectRatio="none">
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
-            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="40" x2="1200" y2="40" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="44" text-anchor="end">4.0%</text>
-            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="100" x2="1200" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="104" text-anchor="end">3.0%</text>
             <line x1="0" y1="160" x2="1200" y2="160" stroke="rgba(212,90,90,0.4)" stroke-width="1" stroke-dasharray="4 3"/>
             <text x="-12" y="164" text-anchor="end" fill="#D45A5A">央行目標 2.0%</text>
-            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(201,169,97,0.05)" stroke-width="0.5"/>
+            <line x1="0" y1="220" x2="1200" y2="220" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
             <text x="-12" y="224" text-anchor="end">1.0%</text>
-            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(201,169,97,0.1)" stroke-width="0.5"/>
+            <line x1="0" y1="280" x2="1200" y2="280" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
             <text x="-12" y="284" text-anchor="end">0%</text>
           </g>
           <g font-family="IBM Plex Mono" font-size="12" fill="#7A7565">
@@ -549,9 +549,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
             <text x="1080" y="305">2026</text>
             <text x="1200" y="305" text-anchor="end">2027 預</text>
           </g>
-          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(201,169,97,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
-          <rect x="1075" y="30" width="125" height="260" fill="rgba(201,169,97,0.02)"/>
-          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(201,169,97,0.6)">預測區間</text>
+          <line x1="1075" y1="30" x2="1075" y2="290" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <rect x="1075" y="30" width="125" height="260" fill="rgba(255,255,255,0.02)"/>
+          <text x="1085" y="48" font-family="Noto Serif TC" font-size="12" fill="rgba(255,255,255,0.6)">預測區間</text>
           <defs>
             <linearGradient id="gradD04" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stop-color="#E5C77F" stop-opacity="0.25"/>
@@ -603,10 +603,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <div class="chart-insight-title">當前處境解讀</div>
         當前 2.14% <span class="up-key">高於央行目標 2.0%</span>，較 2022 通膨高峰 3.59% 已大幅回落，但仍存在<span class="key">黏性通膨</span>問題（核心 CPI 居高不下）。<br><br>
         <strong style="color: var(--gold-bright);">預期：</strong>未來 6 個月維持 2.0-2.3% 區間，<span class="key">短期內回不到央行 2% 目標</span>。2026 H2 若油價走低、電價回穩，年底有機會跌破 2%。<br><br>
-        <strong style="color: var(--gold-bright);">對你業務的關鍵意義：</strong>CPI 高於 2% <span class="key">就是央行不敢降息的最大理由</span>。市場期待的「央行救房市降息」短期難實現，<span class="key">客戶要做好高利率持續一年以上的心理準備</span>。鋮馨應主打「整合貸款降月付」、「轉貸省息」等產品，幫客戶在高利環境下優化現金流。
+        <strong style="color: var(--gold-bright);">市場意涵：</strong>CPI 高於 2% <span class="key">是央行難以降息的主因</span>。市場期待的「降息救房市」短期不易實現，<span class="key">高利率環境可能持續一年以上</span>。對背著多筆貸款的家庭而言，這段期間檢視整合貸款、轉貸等月付優化選項，會比單純等降息更務實。
       </div>
       <div class="cta-strip">
-        <span class="cta-strip-text">這項指標正影響你客戶的房貸條件 · 立即了解因應策略</span>
+        <span class="cta-strip-text">這項指標正影響你的房貸條件 · 立即了解因應策略</span>
         <a href="#" class="cta-strip-btn">免費諮詢 →</a>
       </div>
     </div>
@@ -633,5 +633,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 })();
 </script>
 <script src="cx-line-modal.js" defer></script>
+<div style="max-width:1200px;margin:0 auto;padding:8px 24px 56px;position:relative;z-index:1">
+  <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.85;letter-spacing:0.02em;max-width:760px;margin:0 auto">
+    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁解讀與預測為市場觀察性質，僅供參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+  </div>
+</div>
 </body>
 </html>

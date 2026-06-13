@@ -23,39 +23,38 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root{
-  --accent:#6BA8C9;--accent-glow:rgba(107,168,201,0.32);--accent-bg:rgba(107,168,201,0.10);
-  --bg-deep:#0B0818;--bg-panel:#120E22;--bg-elev:#1A1335;--bg-strip:#0F0525;
-  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;--gold:#C9A961;--line:rgba(255,255,255,0.07);
+  --accent:#FFFFFF;--accent-glow:transparent;--accent-bg:rgba(255,255,255,0.08);
+  --bg-deep:#0e0e10;--bg-panel:#141416;--bg-elev:#1b1b1e;--bg-strip:#141416;
+  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;--gold:#FFFFFF;--line:rgba(255,255,255,0.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(107,168,201,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,168,201,0.03) 1px,transparent 1px);background-size:52px 52px;}
-nav{background:rgba(11,8,24,0.96)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;position:fixed!important;top:0!important;left:0!important;right:0!important;height:48px!important;padding:0 24px!important;z-index:1000!important;box-sizing:border-box!important;backdrop-filter:blur(12px)!important;}
+nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid rgba(255,255,255,0.12)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;position:fixed!important;top:0!important;left:0!important;right:0!important;height:48px!important;padding:0 24px!important;z-index:1000!important;box-sizing:border-box!important;backdrop-filter:blur(12px)!important;}
 .nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important}
 .nav-logo span{color:var(--gold)!important;font-size:15px!important;font-weight:500!important}
 .nav-center{display:flex!important;align-items:center!important;gap:24px!important}
 .nav-links{display:flex!important;align-items:center!important}
 .nav-links a{color:var(--ink-mid)!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;transition:color .2s!important}
 .nav-links a:hover{color:var(--ink)!important}
-.nav-cta{background:var(--gold)!important;color:#0A0E1A!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:700!important;text-decoration:none!important;white-space:nowrap!important}
-.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important;padding:6px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important}
+.nav-cta{background:#fff!important;color:#141414!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:700!important;text-decoration:none!important;white-space:nowrap!important}
+.nav-radar-btn{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,0.6)!important;padding:5px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important}
 @media(max-width:768px){.nav-center,.nav-radar-btn{display:none!important}}
-.hero{position:relative;overflow:hidden;min-height:500px;background:linear-gradient(135deg,#160838 0%,#251058 55%,#160838 100%);}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background-image:linear-gradient(rgba(107,168,201,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(107,168,201,0.05) 1px,transparent 1px);background-size:44px 44px;transform:skewY(-5deg);transform-origin:left bottom;opacity:0.8;}
-.hero::after{content:"";position:absolute;top:0;right:0;width:65%;height:100%;pointer-events:none;z-index:1;background:radial-gradient(ellipse at 68% 38%,rgba(107,168,201,0.28) 0%,transparent 60%);}
+.hero{position:relative;overflow:hidden;min-height:480px;background:#0e0e10;border-bottom:1px solid rgba(255,255,255,0.12);}
+
+
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
 .hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:72px 40px 80px;display:flex;align-items:center;}
 .hero-left{flex:0 0 430px;max-width:430px}
 .series-badge{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.38em;color:var(--accent);margin-bottom:20px;}
 .series-badge::before{content:"";width:28px;height:1px;background:var(--accent)}
-.hero-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:56px;color:#fff;letter-spacing:0.06em;line-height:1.12;margin-bottom:18px;text-shadow:0 0 50px var(--accent-glow);}
+.hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
 .hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:var(--accent);color:#0B0818;padding:13px 28px;border-radius:6px;font-size:14px;font-weight:700;letter-spacing:0.05em;transition:filter .2s;}
-.btn-fill:hover{filter:brightness(1.12)}
-.btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1.5px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.72);padding:13px 22px;border-radius:6px;font-size:14px;font-weight:500;transition:border-color .2s,color .2s;}
+.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#141414;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
+.btn-fill:hover{opacity:.85}
+.btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
-.stats-strip{background:linear-gradient(180deg,#0F0525 0%,#120E22 100%);border-top:1px solid rgba(107,168,201,0.18);border-bottom:1px solid rgba(107,168,201,0.18);padding:56px 0;position:relative;z-index:1;}
+.stats-strip{background:#141416;border-top:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);padding:56px 0;position:relative;z-index:1;}
 .stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
 .stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
 .stat-ring{text-align:center}.stat-ring svg{display:block}
@@ -69,18 +68,18 @@ nav{background:rgba(11,8,24,0.96)!important;border-bottom:.5px solid rgba(201,16
 .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
 .sec-line{flex:1;height:1px;background:var(--line)}.sec-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
 .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px;}
-.card{background:var(--bg-panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:28px 24px 26px;transition:background .2s;}
+.card{background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
 .card:hover{background:var(--bg-elev)}
-.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--accent);background:var(--accent-bg);padding:4px 10px;border-radius:3px;display:inline-block;margin-bottom:14px;}
+.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:rgba(255,255,255,0.72);border:1px solid rgba(255,255,255,0.2);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
 .card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:0.07em;margin-bottom:12px;}
 .card-desc{font-size:13px;line-height:1.9;color:var(--ink-dim);letter-spacing:0.03em;}
-.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid var(--line);border-radius:12px;}
+.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-radius:0;}
 .cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
 .cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:#fff;letter-spacing:0.08em;margin-bottom:28px;}
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 .cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:8px;font-size:15px;font-weight:700;background:var(--accent);color:#0B0818;transition:filter .2s;}
-.cta-main:hover{filter:brightness(1.12)}
-.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:8px;font-size:15px;font-weight:500;border:1.5px solid rgba(255,255,255,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
+.cta-main:hover{opacity:.85}
+.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(255,255,255,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
 .cta-back:hover{border-color:rgba(255,255,255,0.42);color:#fff}
 @media(max-width:900px){
   .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
@@ -105,9 +104,6 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </script>
 
 <div class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="video-topic-b.mp4" type="video/mp4">
-  </video>
   <div class="hero-inner">
     <div class="hero-left">
       <div class="series-badge">SERIES B · 交易量價</div>
@@ -127,7 +123,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#6BA8C9" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
           <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
         </svg>
@@ -135,7 +131,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#6BA8C9" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
           <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
         </svg>
@@ -143,7 +139,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#6BA8C9" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
           <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">6都</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">區域比較</text>
         </svg>
@@ -152,7 +148,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div class="stats-sep"></div>
     <div class="stats-text">
       <div class="stats-title">B 系列 · 交易量價</div>
-      <div class="stats-body">涵蓋全國買賣移轉棟數、信義與國泰房價指數，以及六大都市量價走勢比較，B 系列是研判房市多空轉折、識別區域輪動的最直觀數據基礎。</div>
+      <div class="stats-body">涵蓋全國買賣移轉棟數、信義與國泰房價指數，以及六大都市量價走勢比較，B 系列是研判房市多空轉折、識別區域輪動的直觀數據基礎。</div>
     </div>
   </div>
 </div>
@@ -202,5 +198,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </div>
 
 
+<div style="max-width:1100px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:1">
+  <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
+    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+  </div>
+</div>
 </body>
 </html>
