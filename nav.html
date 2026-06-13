@@ -14,23 +14,23 @@
 .cx-mobile-menu a::after{content:"›";color:#c7c7cc;font-size:22px;font-weight:300}
 .cx-mobile-menu a.cx-mobile-cta{margin-top:18px;background:#16A34A;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-cta::after{content:""}
-.cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%);color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
+.cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:#141414;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-radar::after{content:""}
 .cx-mobile-menu a.active{color:#c8102e}
 body.cx-menu-open{overflow:hidden}
 body.cx-menu-open .cx-social-dock{display:none}
 
-/* 房貸儀表板按鈕 — 漸層高級藍 */
+/* 房貸儀表板按鈕 — 精品輪廓款（去漸層藍，對齊全站精品系統） */
 .nav-radar-btn{
   font-size:12px;font-weight:600;
-  background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%);
-  color:#fff;padding:6px 14px;border-radius:20px;
-  white-space:nowrap;letter-spacing:.03em;
+  background:transparent;
+  color:#141414;padding:5px 14px;border-radius:20px;
+  border:1px solid #141414;
+  white-space:nowrap;letter-spacing:.06em;
   text-decoration:none;
-  box-shadow:0 2px 10px rgba(29,111,164,0.35);
-  transition:filter .2s,box-shadow .2s;
+  transition:background .2s,color .2s;
 }
-.nav-radar-btn:hover{filter:brightness(1.12);box-shadow:0 3px 16px rgba(29,143,214,0.5)}
+.nav-radar-btn:hover{background:#141414;color:#fff}
 
 
 .nav-center{display:flex;align-items:center;gap:24px}

@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="房貸儀表板 — 台灣最完整的房貸市場指標追蹤平台，涵蓋央行利率、房價指數、交易量等 18 項關鍵指標，協助房貸承辦精準掌握市場脈動。">
+<meta name="description" content="房貸儀表板 — 台灣房貸市場 18 項關鍵指標一站追蹤：央行利率、房價指數、交易量與國際資金訊號，資料取自公開統計，協助你掌握市場脈動。">
 <meta name="keywords" content="房貸儀表板,台灣房貸,房市指標,利率追蹤,房貸承辦,市場分析,房價指數,央行利率">
 <meta property="og:title" content="房貸市場儀表板｜18 項利率房價交易量指標追蹤｜鋮馨租賃">
-<meta property="og:description" content="房貸儀表板 — 台灣最完整的房貸市場指標追蹤平台，涵蓋央行利率、房價指數、交易量等 18 項關鍵指標，協助房貸承辦精準掌握市場脈動。">
+<meta property="og:description" content="房貸儀表板 — 台灣房貸市場 18 項關鍵指標一站追蹤：央行利率、房價指數、交易量與國際資金訊號，資料取自公開統計，協助你掌握市場脈動。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cx468.com.tw/radar-index.html">
 <title>房貸市場儀表板｜18 項利率房價交易量指標追蹤｜鋮馨租賃</title>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="房貸市場儀表板｜18 項利率房價交易量指標追蹤｜鋮馨租賃">
-<meta name="twitter:description" content="房貸儀表板 — 台灣最完整的房貸市場指標追蹤平台，涵蓋央行利率、房價指數、交易量等 18 項關鍵指標，協助房貸承辦精準掌握市場脈動。">
+<meta name="twitter:description" content="房貸儀表板 — 台灣房貸市場 18 項關鍵指標一站追蹤：央行利率、房價指數、交易量與國際資金訊號，資料取自公開統計，協助你掌握市場脈動。">
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="canonical" href="https://cx468.com.tw/radar-index.html">
@@ -23,396 +23,250 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root {
-  --bg-deep:#0A0E1A;--bg-panel:#111726;--bg-elev:#161D30;
-  --line:rgba(201,169,97,0.13);--line-strong:rgba(201,169,97,0.32);
-  --gold:#C9A961;--gold-bright:#E5C77F;--gold-dim:#8A7340;
-  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;
-  --cyan:#06B6D4;--orange:#E89348;--red:#D45A5A;--blue:#6BA8C9;--purple:#9B8AC4;
+  --bg:#0e0e10;--panel:rgba(255,255,255,0.02);
+  --hair:rgba(255,255,255,0.12);--hair-strong:rgba(255,255,255,0.26);
+  --ink:#fff;--ink-mid:rgba(255,255,255,0.72);--ink-dim:rgba(255,255,255,0.45);
+  --red:#C61B1C;
+  --st-green:#4ADE80;--st-yellow:#FCD34D;--st-red:#F87171;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  background:var(--bg-deep);color:var(--ink);
+  background:var(--bg);color:var(--ink);
   font-family:"Noto Sans TC",sans-serif;
   min-height:100vh;padding-top:48px;
 }
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    radial-gradient(circle at 15% 45%,rgba(201,169,97,0.14) 0%,transparent 52%),
-    radial-gradient(circle at 78% 12%,rgba(201,169,97,0.07) 0%,transparent 45%),
-    radial-gradient(circle at 55% 88%,rgba(6,182,212,0.04) 0%,transparent 40%);
-}
-body::after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(201,169,97,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,169,97,0.02) 1px,transparent 1px);
-  background-size:52px 52px;
-}
 
-nav{background:rgba(10,14,26,0.92)!important;border-bottom:.5px solid rgba(201,169,97,0.2)!important}
-nav .nav-logo span{color:var(--gold)!important}
+nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid var(--hair)!important}
+nav .nav-logo span{color:#fff!important}
 .nav-links a{color:var(--ink-mid)!important;opacity:1!important}
-.nav-links a:hover{color:var(--ink)!important}
-.nav-cta{background:var(--gold)!important;color:#0A0E1A!important}
-.nav-radar-btn{background:linear-gradient(130deg,#0f2d6b 0%,#1a5fb4 38%,#1d8fd6 70%,#4ab8e8 100%)!important;color:#fff!important}
-.cx-burger span{background:var(--ink)!important}
+.nav-links a:hover{color:#fff!important}
+.nav-cta{background:#fff!important;color:#141414!important}
+.nav-radar-btn{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,0.6)!important;box-shadow:none!important}
+.cx-burger span{background:#fff!important}
 
 .page-wrap{
   position:relative;z-index:1;
   max-width:1100px;margin:0 auto;
-  padding:60px 32px 100px;
+  padding:72px 32px 100px;
 }
 
-/* ═══════════════════════════════════
-   WAVE HERO
-═══════════════════════════════════ */
+/* ═══ HERO ═══ */
 .hero{
   position:relative;overflow:hidden;
   display:flex;align-items:center;gap:0;
   min-height:500px;
-  padding:80px max(32px, calc((100vw - 1036px) / 2)) 100px max(32px, calc((100vw - 1036px) / 2));
+  padding:96px max(32px, calc((100vw - 1036px) / 2)) 104px max(32px, calc((100vw - 1036px) / 2));
   margin-bottom:0;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid var(--hair);
+  background:var(--bg);
 }
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(100deg,rgba(6,8,20,0.88) 0%,rgba(6,8,20,0.72) 38%,rgba(6,8,20,0.22) 65%,transparent 100%);
+  background:linear-gradient(100deg,rgba(14,14,16,0.92) 0%,rgba(14,14,16,0.7) 38%,rgba(14,14,16,0.15) 70%,transparent 100%);
 }
-
-/* Left content */
-.hero-left{
-  flex:0 0 440px;max-width:440px;
-  position:relative;z-index:2;
-}
-
-/* Hero video background */
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.38;pointer-events:none;}
-
-/* Right canvas */
-.hero-right{
-  flex:1;min-height:400px;
-  position:relative;z-index:2;
-}
+.hero-left{flex:0 0 460px;max-width:460px;position:relative;z-index:2}
+.hero-right{flex:1;min-height:400px;position:relative;z-index:2}
 #hero-wave{
   position:absolute;
   inset:-30px -32px -30px -80px;
   width:calc(100% + 112px);height:calc(100% + 60px);
 }
 
-
-/* ── 系統標籤列 ── */
+/* 系統標籤列（髮絲 eyebrow） */
 .hero-sys{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:24px;
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:28px;
   font-family:"IBM Plex Mono",monospace;
-  font-size:10px;letter-spacing:0.32em;
-  color:var(--gold-dim);text-transform:uppercase;
+  font-size:10px;letter-spacing:0.3em;
+  color:var(--ink-mid);text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.4);
+  padding-bottom:8px;
   position:relative;z-index:2;
 }
-.sys-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 7px rgba(201,169,97,0.75);
-  animation:dotPulse 2s ease-in-out infinite;
-}
-.sys-dot:nth-child(3){animation-delay:.6s}
-.sys-dot:nth-child(5){animation-delay:1.2s}
-@keyframes dotPulse{
-  0%,100%{opacity:0.3;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.5)}
-}
 
-/* ── 主標題 ── */
 .hero-title{
-  font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:54px;color:#fff;letter-spacing:0.10em;
-  line-height:1.15;margin-bottom:14px;
+  font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
+  font-size:60px;color:#fff;letter-spacing:0.04em;
+  line-height:1.18;margin-bottom:16px;
   position:relative;z-index:2;
-  text-shadow:
-    0 0 40px rgba(201,169,97,0.65),
-    0 0 80px rgba(201,169,97,0.30),
-    0 2px 4px rgba(0,0,0,0.95),
-    0 4px 24px rgba(0,0,0,0.80);
 }
-
-/* ── 英文副標 ── */
 .hero-en{
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;letter-spacing:0.28em;
-  color:var(--gold-bright);opacity:1;
-  margin-bottom:38px;position:relative;z-index:2;
-  text-shadow:0 1px 6px rgba(0,0,0,0.9);
+  color:var(--ink-dim);
+  margin-bottom:40px;position:relative;z-index:2;
 }
 
-/* ── 數據面板 ── */
+/* 數據面板（白襯線數字、髮絲框） */
 .hero-metrics{
   display:inline-flex;align-items:stretch;
-  margin-bottom:32px;position:relative;z-index:2;
-  border:1px solid rgba(201,169,97,0.45);
-  border-radius:10px;overflow:hidden;
-  background:rgba(8,10,22,0.72);
-  backdrop-filter:blur(14px);
-  box-shadow:0 4px 32px rgba(0,0,0,0.55);
+  margin-bottom:36px;position:relative;z-index:2;
+  border:1px solid var(--hair-strong);
+  background:rgba(14,14,16,0.55);
 }
 .hero-metric{
-  padding:16px 30px;text-align:center;
-  border-right:1px solid rgba(201,169,97,0.18);
+  padding:18px 32px;text-align:center;
+  border-right:1px solid var(--hair);
 }
 .hero-metric:last-child{border-right:0}
 .metric-num{
-  font-family:"IBM Plex Mono",monospace;font-weight:500;
-  font-size:28px;letter-spacing:0.04em;
-  color:var(--gold-bright);line-height:1;margin-bottom:7px;
-  text-shadow:0 0 18px rgba(201,169,97,0.55);
+  font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
+  font-size:30px;letter-spacing:0.02em;
+  color:#fff;line-height:1;margin-bottom:8px;
 }
 .metric-label{
   font-family:"Noto Sans TC",sans-serif;font-size:11px;
-  color:var(--ink-mid);letter-spacing:0.18em;
+  color:var(--ink-dim);letter-spacing:0.18em;
 }
 
-/* ── 標籤群 ── */
-.hero-tags{
-  display:flex;flex-wrap:wrap;gap:10px;
-  position:relative;z-index:2;
-}
+/* 標籤群（方角髮絲鈕） */
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:2}
 .htag{
-  font-family:"Noto Sans TC",sans-serif;font-size:13px;font-weight:600;
-  letter-spacing:0.08em;color:rgba(232,227,213,0.92);
-  border:1.5px solid rgba(201,169,97,0.5);
-  padding:10px 20px;border-radius:6px;
-  background:rgba(8,10,22,0.65);backdrop-filter:blur(8px);
-  transition:border-color .2s,color .2s,background .2s,transform .15s;
-  text-decoration:none;display:inline-flex;align-items:center;gap:7px;
-  box-shadow:0 2px 12px rgba(0,0,0,0.45);
+  font-family:"Noto Sans TC",sans-serif;font-size:13px;font-weight:500;
+  letter-spacing:0.14em;color:#fff;
+  border:1px solid rgba(255,255,255,0.55);
+  padding:12px 22px;border-radius:0;
+  background:transparent;
+  transition:background .2s,color .2s;
+  text-decoration:none;display:inline-flex;align-items:center;
 }
-.htag::before{content:"▸";font-size:11px;color:var(--gold);}
-.htag:hover{
-  border-color:rgba(201,169,97,0.9);color:#fff;
-  background:rgba(201,169,97,0.14);
-  transform:translateY(-2px);
-  box-shadow:0 4px 20px rgba(201,169,97,0.18);
-}
+.htag:hover{background:#fff;color:#141414}
 
-/* ── 裝飾圓圈 ── */
-.hero-deco{
-  position:absolute;bottom:22px;right:48px;
-  display:flex;gap:12px;z-index:2;pointer-events:none;
-}
-.deco-ring{
-  width:36px;height:36px;border-radius:50%;
-  border:1.5px solid rgba(6,182,212,0.42);
-  box-shadow:0 0 10px rgba(6,182,212,0.15) inset,0 0 5px rgba(6,182,212,0.10);
-}
-
-/* ── Section heading ── */
-.section-heading{
-  display:flex;align-items:center;gap:16px;margin-bottom:28px;
-}
-.section-heading-line{flex:1;height:1px;background:var(--line)}
+/* Section heading */
+.section-heading{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.section-heading-line{flex:1;height:1px;background:var(--hair)}
 .section-heading-text{
   font-family:"IBM Plex Mono",monospace;font-size:10px;
   letter-spacing:0.35em;color:var(--ink-dim);
   text-transform:uppercase;white-space:nowrap;
 }
 
-/* ══════════════════════════
-   TAB STACK
-══════════════════════════ */
-.tab-stack{display:flex;flex-direction:column;gap:14px}
-
+/* ═══ 系列列表（編輯式髮絲列） ═══ */
+.tab-stack{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--hair)}
 .tab-item{
-  display:flex;align-items:center;gap:22px;
-  text-decoration:none;
-  border-radius:0 999px 999px 0;
-  padding:22px 56px 22px 28px;
-  position:relative;overflow:hidden;
-  transition:filter .25s,box-shadow .25s;cursor:pointer;
+  display:flex;align-items:center;gap:24px;
+  text-decoration:none;width:100%;
+  border-bottom:1px solid var(--hair);
+  padding:26px 8px;
+  position:relative;
+  transition:background .2s;cursor:pointer;
 }
-.tab-demo{width:42%}
-.tab-a   {width:55%}
-.tab-b   {width:68%}
-.tab-c   {width:81%}
-.tab-d   {width:94%}
-
-.tab-item:hover{filter:brightness(1.14);box-shadow:0 4px 24px rgba(0,0,0,0.35)}
+.tab-item:hover{background:rgba(255,255,255,0.04)}
 .tab-item:hover .tab-arrow{transform:translateX(8px)}
 
-/* DEMO — cyan */
-.tab-demo{
-  background:linear-gradient(100deg,rgba(6,182,212,0.14) 0%,rgba(6,182,212,0.03) 100%);
-  border:1px solid rgba(6,182,212,0.32);border-left:4px solid var(--cyan);
-}
-.tab-demo .tab-badge{background:var(--cyan);color:#0A0E1A}
-.tab-demo .tab-title{color:var(--cyan)}
-.tab-demo .tab-arrow{color:var(--cyan)}
-.tab-demo .tab-codes{color:rgba(6,182,212,0.7)}
-
-/* A — orange */
-.tab-a{
-  background:linear-gradient(100deg,rgba(232,147,72,0.13) 0%,rgba(232,147,72,0.03) 100%);
-  border:1px solid rgba(232,147,72,0.28);border-left:4px solid var(--orange);
-}
-.tab-a .tab-badge{background:rgba(232,147,72,0.82);color:#0A0E1A}
-.tab-a .tab-title{color:var(--orange)}
-.tab-a .tab-arrow{color:var(--orange)}
-.tab-a .tab-codes{color:rgba(232,147,72,0.65)}
-
-/* B — blue */
-.tab-b{
-  background:linear-gradient(100deg,rgba(107,168,201,0.14) 0%,rgba(107,168,201,0.03) 100%);
-  border:1px solid rgba(107,168,201,0.3);border-left:4px solid var(--blue);
-}
-.tab-b .tab-badge{background:var(--blue);color:#0A0E1A}
-.tab-b .tab-title{color:var(--blue)}
-.tab-b .tab-arrow{color:var(--blue)}
-.tab-b .tab-codes{color:rgba(107,168,201,0.7)}
-
-/* C — red */
-.tab-c{
-  background:linear-gradient(100deg,rgba(212,90,90,0.14) 0%,rgba(212,90,90,0.03) 100%);
-  border:1px solid rgba(212,90,90,0.3);border-left:4px solid var(--red);
-}
-.tab-c .tab-badge{background:var(--red);color:#fff}
-.tab-c .tab-title{color:var(--red)}
-.tab-c .tab-arrow{color:var(--red)}
-.tab-c .tab-codes{color:rgba(212,90,90,0.7)}
-
-/* D — purple */
-.tab-d{
-  background:linear-gradient(100deg,rgba(155,138,196,0.14) 0%,rgba(155,138,196,0.03) 100%);
-  border:1px solid rgba(155,138,196,0.3);border-left:4px solid var(--purple);
-}
-.tab-d .tab-badge{background:var(--purple);color:#fff}
-.tab-d .tab-title{color:var(--purple)}
-.tab-d .tab-arrow{color:var(--purple)}
-.tab-d .tab-codes{color:rgba(155,138,196,0.7)}
-
-/* Badge */
 .tab-badge{
-  flex-shrink:0;width:58px;height:58px;border-radius:50%;
+  flex-shrink:0;width:56px;height:56px;
+  border:1px solid var(--hair-strong);
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:2px;
+  align-items:center;justify-content:center;gap:3px;
 }
 .badge-letter{
-  font-family:"Noto Serif TC",serif;font-weight:700;
-  font-size:20px;line-height:1;
+  font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
+  font-size:20px;line-height:1;color:#fff;
 }
 .badge-letter.small{
   font-family:"IBM Plex Mono",monospace;
-  font-size:10px;letter-spacing:0.08em;font-weight:500;
+  font-size:9px;letter-spacing:0.08em;font-weight:500;color:#fff;
 }
 .badge-count{
   font-family:"IBM Plex Mono",monospace;
-  font-size:9px;letter-spacing:0.04em;opacity:0.75;line-height:1;
+  font-size:9px;letter-spacing:0.04em;color:var(--ink-dim);line-height:1;
 }
-
-/* Content */
 .tab-content{flex:1;min-width:0}
 .tab-label{
   font-family:"IBM Plex Mono",monospace;font-size:10px;
   letter-spacing:0.3em;color:var(--ink-dim);
-  margin-bottom:5px;text-transform:uppercase;
+  margin-bottom:6px;text-transform:uppercase;
 }
 .tab-title{
-  font-family:"Noto Serif TC",serif;font-weight:700;
-  font-size:20px;letter-spacing:0.1em;margin-bottom:6px;
+  font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
+  font-size:21px;letter-spacing:0.06em;margin-bottom:7px;color:#fff;
 }
 .tab-codes{
   font-family:"IBM Plex Mono",monospace;font-size:11px;
-  letter-spacing:0.06em;
+  letter-spacing:0.06em;color:var(--ink-dim);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-
-/* Arrow */
 .tab-arrow{
   flex-shrink:0;font-family:"Noto Serif TC",serif;
-  font-size:26px;font-weight:300;
-  transition:transform .2s;margin-right:-24px;
+  font-size:24px;font-weight:300;color:#fff;
+  transition:transform .2s;
 }
 
-/* Footer */
-.footer-note{
-  margin-top:64px;padding-top:28px;
-  border-top:1px solid rgba(201,169,97,0.40);
-  text-align:center;font-family:"Noto Serif TC",serif;
-  font-size:13px;color:var(--gold);letter-spacing:0.12em;
-  text-shadow:0 0 18px rgba(201,169,97,0.25);
-}
-.footer-note span{color:rgba(201,169,97,0.55);}
-
-/* ── 18項指標總覽 ── */
+/* ═══ 18項指標總覽 ═══ */
 .overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .series-block{
-  border:1px solid rgba(201,169,97,0.14);
-  background:rgba(10,12,24,0.6);
-  border-radius:12px;overflow:hidden;
-  position:relative;
-  box-shadow:0 4px 24px rgba(0,0,0,0.3);
-  transition:box-shadow .22s,border-color .22s,transform .22s;
+  border:1px solid var(--hair);
+  background:var(--panel);
+  overflow:hidden;position:relative;
+  transition:border-color .2s,background .2s;
   cursor:pointer;
 }
-.series-block:hover{
-  border-color:rgba(201,169,97,0.38);
-  box-shadow:0 8px 36px rgba(0,0,0,0.5);
-  transform:translateY(-3px);
-}
-.series-block::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--sb-accent,rgba(201,169,97,0.5));
-}
-.sb-header{display:flex;align-items:center;gap:10px;padding:13px 16px 13px 18px;border-bottom:1px solid rgba(201,169,97,0.09)}
-.sb-badge{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:700;flex-shrink:0}
-.sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1}
-.sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:#F87171;letter-spacing:0.1em;flex-shrink:0;
-  background:rgba(248,113,113,0.1);padding:2px 7px;border-radius:4px;border:1px solid rgba(248,113,113,0.25);}
-@keyframes redPulse{0%,100%{box-shadow:0 0 4px rgba(248,113,113,0.5)}50%{box-shadow:0 0 10px rgba(248,113,113,1),0 0 18px rgba(248,113,113,0.4)}}
-@keyframes greenGlow{0%,100%{box-shadow:0 0 4px rgba(74,222,128,0.4)}50%{box-shadow:0 0 8px rgba(74,222,128,0.8)}}
-.ov-row{display:flex;align-items:center;gap:9px;padding:10px 16px 10px 18px;border-bottom:1px solid rgba(201,169,97,0.05);transition:background .18s,padding-left .18s}
+.series-block:hover{border-color:var(--hair-strong);background:rgba(255,255,255,0.04)}
+.sb-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--hair)}
+.sb-badge{width:28px;height:28px;border:1px solid var(--hair-strong);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;flex-shrink:0;color:#fff!important;background:transparent!important}
+.sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1;color:var(--ink-mid)!important}
+.sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--st-red);letter-spacing:0.1em;flex-shrink:0;
+  padding:3px 8px;border:1px solid rgba(248,113,113,0.35);}
+.ov-row{display:flex;align-items:center;gap:9px;padding:11px 18px;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .18s}
 .ov-row:last-child{border-bottom:0}
-.ov-row:hover{background:rgba(201,169,97,0.06);padding-left:22px}
-.ov-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ov-dot.green{background:#4ADE80;animation:greenGlow 2.8s ease-in-out infinite}
-.ov-dot.yellow{background:#FCD34D;box-shadow:0 0 5px rgba(252,211,77,0.5)}
-.ov-dot.red{background:#F87171;animation:redPulse 1.6s ease-in-out infinite}
+.ov-row:hover{background:rgba(255,255,255,0.04)}
+.ov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ov-dot.green{background:var(--st-green)}
+.ov-dot.yellow{background:var(--st-yellow)}
+.ov-dot.red{background:var(--st-red)}
 .ov-code{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);min-width:28px;flex-shrink:0}
-.ov-name{flex:1;font-size:12px;color:var(--ink);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-name{flex:1;font-size:12px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ov-val{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0}
-.ov-val.sg{color:#4ADE80;text-shadow:0 0 8px rgba(74,222,128,0.4)}
-.ov-val.sy{color:#FCD34D;text-shadow:0 0 8px rgba(252,211,77,0.3)}
-.ov-val.sr{color:#F87171;text-shadow:0 0 8px rgba(248,113,113,0.4)}
+.ov-val.sg{color:var(--st-green)}
+.ov-val.sy{color:var(--st-yellow)}
+.ov-val.sr{color:var(--st-red)}
 .ov-trend{font-size:11px;flex-shrink:0;margin-left:2px;line-height:1}
-.ov-trend.up{color:#4ADE80}
-.ov-trend.flat{color:#FCD34D}
-.ov-trend.dn{color:#F87171}
+.ov-trend.up{color:var(--st-green)}
+.ov-trend.flat{color:var(--st-yellow)}
+.ov-trend.dn{color:var(--st-red)}
 .ov-date{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);white-space:nowrap;flex-shrink:0;margin-left:4px}
 .ov-meta{margin-top:10px;margin-bottom:60px;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.2em;color:var(--ink-dim)}
 
+/* Footer */
+.footer-note{
+  margin-top:72px;padding-top:32px;
+  border-top:1px solid var(--hair);
+  text-align:center;font-family:"Noto Serif TC",serif;
+  font-size:13px;color:var(--ink-mid);letter-spacing:0.12em;
+}
+.footer-note span{color:var(--ink-dim)}
+.footer-disclaim{
+  margin-top:18px;text-align:center;
+  font-family:"Noto Sans TC",sans-serif;font-size:11px;
+  color:rgba(255,255,255,0.35);line-height:1.85;
+  max-width:720px;margin-left:auto;margin-right:auto;letter-spacing:0.02em;
+}
+
 /* Mobile */
 @media(max-width:900px){
-  .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:60px 20px 80px;position:relative}
+  .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:64px 20px 80px;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}
-  .hero-right{position:absolute;inset:0;width:100%;height:100%;opacity:0.6;z-index:1}
+  .hero-right{position:absolute;inset:0;width:100%;height:100%;opacity:0.32;z-index:1}
   #hero-wave{inset:0;width:100%;height:100%}
-  .hero-title{font-size:34px}
-  .hero-deco{right:24px;bottom:12px}
-  .hero-metrics{display:flex;width:100%;border-radius:8px}
+  .hero-title{font-size:36px}
+  .hero-metrics{display:flex;width:100%}
   .hero-metric{flex:1;padding:14px 10px}
-  .metric-num{font-size:22px}
-  .page-wrap{padding:48px 20px 80px}
-  .tab-demo,.tab-a,.tab-b,.tab-c,.tab-d{width:100%}
+  .metric-num{font-size:24px}
+  .page-wrap{padding:56px 20px 80px}
+  .tab-item{gap:14px;padding:22px 4px}
   .tab-badge{width:46px;height:46px}
   .badge-letter{font-size:17px}
-  .badge-letter.small{font-size:9px}
+  .badge-letter.small{font-size:8px}
   .tab-title{font-size:17px}
-  .tab-codes{font-size:10px}
-  .tab-arrow{font-size:22px;margin-right:-28px}
+  .tab-codes{font-size:10px;white-space:normal}
+  .tab-arrow{font-size:20px}
   .overview-grid{grid-template-columns:1fr}
 }
 </style>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "CollectionPage", "name": "房貸市場儀表板｜18 項利率房價交易量指標追蹤｜鋮馨租賃", "description": "房貸儀表板 — 台灣最完整的房貸市場指標追蹤平台，涵蓋央行利率、房價指數、交易量等 18 項關鍵指標，協助房貸承辦精準掌握市場脈動。", "url": "https://cx468.com.tw/radar-index.html", "inLanguage": "zh-TW", "isPartOf": {"@type": "WebSite", "name": "鋮馨租賃有限公司", "url": "https://cx468.com.tw/"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"}, {"@type": "ListItem", "position": 2, "name": "房貸儀表板", "item": "https://cx468.com.tw/radar-index.html"}]}, "mainEntity": {"@type": "ItemList", "name": "房貸儀表板分類", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "房貸金融 A系列", "url": "https://cx468.com.tw/topic-a.html"}, {"@type": "ListItem", "position": 2, "name": "交易量價 B系列", "url": "https://cx468.com.tw/topic-b.html"}, {"@type": "ListItem", "position": 3, "name": "風險預警 C系列", "url": "https://cx468.com.tw/topic-c.html"}, {"@type": "ListItem", "position": 4, "name": "國際資金 D系列", "url": "https://cx468.com.tw/topic-d.html"}]}}
+{"@context": "https://schema.org", "@type": "CollectionPage", "name": "房貸市場儀表板｜18 項利率房價交易量指標追蹤｜鋮馨租賃", "description": "房貸儀表板 — 台灣房貸市場 18 項關鍵指標一站追蹤：央行利率、房價指數、交易量與國際資金訊號，資料取自公開統計，協助你掌握市場脈動。", "url": "https://cx468.com.tw/radar-index.html", "inLanguage": "zh-TW", "isPartOf": {"@type": "WebSite", "name": "鋮馨租賃有限公司", "url": "https://cx468.com.tw/"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"}, {"@type": "ListItem", "position": 2, "name": "房貸儀表板", "item": "https://cx468.com.tw/radar-index.html"}]}, "mainEntity": {"@type": "ItemList", "name": "房貸儀表板分類", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "房貸金融 A系列", "url": "https://cx468.com.tw/topic-a.html"}, {"@type": "ListItem", "position": 2, "name": "交易量價 B系列", "url": "https://cx468.com.tw/topic-b.html"}, {"@type": "ListItem", "position": 3, "name": "風險預警 C系列", "url": "https://cx468.com.tw/topic-c.html"}, {"@type": "ListItem", "position": 4, "name": "國際資金 D系列", "url": "https://cx468.com.tw/topic-d.html"}]}}
 </script>
 </head>
 <body>
@@ -434,18 +288,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
 <!-- ── WAVE HERO ── -->
 <div class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="video-hero.mp4" type="video/mp4">
-  </video>
   <div class="hero-left">
-    <div class="hero-sys">
-      <div class="sys-dot"></div>
-      房貸儀表板
-      <div class="sys-dot"></div>
-      知識庫結構
-      <div class="sys-dot"></div>
-      SYS · 2025
-    </div>
+    <div class="hero-sys">房貸儀表板 · 知識庫結構 · SYS 2026</div>
 
     <h1 class="hero-title">房貸<br>儀表板</h1>
     <div class="hero-en">CHENGXIN · MORTGAGE STRESS RADAR · KNOWLEDGE BASE</div>
@@ -573,6 +417,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     鋮馨租賃有限公司 · 房貸儀表板<br>
     <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:6px;display:block;">A 系列 房貸金融 · B 系列 交易量價 · C 系列 風險預警 · D 系列 國際資金</span>
   </div>
+  <div class="footer-disclaim">
+    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，實際貸款條件依個案而定，最終核貸由金融機構決定。
+  </div>
 
 </div>
 
@@ -580,10 +427,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 /* ── 18項指標總覽 fetch ── */
 (function(){
   var SC = {
-    A:{color:'#E89348',bg:'rgba(232,147,72,0.14)',label:'房貸金融',en:'BANKING'},
-    B:{color:'#6BA8C9',bg:'rgba(107,168,201,0.14)',label:'交易量價',en:'VOL & PRICE'},
-    C:{color:'#D45A5A',bg:'rgba(212,90,90,0.14)',label:'風險預警',en:'RISK WARNING'},
-    D:{color:'#9B8AC4',bg:'rgba(155,138,196,0.14)',label:'國際資金',en:'GLOBAL CAP'}
+    A:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'房貸金融',en:'BANKING'},
+    B:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'交易量價',en:'VOL & PRICE'},
+    C:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'風險預警',en:'RISK WARNING'},
+    D:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'國際資金',en:'GLOBAL CAP'}
   };
   fetch('cx_data.json')
     .then(function(r){return r.json();})
@@ -599,7 +446,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var reds=inds.filter(function(i){return i.status==='red';}).length;
         var trendMap={green:{cls:'up',arrow:'↑'},yellow:{cls:'flat',arrow:'→'},red:{cls:'dn',arrow:'↓'}};
         var seriesLink={A:'topic-a.html',B:'topic-b.html',C:'topic-c.html',D:'topic-d.html'};
-        html+='<div class="series-block" style="--sb-accent:'+sc.color+'" onclick="location.href=\''+seriesLink[s]+'\'" role="link" tabindex="0">';
+        html+='<div class="series-block" onclick="location.href=\''+seriesLink[s]+'\'" role="link" tabindex="0">';
         html+='<div class="sb-header">';
         html+='<div class="sb-badge" style="background:'+sc.bg+';color:'+sc.color+'">'+s+'</div>';
         html+='<div class="sb-title" style="color:'+sc.color+'">'+sc.label+'&nbsp;<span style="color:var(--ink-dim);font-size:8px">'+sc.en+'</span></div>';
