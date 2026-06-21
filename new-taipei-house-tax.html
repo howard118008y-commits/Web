@@ -26,9 +26,10 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
 @media(max-width:580px){.g3{grid-template-columns:1fr 1fr}.g4{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:480px){.g3,.g4,.era-grid{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:12px;font-weight:600;color:#6e6e73}
-.field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+.field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s;width:100%;box-sizing:border-box;max-width:100%}
 .field input:focus,.field select:focus{border-color:#1e3a5f}
 .field input::placeholder{color:#b0b0b0}
 .hint{font-size:11px;color:#9ca3af;margin-top:2px}

@@ -165,6 +165,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 
 .btn-purple{background:#C61B1C;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+@media(max-width:480px){.rate-grid{grid-template-columns:1fr!important}.rt{font-size:11px}}
 </style>
   <script src="include.js" defer></script>
 
@@ -497,7 +498,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <!-- 稅率表 -->
 <div class="card">
   <div class="card-title">房地合一稅率速查表</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div class="rate-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
     <div>
       <div style="font-size:13px;font-weight:700;color:#C61B1C;margin-bottom:10px">1.0版（105/1/1–110/6/30取得）</div>
       <table class="rt" id="table10">
