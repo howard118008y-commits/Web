@@ -48,6 +48,10 @@ HEADERS = {
     'Accept': 'application/json, text/html, */*',
 }
 
+# 部分政府站憑證有問題，下面多處用 verify=False；靜音 InsecureRequestWarning
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 # 主計總處 CPI XML（每月更新一次，約月初發布上月數據）
 # 若 GitHub Actions 回報 404，請更新此 URL（從 ws.dgbas.gov.tw 取最新路徑）
 DGBAS_CPI_XML = 'https://ws.dgbas.gov.tw/001/Upload/461/relfile/11525/230555/pr0101a1m.xml'
@@ -107,6 +111,9 @@ def quarter_str(date_str):
 
 def get(url, **kwargs):
     kwargs.setdefault('timeout', 55)
+    # 部分政府網站(pip.moi/banking.gov.tw/ws.dgbas)憑證鏈缺中介或缺 SKI，
+    # Python/OpenSSL 嚴格驗證會失敗(curl -k 仍 200)。公開統計資料，跳過憑證驗證。
+    kwargs.setdefault('verify', False)
     try:
         r = requests.get(url, headers=HEADERS, **kwargs)
         r.raise_for_status()
@@ -960,7 +967,7 @@ def fetch_D04():
     # 主計總處每月初發布上月 CPI，XML 檔路徑每月更新
     # DGBAS_CPI_XML 常數定義在本檔案頂部，每月新資料發布後需更新路徑
     try:
-        r = requests.get(DGBAS_CPI_XML, headers=HEADERS, timeout=55)
+        r = requests.get(DGBAS_CPI_XML, headers=HEADERS, timeout=55, verify=False)
         if r.status_code == 200 and r.content:
             root = ET.fromstring(r.content)
             obs_list = []
@@ -1002,7 +1009,7 @@ def fetch_D04():
         url = ('https://nstatdb.dgbas.gov.tw/dgbasAll/webMain.aspx'
                '?sys=100&funid=qryout&funid2=A040101010'
                '&cycle=41&outkind=11&outmode=8&fldlst=111111111111')
-        r = requests.get(url, timeout=55, headers=HEADERS)
+        r = requests.get(url, timeout=55, headers=HEADERS, verify=False)
         if HAS_BS4 and r.status_code == 200:
             soup = BeautifulSoup(r.text, 'lxml')
             tds  = soup.find_all('td')
