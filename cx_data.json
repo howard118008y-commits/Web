@@ -77,7 +77,7 @@
       "code": "B02",
       "series": "B",
       "name": "信義房價指數",
-      "value": "Q1最新",
+      "value": "量縮價穩",
       "status": "yellow",
       "note": "量縮但價格仍具支撐",
       "updated": "2026-Q1"
@@ -86,7 +86,7 @@
       "code": "B03",
       "series": "B",
       "name": "國泰房價指數",
-      "value": "Q1最新",
+      "value": "預售趨緩",
       "status": "yellow",
       "note": "預售市場趨緩",
       "updated": "2026-Q1"
