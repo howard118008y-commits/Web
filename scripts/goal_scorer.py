@@ -472,7 +472,7 @@ def score_page(html: str, url: str, *,
                lighthouse: Optional[dict] = None,
                rich_results: Optional[dict] = None,
                prev_score: Optional[float] = None,
-               round: Optional[int] = None,
+               loop_round: Optional[int] = None,
                archived: bool = False,
                judge: bool = True,
                judge_model: str = JUDGE_MODEL,
@@ -503,13 +503,13 @@ def score_page(html: str, url: str, *,
         return ScoreResult(url, target_queries, gates, gates_passed, dims,
                            None, prev_score,
                            VERDICT_REVERT if not gates_passed else VERDICT_PASS_GATES,
-                           reasons or ["triage：gate 全過（未評分）"], None, round)
+                           reasons or ["triage：gate 全過（未評分）"], None, loop_round)
 
     # ── gate 掛掉 → 直接 REVERT，省下 LLM 成本 ──
     if not gates_passed:
         return ScoreResult(url, target_queries, gates, False, dims,
                            None, prev_score, VERDICT_REVERT,
-                           reasons + ["gate 未過 → 直接 REVERT（略過 LLM 評審）"], None, round)
+                           reasons + ["gate 未過 → 直接 REVERT（略過 LLM 評審）"], None, loop_round)
 
     # ── 技術分（量測） ──
     dims["technical"] = technical_score(soup, jsonld_types, jsonld_errors, lighthouse, rich_results)
@@ -521,7 +521,7 @@ def score_page(html: str, url: str, *,
     except Exception as ex:
         return ScoreResult(url, target_queries, gates, gates_passed, dims,
                            None, prev_score, VERDICT_ERROR,
-                           reasons + [f"judge 失敗：{ex}"], judge_model, round)
+                           reasons + [f"judge 失敗：{ex}"], judge_model, loop_round)
 
     comp = j.get("compliance", {}) or {}
     if comp.get("violation"):
@@ -529,7 +529,7 @@ def score_page(html: str, url: str, *,
         return ScoreResult(url, target_queries, gates, False, dims,
                            None, prev_score, VERDICT_REVERT,
                            reasons + [f"LLM 判定合規違規 → REVERT：{comp.get('detail', '')[:80]}"],
-                           judge_model, round)
+                           judge_model, loop_round)
 
     for k in LLM_DIMS:
         node = (j.get("dimensions", {}) or {}).get(k, {}) or {}
@@ -541,7 +541,7 @@ def score_page(html: str, url: str, *,
     if any(dims[k].score is None for k in WEIGHTS):
         return ScoreResult(url, target_queries, gates, gates_passed, dims,
                            None, prev_score, VERDICT_ERROR,
-                           reasons + ["維度分數不齊，無法計總分"], judge_model, round)
+                           reasons + ["維度分數不齊，無法計總分"], judge_model, loop_round)
     total = round(sum(dims[k].score * WEIGHTS[k] for k in WEIGHTS) / 100, 2)
 
     # ── 裁決 ──
@@ -553,7 +553,7 @@ def score_page(html: str, url: str, *,
         verdict, why = VERDICT_REVERT, f"總分未進步（{prev_score} → {total}），REVERT"
 
     return ScoreResult(url, target_queries, gates, gates_passed, dims,
-                       total, prev_score, verdict, [why], judge_model, round)
+                       total, prev_score, verdict, [why], judge_model, loop_round)
 
 
 # ───────────────────────── jsonl 寫入 ─────────────────────────
