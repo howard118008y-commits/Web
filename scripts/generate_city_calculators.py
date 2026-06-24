@@ -274,6 +274,12 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
   <p>{name}・{year}年・鋮馨租賃</p>
 </div>
 
+<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#fff;border:1px solid #e7e0d3;border-left:3px solid #0369a1;border-radius:8px">
+  <div style="font-size:12px;font-weight:700;color:#0369a1;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
+  <p style="font-size:15.5px;line-height:1.8;color:#1d1d1f;margin:0 0 10px"><strong>{name}地價稅怎麼算？關鍵看「累進起點地價」{T_fmt} 元。</strong>自用住宅用地適用 2‰ 優惠稅率；一般用地以申報地價總額對照累進起點，超過部分採六級累進（10‰–55‰）。本工具支援行政區・地段・地號查詢，輸入即可估算當年度應納稅額。</p>
+  <div style="font-size:11px;color:#86868b;line-height:1.65">累進起點地價依{name}每年公告為準；本試算僅供參考，實際稅額以稅捐稽徵機關核定為準。</div>
+</div>
+
 <div class="wrap">
 {est_warning}
 <div class="notice">
