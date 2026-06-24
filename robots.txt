@@ -11,6 +11,8 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /*.json$
+Disallow: /scripts/
+Disallow: /*.jsonl$
 
 # 測試中工具區（不對外公開、未列入主站導覽）
 Disallow: /tools-lab/
