@@ -270,7 +270,10 @@ def check_gates(soup, text, jsonld_types, jsonld_errors,
     gates = []
 
     # 1) 可索引（封存頁不檢查）
-    robots = soup.find("meta", attrs={"name": re.compile("robots", re.I)})
+    # 只看 <head> 的 robots meta：include 片段(nav/footer)自帶 noindex 會被 innerHTML 注入 body，
+    # 但 body 的 meta robots Google 會忽略，不可當作本頁 noindex。
+    head = soup.head or soup
+    robots = head.find("meta", attrs={"name": re.compile("robots", re.I)})
     noindex = bool(robots and "noindex" in (robots.get("content", "")).lower())
     canonical = soup.find("link", attrs={"rel": re.compile("canonical", re.I)})
     if archived:

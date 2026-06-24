@@ -81,10 +81,13 @@ def main():
     ap.add_argument("--queries",nargs="*",default=[])
     ap.add_argument("--only",nargs="*")
     ap.add_argument("--panel",action="store_true",help="judge 代表頁(PANEL)，每頁帶其在地查詢")
+    ap.add_argument("--judge-all",action="store_true",help="judge 全部真實頁(noindex 封存頁只跑 gate)")
     ap.add_argument("--prev",type=float,default=None)
     args=ap.parse_args()
 
-    if args.panel:
+    if args.judge_all:
+        pages=args.only or real_pages(); judge=True; qmap=PANEL
+    elif args.panel:
         pages=[p for p in (args.only or PANEL) if p in PANEL]; judge=True
         qmap=PANEL
     elif args.page:
@@ -98,10 +101,14 @@ def main():
     results=[]
     for fn in pages:
         h=rendered.get(fn,"")
-        archived = bool(re.search(r'name=["\']robots["\'][^>]*noindex', h, re.I))
+        # archived 只看頁面自己的 <head>(原始檔)，避免 include 片段注入 body 的 noindex 誤判
+        raw=open(ROOT/fn,encoding="utf-8",errors="ignore").read()
+        head_raw=raw[:raw.lower().find("</head>")+7] if "</head>" in raw.lower() else raw
+        archived = bool(re.search(r'name=["\']robots["\'][^>]*noindex', head_raw, re.I))
         url=f"{BASE}/{fn}"
         queries = qmap.get(fn, args.queries)
-        res=score_page(h, url, target_queries=queries, judge=judge,
+        page_judge = judge and not archived      # 封存頁不花 LLM(不該優化)
+        res=score_page(h, url, target_queries=queries, judge=page_judge,
                        archived=archived, prev_score=args.prev)
         append_score(str(JSONL), res.to_jsonl_row())
         results.append((fn,res))
