@@ -172,6 +172,10 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 <meta property="og:title" content="新北市房屋稅試算 2026｜鋮馨租賃">
 <meta property="og:description" content="新北市房屋稅試算，依建造年月、構造別、用途、路段率計算預估稅額。">
 <meta property="og:url" content="https://cx468.com.tw/new-taipei-house-tax.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="新北市房屋稅試算 2026｜鋮馨租賃">
+<meta name="twitter:description" content="新北市房屋稅試算，依建造年月、構造別、用途、路段率計算預估稅額。">
+<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');</script>

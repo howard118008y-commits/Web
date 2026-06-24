@@ -249,6 +249,10 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 <meta property="og:title" content="{name}地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
 <meta property="og:description" content="{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，自用住宅 2‰ 與一般用地六級累進稅率。">
 <meta property="og:url" content="https://cx468.com.tw/{cfg['file']}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{name}地價稅試算 2026｜行政區地段地號查詢｜鋮馨租賃">
+<meta name="twitter:description" content="{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，自用住宅 2‰ 與一般用地六級累進稅率。">
+<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
