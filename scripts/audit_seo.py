@@ -13,6 +13,10 @@ def audit(path):
     is_page = has(s, r'<html') and has(s, r'<head')
     if not is_page:
         return None
+    # 排除 noindex 頁（demo/封存頁不是 SEO/GEO/AEO 目標，不應計入信號覆蓋率）
+    head = s[:s.lower().find('</head>')] if '</head>' in s.lower() else s
+    if has(head, r'name=["\']robots["\'][^>]*noindex'):
+        return None
     r = {}
     # --- SEO ---
     r['title']       = has(s, r'<title>[^<]{5,}</title>')
