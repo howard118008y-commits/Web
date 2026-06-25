@@ -23,7 +23,8 @@ LIGHTHOUSE = Path(__file__).resolve().parent.parent.parent / "鋮馨開放式自
 def run_lighthouse(url):
     if not LIGHTHOUSE.exists(): return None
     try:
-        out = subprocess.run([str(LIGHTHOUSE), url, "--only-categories=seo,performance",
+        # desktop 預設：反映真實效能(行動slow-4G模擬會把外部字體載入放大成假的10s LCP)
+        out = subprocess.run([str(LIGHTHOUSE), url, "--preset=desktop", "--only-categories=seo,performance",
             "--output=json", "--output-path=stdout", "--quiet",
             "--chrome-flags=--headless=new --no-sandbox"], capture_output=True, text=True, timeout=120)
         data = json.loads(out.stdout)
