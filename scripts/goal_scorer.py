@@ -379,8 +379,14 @@ def collect_evidence(soup, text, jsonld_types) -> dict:
     tel = soup.select('a[href^="tel:"]')
     line = [a for a in soup.find_all("a", href=True)
             if any(k in a["href"].lower() for k in ("line.me", "lin.ee")) or "line" in a.get_text().lower()]
-    internal = [a for a in soup.find_all("a", href=True)
-                if a["href"].startswith("/") or CANONICAL["site"] in a["href"]]
+    def _is_internal(h):
+        h = (h or "").strip()
+        if not h or h.startswith(("#", "mailto:", "tel:", "javascript:")):
+            return False
+        if h.startswith("http"):
+            return CANONICAL["site"] in h
+        return h.startswith("/") or h.endswith(".html")  # 站內相對連結(如 second-mortgage.html)也算
+    internal = [a for a in soup.find_all("a", href=True) if _is_internal(a["href"])]
     tables = soup.find_all("table")
     lists = [u for u in soup.find_all(["ul", "ol"]) if len(u.find_all("li")) >= 3]
 
