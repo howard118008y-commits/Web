@@ -15,8 +15,27 @@ git commit/revert 由人/上層決定（這支只給 verdict，不自動動 git�
 渲染走本地 HTTP server + Playwright，會載入 include.js 的 nav/footer（footer 帶 NAP），
 所以 NAP gate 看得到 footer 的地址/電話。
 """
-import sys, os, re, glob, json, argparse, http.server, socketserver, threading, functools
+import sys, os, re, glob, json, argparse, http.server, socketserver, threading, functools, subprocess
 from pathlib import Path
+
+# Lighthouse runner（解鎖 rubric 技術維度滿分；跑 live URL 取真實 SEO 分 + CWV）
+LIGHTHOUSE = Path(__file__).resolve().parent.parent.parent / "鋮馨開放式自主優化" / "node_modules" / ".bin" / "lighthouse"
+def run_lighthouse(url):
+    if not LIGHTHOUSE.exists(): return None
+    try:
+        out = subprocess.run([str(LIGHTHOUSE), url, "--only-categories=seo,performance",
+            "--output=json", "--output-path=stdout", "--quiet",
+            "--chrome-flags=--headless=new --no-sandbox"], capture_output=True, text=True, timeout=120)
+        data = json.loads(out.stdout)
+        seo = data.get("categories", {}).get("seo", {}).get("score")   # 0–1
+        au = data.get("audits", {})
+        lcp = au.get("largest-contentful-paint", {}).get("numericValue")
+        cls = au.get("cumulative-layout-shift", {}).get("numericValue")
+        cwv = (lcp is not None and lcp <= 2500) and (cls is not None and cls <= 0.1)
+        return {"seo": seo, "cwv_pass": cwv, "lcp_ms": round(lcp) if lcp else None, "cls": round(cls,3) if cls is not None else None}
+    except Exception as e:
+        print(f"  ⚠ lighthouse 失敗 {url}: {str(e)[:60]}")
+        return None
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from goal_scorer import score_page, append_score, ScoreResult
@@ -82,6 +101,7 @@ def main():
     ap.add_argument("--only",nargs="*")
     ap.add_argument("--panel",action="store_true",help="judge 代表頁(PANEL)，每頁帶其在地查詢")
     ap.add_argument("--judge-all",action="store_true",help="judge 全部真實頁(noindex 封存頁只跑 gate)")
+    ap.add_argument("--lighthouse",action="store_true",help="跑 Lighthouse 解鎖技術維度滿分(慢,每頁~15-30s)")
     ap.add_argument("--prev",type=float,default=None)
     args=ap.parse_args()
 
@@ -108,8 +128,9 @@ def main():
         url=f"{BASE}/{fn}"
         queries = qmap.get(fn, args.queries)
         page_judge = judge and not archived      # 封存頁不花 LLM(不該優化)
+        lh = run_lighthouse(url) if (args.lighthouse and not archived) else None
         res=score_page(h, url, target_queries=queries, judge=page_judge,
-                       archived=archived, prev_score=args.prev)
+                       lighthouse=lh, archived=archived, prev_score=args.prev)
         append_score(str(JSONL), res.to_jsonl_row())
         results.append((fn,res))
 
