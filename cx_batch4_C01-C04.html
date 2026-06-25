@@ -229,7 +229,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">金管會銀行局 · 本國銀行平均</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">0.10<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-value">0.08<span class="indicator-value-suffix">%</span></div>
           <div class="indicator-unit">違約率 · 連續 6 個月微升</div>
         </div>
         <div class="indicator-changes">
@@ -343,7 +343,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">內政部營建署 · 季公布</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">9.92<span class="indicator-value-suffix"> 倍</span></div>
+          <div class="indicator-value">9.32<span class="indicator-value-suffix">倍</span></div>
           <div class="indicator-unit">全國平均 · 北市 16.2 倍全球前 5 高</div>
         </div>
         <div class="indicator-changes">
@@ -447,7 +447,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">內政部營建署 · 住宅類別</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">8,247<span class="indicator-value-suffix"> 宅</span></div>
+          <div class="indicator-value">31,573<span class="indicator-value-suffix">戶</span></div>
           <div class="indicator-unit">2026 年 3 月 · 反映建商對 2-3 年後預判</div>
         </div>
         <div class="indicator-changes">
@@ -561,7 +561,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">內政部營建署 · 反映 2-3 年前推案</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">11,562<span class="indicator-value-suffix"> 宅</span></div>
+          <div class="indicator-value">42,905<span class="indicator-value-suffix">戶</span></div>
           <div class="indicator-unit">當期實際供給 · 仍高於建照</div>
         </div>
         <div class="indicator-changes">
@@ -675,7 +675,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var ind=map[code];
         if(!ind)return;
         var tag=el.querySelector('.freq-tag');
-        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        if(tag && tag.innerHTML.indexOf(ind.updated)<0)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        var vEl=el.querySelector('.indicator-value');
+        if(vEl && ind.value!=null){
+          var mm=String(ind.value).match(/^([\d,.]+)\s*(.*)$/);
+          if(mm){vEl.innerHTML=mm[1]+(mm[2]?'<span class="indicator-value-suffix">'+mm[2]+'</span>':'');}
+          else{vEl.textContent=ind.value;}
+        }
       });
     })
     .catch(function(){});

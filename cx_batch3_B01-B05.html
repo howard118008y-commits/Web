@@ -228,7 +228,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">內政部地政司 · 房市交易量總指標</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">21,618<span class="indicator-value-suffix"> 棟</span></div>
+          <div class="indicator-value">80,476<span class="indicator-value-suffix">棟</span></div>
           <div class="indicator-unit">2026 年 3 月 · 預估全年僅 26 萬棟</div>
         </div>
         <div class="indicator-changes">
@@ -353,7 +353,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">信義房屋／政大商學院 · 中古屋特徵價格模型</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">176.93</div>
+          <div class="indicator-value">量縮價穩</div>
           <div class="indicator-unit">基期 2011=100 · 累計上漲 76.93%</div>
         </div>
         <div class="indicator-changes">
@@ -470,7 +470,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">國泰建設／政大不動產中心 · 預售屋與新成屋</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">148.32</div>
+          <div class="indicator-value">預售趨緩</div>
           <div class="indicator-unit">六都加權 · 基期 2021=100</div>
         </div>
         <div class="indicator-changes">
@@ -579,7 +579,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">六直轄市地政局 · 占全國 78.6%</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">16,989<span class="indicator-value-suffix"> 棟</span></div>
+          <div class="indicator-value">62,687<span class="indicator-value-suffix">棟</span></div>
           <div class="indicator-unit">2026 年 3 月 · 新北 4,128 棟居冠</div>
         </div>
         <div class="indicator-changes">
@@ -683,7 +683,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">內政部不動產資訊平台 · 實價登錄編製</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">142.6</div>
+          <div class="indicator-value">14.62<span class="indicator-value-suffix">倍</span></div>
           <div class="indicator-unit">全國加權 · 基期 2016=100</div>
         </div>
         <div class="indicator-changes">
@@ -795,7 +795,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var ind=map[code];
         if(!ind)return;
         var tag=el.querySelector('.freq-tag');
-        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        if(tag && tag.innerHTML.indexOf(ind.updated)<0)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        var vEl=el.querySelector('.indicator-value');
+        if(vEl && ind.value!=null){
+          var mm=String(ind.value).match(/^([\d,.]+)\s*(.*)$/);
+          if(mm){vEl.innerHTML=mm[1]+(mm[2]?'<span class="indicator-value-suffix">'+mm[2]+'</span>':'');}
+          else{vEl.textContent=ind.value;}
+        }
       });
     })
     .catch(function(){});

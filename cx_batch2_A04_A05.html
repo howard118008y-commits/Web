@@ -234,7 +234,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div class="indicator" data-cx-code="A04">
       <span class="indicator-tag">A · 04</span>
       <span class="freq-tag">月公布</span>
-      <span class="accel-badge critical">⚡ 超限 6.7pp</span>
+      <span class="accel-badge critical">⚡ 超限 5.17pp</span>
       <div class="indicator-top">
         <div class="indicator-header-block">
           <div class="indicator-name">不動產放款集中度</div>
@@ -242,8 +242,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">金管會 · 銀行法 72-2 條規定上限 30%</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">36.7<span class="indicator-value-suffix">%</span></div>
-          <div class="indicator-unit">9 家銀行進入警戒線 · 公股授信偏緊</div>
+          <div class="indicator-value">35.17<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-unit">部分銀行進入警戒線 · 公股授信偏緊</div>
         </div>
         <div class="indicator-changes">
           <div class="change-cell"><span class="change-period">月增</span><span class="change-value down-bad">-0.1pp</span></div>
@@ -319,7 +319,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         <div class="context-cell now">
           <div class="context-label">當前位置</div>
           <div class="context-value orange">36.7%</div>
-          <div class="context-time">超法定上限 6.7pp</div>
+          <div class="context-time">超法定上限 5.17pp</div>
         </div>
         <div class="context-cell high">
           <div class="context-label">十年高點</div>
@@ -340,7 +340,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="chart-insight">
         <div class="chart-insight-title">當前處境解讀</div>
         當前 36.7% <span class="up-key">超法定上限 22%</span>，雖較 2024 高峰 38.6% 略降，但<span class="key">仍處歷史高位</span>。對照 2016 年健康水位 26.4%，<span class="key">十年來累計上升 10.3 個百分點</span>，銀行授信能量明顯不足。<br><br>
-        <strong style="color: var(--gold-bright);">預期：</strong>9 家銀行已進警戒線，<span class="key">12 月理監事會可能微鬆「銀行自主管理」</span>但 30% 上限不會動，集中度將緩降不會回到正常區間，預期 6 個月內仍維持 36-37% 區間。<br><br>
+        <strong style="color: var(--gold-bright);">預期：</strong>部分銀行已進警戒線，<span class="key">12 月理監事會可能微鬆「銀行自主管理」</span>但 30% 上限不會動，集中度將緩降不會回到正常區間，預期 6 個月內仍維持 36-37% 區間。<br><br>
         <strong style="color: var(--gold-bright);">市場意涵：</strong>公股銀行授信偏緊預期將持續，<span class="key">民營銀行與信合社</span>成為市場上的替代管道。傳統產業、收入證明較不完整的申貸者，<span class="key">直接送件公股銀行的難度較高</span>，送件前宜先全面檢視自身條件、比較不同管道。
       </div>
       <div class="cta-strip">
@@ -361,7 +361,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">五大行庫撥款金額占比 · 2026.07.31 申請截止</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">42.5<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-value">下滑中</div>
           <div class="indicator-unit">距離申請截止 77 天 · 末班車期</div>
         </div>
         <div class="indicator-changes">
@@ -478,7 +478,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var ind=map[code];
         if(!ind)return;
         var tag=el.querySelector('.freq-tag');
-        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        if(tag && tag.innerHTML.indexOf(ind.updated)<0)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        var vEl=el.querySelector('.indicator-value');
+        if(vEl && ind.value!=null){
+          var mm=String(ind.value).match(/^([\d,.]+)\s*(.*)$/);
+          if(mm){vEl.innerHTML=mm[1]+(mm[2]?'<span class="indicator-value-suffix">'+mm[2]+'</span>':'');}
+          else{vEl.textContent=ind.value;}
+        }
       });
     })
     .catch(function(){});

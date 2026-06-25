@@ -229,7 +229,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">聯邦準備銀行 FRED · 全球利率基準</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">4.382<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-value">4.402<span class="indicator-value-suffix">%</span></div>
           <div class="indicator-unit">殖利率 · 牽動全球資金成本</div>
         </div>
         <div class="indicator-changes">
@@ -343,7 +343,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">台灣銀行牌告 · 中央銀行干預機制</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">31.428</div>
+          <div class="indicator-value">31.82<span class="indicator-value-suffix"></span></div>
           <div class="indicator-unit">新台幣 / 美元 · 台幣中性偏強</div>
         </div>
         <div class="indicator-changes">
@@ -457,7 +457,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">證交所 · 外資 5 日累計賣超 82 億</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">22,847</div>
+          <div class="indicator-value">46,044<span class="indicator-value-suffix">點</span></div>
           <div class="indicator-unit">點 · 外資情緒指標</div>
         </div>
         <div class="indicator-changes">
@@ -573,7 +573,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           <div class="indicator-source">行政院主計總處 · 央行目標 2%</div>
         </div>
         <div class="indicator-value-block">
-          <div class="indicator-value">2.14<span class="indicator-value-suffix">%</span></div>
+          <div class="indicator-value">2.20<span class="indicator-value-suffix">%</span></div>
           <div class="indicator-unit">年增率 · 高於央行目標</div>
         </div>
         <div class="indicator-changes">
@@ -691,7 +691,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         var ind=map[code];
         if(!ind)return;
         var tag=el.querySelector('.freq-tag');
-        if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        if(tag && tag.innerHTML.indexOf(ind.updated)<0)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        var vEl=el.querySelector('.indicator-value');
+        if(vEl && ind.value!=null){
+          var mm=String(ind.value).match(/^([\d,.]+)\s*(.*)$/);
+          if(mm){vEl.innerHTML=mm[1]+(mm[2]?'<span class="indicator-value-suffix">'+mm[2]+'</span>':'');}
+          else{vEl.textContent=ind.value;}
+        }
       });
     })
     .catch(function(){});
