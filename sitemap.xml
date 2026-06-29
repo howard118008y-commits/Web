@@ -36,7 +36,7 @@
   <!-- 主頁 -->
   <url>
     <loc>https://cx468.com.tw/</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -44,19 +44,19 @@
   <!-- 核心服務頁 -->
   <url>
     <loc>https://cx468.com.tw/sale-leaseback.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/loan-process.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/private-to-bank.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -68,13 +68,13 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/bad-credit-mortgage.html</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/second-mortgage.html</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/zhonghe-sale-leaseback.html</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -128,7 +128,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/multi-property.html</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -148,7 +148,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/about.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -168,7 +168,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/faq.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -176,85 +176,85 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/financing-data.html</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-mortgage-overdue.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-bad-credit-loan.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-self-employed-loan.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-debt-negotiation-vs-consolidation.html</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-sale-leaseback-guide.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-loan-integration.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-private-to-bank.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-credit-repair.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-rental-management.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-bank-audit.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-home-equity.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-second-mortgage.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -270,7 +270,7 @@
   <!-- 地價稅試算工具群 -->
   <url>
     <loc>https://cx468.com.tw/land-value-tax-calculator.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -288,25 +288,25 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/new-taipei-land-value-tax-guide.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/taipei-land-value-tax-guide.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/taoyuan-land-value-tax-guide.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/taichung-land-value-tax-guide.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -462,31 +462,31 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-private-loan-credit-damage.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-dsr-rejected.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-credit-control-policy.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-property-loan.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-retirement-property.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -584,37 +584,37 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-foreclosure.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/glossary.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/compare-options.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-sale-leaseback-safety.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-loan-rejected-first-step.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-private-loan-interest-trap.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
