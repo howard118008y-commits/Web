@@ -227,12 +227,15 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   ]
  },
  "inLanguage": "zh-TW",
- "dateModified": "2026-06-22",
+ "dateModified": "2026-07-01",
  "datePublished": "2026-04-29"
 }
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"DefinedTermSet","name":"不動產與稅務名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"本息平均攤還","description":"每月繳款金額固定、其中本金與利息比例逐月變動的還款方式。"},{"@type":"DefinedTerm","name":"年利率","description":"以年為單位計算的借款利率。"},{"@type":"DefinedTerm","name":"總利息","description":"整個貸款期間累計支付的利息總額。"},{"@type":"DefinedTerm","name":"寬限期","description":"只繳利息、暫不還本金的期間。"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個房貸試算機能算什麼？","acceptedAnswer":{"@type":"Answer","text":"輸入貸款金額、年利率與貸款年限，這張表會算出每月應繳金額、總利息支出、總還款金額，以及逐年的本金、利息與剩餘餘額明細。切換「民間 vs 銀行對比」還能比較兩種利率下的月付差距。所有數字都是依你輸入的條件即時試算，屬於試算參考，不是核貸條件。"}},{"@type":"Question","name":"本息平均攤還的月付是怎麼算出來的？","acceptedAnswer":{"@type":"Answer","text":"本息平均攤還是每月繳款金額固定、其中本金與利息比例逐月變動的還款方式。計算時把年利率換算成月利率、年限換算成總期數，再依本金、月利率與期數推算出每期固定月付。前期利息占比較高、本金還得較少，隨著餘額下降，後期還的本金會越來越多，這也是為什麼攤還表逐年的本金與利息會變動。"}},{"@type":"Question","name":"試算出來的月付跟利率，就是我實際會拿到的條件嗎？","acceptedAnswer":{"@type":"Answer","text":"不是。試算是以你自己填入的利率與年限推算，方便你比較不同情境。實際適用利率與可貸金額因人而異，會依你的不動產現況、財務狀況、負債比與當時市場情況而定，最終核貸條件由金融機構決定。建議把試算結果當作評估起點，實際條件仍需經正式評估。"}},{"@type":"Question","name":"民間借款轉銀行前後的月付差，可以用這裡試算嗎？","acceptedAnswer":{"@type":"Answer","text":"可以。切換到「民間 vs 銀行對比」模式，輸入民間借款月利率與預計轉貸的銀行條件，就能看到兩者月付的落差與可能的每月、每年差額。要提醒的是，這是依你輸入數字所做的示意試算，實際能否轉貸、可轉金額與適用利率因人而異，依個案財務與不動產狀況評估，最終核貸由金融機構決定。"}}]}
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -445,6 +448,19 @@ function calculate(){
 }
 calculate();
 </script>
+<section class="faq-section" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
+  <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:24px;font-weight:600;color:#1d1d1f;margin-bottom:20px;text-align:center">房貸試算常見問題</h2>
+  <div style="background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+    <h3 style="font-size:16px;font-weight:700;color:#1d1d1f;margin:0 0 8px">這個房貸試算機能算什麼？</h3>
+    <p style="font-size:15px;line-height:1.8;color:#3a3a3c;margin:0 0 22px">輸入貸款金額、年利率與貸款年限，這張表會算出每月應繳金額、總利息支出、總還款金額，以及逐年的本金、利息與剩餘餘額明細。切換「民間 vs 銀行對比」還能比較兩種利率下的月付差距。所有數字都是依你輸入的條件即時試算，屬於試算參考，不是核貸條件。</p>
+    <h3 style="font-size:16px;font-weight:700;color:#1d1d1f;margin:0 0 8px">本息平均攤還的月付是怎麼算出來的？</h3>
+    <p style="font-size:15px;line-height:1.8;color:#3a3a3c;margin:0 0 22px">本息平均攤還是每月繳款金額固定、其中本金與利息比例逐月變動的還款方式。計算時把年利率換算成月利率、年限換算成總期數，再依本金、月利率與期數推算出每期固定月付。前期利息占比較高、本金還得較少，隨著餘額下降，後期還的本金會越來越多，這也是為什麼攤還表逐年的本金與利息會變動。</p>
+    <h3 style="font-size:16px;font-weight:700;color:#1d1d1f;margin:0 0 8px">試算出來的月付跟利率，就是我實際會拿到的條件嗎？</h3>
+    <p style="font-size:15px;line-height:1.8;color:#3a3a3c;margin:0 0 22px">不是。試算是以你自己填入的利率與年限推算，方便你比較不同情境。實際適用利率與可貸金額因人而異，會依你的不動產現況、財務狀況、負債比與當時市場情況而定，最終核貸條件由金融機構決定。建議把試算結果當作評估起點，實際條件仍需經正式評估。</p>
+    <h3 style="font-size:16px;font-weight:700;color:#1d1d1f;margin:0 0 8px">民間借款轉銀行前後的月付差，可以用這裡試算嗎？</h3>
+    <p style="font-size:15px;line-height:1.8;color:#3a3a3c;margin:0">可以。切換到「民間 vs 銀行對比」模式，輸入民間借款月利率與預計轉貸的銀行條件，就能看到兩者月付的落差與可能的每月、每年差額。要提醒的是，這是依你輸入數字所做的示意試算，實際能否轉貸、可轉金額與適用利率因人而異，依個案財務與不動產狀況評估，最終核貸由金融機構決定。</p>
+  </div>
+</section>
 <section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
   <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
     <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
