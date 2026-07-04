@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install requests yfinance beautifulsoup4 lxml xlrd openpyxl
+        run: pip install requests yfinance beautifulsoup4 lxml xlrd openpyxl pypdf
 
       - name: Fetch indicator data
         run: python scripts/fetch_indicators.py

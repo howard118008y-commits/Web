@@ -4,7 +4,7 @@ CX468 房貸儀表板 — 18 項指標自動抓取腳本
 GitHub Actions 每日 08:30 台灣時間自動執行
 """
 
-import json, requests, csv, io, time, re
+import json, requests, csv, io, time, re, sys
 import xml.etree.ElementTree as ET
 from datetime import date, datetime
 from pathlib import Path
@@ -32,6 +32,12 @@ try:
     HAS_OPENPYXL = True
 except ImportError:
     HAS_OPENPYXL = False
+
+try:
+    from pypdf import PdfReader
+    HAS_PYPDF = True
+except ImportError:
+    HAS_PYPDF = False
 
 BASE      = Path(__file__).resolve().parent.parent
 DATA_FILE = BASE / 'cx_data.json'
@@ -323,7 +329,100 @@ def fetch_A04():
 
 
 def fetch_A05():
-    """新青安貸款占比 — 財政部月報（待開發）"""
+    """新青安貸款占比 — 財政部「安心貸款{民國YYMM}.pdf」×央行 5newloan
+
+    官方口徑（媒體引用「央行公布」的占比）＝五大銀行新承做購屋貸款中新青安部分：
+      分子：財政部青安月統計 PDF 內「五大銀行（臺銀/土銀/合庫/一銀/華銀）本月撥貸金額」加總
+            （PDF 涵蓋 8 家公股銀行，兆豐/彰銀/臺企銀不在央行五大之列，須排除）
+      分母：央行 5newloan 五大銀行新承做購屋貸款金額（同月）
+    PDF 網址規律：service.mof.gov.tw/public/Data/statistic/Other_Statistics/安心貸款11505.pdf
+    每列格式：銀行 受理本月(戶,億) 受理累計(戶,億) 撥貸本月(戶,億) 撥貸累計(戶,億) 比率×2
+    """
+    if not HAS_PYPDF:
+        print("  pypdf not installed, skip A05")
+        return None
+    try:
+        import urllib.parse
+        base = 'https://service.mof.gov.tw/public/Data/statistic/Other_Statistics/'
+        # 從本月往回找最新一期 PDF（次月下旬公布，最多回看 3 期）
+        pdf_text = pdf_roc = None
+        y, m = TODAY.year, TODAY.month
+        for _ in range(4):
+            roc = f'{y - 1911}{m:02d}'
+            url = base + urllib.parse.quote(f'安心貸款{roc}.pdf')
+            r = get(url, timeout=40)
+            if r and r.content[:4] == b'%PDF':
+                pdf_text = "\n".join(p.extract_text() for p in PdfReader(io.BytesIO(r.content)).pages)
+                pdf_roc = roc
+                break
+            m -= 1
+            if m == 0:
+                y, m = y - 1, 12
+        if not pdf_text:
+            return None
+
+        # 月份以 PDF 內文「截至115年5月底」為準（比檔名可靠）
+        dm = re.search(r'截至(\d{2,3})年(\d{1,2})月底', pdf_text)
+        if dm:
+            pdf_month = f'{int(dm.group(1)) + 1911}-{int(dm.group(2)):02d}'
+        else:
+            pdf_month = f'{int(pdf_roc[:3]) + 1911}-{int(pdf_roc[3:]):02d}'
+
+        # 五大銀行「撥貸本月」戶數/金額（每列第 5、6 個數字，0-indexed 4、5）
+        FIVE = ['臺銀', '土銀', '合庫', '一銀', '華銀']
+        disb_amt = disb_cnt = 0.0
+        found = []
+        for bank in FIVE:
+            bm = re.search(bank + r'\s+((?:[\d,]+(?:\.\d+)?[\s]+){9,}[\d,.]+)', pdf_text)
+            if not bm:
+                continue
+            nums = [float(x.replace(',', '')) for x in re.findall(r'[\d,]+(?:\.\d+)?', bm.group(1))]
+            if len(nums) < 8:
+                continue
+            disb_cnt += nums[4]
+            disb_amt += nums[5]
+            found.append(bank)
+        if len(found) != 5:
+            print(f"  A05 PDF 只解析到 {found}，放棄")
+            return None
+
+        # 分母：央行五大銀行新承做購屋貸款（同月對齊）
+        five = _fetch_5newloan_data()
+        if not five:
+            return None
+        cbc_month, _, amount_mln, prev_amount_mln = five
+        if cbc_month == pdf_month:
+            denom_yi = amount_mln / 100
+        else:
+            # 財政部比央行慢一個月時，用央行前月值對齊
+            prev_y, prev_m = int(cbc_month[:4]), int(cbc_month[5:7]) - 1
+            if prev_m == 0:
+                prev_y, prev_m = prev_y - 1, 12
+            if f'{prev_y}-{prev_m:02d}' == pdf_month and prev_amount_mln:
+                denom_yi = prev_amount_mln / 100
+            else:
+                print(f"  A05 月份對不上：PDF={pdf_month} CBC={cbc_month}，放棄")
+                return None
+        if denom_yi <= 0:
+            return None
+
+        share = disb_amt / denom_yi * 100
+        if not (5 < share < 90):   # 合理性防呆
+            print(f"  A05 占比 {share:.1f}% 超出合理範圍，放棄")
+            return None
+        mo_label = f'{int(pdf_month[5:7])}月'
+        if share >= 45:
+            status = 'red'
+            note = f'{mo_label}占比{share:.1f}%，政策貸款依賴度高'
+        elif share >= 35:
+            status = 'yellow'
+            note = f'{mo_label}五大銀撥貸{disb_amt:.0f}億、占新承做{share:.1f}%'
+        else:
+            status = 'green'
+            note = f'{mo_label}占比{share:.1f}%，回落至三成五以下'
+        return dict(value=f'{share:.1f}%', status=status, note=note, updated=pdf_month)
+    except Exception as e:
+        print(f"  A05 MOF/CBC: {e}")
     return None
 
 
@@ -524,14 +623,120 @@ def fetch_B01():
 
 
 def fetch_B02():
-    """信義房價指數 — 信義房屋（季報）"""
-    # 每季發布，需 HTML 解析，尚不穩定
+    """信義房價指數（全台）— sinyinews.com.tw/quarterly
+
+    頁面為 JS 渲染，需 playwright（CI 未裝則跳過、保留上次值，由本機排程器負責）。
+    表格含「台灣」全國列：指數 / 上季指數 / QoQ% / 去年同季 / YoY%。
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("  playwright not installed, skip B02（本機排程器負責）")
+        return None
+    try:
+        qm = None
+        for attempt in range(2):        # 頁面 JS 偶發未渲染完，重試一次
+            with sync_playwright() as p:
+                b = p.chromium.launch(headless=True)
+                pg = b.new_page()
+                pg.goto('https://www.sinyinews.com.tw/quarterly',
+                        wait_until='networkidle', timeout=60_000)
+                pg.wait_for_timeout(1500 + attempt * 3000)
+                txt = pg.evaluate("() => document.body.innerText")
+                b.close()
+            qm = re.search(r'(20\d\d)年第([一二三四])季（信義房價指數）', txt) \
+                 or re.search(r'(20\d\d)年第([一二三四])季都會區季指數', txt)
+            if qm:
+                break
+            print(f"  B02 第 {attempt + 1} 次渲染未取得表格，重試")
+        if not qm:
+            return None
+        q = {'一': 1, '二': 2, '三': 3, '四': 4}[qm.group(2)]
+        updated = f'{qm.group(1)}-Q{q}'
+
+        rm = re.search(r'台灣\s+([\d.]+)\s+[\d.]+\s+(-?[\d.]+)%\s+[\d.]+\s+(-?[\d.]+)%', txt)
+        if not rm:
+            print("  B02 找不到「台灣」全國列")
+            return None
+        idx, qoq, yoy = float(rm.group(1)), float(rm.group(2)), float(rm.group(3))
+        if not (50 < idx < 500):
+            return None
+        if yoy <= -5:
+            status = 'red'
+        elif yoy < 0:
+            status = 'yellow'
+        else:
+            status = 'green'
+        note = f'{updated.replace("-", "")}全台{idx:.2f}，季{qoq:+.2f}%、年{yoy:+.2f}%'
+        return dict(value=f'{idx:.2f}', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  B02 sinyi: {e}")
     return None
 
 
 def fetch_B03():
-    """國泰房價指數 — 國立政治大學（季報）"""
-    # 每季發布，需 HTML 解析，尚不穩定
+    """國泰房地產指數（全國可能成交價）— cathay-red 季報 PDF
+
+    網址規律：/Content/Upload/files/about/about-house/report/{西元年}/{民國年}report_Q{季}.pdf
+    解析「綜合評估－全國」頁：可能成交價格 <指數> <萬元/坪> QoQ% YoY%。
+    季報約於季後 1 個月發布，從當前季往回試 4 季。
+    """
+    if not HAS_PYPDF:
+        print("  pypdf not installed, skip B03")
+        return None
+    try:
+        y, q = TODAY.year, (TODAY.month - 1) // 3 + 1
+        content = updated = None
+        for _ in range(4):
+            url = (f'https://www.cathay-red.com.tw/Content/Upload/files/about/'
+                   f'about-house/report/{y}/{y - 1911}report_Q{q}.pdf')
+            r = get(url, timeout=60)
+            if r and r.content[:4] == b'%PDF':
+                content = r.content
+                updated = f'{y}-Q{q}'
+                break
+            q -= 1
+            if q == 0:
+                y, q = y - 1, 4
+        if not content:
+            return None
+
+        rd = PdfReader(io.BytesIO(content))
+        page_text = None
+        for pg in rd.pages[60:]:            # 綜合評估在報告後段，跳過前段省時間
+            t = pg.extract_text() or ''
+            if '綜合評估－全國' in t or ('綜合評估' in t and '可能成交價格' in t):
+                page_text = t
+                break
+        if not page_text:
+            for pg in rd.pages:             # 保險：全掃一次
+                t = pg.extract_text() or ''
+                if '可能成交價格' in t and '全國' in t:
+                    page_text = t
+                    break
+        if not page_text:
+            print("  B03 PDF 找不到綜合評估頁")
+            return None
+
+        pm = re.search(r'可能成交價格\s+([\d.]+)\s+[\d.]+\s*萬元/坪\s*(-?[\d.]+)%[^-\d]*(-?[\d.]+)%', page_text)
+        if not pm:
+            print("  B03 可能成交價格列解析失敗")
+            return None
+        idx, qoq, yoy = float(pm.group(1)), float(pm.group(2)), float(pm.group(3))
+        if not (50 < idx < 500):
+            return None
+        sm = re.search(r'全國綜合表現分數為\s*(-?\d+)\s*分', "".join((p.extract_text() or '') for p in rd.pages[70:90]))
+        score_note = f'、綜合分數{sm.group(1)}' if sm else ''
+        if yoy <= -3 or qoq <= -2:
+            status = 'red'
+        elif (sm and int(sm.group(1)) < 0) or yoy < 1:
+            status = 'yellow'
+        else:
+            status = 'green'
+        note = f'{updated.replace("-", "")}全國{idx:.2f}，季{qoq:+.2f}%、年{yoy:+.2f}%{score_note}'
+        return dict(value=f'{idx:.2f}', status=status, note=note, updated=updated)
+    except Exception as e:
+        print(f"  B03 cathay: {e}")
     return None
 
 
@@ -1059,12 +1264,20 @@ FETCHERS = {
 # ── 主程式 ─────────────────────────────────────────────────────────────────
 
 def main():
-    print(f"=== CX468 指標更新 {TODAY} ===\n")
+    # --only A05,B02 → 只跑指定代碼（本機排程器用來補 CI 抓不到的指標）
+    only = None
+    for i, a in enumerate(sys.argv):
+        if a == '--only' and i + 1 < len(sys.argv):
+            only = {c.strip().upper() for c in sys.argv[i + 1].split(',') if c.strip()}
+    print(f"=== CX468 指標更新 {TODAY}{'（only=' + ','.join(sorted(only)) + '）' if only else ''} ===\n")
     data = load_data()
     ok = fail = skip = 0
 
     for ind in data['indicators']:
         code    = ind['code']
+        if only and code not in only:
+            skip += 1
+            continue
         fetcher = FETCHERS.get(code)
         if fetcher is None:
             print(f"  · {code}: 無抓取函數")
