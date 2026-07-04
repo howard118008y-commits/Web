@@ -505,18 +505,21 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
   <!-- ════════════ 快速答案卡 END ════════════ -->
 
-  <!-- ════════════ 本月房市焦點（每月更換一則 · 改完務必過 /媽祖把關 再上線）START ════════════ -->
-  <div id="monthly-focus" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid var(--red);padding:26px 28px;margin-bottom:40px">
+  <!-- ════════════ 本週房市焦點（每週更換一則 · 週更流程：WebSearch 查證→自家圖庫配圖→/媽祖把關→上線；不用新聞站圖片避免版權）START ════════════ -->
+  <div id="monthly-focus" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid var(--red);margin-bottom:40px;overflow:hidden">
+    <img src="img/banner-city.jpg" alt="台北都會區住宅大樓全景——新青安補貼倒數與首批寬限期到期是本週房市焦點" loading="lazy" style="display:block;width:100%;height:130px;object-fit:cover;opacity:.9">
+    <div style="padding:24px 28px 26px">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#ff6b6b;letter-spacing:0.3em">本月房市焦點 · MONTHLY FOCUS</span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-dim);letter-spacing:0.2em">2026 · 06</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#ff6b6b;letter-spacing:0.3em">本週房市焦點 · WEEKLY FOCUS</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-dim);letter-spacing:0.2em">2026 · 07 · 第 1 週</span>
     </div>
-    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:#fff;line-height:1.45;margin:0 0 14px">央行 6 月理監事會：利率「連九凍」、限貸令「就到這裡」不再加碼</h2>
-    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 12px">中央銀行於 6 月 18 日召開第二季理監事會，維持政策利率不變（市場稱「連九凍」），現行選擇性信用管制（俗稱限貸令）也維持現狀。總裁楊金龍先前明確表態「選擇性信用管制就到這裡」，現階段不再加碼；但因部分資金流向股市，目前也尚未鬆綁。會中有兩位理事主張升息，楊金龍則考量通膨等因素維持不變。</p>
-    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#E8E3D5">對你的意義：</strong>短期內房貸利率與貸款成數「不再收緊，但也別期待馬上放寬」，政策進入觀望期。手上有多筆高利債務、或曾被限貸卡住的屋主，正適合趁政策穩定期把財務狀況理清楚、評估可行方向。</p>
-    <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px">資料來源：中央社、聯合新聞網（2026-06）。本則為公開新聞整理與市場觀察，非投資或貸款建議；實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:#fff;line-height:1.45;margin:0 0 14px">新青安補貼倒數一個月：7/31 屆期、2.0 尚未定案，首批寬限期今夏起陸續到期</h2>
+    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 12px">財政部新青安優惠貸款將於 2026 年 7 月 31 日屆期，利息補貼以「撥款日」為準——流程若拖過期限才撥款，利率即回到一般水準。接棒的「新青安 2.0」仍在研議中、須報行政院核定後公布；先前媒體流傳的資格與利率版本，財政部已發稿澄清並非官方定案。另一方面，新青安寬限期最長 5 年，但銀行多核給 3 年；2023 年 8 月開辦時首批、採 3 年寬限期的申貸戶，寬限期自今年下半年起陸續屆滿，從只繳利息轉為本息攤還，每月還款金額將明顯增加。</p>
+    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#E8E3D5">對你的意義：</strong>還在跑流程的申貸族，時程要抓緊，7/31 前完成撥款補貼才算數；寬限期陸續到期、月付開始跳升的屋主，正是重新盤點財務結構的時點——名下有房、又有多筆貸款的人，可趁政策交接期把狀況理清楚、評估可行方向。</p>
+    <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px">資料來源：財政部新聞稿、公視新聞、ETtoday、自由時報地產天下（2026-06〜07）。本則為公開新聞整理與市場觀察，非投資或貸款建議；實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+    </div>
   </div>
-  <!-- ════════════ 本月房市焦點 END ════════════ -->
+  <!-- ════════════ 本週房市焦點 END ════════════ -->
 
   <!-- ── Section heading ── -->
   <div class="section-heading">
