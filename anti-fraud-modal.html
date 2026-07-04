@@ -46,6 +46,11 @@
   .afm-btn{font-size:15px;padding:13px 20px}
 }
 body.afm-lock{overflow:hidden}
+/* 廣告點擊改用頂端細條（不擋內容），自然流量維持全屏聲明 */
+.afm-bar{display:flex;align-items:center;gap:10px;background:#fff8e6;border-bottom:1px solid #f0e2b6;color:#6b5b1e;font-size:12.5px;line-height:1.4;padding:8px 12px;position:relative;z-index:998}
+.afm-bar-text{flex:1;min-width:0}
+.afm-bar-view{flex:0 0 auto;background:none;border:1px solid #c9a94e;color:#8a6d1a;font-size:12px;font-weight:700;border-radius:14px;padding:4px 10px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.afm-bar-close{flex:0 0 auto;background:none;border:0;color:#a08c4a;font-size:14px;cursor:pointer;padding:4px 6px;line-height:1}
 </style>
 
 <div class="afm-overlay" id="afmOverlay" role="dialog" aria-modal="true" aria-labelledby="afmTitle">
@@ -84,6 +89,7 @@ body.afm-lock{overflow:hidden}
 <script>
 (function(){
   var KEY = 'cx_antifraud_v1';
+  var AD_SESSION = 'cx_afm_adsession';
   var DAYS = 7;
   var now = Date.now();
   try {
@@ -96,8 +102,19 @@ body.afm-lock{overflow:hidden}
   var btn = document.getElementById('afmBtn');
   if (!overlay || !check || !btn) return;
 
-  overlay.classList.add('afm-show');
-  document.body.classList.add('afm-lock');
+  function markSeen(){
+    try { localStorage.setItem(KEY, String(Date.now())); } catch(e) {}
+  }
+  function closeOverlay(){
+    overlay.classList.remove('afm-show');
+    document.body.classList.remove('afm-lock');
+  }
+  function removeBar(){
+    var bar = document.getElementById('afmBar');
+    if (bar && bar.parentNode) bar.parentNode.removeChild(bar);
+    var nav = document.querySelector('nav');
+    if (nav && nav.style.top) nav.style.top = '';
+  }
 
   check.addEventListener('change', function(){
     btn.disabled = !check.checked;
@@ -105,12 +122,54 @@ body.afm-lock{overflow:hidden}
 
   btn.addEventListener('click', function(){
     if (!check.checked) return;
-    try { localStorage.setItem(KEY, String(Date.now())); } catch(e) {}
-    overlay.classList.remove('afm-show');
-    document.body.classList.remove('afm-lock');
+    markSeen();
+    closeOverlay();
+    removeBar();
     if (typeof gtag === 'function') {
       gtag('event', 'antifraud_consent', { page_path: location.pathname });
     }
   });
+
+  // 廣告點擊（gclid/fbclid 等或 utm_medium=paid）：不擋全屏，改頂端細條；同一造訪的後續頁面也維持細條
+  var urlAd = /(?:[?&](?:gclid|fbclid|msclkid|wbraid|gbraid|ttclid)=)|utm_medium=(?:paid|cpc|ppc|paid_social)/i.test(location.search);
+  if (urlAd) { try { sessionStorage.setItem(AD_SESSION, '1'); } catch(e) {} }
+  var isAd = urlAd;
+  try { isAd = isAd || sessionStorage.getItem(AD_SESSION) === '1'; } catch(e) {}
+
+  if (isAd) {
+    var bar = document.createElement('div');
+    bar.id = 'afmBar';
+    bar.className = 'afm-bar';
+    bar.innerHTML = '<span class="afm-bar-text">🛡️ 慎防詐騙：鋮馨租賃絕不要求預付任何費用、絕不索取網銀密碼</span>'
+      + '<button type="button" class="afm-bar-view" id="afmBarView">查看聲明</button>'
+      + '<button type="button" class="afm-bar-close" id="afmBarClose" aria-label="關閉">✕</button>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    // 全站 nav 為 fixed 頂部懸浮：細條改懸浮最頂、nav 往下讓位（關閉細條即復原）
+    var navEl = document.querySelector('nav');
+    if (navEl && getComputedStyle(navEl).position === 'fixed') {
+      bar.style.position = 'fixed';
+      bar.style.top = '0';
+      bar.style.left = '0';
+      bar.style.right = '0';
+      bar.style.zIndex = '9998';
+      navEl.style.top = bar.offsetHeight + 'px';
+    }
+    document.getElementById('afmBarView').addEventListener('click', function(){
+      overlay.classList.add('afm-show');
+      document.body.classList.add('afm-lock');
+    });
+    document.getElementById('afmBarClose').addEventListener('click', function(){
+      markSeen();
+      removeBar();
+    });
+    // 從細條打開的聲明，點背景可關回（不強制勾選）
+    overlay.addEventListener('click', function(e){
+      if (e.target === overlay) closeOverlay();
+    });
+    return;
+  }
+
+  overlay.classList.add('afm-show');
+  document.body.classList.add('afm-lock');
 })();
 </script>

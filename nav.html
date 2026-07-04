@@ -35,10 +35,15 @@ body.cx-menu-open .cx-social-dock{display:none}
 
 .nav-center{display:flex;align-items:center;gap:24px}
 
+/* 手機版導覽列常駐轉換入口（藥丸） */
+.nav-apply-pill{display:none;background:#c8102e;color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;letter-spacing:.02em}
+
 @media(max-width:768px){
   .cx-burger{display:flex}
   nav .nav-center,nav .nav-radar-btn{display:none!important}
   nav .nav-logo span{font-size:14px}
+  .nav-apply-pill{display:inline-block;margin-right:6px;margin-left:auto}
+  nav{display:flex;align-items:center}
 }
 </style>
 <nav>
@@ -59,6 +64,7 @@ body.cx-menu-open .cx-social-dock{display:none}
     <a href="evaluate.html" class="nav-cta">免費評估</a>
   </div>
   <a href="radar-index.html" class="nav-radar-btn">房貸儀表板</a>
+  <a href="apply.html" class="nav-apply-pill">免費評估</a>
   <button type="button" class="cx-burger" aria-label="開啟選單" aria-expanded="false" data-cx-burger>
     <span></span><span></span><span></span>
   </button>

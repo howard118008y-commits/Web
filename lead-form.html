@@ -123,6 +123,7 @@
         msg.className='form-msg ok';
         msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
         if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'evaluate'});
+        if(window.fbq)fbq('track','Lead');
       }else{throw new Error(j.message||'送出失敗');}
     })
     .catch(function(){
