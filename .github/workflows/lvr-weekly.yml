@@ -37,8 +37,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: scripts/lvr/_cache
-          # 改 SEASONS 清單時手動 bump v 數字以強制重抓
-          key: lvr-zip-cache-v1
+          # key 帶 run_id：actions/cache 命中舊 key 時不會回存，固定 key 曾把當季 zip
+          # 永遠凍結在第一次下載（2026-01 之後月份全空的事故根因）。
+          # 現在每次 run 結束都存新 cache，restore-keys 撿最近一份；
+          # 增補期季檔的重抓由 download_lvr.py 的 FRESH_DAYS 視窗負責。
+          key: lvr-zip-cache-v2-${{ github.run_id }}
+          restore-keys: |
+            lvr-zip-cache-v2-
 
       - name: Install Python deps
         run: |

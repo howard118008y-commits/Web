@@ -618,11 +618,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="meta-row">
         <span class="live-dot"></span>
         <span class="meta-label">即時連線</span>
-        <span class="meta-value" id="now">2026.05.24 09:30:00</span>
+        <span class="meta-value" id="now">──</span>
       </div>
       <div class="meta-row">
         <span class="meta-label">上次更新</span>
-        <span class="meta-value">2026.05.24 09:30</span>
+        <span class="meta-value" id="last-update">載入中…</span>
       </div>
     </div>
   </header>
@@ -1518,11 +1518,13 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </script>
 
 <script>
-/* ── cx_data.json → 更新最後更新日期 ── */
+/* ── cx_data.json → 頁首「上次更新」＋各卡最新值/更新月份（頁內大數字為建置快照，載入後以每日資料覆蓋）── */
 (function(){
   fetch('cx_data.json')
     .then(function(r){return r.json();})
     .then(function(data){
+      var lu=document.getElementById('last-update');
+      if(lu&&data.generated)lu.textContent=String(data.generated).replace(/-/g,'.');
       var map={};
       data.indicators.forEach(function(d){map[d.code]=d;});
       document.querySelectorAll('[data-cx-code]').forEach(function(el){
@@ -1531,6 +1533,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         if(!ind)return;
         var tag=el.querySelector('.freq-tag');
         if(tag)tag.innerHTML=tag.innerHTML+' <span style="color:var(--gold-dim);font-size:11px;letter-spacing:0.1em">· '+ind.updated+'</span>';
+        var v=el.querySelector('.indicator-value');
+        if(v&&ind.value){
+          var m=String(ind.value).match(/^([\d.,]+)(.*)$/);
+          v.innerHTML=m?m[1]+'<span class="indicator-value-suffix">'+m[2]+'</span>':String(ind.value);
+        }
       });
     })
     .catch(function(){});

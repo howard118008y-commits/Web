@@ -2,7 +2,9 @@
 從內政部「不動產成交案件實際資訊資料供應系統」下載指定季別 + 當期 mini-package。
 
 兩階段：
-1. 季別下載（非本期 tab）：113S1 ~ 115S1 共 9 季，已存在則 skip
+1. 季別下載（非本期 tab）：113S1 ~ 115S2 共 10 季。
+   已收檔的舊季「已存在則 skip」；仍在增補期的新季（季末後 FRESH_DAYS 內，
+   內政部每旬會往季 zip 增補交易）即使已存在也刪掉重抓，否則資料凍結在第一次下載日。
 2. 當期下載（本期 tab）：最新 10 天 mini-package，每次 action 都拉一份
 
 mini-package 命名：lvr_mini_YYYYMMDD.zip
@@ -18,10 +20,24 @@ OUT_DIR.mkdir(exist_ok=True)
 
 URL = "https://plvr.land.moi.gov.tw/DownloadOpenData"
 SEASONS = [
-    "115S1",
+    "115S2", "115S1",
     "114S4", "114S3", "114S2", "114S1",
     "113S4", "113S3", "113S2", "113S1",
 ]
+
+# 季末之後多少天內視為「仍在增補」（登記時滯＋公告節奏約兩個月，抓 75 天保險）
+FRESH_DAYS = 75
+
+
+def season_end(season: str) -> datetime:
+    """民國季別（如 115S2）→ 該季最後一天（西元）"""
+    year = int(season[:3]) + 1911
+    month, day = {1: (3, 31), 2: (6, 30), 3: (9, 30), 4: (12, 31)}[int(season[-1])]
+    return datetime(year, month, day)
+
+
+def is_fresh(season: str) -> bool:
+    return (datetime.now() - season_end(season)).days < FRESH_DAYS
 
 
 def download_season(page, season: str) -> Path:
@@ -149,13 +165,24 @@ def main() -> None:
         page.wait_for_selector("#fileFormatId", state="visible", timeout=30_000)
         page.wait_for_timeout(1500)
 
-        # 階段 1：季別下載（已存在 skip）
+        # 階段 1：季別下載（收檔舊季 skip；增補期新季刪掉重抓）
         for season in SEASONS:
             target = OUT_DIR / f"lvr_{season}.zip"
-            if target.exists():
-                print(f"\n=== {season}：已存在 {target.name}，跳過 ===")
+            fresh = is_fresh(season)
+            if target.exists() and not fresh:
+                print(f"\n=== {season}：已收檔，沿用 {target.name} ===")
                 continue
-            download_season(page, season)
+            if target.exists():
+                print(f"\n=== {season}：仍在增補期，刪除舊檔重抓 ===")
+                target.unlink()
+            try:
+                download_season(page, season)
+            except Exception as e:
+                if fresh:
+                    # 新季可能尚未開放下載（選單還沒有該季別）——警告後繼續，別讓整條管線掛掉
+                    print(f"  ⚠ {season} 下載失敗（可能尚未開放），跳過：{e}")
+                else:
+                    raise
 
         # 階段 2：當期 mini-package（失敗不致命）
         try:
