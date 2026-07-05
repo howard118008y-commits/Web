@@ -595,5 +595,40 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
+<script id="cx-embed-guard">
+/* 被第三方網站 iframe 嵌入時：頂端亮署名條＋所有連結改開新分頁回官網（嵌入＝幫我們掛招牌） */
+(function(){
+  var framed = false;
+  try { framed = (window.self !== window.top); } catch (e) { framed = true; }
+  if (!framed) return;
+  function init(){
+    var bar = document.createElement('div');
+    bar.setAttribute('role','note');
+    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:#141414;color:#fff;'
+      + 'padding:10px 14px;font-size:14px;line-height:1.5;text-align:center;font-family:"Noto Sans TC",sans-serif;';
+    bar.innerHTML = '🔧 本工具由 <a href="https://cx468.com.tw/?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
+      + 'target="_blank" rel="noopener" style="color:#ffd166;text-decoration:underline;font-weight:700">鋮馨租賃 cx468.com.tw</a> 提供｜'
+      + '<a href="https://cx468.com.tw/apply.html?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
+      + 'target="_blank" rel="noopener" style="color:#fff;background:#c8102e;padding:2px 10px;border-radius:99px;'
+      + 'text-decoration:none;font-weight:700;margin-left:4px">免費評估 →</a>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    function patchLinks(){
+      document.querySelectorAll('a[href]').forEach(function(a){
+        var h = a.getAttribute('href') || '';
+        if (h.charAt(0) === '#') return;
+        a.target = '_blank'; a.rel = 'noopener';
+      });
+    }
+    patchLinks();
+    /* nav/footer 由 include.js 後載，持續補新連結 */
+    new MutationObserver(patchLinks).observe(document.documentElement, { childList: true, subtree: true });
+    if (typeof gtag === 'function') {
+      gtag('event', 'tool_embedded', { embed_referrer: document.referrer || '(unknown)', page_path: location.pathname });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 </body>
 </html>
