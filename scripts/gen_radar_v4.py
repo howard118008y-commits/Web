@@ -87,7 +87,7 @@ html = f'''<!--
 <meta property="og:title" content="房貸儀表板｜18 項市場指標即時追蹤｜鋮馨租賃">
 <meta property="og:description" content="18 項房貸市場指標每日自動更新，十年歷史實值走勢一頁看懂。">
 <meta property="og:url" content="https://cx468.com.tw/cx_radar_v4_demo.html">
-<meta property="og:image" content="https://cx468.com.tw/img/gen-topic-b.jpg">
+<meta property="og:image" content="https://cx468.com.tw/img/hero-radar.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {schema}
@@ -109,9 +109,9 @@ body{{background:#fff}}
 nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}}
 .nav-back{{font-size:13px;color:var(--ink);opacity:.75;text-decoration:none;font-weight:500}}
 
-.rv4-hero{{position:relative;margin-top:48px;min-height:360px;display:flex;align-items:flex-end;overflow:hidden;background:#141414}}
-.rv4-hero img.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}}
-.rv4-hero .shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.3) 0%,rgba(10,10,12,.52) 52%,rgba(10,10,12,.85) 100%)}}
+.rv4-hero{{position:relative;margin-top:48px;min-height:360px;display:flex;align-items:flex-end;overflow:hidden;background:#ded8cc}}
+.rv4-hero img.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;filter:saturate(.96) contrast(1.03) brightness(1.05)}}
+.rv4-hero .shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,12,.18) 0%,rgba(8,8,12,.06) 38%,rgba(8,8,12,.16) 58%,rgba(8,8,12,.64) 100%)}}
 .rv4-hero .inner{{position:relative;max-width:1160px;margin:0 auto;padding:68px 24px 34px;width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}}
 .rv4-hero .rule{{width:44px;height:3px;background:var(--red);margin-bottom:16px}}
 .rv4-hero .eyebrow{{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin:0 0 12px;font-weight:500}}
@@ -181,7 +181,7 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 <div data-include="nav-tool"></div>
 
 <div class="rv4-hero">
-  <img class="bg" src="img/gen-topic-b.jpg" alt="密集住宅屋頂與遠山暖霞">
+  <img class="bg" src="img/hero-radar.jpg" alt="黃金時刻的台灣城市天際線與住宅大樓">
   <div class="shade"></div>
   <div class="inner">
     <div>

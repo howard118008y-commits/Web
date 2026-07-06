@@ -30,9 +30,9 @@ body{background:#fff}
 nav img.nav-logo{height:40px;width:40px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
 .nav-back{font-size:13px;color:var(--ink);opacity:.75;text-decoration:none;font-weight:500}
 
-.obs-hero{position:relative;margin-top:48px;min-height:340px;display:flex;align-items:flex-end;overflow:hidden;background:#141414}
-.obs-hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
-.obs-hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.28) 0%,rgba(10,10,12,.5) 52%,rgba(10,10,12,.84) 100%)}
+.obs-hero{position:relative;margin-top:48px;min-height:340px;display:flex;align-items:flex-end;overflow:hidden;background:#ded8cc}
+.obs-hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;filter:saturate(.96) contrast(1.03) brightness(1.05)}
+.obs-hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,12,.18) 0%,rgba(8,8,12,.06) 38%,rgba(8,8,12,.16) 58%,rgba(8,8,12,.64) 100%)}
 .obs-hero .inner{position:relative;max-width:1120px;margin:0 auto;padding:66px 24px 34px;width:100%}
 .obs-hero .rule{width:44px;height:3px;background:var(--red);margin-bottom:16px}
 .obs-hero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin:0 0 12px;font-weight:500}
@@ -301,7 +301,6 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
 }})();
 </script>
 <script src="include.js" defer></script>
-<div data-include="footer"></div>
 </body>
 </html>"""
 
@@ -505,7 +504,6 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
 }})();
 </script>
 <script src="include.js" defer></script>
-<div data-include="footer"></div>
 </body>
 </html>"""
 
