@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""房貸儀表板 v4 完整版 — 全生成式頁面（2026-07-06 品牌重生版）
+
+老闆令：UI 對齊首頁品牌＋內容全部由最新資料生成（廢除 2026-05 手寫示範內容）。
+- 靜態層：本腳本由 cx_data.json 產出 18 張卡（現值/狀態/註記/更新月），每日 CI 重跑保鮮
+- 動態層：cx-radar-v4.js 讀 cx_data + cx_history，畫十年實值走勢、算變化與十年高低均
+- 合規：無預測、無新行銷宣稱；註記沿用 cx_data（既有媽祖流程）；免責文照舊版原文
+輸出：cx_radar_v4_demo.html（沿用網址，production 檔名不改）
+"""
+import json
+from datetime import datetime
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent.parent
+DATA = json.loads((BASE / 'cx_data.json').read_text(encoding='utf-8'))
+NOW = datetime.now().strftime('%Y-%m-%d %H:%M')
+TODAY_ISO = datetime.now().strftime('%Y-%m-%d')
+
+SECTIONS = [
+    ('A', '政策與資金', '央行利率、房貸利率與放款動能'),
+    ('B', '市場量價', '移轉棟數與房價指數'),
+    ('C', '風險與結構', '逾放、負擔能力與供給'),
+    ('D', '全球與資金環境', '美債、匯率、股市與物價'),
+]
+STATUS_TXT = {'green': '正常', 'yellow': '留意', 'red': '警示'}
+
+def esc(s):
+    return (s or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+def card(ind):
+    code, name = ind['code'], esc(ind['name'])
+    val, note = esc(ind['value']), esc(ind.get('note', ''))
+    status = ind.get('status', 'yellow')
+    upd = esc(ind.get('updated', '—'))
+    return f'''    <div class="rv4-card" data-cx-code="{code}" data-status="{status}">
+      <div class="rv4-head">
+        <span class="rv4-code">{code}</span>
+        <span class="rv4-dot {status}" title="{STATUS_TXT.get(status,'')}"></span>
+      </div>
+      <div class="rv4-name">{name}</div>
+      <div class="rv4-value">{val}</div>
+      <div class="rv4-changes" data-role="changes"><span class="rv4-chg">—</span></div>
+      <div class="rv4-chart" data-role="chart"><div class="rv4-nochart">歷史累積中，走勢隨每日更新長出</div></div>
+      <div class="rv4-stats" data-role="stats"></div>
+      <div class="rv4-note">{note}</div>
+      <div class="rv4-upd">資料至 {upd}</div>
+    </div>'''
+
+cards_by_series = {}
+for ind in DATA['indicators']:
+    cards_by_series.setdefault(ind['code'][0], []).append(card(ind))
+
+sections_html = []
+for key, title, sub in SECTIONS:
+    cards = '\n'.join(cards_by_series.get(key, []))
+    sections_html.append(f'''  <div class="section-title" id="sec-{key}">{key} 系列｜{title}<span class="rv4-secsub">{sub}</span></div>
+  <div class="rv4-grid">
+{cards}
+  </div>''')
+sections_html = '\n\n'.join(sections_html)
+
+schema = json.dumps([
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"},
+        {"@type": "ListItem", "position": 2, "name": "房貸儀表板",
+         "item": "https://cx468.com.tw/cx_radar_v4_demo.html"}]},
+    {"@context": "https://schema.org", "@type": "WebPage",
+     "@id": "https://cx468.com.tw/cx_radar_v4_demo.html",
+     "url": "https://cx468.com.tw/cx_radar_v4_demo.html",
+     "name": "房貸儀表板｜18 項市場指標即時追蹤", "dateModified": TODAY_ISO, "inLanguage": "zh-TW"},
+], ensure_ascii=False)
+
+html = f'''<!--
+  Page: 房貸儀表板 v4 完整版（全生成）
+  Generated: {NOW} by scripts/gen_radar_v4.py — 手改無效，改產生器
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>房貸儀表板｜18 項市場指標即時追蹤｜鋮馨租賃</title>
+<link rel="canonical" href="https://cx468.com.tw/cx_radar_v4_demo.html">
+<meta name="description" content="央行利率、房貸利率、移轉棟數、房價指數、逾放比、美債與匯率——18 項房貸市場指標每日自動更新，十年歷史實值走勢一頁看懂。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="房貸儀表板｜18 項市場指標即時追蹤｜鋮馨租賃">
+<meta property="og:description" content="18 項房貸市場指標每日自動更新，十年歷史實值走勢一頁看懂。">
+<meta property="og:url" content="https://cx468.com.tw/cx_radar_v4_demo.html">
+<meta property="og:image" content="https://cx468.com.tw/img/gen-topic-b.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{schema}
+</script>
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+</script>
+
+<style>
+:root{{--ink:#1d1d1f;--paper:#faf8f4;--line:rgba(0,0,0,.08);--red:#c8102e;--gold:#D4AF37;--mono:'IBM Plex Mono',ui-monospace,monospace;--serif:'Noto Serif TC',serif}}
+body{{background:#fff}}
+nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}}
+.nav-back{{font-size:13px;color:var(--ink);opacity:.75;text-decoration:none;font-weight:500}}
+
+.rv4-hero{{position:relative;margin-top:48px;min-height:360px;display:flex;align-items:flex-end;overflow:hidden;background:#141414}}
+.rv4-hero img.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}}
+.rv4-hero .shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.3) 0%,rgba(10,10,12,.52) 52%,rgba(10,10,12,.85) 100%)}}
+.rv4-hero .inner{{position:relative;max-width:1160px;margin:0 auto;padding:68px 24px 34px;width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}}
+.rv4-hero .rule{{width:44px;height:3px;background:var(--red);margin-bottom:16px}}
+.rv4-hero .eyebrow{{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin:0 0 12px;font-weight:500}}
+.rv4-hero h1{{font-family:var(--serif);font-weight:900;font-size:44px;color:#fff;letter-spacing:.05em;line-height:1.14;margin:0 0 10px}}
+.rv4-hero .sub{{font-size:15px;color:rgba(255,255,255,.9);margin:0}}
+.rv4-live{{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.75);text-align:right;line-height:2}}
+.rv4-live .dot{{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34c759;margin-right:7px;animation:pulse 2s infinite}}
+@keyframes pulse{{0%,100%{{opacity:1}}50%{{opacity:.35}}}}
+.rv4-live b{{color:#fff;font-weight:500}}
+@media(max-width:768px){{.rv4-hero{{min-height:320px}}.rv4-hero h1{{font-size:31px}}.rv4-live{{text-align:left}}}}
+
+.rv4-wrap{{max-width:1160px;margin:34px auto;padding:0 20px 60px}}
+.section-title{{display:flex;align-items:baseline;gap:9px;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.12em;text-transform:uppercase;margin:44px 0 14px 2px;font-family:var(--mono)}}
+.section-title::before{{content:'';width:8px;height:8px;background:var(--red);flex:none;align-self:center}}
+.rv4-secsub{{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:#6e6e73;font-weight:400;letter-spacing:.02em;text-transform:none}}
+.section-title:first-of-type{{margin-top:8px}}
+
+.rv4-guide{{background:var(--paper);border:1px solid #e7e0d3;border-left:4px solid var(--gold);border-radius:16px;padding:22px 24px;margin-bottom:8px}}
+.rv4-guide h2{{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.1em;margin:0 0 14px}}
+.rv4-steps{{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}}
+@media(max-width:760px){{.rv4-steps{{grid-template-columns:1fr}}}}
+.rv4-step{{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}}
+.rv4-step .s{{font-family:var(--mono);font-size:10px;letter-spacing:.22em;margin-bottom:8px}}
+.rv4-step:nth-child(1) .s{{color:var(--red)}}.rv4-step:nth-child(2) .s{{color:#2563EB}}.rv4-step:nth-child(3) .s{{color:#8a6d1a}}
+.rv4-step b{{display:block;font-size:14px;color:var(--ink);margin-bottom:5px}}
+.rv4-step p{{font-size:12px;color:#57575b;line-height:1.7;margin:0}}
+.rv4-legend{{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#6e6e73}}
+.rv4-pill{{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:4px 12px;border:1px solid}}
+.rv4-pill i{{width:7px;height:7px;border-radius:50%;flex:none}}
+.rv4-pill.g{{color:#1d7a3e;border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.07)}}.rv4-pill.g i{{background:#34c759}}
+.rv4-pill.y{{color:#8a6d1a;border-color:rgba(212,175,55,.45);background:rgba(212,175,55,.08)}}.rv4-pill.y i{{background:#D4AF37}}
+.rv4-pill.r{{color:var(--red);border-color:rgba(200,16,46,.35);background:rgba(200,16,46,.06)}}.rv4-pill.r i{{background:var(--red)}}
+
+.rv4-grid{{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}}
+@media(max-width:860px){{.rv4-grid{{grid-template-columns:1fr}}}}
+.rv4-card{{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column}}
+.rv4-head{{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}}
+.rv4-code{{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.16em}}
+.rv4-dot{{width:10px;height:10px;border-radius:50%}}
+.rv4-dot.green{{background:#34c759}}.rv4-dot.yellow{{background:#D4AF37}}.rv4-dot.red{{background:#ff453a}}
+.rv4-name{{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);letter-spacing:.04em;margin-bottom:6px}}
+.rv4-value{{font-family:var(--mono);font-size:30px;font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-bottom:6px}}
+.rv4-changes{{display:flex;gap:14px;font-family:var(--mono);font-size:12px;color:#6e6e73;margin-bottom:12px;min-height:18px}}
+.rv4-chg b{{font-weight:600}}
+.rv4-chg .up{{color:#1d7a3e}}.rv4-chg .down{{color:var(--red)}}
+.rv4-chart{{margin:0 -4px 10px}}
+.rv4-nochart{{font-size:11.5px;color:#a1a1a6;background:var(--paper);border:1px dashed #e0d9c8;border-radius:10px;padding:26px 0;text-align:center}}
+.rv4-stats{{display:flex;gap:0;border-top:1px solid #f0f0f3;border-bottom:1px solid #f0f0f3;margin-bottom:12px}}
+.rv4-stat{{flex:1;padding:9px 4px;text-align:center}}
+.rv4-stat+.rv4-stat{{border-left:1px solid #f0f0f3}}
+.rv4-stat .k{{font-size:10px;color:#a1a1a6;letter-spacing:.08em;margin-bottom:3px;font-family:var(--mono)}}
+.rv4-stat .v{{font-family:var(--mono);font-size:13px;color:var(--ink)}}
+.rv4-note{{font-size:12.5px;color:#57575b;line-height:1.7;min-height:36px}}
+.rv4-upd{{font-family:var(--mono);font-size:10.5px;color:#a1a1a6;margin-top:10px}}
+
+.rv4-disc{{background:var(--paper);border:1px solid #e7e0d3;border-radius:16px;padding:20px 24px;font-size:12px;color:#57575b;line-height:1.85;margin-top:36px}}
+.rv4-cta{{background:#141414;color:#fff;padding:46px 24px;border-radius:20px;text-align:center;margin-top:28px}}
+.rv4-cta h2{{font-family:var(--serif);font-size:27px;font-weight:700;margin:0 0 10px;letter-spacing:.04em;color:#fff}}
+.rv4-cta p{{font-size:14.5px;color:rgba(255,255,255,.65);margin:0 0 22px}}
+.rv4-cta a{{display:inline-block;font-weight:600;padding:11px 24px;border-radius:980px;text-decoration:none;font-size:14px;margin:0 6px}}
+.rv4-cta a.w{{background:#fff;color:#141414}}
+.rv4-cta a.l{{background:#06C755;color:#fff}}
+</style>
+</head>
+<body>
+
+<div data-include="nav-tool"></div>
+
+<div class="rv4-hero">
+  <img class="bg" src="img/gen-topic-b.jpg" alt="密集住宅屋頂與遠山暖霞">
+  <div class="shade"></div>
+  <div class="inner">
+    <div>
+      <div class="rule"></div>
+      <p class="eyebrow">CX Mortgage Radar · 每日 08:30 自動更新</p>
+      <h1>房貸儀表板</h1>
+      <p class="sub">18 項市場指標｜十年歷史實值走勢｜公開統計來源</p>
+    </div>
+    <div class="rv4-live">
+      <div><span class="dot"></span>即時連線 <b id="now">──</b></div>
+      <div>上次更新 <b id="last-update">載入中…</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="rv4-wrap">
+
+  <div class="rv4-guide">
+    <h2>📖 如何閱讀這份儀表板</h2>
+    <div class="rv4-steps">
+      <div class="rv4-step"><div class="s">STEP 1</div><b>看當前數值</b><p>每張卡的大數字就是最新市場數據，右上角燈號代表健康程度。</p></div>
+      <div class="rv4-step"><div class="s">STEP 2</div><b>看短期變化</b><p>數字下方的「近期／一年」欄位，顯示這個指標近期上漲或下降了多少。</p></div>
+      <div class="rv4-step"><div class="s">STEP 3</div><b>看長期走勢</b><p>卡片中的走勢圖為十年歷史實值，可判斷目前位置是高點還是低點。</p></div>
+    </div>
+    <div class="rv4-legend">
+      <span style="letter-spacing:.1em;margin-right:4px">燈號說明</span>
+      <span class="rv4-pill g"><i></i>正常・數值健康</span>
+      <span class="rv4-pill y"><i></i>留意・需觀察趨勢</span>
+      <span class="rv4-pill r"><i></i>警示・建議諮詢專業評估</span>
+    </div>
+  </div>
+
+{sections_html}
+
+  <div class="rv4-disc">
+    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁解讀與呈現為市場觀察性質，僅供參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+  </div>
+
+  <div class="rv4-cta">
+    <h2>看得懂市場，更要看得懂自己的條件</h2>
+    <p>把你的狀況告訴我們，依個案免費評估最適合的方向。不申請不收費。</p>
+    <a class="w" href="apply.html">填表免費評估 →</a>
+    <a class="l" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>
+  </div>
+
+</div>
+
+<div data-include="footer"></div>
+<script src="include.js" defer></script>
+<script src="cx-line-modal.js" defer></script>
+<script src="cx-radar-v4.js" defer></script>
+</body>
+</html>
+'''
+
+out = BASE / 'cx_radar_v4_demo.html'
+out.write_text(html, encoding='utf-8')
+print(f'✅ 生成 {out.name}（{len(DATA["indicators"])} 卡，{NOW}）')

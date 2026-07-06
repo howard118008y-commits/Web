@@ -634,7 +634,9 @@ def main() -> None:
     deep_pkl = OUT_DIR / "shindian_deep.pkl"
     deep = pd.read_pickle(deep_pkl)
 
-    season_label = df["__season"].max().replace("S", "Q") if not df.empty else "?"
+    # __season 含 mini_YYYYMMDD 增量標籤，取季別格式的最大值，避免檔名漏進 UI（2026-07-06 老闆抓到）
+    seasons = [s for s in df["__season"].unique() if isinstance(s, str) and len(s) == 5 and s[3] == "S"]
+    season_label = max(seasons).replace("S", "Q") if seasons else "最新"
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
     ai_report = load_ai_report()
     html = build_html(generated_at, season_label, window_data, deep, ai_report)
