@@ -23,23 +23,13 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root{
-  --accent:#FFFFFF;--accent-glow:transparent;--accent-bg:rgba(255,255,255,0.08);
-  --bg-deep:#0e0e10;--bg-panel:#141416;--bg-elev:#1b1b1e;--bg-strip:#141416;
-  --ink:#E8E3D5;--ink-mid:#B0AB9A;--ink-dim:#7A7565;--gold:#FFFFFF;--line:rgba(255,255,255,0.07);
+  --accent:#c8102e;--accent-glow:transparent;--accent-bg:rgba(200,16,46,0.06);
+  --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
+  --ink:#1d1d1f;--ink-mid:#5a5750;--ink-dim:#8a867c;--gold:#D4AF37;--line:rgba(0,0,0,0.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
-nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid rgba(255,255,255,0.12)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;position:fixed!important;top:0!important;left:0!important;right:0!important;height:48px!important;padding:0 24px!important;z-index:1000!important;box-sizing:border-box!important;backdrop-filter:blur(12px)!important;}
-.nav-logo{display:flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important}
-.nav-logo span{color:var(--gold)!important;font-size:15px!important;font-weight:500!important}
-.nav-center{display:flex!important;align-items:center!important;gap:24px!important}
-.nav-links{display:flex!important;align-items:center!important}
-.nav-links a{color:var(--ink-mid)!important;font-size:14px!important;padding:0 12px!important;text-decoration:none!important;transition:color .2s!important}
-.nav-links a:hover{color:var(--ink)!important}
-.nav-cta{background:#fff!important;color:#141414!important;padding:7px 18px!important;border-radius:20px!important;font-size:13px!important;font-weight:700!important;text-decoration:none!important;white-space:nowrap!important}
-.nav-radar-btn{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,0.6)!important;padding:5px 14px!important;border-radius:20px!important;font-size:12px!important;font-weight:600!important;text-decoration:none!important;white-space:nowrap!important}
-@media(max-width:768px){.nav-center,.nav-radar-btn{display:none!important}}
-.hero{position:relative;overflow:hidden;min-height:480px;background:#0e0e10;border-bottom:1px solid rgba(255,255,255,0.12);}
+.hero{position:relative;overflow:hidden;min-height:480px;background:#141414;border-bottom:1px solid rgba(0,0,0,0.08);}
 
 
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
@@ -54,13 +44,13 @@ nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid rgba(255,25
 .btn-fill:hover{opacity:.85}
 .btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
-.stats-strip{background:#141416;border-top:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);padding:56px 0;position:relative;z-index:1;}
+.stats-strip{background:#faf8f4;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:56px 0;position:relative;z-index:1;}
 .stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
 .stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
 .stat-ring{text-align:center}.stat-ring svg{display:block}
-.stats-sep{width:1px;height:80px;background:rgba(255,255,255,0.08);flex-shrink:0}
+.stats-sep{width:1px;height:80px;background:rgba(0,0,0,0.1);flex-shrink:0}
 .stats-text{flex:1;min-width:200px}
-.stats-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;color:#fff;letter-spacing:0.08em;margin-bottom:12px;}
+.stats-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;color:var(--ink);letter-spacing:0.08em;margin-bottom:12px;}
 .stats-body{font-size:14px;line-height:1.88;color:var(--ink-mid);letter-spacing:0.03em;}
 .content-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 40px 100px;}
 .breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:60px;}
@@ -68,19 +58,19 @@ nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid rgba(255,25
 .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
 .sec-line{flex:1;height:1px;background:var(--line)}.sec-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
 .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px;}
-.card{background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
+.card{background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
 .card:hover{background:var(--bg-elev)}
-.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:rgba(255,255,255,0.72);border:1px solid rgba(255,255,255,0.2);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
-.card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:0.07em;margin-bottom:12px;}
+.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:#5a5750;border:1px solid rgba(0,0,0,0.18);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
+.card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:0.07em;margin-bottom:12px;}
 .card-desc{font-size:13px;line-height:1.9;color:var(--ink-dim);letter-spacing:0.03em;}
-.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-radius:0;}
+.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;}
 .cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
-.cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:#fff;letter-spacing:0.08em;margin-bottom:28px;}
+.cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#fff;color:#141414;transition:opacity .2s;}
+.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#141414;color:#fff;transition:opacity .2s;}
 .cta-main:hover{opacity:.85}
-.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(255,255,255,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(255,255,255,0.42);color:#fff}
+.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
+.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1d1d1f}
 @media(max-width:900px){
   .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}.hero-right{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:0.55;height:auto}
@@ -251,26 +241,26 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div class="stat-circles">
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="191 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">4</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="191 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">4</text>
+          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
+          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold" font-family="IBM Plex Mono,monospace">全球</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">宏觀視野</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="14" font-weight="bold" font-family="IBM Plex Mono,monospace">全球</text>
+          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">宏觀視野</text>
         </svg>
       </div>
     </div>
@@ -286,11 +276,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="breadcrumb">
     <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>國際資金 D系列</span>
   </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-left:2px solid #C61B1C;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#ff6b6b;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#E8E3D5;margin:0 0 14px"><strong style="color:#fff">想知道「國際資金與物價怎麼牽動台灣房貸」，看這組總體環境指標。</strong>D 系列追蹤美十年期公債殖利率、美元台幣匯率、台股與台灣 CPI；外部資金與通膨會透過利率與資金流，間接影響台灣房市與房貸條件。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#B0AB9A;line-height:2"><li><strong style="color:#E8E3D5">美十年期公債殖利率 4.493%（2026-06）</strong>：全球利率定錨，牽動台灣資金成本與長天期利率。</li><li><strong style="color:#E8E3D5">美元台幣匯率 31.71（2026-06）</strong>：影響資金流向與輸入性通膨。</li><li><strong style="color:#E8E3D5">台股加權指數 47,101 點（2026-06）</strong>：資產與財富效果，間接影響購屋力。</li><li><strong style="color:#E8E3D5">台灣 CPI 2.20%（2026-05）</strong>：通膨水準，是央行升降息的關鍵依據。</li></ul>
-  <div style="font-size:11.5px;color:#7A7565;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
+<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #c8102e;padding:24px 26px;margin-bottom:48px">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#c8102e;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
+  <p style="font-size:16px;line-height:1.85;color:#1d1d1f;margin:0 0 14px"><strong style="color:#1d1d1f">想知道「國際資金與物價怎麼牽動台灣房貸」，看這組總體環境指標。</strong>D 系列追蹤美十年期公債殖利率、美元台幣匯率、台股與台灣 CPI；外部資金與通膨會透過利率與資金流，間接影響台灣房市與房貸條件。</p>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1d1d1f">美十年期公債殖利率 4.493%（2026-06）</strong>：全球利率定錨，牽動台灣資金成本與長天期利率。</li><li><strong style="color:#1d1d1f">美元台幣匯率 31.71（2026-06）</strong>：影響資金流向與輸入性通膨。</li><li><strong style="color:#1d1d1f">台股加權指數 47,101 點（2026-06）</strong>：資產與財富效果，間接影響購屋力。</li><li><strong style="color:#1d1d1f">台灣 CPI 2.20%（2026-05）</strong>：通膨水準，是央行升降息的關鍵依據。</li></ul>
+  <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
 </div>
   <div class="sec-head">
     <div class="sec-line"></div><div class="sec-text">監測指標 · INDICATORS</div><div class="sec-line"></div>
@@ -319,25 +309,25 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px">
-  <div style="border:1px solid rgba(255,255,255,0.12);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:10px">美國公債殖利率，關台灣房貸什麼事？</div>
-    <div style="font-size:14px;line-height:1.9;color:#B0AB9A">美十年期公債殖利率（目前 4.493%）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。</div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">美國公債殖利率，關台灣房貸什麼事？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">美十年期公債殖利率（目前 4.493%）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。</div>
   </div>
-  <div style="border:1px solid rgba(255,255,255,0.12);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:10px">CPI（消費者物價指數）和房貸利率有關係嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#B0AB9A">有。CPI 反映通膨（目前 2.20%，2026-05），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。</div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">CPI（消費者物價指數）和房貸利率有關係嗎？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">有。CPI 反映通膨（目前 2.20%，2026-05），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。</div>
   </div>
-  <div style="border:1px solid rgba(255,255,255,0.12);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:10px">看這些國際指標，對買房有什麼用？</div>
-    <div style="font-size:14px;line-height:1.9;color:#B0AB9A">它們是房市的「外部環境」訊號：利率、匯率、股市與通膨會透過資金面影響購屋力與房貸條件。僅供研判大方向，實際貸款條件仍依個案與銀行決定。</div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">看這些國際指標，對買房有什麼用？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">它們是房市的「外部環境」訊號：利率、匯率、股市與通膨會透過資金面影響購屋力與房貸條件。僅供研判大方向，實際貸款條件仍依個案與銀行決定。</div>
   </div>
   </div>
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(255,255,255,0.22);padding:7px 0 7px 16px"><strong style="color:#E8E3D5;font-size:14px">美十年期公債殖利率</strong><span style="color:#7A7565;font-size:13.5px;line-height:1.85"> — 美國 10 年期公債的市場殖利率，被視為全球長天期利率的定錨。</span></div>
-    <div style="border-left:2px solid rgba(255,255,255,0.22);padding:7px 0 7px 16px"><strong style="color:#E8E3D5;font-size:14px">消費者物價指數（CPI）</strong><span style="color:#7A7565;font-size:13.5px;line-height:1.85"> — 衡量一般物價變動的指標，是中央銀行貨幣政策的重要依據。</span></div>
-    <div style="border-left:2px solid rgba(255,255,255,0.22);padding:7px 0 7px 16px"><strong style="color:#E8E3D5;font-size:14px">輸入性通膨</strong><span style="color:#7A7565;font-size:13.5px;line-height:1.85"> — 因進口商品或原物料價格上漲，透過匯率傳導至國內的物價上升。</span></div>
-    <div style="border-left:2px solid rgba(255,255,255,0.22);padding:7px 0 7px 16px"><strong style="color:#E8E3D5;font-size:14px">選擇性信用管制</strong><span style="color:#7A7565;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
+    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">美十年期公債殖利率</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 美國 10 年期公債的市場殖利率，被視為全球長天期利率的定錨。</span></div>
+    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">消費者物價指數（CPI）</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 衡量一般物價變動的指標，是中央銀行貨幣政策的重要依據。</span></div>
+    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">輸入性通膨</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 因進口商品或原物料價格上漲，透過匯率傳導至國內的物價上升。</span></div>
+    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">選擇性信用管制</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
   </div>
   <div class="cta-box">
     <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
@@ -350,18 +340,20 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </div>
 
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid #C61B1C;text-align:center">
-  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
-  <div style="font-size:13.5px;color:rgba(255,255,255,0.6);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
+<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #c8102e;text-align:center">
+  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
+  <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#141414;background:#fff;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
+    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#141414;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
     <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#06c755;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
   </div>
 </div>
 <div style="max-width:1100px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:1">
-  <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
+  <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(29,29,31,0.42);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
     資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
   </div>
 </div>
+<div data-include="footer"></div>
+<script src="include.js" defer></script>
 </body>
 </html>

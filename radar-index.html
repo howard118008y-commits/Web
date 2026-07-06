@@ -23,11 +23,11 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root {
-  --bg:#0e0e10;--panel:rgba(255,255,255,0.02);
-  --hair:rgba(255,255,255,0.12);--hair-strong:rgba(255,255,255,0.26);
-  --ink:#fff;--ink-mid:rgba(255,255,255,0.72);--ink-dim:rgba(255,255,255,0.45);
-  --red:#C61B1C;
-  --st-green:#4ADE80;--st-yellow:#FCD34D;--st-red:#F87171;
+  --bg:#fff;--panel:#faf8f4;
+  --hair:rgba(0,0,0,0.08);--hair-strong:rgba(0,0,0,0.25);
+  --ink:#1d1d1f;--ink-mid:rgba(29,29,31,0.72);--ink-dim:rgba(29,29,31,0.45);
+  --red:#c8102e;--gold:#D4AF37;
+  --st-green:#1a7f37;--st-yellow:#9a7b0a;--st-red:#c8102e;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -37,21 +37,13 @@ body{
   min-height:100vh;padding-top:48px;
 }
 
-nav{background:rgba(14,14,16,0.92)!important;border-bottom:1px solid var(--hair)!important}
-nav .nav-logo span{color:#fff!important}
-.nav-links a{color:var(--ink-mid)!important;opacity:1!important}
-.nav-links a:hover{color:#fff!important}
-.nav-cta{background:#fff!important;color:#141414!important}
-.nav-radar-btn{background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,0.6)!important;box-shadow:none!important}
-.cx-burger span{background:#fff!important}
-
 .page-wrap{
   position:relative;z-index:1;
   max-width:1100px;margin:0 auto;
   padding:72px 32px 100px;
 }
 
-/* ═══ HERO ═══ */
+/* ═══ HERO（照片主視覺，與儀表板同款） ═══ */
 .hero{
   position:relative;overflow:hidden;
   display:flex;align-items:center;gap:0;
@@ -59,19 +51,19 @@ nav .nav-logo span{color:#fff!important}
   padding:96px max(32px, calc((100vw - 1036px) / 2)) 104px max(32px, calc((100vw - 1036px) / 2));
   margin-bottom:0;
   border-bottom:1px solid var(--hair);
-  background:var(--bg);
+  background:#ded8cc;
+}
+.hero img.bg{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:0;
+  filter:saturate(.96) contrast(1.03) brightness(1.02);
 }
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(100deg,rgba(14,14,16,0.92) 0%,rgba(14,14,16,0.7) 38%,rgba(14,14,16,0.15) 70%,transparent 100%);
+  background:linear-gradient(100deg,rgba(8,8,12,0.82) 0%,rgba(8,8,12,0.62) 38%,rgba(8,8,12,0.12) 70%,transparent 100%);
 }
 .hero-left{flex:0 0 460px;max-width:460px;position:relative;z-index:2}
 .hero-right{flex:1;min-height:400px;position:relative;z-index:2}
-#hero-wave{
-  position:absolute;
-  inset:-30px -32px -30px -80px;
-  width:calc(100% + 112px);height:calc(100% + 60px);
-}
 
 /* 系統標籤列（髮絲 eyebrow） */
 .hero-sys{
@@ -79,7 +71,7 @@ nav .nav-logo span{color:#fff!important}
   margin-bottom:28px;
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;letter-spacing:0.3em;
-  color:var(--ink-mid);text-transform:uppercase;
+  color:rgba(255,255,255,0.85);text-transform:uppercase;
   border-bottom:1px solid rgba(255,255,255,0.4);
   padding-bottom:8px;
   position:relative;z-index:2;
@@ -94,7 +86,7 @@ nav .nav-logo span{color:#fff!important}
 .hero-en{
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;letter-spacing:0.28em;
-  color:var(--ink-dim);
+  color:rgba(255,255,255,0.55);
   margin-bottom:40px;position:relative;z-index:2;
 }
 
@@ -102,12 +94,12 @@ nav .nav-logo span{color:#fff!important}
 .hero-metrics{
   display:inline-flex;align-items:stretch;
   margin-bottom:36px;position:relative;z-index:2;
-  border:1px solid var(--hair-strong);
-  background:rgba(14,14,16,0.55);
+  border:1px solid rgba(255,255,255,0.35);
+  background:rgba(8,8,12,0.45);
 }
 .hero-metric{
   padding:18px 32px;text-align:center;
-  border-right:1px solid var(--hair);
+  border-right:1px solid rgba(255,255,255,0.18);
 }
 .hero-metric:last-child{border-right:0}
 .metric-num{
@@ -117,7 +109,7 @@ nav .nav-logo span{color:#fff!important}
 }
 .metric-label{
   font-family:"Noto Sans TC",sans-serif;font-size:11px;
-  color:var(--ink-dim);letter-spacing:0.18em;
+  color:rgba(255,255,255,0.65);letter-spacing:0.18em;
 }
 
 /* 標籤群（方角髮絲鈕） */
@@ -152,7 +144,7 @@ nav .nav-logo span{color:#fff!important}
   position:relative;
   transition:background .2s;cursor:pointer;
 }
-.tab-item:hover{background:rgba(255,255,255,0.04)}
+.tab-item:hover{background:rgba(0,0,0,0.03)}
 .tab-item:hover .tab-arrow{transform:translateX(8px)}
 
 .tab-badge{
@@ -163,11 +155,11 @@ nav .nav-logo span{color:#fff!important}
 }
 .badge-letter{
   font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
-  font-size:20px;line-height:1;color:#fff;
+  font-size:20px;line-height:1;color:var(--ink);
 }
 .badge-letter.small{
   font-family:"IBM Plex Mono",monospace;
-  font-size:9px;letter-spacing:0.08em;font-weight:500;color:#fff;
+  font-size:9px;letter-spacing:0.08em;font-weight:500;color:var(--ink);
 }
 .badge-count{
   font-family:"IBM Plex Mono",monospace;
@@ -181,7 +173,7 @@ nav .nav-logo span{color:#fff!important}
 }
 .tab-title{
   font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;
-  font-size:21px;letter-spacing:0.06em;margin-bottom:7px;color:#fff;
+  font-size:21px;letter-spacing:0.06em;margin-bottom:7px;color:var(--ink);
 }
 .tab-codes{
   font-family:"IBM Plex Mono",monospace;font-size:11px;
@@ -190,7 +182,7 @@ nav .nav-logo span{color:#fff!important}
 }
 .tab-arrow{
   flex-shrink:0;font-family:"Noto Serif TC",serif;
-  font-size:24px;font-weight:300;color:#fff;
+  font-size:24px;font-weight:300;color:var(--ink);
   transition:transform .2s;
 }
 
@@ -203,15 +195,15 @@ nav .nav-logo span{color:#fff!important}
   transition:border-color .2s,background .2s;
   cursor:pointer;
 }
-.series-block:hover{border-color:var(--hair-strong);background:rgba(255,255,255,0.04)}
+.series-block:hover{border-color:var(--hair-strong);background:rgba(0,0,0,0.02)}
 .sb-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--hair)}
-.sb-badge{width:28px;height:28px;border:1px solid var(--hair-strong);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;flex-shrink:0;color:#fff!important;background:transparent!important}
+.sb-badge{width:28px;height:28px;border:1px solid var(--hair-strong);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;flex-shrink:0;color:var(--ink)!important;background:transparent!important}
 .sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1;color:var(--ink-mid)!important}
 .sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--st-red);letter-spacing:0.1em;flex-shrink:0;
-  padding:3px 8px;border:1px solid rgba(248,113,113,0.35);}
-.ov-row{display:flex;align-items:center;gap:9px;padding:11px 18px;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .18s}
+  padding:3px 8px;border:1px solid rgba(200,16,46,0.3);}
+.ov-row{display:flex;align-items:center;gap:9px;padding:11px 18px;border-bottom:1px solid rgba(0,0,0,0.06);transition:background .18s}
 .ov-row:last-child{border-bottom:0}
-.ov-row:hover{background:rgba(255,255,255,0.04)}
+.ov-row:hover{background:rgba(0,0,0,0.03)}
 .ov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .ov-dot.green{background:var(--st-green)}
 .ov-dot.yellow{background:var(--st-yellow)}
@@ -240,7 +232,7 @@ nav .nav-logo span{color:#fff!important}
 .footer-disclaim{
   margin-top:18px;text-align:center;
   font-family:"Noto Sans TC",sans-serif;font-size:11px;
-  color:rgba(255,255,255,0.35);line-height:1.85;
+  color:rgba(29,29,31,0.42);line-height:1.85;
   max-width:720px;margin-left:auto;margin-right:auto;letter-spacing:0.02em;
 }
 
@@ -248,8 +240,8 @@ nav .nav-logo span{color:#fff!important}
 @media(max-width:900px){
   .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:64px 20px 80px;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}
-  .hero-right{position:absolute;inset:0;width:100%;height:100%;opacity:0.32;z-index:1}
-  #hero-wave{inset:0;width:100%;height:100%}
+  .hero-right{display:none}
+  .hero::after{background:linear-gradient(180deg,rgba(8,8,12,0.6) 0%,rgba(8,8,12,0.55) 55%,rgba(8,8,12,0.78) 100%)}
   .hero-title{font-size:36px}
   .hero-metrics{display:flex;width:100%}
   .hero-metric{flex:1;padding:14px 10px}
@@ -458,8 +450,9 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 });
 </script>
 
-<!-- ── WAVE HERO ── -->
+<!-- ── PHOTO HERO ── -->
 <div class="hero">
+  <img class="bg" src="img/hero-radar.jpg" alt="黃金時刻的台灣城市天際線與住宅大樓" fetchpriority="high">
   <div class="hero-left">
     <div class="hero-sys">房貸儀表板 · 知識庫結構 · SYS 2026</div>
 
@@ -489,34 +482,32 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     </div>
   </div>
 
-  <div class="hero-right">
-    <canvas id="hero-wave"></canvas>
-  </div>
+  <div class="hero-right"></div>
 
 </div>
 
 <div class="page-wrap">
 
   <!-- ════════════ 快速答案卡（AEO quick-answer）START ════════════ -->
-  <div class="quick-answer" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid var(--red);padding:26px 28px;margin-bottom:40px">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#ff6b6b;letter-spacing:0.3em;margin-bottom:14px">快速答案 · QUICK ANSWER</div>
-    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:#fff;line-height:1.45;margin:0 0 14px">這個房貸儀表板在追蹤什麼？給誰看？</h2>
+  <div class="quick-answer" style="background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--red);padding:26px 28px;margin-bottom:40px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--red);letter-spacing:0.3em;margin-bottom:14px">快速答案 · QUICK ANSWER</div>
+    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:var(--ink);line-height:1.45;margin:0 0 14px">這個房貸儀表板在追蹤什麼？給誰看？</h2>
     <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0">房貸市場儀表板把台灣房貸市場分成四大系列、共 18 項關鍵指標一站追蹤，涵蓋央行利率與銀行端管制、房市交易量價、風險預警，以及影響資金環境的國際訊號。資料取自中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。它適合關心房貸利率與貸款成數走向的屋主、揹著多筆負債想理清財務的家庭，以及想在做決定前先看懂市場脈動的一般民眾。本頁僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，實際貸款條件依個案而定，最終核貸由金融機構決定。</p>
   </div>
   <!-- ════════════ 快速答案卡 END ════════════ -->
 
   <!-- ════════════ 本週房市焦點（每週更換一則 · 週更流程：WebSearch 查證→自家圖庫配圖→/媽祖把關→上線；不用新聞站圖片避免版權）START ════════════ -->
-  <div id="monthly-focus" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid var(--red);margin-bottom:40px;overflow:hidden">
+  <div id="monthly-focus" style="background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--red);margin-bottom:40px;overflow:hidden">
     <img src="img/banner-city.jpg" alt="台北都會區住宅大樓全景——新青安補貼倒數與首批寬限期到期是本週房市焦點" loading="lazy" style="display:block;width:100%;height:130px;object-fit:cover;opacity:.9">
     <div style="padding:24px 28px 26px">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#ff6b6b;letter-spacing:0.3em">本週房市焦點 · WEEKLY FOCUS</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--red);letter-spacing:0.3em">本週房市焦點 · WEEKLY FOCUS</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-dim);letter-spacing:0.2em">2026 · 07 · 第 1 週</span>
     </div>
-    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:#fff;line-height:1.45;margin:0 0 14px">新青安補貼倒數一個月：7/31 屆期、2.0 尚未定案，首批寬限期今夏起陸續到期</h2>
+    <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:var(--ink);line-height:1.45;margin:0 0 14px">新青安補貼倒數一個月：7/31 屆期、2.0 尚未定案，首批寬限期今夏起陸續到期</h2>
     <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 12px">財政部新青安優惠貸款將於 2026 年 7 月 31 日屆期，利息補貼以「撥款日」為準——流程若拖過期限才撥款，利率即回到一般水準。接棒的「新青安 2.0」仍在研議中、須報行政院核定後公布；先前媒體流傳的資格與利率版本，財政部已發稿澄清並非官方定案。另一方面，新青安寬限期最長 5 年，但銀行多核給 3 年；2023 年 8 月開辦時首批、採 3 年寬限期的申貸戶，寬限期自今年下半年起陸續屆滿，從只繳利息轉為本息攤還，每月還款金額將明顯增加。</p>
-    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#E8E3D5">對你的意義：</strong>還在跑流程的申貸族，時程要抓緊，7/31 前完成撥款補貼才算數；寬限期陸續到期、月付開始跳升的屋主，正是重新盤點財務結構的時點——名下有房、又有多筆貸款的人，可趁政策交接期把狀況理清楚、評估可行方向。</p>
-    <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px">資料來源：財政部新聞稿、公視新聞、ETtoday、自由時報地產天下（2026-06〜07）。本則為公開新聞整理與市場觀察，非投資或貸款建議；實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#1d1d1f">對你的意義：</strong>還在跑流程的申貸族，時程要抓緊，7/31 前完成撥款補貼才算數；寬限期陸續到期、月付開始跳升的屋主，正是重新盤點財務結構的時點——名下有房、又有多筆貸款的人，可趁政策交接期把狀況理清楚、評估可行方向。</p>
+    <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;border-top:1px solid rgba(0,0,0,0.08);padding-top:12px">資料來源：財政部新聞稿、公視新聞、ETtoday、自由時報地產天下（2026-06〜07）。本則為公開新聞整理與市場觀察，非投資或貸款建議；實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
     </div>
   </div>
   <!-- ════════════ 本週房市焦點 END ════════════ -->
@@ -609,11 +600,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   </div>
   <div class="ov-meta" id="ov-meta"></div>
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-left:3px solid #C61B1C;text-align:center">
-  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
-  <div style="font-size:13.5px;color:rgba(255,255,255,0.6);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
+<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:var(--panel);border:1px solid var(--hair);border-left:3px solid var(--red);text-align:center">
+  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
+  <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#141414;background:#fff;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
+    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#141414;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
     <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#06c755;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
   </div>
 </div>
@@ -624,20 +615,20 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div class="section-heading-line"></div>
   </div>
   <div class="glossary" style="border:1px solid var(--hair);background:var(--panel);padding:8px 28px 20px;margin-bottom:16px">
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">LTV（貸款成數，Loan-to-Value）</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:18px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">LTV（貸款成數，Loan-to-Value）</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">貸款金額占不動產鑑價或成交價的比例。成數越高、屋主自備款越少；央行選擇性信用管制常以調整貸款成數上限來影響房市資金。實際可貸成數依個案不動產條件、財務狀況與銀行政策而定。</p>
     </div>
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">DBR（負債比，Debt-Burden Ratio）</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:18px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">DBR（負債比，Debt-Burden Ratio）</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">又稱無擔保債務比，指個人無擔保負債總額與月收入的倍數關係，是銀行審核信貸與整合案件的重要參考。負債比越高，銀行核貸空間通常越受限。實際認定標準由各金融機構依規定與個案評估。</p>
     </div>
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">DSR（還款負擔比，Debt-Service Ratio）</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:18px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">DSR（還款負擔比，Debt-Service Ratio）</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">每月固定還款金額占每月收入的比例，用來衡量還款壓力是否過重。比例過高時現金流容易吃緊，也會影響銀行對新貸款的審核。實際評估方式依各金融機構規範而定。</p>
     </div>
     <div style="padding:18px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">選擇性信用管制（俗稱限貸令）</h3>
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">選擇性信用管制（俗稱限貸令）</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">中央銀行針對特定類型不動產貸款採取的差異化管制措施，常見手段包括調整貸款成數上限、限制寬限期等，目的在於穩定房市與金融秩序。政策內容與鬆緊時點依主管機關公告為準。</p>
     </div>
   </div>
@@ -650,20 +641,20 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     <div class="section-heading-line"></div>
   </div>
   <div class="faq" style="border:1px solid var(--hair);background:var(--panel);padding:8px 28px 20px;margin-bottom:16px">
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">這個儀表板的資料多久更新一次？</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">這個儀表板的資料多久更新一次？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">各項指標的更新頻率不同，會跟隨資料來源機構的發布節奏。利率與政策類指標多在央行理監事會後更新，房價與交易量類指標則多為月報或季報，更新時間一律以各機構官方發布為準，頁面上每項指標都會標示對應的資料時間。</p>
     </div>
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">儀表板的數據來源是哪裡？</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">儀表板的數據來源是哪裡？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">資料取自中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，以及公開發布的房價與市場指數。本頁為公開資料的整理與呈現，非投資或貸款建議。</p>
     </div>
-    <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">18 項指標分成哪幾個系列？</h3>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">18 項指標分成哪幾個系列？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">分為四大系列：A 房貸金融（央行利率與銀行端管制）、B 交易量價（房市成交量與房價指數）、C 風險預警（逾放、房價所得比等風險訊號）、D 國際資金（美債殖利率、匯率、股市與物價等外部訊號）。每個系列都可點入看完整指標與走勢。</p>
     </div>
     <div style="padding:20px 0">
-      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:#fff;margin:0 0 8px">看完指標後，可以做什麼？</h3>
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">看完指標後，可以做什麼？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">儀表板幫你看懂市場方向，若想了解對自身房貸或負債的實際影響，可預約免費諮詢，由顧問依你的個案評估可行方向。不申請不收費；本公司非金融機構、不放貸，實際貸款條件依個案而定，最終核貸由金融機構決定。</p>
     </div>
   </div>
@@ -683,10 +674,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 /* ── 18項指標總覽 fetch ── */
 (function(){
   var SC = {
-    A:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'房貸金融',en:'BANKING'},
-    B:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'交易量價',en:'VOL & PRICE'},
-    C:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'風險預警',en:'RISK WARNING'},
-    D:{color:'rgba(255,255,255,0.85)',bg:'transparent',label:'國際資金',en:'GLOBAL CAP'}
+    A:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'房貸金融',en:'BANKING'},
+    B:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'交易量價',en:'VOL & PRICE'},
+    C:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'風險預警',en:'RISK WARNING'},
+    D:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'國際資金',en:'GLOBAL CAP'}
   };
   fetch('cx_data.json')
     .then(function(r){return r.json();})
@@ -732,70 +723,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 })();
 </script>
 
-<script>
-/* ── Wave canvas animation ── */
-(function(){
-  var canvas=document.getElementById('hero-wave');
-  if(!canvas)return;
-  var ctx=canvas.getContext('2d');
-  var t=0;
-
-  function resize(){
-    canvas.width=canvas.offsetWidth||600;
-    canvas.height=canvas.offsetHeight||400;
-  }
-
-  function lerp(a,b,f){return a+(b-a)*f;}
-
-  function draw(){
-    var W=canvas.width,H=canvas.height;
-    if(!W||!H){requestAnimationFrame(draw);return;}
-    ctx.clearRect(0,0,W,H);
-
-    var N=110;
-    for(var i=0;i<N;i++){
-      var p=i/N;
-      var dist=Math.abs(p-0.5)*2; /* 0=centre 1=edge */
-      var r,g,b,a;
-      if(dist<0.10){r=240;g=232;b=215;a=0.48;}
-      else if(dist<0.30){var f=(dist-0.10)/0.20;r=Math.round(lerp(240,220,f));g=Math.round(lerp(232,215,f));b=Math.round(lerp(215,195,f));a=lerp(0.44,0.34,f);}
-      else if(dist<0.55){var f=(dist-0.30)/0.25;r=Math.round(lerp(220,200,f));g=Math.round(lerp(215,190,f));b=Math.round(lerp(195,165,f));a=lerp(0.30,0.16,f);}
-      else if(dist<0.78){var f=(dist-0.55)/0.23;r=Math.round(lerp(200,175,f));g=Math.round(lerp(190,165,f));b=Math.round(lerp(165,140,f));a=lerp(0.13,0.05,f);}
-      else{var f=(dist-0.78)/0.22;r=175;g=165;b=145;a=lerp(0.04,0.01,f);}
-
-      ctx.beginPath();
-      ctx.strokeStyle='rgba('+r+','+g+','+b+','+Math.max(0,a).toFixed(2)+')';
-      ctx.lineWidth=0.75;
-
-      var yCenter=H*0.5;
-      var yOff=(p-0.5)*H*1.18;
-      var amp=Math.exp(-Math.pow(dist*2.8,2))*92+14;
-      var ph1=t+i*0.10;
-      var ph2=t*0.72+i*0.14;
-      var ph3=t*1.45+i*0.07;
-
-      for(var x=0;x<=W;x+=3){
-        var xn=x/W;
-        /* Gaussian bloom centred at ~55% of canvas width */
-        var env=Math.exp(-Math.pow(xn-0.52,2)/0.16)*1.75;
-        if(env>1.05)env=1.05;
-        var y=yCenter+yOff
-             +Math.sin(x*0.0068+ph1)*amp*env
-             +Math.sin(x*0.014+ph2)*(amp*0.38)*env
-             +Math.sin(x*0.022+ph3)*(amp*0.18)*env;
-        if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-    }
-
-    t+=0.009;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize',resize);
-  draw();
-})();
-</script>
+<div data-include="footer"></div>
+<script src="include.js" defer></script>
 </body>
 </html>
