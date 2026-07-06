@@ -612,7 +612,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="brand-mark">鋮馨租賃有限公司</div>
       <div class="brand-title">房貸儀表板</div>
       <div class="brand-sub">房貸市場儀表板 · v0.4 設計示範版</div>
-      <div class="demo-tag">DEMO · 前 3 項指標 · 完整版將擴充至 18 項</div>
+      <div class="demo-tag">完整版 · 18 項指標 · 走勢為公開統計歷史值</div>
     </div>
     <div class="meta">
       <div class="meta-row">
@@ -1497,7 +1497,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
   <footer class="footer">
     <div>鋮馨租賃有限公司 · 房貸市場儀表板</div>
-    <div style="margin-top: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">房貸儀表板 v0.4 設計示範 · 完整版將擴充至 18 項指標</div>
+    <div style="margin-top: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">房貸儀表板 v4 完整版 · 18 項指標 · 每日 08:30 自動更新</div>
   </footer>
 
 </div>
@@ -1544,6 +1544,31 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 })();
 </script>
 <script src="cx-line-modal.js" defer></script>
+<script src="cx-radar-charts.js" defer></script>
+<!-- ── 全 18 項指標總覽（cx-radar-charts.js 以真實歷史序列渲染）── -->
+<style>
+.a18-wrap{max-width:1200px;margin:28px auto 0;padding:0 24px;position:relative;z-index:1}
+.a18-title{font-family:'Noto Serif TC',serif;font-size:22px;color:#f5f1e8;letter-spacing:.06em;margin:0 0 4px}
+.a18-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;font-family:'Noto Sans TC',sans-serif}
+.a18-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.a18-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.a18-grid{grid-template-columns:1fr}}
+.a18-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 16px;font-family:'Noto Sans TC',sans-serif}
+.a18-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.a18-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#D4AF37;letter-spacing:.14em}
+.a18-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.a18-name{font-size:14px;color:#f5f1e8;font-weight:600;margin-bottom:2px}
+.a18-value{font-family:'IBM Plex Mono',monospace;font-size:22px;color:#fff;margin:2px 0 6px}
+.a18-nochart{font-size:11px;color:rgba(255,255,255,.35);height:44px;display:flex;align-items:center}
+.a18-note{font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.55;margin-top:6px;min-height:30px}
+.a18-upd{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-top:6px}
+</style>
+<div class="a18-wrap">
+  <div class="a18-title">全 18 項指標總覽</div>
+  <div class="a18-sub">現值與狀態每日 08:30 自動更新；走勢圖為各公開統計來源之歷史數值，僅供市場觀察參考。歷史點數不足的指標將隨每日累積逐步長出走勢。</div>
+  <div id="all18-grid" class="a18-grid"></div>
+</div>
+
 <div style="max-width:1200px;margin:0 auto;padding:8px 24px 56px;position:relative;z-index:1">
   <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);line-height:1.85;letter-spacing:0.02em;max-width:760px;margin:0 auto">
     資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁解讀與預測為市場觀察性質，僅供參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
