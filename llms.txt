@@ -1,5 +1,5 @@
 # 鋮馨租賃有限公司
-> 鋮馨租賃有限公司是位於新北市中和區的不動產金融顧問，整合逾 40 家銀行與金融管道，專辦房屋售後回租、二胎房貸、貸款整合、民間轉銀行與包租代管。服務名下多房的屋主，以及信用瑕疵、聯徵條件不佳的不動產持有人，協助降低每月還款壓力、活化資產。本公司為諮詢媒合服務、非金融機構，最終核貸由金融機構決定。免費評估、誠實不收費。
+> 鋮馨租賃有限公司是位於新北市中和區的不動產金融顧問，整合 39 家以上合作銀行，專辦房屋售後回租、二胎房貸、貸款整合、民間轉銀行與包租代管。服務名下多房的屋主，以及信用瑕疵、聯徵條件不佳的不動產持有人，協助降低每月還款壓力、活化資產。本公司為諮詢媒合服務、非金融機構，最終核貸由金融機構決定。免費評估、誠實不收費。
 
 公司名稱：鋮馨租賃有限公司
 地址：新北市中和區中正路468號
@@ -50,6 +50,7 @@ Google 商家：https://maps.app.goo.gl/WXHqkvNp49uCaGJE7
 - [不動產融資數據速查表](https://cx468.com.tw/financing-data): 房地合一稅與土增稅級距、契稅、DBR22／DSR、民間月息與銀行年息結構、售後回租成數、信用瑕疵留存時間（皆為現行一般規定，依個案與主管機關核定）。
 
 ## Optional
+- [English — Taiwan Real-Estate Financing Advisory](https://cx468.com.tw/en/): Advisory and matching consultancy for Taiwan property owners: sale-and-leaseback (title transfer + tenancy + contractual repurchase right), debt consolidation, private-to-bank refinancing. Not a bank; not a lender.
 - [關於鋮馨租賃](https://cx468.com.tw/about)
 - [知識專欄](https://cx468.com.tw/knowledge)
 - [完整內容版本](https://cx468.com.tw/llms-full.txt)
