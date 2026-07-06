@@ -130,7 +130,7 @@ def head_jsonld(page_key: str, date_iso: str) -> str:
 def quick_answer_html(page_key: str) -> str:
     head, text = PAGES[page_key]["quick"]
     return (f'<div id="quick-answer" class="notes" style="margin:0 0 24px;'
-            f'border-left:3px solid #7C3AED">\n'
+            f'border-left:3px solid #c8102e">\n'
             f'  <h4>快速答案｜{head}</h4>\n  <p style="margin:0">{text}</p>\n</div>')
 
 

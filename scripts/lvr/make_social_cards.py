@@ -25,7 +25,7 @@ CARD_DIR.mkdir(exist_ok=True)
 
 # 1080×1350 @ 100 dpi → figsize=(10.8, 13.5)
 FIGSIZE = (10.8, 13.5)
-PURPLE = "#7C3AED"
+PURPLE = "#c8102e"   # 品牌紅（2026-07-06 全家族換裝，變數名沿用）
 BLUE = "#2563EB"
 GREEN = "#16A34A"
 ORANGE = "#F59E0B"

@@ -30,8 +30,8 @@ AI_REPORT_PATH = CX468_DIR / "lvr-data" / "週報_最新.txt"
 
 FOCUS_TOWNS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]
 COLORS = {
-    "中和區": "#7C3AED", "永和區": "#2563EB", "板橋區": "#16A34A",
-    "新店區": "#F59E0B", "土城區": "#EF4444",
+    "中和區": "#c8102e", "永和區": "#D4AF37", "板橋區": "#1d1d1f",
+    "新店區": "#2563EB", "土城區": "#0EA5E9",
 }
 # 卡片超連結到區域百科頁（slug 須與 scripts/build_area_pages.py 一致）
 AREA_SLUG = {
@@ -113,6 +113,8 @@ def build_html(generated_at: str, season_label: str,
 {aeo_head}
 <meta name="description" content="台北市 + 新北市 + 台中市 + 桃園市 各行政區實價登錄追蹤：時間窗 30/90/180/365 切換、YoY 年增率、跨縣市趨勢、新店區深度解析。每月 2/12/22 自動更新。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
@@ -128,103 +130,111 @@ else if(a.closest('.cta-strip')){{gtag('event','cta_click',{{page_path:location.
 </script>
 
 <style>
-nav{{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}}
-img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}}
-.nav-back{{font-size:14px;color:#7C3AED;text-decoration:none;font-weight:500}}
+:root{{--ink:#1d1d1f;--paper:#faf8f4;--line:rgba(0,0,0,.08);--red:#c8102e;--gold:#D4AF37;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--serif:'Noto Serif TC',serif}}
+body{{background:#fff}}
+nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}}
+.nav-back{{font-size:13px;color:var(--ink);opacity:.75;text-decoration:none;font-weight:500}}
 
-.hero{{background:linear-gradient(135deg,#7C3AED 0%,#2563EB 60%,#16A34A 100%);padding:60px 24px 44px;text-align:center}}
-.eyebrow{{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}}
-.hero h1{{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}}
-.hero p{{font-size:17px;color:rgba(255,255,255,.85);max-width:600px;margin:0 auto 6px}}
-.hero .meta{{font-size:13px;color:rgba(255,255,255,.7);margin-top:14px}}
-@media(max-width:768px){{.hero h1{{font-size:32px}}}}
+/* ── 照片 hero（對齊首頁語言）── */
+.obs-hero{{position:relative;margin-top:48px;min-height:380px;display:flex;align-items:flex-end;overflow:hidden;background:#141414}}
+.obs-hero img.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}}
+.obs-hero .shade{{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.28) 0%,rgba(10,10,12,.5) 52%,rgba(10,10,12,.84) 100%)}}
+.obs-hero .inner{{position:relative;max-width:1120px;margin:0 auto;padding:70px 24px 36px;width:100%}}
+.obs-hero .rule{{width:44px;height:3px;background:var(--red);margin-bottom:16px}}
+.obs-hero .eyebrow{{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;margin:0 0 12px;font-weight:500}}
+.obs-hero h1{{font-family:var(--serif);font-weight:900;font-size:46px;color:#fff;letter-spacing:.05em;line-height:1.14;margin:0 0 12px}}
+.obs-hero .sub{{font-size:15px;color:rgba(255,255,255,.9);margin:0 0 16px;font-weight:400}}
+.obs-hero .meta{{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.62);letter-spacing:.02em;margin:0}}
+@media(max-width:768px){{.obs-hero{{min-height:320px}}.obs-hero h1{{font-size:32px}}.obs-hero .inner{{padding:60px 20px 28px}}}}
 
-.obs-wrap{{max-width:1120px;margin:40px auto;padding:0 20px 80px}}
-.section-title{{font-size:13px;font-weight:700;color:#6e6e73;letter-spacing:.08em;text-transform:uppercase;margin:36px 0 14px 4px}}
+.obs-wrap{{max-width:1120px;margin:36px auto;padding:0 20px 60px}}
+.section-title{{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:#6e6e73;letter-spacing:.16em;text-transform:uppercase;margin:42px 0 14px 2px}}
+.section-title::before{{content:'';width:8px;height:8px;background:var(--red);flex:none}}
 .section-title:first-child{{margin-top:0}}
 
 /* time toggle */
 .window-toggle{{display:inline-flex;background:#f5f5f7;border-radius:10px;padding:3px;margin-left:12px;vertical-align:middle}}
-.window-toggle button{{font-size:12px;font-weight:600;color:#6e6e73;background:transparent;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;transition:all .2s}}
-.window-toggle button.active{{background:#fff;color:#7C3AED;box-shadow:0 1px 3px rgba(0,0,0,.08)}}
+.window-toggle button{{font-size:12px;font-weight:600;color:#6e6e73;background:transparent;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;transition:all .2s;font-family:var(--mono)}}
+.window-toggle button.active{{background:var(--ink);color:#fff}}
 
 .kpi-grid{{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}}
 @media(max-width:900px){{.kpi-grid{{grid-template-columns:repeat(2,1fr)}}}}
 @media(max-width:480px){{.kpi-grid{{grid-template-columns:1fr}}}}
 .kpi-link{{text-decoration:none;color:inherit;display:block}}
 .kpi-link .kpi-card{{transition:transform .15s ease,box-shadow .15s ease}}
-.kpi-link:hover .kpi-card{{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.10)}}
-.kpi-cta{{font-size:11px;font-weight:600;color:#0071e3;margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f3}}
-.kpi-card{{background:#fff;border-radius:18px;padding:20px 18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}}
-.kpi-town{{font-size:14px;font-weight:700;color:#1d1d1f;margin-bottom:10px}}
+.kpi-link:hover .kpi-card{{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.08)}}
+.kpi-cta{{font-size:11px;font-weight:600;color:var(--red);margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f3}}
+.kpi-card{{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px}}
+.kpi-town{{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:.06em}}
 .kpi-main{{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f0f0f3}}
-.kpi-value{{font-size:30px;font-weight:700;color:#1d1d1f;letter-spacing:-.02em;line-height:1}}
-.kpi-unit{{font-size:13px;font-weight:500;color:#6e6e73;margin-left:4px}}
+.kpi-value{{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1}}
+.kpi-unit{{font-size:12px;font-weight:500;color:#6e6e73;margin-left:4px;font-family:var(--mono)}}
 .kpi-label{{font-size:11px;color:#6e6e73;margin-top:4px}}
-.kpi-row{{display:flex;justify-content:space-between;font-size:12px;color:#1d1d1f;margin-bottom:5px}}
+.kpi-row{{display:flex;justify-content:space-between;font-size:12px;color:var(--ink);margin-bottom:5px;font-variant-numeric:tabular-nums}}
 .kpi-row span{{color:#6e6e73}}
 .kpi-change{{font-size:11px;color:#6e6e73;margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f3}}
 .kpi-empty{{font-size:13px;color:#6e6e73;text-align:center;padding:20px 0}}
 
-.chart-card{{background:#fff;border-radius:18px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.05);margin-bottom:18px}}
-.chart-card h3{{font-size:16px;font-weight:600;color:#1d1d1f;margin:0 0 6px}}
-.chart-card p.chart-note{{font-size:12px;color:#6e6e73;margin:0 0 14px;line-height:1.5}}
+.chart-card{{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}}
+.chart-card h3{{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin:0 0 6px;letter-spacing:.03em}}
+.chart-card p.chart-note{{font-size:12.5px;color:#6e6e73;margin:0 0 14px;line-height:1.6}}
 .chart-card img{{width:100%;height:auto;display:block;border-radius:10px}}
 .chart-row{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}}
 @media(max-width:780px){{.chart-row{{grid-template-columns:1fr}}}}
 .chart-row .chart-card{{margin-bottom:0}}
 
-/* spotlight card */
-.spotlight{{background:linear-gradient(135deg,#FEF3C7,#FECACA);border-radius:18px;padding:24px;margin-bottom:18px;border-left:6px solid #F59E0B}}
-.spotlight-header{{font-size:11px;font-weight:700;color:#92400E;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}}
-.spotlight h3{{font-size:18px;font-weight:700;color:#1d1d1f;margin:0 0 8px}}
-.spotlight p.insight{{font-size:14px;color:#1d1d1f;line-height:1.7;margin:0 0 14px}}
-.spotlight p.insight b{{color:#92400E}}
+/* spotlight（新店深度）*/
+.spotlight{{background:var(--paper);border:1px solid #e7e0d3;border-left:4px solid var(--gold);border-radius:16px;padding:24px;margin-bottom:18px}}
+.spotlight-header{{font-family:var(--mono);font-size:11px;font-weight:600;color:#8a6d1a;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}}
+.spotlight h3{{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);margin:0 0 8px}}
+.spotlight p.insight{{font-size:14px;color:var(--ink);line-height:1.75;margin:0 0 14px}}
+.spotlight p.insight b{{color:#8a6d1a}}
 
 /* Ranking */
-.rank-card{{background:#fff;border-radius:18px;padding:18px 4px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}}
+.rank-card{{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 4px;overflow:hidden}}
 .rank-card-head{{display:flex;justify-content:space-between;align-items:center;padding:0 18px;margin-bottom:6px;flex-wrap:wrap;gap:10px}}
-.rank-card h3{{font-size:16px;font-weight:600;color:#1d1d1f;margin:0}}
+.rank-card h3{{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin:0}}
 .rank-card p.rank-note{{font-size:12px;color:#6e6e73;margin:0 18px 14px;line-height:1.5}}
 .city-chips{{display:flex;gap:6px;flex-wrap:wrap}}
 .city-chip{{font-size:12px;font-weight:600;color:#6e6e73;background:#f5f5f7;padding:6px 12px;border-radius:980px;cursor:pointer;border:none;transition:all .2s}}
-.city-chip.active{{background:#7C3AED;color:#fff}}
+.city-chip.active{{background:var(--ink);color:#fff}}
 .rank-table-wrap{{overflow-x:auto}}
-table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d1f;min-width:760px}}
-.rank-table th{{background:#f5f5f7;color:#6e6e73;font-weight:600;text-align:left;padding:10px 12px;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1.5px solid #e8e8ed;position:sticky;top:0}}
-.rank-table th:hover{{background:#ebebef;color:#1d1d1f}}
+table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:var(--ink);min-width:760px}}
+.rank-table th{{background:#faf9f7;color:#6e6e73;font-weight:600;text-align:left;padding:10px 12px;cursor:pointer;user-select:none;white-space:nowrap;border-bottom:1.5px solid #e8e4da;position:sticky;top:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em}}
+.rank-table th:hover{{background:#f2efe8;color:var(--ink)}}
 .rank-table th .arrow{{margin-left:4px;opacity:.4;font-size:10px}}
-.rank-table th.sorted .arrow{{opacity:1;color:#7C3AED}}
+.rank-table th.sorted .arrow{{opacity:1;color:var(--red)}}
 .rank-table td{{padding:9px 12px;border-bottom:.5px solid #f0f0f3;white-space:nowrap}}
-.rank-table td.num{{text-align:right;font-variant-numeric:tabular-nums}}
+.rank-table td.num{{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px}}
 .rank-table tr.low-sample td{{color:#86868b}}
-.rank-table tr:hover{{background:#fafafc}}
+.rank-table tr:hover{{background:#fbfaf7}}
 .badge-low{{display:inline-block;font-size:10px;color:#86868b;background:#f0f0f3;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500}}
 .empty-row td{{text-align:center;color:#86868b;padding:30px 0;font-style:italic}}
 
-.download-card{{background:#f5f5f7;border-radius:16px;padding:24px}}
+.download-card{{background:var(--paper);border:1px solid #e7e0d3;border-radius:16px;padding:24px}}
 .download-grid{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
-.download-grid a{{font-size:13px;color:#1d1d1f;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500}}
-.download-grid a:hover{{border-color:#7C3AED;color:#7C3AED}}
+.download-grid a{{font-size:13px;color:var(--ink);background:#fff;border:1px solid #d8d2c4;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500}}
+.download-grid a:hover{{border-color:var(--red);color:var(--red)}}
 
-.notes{{background:#f5f5f7;border-radius:16px;padding:22px;font-size:13px;color:#1d1d1f;line-height:1.7}}
-.notes h4{{font-size:14px;font-weight:700;margin:0 0 10px;color:#1d1d1f}}
+.notes{{background:var(--paper);border:1px solid #e7e0d3;border-radius:16px;padding:22px;font-size:13px;color:var(--ink);line-height:1.7}}
+.notes h4{{font-size:14px;font-weight:700;margin:0 0 10px;color:var(--ink)}}
 .notes ul{{margin:0;padding-left:20px;color:#3a3a3c}}
 .notes li{{margin-bottom:5px}}
 
-.cta-strip{{background:linear-gradient(135deg,#7C3AED,#2563EB);color:#fff;padding:30px 24px;border-radius:18px;text-align:center;margin-top:28px}}
-.cta-strip h2{{font-size:20px;font-weight:700;margin:0 0 8px;color:#fff}}
-.cta-strip p{{font-size:14px;color:rgba(255,255,255,.85);margin:0 0 18px}}
-.cta-strip a.btn-on-gradient{{display:inline-block;background:#fff;color:#7C3AED;font-weight:600;padding:10px 22px;border-radius:980px;text-decoration:none;font-size:14px;margin:0 6px}}
+.cta-strip{{background:#141414;color:#fff;padding:46px 24px;border-radius:20px;text-align:center;margin-top:32px}}
+.cta-strip h2{{font-family:var(--serif);font-size:28px;font-weight:700;margin:0 0 10px;color:#fff;letter-spacing:.04em}}
+.cta-strip p{{font-size:14.5px;color:rgba(255,255,255,.65);margin:0 0 22px}}
+.cta-strip a.btn-on-gradient{{display:inline-block;background:#fff;color:#141414;font-weight:600;padding:11px 24px;border-radius:980px;text-decoration:none;font-size:14px;margin:0 6px}}
+.cta-strip a.btn-on-gradient:last-child{{background:#06C755;color:#fff}}
 
-.family-nav{{display:flex;gap:8px;padding:14px 18px;background:#f5f5f7;border-radius:12px;margin-bottom:18px;flex-wrap:wrap}}
+.family-nav{{display:flex;gap:8px;padding:12px 14px;background:#f5f5f7;border-radius:12px;margin-bottom:18px;flex-wrap:wrap}}
 .family-nav a{{font-size:13px;font-weight:600;color:#6e6e73;text-decoration:none;padding:8px 14px;border-radius:980px;background:transparent;transition:all .2s}}
-.family-nav a:hover{{background:#fff;color:#1d1d1f}}
-.family-nav a.active{{background:#7C3AED;color:#fff}}
+.family-nav a:hover{{background:#fff;color:var(--ink)}}
+.family-nav a.active{{background:var(--ink);color:#fff}}
 
-.ai-card{{background:linear-gradient(135deg,#EFF6FF,#F3E8FF);border-radius:18px;padding:24px;border-left:6px solid #7C3AED;margin-bottom:18px}}
-.ai-badge{{display:inline-block;font-size:11px;font-weight:700;color:#7C3AED;background:rgba(255,255,255,.7);padding:4px 10px;border-radius:980px;margin-bottom:12px;letter-spacing:.04em}}
-.ai-card p{{font-size:14px;color:#1d1d1f;line-height:1.8;margin:0 0 10px}}
+.ai-card{{background:var(--paper);border:1px solid #e7e0d3;border-left:4px solid var(--gold);border-radius:16px;padding:24px;margin-bottom:18px}}
+.ai-badge{{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--red);padding:4px 12px;border-radius:980px;margin-bottom:12px;letter-spacing:.08em}}
+.ai-card p{{font-size:14px;color:var(--ink);line-height:1.85;margin:0 0 10px}}
 .ai-card p:last-child{{margin-bottom:0;font-size:11px;color:#6e6e73;font-style:italic}}
 </style>
 </head>
@@ -232,11 +242,16 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
 
 <div data-include="nav-tool"></div>
 
-<div class="hero">
-  <p class="eyebrow">LVR Observatory · v3</p>
-  <h1>實價登錄觀察室</h1>
-  <p>台北市 + 新北市 + 台中市 + 桃園市｜正常住宅成交追蹤</p>
-  <p class="meta">資料涵蓋 113Q1 ~ {season_label}　·　全 {n_districts_180} 行政區（近 180 天）　·　更新於 {generated_at}</p>
+<div class="obs-hero">
+  <img class="bg" src="img/gen-city-taipei.jpg" alt="台北盆地暮色街景">
+  <div class="shade"></div>
+  <div class="inner">
+    <div class="rule"></div>
+    <p class="eyebrow">LVR Observatory · 內政部實價登錄</p>
+    <h1>實價登錄觀察室</h1>
+    <p class="sub">台北市 + 新北市 + 台中市 + 桃園市｜正常住宅成交追蹤</p>
+    <p class="meta">資料涵蓋 113Q1 ~ {season_label} · 全 {n_districts_180} 行政區（近 180 天） · 更新於 {generated_at}</p>
+  </div>
 </div>
 
 <div class="obs-wrap">
@@ -602,6 +617,7 @@ renderKPI();
 renderRank();
 </script>
 
+<div data-include="footer"></div>
 <script src="include.js" defer></script>
 </body>
 </html>
