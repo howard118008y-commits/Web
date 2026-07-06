@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from shutil import copy2
 import json
+import aeo_blocks
 
 import pandas as pd
 
@@ -65,6 +66,11 @@ def load_ai_report() -> str:
 
 def build_html(generated_at: str, season_label: str,
                window_data: dict, deep: dict, ai_report: str = "") -> str:
+    # AEO 區塊（schema 與可見同源，見 aeo_blocks.py；改字須重過媽祖）
+    aeo_head = aeo_blocks.head_jsonld("observatory", generated_at[:10])
+    aeo_quick = aeo_blocks.quick_answer_html("observatory")
+    aeo_faq_terms = aeo_blocks.faq_terms_html("observatory")
+
     # 把 4 窗資料壓進一個 JS 物件
     data_json = json.dumps(window_data, ensure_ascii=False, default=str)
     n_districts_180 = len(window_data[180]["ranking"])
@@ -97,14 +103,15 @@ def build_html(generated_at: str, season_label: str,
 <link rel="canonical" href="https://cx468.com.tw/lvr-observatory.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="實價登錄觀察室 2026｜北中桃四縣市房價追蹤｜鋮馨租賃">
-<meta property="og:description" content="台北市+新北市+台中市+桃園市共75行政區實價登錄追蹤：YoY 年增率、跨縣市趨勢、新店區深度解析，每月更新。">
+<meta property="og:description" content="台北市+新北市+台中市+桃園市各行政區實價登錄追蹤：YoY 年增率、跨縣市趨勢、新店區深度解析，每月更新。">
 <meta property="og:url" content="https://cx468.com.tw/lvr-observatory.html">
 <meta property="og:image" content="https://cx468.com.tw/lvr-charts/chart_city_trend.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"Dataset","name":"實價登錄觀察室 — 台北・新北・台中・桃園 住宅成交追蹤","description":"涵蓋台北市、新北市、台中市、桃園市共75個行政區的內政部實價登錄正常住宅成交資料，提供單價中位數、YoY 年增率、跨縣市跨季趨勢與行政區排名，每月2/12/22更新。","url":"https://cx468.com.tw/lvr-observatory.html","keywords":["實價登錄","房價","單價中位數","年增率","台北市","新北市","台中市","桃園市"],"creator":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw/"}},"isBasedOn":"內政部不動產交易實價查詢服務網","spatialCoverage":{{"@type":"Place","name":"台北市、新北市、台中市、桃園市"}},"license":"https://cx468.com.tw/","inLanguage":"zh-TW"}}
+{{"@context":"https://schema.org","@type":"Dataset","name":"實價登錄觀察室 — 台北・新北・台中・桃園 住宅成交追蹤","description":"涵蓋台北市、新北市、台中市、桃園市各行政區的內政部實價登錄正常住宅成交資料，提供單價中位數、YoY 年增率、跨縣市跨季趨勢與行政區排名，每月2/12/22更新。","url":"https://cx468.com.tw/lvr-observatory.html","keywords":["實價登錄","房價","單價中位數","年增率","台北市","新北市","台中市","桃園市"],"creator":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw/"}},"isBasedOn":"內政部不動產交易實價查詢服務網","spatialCoverage":{{"@type":"Place","name":"台北市、新北市、台中市、桃園市"}},"license":"https://cx468.com.tw/","inLanguage":"zh-TW"}}
 </script>
-<meta name="description" content="台北市 + 新北市 + 台中市 + 桃園市 共 75 行政區實價登錄追蹤：時間窗 30/90/180/365 切換、YoY 年增率、跨縣市趨勢、新店區深度解析。每月 2/12/22 自動更新。">
+{aeo_head}
+<meta name="description" content="台北市 + 新北市 + 台中市 + 桃園市 各行政區實價登錄追蹤：時間窗 30/90/180/365 切換、YoY 年增率、跨縣市趨勢、新店區深度解析。每月 2/12/22 自動更新。">
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 
 <!-- Google Analytics 4 -->
@@ -233,6 +240,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
 </div>
 
 <div class="obs-wrap">
+{aeo_quick}
 
   <div class="family-nav">
     <a href="lvr-observatory.html" class="active">觀察室（買賣）</a>
@@ -388,6 +396,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:13px;color:#1d1d
     </div>
   </div>
 
+{aeo_faq_terms}
   <div class="section-title">資料說明與免責</div>
   <div class="notes">
     <h4>資料來源</h4>
