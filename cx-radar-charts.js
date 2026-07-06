@@ -89,6 +89,27 @@
       });
     }
 
+    /* ── 預測格拆除（媽祖 2026-07-06：未經把關之預測宣稱不得對外）──
+       有歷史序列 → 換成「十年平均（歷史實值）」可計算事實；無 → 整格隱藏 */
+    document.querySelectorAll('[data-cx-code]').forEach(function (el) {
+      var code = el.getAttribute('data-cx-code');
+      el.querySelectorAll('.context-cell.forecast').forEach(function (cell) {
+        var h = hist[code];
+        if (h && h.points && h.points.length >= 8) {
+          var vals = h.points.map(function (p) { return p[1]; });
+          var mean = vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
+          var lab = cell.querySelector('.context-label');
+          var val = cell.querySelector('.context-value');
+          var tm = cell.querySelector('.context-time');
+          if (lab) lab.textContent = '十年平均';
+          if (val) { val.textContent = fmt(mean) + (h.unit || ''); val.className = 'context-value'; }
+          if (tm) tm.textContent = h.points[0][0] + ' 起歷史實值平均';
+        } else {
+          cell.style.display = 'none';
+        }
+      });
+    });
+
     /* ── 大卡真實走勢替換 ── */
     document.querySelectorAll('[data-cx-code]').forEach(function (el) {
       var code = el.getAttribute('data-cx-code');
