@@ -17,7 +17,7 @@ def norm(s):
     return re.sub(r'\s+', '', s)
 
 aligned, drift, noschema = [], {}, 0
-for f in sorted(glob.glob('*.html')):
+for f in sorted(glob.glob('*.html') + glob.glob('en/*.html')):
     t = open(f, encoding='utf-8').read()
     faqs = []
     for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', t, re.S):

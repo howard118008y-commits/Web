@@ -47,9 +47,10 @@ AEO = ['faq','speakable','definedterm','breadcrumb','answercard','datemod']
 GEO = ['org_schema','no_finsvc']
 
 pages = {}
-for p in sorted(glob.glob(os.path.join(ROOT, "*.html"))):
+# en/ 子目錄一併納入母體（2026-07-07：掃描母體要跟著站點結構長，勿只掃頂層）
+for p in sorted(glob.glob(os.path.join(ROOT, "*.html")) + glob.glob(os.path.join(ROOT, "en", "*.html"))):
     r = audit(p)
-    if r: pages[os.path.basename(p)] = r
+    if r: pages[os.path.relpath(p, ROOT)] = r
 
 def score(r, keys): return sum(1 for k in keys if r[k]), len(keys)
 
