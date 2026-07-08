@@ -60,6 +60,24 @@ for key, title, sub in SECTIONS:
   </div>''')
 sections_html = '\n\n'.join(sections_html)
 
+# definedterm（AEO）：詞條與可見「名詞解釋」區塊用同一份 TERMS 生成（同源鐵則）
+import html as _html
+TERMS = [
+    ("央行重貼現率", "中央銀行對銀行辦理重貼現融通適用的利率，是台灣的政策利率指標，走向牽動銀行房貸利率。"),
+    ("不動產放款集中度", "全體銀行不動產放款占總放款的比率，是主管機關觀察銀行資金流向房市程度的指標。"),
+    ("買賣移轉棟數", "不動產完成買賣移轉登記的棟數，是觀察房市交易量最常用的指標，由各地政機關逐月統計公布。"),
+    ("房貸逾放比", "房貸逾期放款占房貸總額的比率，反映房貸戶的繳款品質與銀行資產健全度。"),
+    ("房價所得比", "中位數住宅總價除以家戶年可支配所得的倍數，用來衡量購屋負擔，倍數越高負擔越重。"),
+]
+_terms_items = "".join(
+    f'    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px">'
+    f'<strong style="color:#1d1d1f;font-size:14.5px">{_html.escape(t, quote=True)}</strong>'
+    f'<span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — {_html.escape(d, quote=True)}</span></div>\n'
+    for t, d in TERMS)
+terms_section = ('<section style="max-width:760px;margin:28px auto 0;padding:0 16px">\n'
+                 '  <h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">名詞解釋</h2>\n'
+                 f'{_terms_items}</section>')
+
 schema = json.dumps([
     {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"},
@@ -69,6 +87,8 @@ schema = json.dumps([
      "@id": "https://cx468.com.tw/cx_radar_v4_demo.html",
      "url": "https://cx468.com.tw/cx_radar_v4_demo.html",
      "name": "房貸儀表板｜18 項市場指標即時追蹤", "dateModified": TODAY_ISO, "inLanguage": "zh-TW"},
+    {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "房貸市場指標名詞解釋",
+     "hasDefinedTerm": [{"@type": "DefinedTerm", "name": t, "description": d} for t, d in TERMS]},
 ], ensure_ascii=False)
 
 html = f'''<!--
@@ -215,6 +235,8 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
   </div>
 
 {sections_html}
+
+{terms_section}
 
   <div class="rv4-disc">
     資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁解讀與呈現為市場觀察性質，僅供參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
