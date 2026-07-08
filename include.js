@@ -5,12 +5,13 @@
  *
  * 載入策略（為了 LCP）：
  * - nav / footer / line-qr：DOMContentLoaded 立即載入（影響首屏 layout）
- * - anti-fraud-modal：延遲到 idle / window load 後才載入（避免阻擋 hero LCP）
+ * - anti-fraud-modal / chat-widget：延遲到 idle / window load 後才載入（避免阻擋 hero LCP）
+ * - chat-widget（小鋮 AI 助理）不必每頁加 div，由本檔自動注入全站生效
  */
 (function () {
   'use strict';
 
-  var DEFERRED = ['anti-fraud-modal'];
+  var DEFERRED = ['anti-fraud-modal', 'chat-widget'];
 
   function loadInclude(el) {
     var src = el.dataset.include;
@@ -65,6 +66,12 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    // 小鋮 AI 助理全站自動注入（延遲載入，不影響 LCP）
+    if (!document.querySelector('[data-include="chat-widget"]')) {
+      var cw = document.createElement('div');
+      cw.dataset.include = 'chat-widget';
+      document.body.appendChild(cw);
+    }
     var all = Array.from(document.querySelectorAll('[data-include]'));
     var immediate = [];
     var deferred = [];

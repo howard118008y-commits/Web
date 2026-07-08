@@ -1,0 +1,262 @@
+<meta name="robots" content="noindex">
+<style>
+/* ── 小鋮 AI 服務助理（chat-widget）── Oriental Terminal ── */
+.cw-launch{position:fixed;bottom:24px;right:24px;z-index:9990;width:58px;height:58px;border-radius:50%;background:#141414;border:1.5px solid #C61B1C;box-shadow:0 6px 22px rgba(0,0,0,.28);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s ease}
+.cw-launch:hover{transform:scale(1.06)}
+.cw-launch .cw-zi{font-family:'Noto Serif TC','Songti TC',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
+.cw-launch .cw-ai{position:absolute;top:-4px;right:-4px;background:#C61B1C;color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 5px;border-radius:8px}
+.cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:#fff;color:#1d1d1f;font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid #e3e3e6;border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;max-width:200px}
+.cw-panel{position:fixed;bottom:96px;right:24px;z-index:9991;width:min(380px,calc(100vw - 32px));height:min(600px,74vh);background:#faf9f7;border:1px solid #e3e3e6;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:hidden}
+.cw-panel.cw-open{display:flex}
+.cw-head{background:#141414;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.cw-head-title{font-family:'Noto Serif TC','Songti TC',serif;font-size:18px;font-weight:600;color:#fff;letter-spacing:.04em}
+.cw-head-sub{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.18em;margin-top:2px}
+.cw-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);font-size:22px;line-height:1;cursor:pointer;padding:4px}
+.cw-disc{background:#f1efec;font-size:10.5px;color:#8e8e93;line-height:1.55;padding:8px 14px;letter-spacing:.02em}
+.cw-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.cw-msg{max-width:86%;font-size:14px;line-height:1.7;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
+.cw-msg.cw-bot{background:#fff;border:1px solid #e8e8ea;color:#1d1d1f;border-radius:2px 14px 14px 14px;align-self:flex-start}
+.cw-msg.cw-user{background:#141414;color:#fff;border-radius:14px 2px 14px 14px;align-self:flex-end}
+.cw-msg a{color:#C61B1C;font-weight:600;text-decoration:none}
+.cw-typing{align-self:flex-start;font-size:13px;color:#a1a1a6;padding:4px 14px}
+.cw-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}
+.cw-chip{background:#fff;border:1px solid #d2d2d7;color:#1d1d1f;font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
+.cw-chip:hover{border-color:#C61B1C;color:#C61B1C}
+.cw-inrow{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #ececef}
+.cw-input{flex:1;border:1px solid #d2d2d7;border-radius:10px;font-size:14px;padding:10px 12px;outline:none;font-family:inherit}
+.cw-input:focus{border-color:#C61B1C}
+.cw-send{background:#C61B1C;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;padding:0 18px;cursor:pointer;letter-spacing:.06em}
+.cw-send:disabled{opacity:.4;cursor:default}
+.cw-foot{display:flex;gap:8px;padding:8px 12px 12px;background:#fff}
+.cw-cta{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:10px 8px;border-radius:10px;text-decoration:none;letter-spacing:.04em}
+.cw-cta.cw-line{background:#06C755;color:#fff}
+.cw-cta.cw-form{background:#141414;color:#fff}
+@media(max-width:768px){
+  .cw-launch{bottom:88px;right:16px;width:54px;height:54px}
+  .cw-teaser{bottom:98px;right:80px}
+  .cw-panel{left:12px;right:12px;bottom:12px;width:auto;height:78vh;border-radius:16px}
+}
+</style>
+
+<button class="cw-launch" id="cwLaunch" aria-label="開啟小鋮 AI 服務助理" aria-expanded="false">
+  <span class="cw-zi">鋮</span><span class="cw-ai">AI</span>
+</button>
+
+<div class="cw-panel" id="cwPanel" role="dialog" aria-label="小鋮 AI 服務助理">
+  <div class="cw-head">
+    <div>
+      <div class="cw-head-title">小鋮</div>
+      <div class="cw-head-sub">AI 服務助理 · CHENG XIN</div>
+    </div>
+    <button class="cw-close" id="cwClose" aria-label="關閉">×</button>
+  </div>
+  <div class="cw-disc">小鋮為 AI 引導助理，回覆僅供參考、非承諾。本公司為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定。對話請勿輸入電話、證號等個人資料。</div>
+  <div class="cw-msgs" id="cwMsgs"></div>
+  <div class="cw-chips" id="cwChips"></div>
+  <div class="cw-inrow">
+    <input class="cw-input" id="cwInput" type="text" maxlength="300" placeholder="輸入問題，例如：我想了解貸款整合" aria-label="輸入問題">
+    <button class="cw-send" id="cwSend">送出</button>
+  </div>
+  <div class="cw-foot">
+    <a class="cw-cta cw-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-cw-cta="line">加 LINE 諮詢</a>
+    <a class="cw-cta cw-form" href="apply.html" data-cw-cta="form">填表申請，專員回電</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var API = (location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+    ? 'http://127.0.0.1:5001/chat'
+    : 'https://cx468-linebot.onrender.com/chat';
+
+  var launch = document.getElementById('cwLaunch');
+  var panel = document.getElementById('cwPanel');
+  var closeBtn = document.getElementById('cwClose');
+  var msgsEl = document.getElementById('cwMsgs');
+  var chipsEl = document.getElementById('cwChips');
+  var inputEl = document.getElementById('cwInput');
+  var sendBtn = document.getElementById('cwSend');
+  var history = [];   // {role, content} 只存文字，不存個資欄位
+  var busy = false;
+
+  function track(name, label){
+    try{ if (typeof gtag === 'function') gtag('event', name, {cw_label: label || ''}); }catch(e){}
+  }
+
+  function isOfficeHours(){
+    var d = new Date();
+    var day = d.getDay(), h = d.getHours();
+    return day >= 1 && day <= 5 && h >= 9 && h < 18;
+  }
+
+  var HUMAN_MSG_OPEN = '現在是辦公時間（週一至五 09:00–18:00），加 LINE 或來電 02-2249-0517，專員直接為您服務。';
+  var HUMAN_MSG_CLOSED = '現在是非辦公時間（服務時段週一至五 09:00–18:00）。先留 LINE 訊息，我們上班後第一時間回覆您。';
+
+  var FLOWS = {
+    slb: {
+      label: '售後回租是什麼',
+      text: '售後回租是：房子出售並過戶給投資方、同時簽租約繼續住在原處，並保有日後依約買回的權利——三件事一組。資金約市值 7–9 成（依個案）、一般約 2–4 週到位。適合名下有房、曾被銀行婉拒、又不想搬家的屋主。',
+      chips: ['link:sale-leaseback.html:看完整介紹', 'flow:apply', 'flow:human']
+    },
+    debt: {
+      label: '多筆負債想整合',
+      text: '貸款整合是把多筆負債——信貸、卡循、民間——整合成一筆銀行房貸，每個月只繳一筆。過往案例月付從 6 萬降到 2.8 萬（依個案，降幅多在 30–50% 區間）。名下有房就值得請專員評估。',
+      chips: ['link:debt-consolidation.html:看完整介紹', 'flow:apply', 'flow:human']
+    },
+    p2b: {
+      label: '民間想轉銀行',
+      text: '民間借款長年只繳息、本金不動嗎？民間月息約 1–2%，有機會分階段轉成銀行年息約 2–3% 區間（市場慣行敘述、非承諾），讓本金第一次開始下降。',
+      chips: ['link:private-to-bank.html:看完整介紹', 'flow:apply', 'flow:human']
+    },
+    apply: {
+      label: '怎麼申請',
+      text: '三步驟：① 填表或加 LINE 說明狀況 → ② 專員評估後提出方案 → ③ 您同意才進行。不申請不收費，面談不收費。',
+      chips: ['link:apply.html:填表申請，專員回電', 'line:加 LINE 說明狀況', 'flow:human']
+    },
+    human: {
+      label: '找真人服務',
+      dynamic: true,
+      chips: ['line:加 LINE 找專員', 'tel:直接撥打電話']
+    }
+  };
+  var START_CHIPS = ['flow:slb', 'flow:debt', 'flow:p2b', 'flow:apply', 'flow:human'];
+
+  function addMsg(role, text){
+    var div = document.createElement('div');
+    div.className = 'cw-msg ' + (role === 'user' ? 'cw-user' : 'cw-bot');
+    div.textContent = text;
+    msgsEl.appendChild(div);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    history.push({role: role === 'user' ? 'user' : 'assistant', content: text});
+    if (history.length > 12) history = history.slice(-12);
+  }
+
+  function renderChips(list){
+    chipsEl.innerHTML = '';
+    (list || []).forEach(function(spec){
+      var parts = spec.split(':');
+      var kind = parts[0];
+      var chip = document.createElement('button');
+      chip.className = 'cw-chip';
+      if (kind === 'flow') {
+        var f = FLOWS[parts[1]];
+        chip.textContent = f.label;
+        chip.onclick = function(){ runFlow(parts[1]); };
+      } else if (kind === 'link') {
+        chip.textContent = parts[2];
+        chip.onclick = function(){ track('cw_cta', parts[1]); location.href = parts[1]; };
+      } else if (kind === 'line') {
+        chip.textContent = parts[1];
+        chip.onclick = function(){ track('cw_cta', 'line'); window.open('https://lin.ee/PHIfSoY', '_blank'); };
+      } else if (kind === 'tel') {
+        chip.textContent = parts[1];
+        chip.onclick = function(){ track('cw_cta', 'tel'); location.href = 'tel:+886222490517'; };
+      }
+      chipsEl.appendChild(chip);
+    });
+  }
+
+  function runFlow(key){
+    var f = FLOWS[key];
+    track('cw_quick', key);
+    addMsg('user', f.label);
+    var text = f.dynamic ? (isOfficeHours() ? HUMAN_MSG_OPEN : HUMAN_MSG_CLOSED) : f.text;
+    addMsg('bot', text);
+    renderChips(f.chips);
+  }
+
+  function showTyping(on){
+    var t = document.getElementById('cwTyping');
+    if (on && !t) {
+      t = document.createElement('div');
+      t.id = 'cwTyping';
+      t.className = 'cw-typing';
+      t.textContent = '小鋮輸入中…';
+      msgsEl.appendChild(t);
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    } else if (!on && t) {
+      t.remove();
+    }
+  }
+
+  function sendFree(){
+    if (busy) return;
+    var q = inputEl.value.trim();
+    if (!q) return;
+    inputEl.value = '';
+    addMsg('user', q);
+    renderChips([]);
+    track('cw_freetext');
+    busy = true; sendBtn.disabled = true; showTyping(true);
+    fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({messages: history})
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        showTyping(false);
+        addMsg('bot', d.reply || '抱歉，這題由專員回答更準確。歡迎加 LINE 或來電 02-2249-0517。');
+        renderChips(['flow:apply', 'flow:human']);
+      })
+      .catch(function(){
+        showTyping(false);
+        addMsg('bot', '連線暫時不穩。歡迎直接加 LINE（點下方綠色按鈕）或來電 02-2249-0517，專員為您服務。');
+        renderChips(['flow:human']);
+      })
+      .finally(function(){ busy = false; sendBtn.disabled = false; });
+  }
+
+  var started = false;
+  function openPanel(){
+    panel.classList.add('cw-open');
+    launch.setAttribute('aria-expanded', 'true');
+    removeTeaser();
+    track('cw_open');
+    if (!started) {
+      started = true;
+      addMsg('bot', '您好，我是小鋮，鋮馨的 AI 線上服務助理。想了解哪一項服務？也可以直接輸入問題。');
+      renderChips(START_CHIPS);
+    }
+    inputEl.focus();
+  }
+  function closePanel(){
+    panel.classList.remove('cw-open');
+    launch.setAttribute('aria-expanded', 'false');
+  }
+
+  launch.addEventListener('click', function(){
+    panel.classList.contains('cw-open') ? closePanel() : openPanel();
+  });
+  closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && panel.classList.contains('cw-open')) closePanel();
+  });
+  sendBtn.addEventListener('click', sendFree);
+  inputEl.addEventListener('keydown', function(e){
+    if (e.key === 'Enter') sendFree();
+  });
+  panel.querySelectorAll('[data-cw-cta]').forEach(function(a){
+    a.addEventListener('click', function(){ track('cw_cta', a.dataset.cwCta); });
+  });
+
+  // 輕量主動邀請：停留 25 秒且未開過才出現，一次性
+  var teaser = null;
+  function removeTeaser(){ if (teaser) { teaser.remove(); teaser = null; } }
+  try {
+    if (!sessionStorage.getItem('cwTeaserShown')) {
+      setTimeout(function(){
+        if (panel.classList.contains('cw-open')) return;
+        teaser = document.createElement('div');
+        teaser.className = 'cw-teaser';
+        teaser.textContent = '操作有問題？點我問小鋮';
+        teaser.onclick = openPanel;
+        document.body.appendChild(teaser);
+        sessionStorage.setItem('cwTeaserShown', '1');
+        setTimeout(removeTeaser, 12000);
+      }, 25000);
+    }
+  } catch(e) {}
+})();
+</script>
