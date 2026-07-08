@@ -25,3 +25,6 @@ scripts/lvr/__pycache__/
 * 2.*
 __pycache__/
 _preview_*.html
+
+# goal 評分迴圈輸出（機器產出流水，本地保留即可）
+scripts/goal-scores.jsonl

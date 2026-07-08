@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Phase 2 第一環服務 pillar 生成器（永和/板橋/三重/土城）。
+   差異化：每區真實在地脈絡(捷運/房市/地標) + 區名特定 FAQ；FAQ schema 與可見同源生成。
+   共享：四服務框架(二胎/售後回租三要件/貸款整合/民間轉銀行)、免費諮詢、非金融機構。"""
+import json, html
+esc=lambda x:html.escape(x,quote=True)
+
+DISTRICTS={
+"yonghe":{"name":"永和","slug":"yonghe-property-finance","geo":"25.0090;121.5140","area":"area-yonghe.html",
+ "intro":"永和區與中和合稱「雙和」，是全台人口密度最高的行政區之一，住宅以中古公寓與華廈為主、巷弄密集、屋齡偏高。捷運中和新蘆線設頂溪、永安市場站，多座橋樑直通台北公館、古亭一帶。許多永和屋主名下有房、卻因信用瑕疵或負債比偏高，向銀行增貸、二胎時碰壁。",
+ "near":"永和與鋮馨所在的中和同屬雙和、緊鄰，行情與銀行管道熟悉。"},
+"banqiao":{"name":"板橋","slug":"banqiao-property-finance","geo":"25.0118;121.4628","area":"area-banqiao.html",
+ "intro":"板橋是新北市政中心與人口最多的行政區，板橋車站三鐵共構（高鐵、台鐵、捷運板南線）並結合客運轉運站，環狀線設板橋、板新站。新板特區商業繁榮，住宅型態多元，從老公寓到新成屋皆有。板橋屋主在增貸、二胎遇到銀行條件卡關時，可評估其他合法管道。",
+ "near":"板橋緊鄰中和，鋮馨熟悉板橋各區段行情與在地銀行管道。"},
+"sanchong":{"name":"三重","slug":"sanchong-property-finance","geo":"25.0610;121.4940","area":"",
+ "intro":"三重區緊鄰台北市大同、中山，透過台北橋、忠孝橋直通台北車站一帶，捷運中和新蘆線（菜寮、台北橋、三重站）與機場線行經區內。住宅以中古公寓為主、屋齡偏高，近年部分重劃與都更帶動老屋改建。三重屋主名下有房、被銀行拒貸或缺現金時，合法的資金管道比想像中多。",
+ "near":"三重與中和雖分屬不同區，鋮馨提供跨區服務、熟悉新北各區行情。"},
+"tucheng":{"name":"土城","slug":"tucheng-property-finance","geo":"24.9720;121.4440","area":"area-tucheng.html",
+ "intro":"土城區有土城工業區與頂埔科技園區（鴻海集團總部所在地），是重要的產業基地；捷運板南線設土城、海山、亞東、永寧、頂埔站，海山捷運商圈支撐生活機能。住宅以中古華廈與工業區周邊住宅為主。土城屋主在二胎、增貸遇到條件限制時，可評估售後回租等其他方向。",
+ "near":"土城緊鄰中和，鋮馨熟悉土城與海山、頂埔一帶的不動產行情。"},
+}
+
+def faqs(name, near):
+    return [
+("%s二胎房貸的條件是什麼？"%name, "二胎房貸是在既有第一順位房貸之外、以同一不動產再設定第二順位抵押取得資金，產權不移轉。一般會看不動產的殘餘可貸空間（市值扣掉一胎餘額）、屋況與個人財務狀況；信用瑕疵不必然無法評估，但能不能貸、額度與利率多少，最終由金融機構依個案核定。鋮馨協助%s屋主把狀況理清楚、比較可行管道，非放貸方。"%name),
+("%s的房子辦售後回租，流程怎麼走？"%name, "售後回租是「過戶＋租約＋買回」一組安排：屋主把房子過戶給投資方、同時簽訂租約繼續居住，並保有日後依約買回的權利。流程約為：免費諮詢與不動產評估→提案（金額多落在市值 7–9 成、依個案）→簽約→過戶→資金到位，整體常見約 2–4 週。產權會移轉，簽約前務必看懂買回、租金、租期與違約條款；是否適合依個案評估。"),
+("在%s，債務太多想整合該找誰？"%name, "可先把名下所有債務（信貸、卡循、民間借款、房貸）攤開，評估「貸款整合」把多筆高利率債務整併為一筆銀行貸款、降低每月月付；或把高利率民間借款分階段轉回銀行體系。鋮馨提供諮詢與媒合協助，不是放貸方，最終核貸由金融機構決定。"),
+("鋮馨有服務%s嗎？"%name, "有。%s鋮馨租賃有限公司位於新北市中和區中正路 468 號，服務範圍涵蓋%s一帶，營業時間週一至週五 09:00–18:00，電話 02-2249-0517 / 0931-087-996，亦可加 LINE 諮詢。"%(near,name)),
+]
+
+def build(d):
+    name,slug,geo,area=d["name"],d["slug"],d["geo"],d["area"]
+    F=faqs(name,d["near"])
+    faq_sch={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in F]}
+    faq_vis="".join(f'  <div class="faq-item"><h3>{esc(q)}</h3><p>{esc(a)}</p></div>\n' for q,a in F)
+    lat,lon=geo.split(";")
+    ORG={"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","description":"新北市中和區在地不動產融資諮詢與媒合，服務%s一帶：二胎房貸、售後回租、貸款整合、民間轉銀行。20 年以上經驗，非金融機構。"%name,"address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":25.0070,"longitude":121.4912},"areaServed":[{"@type":"AdministrativeArea","name":"新北市%s區"%name},{"@type":"AdministrativeArea","name":"新北市中和區"},{"@type":"AdministrativeArea","name":"新北市"}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"]}
+    BC={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"%s不動產融資諮詢"%name,"item":"https://cx468.com.tw/%s.html"%slug}]}
+    WP={"@context":"https://schema.org","@type":"WebPage","@id":"https://cx468.com.tw/%s.html#webpage"%slug,"url":"https://cx468.com.tw/%s.html"%slug,"name":"%s不動產融資諮詢"%name,"speakable":{"@type":"SpeakableSpecification","cssSelector":["#quick-answer"]},"inLanguage":"zh-TW","datePublished":"2026-06-25","dateModified":"2026-06-25"}
+    TS={"@context":"https://schema.org","@type":"DefinedTermSet","name":"不動產融資名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"二胎房貸","description":"在既有第一順位房貸之外，以同一不動產再設定第二順位抵押取得資金的貸款；產權不移轉。"},{"@type":"DefinedTerm","name":"售後回租","description":"屋主將不動產過戶給投資方、同時簽租約繼續居住，並保有日後依約買回權利的資金規劃方式。"},{"@type":"DefinedTerm","name":"貸款整合","description":"將多筆債務整併為一筆銀行貸款，目標降低每月還款。"}]}
+    area_li=f'<li><strong>{name}區房市參考</strong>：見<a href="{area}">{name}區房市與生活機能總覽</a>。</li>' if area else ''
+    sch="\n".join(f'<script type="application/ld+json">{json.dumps(x,ensure_ascii=False)}</script>' for x in [ORG,BC,WP,faq_sch,TS])
+    return f"""<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{name}不動產融資諮詢｜二胎房貸．售後回租．貸款整合｜鋮馨租賃</title>
+<meta name="description" content="{name}（新北市）不動產融資諮詢：名下有房卻被銀行拒貸或缺現金，可評估二胎房貸、售後回租、貸款整合、民間轉銀行。鋮馨租賃在地 20 年、位於中和中正路 468 號，服務{name}一帶。本公司非金融機構，最終核貸由金融機構決定。">
+<meta name="keywords" content="{name}二胎房貸,{name}售後回租,{name}貸款整合,{name}不動產融資,新北市{name},鋮馨租賃">
+<link rel="canonical" href="https://cx468.com.tw/{slug}.html">
+<meta property="og:title" content="{name}不動產融資諮詢｜二胎．售後回租．貸款整合｜鋮馨租賃">
+<meta property="og:description" content="{name}名下有房被拒貸或缺現金可評估的合法管道。鋮馨在地 20 年。本公司非金融機構。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cx468.com.tw/{slug}.html">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{name}不動產融資諮詢">
+<meta name="twitter:description" content="{name}名下有房可評估的合法資金管道。非金融機構。">
+<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta name="geo.region" content="TW-NWT">
+<meta name="geo.placename" content="新北市{name}區">
+<meta name="geo.position" content="{geo}">
+<meta name="ICBM" content="{lat}, {lon}">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+.art-hero{{background:#0e0e10;padding:120px 2rem 76px;text-align:center}}
+.art-tag{{display:inline-block;font-size:10px;font-weight:500;padding:0 0 8px;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(255,255,255,.4);margin-bottom:1.2rem;letter-spacing:.26em}}
+.art-hero h1{{font-family:"Noto Serif TC",serif;font-size:32px;font-weight:600;color:#fff;line-height:1.45;max-width:780px;margin:0 auto .75rem}}
+.art-hero-meta{{font-size:13px;color:rgba(255,255,255,.7)}}
+.art-body{{max-width:720px;margin:0 auto;padding:3rem 2rem 5rem}}
+.art-body h2{{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:600;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6}}
+.art-body h3{{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:600;margin:1.5rem 0 .5rem;color:#1d1d1f}}
+.art-body p{{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.1rem}}
+.art-body ul{{margin:.5rem 0 1.25rem 1.4rem}}.art-body li{{font-size:16px;line-height:1.8;color:#3d3d3f;margin-bottom:.4rem}}
+.svc-grid{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.25rem 0}}
+.svc-card{{background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px;padding:18px 20px;text-decoration:none;display:block}}
+.svc-card:hover{{border-color:#C61B1C;background:#fff}}.svc-card h3{{margin:0 0 6px;font-size:17px;color:#1d1d1f}}.svc-card p{{font-size:13.5px;color:#6e6e73;line-height:1.7;margin:0}}.svc-card .go{{font-size:13px;color:#C61B1C;font-weight:600;margin-top:8px;display:inline-block}}
+.faq-item{{border-bottom:1px solid #f0f0f0;padding-bottom:.5rem;margin-bottom:1rem}}
+.cta-box{{background:#0a2a1a;border-radius:20px;padding:2.25rem;text-align:center;margin:3rem 0 1rem}}
+.cta-box h3{{font-size:22px;font-weight:700;color:#fff;margin-bottom:.6rem}}.cta-box p{{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:1.3rem}}
+.cta-row{{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}}.cta-box a{{display:inline-block;padding:11px 26px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none}}.cta-tel{{background:#fff;color:#1d1d1f}}.cta-line{{background:#06c755;color:#fff}}
+.disclaimer{{font-size:12px;color:#9b9b9f;line-height:1.7;margin-top:1.5rem}}.back-link{{display:inline-flex;gap:6px;font-size:13px;color:#86868b;margin-bottom:1.5rem;text-decoration:none}}
+@media(max-width:768px){{.art-hero h1{{font-size:25px}}.svc-grid{{grid-template-columns:1fr}}}}
+</style>
+{sch}
+<script src="include.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-4FX9LNEL7R');</script>
+<script>!function(f,b,e,v,n,t,s){{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','27280305434986441');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+<div data-include="nav"></div>
+<section class="art-hero">
+  <div class="art-tag">新北市{name}區・在地融資諮詢</div>
+  <h1>{name}不動產融資諮詢<br>二胎房貸．售後回租．貸款整合</h1>
+  <div class="art-hero-meta">鋮馨租賃 · 中和中正路 468 號 · 服務{name}一帶 · 在地 20 年</div>
+</section>
+<div class="art-body">
+  <a href="zhonghe-property-finance.html" class="back-link">← 中和不動產融資諮詢總覽</a>
+  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #C61B1C;padding:22px 24px;margin:18px 0 30px">
+    <div style="font-size:13px;font-weight:700;color:#C61B1C;letter-spacing:.22em;margin-bottom:9px">快速答案</div>
+    <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px"><strong>在{name}，名下有房卻被銀行拒貸或缺現金，合法的選擇通常比你想的多。</strong>可評估：二胎房貸（產權不移轉）、售後回租（過戶＋簽租約續住＋可依約買回）、貸款整合（多筆高利併一筆銀行貸款）、民間轉銀行。鋮馨租賃位於中和中正路 468 號、服務{name}一帶、在地 20 年；本公司非金融機構、不放貸，最終核貸由金融機構決定。</p>
+    <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95">
+      <li><strong>二胎房貸</strong>：一胎之外再設二順位，依殘值與條件評估。</li>
+      <li><strong>售後回租</strong>：過戶＋租約續住＋依約買回，金額約市值 7–9 成（依個案）。</li>
+      <li><strong>貸款整合／民間轉銀行</strong>：把高利率債務收斂、降月付、轉回銀行體系。</li>
+    </ul>
+  </div>
+  <p>{d['intro']}鋮馨租賃有限公司總部設於中和區中正路 468 號，在地深耕不動產與資金規劃超過 20 年，協助你把狀況理清楚、找到最有機會的合法方向。是否適合，依個案不動產條件與財務狀況評估。</p>
+
+  <h2>在{name}，名下有房可以怎麼取得資金？</h2>
+  <p>名下有不動產時，常見的合法管道有四種，各自適合不同情況。能不能辦、條件與額度多少，都要看你的不動產條件、財務狀況與當時市場，最終由金融機構依個案決定。</p>
+  <div class="svc-grid">
+    <a class="svc-card" href="second-mortgage.html"><h3>二胎房貸</h3><p>一胎之外再設定第二順位抵押取得資金，產權不移轉。適合想保留房子、有殘餘可貸空間的屋主。</p><span class="go">二胎增貸試算 →</span></a>
+    <a class="svc-card" href="zhonghe-sale-leaseback.html"><h3>售後回租</h3><p>把房子過戶給投資方、同時簽租約續住、並可依約買回。適合信用瑕疵、二胎被拒、不想搬家者。</p><span class="go">了解售後回租 →</span></a>
+    <a class="svc-card" href="debt-consolidation.html"><h3>貸款整合</h3><p>把多筆高利率債務整併為一筆利率較低的銀行貸款，降低每月月付。</p><span class="go">了解貸款整合 →</span></a>
+    <a class="svc-card" href="private-to-bank.html"><h3>民間轉銀行</h3><p>把高利率的民間借款分階段轉回銀行體系，降低長期利息負擔。</p><span class="go">了解民間轉銀行 →</span></a>
+  </div>
+
+  <h2>為什麼找在地的鋮馨？</h2>
+  <ul>
+    <li><strong>在地 20 年</strong>：總部位於中和區中正路 468 號，{d['near']}</li>
+    <li><strong>逾 39 家合作銀行</strong>：把你的狀況比對不同管道，協助找到最有機會的合法方向。</li>
+    <li><strong>定位清楚</strong>：鋮馨是諮詢與媒合服務，<strong>非金融機構、非放貸方</strong>，最終核貸由金融機構決定。</li>
+    {area_li}
+  </ul>
+
+  <h2>常見問題</h2>
+{faq_vis}
+  <div class="cta-box">
+    <h3>{name}在地，先免費諮詢你的狀況</h3>
+    <p>把狀況講清楚，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構。</p>
+    <div class="cta-row">
+      <a class="cta-tel" href="tel:0222490517">☎ 02-2249-0517</a>
+      <a class="cta-line" href="https://lin.ee/PHIfSoY">加 LINE 免費諮詢</a>
+    </div>
+  </div>
+  <p class="disclaimer">本頁資訊僅供參考，實際結果依個案不動產條件、財務狀況與市場情況而定。鋮馨租賃有限公司為融資租賃業者，非金融機構、不放貸，相關貸款或核貸結果最終由金融機構依個案決定。地址：新北市中和區中正路 468 號。</p>
+</div>
+<div data-include="line-qr"></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>"""
+
+import re
+made=[]
+for k,d in DISTRICTS.items():
+    s=build(d); fn=d["slug"]+".html"
+    open(fn,"w",encoding="utf-8").write(s)
+    made.append(fn)
+print("生成:",made)
