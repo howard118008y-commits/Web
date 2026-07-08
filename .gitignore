@@ -19,3 +19,9 @@ img/_original/
 # Note: 產物 lvr-charts/ + lvr-data/ + lvr-observatory.html 會 commit；cache 不會
 scripts/lvr/_cache/
 scripts/lvr/__pycache__/
+
+# iCloud Drive 衝突複本（專案夾在 iCloud，多機同步會生「名 2.ext」）＋Python 快取＋暫存預覽
+# 詳見 memory feedback_icloud_conflict_copies
+* 2.*
+__pycache__/
+_preview_*.html
