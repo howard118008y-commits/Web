@@ -70,15 +70,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div class="page-hero">
   <div class="page-eyebrow">免費評估申請 · Apply</div>
-  <h1 class="page-h1">留下資料，<br>讓專員主動聯繫你。</h1>
+  <h1 class="page-h1">免費評估你的資金<br>與不動產規劃。</h1>
   <p class="page-sub">填寫約需 1 分鐘。專員將於上班時間（週一至五 09:00–18:00）主動與您聯繫，免費評估、不申請不收費。</p>
 </div>
 
 <div class="apply-wrap">
-  <div class="apply-frame">
-    <iframe id="cx-form-frame" src="https://docs.google.com/forms/d/e/1FAIpQLSeamMavg3xPwW9mY6yTANX6nHt8ieh_9_LZaq7XGfAA-sWRcg/viewform?embedded=true" title="鋮馨免費評估申請表單" loading="lazy">載入中…</iframe>
-  </div>
-  <p class="apply-fallback">表單無法顯示？<a href="https://docs.google.com/forms/d/e/1FAIpQLSeamMavg3xPwW9mY6yTANX6nHt8ieh_9_LZaq7XGfAA-sWRcg/viewform" target="_blank" rel="noopener">點此在新視窗開啟表單</a></p>
+  <div data-include="lead-form"></div>
 
   <div class="apply-alt">
     <div class="apply-alt-title">不想填表單？直接聊也可以。</div>
@@ -91,17 +88,5 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <div data-include="footer"></div>
-<script>
-(function(){
-  var f=document.getElementById('cx-form-frame');if(!f)return;var n=0;
-  f.addEventListener('load',function(){
-    n++;
-    if(n>1){
-      gtag('event','form_submit_lead',{page_path:location.pathname});
-      if(window.fbq){fbq('track','Lead');}
-    }
-  });
-})();
-</script>
 </body>
 </html>
