@@ -1,0 +1,136 @@
+<!-- 共用元件：評估表單（無「免費評估」鉤子變體，二胎主商品場景專用）。用 <div data-include="lead-form-nofree"></div> 載入。
+     欄位名用英文 ASCII（Web3Forms 對中文欄位名會編碼亂碼）。 -->
+<style>
+.form-wrap{background:#f5f5f7;max-width:none;margin:0;padding:80px 24px}
+.form-inner{max-width:640px;margin:0 auto}
+.form-wrap .section-label{font-size:12px;color:#c8102e;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.form-wrap .section-title{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1d1d1f;margin-bottom:40px;text-align:center}
+.form-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.form-privacy{display:flex;gap:12px;align-items:flex-start;background:#f0faf3;border:1px solid rgba(6,199,85,.25);border-radius:14px;padding:16px 18px;margin-bottom:28px}
+.form-privacy .lock{font-size:20px;line-height:1.4;flex-shrink:0}
+.form-privacy p{font-size:13px;color:#1d1d1f;line-height:1.65;margin:0}
+.form-privacy a{color:#06C755;font-weight:600}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
+.field label .opt{font-weight:400;color:#86868b;font-size:12px}
+.field label .req{color:#c8102e;margin-left:2px}
+.field input,.field select,.field textarea{width:100%;font-size:16px;color:#1d1d1f;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#06C755;background:#fff}
+.field textarea{resize:vertical;min-height:96px}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 24px}
+.consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#06C755}
+.consent label{font-size:13px;color:#6e6e73;line-height:1.6}
+.consent a{color:#06C755;font-weight:600}
+.form-submit{width:100%;background:#06C755;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.form-submit:hover{opacity:.9}
+.form-submit:disabled{opacity:.5;cursor:not-allowed}
+.form-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
+.form-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
+.form-msg.ok{display:block;background:#f0faf3;color:#157347;border:1px solid rgba(6,199,85,.3)}
+.form-msg.ok a,.form-msg.err a{color:#06C755;font-weight:600}
+.form-msg.err{display:block;background:#fdf0f1;color:#c8102e;border:1px solid rgba(200,16,46,.3);margin-top:18px}
+.hp{position:absolute!important;left:-9999px!important;opacity:0}
+@media(max-width:768px){
+  .form-wrap{padding:56px 16px}
+  .form-card{padding:28px 20px}
+  .form-wrap .section-title{font-size:26px}
+}
+</style>
+
+<div class="form-wrap" id="form">
+ <div class="form-inner">
+  <div class="section-label">線上填寫</div>
+  <h2 class="section-title">留下資料，<br>專人主動與你聯繫。</h2>
+  <div class="form-card">
+    <div class="form-privacy">
+      <span class="lock">🔒</span>
+      <p><strong>你的隱私，我們認真對待。</strong>資料採加密傳輸，僅用於本次諮詢聯繫，不會外流或轉售。本表單<strong>不索取身分證字號</strong>等高敏感資料。詳見<a href="privacy-policy.html">隱私權政策</a>。</p>
+    </div>
+    <form id="evalForm" novalidate>
+      <input type="hidden" name="access_key" value="b2959b73-847e-4a81-bd4f-e3a9de65713a">
+      <input type="hidden" name="subject" value="鋮馨官網｜二胎頁表單新進件">
+      <input type="hidden" name="from_name" value="鋮馨官網 線上申請">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+      <div class="field">
+        <label>怎麼稱呼您<span class="req">*</span></label>
+        <input type="text" name="Name" required placeholder="例：王先生 / 陳小姐">
+      </div>
+      <div class="field">
+        <label>聯絡電話<span class="req">*</span></label>
+        <input type="tel" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
+      </div>
+      <div class="field">
+        <label>LINE ID <span class="opt">（選填，方便我們用 LINE 聯繫）</span></label>
+        <input type="text" name="LINE_ID" placeholder="你的 LINE ID">
+      </div>
+      <div class="field">
+        <label>不動產地址<span class="req">*</span></label>
+        <input type="text" name="Property_Address" required placeholder="例：新北市中和區中正路 468 號">
+      </div>
+      <div class="field">
+        <label>我想了解<span class="req">*</span></label>
+        <select name="Service" required>
+          <option value="" disabled selected>請選擇</option>
+          <option>售後回租（賣房續住）</option>
+          <option>貸款整合（降低月付）</option>
+          <option>民間轉銀行（降低利息）</option>
+          <option>包租代管（出租管理）</option>
+          <option>不確定，想聽建議</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>補充說明 <span class="opt">（選填）</span></label>
+        <textarea name="Message" placeholder="例如：目前貸款狀況、希望多久內完成、其他想說明的事"></textarea>
+      </div>
+      <div class="consent">
+        <input type="checkbox" id="consent" required>
+        <label for="consent">我已閱讀並同意<a href="privacy-policy.html">隱私權政策</a>，並同意鋮馨租賃使用上述資料與我聯繫進行後續諮詢。</label>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">送出，專員主動回電</button>
+      <p class="form-foot">送出後專人將於 1–2 個工作日內與你聯繫｜不申請不收費</p>
+    </form>
+    <div class="form-msg" id="formMsg"></div>
+  </div>
+ </div>
+</div>
+
+<script>
+(function(){
+  var form=document.getElementById('evalForm');
+  if(!form)return;
+  var btn=document.getElementById('submitBtn');
+  var msg=document.getElementById('formMsg');
+  var consent=document.getElementById('consent');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    msg.className='form-msg';msg.innerHTML='';
+    if(!form.checkValidity()||!consent.checked){
+      msg.className='form-msg err';
+      msg.innerHTML=consent.checked?'請填寫必填欄位（標示 * 者）。':'請先勾選同意隱私權政策。';
+      return;
+    }
+    var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
+    // 同步通知自家後端推 LINE 給工作機（best-effort，失敗不影響主流程）
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(){});}catch(e){}
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+    })
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(j.success){
+        form.style.display='none';
+        msg.className='form-msg ok';
+        msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+        if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'nofree'});
+        if(window.fbq)fbq('track','Lead');
+      }else{throw new Error(j.message||'送出失敗');}
+    })
+    .catch(function(){
+      btn.disabled=false;btn.textContent=orig;
+      msg.className='form-msg err';
+      msg.innerHTML='送出失敗，請稍後再試，或直接加 LINE 與我們聯繫：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+    });
+  });
+})();
+</script>

@@ -1,0 +1,55 @@
+<!-- 共用元件：信任模組（反詐/安心錨）。用 <div data-include="trust-block"></div> 載入。
+     用途：貼在金錢主張與 CTA 旁，先講清楚身份與定位，降低詐騙疑慮。
+     合規：非金融機構聲明為第一點；全模組不出現「免費評估/免費諮詢」，
+     可安全用於二胎主商品場景（僅保留收費透明句「不申請不收費」）。 -->
+<style>
+.trust-block{background:#f5f5f7;padding:56px 24px}
+.trust-block-inner{max-width:980px;margin:0 auto}
+.trust-block .trust-label{font-size:12px;color:#c8102e;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:10px;text-align:center}
+.trust-block .trust-title{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:#1d1d1f;margin:0 0 32px;text-align:center}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.trust-card{background:#fff;border:.5px solid #d2d2d7;border-radius:20px;padding:28px 24px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.trust-card .trust-icon{width:40px;height:40px;border-radius:12px;background:#fdf0f1;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.trust-card .trust-icon svg{width:20px;height:20px;stroke:#c8102e;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.trust-card h3{font-size:16px;font-weight:700;color:#1d1d1f;margin:0 0 8px;line-height:1.4}
+.trust-card p{font-size:14px;color:#6e6e73;line-height:1.7;margin:0}
+.trust-card p strong{color:#1d1d1f;font-weight:600}
+.trust-block .trust-note{font-size:12px;color:#86868b;text-align:center;margin:24px auto 0;max-width:640px;line-height:1.7}
+@media(max-width:768px){
+  .trust-block{padding:40px 16px}
+  .trust-grid{grid-template-columns:1fr}
+  .trust-card{padding:22px 20px}
+  .trust-block .trust-title{font-size:20px}
+}
+</style>
+
+<section class="trust-block" aria-label="安心保障">
+  <div class="trust-block-inner">
+    <p class="trust-label">安心承諾</p>
+    <h2 class="trust-title">找我們談之前，先讓你知道我們是誰</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>我們不是銀行，也不放款</h3>
+        <p>本公司<strong>非金融機構</strong>，定位是<strong>不動產融資諮詢與媒合顧問</strong>——幫你把狀況整理清楚、對接合適的金融機構。<strong>最終核貸由金融機構決定</strong>，我們不做任何核貸承諾。</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>39 家以上合作銀行</h3>
+        <p>深耕不動產租賃 <strong>20+ 年</strong>，與 <strong>39 家以上</strong>銀行建立合作管道。曾遭拒貸仍可重新評估，依個人狀況找出還走得通的路。</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </div>
+        <h3>實體辦公室，見面談最安心</h3>
+        <p>辦公室就在<strong>新北市中和區中正路 468 號</strong>，歡迎預約面談、當面確認每一個環節。<strong>不申請不收費。</strong></p>
+      </div>
+    </div>
+    <p class="trust-note">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+  </div>
+</section>
