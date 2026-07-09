@@ -65,6 +65,28 @@
     }
   }
 
+  /**
+   * 動態增強（GSAP 卡片 scroll-reveal）全站延遲載入。
+   * 與 chat-widget 同策略：window load 後才載，絕不阻擋首屏 LCP。
+   * onload 鏈保證順序 gsap → ScrollTrigger → cx-motion；用絕對路徑 /js/ 兼容 /en/ 等子目錄。
+   * 任一環節失敗只是沒有動畫，內容照常顯示（cx-motion 內另有 gsap 存在性守衛）。
+   */
+  function loadMotion() {
+    if (window.__cxMotionLoaded) return;
+    window.__cxMotionLoaded = true;
+    function add(src, cb) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = cb || null;
+      document.body.appendChild(s);
+    }
+    add('/js/gsap.min.js', function () {
+      add('/js/ScrollTrigger.min.js', function () {
+        add('/js/cx-motion.js');
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     // 小鋮 AI 助理全站自動注入（延遲載入，不影響 LCP）
     if (!document.querySelector('[data-include="chat-widget"]')) {
@@ -87,9 +109,11 @@
 
     if (document.readyState === 'complete') {
       loadDeferred(deferred);
+      loadMotion();
     } else {
       window.addEventListener('load', function () {
         loadDeferred(deferred);
+        loadMotion();
       }, { once: true });
     }
   });
