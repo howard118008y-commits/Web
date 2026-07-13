@@ -42,7 +42,10 @@
 @media(max-width:768px){
   .cw-launch{bottom:88px;right:16px;width:54px;height:54px}
   .cw-teaser{bottom:98px;right:80px}
-  .cw-panel{left:12px;right:12px;bottom:12px;width:auto;height:70vh;border-radius:18px}
+  /* 手機版縮小：右下浮窗不滿版，不擋頁面操作（老闆 2026-07-14 令） */
+  .cw-panel{left:auto;right:12px;bottom:152px;width:min(300px,calc(100vw - 24px));height:min(440px,56vh);border-radius:18px}
+  .cw-msg{font-size:13px}
+  .cw-head{padding:10px 14px}
 }
 </style>
 
