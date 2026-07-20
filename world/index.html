@@ -36,8 +36,11 @@
     .cx-en-sub{font-size:14px;padding:0 6px;margin-bottom:36px}
     .cx-en-btn{font-size:15px;padding:15px 38px}
   }
+  @media(max-width:860px){
+    #cx-enter{background-image:linear-gradient(rgba(12,14,11,.42),rgba(12,14,11,.86)),url('assets_m/m1_street.png')}
+  }
   /* 手機版：捲軸驅動的圖片序列(iOS 不支援捲動捲影片，改捲動切換預載幀，同 Apple 產品頁技法) */
-  #mobile-flight{display:none;position:relative;width:100%;height:520vh;background:var(--cx-warm)}
+  #mobile-flight{display:none;position:relative;width:100%;height:620vh;background:var(--cx-warm)}
   .mf-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cx-warm)}
   #mfcanvas{width:100%;height:100%;display:block}
   .mf-hint{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:rgba(247,240,230,.78);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite;transition:opacity .4s}
@@ -153,52 +156,55 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
   });
 })();
 
-// 手機版圖片序列捲動（iOS 安全）：捲動位置→顯示第 N 幀，畫在 canvas 上(cover)
+// 手機版原生直式圖片序列捲動（iOS 安全，滿版無補框）：捲動→目標幀，rAF 緩動內插求順滑
 if (CX_MOBILE) (function(){
-  var N = 120, PAD = 'assets/mframes/f';
+  var N = 150, PAD = 'assets_m/frames/f';
   var wrap = document.getElementById('mobile-flight');
   var cv = document.getElementById('mfcanvas');
   var hint = document.getElementById('mfHint');
   if (!wrap || !cv) return;
   var ctx = cv.getContext('2d');
-  var imgs = [], cur = -1, ready = 0;
+  var imgs = [], target = 0, curF = 0, drawn = -1;
   function pad3(n){ return ('000'+n).slice(-3); }
   for (var i = 1; i <= N; i++){
     var im = new Image();
     im.src = PAD + pad3(i) + '.jpg';
-    im.onload = (function(idx){ return function(){ ready++; if (idx === 0) draw(0); }; })(i-1);
+    im.onload = (function(idx){ return function(){ if (idx === 0) draw(0); }; })(i-1);
     imgs.push(im);
   }
   function fit(){
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = Math.round(cv.clientWidth * dpr);
     cv.height = Math.round(cv.clientHeight * dpr);
-    if (cur >= 0) draw(cur, true);
+    drawn = -1;
   }
-  function draw(idx, force){
+  function draw(idx){
     var im = imgs[idx];
-    if (!im || !im.complete || im.naturalWidth === 0) return;
-    if (idx === cur && !force) return;
-    cur = idx;
+    if (!im || !im.complete || im.naturalWidth === 0){
+      for (var k = idx; k >= 0; k--){ if (imgs[k] && imgs[k].complete && imgs[k].naturalWidth){ im = imgs[k]; break; } }
+      if (!im) return;
+    }
     var cw = cv.width, ch = cv.height, iw = im.naturalWidth, ih = im.naturalHeight;
-    var s = Math.max(cw/iw, ch/ih), w = iw*s, h = ih*s;   // cover
+    var s = Math.max(cw/iw, ch/ih), w = iw*s, h = ih*s;   // cover 滿版
     ctx.drawImage(im, (cw-w)/2, (ch-h)/2, w, h);
   }
-  var ticking = false;
-  function onScroll(){
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(function(){
-      ticking = false;
-      var top = wrap.offsetTop, span = wrap.offsetHeight - window.innerHeight;
-      var p = span > 0 ? (window.scrollY - top) / span : 0;
-      p = Math.max(0, Math.min(1, p));
-      draw(Math.round(p * (N - 1)));
-      if (hint) hint.style.opacity = p > 0.04 ? '0' : '1';
-    });
+  function computeTarget(){
+    var top = wrap.offsetTop, span = wrap.offsetHeight - window.innerHeight;
+    var p = span > 0 ? (window.scrollY - top) / span : 0;
+    p = Math.max(0, Math.min(1, p));
+    target = p * (N - 1);
+    if (hint) hint.style.opacity = p > 0.03 ? '0' : '1';
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
+  function loop(){
+    curF += (target - curF) * 0.2;                        // 緩動追向目標＝順滑
+    if (Math.abs(target - curF) < 0.01) curF = target;
+    var idx = Math.round(curF);
+    if (idx !== drawn){ draw(idx); drawn = idx; }
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('scroll', computeTarget, {passive:true});
   window.addEventListener('resize', fit);
-  fit();
+  fit(); computeTarget(); requestAnimationFrame(loop);
 })();
 </script>
 </body>
