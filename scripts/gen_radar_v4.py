@@ -71,7 +71,7 @@ TERMS = [
 ]
 _terms_items = "".join(
     f'    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px">'
-    f'<strong style="color:#1d1d1f;font-size:14.5px">{_html.escape(t, quote=True)}</strong>'
+    f'<strong style="color:#1d1d1f;font-size:14.5px">{_html.escape(t, quote=True)}是什麼？</strong>'
     f'<span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — {_html.escape(d, quote=True)}</span></div>\n'
     for t, d in TERMS)
 terms_section = ('<section style="max-width:760px;margin:28px auto 0;padding:0 16px">\n'
@@ -86,9 +86,18 @@ schema = json.dumps([
     {"@context": "https://schema.org", "@type": "WebPage",
      "@id": "https://cx468.com.tw/cx_radar_v4_demo.html",
      "url": "https://cx468.com.tw/cx_radar_v4_demo.html",
-     "name": "房貸儀表板｜18 項市場指標即時追蹤", "dateModified": TODAY_ISO, "inLanguage": "zh-TW"},
+     "name": "房貸儀表板｜18 項市場指標即時追蹤", "dateModified": TODAY_ISO, "inLanguage": "zh-TW",
+     "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#quick-answer"]},
+     "publisher": {"@type": ["LocalBusiness", "RealEstateAgent"], "name": "鋮馨租賃有限公司",
+                   "url": "https://cx468.com.tw", "telephone": "+886-2-2249-0517",
+                   "address": {"@type": "PostalAddress", "streetAddress": "中正路468號",
+                               "addressLocality": "中和區", "addressRegion": "新北市",
+                               "postalCode": "23552", "addressCountry": "TW"}}},
     {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "房貸市場指標名詞解釋",
      "hasDefinedTerm": [{"@type": "DefinedTerm", "name": t, "description": d} for t, d in TERMS]},
+    {"@context": "https://schema.org", "@type": "FAQPage",
+     "mainEntity": [{"@type": "Question", "name": f"{t}是什麼？",
+                     "acceptedAnswer": {"@type": "Answer", "text": d}} for t, d in TERMS]},
 ], ensure_ascii=False)
 
 html = f'''<!--
@@ -218,6 +227,11 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 </div>
 
 <div class="rv4-wrap">
+
+  <div class="rv4-guide" id="quick-answer" style="margin-bottom:16px">
+    <h2>⚡ 快速答案</h2>
+    <p style="font-size:13.5px;color:#57575b;line-height:1.85;margin:0">央行利率、房貸利率、買賣移轉棟數、房價指數、房貸逾放比、美債與匯率——18 項房貸市場指標每日自動更新，十年歷史實值走勢一頁看懂；資料取自中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計。</p>
+  </div>
 
   <div class="rv4-guide">
     <h2>📖 如何閱讀這份儀表板</h2>
