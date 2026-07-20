@@ -7,19 +7,56 @@
 <title>走進鋮馨的世界｜鋮馨租賃</title>
 <style>
   :root{
-    --sw-bg:#0f1d1a; --sw-ink:#f5f3f0; --sw-ink-soft:rgba(245,243,240,.72);
+    /* 引擎底色維持深綠(對齊前段小模型場景)；抵達頁與頁腳走暖夜金(對齊尾景「入夜燈亮」) */
+    --sw-bg:#0f1d1a; --sw-ink:#f7f0e6; --sw-ink-soft:rgba(247,240,230,.72);
     --sw-accent:#C61B1C;
+    --cx-warm:#140d07; --cx-warm-soft:#1d130a; --cx-amber:#d9a441;
     --sw-font-display:'Noto Serif TC','Songti TC',serif;
     --sw-font-body:'Noto Sans TC','PingFang TC',sans-serif;
   }
-  html,body{margin:0;background:var(--sw-bg)}
-  .cx-foot{position:relative;z-index:5;background:#0b1614;color:rgba(245,243,240,.55);
-    font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:18px 16px 26px}
-  .cx-foot b{color:rgba(245,243,240,.8);font-weight:500}
+  html,body{margin:0;background:var(--cx-warm)}
+  .cx-foot{position:relative;z-index:5;background:var(--cx-warm);color:rgba(247,240,230,.55);
+    font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:22px 16px 30px}
+  .cx-foot b{color:rgba(247,240,230,.82);font-weight:500}
+  /* 抵達頁：左門入官網 / 右填表單 — 暖夜金調，承接飛行尾景 */
+  .cx-arrival{position:relative;z-index:5;background:var(--cx-warm);
+    background-image:linear-gradient(180deg,rgba(20,13,7,.30) 0%,rgba(20,13,7,.66) 42%,rgba(20,13,7,.9) 100%),url('assets/s5_door.png');
+    background-size:cover;background-position:center;padding:88px 24px 72px;display:flex;gap:44px;justify-content:center;align-items:stretch;flex-wrap:wrap;font-family:'Noto Sans TC','PingFang TC',sans-serif}
+  .cx-arr-left{flex:1 1 340px;max-width:440px;color:var(--sw-ink);display:flex;flex-direction:column;justify-content:center}
+  .cx-arr-left .zi{font-family:'Noto Serif TC','Songti TC',serif;font-size:14px;letter-spacing:.32em;color:var(--cx-amber);margin-bottom:18px}
+  .cx-arr-left h2{font-family:'Noto Serif TC','Songti TC',serif;font-size:38px;font-weight:600;line-height:1.32;margin:0 0 18px;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+  .cx-arr-left p{font-size:15px;line-height:1.9;color:rgba(247,240,230,.82);margin:0 0 30px}
+  .cx-arr-btns{display:flex;flex-direction:column;gap:12px}
+  .cx-arr-btns a{display:block;text-align:center;text-decoration:none;font-size:15px;font-weight:600;padding:15px 20px;border-radius:12px;letter-spacing:.04em}
+  .cx-arr-btns .go{background:#C61B1C;color:#fff}
+  .cx-arr-btns .line{background:#06C755;color:#fff}
+  .cx-arr-btns .tel{background:transparent;color:#f5f3f0;border:1px solid rgba(245,243,240,.4)}
+  .cx-arr-right{flex:1 1 340px;max-width:480px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.4);display:flex;flex-direction:column}
+  .cx-arr-right .cap{font-size:13px;font-weight:600;color:#1d1d1f;padding:16px 20px 6px;letter-spacing:.03em}
+  .cx-arr-right iframe{width:100%;height:620px;border:0;background:#fff}
+  @media(max-width:760px){.cx-arrival{padding:48px 16px;gap:28px}.cx-arr-left h2{font-size:26px}.cx-arr-right iframe{height:560px}}
 </style>
 </head>
 <body>
 <div id="world"></div>
+
+<section class="cx-arrival" id="arrival">
+  <div class="cx-arr-left">
+    <div class="zi">鋮馨租賃 · 中和 · 二十餘年</div>
+    <h2>飛了一圈，<br>回到鋮馨門口。</h2>
+    <p>從你的房子，到每個月的壓力，我們都看過。<br>不動產融資諮詢與媒合顧問——進官網多了解，或右邊留個資料，讓專員回電跟你談。<br>依個案評估，不申請不收費。</p>
+    <div class="cx-arr-btns">
+      <a class="go" href="https://cx468.com.tw/">進入鋮馨官網 →</a>
+      <a class="line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">加 LINE 線上諮詢</a>
+      <a class="tel" href="tel:0222490517">撥打 02-2249-0517</a>
+    </div>
+  </div>
+  <div class="cx-arr-right">
+    <div class="cap">免費評估申請 · 不申請不收費</div>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeamMavg3xPwW9mY6yTANX6nHt8ieh_9_LZaq7XGfAA-sWRcg/viewform?embedded=true" loading="lazy" title="鋮馨租賃免費評估申請">載入中…</iframe>
+  </div>
+</section>
+
 <div class="cx-foot">
   情境示意，畫面由 AI 生成。<br>
   <b>本公司非金融機構・不放貸・依個案評估・最終核貸由金融機構決定</b><br>
@@ -47,8 +84,7 @@ mountScrollWorld(document.getElementById('world'), {
     { id: 'dawn', label: '入夜燈亮', still: 'assets/s4b_home_graded.png', clip: 'assets/web_dive_s4b_final.mp4',
       accent: '#C61B1C', eyebrow: '民間轉銀行', title: '本金，開始下降',
       body: '長年只繳息的日子，有機會翻頁。依個案評估，最終核貸由金融機構決定。',
-      cta: { primary: { label: '加 LINE 諮詢（不申請不收費）', href: 'https://lin.ee/PHIfSoY' },
-             secondary: { label: '回鋮馨官網首頁', href: 'https://cx468.com.tw/' } } },
+      cta: { primary: { label: '繼續往下，抵達鋮馨門口 ↓', href: '#arrival' } } },
   ],
   connectors: ['assets/web_conn_0.mp4', 'assets/web_conn_1.mp4', 'assets/web_conn_2b.mp4'],
 });
