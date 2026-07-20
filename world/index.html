@@ -36,6 +36,11 @@
     .cx-en-sub{font-size:14px;padding:0 6px;margin-bottom:36px}
     .cx-en-btn{font-size:15px;padding:15px 38px}
   }
+  /* 手機版：不用捲動捲影片(iOS 不支援)，改直接播直式飛行影片 */
+  #mobile-flight{display:none;position:relative;width:100%;height:100vh;height:100svh;background:var(--cx-warm);overflow:hidden}
+  #mobile-flight video{width:100%;height:100%;object-fit:cover;display:block}
+  .mf-hint{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(247,240,230,.72);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite}
+  @media(max-width:860px){ #world{display:none!important} #mobile-flight{display:block} }
   .cx-foot{position:relative;z-index:5;background:var(--cx-warm);color:rgba(247,240,230,.55);
     font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:22px 16px 30px}
   .cx-foot b{color:rgba(247,240,230,.82);font-weight:500}
@@ -68,6 +73,11 @@
 </div>
 <div id="world"></div>
 
+<div id="mobile-flight">
+  <video id="mflight" src="assets/mobile_chain.mp4" muted playsinline loop preload="auto"></video>
+  <div class="mf-hint">往下捲，抵達鋮馨門口 ↓</div>
+</div>
+
 <section class="cx-arrival" id="arrival">
   <div class="cx-arr-left">
     <div class="zi">鋮馨租賃 · 中和 · 二十餘年</div>
@@ -92,7 +102,10 @@
 </div>
 <script src="scrub-engine.js"></script>
 <script>
-mountScrollWorld(document.getElementById('world'), {
+// 手機偵測：粗指標或窄螢幕＝手機。手機不掛捲動引擎(iOS 捲動捲影片不穩)，改播直式飛行影片。
+var CX_MOBILE = window.matchMedia('(max-width:860px)').matches
+             || window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
   brand: { name: '鋮馨租賃', href: 'https://cx468.com.tw/' },
   hint: '往下捲，走進來',
   nav: true,
@@ -117,16 +130,21 @@ mountScrollWorld(document.getElementById('world'), {
   connectors: ['assets/web_conn_0.mp4', 'assets/web_conn_1.mp4', 'assets/web_conn_2b.mp4'],
 });
 
-// 點擊進入：解鎖捲動＋預熱影片（iOS 需使用者手勢才准播放）＋淡出封面
+// 點擊進入：解鎖捲動＋播放飛行（iOS 需使用者手勢才准播放）＋淡出封面
 (function(){
   var gate = document.getElementById('cx-enter');
   var btn = document.getElementById('cxEnterBtn');
   if (!gate || !btn) return;
   btn.addEventListener('click', function(){
     try {
-      document.querySelectorAll('#world video').forEach(function(v){
-        v.muted = true; var p = v.play(); if (p && p.then) p.then(function(){ v.pause(); }).catch(function(){});
-      });
+      if (CX_MOBILE) {
+        var mf = document.getElementById('mflight');
+        if (mf) { mf.muted = true; var pm = mf.play(); if (pm && pm.catch) pm.catch(function(){}); }
+      } else {
+        document.querySelectorAll('#world video').forEach(function(v){
+          v.muted = true; var p = v.play(); if (p && p.then) p.then(function(){ v.pause(); }).catch(function(){});
+        });
+      }
     } catch(e){}
     document.body.classList.remove('cx-locked');
     window.scrollTo(0, 0);
