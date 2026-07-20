@@ -36,10 +36,11 @@
     .cx-en-sub{font-size:14px;padding:0 6px;margin-bottom:36px}
     .cx-en-btn{font-size:15px;padding:15px 38px}
   }
-  /* 手機版：不用捲動捲影片(iOS 不支援)，改直接播直式飛行影片 */
-  #mobile-flight{display:none;position:relative;width:100%;height:100vh;height:100svh;background:var(--cx-warm);overflow:hidden}
-  #mobile-flight video{width:100%;height:100%;object-fit:cover;display:block}
-  .mf-hint{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(247,240,230,.72);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite}
+  /* 手機版：捲軸驅動的圖片序列(iOS 不支援捲動捲影片，改捲動切換預載幀，同 Apple 產品頁技法) */
+  #mobile-flight{display:none;position:relative;width:100%;height:520vh;background:var(--cx-warm)}
+  .mf-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cx-warm)}
+  #mfcanvas{width:100%;height:100%;display:block}
+  .mf-hint{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:rgba(247,240,230,.78);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite;transition:opacity .4s}
   @media(max-width:860px){ #world{display:none!important} #mobile-flight{display:block} }
   .cx-foot{position:relative;z-index:5;background:var(--cx-warm);color:rgba(247,240,230,.55);
     font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:22px 16px 30px}
@@ -74,8 +75,10 @@
 <div id="world"></div>
 
 <div id="mobile-flight">
-  <video id="mflight" src="assets/mobile_chain.mp4" muted playsinline loop preload="auto"></video>
-  <div class="mf-hint">往下捲，抵達鋮馨門口 ↓</div>
+  <div class="mf-sticky">
+    <canvas id="mfcanvas"></canvas>
+    <div class="mf-hint" id="mfHint">往下捲，飛進鋮馨 ↓</div>
+  </div>
 </div>
 
 <section class="cx-arrival" id="arrival">
@@ -137,10 +140,7 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
   if (!gate || !btn) return;
   btn.addEventListener('click', function(){
     try {
-      if (CX_MOBILE) {
-        var mf = document.getElementById('mflight');
-        if (mf) { mf.muted = true; var pm = mf.play(); if (pm && pm.catch) pm.catch(function(){}); }
-      } else {
+      if (!CX_MOBILE) {
         document.querySelectorAll('#world video').forEach(function(v){
           v.muted = true; var p = v.play(); if (p && p.then) p.then(function(){ v.pause(); }).catch(function(){});
         });
@@ -151,6 +151,54 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
     gate.classList.add('gone');
     setTimeout(function(){ if (gate && gate.parentNode) gate.parentNode.removeChild(gate); }, 900);
   });
+})();
+
+// 手機版圖片序列捲動（iOS 安全）：捲動位置→顯示第 N 幀，畫在 canvas 上(cover)
+if (CX_MOBILE) (function(){
+  var N = 120, PAD = 'assets/mframes/f';
+  var wrap = document.getElementById('mobile-flight');
+  var cv = document.getElementById('mfcanvas');
+  var hint = document.getElementById('mfHint');
+  if (!wrap || !cv) return;
+  var ctx = cv.getContext('2d');
+  var imgs = [], cur = -1, ready = 0;
+  function pad3(n){ return ('000'+n).slice(-3); }
+  for (var i = 1; i <= N; i++){
+    var im = new Image();
+    im.src = PAD + pad3(i) + '.jpg';
+    im.onload = (function(idx){ return function(){ ready++; if (idx === 0) draw(0); }; })(i-1);
+    imgs.push(im);
+  }
+  function fit(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(cv.clientWidth * dpr);
+    cv.height = Math.round(cv.clientHeight * dpr);
+    if (cur >= 0) draw(cur, true);
+  }
+  function draw(idx, force){
+    var im = imgs[idx];
+    if (!im || !im.complete || im.naturalWidth === 0) return;
+    if (idx === cur && !force) return;
+    cur = idx;
+    var cw = cv.width, ch = cv.height, iw = im.naturalWidth, ih = im.naturalHeight;
+    var s = Math.max(cw/iw, ch/ih), w = iw*s, h = ih*s;   // cover
+    ctx.drawImage(im, (cw-w)/2, (ch-h)/2, w, h);
+  }
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var top = wrap.offsetTop, span = wrap.offsetHeight - window.innerHeight;
+      var p = span > 0 ? (window.scrollY - top) / span : 0;
+      p = Math.max(0, Math.min(1, p));
+      draw(Math.round(p * (N - 1)));
+      if (hint) hint.style.opacity = p > 0.04 ? '0' : '1';
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', fit);
+  fit();
 })();
 </script>
 </body>
