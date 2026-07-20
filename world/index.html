@@ -44,6 +44,12 @@
   .mf-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cx-warm)}
   #mfcanvas{width:100%;height:100%;display:block}
   .mf-hint{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:rgba(247,240,230,.78);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite;transition:opacity .4s}
+  /* 手機場景特效字（鄭重）：金線＋襯線大字＋柔光暈，捲動淡入上升 */
+  .mf-copy{position:absolute;left:0;right:0;bottom:15%;padding:0 30px;text-align:center;pointer-events:none;opacity:0;transform:translateY(20px);will-change:opacity,transform}
+  .mf-copy .rule{display:inline-block;width:34px;height:1.5px;background:var(--cx-amber);margin:0 auto 16px;opacity:.9}
+  .mf-copy .eb{display:block;font-family:'Noto Serif TC','Songti TC',serif;font-size:13px;letter-spacing:.36em;color:var(--cx-amber);margin-bottom:14px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+  .mf-copy .ti{font-family:'Noto Serif TC','Songti TC',serif;font-size:38px;font-weight:600;color:#fff;line-height:1.28;margin:0 0 14px;letter-spacing:.02em;text-shadow:0 2px 20px rgba(0,0,0,.7),0 0 40px rgba(217,164,65,.22)}
+  .mf-copy .ln{font-family:'Noto Sans TC','PingFang TC',sans-serif;font-size:13.5px;line-height:1.7;color:rgba(247,240,230,.9);letter-spacing:.04em;text-shadow:0 1px 8px rgba(0,0,0,.7)}
   @media(max-width:860px){ #world{display:none!important} #mobile-flight{display:block} }
   .cx-foot{position:relative;z-index:5;background:var(--cx-warm);color:rgba(247,240,230,.55);
     font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:22px 16px 30px}
@@ -80,6 +86,9 @@
 <div id="mobile-flight">
   <div class="mf-sticky">
     <canvas id="mfcanvas"></canvas>
+    <div class="mf-copy" data-mid="0.36"><span class="rule"></span><span class="eb">售後回租</span><h2 class="ti">房子，還是家</h2><p class="ln">過戶給投資方，簽租約繼續住，<br>並保有日後依約買回的權利。</p></div>
+    <div class="mf-copy" data-mid="0.63"><span class="rule"></span><span class="eb">貸款整合</span><h2 class="ti">多筆，變一筆</h2><p class="ln">信貸、卡循、民間，整合成一筆，<br>每個月只繳一筆。依個案評估。</p></div>
+    <div class="mf-copy" data-mid="0.93"><span class="rule"></span><span class="eb">民間轉銀行</span><h2 class="ti">本金，開始下降</h2><p class="ln">長年只繳息的日子，有機會翻頁。<br>依個案評估，最終核貸由金融機構決定。</p></div>
     <div class="mf-hint" id="mfHint">往下捲，飛進鋮馨 ↓</div>
   </div>
 </div>
@@ -188,12 +197,25 @@ if (CX_MOBILE) (function(){
     var s = Math.max(cw/iw, ch/ih), w = iw*s, h = ih*s;   // cover 滿版
     ctx.drawImage(im, (cw-w)/2, (ch-h)/2, w, h);
   }
+  var copies = [].slice.call(wrap.querySelectorAll('.mf-copy'));
+  var mids = copies.map(function(c){ return parseFloat(c.getAttribute('data-mid')); });
+  var HALF = 0.11;   // 每段字在其中心點 ±0.11 進度範圍內顯示
+  function updateCopy(p){
+    for (var j = 0; j < copies.length; j++){
+      var d = Math.abs(p - mids[j]);
+      var v = d > HALF ? 0 : (1 - d / HALF);          // 中心最亮、邊緣淡出
+      v = v * v * (3 - 2 * v);                          // smoothstep
+      copies[j].style.opacity = v.toFixed(3);
+      copies[j].style.transform = 'translateY(' + ((1 - v) * 20).toFixed(1) + 'px)';
+    }
+  }
   function computeTarget(){
     var top = wrap.offsetTop, span = wrap.offsetHeight - window.innerHeight;
     var p = span > 0 ? (window.scrollY - top) / span : 0;
     p = Math.max(0, Math.min(1, p));
     target = p * (N - 1);
     if (hint) hint.style.opacity = p > 0.03 ? '0' : '1';
+    updateCopy(p);
   }
   function loop(){
     curF += (target - curF) * 0.2;                        // 緩動追向目標＝順滑
