@@ -40,7 +40,7 @@
     #cx-enter{background-image:linear-gradient(rgba(12,14,11,.42),rgba(12,14,11,.86)),url('assets_m/m1_street.png')}
   }
   /* 手機版：捲軸驅動的圖片序列(iOS 不支援捲動捲影片，改捲動切換預載幀，同 Apple 產品頁技法) */
-  #mobile-flight{display:none;position:relative;width:100%;height:620vh;background:var(--cx-warm)}
+  #mobile-flight{display:none;position:relative;width:100%;height:860vh;background:var(--cx-warm)}
   .mf-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cx-warm)}
   #mfcanvas{width:100%;height:100%;display:block}
   .mf-hint{position:absolute;left:0;right:0;bottom:22px;text-align:center;color:rgba(247,240,230,.78);font:12px/1.6 'Noto Sans TC','PingFang TC',sans-serif;letter-spacing:.16em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);animation:cx-bob 1.8s ease-in-out infinite;transition:opacity .4s}
@@ -86,9 +86,11 @@
 <div id="mobile-flight">
   <div class="mf-sticky">
     <canvas id="mfcanvas"></canvas>
-    <div class="mf-copy" data-mid="0.36"><span class="rule"></span><span class="eb">售後回租</span><h2 class="ti">房子，還是家</h2><p class="ln">過戶給投資方，簽租約繼續住，<br>並保有日後依約買回的權利。</p></div>
-    <div class="mf-copy" data-mid="0.63"><span class="rule"></span><span class="eb">貸款整合</span><h2 class="ti">多筆，變一筆</h2><p class="ln">信貸、卡循、民間，整合成一筆，<br>每個月只繳一筆。依個案評估。</p></div>
-    <div class="mf-copy" data-mid="0.93"><span class="rule"></span><span class="eb">民間轉銀行</span><h2 class="ti">本金，開始下降</h2><p class="ln">長年只繳息的日子，有機會翻頁。<br>依個案評估，最終核貸由金融機構決定。</p></div>
+    <div class="mf-copy" data-mid="0.20"><span class="rule"></span><span class="eb">售後回租</span><h2 class="ti">房子，還是家</h2><p class="ln">過戶給投資方，簽租約繼續住，<br>並保有日後依約買回的權利。</p></div>
+    <div class="mf-copy" data-mid="0.38"><span class="rule"></span><span class="eb">貸款整合</span><h2 class="ti">多筆，變一筆</h2><p class="ln">信貸、卡循、民間，整合成一筆，<br>每個月只繳一筆。依個案評估。</p></div>
+    <div class="mf-copy" data-mid="0.57"><span class="rule"></span><span class="eb">二胎增貸</span><h2 class="ti">淨值，再運用一次</h2><p class="ln">名下房屋的淨值，評估後<br>有機會再一次運用。依個案評估。</p></div>
+    <div class="mf-copy" data-mid="0.76"><span class="rule"></span><span class="eb">包租代管</span><h2 class="ti">房子，交給我們顧</h2><p class="ln">招租、收租、日常管理，<br>交給專人替你打理。</p></div>
+    <div class="mf-copy" data-mid="0.95"><span class="rule"></span><span class="eb">民間轉銀行</span><h2 class="ti">本金，開始下降</h2><p class="ln">長年只繳息的日子，有機會翻頁。<br>依個案評估，最終核貸由金融機構決定。</p></div>
     <div class="mf-hint" id="mfHint">往下捲，飛進鋮馨 ↓</div>
   </div>
 </div>
@@ -167,7 +169,7 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
 
 // 手機版原生直式圖片序列捲動（iOS 安全，滿版無補框）：捲動→目標幀，rAF 緩動內插求順滑
 if (CX_MOBILE) (function(){
-  var N = 150, PAD = 'assets_m/frames/f';
+  var N = 230, PAD = 'assets_m/frames/f';
   var wrap = document.getElementById('mobile-flight');
   var cv = document.getElementById('mfcanvas');
   var hint = document.getElementById('mfHint');
