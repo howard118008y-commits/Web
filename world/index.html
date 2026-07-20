@@ -15,6 +15,8 @@
     --sw-font-body:'Noto Sans TC','PingFang TC',sans-serif;
   }
   html,body{margin:0;background:var(--cx-warm)}
+  /* 引擎粒子容器在 atmosphere 判斷式外總會生成，直接藏掉（老闆：粉紅泡泡很分裂） */
+  .sw-particles{display:none!important}
   .cx-foot{position:relative;z-index:5;background:var(--cx-warm);color:rgba(247,240,230,.55);
     font:12px/1.8 'Noto Sans TC','PingFang TC',sans-serif;text-align:center;padding:22px 16px 30px}
   .cx-foot b{color:rgba(247,240,230,.82);font-weight:500}
@@ -68,7 +70,7 @@ mountScrollWorld(document.getElementById('world'), {
   brand: { name: '鋮馨租賃', href: 'https://cx468.com.tw/' },
   hint: '往下捲，走進來',
   nav: true,
-  atmosphere: true,
+  atmosphere: false,
   diveScroll: 1.4,
   connScroll: 1.3,
   sections: [
