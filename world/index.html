@@ -71,6 +71,20 @@
   .cx-arr-right .cap{font-size:13px;font-weight:600;color:#1d1d1f;padding:16px 20px 6px;letter-spacing:.03em}
   .cx-arr-right iframe{width:100%;height:620px;border:0;background:#fff}
   @media(max-width:760px){.cx-arrival{padding:48px 16px;gap:28px}.cx-arr-left h2{font-size:26px}.cx-arr-right iframe{height:560px}}
+  /* ── 主題統一覆寫（老闆 2026-07-21：不要米色分割帶、整頁都是房子場景）──
+     引擎在 .sw-root 類層寫死淡米色預設(#F5EDE0)，:root 蓋不到；用 #world 提高優先權整套改暖夜色。 */
+  #world.sw-root, #world{--sw-bg:#140d07;--sw-ink:#f7f0e6;--sw-ink-soft:rgba(247,240,230,.72)}
+  /* 天空層＝場景空檔的底：直接鋪尾景房子圖＋暖夜壓暗，任何裸露處都是房子、不再是色塊 */
+  #world .sw-sky{background:#140d07 url('assets/s4b_home_graded.png') center/cover no-repeat}
+  #world .sw-sky__grad{background:linear-gradient(180deg,rgba(20,13,7,.5) 0%,rgba(20,13,7,.72) 60%,rgba(20,13,7,.86) 100%)}
+  #world .sw-sky__glow{display:none}
+  /* 導覽列：白霜膠囊改暖夜半透明，文字轉亮色 */
+  #world .sw-nav{background:rgba(20,13,7,.55);border-color:rgba(217,164,65,.28)}
+  /* 段落 CTA 主鈕：原本吃 --sw-ink 當底，轉亮後會變米底白字，改品牌紅 */
+  #world .sw-btn--primary{background:var(--sw-accent,#C61B1C);color:#fff}
+  /* 抵達區進入視窗後，引擎固定文案層/路徑點淡出，避免與抵達區文字雙重疊字 */
+  #world .sw-copylayer,#world .sw-route{transition:opacity .45s ease}
+  body.cx-arrived #world .sw-copylayer,body.cx-arrived #world .sw-route{opacity:0!important;pointer-events:none!important}
 </style>
 </head>
 <body class="cx-locked">
@@ -165,6 +179,18 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
     gate.classList.add('gone');
     setTimeout(function(){ if (gate && gate.parentNode) gate.parentNode.removeChild(gate); }, 900);
   });
+})();
+
+// 桌機：抵達區進入視窗即淡出引擎文案層（雙重疊字修正，老闆 2026-07-21）
+if (!CX_MOBILE) (function(){
+  var arr = document.getElementById('arrival');
+  if (!arr) return;
+  function chk(){
+    var on = window.scrollY + window.innerHeight * 0.6 > arr.offsetTop;
+    document.body.classList.toggle('cx-arrived', on);
+  }
+  window.addEventListener('scroll', chk, {passive:true});
+  chk();
 })();
 
 // 手機版原生直式圖片序列捲動（iOS 安全，滿版無補框）：捲動→目標幀，rAF 緩動內插求順滑
