@@ -452,7 +452,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 
 <!-- ── PHOTO HERO ── -->
 <div class="hero">
-  <img class="bg" src="img/hero-radar.jpg" alt="黃金時刻的台灣城市天際線與住宅大樓" fetchpriority="high">
+  <picture><source srcset="img/hero-radar.avif" type="image/avif"><source srcset="img/hero-radar.webp" type="image/webp"><img class="bg" src="img/hero-radar.jpg" alt="黃金時刻的台灣城市天際線與住宅大樓" fetchpriority="high"></picture>
   <div class="hero-left">
     <div class="hero-sys">房貸儀表板 · 知識庫結構 · SYS 2026</div>
 
