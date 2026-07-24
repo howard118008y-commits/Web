@@ -175,6 +175,8 @@
 ### 部署驗證 (Deployment)
 - 改完任何 HTML/CSS **不要只說「完成」**。GitHub Pages 約 1–2 分鐘生效，要提醒使用者**無痕/清快取**重開，確認「指定的那個元素」真的出現、行為正確。
 - 注意三類「改了看不到」：瀏覽器快取、缺視覺分隔、`include.js` 片段（nav/footer/lead-form 等）沒載入。
+- **本機驗證 include 片段時，`fetch('footer.html')` 會吃瀏覽器 heuristic cache 拿到舊版**（python http.server 不送 Cache-Control）。2026-07-24 因此一度誤判「改動沒生效」。驗證一律加 `{cache:'reload'}`，或用帶 query 的 URL。
+- **全站共用片段要加 fallback 樣式時，用 `:where()` 把 specificity 壓到 0**，不要直接補 `style.css`。全站有 26 個 self-contained 頁（article 系列、二胎在地頁）沒載入 `style.css`，補進去會連帶套用 reset/nav/按鈕規則、牽動範圍遠大於目標；而 `index.html`（自訂 `#0e0e10` footer）、`land-value-tax-calculator`／`tools-lab`（`<footer>` 是卡片頁尾非全站頁尾）都有自己的規則，無腦內嵌會蓋掉它們。做法見 `footer.html` 的 `:where(.cx-site-footer)` 區塊。
 - git 部署只 `git add` 本次相關檔，**禁止 `git add -A`**（此 repo 常有 `.mcp.json`、`tools-lab/`、`docs/` 等不相關變更）。push 前先 `git fetch && git rebase origin/main`（遠端有自動數據 commit）。可用 `/deploy`。
 
 ### MCP 與 Git
