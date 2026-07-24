@@ -12,7 +12,7 @@
 @keyframes cxMenuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .cx-mobile-menu a{font-size:18px;font-weight:600;color:#1d1d1f;padding:18px 4px;border-bottom:.5px solid #e8e8ed;text-decoration:none;display:flex;justify-content:space-between;align-items:center}
 .cx-mobile-menu a::after{content:"›";color:#c7c7cc;font-size:22px;font-weight:300}
-.cx-mobile-menu a.cx-mobile-cta{margin-top:18px;background:#16A34A;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
+.cx-mobile-menu a.cx-mobile-cta{margin-top:18px;background:#048456;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-cta::after{content:""}
 .cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:#141414;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-radar::after{content:""}
@@ -47,6 +47,22 @@ body.cx-menu-open .cx-social-dock{display:none}
   nav .nav-logo span{font-size:14px}
   .nav-apply-pill{display:inline-flex;align-items:center;margin-right:6px;margin-left:auto}
   nav{display:flex;align-items:center}
+}
+
+/* 沒載 style.css 的頁（article 系列等 26 頁）nav 容器與連結的 fallback。
+   用 :where() specificity=0——有載 style.css 的頁一律以 style.css 為準、不受影響；
+   只有「完全沒有 nav 容器規則」的頁才吃這份。值與 style.css 的 Navigation 區段同步。
+   article 頁的 .art-hero{padding-top:48px} 正好補償這裡的 fixed nav 48px 高度。 */
+:where(nav){position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+:where(.nav-logo){font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;color:#1d1d1f}
+:where(.nav-links){display:flex;gap:1.75rem}
+:where(.nav-links a){font-size:12px;color:#1d1d1f;opacity:.8;text-decoration:none}
+:where(.nav-links a:hover){opacity:1}
+:where(.nav-links a.active){opacity:1;font-weight:600;color:#c8102e}
+:where(.nav-cta){font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none}
+@media(max-width:768px){
+  :where(nav){padding:0 1rem}
+  :where(.nav-links){display:none}
 }
 </style>
 <nav>
