@@ -18,15 +18,15 @@ html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
 .nav-logo span{color:#c8102e;font-weight:700}
 .nav-links{display:flex;gap:1.75rem}
 .nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
 .nav-links a:hover{opacity:1}
 .nav-links a.active{opacity:1;font-weight:600;color:#c8102e}
 .nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
-.btn-line{display:inline-block;background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
-.btn-green{background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
+.btn-line{display:inline-block;background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
+.btn-green{background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
 .btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
 .btn-white{background:#fff;color:#1d1d1f;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
 .btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
@@ -60,7 +60,7 @@ footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
   .cta-strip h2{font-size:28px}
   .footer-cols{grid-template-columns:1fr}
   footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
+  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#048456;box-shadow:0 4px 16px rgba(6,199,85,.45)}
 }
 /* === end inlined style.css === */
 
@@ -360,7 +360,14 @@ body.at-top nav .cx-burger span{background:#fff}
 .hcalc-row{margin-bottom:14px}
 .hcalc-lbl{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.06em;display:flex;justify-content:space-between;margin-bottom:6px}
 .hcalc-v{font-size:13px;font-weight:600;color:#fff;letter-spacing:.02em}
-.hcalc-sl{width:100%;height:2px;border-radius:1px;outline:none;cursor:pointer;accent-color:#C61B1C;display:block;margin:4px 0 0}
+/* 滑桿：視覺軌維持 2px 髮絲線，但把可點/可拖熱區撐到 32px（負 margin 抵銷、版面不位移） */
+.hcalc-sl{-webkit-appearance:none;appearance:none;width:100%;height:32px;background:transparent;border:0;padding:0;outline:none;cursor:pointer;display:block;margin:-11px 0 -19px}
+.hcalc-sl::-webkit-slider-runnable-track{height:2px;border-radius:1px;background:linear-gradient(#C61B1C,#C61B1C) 0/var(--p,50%) 100% no-repeat,rgba(255,255,255,.88)}
+.hcalc-sl::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border:0;border-radius:50%;background:#C61B1C;margin-top:-6px}
+.hcalc-sl::-moz-range-track{height:2px;border-radius:1px;background:rgba(255,255,255,.88)}
+.hcalc-sl::-moz-range-progress{height:2px;border-radius:1px;background:#C61B1C}
+.hcalc-sl::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:#C61B1C}
+.hcalc-sl:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .hcalc-out{border-top:1px solid rgba(255,255,255,.16);padding:12px 2px 2px;margin-top:16px}
 .hcalc-out-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0}
 .hcalc-out-lbl{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.08em}
@@ -395,9 +402,11 @@ body.at-top nav .cx-burger span{background:#fff}
 .ilf-field label .ilf-req{color:#C61B1C;margin-left:2px}
 .ilf-field input{width:100%;font-size:16px;color:#141414;background:#fff;border:1px solid #d9d9de;border-radius:0;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .2s}
 .ilf-field input:focus{outline:none;border-color:#141414}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.ilf-field input:focus-visible,.ilf-consent input:focus-visible,.ilf-submit:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 .ilf-consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 26px}
-.ilf-consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#141414}
-.ilf-consent label{font-size:12.5px;color:#6e6e73;line-height:1.7}
+.ilf-consent input{width:24px;height:24px;margin-top:0;flex-shrink:0;accent-color:#141414;cursor:pointer}
+.ilf-consent label{font-size:12.5px;color:#6e6e73;line-height:1.7;cursor:pointer;padding:3px 0}
 .ilf-consent a{color:#141414;font-weight:600;text-decoration:underline}
 .ilf-submit{width:100%;background:#141414;color:#fff;font-size:14px;font-weight:600;border:none;border-radius:0;padding:17px;cursor:pointer;letter-spacing:.18em;transition:opacity .2s}
 .ilf-submit:hover{opacity:.85}
@@ -996,16 +1005,16 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <input type="hidden" name="from_name" value="鋮馨官網">
     <input type="checkbox" name="botcheck" class="ilf-hp" tabindex="-1" autocomplete="off">
     <div class="ilf-field">
-     <label>怎麼稱呼您<span class="ilf-req">*</span></label>
-     <input type="text" name="Name" required placeholder="例：王先生 / 陳小姐">
+     <label for="ilf-name">怎麼稱呼您<span class="ilf-req">*</span></label>
+     <input type="text" id="ilf-name" aria-required="true" name="Name" required placeholder="例：王先生 / 陳小姐">
     </div>
     <div class="ilf-field">
-     <label>聯絡電話<span class="ilf-req">*</span></label>
-     <input type="tel" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
+     <label for="ilf-phone">聯絡電話<span class="ilf-req">*</span></label>
+     <input type="tel" id="ilf-phone" aria-required="true" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
     </div>
     <div class="ilf-field">
-     <label>LINE ID <span class="ilf-opt">（選填，方便用 LINE 聯繫）</span></label>
-     <input type="text" name="LINE_ID" placeholder="你的 LINE ID">
+     <label for="ilf-lineid">LINE ID <span class="ilf-opt">（選填，方便用 LINE 聯繫）</span></label>
+     <input type="text" id="ilf-lineid" name="LINE_ID" placeholder="你的 LINE ID">
     </div>
     <div class="ilf-consent">
      <input type="checkbox" id="ilfConsent" required>
@@ -1321,9 +1330,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     }
     hvEl.addEventListener('input',run);rlEl.addEventListener('input',run);run();
   }
+  // 滑桿已改自訂軌（熱區 32px），已填色比例交給 --p 維持原本「左紅右白」外觀
+  function bindFill(){
+    document.querySelectorAll('.hcalc-sl').forEach(function(s){
+      function p(){var mn=+s.min||0,mx=+s.max||100;
+        s.style.setProperty('--p',(mx>mn?(+s.value-mn)/(mx-mn)*100:0)+'%');}
+      s.addEventListener('input',p);p();
+    });
+  }
   document.addEventListener('DOMContentLoaded',function(){
     bindCalc('hd-hv','hd-rl','hd-loan','hd-mo','hd-hv-disp','hd-rl-disp');
     bindCalc('hm-hv','hm-rl','hm-loan','hm-mo','hm-hv-disp','hm-rl-disp');
+    bindFill();
   });
 })();
 </script>

@@ -123,7 +123,7 @@
 
 #cx-line-modal .cxm-btn {
   display: inline-block;
-  background: #06C755;
+  background: #048456;
   color: #fff;
   font-size: 15px;
   font-weight: 700;

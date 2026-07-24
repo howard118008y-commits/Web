@@ -12,7 +12,7 @@ a{text-decoration:none;color:inherit}
 
 /* === Navigation === */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
 .nav-logo span{color:#c8102e;font-weight:700}
 .nav-links{display:flex;gap:1.75rem}
 .nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
@@ -21,8 +21,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 .nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
 
 /* === Common Buttons === */
-.btn-line{display:inline-block;background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
-.btn-green{background:#06C755;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
+.btn-line{display:inline-block;background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
+.btn-green{background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
 .btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
 .btn-white{background:#fff;color:#1d1d1f;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
 .btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
@@ -44,14 +44,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
 .footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
 .footer-col-title{font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
-.footer-link{display:block;font-size:11px;color:#86868b;margin-bottom:.4rem}
+/* 觸控目標：連結本體 16px 高 → padding 撐到 40px、彼此間距 ≥12px（WCAG 2.5.8） */
+.footer-link{display:block;font-size:11px;color:#86868b;margin-bottom:0;padding:12px 0}
 .footer-link:hover{color:#f5f5f7}
 .contact-label{font-size:11px;font-weight:500;color:#f5f5f7;display:block;margin-bottom:3px}
 .contact-value{font-size:11px;color:#86868b;line-height:1.65}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;border-top:.5px solid #424245;padding-top:1.25rem;margin-top:1.5rem}
 .copyright{font-size:11px;color:#86868b}
-.footer-links-row{display:flex;gap:1.5rem}
-.footer-link-sm{font-size:11px;color:#86868b}
+.footer-links-row{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-link-sm{font-size:11px;color:#86868b;display:inline-flex;align-items:center;min-height:44px}
 .footer-link-sm:hover{color:#f5f5f7}
 
 /* === Mobile LINE Floating Action Button === */
@@ -66,5 +67,5 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
   .cta-strip h2{font-size:28px}
   .footer-cols{grid-template-columns:1fr}
   footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#06C755;box-shadow:0 4px 16px rgba(6,199,85,.45)}
+  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#048456;box-shadow:0 4px 16px rgba(6,199,85,.45)}
 }

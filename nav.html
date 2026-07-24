@@ -36,13 +36,16 @@ body.cx-menu-open .cx-social-dock{display:none}
 .nav-center{display:flex;align-items:center;gap:24px}
 
 /* 手機版導覽列常駐轉換入口（藥丸） */
-.nav-apply-pill{display:none;background:#c8102e;color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;letter-spacing:.02em}
+/* 觸控目標 ≥44px（WCAG 2.5.8）。直接把藥丸拉到 44px 會塞滿 48px 導覽列、視覺走樣，
+   故維持藥丸原尺寸，改用 ::after 透明覆蓋層把「可點範圍」撐到 44px（視覺零變動）。 */
+.nav-apply-pill{display:none;background:#c8102e;color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;letter-spacing:.02em;position:relative}
+.nav-apply-pill::after{content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:44px}
 
 @media(max-width:768px){
   .cx-burger{display:flex}
   nav .nav-center,nav .nav-radar-btn{display:none!important}
   nav .nav-logo span{font-size:14px}
-  .nav-apply-pill{display:inline-block;margin-right:6px;margin-left:auto}
+  .nav-apply-pill{display:inline-flex;align-items:center;margin-right:6px;margin-left:auto}
   nav{display:flex;align-items:center}
 }
 </style>

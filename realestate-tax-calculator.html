@@ -46,6 +46,8 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .irow{display:flex;align-items:center;gap:8px}
 
 .irow input[type=number],.irow input[type=month],.irow select{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.irow input[type=number]:focus-visible,.irow input[type=month]:focus-visible,.irow select:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .irow input:focus,.irow select:focus{border-color:#C61B1C}
 

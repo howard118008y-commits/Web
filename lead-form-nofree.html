@@ -10,25 +10,28 @@
 .form-privacy{display:flex;gap:12px;align-items:flex-start;background:#f0faf3;border:1px solid rgba(6,199,85,.25);border-radius:14px;padding:16px 18px;margin-bottom:28px}
 .form-privacy .lock{font-size:20px;line-height:1.4;flex-shrink:0}
 .form-privacy p{font-size:13px;color:#1d1d1f;line-height:1.65;margin:0}
-.form-privacy a{color:#06C755;font-weight:600}
+.form-privacy a{color:#0F7A4F;font-weight:600}
 .field{margin-bottom:20px}
 .field label{display:block;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
 .field label .opt{font-weight:400;color:#86868b;font-size:12px}
 .field label .req{color:#c8102e;margin-left:2px}
 .field input,.field select,.field textarea{width:100%;font-size:16px;color:#1d1d1f;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#06C755;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#048456;background:#fff}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,
+.consent input:focus-visible,.form-submit:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 .field textarea{resize:vertical;min-height:96px}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 24px}
-.consent input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#06C755}
-.consent label{font-size:13px;color:#6e6e73;line-height:1.6}
-.consent a{color:#06C755;font-weight:600}
-.form-submit{width:100%;background:#06C755;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.consent input{width:24px;height:24px;margin-top:0;flex-shrink:0;accent-color:#048456;cursor:pointer}
+.consent label{font-size:13px;color:#6e6e73;line-height:1.6;cursor:pointer;padding:3px 0}
+.consent a{color:#0F7A4F;font-weight:600}
+.form-submit{width:100%;background:#048456;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
 .form-submit:hover{opacity:.9}
 .form-submit:disabled{opacity:.5;cursor:not-allowed}
 .form-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
 .form-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
 .form-msg.ok{display:block;background:#f0faf3;color:#157347;border:1px solid rgba(6,199,85,.3)}
-.form-msg.ok a,.form-msg.err a{color:#06C755;font-weight:600}
+.form-msg.ok a,.form-msg.err a{color:#0F7A4F;font-weight:600}
 .form-msg.err{display:block;background:#fdf0f1;color:#c8102e;border:1px solid rgba(200,16,46,.3);margin-top:18px}
 .hp{position:absolute!important;left:-9999px!important;opacity:0}
 @media(max-width:768px){
@@ -54,24 +57,24 @@
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
 
       <div class="field">
-        <label>怎麼稱呼您<span class="req">*</span></label>
-        <input type="text" name="Name" required placeholder="例：王先生 / 陳小姐">
+        <label for="lfn-name">怎麼稱呼您<span class="req">*</span></label>
+        <input type="text" id="lfn-name" aria-required="true" name="Name" required placeholder="例：王先生 / 陳小姐">
       </div>
       <div class="field">
-        <label>聯絡電話<span class="req">*</span></label>
-        <input type="tel" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
+        <label for="lfn-phone">聯絡電話<span class="req">*</span></label>
+        <input type="tel" id="lfn-phone" aria-required="true" name="Phone" required inputmode="tel" placeholder="方便聯繫的手機或市話">
       </div>
       <div class="field">
-        <label>LINE ID <span class="opt">（選填，方便我們用 LINE 聯繫）</span></label>
-        <input type="text" name="LINE_ID" placeholder="你的 LINE ID">
+        <label for="lfn-lineid">LINE ID <span class="opt">（選填，方便我們用 LINE 聯繫）</span></label>
+        <input type="text" id="lfn-lineid" name="LINE_ID" placeholder="你的 LINE ID">
       </div>
       <div class="field">
-        <label>不動產地址<span class="req">*</span></label>
-        <input type="text" name="Property_Address" required placeholder="例：新北市中和區中正路 468 號">
+        <label for="lfn-address">不動產地址<span class="req">*</span></label>
+        <input type="text" id="lfn-address" aria-required="true" name="Property_Address" required placeholder="例：新北市中和區中正路 468 號">
       </div>
       <div class="field">
-        <label>我想了解<span class="req">*</span></label>
-        <select name="Service" required>
+        <label for="lfn-service">我想了解<span class="req">*</span></label>
+        <select id="lfn-service" aria-required="true" name="Service" required>
           <option value="" disabled selected>請選擇</option>
           <option>售後回租（賣房續住）</option>
           <option>貸款整合（降低月付）</option>
@@ -81,8 +84,8 @@
         </select>
       </div>
       <div class="field">
-        <label>補充說明 <span class="opt">（選填）</span></label>
-        <textarea name="Message" placeholder="例如：目前貸款狀況、希望多久內完成、其他想說明的事"></textarea>
+        <label for="lfn-message">補充說明 <span class="opt">（選填）</span></label>
+        <textarea id="lfn-message" name="Message" placeholder="例如：目前貸款狀況、希望多久內完成、其他想說明的事"></textarea>
       </div>
       <div class="consent">
         <input type="checkbox" id="consent" required>

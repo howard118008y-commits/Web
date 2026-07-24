@@ -246,6 +246,8 @@
 .faq-search{display:flex;gap:0;max-width:480px;margin:0 auto;background:#fff;border-radius:0;overflow:hidden;padding:4px 4px 4px 20px}
 
 .faq-search input{flex:1;border:none;outline:none;font-size:14px;background:transparent}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.faq-search input:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .faq-search button{background:#141414;color:#fff;border:none;padding:8px 22px;border-radius:0;font-size:12px;font-weight:600;letter-spacing:.1em;cursor:pointer}
 

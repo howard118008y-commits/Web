@@ -30,6 +30,8 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:12px;font-weight:600;color:#6e6e73}
 .field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s;width:100%;box-sizing:border-box;max-width:100%}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.field input:focus-visible,.field select:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 .field input:focus,.field select:focus{border-color:#1e3a5f}
 .field input::placeholder{color:#b0b0b0}
 .hint{font-size:11px;color:#9ca3af;margin-top:2px}
@@ -794,7 +796,7 @@ function clearAll() {
   </div>
 </section>
 <div data-include="line-qr"></div>
-<div style="max-width:720px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:10px 20px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#06c755;padding:10px 20px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
+<div style="max-width:720px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:10px 20px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:10px 20px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
 <section style="max-width:720px;margin:28px auto 0;padding:0 16px">
   <h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">常見問題</h2>
   <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1d1d1f;margin:0 0 8px">房屋稅怎麼算？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">房屋稅＝房屋評定現值 × 適用稅率。房屋評定現值由地方政府按構造、用途、屋齡、路段率核定，並非市價或成交價。</p></div>

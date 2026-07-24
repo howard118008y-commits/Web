@@ -19,19 +19,67 @@
   var mm = gsap.matchMedia();
   mm.add("(prefers-reduced-motion: no-preference)", function () {
 
+    /* 動畫收尾一律 clearProps：inline 的 opacity/transform 完全移除，
+       元素不可能停在中途透明度（原本靠 once＝動完即殺，若 tween 未跑完就被殺會永久半透明）。 */
+    function settle(els) {
+      gsap.set(els, { clearProps: "opacity,transform" });
+    }
+
     function revealGroup(selector, stagger) {
       var els = gsap.utils.toArray(selector).filter(function (el) {
         return el.getBoundingClientRect().top > window.innerHeight * 0.85;   // 只動 below-fold
       });
       if (!els.length) return;
       gsap.set(els, { opacity: 0, y: 26 });
+      els.forEach(function (el) { el.setAttribute("data-cx-reveal", ""); });  // 供 failsafe 掃描
       ScrollTrigger.batch(els, {
         start: "top 90%", once: true,
         onEnter: function (batch) {
-          gsap.to(batch, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: stagger || 0.09 });
+          gsap.to(batch, {
+            opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: stagger || 0.09,
+            onComplete: function () { settle(batch); }
+          });
         }
       });
     }
+
+    /* Failsafe：捲動位置被「跳著換」時（bfcache 上一頁還原／錨點落地／程式捲動），
+       ScrollTrigger 的起訖值可能已過期而不再觸發 onEnter，元素會卡在 opacity 0。
+       refresh() 重算後再掃一次：凡是已捲過觸發線卻仍不是全不透明的，直接還原。
+       內容看得見 > 動畫演出。 */
+    function failsafe() {
+      var line = window.innerHeight * 0.9;
+      document.querySelectorAll("[data-cx-reveal]").forEach(function (el) {
+        if (el.getBoundingClientRect().top < line &&
+            parseFloat(getComputedStyle(el).opacity) < 1) {
+          gsap.killTweensOf(el);
+          settle(el);
+        }
+      });
+    }
+
+    /* 全站 html{scroll-behavior:smooth}——錨點/還原的捲動要跑好幾百毫秒才到位，
+       只掃一次會在元素還沒過觸發線時就掃完。故補掃多次。 */
+    var timers = [];
+    function sweep(delays) {
+      delays.forEach(function (d) { timers.push(setTimeout(failsafe, d)); });
+    }
+    function resync() {
+      ScrollTrigger.refresh();
+      sweep([120, 600, 1500]);
+    }
+    window.addEventListener("pageshow", resync);      // bfcache 還原（上一頁 / 上一頁按鈕）
+    window.addEventListener("hashchange", resync);    // 錨點跳轉
+    // 捲動結束時再保險一次（scrollend 不支援就退回 scroll + debounce）
+    var seTimer;
+    if ("onscrollend" in window) {
+      window.addEventListener("scrollend", failsafe);
+    } else {
+      window.addEventListener("scroll", function () {
+        clearTimeout(seTimer); seTimer = setTimeout(failsafe, 200);
+      }, { passive: true });
+    }
+    sweep([1200]);                                    // 首次載入後補一次（含錨點直接落地）
 
     // 中性結構卡白名單（選擇器不存在的頁面自動略過）。
     // 白名單制＝新頁型的卡片預設「不動」，要納入需明確加 selector＋過媽祖，避免誤 animate 到敏感盒。
@@ -56,5 +104,17 @@
       ".diag-card",            // 首頁：服務導引卡
       ".proc-step"             // 首頁：流程步驟
     ].forEach(function (sel) { revealGroup(sel); });
+
+    // 使用者中途切換成 prefers-reduced-motion 時，把本 context 掛的東西收乾淨
+    return function () {
+      timers.forEach(clearTimeout); clearTimeout(seTimer);
+      window.removeEventListener("pageshow", resync);
+      window.removeEventListener("hashchange", resync);
+      window.removeEventListener("scrollend", failsafe);
+      document.querySelectorAll("[data-cx-reveal]").forEach(function (el) {
+        settle(el);
+        el.removeAttribute("data-cx-reveal");
+      });
+    };
   });
 })();

@@ -48,6 +48,8 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .irow input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
 
 .irow input:focus{border-color:#16A34A}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.irow input:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .unit{font-size:13px;color:#6e6e73;white-space:nowrap}
 
@@ -291,11 +293,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="sec">購入成本</div>
   <div class="row2">
     <div class="field">
-      <label>購入總價 <span>含稅費</span></label>
+      <label for="buyPrice">購入總價 <span>含稅費</span></label>
       <div class="irow"><input type="number" id="buyPrice" value="1500" min="1" step="1" oninput="calc()"><span class="unit">萬元</span></div>
     </div>
     <div class="field">
-      <label>裝修費用 <span>選填</span></label>
+      <label for="reno">裝修費用 <span>選填</span></label>
       <div class="irow"><input type="number" id="reno" value="0" min="0" step="1" oninput="calc()"><span class="unit">萬元</span></div>
     </div>
   </div>
@@ -303,11 +305,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="sec">租金收入</div>
   <div class="row2">
     <div class="field">
-      <label>每月租金</label>
+      <label for="monthlyRent">每月租金</label>
       <div class="irow"><input type="number" id="monthlyRent" value="20000" min="0" step="500" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>空置率 <span>每年平均空租月數</span></label>
+      <label for="vacancyMonths">空置率 <span>每年平均空租月數</span></label>
       <div class="irow"><input type="number" id="vacancyMonths" value="1" min="0" max="12" step="0.5" oninput="calc()"><span class="unit">個月/年</span></div>
     </div>
   </div>
@@ -315,27 +317,27 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="sec">每年持有成本</div>
   <div class="row2">
     <div class="field">
-      <label>每月管理費</label>
+      <label for="mgmt">每月管理費</label>
       <div class="irow"><input type="number" id="mgmt" value="2000" min="0" step="100" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>房屋稅（年繳）</label>
+      <label for="houseTax">房屋稅（年繳）</label>
       <div class="irow"><input type="number" id="houseTax" value="6000" min="0" step="100" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>地價稅（年繳）</label>
+      <label for="landTax">地價稅（年繳）</label>
       <div class="irow"><input type="number" id="landTax" value="3000" min="0" step="100" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>火險＋地震險（年繳）</label>
+      <label for="insurance">火險＋地震險（年繳）</label>
       <div class="irow"><input type="number" id="insurance" value="3000" min="0" step="100" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>修繕維護（年估）</label>
+      <label for="repair">修繕維護（年估）</label>
       <div class="irow"><input type="number" id="repair" value="5000" min="0" step="500" oninput="calc()"><span class="unit">元</span></div>
     </div>
     <div class="field">
-      <label>包租代管服務費 <span>月租金百分比</span></label>
+      <label for="mgmtPct">包租代管服務費 <span>月租金百分比</span></label>
       <div class="irow"><input type="number" id="mgmtPct" value="0" min="0" max="20" step="0.5" oninput="calc()"><span class="unit">%</span></div>
     </div>
   </div>

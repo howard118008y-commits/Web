@@ -47,10 +47,14 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .input-row{display:flex;align-items:center;gap:8px}
 
 .input-row input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.input-row input[type=number]:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .input-row input[type=number]:focus{border-color:#16A34A}
 
 .input-row select{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s;cursor:pointer}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.input-row select:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .input-row select:focus{border-color:#16A34A}
 
@@ -173,6 +177,10 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 
 .btn-purple{background:#C61B1C;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+#fracDen,#fracNum{outline:none}
+#fracDen:focus-visible,#fracNum:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 </style>
   <script src="include.js" defer></script>
 
@@ -354,7 +362,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div style="font-size:12px;font-weight:700;color:#C61B1C;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
   <p style="font-size:15.5px;line-height:1.8;color:#1d1d1f;margin:0 0 8px"><strong>賣房時的土地增值稅，是依「土地公告現值的漲幅」課徵，不是看成交價。</strong>稅基＝移轉時土地公告現值 −（前次移轉現值 × 物價指數調整）。一般用地按漲幅採 20%／30%／40% 三級累進；符合自用住宅用地條件可適用 10% 優惠稅率（一生一次，另有「一生一屋」可再適用）。本工具幫你快速估算。</p>
   <div style="font-size:11px;color:#86868b;line-height:1.65">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
-<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:9px 18px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#06c755;padding:9px 18px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
+<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:9px 18px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:9px 18px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
 </div>
 
 
@@ -428,10 +436,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <label>移轉或設典範圍 <span id="fracDisplay">1／1 = 100%</span></label>
     <div class="input-row" style="gap:8px">
       <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分子</span>
-      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;text-align:center;background:#fff" oninput="updateFrac()">
       <span style="font-size:18px;color:#6e6e73;flex-shrink:0">／</span>
       <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分母</span>
-      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;outline:none;text-align:center;background:#fff" oninput="updateFrac()">
+      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;text-align:center;background:#fff" oninput="updateFrac()">
     </div>
   </div>
 

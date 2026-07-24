@@ -46,6 +46,8 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .irow{display:flex;align-items:center;gap:8px}
 
 .irow input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}
+/* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
+.irow input[type=number]:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
 .irow input:focus{border-color:#1a1a1a}
 
@@ -517,7 +519,7 @@ syncDTI();
   </div>
 </section>
 <div data-include="line-qr"></div>
-<div style="max-width:720px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:10px 20px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#06c755;padding:10px 20px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
+<div style="max-width:720px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:10px 20px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:10px 20px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
 <section style="max-width:720px;margin:28px auto 0;padding:0 16px">
   <h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">常見問題</h2>
   <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1d1d1f;margin:0 0 8px">DBR 和 DSR 是什麼？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">DBR（無擔保負債比）是信用卡、信貸等無擔保債務月付 ÷ 月收入；DSR（總費用支出比）含房貸等所有債務月付 ÷ 月收入。銀行用來評估還款能力。</p></div>
