@@ -385,6 +385,26 @@ body.at-top nav .cx-burger span{background:#fff}
   .hcalc-hd{font-size:12px;margin-bottom:14px}
   .hcalc-out-num{font-size:17px}
 }
+/* 預約日曆（取代原增貸空間拉式估算機） */
+.hcal-topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.hcal-month{font-family:"Noto Serif TC","Songti TC",serif;font-size:14px;font-weight:600;color:#fff;letter-spacing:.04em}
+.hcal-nav button{background:transparent;border:1px solid rgba(255,255,255,.28);color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.hcal-nav button:hover{background:rgba(255,255,255,.14)}
+.hcal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:5px}
+.hcal-week span{font-size:9.5px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.04em}
+.hcal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.hcal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:11.5px;color:rgba(255,255,255,.82);border-radius:3px;text-decoration:none}
+.hcal-day.empty{visibility:hidden}
+.hcal-day.past{color:rgba(255,255,255,.2)}
+.hcal-day.today{box-shadow:inset 0 0 0 1px #C61B1C}
+.hcal-day.avail{background:rgba(255,255,255,.07);cursor:pointer;transition:background .2s}
+.hcal-day.avail:hover{background:rgba(198,27,28,.4)}
+.hcal-day.blocked{color:rgba(255,255,255,.3);text-decoration:line-through;background:rgba(198,27,28,.12)}
+.hcal-legend{display:flex;gap:12px;margin-top:10px;font-size:9.5px;color:rgba(255,255,255,.48)}
+.hcal-legend span{display:inline-flex;align-items:center;gap:5px}
+.hcal-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.hcal-dot.a{background:rgba(255,255,255,.5)}
+.hcal-dot.b{background:#C61B1C}
 
 /* index-only lead form（精品版式：襯線＋髮絲線＋矩形） */
 .ilf-wrap{background:#f6f5f3;max-width:none;margin:0;padding:80px 24px}
@@ -716,22 +736,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
           <h1 class="hero-h1">3 家銀行都說不？<br>鋮馨用售後回租，讓名下的房重新動起來</h1>
           <p class="hero-sub">售後回租＝房子過戶給投資方、簽租約續住、保有日後依約買回的權利；另有貸款整合・民間轉銀行，曾遭拒貸仍可重新評估。走貸款路線，兩個數字、三十秒，先估可增貸空間與月付參考區間。</p>
           <div class="hero-calc-mob">
-            <div class="hcalc">
-              <div class="hcalc-hd">增貸空間・即時估算</div>
-              <div class="hcalc-row">
-                <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hm-hv-disp">800 萬</span></div>
-                <input type="range" class="hcalc-sl" id="hm-hv" min="100" max="5000" step="50" value="800">
+            <div class="hcalc" id="hcal-m">
+              <div class="hcalc-hd">面談時段・線上預約</div>
+              <div class="hcal-topline">
+                <div class="hcal-nav"><button type="button" class="hcal-prev" aria-label="上個月">‹</button></div>
+                <span class="hcal-month">—</span>
+                <div class="hcal-nav"><button type="button" class="hcal-next" aria-label="下個月">›</button></div>
               </div>
-              <div class="hcalc-row">
-                <div class="hcalc-lbl"><span>現有房貸餘額</span><span class="hcalc-v" id="hm-rl-disp">200 萬</span></div>
-                <input type="range" class="hcalc-sl" id="hm-rl" min="0" max="4000" step="50" value="200">
-              </div>
-              <div class="hcalc-out">
-                <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hm-loan">—</span></div>
-                <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hm-mo">—</span></div>
-              </div>
-              <div class="hcalc-disc">估算・僅供參考，以審核為準。基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
-              <a class="hcalc-cta" href="apply.html">算完想確認實際條件？填表申請，專員主動回電 →</a>
+              <div class="hcal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+              <div class="hcal-grid"></div>
+              <div class="hcal-legend"><span><i class="hcal-dot a"></i>可預約</span><span><i class="hcal-dot b"></i>已約滿</span></div>
+              <div class="hcalc-disc">點選可預約日期會開啟預約表單；標示日期代表當天已被客戶預約或同仁登記佔用。</div>
+              <a class="hcalc-cta" href="consultation-topics.html">不確定要約什麼？先看看您適合哪個項目 →</a>
             </div>
           </div>
           <div class="btn-row">
@@ -744,22 +760,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
           <p style="font-size:12.5px;margin-top:10px;letter-spacing:.05em;"><a href="world/" style="color:rgba(255,255,255,.78);text-decoration:underline;text-underline-offset:4px;">🏠 走進鋮馨的世界 · 沉浸式體驗 →</a></p>
         </div>
         <div class="hero-right">
-          <div class="hcalc">
-            <div class="hcalc-hd">增貸空間・即時估算</div>
-            <div class="hcalc-row">
-              <div class="hcalc-lbl"><span>房屋現值</span><span class="hcalc-v" id="hd-hv-disp">800 萬</span></div>
-              <input type="range" class="hcalc-sl" id="hd-hv" min="100" max="5000" step="50" value="800">
+          <div class="hcalc" id="hcal-d">
+            <div class="hcalc-hd">面談時段・線上預約</div>
+            <div class="hcal-topline">
+              <div class="hcal-nav"><button type="button" class="hcal-prev" aria-label="上個月">‹</button></div>
+              <span class="hcal-month">—</span>
+              <div class="hcal-nav"><button type="button" class="hcal-next" aria-label="下個月">›</button></div>
             </div>
-            <div class="hcalc-row">
-              <div class="hcalc-lbl"><span>現有房貸餘額</span><span class="hcalc-v" id="hd-rl-disp">200 萬</span></div>
-              <input type="range" class="hcalc-sl" id="hd-rl" min="0" max="4000" step="50" value="200">
-            </div>
-            <div class="hcalc-out">
-              <div class="hcalc-out-row"><span class="hcalc-out-lbl">可增貸空間估算</span><span class="hcalc-out-num" id="hd-loan">—</span></div>
-              <div class="hcalc-out-row"><span class="hcalc-out-lbl">月付參考區間</span><span class="hcalc-out-num" id="hd-mo">—</span></div>
-            </div>
-            <div class="hcalc-disc">估算・僅供參考，以審核為準。基於 LTV 60–75%，月付以一般房貸利率、20 年本息估算。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
-              <a class="hcalc-cta" href="apply.html">算完想確認實際條件？填表申請，專員主動回電 →</a>
+            <div class="hcal-week"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+            <div class="hcal-grid"></div>
+            <div class="hcal-legend"><span><i class="hcal-dot a"></i>可預約</span><span><i class="hcal-dot b"></i>已約滿</span></div>
+            <div class="hcalc-disc">點選可預約日期會開啟預約表單；標示日期代表當天已被客戶預約或同仁登記佔用。</div>
+            <a class="hcalc-cta" href="consultation-topics.html">不確定要約什麼？先看看您適合哪個項目 →</a>
           </div>
         </div>
       </div>
@@ -1305,43 +1317,81 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </a>
 <script>
 (function(){
-  function bindCalc(hvId,rlId,loId,moId,hvdId,rldId){
-    var hvEl=document.getElementById(hvId),rlEl=document.getElementById(rlId);
-    if(!hvEl||!rlEl)return;
-    function run(){
-      var hv=+hvEl.value||0,rl=+rlEl.value||0;
-      var minL=Math.max(0,Math.round(hv*.60-rl));
-      var maxL=Math.max(0,Math.round(hv*.75-rl));
-      document.getElementById(hvdId).textContent=hv.toLocaleString()+'萬';
-      document.getElementById(rldId).textContent=rl.toLocaleString()+'萬';
-      var loEl=document.getElementById(loId),moEl=document.getElementById(moId);
-      if(!loEl||!moEl)return;
-      if(maxL<=0){loEl.textContent='需個案評估';moEl.textContent='—';return;}
-      function f(n){return n>=10000?(n/10000).toFixed(1)+'萬':n.toLocaleString();}
-      var minMo=Math.round(minL*58/1000)*1000;
-      var maxMo=Math.round(maxL*63/1000)*1000;
-      if(minL<=0){
-        loEl.textContent='最多約'+maxL.toLocaleString()+'萬';
-        moEl.textContent='約'+f(maxMo)+'/月';
-      }else{
-        loEl.textContent=minL.toLocaleString()+'–'+maxL.toLocaleString()+'萬';
-        moEl.textContent='約'+f(minMo)+'–'+f(maxMo)+'/月';
-      }
+  var API = 'https://script.google.com/macros/s/AKfycbwt2bmdXtOCfX6DN1ITBbUilqa67r24j2ccpfZ7OzUqUs2KQ1X2beJsEtLHI26e5ygS/exec';
+  var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdLqteVJcPjx7qE1rwsbemAG7QVFCVbMniTqDl27TlI8FOb_A/viewform';
+  var blockedSet = {};
+
+  function pad(n){return n<10?'0'+n:''+n;}
+  function ymd(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d);}
+
+  function renderCal(root, cur){
+    var monthEl = root.querySelector('.hcal-month');
+    var gridEl = root.querySelector('.hcal-grid');
+    monthEl.textContent = cur.y+'年'+(cur.m+1)+'月';
+    gridEl.innerHTML = '';
+    var startDow = new Date(cur.y, cur.m, 1).getDay();
+    var daysInMonth = new Date(cur.y, cur.m+1, 0).getDate();
+    var now = new Date();
+    var todayStr = ymd(now.getFullYear(), now.getMonth(), now.getDate());
+    for (var i=0;i<startDow;i++){
+      var empty=document.createElement('span'); empty.className='hcal-day empty'; gridEl.appendChild(empty);
     }
-    hvEl.addEventListener('input',run);rlEl.addEventListener('input',run);run();
+    for (var d=1; d<=daysInMonth; d++){
+      var key = ymd(cur.y, cur.m, d);
+      var isPast = key < todayStr;
+      var isToday = key === todayStr;
+      var isBlocked = !!blockedSet[key];
+      var el;
+      if (isPast || isBlocked){
+        el = document.createElement('span');
+        el.className = 'hcal-day' + (isPast?' past':'') + (isBlocked?' blocked':'');
+      } else {
+        el = document.createElement('a');
+        el.className = 'hcal-day avail' + (isToday?' today':'');
+        el.href = FORM_URL; el.target = '_blank'; el.rel = 'noopener';
+      }
+      el.textContent = d;
+      gridEl.appendChild(el);
+    }
   }
-  // 滑桿已改自訂軌（熱區 32px），已填色比例交給 --p 維持原本「左紅右白」外觀
-  function bindFill(){
-    document.querySelectorAll('.hcalc-sl').forEach(function(s){
-      function p(){var mn=+s.min||0,mx=+s.max||100;
-        s.style.setProperty('--p',(mx>mn?(+s.value-mn)/(mx-mn)*100:0)+'%');}
-      s.addEventListener('input',p);p();
+
+  function initCalendar(rootId){
+    var root = document.getElementById(rootId);
+    if (!root) return;
+    var now = new Date();
+    var cur = { y: now.getFullYear(), m: now.getMonth() };
+    renderCal(root, cur);
+    root.querySelector('.hcal-prev').addEventListener('click', function(){
+      cur.m--; if (cur.m<0){cur.m=11;cur.y--;}
+      renderCal(root, cur);
+    });
+    root.querySelector('.hcal-next').addEventListener('click', function(){
+      cur.m++; if (cur.m>11){cur.m=0;cur.y++;}
+      renderCal(root, cur);
     });
   }
-  document.addEventListener('DOMContentLoaded',function(){
-    bindCalc('hd-hv','hd-rl','hd-loan','hd-mo','hd-hv-disp','hd-rl-disp');
-    bindCalc('hm-hv','hm-rl','hm-loan','hm-mo','hm-hv-disp','hm-rl-disp');
-    bindFill();
+
+  function loadBlockedThenInit(){
+    initCalendar('hcal-d');
+    initCalendar('hcal-m');
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    /* Apps Script /exec 沒有 CORS 標頭，用 JSONP（<script> 標籤）讀取，不能用 fetch() */
+    var cbName = '__cxBookingCb' + Date.now();
+    var finished = false;
+    window[cbName] = function(data){
+      finished = true;
+      (data && data.blocked || []).forEach(function(k){ blockedSet[k] = true; });
+      loadBlockedThenInit();
+      delete window[cbName];
+    };
+    var s = document.createElement('script');
+    s.src = API + '?action=list&callback=' + cbName;
+    s.onerror = function(){ if (!finished) loadBlockedThenInit(); };
+    document.body.appendChild(s);
+    /* 保險：3 秒內沒回來就先顯示空白可預約日曆，不讓使用者空等 */
+    setTimeout(function(){ if (!finished) { finished = true; loadBlockedThenInit(); } }, 3000);
   });
 })();
 </script>
