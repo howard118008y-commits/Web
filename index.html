@@ -368,7 +368,9 @@ body.at-top nav .cx-burger span{background:#fff}
 .hero-right{width:340px;flex-shrink:0}
 .hero-flex .btn-row{justify-content:flex-start}
 /* 增貸空間・即時估算（精品玻璃儀表） */
-.hcalc{background:rgba(10,10,14,.52);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.16);border-radius:3px;padding:26px 24px 20px}
+/* 2a Glassmorphism（design_handoff_cx468_cards）— hover 邊框/底色加深 */
+.hcalc{background:rgba(10,10,14,.52);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.16);border-radius:3px;padding:26px 24px 20px;transition:background .3s,border-color .3s}
+.hcalc:hover{background:rgba(10,10,14,.6);border-color:rgba(255,255,255,.32)}
 .hcalc-hd{font-family:"Noto Serif TC","Songti TC",serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.92);letter-spacing:.3em;margin-bottom:18px}
 .hcalc-hd::after{content:"";display:block;width:28px;height:1px;background:#C61B1C;margin-top:10px}
 .hcalc-row{margin-bottom:14px}
@@ -877,16 +879,22 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     .duo-eyebrow{font-size:11px;font-weight:500;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px}
     .duo-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:46px;font-weight:600;color:#141414;letter-spacing:.01em;line-height:1.25}
     .duo{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-    .duo-panel{position:relative;display:block;height:78vh;min-height:540px;overflow:hidden;background:#0a0a0c}
-    .duo-panel img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.04) brightness(.92);transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
-    .duo-panel:hover img{transform:scale(1.045)}
+    /* 2d 3D Tilt（design_handoff_cx468_cards）— pointermove 傾斜 + 光澤層 */
+    .duo-panel{position:relative;display:block;height:78vh;min-height:540px;overflow:hidden;background:#0a0a0c;perspective:1000px}
+    .duo-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+    .duo-panel.tilting .duo-in{transition:transform .12s ease-out}
+    .duo-in img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.04) brightness(.92);transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
+    .duo-panel:hover .duo-in img{transform:scale(1.045)}
     .duo-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.72) 0%,rgba(8,8,12,.26) 36%,rgba(8,8,12,.04) 62%)}
+    .duo-glare{position:absolute;inset:0;background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.15),transparent 46%);pointer-events:none;opacity:0;transition:opacity .3s}
+    .duo-panel:hover .duo-glare{opacity:1}
     .duo-body{position:absolute;left:0;right:0;bottom:0;padding:0 48px 52px}
-    .duo-tag{font-size:10px;font-weight:500;color:rgba(255,255,255,.66);letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px}
-    .duo-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.3;margin-bottom:12px}
-    .duo-d{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.75;letter-spacing:.03em;max-width:430px;margin-bottom:24px}
-    .duo-cta{display:inline-block;font-size:12px;font-weight:600;color:#fff;letter-spacing:.18em;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.55);transition:border-color .3s}
+    .duo-tag{font-size:10px;font-weight:500;color:rgba(255,255,255,.66);letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px;transform:translateZ(56px)}
+    .duo-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.3;margin-bottom:12px;transform:translateZ(44px)}
+    .duo-d{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.75;letter-spacing:.03em;max-width:430px;margin-bottom:24px;transform:translateZ(24px)}
+    .duo-cta{display:inline-block;font-size:12px;font-weight:600;color:#fff;letter-spacing:.18em;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.55);transition:border-color .3s;transform:translateZ(34px)}
     .duo-panel:hover .duo-cta{border-color:#fff}
+    @media(prefers-reduced-motion:reduce){.duo-in{transition:none!important}}
     /* 次要路徑：髮絲線安靜清單 */
     .quiet{max-width:1280px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid #e3e3e6;margin-top:2px}
     .quiet-it{display:block;padding:40px 36px 44px;border-right:1px solid #e3e3e6;transition:background .3s}
@@ -909,6 +917,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       .quiet-it{border-right:none;border-bottom:1px solid #e3e3e6;padding:28px 4px 30px}
       .quiet-it:last-child{border-bottom:none}
     }
+    @media(hover:none){.duo-in{transform:none!important}}
   </style>
   <div class="duo-head">
     <div class="duo-eyebrow">核心服務</div>
@@ -916,24 +925,30 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
   <div class="duo">
     <a class="duo-panel" href="sale-leaseback.html">
+     <div class="duo-in">
       <picture><source srcset="img/svc-leaseback.avif" type="image/avif"><source srcset="img/svc-leaseback.webp" type="image/webp"><img src="img/svc-leaseback.jpg" alt="台北老城區公寓屋頂與遠方新建大樓" loading="lazy"></picture>
       <div class="duo-shade"></div>
+      <div class="duo-glare"></div>
       <div class="duo-body">
         <div class="duo-tag">Sale-Leaseback</div>
         <div class="duo-t">賣掉房子，<br>還是住在原本的家。</div>
         <p class="duo-d">售後回租：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利。可取得約市值 7–9 成的資金，信用不完美也能先評估。</p>
         <span class="duo-cta">了解售後回租</span>
       </div>
+     </div>
     </a>
     <a class="duo-panel" href="https://lin.ee/PHIfSoY">
+     <div class="duo-in">
       <picture><source srcset="img/svc-equity.avif" type="image/avif"><source srcset="img/svc-equity.webp" type="image/webp"><img src="img/svc-equity.jpg" alt="台北市中心新建大樓群" loading="lazy"></picture>
       <div class="duo-shade"></div>
+      <div class="duo-glare"></div>
       <div class="duo-body">
         <div class="duo-tag">Second Mortgage</div>
         <div class="duo-t">房貸繳了這些年，<br>淨值還能再做一次規劃。</div>
         <p class="duo-d">二胎增貸：以房屋淨值評估第二順位貸款空間，資金用途自由。可貸額度與利率依個案不動產條件與金融機構審核而定。</p>
         <span class="duo-cta">LINE 線上諮詢</span>
       </div>
+     </div>
     </a>
   </div>
   <div class="quiet">
@@ -957,6 +972,27 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
   </div>
 </section>
+<script>
+/* 2d 3D Tilt：pointermove 傾斜 + 光澤層跟隨游標，觸控裝置不綁定 */
+(function(){
+  if(window.matchMedia('(hover:none)').matches)return;
+  document.querySelectorAll('.duo-panel').forEach(function(panel){
+    var inner=panel.querySelector('.duo-in');
+    panel.addEventListener('pointermove',function(e){
+      var r=panel.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      panel.classList.add('tilting');
+      inner.style.transform='rotateX('+((.5-y)*11)+'deg) rotateY('+((x-.5)*13)+'deg)';
+      panel.style.setProperty('--mx',(x*100)+'%');
+      panel.style.setProperty('--my',(y*100)+'%');
+    });
+    panel.addEventListener('pointerout',function(){
+      panel.classList.remove('tilting');
+      inner.style.transform='';
+    });
+  });
+})();
+</script>
 
 <!-- 數字成果（去識別化情境示意）：深色攝影數據帶 -->
 <section class="s-pad proof-dark">
@@ -1026,8 +1062,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     .band-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.55) 0%,rgba(8,8,12,.25) 50%,rgba(8,8,12,.30) 100%)}
     .band-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
     .band-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.02em;line-height:1.45;margin-bottom:30px;text-wrap:balance}
-    .band-cta{display:inline-block;background:#fff;color:#141414;font-size:13px;font-weight:600;letter-spacing:.16em;padding:14px 36px;border-radius:0}
-    .band-cta:hover{background:rgba(255,255,255,.88)}
+    /* 2g Shine Sweep（design_handoff_cx468_cards）— LINE CTA 流光掃過 */
+    .band-cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;line-height:1;background:#048456;color:#fff;font-size:13px;font-weight:600;letter-spacing:.16em;padding:15px 32px;border-radius:24px;transition:background .25s}
+    .band-cta:hover{background:#03723f}
+    .band-cta::after{content:"";position:absolute;top:-30%;left:0;width:40%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.62),transparent);transform:translateX(-140%) skewX(-18deg);animation:band-sweep 2.8s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none}
+    @keyframes band-sweep{0%{transform:translateX(-120%) skewX(-18deg)}55%,100%{transform:translateX(320%) skewX(-18deg)}}
+    @media(prefers-reduced-motion:reduce){.band-cta::after{animation:none}}
     @media(max-width:768px){
       .band{height:48vh;min-height:360px}
       .band-t{font-size:24px;margin-bottom:24px}
@@ -1118,6 +1158,14 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 
 <section id="geo-content" style="background:#1d1d1f;padding:80px 24px;">
+  <style>
+    /* 2l Spotlight（design_handoff_cx468_cards）— pointermove 聚光燈，維持單欄以利 AEO 可讀性 */
+    #geo-content .spot{position:relative;overflow:hidden;padding:24px;margin:0 0 56px;border-radius:4px;transition:background .3s}
+    #geo-content .spot::before{content:"";position:absolute;inset:0;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(198,27,28,.32),transparent 62%);opacity:0;transition:opacity .4s;pointer-events:none}
+    #geo-content .spot:hover::before{opacity:1}
+    #geo-content .spot>*{position:relative;z-index:1}
+    @media(hover:none){#geo-content .spot::before{display:none}}
+  </style>
   <div style="max-width:720px;margin:0 auto;">
 
     <p style="font-size:13px;font-weight:600;color:#6e6e73;letter-spacing:.06em;text-transform:uppercase;margin-bottom:48px;">關於鋮馨租賃</p>
@@ -1129,7 +1177,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
 
     <!-- 租屋 -->
-    <div style="margin-bottom:56px;">
+    <div class="spot">
       <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">租屋・包租代管</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
         鋮馨租賃是新北市專業<strong style="color:#f5f5f7;">租屋管理</strong>與<strong style="color:#f5f5f7;">包租代管</strong>公司，協助屋主將閒置房產轉為穩定現金流。我們負責租客開發、合約簽訂、每月收租、維修通報，讓房東完全無後顧之憂。服務範圍涵蓋新北市中和、板橋、永和、新莊及全台各地。
@@ -1139,7 +1187,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div style="height:1px;background:#3a3a3c;margin-bottom:56px;"></div>
 
     <!-- 不動產 -->
-    <div style="margin-bottom:56px;">
+    <div class="spot">
       <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">不動產・售後回租</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
         鋮馨租賃提供<strong style="color:#f5f5f7;">不動產售後回租</strong>服務：房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，協助屋主快速取得資金。從估價、簽約、清償到買回，每個步驟均有專人確認，是靈活運用<strong style="color:#f5f5f7;">不動產</strong>資產的方式之一，是否適合依個案評估。
@@ -1149,7 +1197,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div style="height:1px;background:#3a3a3c;margin-bottom:56px;"></div>
 
     <!-- 貸款 -->
-    <div style="margin-bottom:56px;">
+    <div class="spot">
       <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:28px;font-weight:600;color:#f5f5f7;margin-bottom:14px;letter-spacing:.01em;">貸款・整合規劃</h2>
       <p style="font-size:16px;color:#a1a1a6;line-height:1.8;">
         多筆<strong style="color:#f5f5f7;">貸款</strong>壓力大？鋮馨租賃協助整合信貸、信用卡、民間借款為一筆低利率房貸，月付有機會下降（實際依個案核貸條件而定）。即使信用條件不完美，只要名下有不動產，即可免費評估<strong style="color:#f5f5f7;">貸款整合</strong>方案，並規劃逐步轉入銀行體系的完整路徑。
@@ -1163,6 +1211,19 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   </div>
 </section>
+<script>
+/* 2l Spotlight：pointermove 驅動 --mx/--my，觸控裝置不綁定 */
+(function(){
+  if(window.matchMedia('(hover:none)').matches)return;
+  document.querySelectorAll('#geo-content .spot').forEach(function(el){
+    el.addEventListener('pointermove',function(e){
+      var r=el.getBoundingClientRect();
+      el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    });
+  });
+})();
+</script>
 
 
 
