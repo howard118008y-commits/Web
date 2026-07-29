@@ -298,15 +298,7 @@ body.at-top nav .cx-burger span{background:#fff}
 .card-lg,.card-sm{transition:transform .25s ease,box-shadow .25s ease}
 .card-lg:hover,.card-sm:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.18)}
 
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1280px;margin:0 auto;padding:0 64px;border-top:1px solid #e3e3e6}
-.proof-card{background:transparent;border:none;border-right:1px solid #e3e3e6;border-radius:0;padding:42px 36px 46px;box-shadow:none}
-.proof-card:last-child{border-right:none}
-.proof-hook{font-size:13.5px;font-weight:500;color:#6e6e73;line-height:1.7;letter-spacing:.02em;margin-bottom:22px}
-.proof-stat{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.proof-from{font-size:13px;color:#a1a1a6;text-decoration:line-through;letter-spacing:.02em}
-.proof-arrow{color:#C61B1C;font-weight:600}
-.proof-to{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414;letter-spacing:.01em}
-.proof-note{font-size:10.5px;color:#a1a1a6;line-height:1.6;letter-spacing:.02em}
+/* 2e Flip 的 .proof-* 樣式定義在 .proof-dark 區塊內（scoped <style>），此處不重複 */
 
 /* 2f Step Rail（design_handoff_cx468_cards）— 節點軌道 */
 .proc{max-width:1280px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #e3e3e6}
@@ -326,9 +318,9 @@ body.at-top nav .cx-burger span{background:#fff}
   .numbar-it:nth-child(2){border-right:none}
   .numbar-it:nth-child(3),.numbar-it:nth-child(4){border-bottom:none}
   .numbar-n{font-size:24px}
-  .diag-grid,.proof-grid,.proc{grid-template-columns:1fr;gap:0;padding:0 22px}
-  .diag-card,.proof-card,.proc-step{border-right:none;border-bottom:1px solid #e3e3e6;padding:28px 4px 32px}
-  .diag-card:last-child,.proof-card:last-child,.proc-step:last-child{border-bottom:none}
+  .diag-grid,.proc{grid-template-columns:1fr;gap:0;padding:0 22px}
+  .diag-card,.proc-step{border-right:none;border-bottom:1px solid #e3e3e6;padding:28px 4px 32px}
+  .diag-card:last-child,.proc-step:last-child{border-bottom:none}
 }
 
 /* === 核心服務：Wells Fargo 風（乾淨白底、無照片、小線條圖示） === */
@@ -1003,16 +995,27 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     .proof-dark>.s-head,.proof-dark>.proof-grid,.proof-dark>p{position:relative;z-index:2}
     .proof-dark .s-eyebrow{color:rgba(255,255,255,.6)}
     .proof-dark .sec-title{color:#fff}
-    .proof-dark .proof-grid{border-top:1px solid rgba(255,255,255,.22)}
-    .proof-dark .proof-card{border-right-color:rgba(255,255,255,.22)}
-    .proof-dark .proof-card:last-child{border-right:none}
-    .proof-dark .proof-hook{color:rgba(255,255,255,.72)}
-    .proof-dark .proof-from{color:rgba(255,255,255,.5)}
-    .proof-dark .proof-arrow{color:#e05a5b}
-    .proof-dark .proof-to{color:#fff}
-    .proof-dark .proof-note{color:rgba(255,255,255,.45)}
+    /* 2e Flip（design_handoff_cx468_cards）— hover 翻牌看「處理後」，正面白底/背面 #141414 */
+    .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1280px;margin:0 auto;padding:0 64px}
+    .proof-card{position:relative;height:228px;perspective:1300px;cursor:pointer}
+    .proof-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.22,.61,.36,1)}
+    .proof-card:hover .proof-in,.proof-card.flip-open .proof-in{transform:rotateY(180deg)}
+    .proof-face{position:absolute;inset:0;box-sizing:border-box;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid #e3e3e6;background:#fff;border-radius:4px;padding:28px 26px;display:flex;flex-direction:column;justify-content:space-between}
+    .proof-face.back{transform:rotateY(180deg);background:#141414;border-color:#141414}
+    .proof-hook{font-size:13.5px;font-weight:500;color:#6e6e73;line-height:1.75;letter-spacing:.02em;margin:0}
+    .proof-eyebrow{font-size:10px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.2em;text-transform:uppercase}
+    .proof-stat{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .proof-from{font-size:13px;color:#a1a1a6;text-decoration:line-through;letter-spacing:.02em}
+    .proof-face.back .proof-from{color:rgba(255,255,255,.45)}
+    .proof-arrow{color:#C61B1C;font-weight:600}
+    .proof-face.back .proof-arrow{color:#e05a5b}
+    .proof-to{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414;letter-spacing:.01em}
+    .proof-face.back .proof-to{color:#fff}
+    .proof-hint{font-size:10px;color:#a1a1a6;letter-spacing:.16em;margin-top:12px}
+    .proof-note{font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;letter-spacing:.02em;margin:10px 0 0}
+    @media(prefers-reduced-motion:reduce){.proof-in{transition:none}}
     @media(max-width:768px){
-      .proof-dark .proof-card{border-bottom-color:rgba(255,255,255,.22)}
+      .proof-grid{grid-template-columns:1fr;padding:0 22px}
     }
   </style>
   <picture><source srcset="img/proof-bg.avif" type="image/avif"><source srcset="img/proof-bg.webp" type="image/webp"><img class="proof-bgimg" src="img/proof-bg.jpg" alt="" loading="lazy" aria-hidden="true"></picture>
@@ -1022,23 +1025,71 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
   <div class="proof-grid">
     <div class="proof-card">
-      <div class="proof-hook">3 家銀行都說不，名下有房卻動不了。</div>
-      <div class="proof-stat"><span class="proof-from">資產卡住</span><span class="proof-arrow">→</span><span class="proof-to">最快約 3 週周轉</span></div>
-      <div class="proof-note">情境示意。實際時程依不動產條件與個案而定。</div>
+     <div class="proof-in">
+      <div class="proof-face">
+        <div class="proof-hook">3 家銀行都說不，<br>名下有房卻動不了。</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">資產卡住</span></div>
+          <div class="proof-hint">滑入看處理後 ↻</div>
+        </div>
+      </div>
+      <div class="proof-face back">
+        <div class="proof-eyebrow">處理後</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">資產卡住</span><span class="proof-arrow">→</span><span class="proof-to">最快約 3 週周轉</span></div>
+          <p class="proof-note">情境示意。實際時程依不動產條件與個案而定。</p>
+        </div>
+      </div>
+     </div>
     </div>
     <div class="proof-card">
-      <div class="proof-hook">信貸＋卡循＋民間，月付近 6 萬。</div>
-      <div class="proof-stat"><span class="proof-from">月付 6 萬</span><span class="proof-arrow">→</span><span class="proof-to">月付 2.8 萬</span></div>
-      <div class="proof-note">情境示意。整合結果依負債結構與核貸條件而定。</div>
+     <div class="proof-in">
+      <div class="proof-face">
+        <div class="proof-hook">信貸＋卡循＋民間，<br>月付近 6 萬。</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">月付 6 萬</span></div>
+          <div class="proof-hint">滑入看處理後 ↻</div>
+        </div>
+      </div>
+      <div class="proof-face back">
+        <div class="proof-eyebrow">處理後</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">月付 6 萬</span><span class="proof-arrow">→</span><span class="proof-to">月付 2.8 萬</span></div>
+          <p class="proof-note">情境示意。整合結果依負債結構與核貸條件而定。</p>
+        </div>
+      </div>
+     </div>
     </div>
     <div class="proof-card">
-      <div class="proof-hook">民間借了 10 年，繳的幾乎都是利息。</div>
-      <div class="proof-stat"><span class="proof-from">月息 1–2%</span><span class="proof-arrow">→</span><span class="proof-to">年息 2–3%</span></div>
-      <div class="proof-note">情境示意。轉貸成數與利率最終由金融機構決定。</div>
+     <div class="proof-in">
+      <div class="proof-face">
+        <div class="proof-hook">民間借了 10 年，<br>繳的幾乎都是利息。</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">月息 1–2%</span></div>
+          <div class="proof-hint">滑入看處理後 ↻</div>
+        </div>
+      </div>
+      <div class="proof-face back">
+        <div class="proof-eyebrow">處理後</div>
+        <div>
+          <div class="proof-stat"><span class="proof-from">月息 1–2%</span><span class="proof-arrow">→</span><span class="proof-to">年息 2–3%</span></div>
+          <p class="proof-note">情境示意。轉貸成數與利率最終由金融機構決定。</p>
+        </div>
+      </div>
+     </div>
     </div>
   </div>
   <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.5);max-width:680px;margin:26px auto 0;padding:0 20px;line-height:1.7;letter-spacing:.03em;">以上為去識別化情境示意，非個別承諾。實際結果依不動產條件、財務狀況與市場情況而定；本公司非金融機構，最終核貸由金融機構決定。</p>
 </section>
+<script>
+/* 2e Flip：觸控裝置無 hover，改點擊翻牌 */
+(function(){
+  if(!window.matchMedia('(hover:none)').matches)return;
+  document.querySelectorAll('.proof-card').forEach(function(card){
+    card.addEventListener('click',function(){card.classList.toggle('flip-open');});
+  });
+})();
+</script>
 
 <!-- 流程四步 -->
 <section class="s-pad" style="background:#fff;">
