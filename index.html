@@ -266,21 +266,30 @@ body.at-top nav .cx-burger span{background:#fff}
 .banner{display:block;cursor:pointer}
 
 /* === 編輯系統：襯線＋髮絲線（全頁統一） === */
-.numbar{background:#fff;border-bottom:1px solid #e3e3e6}
-.numbar-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.numbar-it{padding:34px 14px;text-align:center;border-right:1px solid #e3e3e6}
-.numbar-it:last-child{border-right:none}
-.numbar-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:30px;font-weight:600;color:#141414;letter-spacing:.02em}
-.numbar-l{font-size:11px;color:#86868b;margin-top:7px;line-height:1.4;letter-spacing:.14em}
+/* 2b Neumorphism（design_handoff_cx468_cards）— 務必在 #f4f0ea 底上，換底色浮雕失效 */
+.numbar{background:#f4f0ea}
+.numbar-in{max-width:1280px;margin:0 auto;padding:44px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.numbar-it{background:#f4f0ea;border-radius:18px;padding:28px 16px;text-align:center;box-shadow:9px 9px 20px #dcd5ca,-9px -9px 20px #fffdf8;transition:box-shadow .4s}
+.numbar-it:hover{box-shadow:inset 6px 6px 14px #dcd5ca,inset -6px -6px 14px #fffdf8}
+.numbar-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;color:#141414;letter-spacing:.02em;line-height:1}
+.numbar-l{font-size:11px;color:#8a7a64;margin-top:11px;line-height:1.4;letter-spacing:.14em}
 
+@media(max-width:640px){.numbar-in{grid-template-columns:repeat(2,1fr)}}
+
+/* 2c Hover Reveal（design_handoff_cx468_cards）— hover 展開解方，觸控裝置改預設可見 */
 .diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1280px;margin:0 auto;padding:0 64px;border-top:1px solid #e3e3e6}
-.diag-card{display:block;background:transparent;border-radius:0;padding:42px 36px 46px;text-decoration:none;border-right:1px solid #e3e3e6;transition:background .3s}
+.diag-card{display:block;background:#fff;border-radius:0;padding:30px 28px;text-decoration:none;border-right:1px solid #e3e3e6;transition:background .3s,box-shadow .4s,transform .4s}
 .diag-card:last-child{border-right:none}
-.diag-card:hover{background:#fafafa}
+.diag-card:hover{background:#fafafa;transform:translateY(-3px);box-shadow:0 18px 42px rgba(0,0,0,.08)}
 .diag-q{font-size:10px;font-weight:600;color:#C61B1C;letter-spacing:.24em;text-transform:uppercase;margin-bottom:16px}
 .diag-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:21px;font-weight:600;color:#141414;line-height:1.5;letter-spacing:.01em;margin-bottom:12px}
-.diag-s{font-size:13px;color:#6e6e73;line-height:1.75;letter-spacing:.02em;margin-bottom:18px}
-.diag-go{font-size:11.5px;font-weight:600;color:#141414;letter-spacing:.12em}
+.diag-s{font-size:13px;color:#6e6e73;line-height:1.75;letter-spacing:.02em}
+.diag-go{display:block;font-size:11.5px;font-weight:600;color:#141414;letter-spacing:.12em;margin-top:18px}
+.diag-hide{max-height:0;opacity:0;overflow:hidden;transition:max-height .55s cubic-bezier(.22,.61,.36,1),opacity .4s,margin-top .55s}
+.diag-card:hover .diag-hide,.diag-card:focus-visible .diag-hide{max-height:140px;opacity:1;margin-top:18px}
+.diag-sol{border-top:1px solid #e3e3e6;padding-top:16px;font-size:12px;color:#141414;line-height:1.8}
+.diag-sol b{color:#C61B1C;font-weight:600}
+@media(hover:none){.diag-hide{max-height:140px;opacity:1;margin-top:18px}}
 
 .nbadge{display:inline-flex;align-items:center;gap:9px;background:rgba(0,0,0,.5);border:.5px solid rgba(255,255,255,.18);border-radius:9px;padding:7px 13px;margin-bottom:1rem;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .nbadge b{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1}
@@ -299,9 +308,14 @@ body.at-top nav .cx-burger span{background:#fff}
 .proof-to{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414;letter-spacing:.01em}
 .proof-note{font-size:10.5px;color:#a1a1a6;line-height:1.6;letter-spacing:.02em}
 
+/* 2f Step Rail（design_handoff_cx468_cards）— 節點軌道 */
 .proc{max-width:1280px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #e3e3e6}
-.proc-step{background:transparent;border-radius:0;border-right:1px solid #e3e3e6;padding:42px 32px 46px}
+.proc-step{position:relative;background:transparent;border-radius:0;border-right:1px solid #e3e3e6;padding:42px 32px 46px}
 .proc-step:last-child{border-right:none}
+.proc-step::before{content:"";position:absolute;top:-9px;left:26px;width:18px;height:18px;border-radius:50%;border:1.5px solid #C61B1C;background:#fff;transition:transform .3s cubic-bezier(.22,.61,.36,1),background .3s;z-index:2}
+.proc-step::after{content:"";position:absolute;top:-3px;left:32px;width:6px;height:6px;border-radius:50%;background:#C61B1C;transition:background .3s;z-index:3}
+.proc-step:hover::before{background:#C61B1C;transform:scale(1.15)}
+.proc-step:hover::after{background:#fff}
 .proc-n{font-size:10px;font-weight:600;color:#C61B1C;letter-spacing:.24em;margin-bottom:16px}
 .proc-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#141414;margin-bottom:10px;letter-spacing:.01em}
 .proc-d{font-size:13px;color:#6e6e73;line-height:1.75;letter-spacing:.02em}
@@ -458,6 +472,29 @@ body.at-top nav .cx-burger span{background:#fff}
   .s-pad{padding:80px 16px}
   .ilf-wrap{padding:80px 16px!important}
 }
+
+/* 2j Accordion（design_handoff_cx468_cards）— 原生 details/summary，＋ 旋轉 45° */
+.acc-grid{display:flex;flex-direction:column;gap:14px}
+.acc{background:#fff;border:1px solid #e3e3e6;transition:border-color .3s,box-shadow .35s}
+.acc[open]{border-color:#141414;box-shadow:0 14px 34px rgba(0,0,0,.07)}
+.acc>summary{list-style:none;cursor:pointer;padding:26px;display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.acc>summary::-webkit-details-marker{display:none}
+.acc-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#141414;letter-spacing:.01em}
+.acc-pm{font-size:15px;color:#C61B1C;line-height:1;transition:transform .35s;flex:none}
+.acc[open] .acc-pm{transform:rotate(45deg)}
+.acc-body{padding:0 26px 26px;font-size:15px;color:#6e6e73;line-height:1.9;letter-spacing:.02em;margin:0}
+
+/* 2k Animated Border（design_handoff_cx468_cards）— FAQ 展開時流光邊框 */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.faq-acc{background:#fff;border:1px solid #e3e3e6;position:relative;transition:border-color .3s}
+.faq-acc[open]{border-color:#fff}
+.faq-acc[open]::before{content:"";position:absolute;inset:-1px;padding:1px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 235deg,#C61B1C 312deg,#ff8674 342deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:ang 4s linear infinite}
+@keyframes ang{to{--ang:360deg}}
+.faq-acc>summary{list-style:none;cursor:pointer;padding:26px;display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em}
+.faq-acc>summary::-webkit-details-marker{display:none}
+.faq-pm{font-size:22px;color:#6e6e73;font-weight:300;transition:transform .35s;flex:none}
+.faq-acc[open] .faq-pm{transform:rotate(45deg)}
+.faq-body{padding:0 26px 26px;font-size:15px;color:#6e6e73;line-height:1.7;margin:0}
 </style>
 
 <meta name="keywords" content="租屋,新北市租屋,中和租屋,包租代管,房屋出租,不動產租賃,售後回租,不動產售後回租,貸款整合,民間轉銀行,房屋貸款整合,新北市貸款,中和貸款,鋮馨租賃,cx468,Cheng Xin Leasing">
@@ -808,18 +845,21 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div class="diag-q">處境 ①</div>
       <div class="diag-t">名下有房，<br>但銀行貸款連續被拒</div>
       <div class="diag-s">信用有過事件、或負債比卡關。房子的價值是真的，只是銀行暫時看不到。</div>
+      <div class="diag-hide"><div class="diag-sol"><b>→ 售後回租</b>：房子過戶給投資方、簽租約續住，並保有依約買回的權利，可取得約市值 7–9 成資金。</div></div>
       <div class="diag-go">→ 看售後回租怎麼幫你</div>
     </a>
     <a class="diag-card" href="services.html">
       <div class="diag-q">處境 ②</div>
       <div class="diag-t">房貸＋信貸＋卡循，<br>月付吃掉收入一半以上</div>
       <div class="diag-s">多筆高利率債務交疊，每個月光繳最低就喘不過氣。</div>
+      <div class="diag-hide"><div class="diag-sol"><b>→ 貸款整合</b>：多筆債務併為一筆銀行房貸，過往案例月付降 30–50%，依個案而定。</div></div>
       <div class="diag-go">→ 看貸款整合怎麼降月付</div>
     </a>
     <a class="diag-card" href="private-to-bank.html">
       <div class="diag-q">處境 ③</div>
       <div class="diag-t">民間借了好幾年，<br>繳的幾乎都是利息</div>
       <div class="diag-s">月息 1–2% 長年只繳得起利息，本金幾乎沒有減少。</div>
+      <div class="diag-hide"><div class="diag-sol"><b>→ 民間轉銀行</b>：分階段轉進銀行年息區間，本金第一次開始往下走。</div></div>
       <div class="diag-go">→ 看民間怎麼轉進銀行</div>
     </a>
   </div>
@@ -1173,20 +1213,20 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div style="max-width:720px;margin:0 auto;">
     <div class="s-eyebrow">名詞解釋</div>
     <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:42px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:40px;line-height:1.3;">三個關鍵名詞，<br>先弄懂再決定。</h2>
-    <dl style="display:flex;flex-direction:column;gap:0;margin:0;">
-      <div style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <dt style="font-family:'Noto Serif TC','Songti TC',serif;font-size:19px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:10px;">售後回租</dt>
-        <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">屋主將房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，藉此取得資金而不必搬離。是否適合依個案不動產條件與財務狀況評估。</dd>
-      </div>
-      <div style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <dt style="font-family:'Noto Serif TC','Songti TC',serif;font-size:19px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:10px;">貸款整合</dt>
-        <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">將信貸、信用卡、民間借款等多筆負債整合為一筆以不動產擔保的貸款，月付有機會下降，實際依個案核貸條件而定。</dd>
-      </div>
-      <div style="border-top:1px solid #ddddd8;border-bottom:1px solid #ddddd8;padding:26px 0;">
-        <dt style="font-family:'Noto Serif TC','Songti TC',serif;font-size:19px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:10px;">民間轉銀行</dt>
-        <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">協助將高利率的民間借款分階段轉介至銀行體系，讓本金有機會開始下降；利率與可行性依個人財務條件與金融機構核貸而定。</dd>
-      </div>
-    </dl>
+    <div class="acc-grid">
+      <details class="acc" data-open="1">
+        <summary><span class="acc-t">售後回租</span><span class="acc-pm">＋</span></summary>
+        <p class="acc-body">屋主將房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，藉此取得資金而不必搬離。是否適合依個案不動產條件與財務狀況評估。</p>
+      </details>
+      <details class="acc">
+        <summary><span class="acc-t">貸款整合</span><span class="acc-pm">＋</span></summary>
+        <p class="acc-body">將信貸、信用卡、民間借款等多筆負債整合為一筆以不動產擔保的貸款，月付有機會下降，實際依個案核貸條件而定。</p>
+      </details>
+      <details class="acc">
+        <summary><span class="acc-t">民間轉銀行</span><span class="acc-pm">＋</span></summary>
+        <p class="acc-body">協助將高利率的民間借款分階段轉介至銀行體系，讓本金有機會開始下降；利率與可行性依個人財務條件與金融機構核貸而定。</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -1194,62 +1234,41 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div style="max-width:720px;margin:0 auto;">
     <div class="s-eyebrow">常見問題</div>
     <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:42px;font-weight:600;color:#141414;letter-spacing:.01em;margin-bottom:48px;line-height:1.3;">你想知道的，<br>我們都回答。</h2>
-    <div style="display:flex;flex-direction:column;gap:0;">
+    <div class="acc-grid">
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;" open>
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          新北市租屋哪裡找專業包租代管公司？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">鋮馨租賃有限公司是新北市中和區的專業包租代管公司，提供房屋出租管理、租客開發、合約簽訂、租金收取及日常維修協調等一站式租屋管理服務。聯絡方式：02-2249-0517，地址：新北市中和區中正路468號。</p>
+      <details class="faq-acc" data-open="1">
+        <summary>新北市租屋哪裡找專業包租代管公司？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">鋮馨租賃有限公司是新北市中和區的專業包租代管公司，提供房屋出租管理、租客開發、合約簽訂、租金收取及日常維修協調等一站式租屋管理服務。聯絡方式：02-2249-0517，地址：新北市中和區中正路468號。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          租屋包租代管的費用怎麼計算？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">鋮馨租賃的包租代管服務費用以月租金的固定比例計算，招租期間由本公司吸收，房東免繳管理費。首次招租收半個月租金作為租客開發費，日常修繕免費代協調，材料工資另計。可選配租金保障型方案，空置期間管理服務照常。</p>
+      <details class="faq-acc">
+        <summary>租屋包租代管的費用怎麼計算？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">鋮馨租賃的包租代管服務費用以月租金的固定比例計算，招租期間由本公司吸收，房東免繳管理費。首次招租收半個月租金作為租客開發費，日常修繕免費代協調，材料工資另計。可選配租金保障型方案，空置期間管理服務照常。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          什麼是不動產售後回租？適合哪些人？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">不動產售後回租是屋主將房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，藉此取得資金而不必搬離。適合需要快速資金周轉、多筆貸款壓力大、或銀行貸款被拒的不動產持有人。鋮馨租賃提供免費評估，全台服務，是否適合依個案不動產條件與財務狀況評估。</p>
+      <details class="faq-acc">
+        <summary>什麼是不動產售後回租？適合哪些人？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">不動產售後回租是屋主將房子過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，藉此取得資金而不必搬離。適合需要快速資金周轉、多筆貸款壓力大、或銀行貸款被拒的不動產持有人。鋮馨租賃提供免費評估，全台服務，是否適合依個案不動產條件與財務狀況評估。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          不動產售後回租和一般房屋買賣有什麼差別？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">一般買賣永久轉移所有權；售後回租是將房屋過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，屋主可在約定期限內依約買回。是否適合依個案評估。</p>
+      <details class="faq-acc">
+        <summary>不動產售後回租和一般房屋買賣有什麼差別？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">一般買賣永久轉移所有權；售後回租是將房屋過戶給投資方、同時簽租約繼續居住，並保有日後依約買回的權利，屋主可在約定期限內依約買回。是否適合依個案評估。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          貸款整合是什麼？怎麼幫我降低還款壓力？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">貸款整合是將多筆高利率貸款（如信貸年利率10%以上、信用卡循環利率15%、民間借款）整合為一筆以不動產擔保的低利率貸款，有助降低每月還款金額（實際依個案核貸條件而定）。鋮馨租賃協助規劃民間轉銀行貸款路徑，長期有機會節省利息支出，適合有房產但負債較重的屋主。</p>
+      <details class="faq-acc">
+        <summary>貸款整合是什麼？怎麼幫我降低還款壓力？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">貸款整合是將多筆高利率貸款（如信貸年利率10%以上、信用卡循環利率15%、民間借款）整合為一筆以不動產擔保的低利率貸款，有助降低每月還款金額（實際依個案核貸條件而定）。鋮馨租賃協助規劃民間轉銀行貸款路徑，長期有機會節省利息支出，適合有房產但負債較重的屋主。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          信用條件不好可以申請貸款整合嗎？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">可以。鋮馨租賃專門服務信用條件不完美但名下有不動產的個人屋主。即使有聯徵紀錄、曾遭銀行拒貸或有多筆民間借款，名下有不動產即可先做免費評估。我們協助規劃逐步轉入銀行體系的方案。</p>
+      <details class="faq-acc">
+        <summary>信用條件不好可以申請貸款整合嗎？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">可以。鋮馨租賃專門服務信用條件不完美但名下有不動產的個人屋主。即使有聯徵紀錄、曾遭銀行拒貸或有多筆民間借款，名下有不動產即可先做免費評估。我們協助規劃逐步轉入銀行體系的方案。</p>
       </details>
 
-      <details style="border-top:1px solid #ddddd8;border-bottom:1px solid #ddddd8;padding:26px 0;">
-        <summary style="font-family:'Noto Serif TC','Songti TC',serif;font-size:17px;font-weight:600;color:#141414;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-          鋮馨租賃公司在哪裡？服務哪些地區？
-          <span style="font-size:22px;color:#6e6e73;font-weight:300;">＋</span>
-        </summary>
-        <p style="font-size:15px;color:#6e6e73;line-height:1.7;margin-top:12px;">鋮馨租賃有限公司位於新北市中和區中正路468號，服務範圍涵蓋全台灣，包含新北市板橋、中和、永和、新莊、三重、土城，以及台北市、桃園市等縣市。可加入官方LINE（https://lin.ee/PHIfSoY）或致電 02-2249-0517 預約免費評估。</p>
+      <details class="faq-acc">
+        <summary>鋮馨租賃公司在哪裡？服務哪些地區？<span class="faq-pm">＋</span></summary>
+        <p class="faq-body">鋮馨租賃有限公司位於新北市中和區中正路468號，服務範圍涵蓋全台灣，包含新北市板橋、中和、永和、新莊、三重、土城，以及台北市、桃園市等縣市。可加入官方LINE（https://lin.ee/PHIfSoY）或致電 02-2249-0517 預約免費評估。</p>
       </details>
 
     </div>
@@ -1412,6 +1431,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     ob.observe(document.documentElement,{childList:true,subtree:true});
   }
 })();
+</script>
+<script>
+requestAnimationFrame(function(){
+  document.querySelectorAll('details[data-open="1"]').forEach(function(d){d.open=true;});
+});
 </script>
 </body>
 </html>
