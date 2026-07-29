@@ -56,9 +56,22 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .row2{grid-template-columns:1fr}
 }
 
-.res-main{background:linear-gradient(135deg,#1d1d1f,#1e3a5f);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+/* Odometer（design_handoff_cx468_cards 3j）— 深底跳字碼表，逐位數動畫收斂至真實試算值（非展示用假動畫） */
+.res-main{background:#0e0e10;border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
 
 .res-main-lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
+
+.od-win{display:flex;align-items:flex-end;justify-content:center;gap:3px;flex-wrap:wrap;margin:10px 0 4px}
+
+.od-d{width:26px;height:42px;overflow:hidden;position:relative;background:#1a1a1e;border:1px solid rgba(255,255,255,.15);border-radius:4px}
+
+.od-d ul{position:absolute;top:0;left:0;right:0;height:auto;margin:0;padding:0;list-style:none;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+
+.od-d li{height:42px;display:grid;place-items:center;font:600 21px "Noto Serif TC","Songti TC",serif;color:#fff}
+
+.od-comma{align-self:flex-end;color:rgba(255,255,255,.5);font-size:19px;font-weight:600;padding-bottom:5px}
+
+.od-unit{align-self:flex-end;color:rgba(255,255,255,.65);font-size:14px;padding-bottom:8px;margin-left:5px}
 
 .res-main-val{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.03em}
 
@@ -374,7 +387,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <div class="res-main">
     <div class="res-main-lbl">空屋期間 <span id="vacLabel">—</span> 個月，總損失</div>
-    <div class="res-main-val" id="totalLoss2">—</div>
+    <div class="od-win" id="odWin" aria-hidden="true"></div>
+    <div class="res-main-val" id="totalLoss2" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">—</div>
     <div class="res-main-sub" id="resSub">持有成本 ＋ 租金機會成本</div>
   </div>
 
@@ -425,6 +439,32 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <script>
 function fmt(n){if(isNaN(n)||n===null)return'—';return Math.round(n).toLocaleString('zh-TW');}
 
+function renderOdometer(value){
+  const win=document.getElementById('odWin');
+  const str=Math.max(0,Math.round(value)).toLocaleString('zh-TW');
+  const digitCount=(str.match(/\d/g)||[]).length;
+  if(win.dataset.digits!=digitCount){
+    win.innerHTML='';
+    for(const ch of str){
+      if(ch===','){
+        const c=document.createElement('span');c.className='od-comma';c.textContent=',';win.appendChild(c);
+      } else {
+        const d=document.createElement('div');d.className='od-d';
+        const ul=document.createElement('ul');
+        for(let n=0;n<=9;n++){const li=document.createElement('li');li.textContent=n;ul.appendChild(li);}
+        d.appendChild(ul);win.appendChild(d);
+      }
+    }
+    const u=document.createElement('span');u.className='od-unit';u.textContent='元';win.appendChild(u);
+    win.dataset.digits=digitCount;
+  }
+  const digits=str.replace(/,/g,'').split('');
+  const uls=win.querySelectorAll('.od-d ul');
+  requestAnimationFrame(()=>{
+    uls.forEach((ul,i)=>{ul.style.transform='translateY(-'+(42*parseInt(digits[i],10))+'px)';});
+  });
+}
+
 function calc(){
   const houseValue=(parseFloat(document.getElementById('houseValue').value)||0)*10000;
   const vacancyMonths=parseFloat(document.getElementById('vacancyMonths').value)||0;
@@ -446,6 +486,7 @@ function calc(){
   document.getElementById('vacLabel').textContent=vacancyMonths;
   document.getElementById('totalLoss').textContent=fmt(totalLoss)+' 元';
   document.getElementById('totalLoss2').textContent=fmt(totalLoss)+' 元';
+  renderOdometer(totalLoss);
   document.getElementById('dailyCost').textContent=fmt(dailyCost)+' 元/天';
   document.getElementById('holdCost').textContent=fmt(holdCost);
   document.getElementById('oppCost').textContent=fmt(oppCost);

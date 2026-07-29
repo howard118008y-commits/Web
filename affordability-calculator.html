@@ -117,9 +117,16 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .slider-labels{display:flex;justify-content:space-between;font-size:11px;color:#aaa;margin-top:4px}
 
-.dti-bar{height:10px;background:#e8e8ed;border-radius:5px;overflow:hidden;margin:10px 0 4px}
-
-.dti-fill{height:100%;border-radius:5px;transition:width .4s,background .4s}
+/* Needle Gauge（design_handoff_cx468_cards 3h）— 綠0–30% / 黃30–40% / 紅40–50% */
+.gg{text-align:center}
+.gauge{position:relative;width:186px;height:100px;margin:4px auto 0;overflow:hidden}
+.gauge-arc{position:relative;width:186px;height:186px;border-radius:50%;background:conic-gradient(from 270deg,#16A34A 0 108deg,#f59e0b 108deg 144deg,#ef4444 144deg 180deg,transparent 180deg)}
+.gauge-arc::after{content:"";position:absolute;inset:24px;background:#fff;border-radius:50%}
+.gauge-nd{position:absolute;left:50%;bottom:0;margin-left:-1px;width:2px;height:76px;background:#141414;transform-origin:bottom center;border-radius:2px 2px 0 0;z-index:2;transition:transform .5s cubic-bezier(.34,1.3,.5,1)}
+.gauge-hub{position:absolute;left:50%;bottom:-6px;margin-left:-6px;width:12px;height:12px;border-radius:50%;background:#141414;z-index:3}
+.gauge-readout{margin-top:8px}
+.gauge-val{font-family:"Noto Serif TC","Songti TC",serif;font-size:28px;font-weight:600;color:#141414}
+.gauge-tag{font-size:12px;color:#6e6e73;margin-top:2px}
 
 .disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
 
@@ -386,13 +393,16 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <div style="background:#f5f5f7;border-radius:12px;padding:16px 20px;margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:8px">
-      <span>還款負擔率</span><span id="dtiActual">—</span>
+  <div class="gg" style="background:#f5f5f7;border-radius:12px;padding:20px;margin-bottom:16px">
+    <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:4px">還款負擔率（DSR）</div>
+    <div class="gauge">
+      <div class="gauge-arc"></div>
+      <div class="gauge-nd" id="gaugeNeedle"></div>
+      <div class="gauge-hub"></div>
     </div>
-    <div class="dti-bar"><div class="dti-fill" id="dtiFill" style="width:0%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:#aaa">
-      <span>0%</span><span>20%（保守）</span><span>30%（建議）</span><span>50%</span>
+    <div class="gauge-readout">
+      <div class="gauge-val" id="dtiActual">—</div>
+      <div class="gauge-tag" id="dtiTag">—</div>
     </div>
   </div>
 
@@ -482,11 +492,10 @@ function calc(){
   document.getElementById('d-down').textContent=Math.round(downPct*100)+'% / '+fmtW(downAmt)+' 萬元';
   document.getElementById('d-price').textContent=fmtW(maxPrice)+' 萬元';
 
-  document.getElementById('dtiActual').textContent=(dti)+'%（設定）';
-  const barW=Math.min(dti/50*100,100);
-  const fill=document.getElementById('dtiFill');
-  fill.style.width=barW+'%';
-  fill.style.background=dti<=30?'#16A34A':dti<=40?'#f59e0b':'#ef4444';
+  document.getElementById('dtiActual').textContent=dti+'%';
+  document.getElementById('dtiTag').textContent=dti<=30?'體質健全（設定值）':dti<=40?'負擔偏高（設定值）':'高負擔警示（設定值）';
+  const needleDeg=-90+Math.min(dti,50)/50*180;
+  document.getElementById('gaugeNeedle').style.transform='rotate('+needleDeg+'deg)';
 
   const info=document.getElementById('infoBox');
   const warn=document.getElementById('warnBox');

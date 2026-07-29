@@ -33,7 +33,12 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 @media(max-width:380px){.city-grid{grid-template-columns:1fr}}
 
 /* ready card */
-.city-card{display:flex;flex-direction:column;background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 6px rgba(0,0,0,.06);border:1.5px solid transparent;text-decoration:none;transition:all .2s;cursor:pointer}
+/* Paper Fold 折角（design_handoff_cx468_cards 3d）— 已上線城市卡右上角折角 */
+.city-card{position:relative;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 6px rgba(0,0,0,.06);border:1.5px solid transparent;text-decoration:none;transition:all .2s,box-shadow .4s;cursor:pointer}
+.city-card:not(.soon)::before{content:"";position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 22px 22px 0;border-color:transparent #f0f0f2 transparent transparent;transition:border-width .35s;z-index:1}
+.city-card:not(.soon)::after{content:"";position:absolute;top:0;right:0;width:22px;height:22px;background:linear-gradient(225deg,#d8d8dc 0%,#f0f0f2 48%,transparent 49%);transition:width .35s,height .35s;z-index:1}
+.city-card:not(.soon):hover::before{border-width:0 30px 30px 0}
+.city-card:not(.soon):hover::after{width:30px;height:30px}
 .city-card.ready{border-color:#f59e0b;background:linear-gradient(135deg,#fff7ed,#fffbef)}
 .city-card.ready:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(180,83,9,.15);border-color:#b45309}
 .city-card.soon{background:#fafafa;cursor:default;opacity:.72}

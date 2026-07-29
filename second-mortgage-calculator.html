@@ -52,11 +52,26 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .input-row input[type=number]:focus{border-color:#C61B1C}
 .unit{font-size:14px;color:#6e6e73;white-space:nowrap;min-width:28px}
 
-input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 input[type=range]:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#141414;cursor:pointer;box-shadow:0 2px 6px rgba(124,58,237,.4)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#141414;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:#141414;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e8e8ed}
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:#6e6e73;margin-top:4px}
+
+/* Stacked Bar（design_handoff_cx468_cards 3g）— 一胎/二胎 LTV 佔比 */
+.st{margin-bottom:18px}
+.st-bar{height:34px;display:flex;background:#f0f0f2;border-radius:8px;overflow:hidden;margin-bottom:10px}
+.st-bar i{height:100%;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff;letter-spacing:.06em;white-space:nowrap;overflow:hidden;transition:width .8s cubic-bezier(.22,.61,.36,1)}
+.st-1{background:#141414}
+.st-2{background:#C61B1C}
+.st-cap{position:relative;height:16px;border-left:1px solid #d2d2d7;border-right:1px solid #d2d2d7;margin-bottom:14px}
+.st-cap i{position:absolute;top:0;height:100%;border-top:1px solid #d2d2d7}
+.st-cap span{position:absolute;top:3px;text-align:center;font-size:9.5px;color:#a1a1a6;letter-spacing:.06em;white-space:nowrap}
+.st-key{display:flex;gap:16px;font-size:10.5px;color:#6e6e73;flex-wrap:wrap}
+.st-key div{display:flex;align-items:center;gap:6px}
+.st-key b{width:9px;height:9px;border-radius:2px;flex:none;display:inline-block}
 
 /* RESULTS */
 .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
@@ -227,6 +242,23 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <div class="card">
     <div class="card-title">試算結果</div>
+
+    <div class="st">
+      <div class="st-bar">
+        <i class="st-1" id="stFirst" style="width:0%">一胎</i>
+        <i class="st-2" id="stSecond" style="width:0%">可貸二胎</i>
+      </div>
+      <div class="st-cap" id="stCap">
+        <i id="stCapLine" style="left:0;width:0%"></i>
+        <span id="stCapLabel" style="left:0;width:0%">LTV 上限 —</span>
+      </div>
+      <div class="st-key">
+        <div><b style="background:#141414"></b>一胎剩餘本金</div>
+        <div><b style="background:#C61B1C"></b>可貸二胎金額</div>
+        <div><b style="background:#f0f0f2;border:1px solid #d2d2d7"></b>剩餘房屋淨值</div>
+      </div>
+    </div>
+
     <div class="result-grid">
       <div class="result-card hl-purple">
         <div class="result-label">預估可貸金額</div>
@@ -301,6 +333,16 @@ function calculate(){
   document.getElementById('monthly').textContent  = fmt(monthly);
   document.getElementById('interest').textContent = fmt(interest);
   document.getElementById('total').textContent    = fmt(total);
+
+  var firstPct = market > 0 ? Math.min(100, first / market * 100) : 0;
+  var loanPct  = market > 0 ? Math.min(100 - firstPct, loanable / market * 100) : 0;
+  document.getElementById('stFirst').style.width  = firstPct + '%';
+  document.getElementById('stSecond').style.width = loanPct + '%';
+  document.getElementById('stCapLine').style.left  = '0';
+  document.getElementById('stCapLine').style.width = ltv + '%';
+  document.getElementById('stCapLabel').style.left  = '0';
+  document.getElementById('stCapLabel').style.width = ltv + '%';
+  document.getElementById('stCapLabel').textContent = 'LTV 上限 ' + ltv + '%';
 }
 calculate();
 </script>

@@ -10,9 +10,9 @@
 /* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#f59e0b;text-decoration:none;font-weight:500}
+.nav-back{font-size:14px;color:#C61B1C;text-decoration:none;font-weight:500}
 
-.hero{background:linear-gradient(135deg,#b45309 0%,#f59e0b 60%,#fcd34d 100%);padding:60px 24px 44px;text-align:center}
+.hero{background:linear-gradient(135deg,#8A1416 0%,#C61B1C 60%,#e05a5b 100%);padding:60px 24px 44px;text-align:center}
 
 .eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 
@@ -46,7 +46,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 .irow input[type=number]:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
 
-.irow input:focus{border-color:#f59e0b}
+.irow input:focus{border-color:#C61B1C}
 
 .unit{font-size:13px;color:#6e6e73;white-space:nowrap}
 
@@ -56,45 +56,25 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .row2{grid-template-columns:1fr}
 }
 
-.res-main{background:linear-gradient(135deg,#b45309,#f59e0b);border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+/* Receipt Stack 結果卡（design_handoff_cx468_cards 3b） */
+.tc-hd{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.tc-ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;flex:none}
+.tc-ico svg{width:19px;height:19px}
+.tc-nm{font-family:"Noto Serif TC","Songti TC",serif;font-size:15.5px;font-weight:600;color:#141414;letter-spacing:.01em}
+.tc-sub{font-size:10.5px;color:#a1a1a6;letter-spacing:.05em;margin-top:3px}
+.tc-out{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid #e3e3e6;margin-top:16px;padding-top:14px}
+.tc-ol{font-size:10.5px;color:#86868b;letter-spacing:.1em}
+.tc-ov{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414}
+.recstack{position:relative;width:100%}
+.recstack-l{position:absolute;left:0;right:0;top:0;height:100%;background:#fff;border:1px solid #e3e3e6}
+.recstack-l.l2{transform:rotate(-1.1deg) translateY(4px);z-index:0}
+.recstack-l.l3{transform:rotate(1deg) translateY(7px);z-index:0}
+.recstack-top{position:relative;z-index:2;background:#fff;border:1px solid #e3e3e6;padding:28px 26px}
+.rec-line{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:#6e6e73;letter-spacing:.02em}
+.rec-line b{color:#141414;font-weight:600;font-variant-numeric:tabular-nums}
+.rec-dash{border-top:1px dashed #d2d2d7;margin:10px 0}
 
-.res-main-lbl{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:6px}
-
-.res-main-val{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.03em}
-
-.res-main-sub{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px}
-
-.rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-
-.rc{background:#f5f5f7;border-radius:12px;padding:16px 12px;text-align:center}
-
-.rc-lbl{font-size:11px;color:#6e6e73;margin-bottom:5px}
-
-.rc-val{font-size:17px;font-weight:700;color:#1d1d1f}
-
-.rc-sub{font-size:10px;color:#aaa;margin-top:2px}
-
-.rc.amber{background:#f59e0b}
-
-.rc.amber .rc-lbl,.rc.amber .rc-sub{color:rgba(255,255,255,.75)}
-
-.rc.amber .rc-val{color:#fff}
-
-.rc.brown{background:#b45309}
-
-.rc.brown .rc-lbl,.rc.brown .rc-sub{color:rgba(255,255,255,.75)}
-
-.rc.brown .rc-val{color:#fff}
-
-.detail{background:#f5f5f7;border-radius:12px;padding:18px 20px;font-size:13px;line-height:2.1}
-
-.dr{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:3px 0}
-
-.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#b45309}
-
-.dr.opt span:first-child{color:#aaa}
-
-.info-box{background:#fffbeb;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#78350f;line-height:1.75}
+.info-box{background:#faf6f5;border:1.5px solid #C61B1C;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#8f1314;line-height:1.75}
 
 .disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
 
@@ -103,7 +83,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 
 
-.btn-amber{background:#f59e0b;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+.btn-amber{background:#C61B1C;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 
 .btn-dark{background:#374151;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
 </style>
@@ -284,8 +264,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <div class="wrap">
-<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #b45309;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#b45309;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
+<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #8A1416;border-radius:8px">
+  <div style="font-size:12px;font-weight:700;color:#8A1416;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
   <p style="font-size:15.5px;line-height:1.8;color:#1d1d1f;margin:0 0 8px"><strong>買房除了成交價，通常還要多準備約 2–8% 的相關費用。</strong>包含契稅、印花稅、代書（地政士）費、登記規費、仲介費（買方常見 1–2%）、火險與地震險；若要裝潢、搬家再另計。本工具一次幫你估出購屋總費用，避免簽約後才發現現金不夠。</p>
   <div style="font-size:11px;color:#86868b;line-height:1.65">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
 <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1d1d1f;padding:9px 18px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:9px 18px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
@@ -359,42 +339,46 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </div>
 
-<!-- 結果 -->
+<!-- 結果（Receipt Stack，design_handoff_cx468_cards 3b） -->
 <div class="card">
   <div class="card-title">試算結果</div>
 
-  <div class="res-main">
-    <div class="res-main-lbl">購屋總費用（含成交價）</div>
-    <div class="res-main-val" id="grandTotal">—</div>
-    <div class="res-main-sub" id="resSub">—</div>
-  </div>
+  <div class="recstack">
+    <div class="recstack-l l2"></div>
+    <div class="recstack-l l3"></div>
+    <div class="recstack-top">
+      <div class="tc-hd">
+        <div class="tc-ico" style="background:#faf6f5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C61B1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-8h6v8"/></svg>
+        </div>
+        <div>
+          <div class="tc-nm">購屋總費用試算結果</div>
+          <div class="tc-sub" id="resSub">—</div>
+        </div>
+      </div>
 
-  <div class="rg">
-    <div class="rc brown">
-      <div class="rc-lbl">成交價以外追加費用</div>
-      <div class="rc-val" id="extraTotal">—</div>
-      <div class="rc-sub">元</div>
-    </div>
-    <div class="rc amber">
-      <div class="rc-lbl">佔成交價比例</div>
-      <div class="rc-val" id="extraPct">—</div>
-      <div class="rc-sub">含裝潢</div>
-    </div>
-  </div>
+      <div class="rec-line"><span>成交總價</span><b id="d-price">—</b></div>
+      <div class="rec-line"><span>契稅（房屋評定現值 × {稅率}）</span><b id="d-deed">—</b></div>
+      <div class="rec-line"><span>印花稅（成交價 × 0.1%）</span><b id="d-stamp">—</b></div>
+      <div class="rec-line"><span>仲介費</span><b id="d-agent">—</b></div>
+      <div class="rec-line"><span>代書費</span><b id="d-notary">—</b></div>
+      <div class="rec-line"><span>地政規費</span><b id="d-reg">—</b></div>
+      <div class="rec-line"><span>貸款手續費</span><b id="d-loan">—</b></div>
+      <div class="rec-line"><span>裝潢費（選填）</span><b id="d-reno">—</b></div>
+      <div class="rec-line"><span>搬家費（選填）</span><b id="d-moving">—</b></div>
+      <div class="rec-line"><span>火險＋地震險</span><b id="d-ins">—</b></div>
+      <div class="rec-line"><span>其他</span><b id="d-other">—</b></div>
 
-  <div class="detail">
-    <div class="dr"><span>成交總價</span><span id="d-price">—</span></div>
-    <div class="dr"><span>契稅（房屋評定現值 × {稅率}）</span><span id="d-deed">—</span></div>
-    <div class="dr"><span>印花稅（成交價 × 0.1%）</span><span id="d-stamp">—</span></div>
-    <div class="dr"><span>仲介費</span><span id="d-agent">—</span></div>
-    <div class="dr"><span>代書費</span><span id="d-notary">—</span></div>
-    <div class="dr"><span>地政規費</span><span id="d-reg">—</span></div>
-    <div class="dr"><span>貸款手續費</span><span id="d-loan">—</span></div>
-    <div class="dr opt"><span>裝潢費（選填）</span><span id="d-reno">—</span></div>
-    <div class="dr opt"><span>搬家費（選填）</span><span id="d-moving">—</span></div>
-    <div class="dr opt"><span>火險＋地震險</span><span id="d-ins">—</span></div>
-    <div class="dr opt"><span>其他</span><span id="d-other">—</span></div>
-    <div class="dr"><span>購屋總費用</span><span id="d-grand">—</span></div>
+      <div class="rec-dash"></div>
+      <div class="rec-line"><span>成交價以外追加費用</span><b id="extraTotal">—</b></div>
+      <div class="rec-line"><span>佔成交價比例</span><b id="extraPct">—</b></div>
+      <div class="rec-line"><span>購屋總費用</span><b id="d-grand">—</b></div>
+
+      <div class="tc-out">
+        <span class="tc-ol">購屋總費用（含成交價）</span>
+        <span class="tc-ov" id="grandTotal">—</span>
+      </div>
+    </div>
   </div>
 
   <div id="infoBox" class="info-box" style="display:none"></div>

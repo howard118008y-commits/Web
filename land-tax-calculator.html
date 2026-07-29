@@ -88,44 +88,27 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .cpi-note{font-size:11px;color:#6e6e73;margin-top:6px}
 
 
-/* Results */
-.result-main{background:#141414;border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+/* Results — Ticket Notch（design_handoff_cx468_cards 3c） */
+.tc-hd{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.tc-ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;flex:none;background:#141414}
+.tc-ico svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tc-nm{font-family:"Noto Serif TC","Songti TC",serif;font-size:15.5px;font-weight:600;color:#141414;letter-spacing:.01em}
+.tc-sub{font-size:10.5px;color:#a1a1a6;letter-spacing:.05em;margin-top:3px}
+.tc-out{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid #e3e3e6;margin-top:16px;padding-top:14px}
+.tc-ol{font-size:10.5px;color:#86868b;letter-spacing:.1em}
+.tc-ov{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#141414}
+.tc-ov em{font-style:normal;font-size:12px;color:#86868b;margin-left:2px;font-weight:500}
+.tc-note{font-size:9.5px;color:#a1a1a6;line-height:1.7;margin-top:10px;letter-spacing:.02em}
 
-.result-main-label{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
+.rc-line{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:#6e6e73;letter-spacing:.02em}
+.rc-line b{color:#141414;font-weight:600;font-variant-numeric:tabular-nums}
 
-.result-main-value{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.03em}
-
-.result-main-sub{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px}
-
-.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
-
-@media(max-width:540px){
-  .result-grid{grid-template-columns:1fr 1fr}
-}
-
-.rc{background:#f5f5f7;border-radius:12px;padding:16px 12px;text-align:center}
-
-.rc-label{font-size:11px;color:#6e6e73;margin-bottom:5px}
-
-.rc-value{font-size:17px;font-weight:700;color:#1d1d1f}
-
-.rc-sub{font-size:10px;color:#aaa;margin-top:2px}
-
-.rc.hl{background:#C61B1C}
-
-.rc.hl .rc-label{color:rgba(255,255,255,.7)}
-
-.rc.hl .rc-value{color:#fff}
-
-.rc.hl .rc-sub{color:rgba(255,255,255,.5)}
-
-.detail-box{background:#f5f5f7;border-radius:12px;padding:18px 20px;font-size:13px;line-height:2}
-
-.detail-box .drow{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:3px 0}
-
-.detail-box .drow:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#16A34A}
-
-.detail-box .drow span:last-child{font-weight:600}
+.tk{position:relative;background:#fff;border:1px solid #e3e3e6;padding:26px 24px;--n:11px}
+.tk::before,.tk::after{content:"";position:absolute;top:112px;width:var(--n);height:calc(var(--n)*2);background:#fff;border:1px solid #e3e3e6}
+.tk::before{left:-1px;border-left:none;border-radius:0 999px 999px 0}
+.tk::after{right:-1px;border-right:none;border-radius:999px 0 0 999px}
+.tk-perf{border-top:1.5px dashed #d2d2d7;margin:16px -24px 14px}
+.tk-stamp{position:absolute;right:20px;top:22px;width:52px;height:52px;border:1.5px solid rgba(198,27,28,.34);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-13deg);font-size:8.5px;font-weight:600;color:#C61B1C;letter-spacing:.08em;line-height:1.35}
 
 .info-box{background:#f0fdf4;border:1.5px solid #16A34A;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#166534;line-height:1.75}
 
@@ -499,31 +482,43 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </p>
 </div>
 
-<!-- 結果 -->
+<!-- 結果（Ticket Notch，design_handoff_cx468_cards 3c） -->
 <div class="card">
   <div class="card-title">試算結果</div>
-  <div class="result-main">
-    <div class="result-main-label">估算應繳土地增值稅</div>
-    <div class="result-main-value" id="taxResult">—</div>
-    <div class="result-main-sub" id="taxSub">請填入完整資料</div>
+
+  <div class="tk">
+    <div class="tk-stamp" id="tkStamp">估算<br>僅供參考</div>
+    <div class="tc-hd">
+      <div class="tc-ico"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-6 7 6v12"/><rect x="9" y="14" width="6" height="7" rx="1"/></svg></div>
+      <div>
+        <div class="tc-nm">土地增值稅試算</div>
+        <div class="tc-sub" id="taxSub">請填入完整資料</div>
+      </div>
+    </div>
+
+    <div class="rc-line"><span>申報移轉現值總額</span><b id="d-sell">—</b></div>
+    <div class="rc-line"><span>調整後原地價（含物價指數）</span><b id="d-adj">—</b></div>
+    <div class="rc-line"><span>可扣除費用</span><b id="d-deduct">—</b></div>
+    <div class="rc-line"><span>漲價總數額</span><b id="d-inc">—</b></div>
+    <div class="rc-line"><span>漲價倍數</span><b id="multiple">—</b></div>
+    <div class="rc-line"><span>適用稅率</span><b id="rateLabel">—</b></div>
+
+    <div class="tk-perf"></div>
+
+    <div class="rc-line"><span>查定稅額</span><b id="d-raw">—</b></div>
+    <div class="rc-line"><span id="d-reduce-label">—</span><b id="d-reduce">—</b></div>
+    <div class="rc-line"><span>估算應繳稅額</span><b id="d-tax">—</b></div>
+    <span style="display:none" id="increment"></span><span style="display:none" id="reduceLabel"></span>
+
+    <div class="tc-out">
+      <span class="tc-ol">估算應繳土地增值稅</span>
+      <span class="tc-ov" id="taxResult">—</span>
+    </div>
+    <div class="tc-note">本試算依財政部官方速算公式估算，物價指數取自民國115年3月公告表，僅供參考。實際稅額依地方稅捐稽徵處核定為準。</div>
   </div>
-  <div class="result-grid">
-    <div class="rc"><div class="rc-label">漲價總數額</div><div class="rc-value" id="increment">—</div><div class="rc-sub">元</div></div>
-    <div class="rc"><div class="rc-label">漲價倍數</div><div class="rc-value" id="multiple">—</div><div class="rc-sub">倍</div></div>
-    <div class="rc hl"><div class="rc-label">適用稅率</div><div class="rc-value" id="rateLabel">—</div><div class="rc-sub" id="reduceLabel">—</div></div>
-  </div>
-  <div class="detail-box">
-    <div class="drow"><span>申報移轉現值總額</span><span id="d-sell">—</span></div>
-    <div class="drow"><span>調整後原地價（含物價指數）</span><span id="d-adj">—</span></div>
-    <div class="drow"><span>可扣除費用</span><span id="d-deduct">—</span></div>
-    <div class="drow"><span>漲價總數額</span><span id="d-inc">—</span></div>
-    <div class="drow"><span>查定稅額</span><span id="d-raw">—</span></div>
-    <div class="drow"><span id="d-reduce-label">—</span><span id="d-reduce">—</span></div>
-    <div class="drow"><span>估算應繳稅額</span><span id="d-tax">—</span></div>
-  </div>
+
   <div id="infoBox" class="info-box" style="display:none"></div>
   <div id="warnBox" class="warn-box" style="display:none"></div>
-  <div class="disclaimer">⚠️ 本試算依財政部官方速算公式估算，物價指數取自民國115年3月公告表，僅供參考。實際稅額依地方稅捐稽徵處核定為準。</div>
   <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#141414;color:#fff;border-radius:12px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
@@ -791,6 +786,7 @@ function calc(){
     document.getElementById('taxResult').textContent='0 元';
     document.getElementById('taxSub').textContent='無漲價，不需繳納土地增值稅';
     document.getElementById('multiple').textContent='—';document.getElementById('rateLabel').textContent='—';document.getElementById('reduceLabel').textContent='無';
+    document.getElementById('tkStamp').innerHTML='無漲價<br>免徵';
     document.getElementById('d-raw').textContent='0 元';document.getElementById('d-reduce-label').textContent='—';document.getElementById('d-reduce').textContent='—';document.getElementById('d-tax').textContent='0 元';
     infoBox.style.display='block';infoBox.innerHTML='<strong>無漲價：</strong>出售地價低於原購入地價（含物價指數調整），依法不需繳納土地增值稅。';
     return;
@@ -812,6 +808,7 @@ function calc(){
   document.getElementById('taxSub').textContent=readjDesc||('物價指數 '+cpi+'%，'+rateDesc);
   document.getElementById('rateLabel').textContent=selfUse?'10%':rateDesc.split('（')[0];
   document.getElementById('reduceLabel').textContent=reduceDesc;
+  document.getElementById('tkStamp').innerHTML=selfUse?'自用<br>優惠':'一般<br>稅率';
   document.getElementById('d-raw').textContent=fmt(rawTax)+' 元';
   document.getElementById('d-reduce-label').textContent=readjust?'重劃減徵40%':'累進差額/優惠';
   document.getElementById('d-reduce').textContent=readjust?fmt(rawTax*.40)+' 元':reduceDesc;

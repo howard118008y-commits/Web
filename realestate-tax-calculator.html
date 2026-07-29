@@ -59,17 +59,16 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .row2{grid-template-columns:1fr}
 }
 
-.tog{display:flex;border:1.5px solid #d2d2d7;border-radius:10px;overflow:hidden}
+/* Segmented Switch（design_handoff_cx468_cards 3e）— 滑動白色藥丸取代實心填色 */
+.tog{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#f5f5f7;padding:3px;border-radius:10px;overflow:hidden}
 
-.togbtn{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:500;color:#6e6e73;cursor:pointer;border:none;background:#fff;transition:all .2s;border-right:1px solid #d2d2d7}
+.tog::before{content:"";position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12);transition:transform .35s cubic-bezier(.22,.61,.36,1);z-index:0}
 
-.togbtn:last-child{border-right:none}
+.tog:has(.togbtn:nth-child(2).on)::before{transform:translateX(100%)}
 
-.togbtn.on{background:#C61B1C;color:#fff;font-weight:700}
+.togbtn{position:relative;z-index:1;flex:1;padding:11px;text-align:center;font-size:13px;font-weight:600;color:#6e6e73;cursor:pointer;border:none;background:transparent;transition:color .3s}
 
-.togbtn.on-blue{background:#1a1a1a;color:#fff;font-weight:700}
-
-.togbtn.on-red{background:#ef4444;color:#fff;font-weight:700}
+.togbtn.on,.togbtn.on-blue,.togbtn.on-red{background:transparent;color:#C61B1C;font-weight:700}
 
 
 /* version badge */

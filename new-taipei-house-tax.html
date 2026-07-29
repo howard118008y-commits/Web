@@ -53,10 +53,11 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .btn-calc:hover{background:#152d4a}
 .btn-outline{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
 .btn-home{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center}
-.era-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
-.era-label{display:flex;align-items:center;gap:6px;background:#f9fafb;border:1.5px solid #d2d2d7;border-radius:8px;padding:8px 10px;cursor:pointer;font-size:13px;transition:border-color .2s}
-.era-label:has(input:checked){border-color:#1e3a5f;background:#eff6ff}
-.era-label input{accent-color:#1e3a5f}
+/* Chip Matrix（design_handoff_cx468_cards 3k）— 膠囊選單，選中反黑 */
+.era-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.era-label{position:relative;display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #d2d2d7;border-radius:999px;padding:8px 14px;cursor:pointer;font-size:12.5px;color:#3a3a3c;transition:all .2s}
+.era-label input{position:absolute;opacity:0;width:0;height:0}
+.era-label:has(input:checked){border-color:#141414;background:#141414;color:#fff;font-weight:600}
 .sub-select{margin-top:8px;display:none}
 .disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:14px;padding:10px 14px;background:#f9f9f9;border-radius:8px;border:.5px solid #e5e5e5}
 </style>

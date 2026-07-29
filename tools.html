@@ -45,19 +45,26 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .tool-cta{font-size:13px;font-weight:600}
 
-/* 1 大工具：實價資料中心 */
-.data-hub{background:#141414;border-radius:0;padding:40px 36px;color:#fff;margin-bottom:44px}
-.data-hub .hub-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.data-hub h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#fff;margin:0 0 10px;letter-spacing:.01em}
-.data-hub p.hub-sub{font-size:15px;color:rgba(255,255,255,.88);margin:0 0 22px;line-height:1.6}
-.data-hub-stats{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:22px;font-size:12px;color:rgba(255,255,255,.85)}
-.data-hub-stats b{color:#fff;font-size:20px;font-weight:700;margin-right:4px}
-.data-hub-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media(max-width:600px){.data-hub-tabs{grid-template-columns:1fr}}
-.data-hub-tabs a{display:block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:0;padding:16px 18px;text-decoration:none;color:#fff;transition:background .2s}
-.data-hub-tabs a:hover{background:rgba(255,255,255,.16)}
-.data-hub-tabs .tab-title{font-size:15px;font-weight:700;margin-bottom:4px}
-.data-hub-tabs .tab-desc{font-size:12px;color:rgba(255,255,255,.82);line-height:1.4}
+/* 1 大工具：實價資料中心（Bento Grid） */
+.data-sec{background:#0a0a0c;border-radius:0;padding:44px 40px;margin-bottom:44px}
+.theme-tag{display:inline-block;font:600 9.5px ui-monospace,Menlo,monospace;letter-spacing:.16em;color:#fff;background:#C61B1C;padding:4px 9px;border-radius:4px;margin-bottom:16px;text-transform:uppercase}
+.data-sec .hub-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.data-sec h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#fff;margin:0 0 24px;letter-spacing:.01em}
+.bento{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px}
+.bt{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);padding:22px 20px;text-decoration:none;display:block;transition:background .3s,border-color .3s}
+.bt:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.34)}
+.bt.lead{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
+.bt-eb{font-size:9.5px;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
+.bt-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:7px}
+.bt-d{font-size:11.5px;color:rgba(255,255,255,.6);line-height:1.7;letter-spacing:.02em}
+.bt-big{font-family:"Noto Serif TC","Songti TC",serif;font-size:44px;font-weight:600;color:#fff;line-height:1}
+.bt-big em{font-style:normal;font-size:17px;color:rgba(255,255,255,.6);margin-left:4px}
+.bt-row{display:flex;gap:26px;margin-top:20px}
+.bt-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:21px;font-weight:600;color:#fff;line-height:1}
+.bt-nl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.12em;margin-top:6px}
+.bt-go{font-size:11px;color:#fff;letter-spacing:.14em;margin-top:14px}
+.bt-go::after{content:" ›"}
+@media(max-width:600px){.bento{grid-template-columns:1fr}.bt.lead{grid-row:auto}.bt[style]{grid-column:auto!important}}
 
 .cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
 </style>
@@ -319,29 +326,26 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 
-  <!-- 1 大工具：實價資料中心 -->
-  <div class="data-hub">
-    <div class="hub-eyebrow">★ Data Hub · 1 大工具</div>
+  <!-- 1 大工具：實價資料中心（Bento Grid） -->
+  <div class="data-sec">
+    <span class="theme-tag">Data Hub · 1 大工具</span>
+    <div class="hub-eyebrow">★ 每月 3 次自動更新 · 2/12/22 號</div>
     <h2>實價資料中心</h2>
-    <p class="hub-sub">台北 + 新北 + 台中 + 桃園，4 縣市 75 行政區實價追蹤。買賣、預售、租金一站全覽，每月 3 次自動更新（2/12/22 號）。</p>
-    <div class="data-hub-stats">
-      <div><b>75</b> 行政區</div>
-      <div><b>290k+</b> 筆資料</div>
-      <div><b>9 季</b> 跨期追蹤</div>
-    </div>
-    <div class="data-hub-tabs">
-      <a href="lvr-observatory.html">
-        <div class="tab-title">買賣觀察室 →</div>
-        <div class="tab-desc">YoY 年增率、跨季趨勢、新店深度解析、6 張社群圖卡</div>
-      </a>
-      <a href="lvr-presale.html">
-        <div class="tab-title">預售屋觀察 →</div>
-        <div class="tab-desc">4 縣市預售案件實價單價追蹤，已排除解約</div>
-      </a>
-      <a href="lvr-rental.html">
-        <div class="tab-title">租金報酬 →</div>
-        <div class="tab-desc">月租中位 + 年化報酬率估算（年租 ÷ 售價）</div>
-      </a>
+    <div class="bento">
+      <div class="bt lead">
+        <div>
+          <div class="bt-big">75<em>行政區</em></div>
+          <div class="bt-row">
+            <div><div class="bt-n">290k+</div><div class="bt-nl">筆實價資料</div></div>
+            <div><div class="bt-n">9 季</div><div class="bt-nl">跨期追蹤</div></div>
+            <div><div class="bt-n">4</div><div class="bt-nl">縣市</div></div>
+          </div>
+        </div>
+        <div class="bt-d" style="margin-top:22px">台北・新北・台中・桃園，買賣、預售、租金一站全覽。</div>
+      </div>
+      <a class="bt" href="lvr-observatory.html"><div class="bt-eb">01</div><div class="bt-t">買賣觀察室</div><div class="bt-d">YoY 年增率、跨季趨勢、新店深度解析。6 張社群圖卡分享</div><div class="bt-go">進入</div></a>
+      <a class="bt" href="lvr-presale.html"><div class="bt-eb">02</div><div class="bt-t">預售屋觀察</div><div class="bt-d">4 縣市預售案件實價單價追蹤，已排除解約</div><div class="bt-go">進入</div></a>
+      <a class="bt" href="lvr-rental.html" style="grid-column:span 2"><div class="bt-eb">03</div><div class="bt-t">租金報酬觀察</div><div class="bt-d">月租中位數 + 年化報酬率估算（年租 ÷ 售價），跨縣市可比</div><div class="bt-go">進入</div></a>
     </div>
   </div>
 

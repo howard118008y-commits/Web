@@ -115,6 +115,18 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 .gauge-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#16A34A,#1a1a1a);transition:width .5s ease}
 
+/* Sparkline（design_handoff_cx468_cards 3i）— 淨報酬率隨空置月數變化（依目前輸入即時試算，非歷史數據） */
+.sp-wrap{background:#f5f5f7;border-radius:12px;padding:20px;margin-bottom:16px}
+.sp-title{font-size:12px;color:#6e6e73;margin-bottom:8px}
+.sp-chart{position:relative;height:66px;margin:4px 0 8px}
+.sp-chart svg{width:100%;height:100%;overflow:visible}
+.sp-chart path.ln{fill:none;stroke:#C61B1C;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;animation:sp-draw 1.4s cubic-bezier(.22,.61,.36,1) .2s forwards}
+.sp-chart path.fl{fill:rgba(198,27,28,.07);stroke:none}
+.sp-chart .gl{stroke:#e3e3e6;stroke-width:1}
+.sp-dot{position:absolute;left:calc(100% - 3px);top:0;width:7px;height:7px;border-radius:50%;background:#C61B1C;box-shadow:0 0 0 3px rgba(198,27,28,.16);transition:top .4s}
+.sp-mm{display:flex;justify-content:space-between;font-size:9.5px;color:#a1a1a6;letter-spacing:.04em}
+@keyframes sp-draw{to{stroke-dashoffset:0}}
+
 .disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
 
 
@@ -382,6 +394,21 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 
+  <div class="sp-wrap">
+    <div class="sp-title">空置月數敏感度 — 淨報酬率隨空置天數增加而變化（依目前輸入即時試算）</div>
+    <div class="sp-chart">
+      <svg viewBox="0 0 300 66" preserveAspectRatio="none" aria-hidden="true">
+        <line class="gl" x1="0" y1="16" x2="300" y2="16"></line>
+        <line class="gl" x1="0" y1="33" x2="300" y2="33"></line>
+        <line class="gl" x1="0" y1="50" x2="300" y2="50"></line>
+        <path class="fl" id="spFill" d=""></path>
+        <path class="ln" id="spLine" d=""></path>
+      </svg>
+      <div class="sp-dot" id="spDot"></div>
+    </div>
+    <div class="sp-mm"><span>空置 0 月</span><span>空置 1 月</span><span>空置 2 月</span><span>空置 3 月</span></div>
+  </div>
+
   <div class="detail">
     <div class="dr plus"><span>年租金收入（含空置調整）</span><span id="d-income">—</span></div>
     <div class="dr minus"><span>每年持有成本</span><span id="d-cost">—</span></div>
@@ -466,6 +493,22 @@ function calc(){
   else if(netYield>=0){hint='偏低 (<3%)';warn.style.display='block';warn.innerHTML='<strong>報酬偏低：</strong>淨報酬率僅 '+pct(netYield)+'，低於一般市場水準。建議評估增加租金、降低持有成本，或考慮轉做短租。';}
   else{hint='虧損';warn.style.display='block';warn.innerHTML='<strong>注意：</strong>持有成本高於租金收入，目前為虧損狀態。建議重新評估租金定價或持有成本。';}
   document.getElementById('gaugeHint').textContent=hint;
+
+  // Sparkline：淨報酬率隨空置月數 0–3 月變化（同一組輸入、同一條公式，逐月即時試算）
+  const svPoints=[0,1,2,3].map(v=>{
+    const em=12-v;
+    const ar=monthlyRent*em;
+    const ac=annualMgmtFee+houseTax+landTax+insurance+repair+annualServiceFee;
+    return (ar-ac)/totalCost*100;
+  });
+  const svMin=Math.min(...svPoints), svMax=Math.max(...svPoints);
+  const svRange=svMax-svMin||1;
+  const svY=v=>58-((v-svMin)/svRange)*50;
+  const svX=[0,100,200,300];
+  const linePts=svX.map((x,i)=>x+' '+svY(svPoints[i]).toFixed(1)).join(' L ');
+  document.getElementById('spLine').setAttribute('d','M '+linePts);
+  document.getElementById('spFill').setAttribute('d','M '+linePts+' L 300 66 L 0 66 Z');
+  document.getElementById('spDot').style.top=svY(svPoints[3]).toFixed(1)+'px';
 }
 
 calc();
