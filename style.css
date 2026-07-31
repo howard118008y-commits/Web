@@ -4,6 +4,28 @@
    各頁特殊樣式仍寫在頁面內 <style> 中
    ============================================ */
 
+/* === Design Tokens（2026-07-31 建立，逐步取代各頁散落的內聯色碼） ===
+   新頁面／新改版一律用這組變數，不要再手打色碼。
+   舊頁尚未轉換前，內聯色碼仍是實際生效值，變數只在已採用的地方生效。 */
+:root{
+  --red:#C61B1C;         /* 品牌主色：CTA、連結、強調、深色面板底 */
+  --red-dark:#8A1416;    /* 深紅：漸層/hover 加深 */
+  --ink:#141414;         /* 主要內文黑 */
+  --ink-soft:#1d1d1f;    /* 次要內文黑（略淺） */
+  --text-secondary:#6e6e73;
+  --text-tertiary:#86868b;
+  --text-quaternary:#a1a1a6;
+  --bg-warm:#f4f0ea;     /* Neumorphism 底色 */
+  --bg-light:#f6f5f3;
+  --bg-off:#fafafa;
+  --border-hairline:#e3e3e6;
+  --border-input:#d2d2d7;
+  --dark-bg:#0a0a0c;     /* 深色面板（hero/CTA band） */
+  --dark-bg-soft:#0e0e10;
+  --line-green:#048456;  /* LINE 品牌綠 */
+  --font-serif:"Noto Serif TC","Songti TC",serif;
+}
+
 /* === Reset === */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -13,11 +35,11 @@ a{text-decoration:none;color:inherit}
 /* === Navigation === */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
 .nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
-.nav-logo span{color:#c8102e;font-weight:700}
+.nav-logo span{color:var(--red);font-weight:700}
 .nav-links{display:flex;gap:1.75rem}
 .nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
 .nav-links a:hover{opacity:1}
-.nav-links a.active{opacity:1;font-weight:600;color:#c8102e}
+.nav-links a.active{opacity:1;font-weight:600;color:var(--red)}
 .nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
 
 /* === Common Buttons === */
