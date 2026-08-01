@@ -88,11 +88,15 @@ jobs:
         working-directory: scripts/lvr
         run: python build_extras.py
 
+      - name: Sync tools.html Data Hub stats (行政區/筆數/縣市)
+        working-directory: scripts/lvr
+        run: python sync_hub_stats.py
+
       - name: Commit + push (if changed)
         run: |
           git config user.name "LVR Observatory Bot"
           git config user.email "lvr-bot@users.noreply.github.com"
-          git add lvr-observatory.html lvr-presale.html lvr-rental.html lvr-charts/ lvr-data/ lvr-social-cards/
+          git add lvr-observatory.html lvr-presale.html lvr-rental.html lvr-charts/ lvr-data/ lvr-social-cards/ tools.html
           if git diff --staged --quiet; then
             echo "✓ No content changes — skipping commit."
             exit 0
