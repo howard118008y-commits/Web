@@ -15,13 +15,13 @@ body{background:#fdf8f0;margin:0;font-family:-apple-system,BlinkMacSystemFont,'H
 nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
 .nav-back{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}
-.hero{background:#0e0e10;padding:28px 24px 22px;text-align:center}
+.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-elevator-apt.jpg') center/cover no-repeat;padding:28px 24px 22px;text-align:center}
 .hero h1{font-size:26px;font-weight:700;color:#fff;margin:0 0 4px}
 .hero p{font-size:13px;color:rgba(255,255,255,.8);margin:0}
 .wrap{max-width:720px;margin:0 auto;padding:20px 16px 80px}
 .notice{background:#fefce8;border:1px solid #d97706;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:#713f12;line-height:1.75}
 .step-card{background:#fff;border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.step-label{font-size:13px;font-weight:700;color:#1e3a5f;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #bfdbfe}
+.step-label{font-size:13px;font-weight:700;color:#C61B1C;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e8c5c5}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
@@ -32,7 +32,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .field input,.field select{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s;width:100%;box-sizing:border-box;max-width:100%}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 .field input:focus-visible,.field select:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
-.field input:focus,.field select:focus{border-color:#1e3a5f}
+.field input:focus,.field select:focus{border-color:#C61B1C}
 .field input::placeholder{color:#b0b0b0}
 .hint{font-size:11px;color:#9ca3af;margin-top:2px}
 .usage-block{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin-bottom:10px}
@@ -40,7 +40,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .usage-row .field{flex:1;min-width:140px}
 .add-btn{background:#e0f2fe;color:#0369a1;border:1.5px solid #bae6fd;border-radius:8px;height:42px;padding:0 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
 .remove-btn{background:#fef2f2;color:#dc2626;border:1.5px solid #fecaca;border-radius:8px;height:36px;padding:0 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
-.result-card{background:#1e3a5f;border-radius:14px;padding:22px;margin-top:16px;color:#fff}
+.result-card{background:#C61B1C;border-radius:14px;padding:22px;margin-top:16px;color:#fff}
 .result-title{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:8px}
 .result-total{font-size:36px;font-weight:700;color:#fbbf24;margin-bottom:4px}
 .result-unit{font-size:13px;color:rgba(255,255,255,.7)}
@@ -49,7 +49,7 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 .breakdown-label{color:rgba(255,255,255,.6)}
 .breakdown-val{font-weight:600;color:#fff}
 .btn-row{display:flex;gap:12px;justify-content:center;margin-top:20px}
-.btn-calc{background:#1e3a5f;color:#fff;border:none;border-radius:24px;height:48px;padding:0 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-calc{background:#C61B1C;color:#fff;border:none;border-radius:24px;height:48px;padding:0 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn-calc:hover{background:#152d4a}
 .btn-outline{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
 .btn-home{background:#fff;color:#6e6e73;border:1.5px solid #d2d2d7;border-radius:24px;height:48px;padding:0 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center}
@@ -331,7 +331,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </select>
     </div>
   </div>
-  <div id="sectionRateDisplay" style="font-size:12px;color:#1e3a5f;margin-top:8px;display:none">
+  <div id="sectionRateDisplay" style="font-size:12px;color:#C61B1C;margin-top:8px;display:none">
     📍 路段率：<strong id="sectionRateVal">—</strong>
   </div>
 </div>
@@ -343,7 +343,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div id="usageBlocks">
     <!-- 第一個使用情形 -->
     <div class="usage-block" id="usageBlock0">
-      <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:10px">使用情形 ①</div>
+      <div style="font-size:12px;font-weight:700;color:#141414;margin-bottom:10px">使用情形 ①</div>
       <div class="usage-row">
         <div class="field" style="flex:2">
           <label>房屋使用情形</label>
@@ -376,7 +376,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <!-- 第二個使用情形（可選） -->
     <div class="usage-block" id="usageBlock1" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-size:12px;font-weight:700;color:#374151">使用情形 ②</div>
+        <div style="font-size:12px;font-weight:700;color:#141414">使用情形 ②</div>
         <button class="remove-btn" onclick="removeUsage()">移除</button>
       </div>
       <div class="usage-row">
@@ -430,7 +430,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <a href="https://einvdonate.tax.ntpc.gov.tw/Calculation/HouseTax" target="_blank" rel="noopener"
-   style="display:flex;align-items:center;gap:8px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:12px;color:#1d4ed8;text-decoration:none">
+   style="display:flex;align-items:center;gap:8px;background:#faf6f5;border:1px solid #e8c5c5;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:12px;color:#1d4ed8;text-decoration:none">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg>
   前往新北市稅務局官方房屋稅試算系統
 </a>
