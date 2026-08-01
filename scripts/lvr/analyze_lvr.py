@@ -47,12 +47,31 @@ def roc_to_date(s):
         return pd.NaT
 
 
+def _season_label(zip_path: Path) -> str:
+    """由 zip 檔名推季別。
+
+    季檔：lvr_115S1.zip → 115S1
+    mini：lvr_mini_20260801.zip → 依日期換算民國季別（如 115S3）。
+          不可直接用檔名，否則圖表 X 軸會出現「mini_20260801」這種原始字串
+          ——2026-08-01 實際發生過，chart_city_trend 最後一格就是它。
+    """
+    stem = zip_path.stem.replace("lvr_", "")
+    if not stem.startswith("mini_"):
+        return stem
+    ymd = stem.replace("mini_", "")
+    try:
+        y, m = int(ymd[:4]), int(ymd[4:6])
+        return f"{y - 1911}S{(m - 1) // 3 + 1}"
+    except (ValueError, IndexError):
+        return stem
+
+
 def load_main_csv(zip_path: Path, csv_name: str, city: str) -> pd.DataFrame:
     with ZipFile(zip_path) as z:
         with z.open(csv_name) as f:
             df = pd.read_csv(f, encoding="utf-8", dtype=str)
     df = df.iloc[1:].reset_index(drop=True)
-    df["__season"] = zip_path.stem.replace("lvr_", "")
+    df["__season"] = _season_label(zip_path)
     df["縣市"] = city
     return df
 
@@ -250,6 +269,27 @@ def main() -> None:
         with open(OUT_DIR / f"focus_kpis_w{w}.json", "w", encoding="utf-8") as f:
             json.dump(focus, f, ensure_ascii=False, indent=2, default=str)
         print(f"  ✓ w={w}：{len(ranking)} 區")
+
+    # 跨季趨勢序列（給前端互動圖表用；原本只有 PNG，前端沒有逐季資料可畫）
+    print(f"\n→ 產出跨季趨勢 JSON（前端互動圖表用）")
+    trend_pivot = (
+        df.groupby(["__season", "縣市"])["單價_萬每坪"]
+          .median().unstack("縣市").sort_index()
+    )
+    trend = {
+        "seasons": [str(s) for s in trend_pivot.index],
+        "series": {
+            city: [None if pd.isna(v) else round(float(v), 1)
+                   for v in trend_pivot[city]]
+            for city in ["台北市", "新北市", "台中市", "桃園市"]
+            if city in trend_pivot.columns
+        },
+        "unit": "萬/坪",
+        "metric": "單價中位數",
+    }
+    with open(OUT_DIR / "city_trend.json", "w", encoding="utf-8") as f:
+        json.dump(trend, f, ensure_ascii=False, indent=1)
+    print(f"  ✓ city_trend.json：{len(trend['seasons'])} 季 × {len(trend['series'])} 縣市")
 
     # 新店深度解析
     print(f"\n→ 新店區 113S1 vs 115S1 深度解析")

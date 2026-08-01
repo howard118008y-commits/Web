@@ -91,7 +91,7 @@ def chart_yoy_change(df: pd.DataFrame) -> Path:
 
 
 def chart_city_trend(df: pd.DataFrame) -> Path:
-    """4 縣市 9 季均價趨勢線。"""
+    """4 縣市跨季均價趨勢線。"""
     pivot = (
         df.groupby(["__season", "縣市"])["單價_萬每坪"]
           .median()
@@ -108,7 +108,11 @@ def chart_city_trend(df: pd.DataFrame) -> Path:
             ax.annotate(f"{y:.1f}", xy=(x, y), xytext=(0, 8),
                         textcoords="offset points", ha="center", fontsize=8,
                         color=COLORS[city], fontweight="bold")
-    ax.set_title("4 縣市全市平均｜單價中位數跨季趨勢（113Q1 → 115Q1）",
+    # 標題季別由資料實算，不可寫死——舊版固定寫「113Q1 → 115Q1」，
+    # 資料往前走後標題與 X 軸對不上（2026-08-01 已到 115S3 仍寫 115Q1）。
+    seasons = list(pivot.index)
+    span = f"（{seasons[0]} → {seasons[-1]}）" if seasons else ""
+    ax.set_title(f"4 縣市全市平均｜單價中位數跨季趨勢{span}",
                  fontsize=15, fontweight="bold", pad=14)
     ax.set_xlabel("季別", fontsize=11)
     ax.set_ylabel("單價中位數（萬/坪）", fontsize=11)
