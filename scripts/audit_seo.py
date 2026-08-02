@@ -81,6 +81,15 @@ for tot,mx,n,s1,s2,s3 in scored[:15]:
     print(f"  {tot:2d}/{mx}  SEO{s1}/{len(SEO)} AEO{s2}/{len(AEO)} GEO{s3}/{len(GEO)}  {n}")
 
 # 存 JSON 供後續比對
-out = os.path.join(ROOT, "..", "行銷產出", "週報", "seo-audit-latest.json")
+# 2026-07-31 repo 遷出 iCloud 後，ROOT/.. 不再是專案夾，寫檔會 FileNotFoundError。
+# 改為絕對路徑（可用 CX468_MARKETING_DIR 覆寫），並自動建目錄。
+MARKETING_DIR = os.environ.get(
+    "CX468_MARKETING_DIR",
+    os.path.expanduser(
+        "~/Library/Mobile Documents/com~apple~CloudDocs/鋮馨cloud code/行銷產出"
+    ),
+)
+out = os.path.join(MARKETING_DIR, "週報", "seo-audit-latest.json")
+os.makedirs(os.path.dirname(out), exist_ok=True)
 json.dump({"pages":pages,"summary":{"total_pages":len(pages)}}, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
 print(f"\n明細存：{out}")
