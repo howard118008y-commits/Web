@@ -84,7 +84,16 @@ jobs:
                   penghu-land-value-tax.html
           YEAR=$(python -c "import json; c=json.load(open('scripts/tax-config.json')); print(list(c['cities'].values())[0].get('year',''))")
           git commit -m "Update 地價稅累進起點地價 ${YEAR}年 [bot]"
-          git push
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin main; then
+              echo "✓ Push 成功（第 $attempt 次）"
+              exit 0
+            fi
+            echo "⚠ Push 第 $attempt 次失敗，10 秒後重試"
+            sleep 10
+          done
+          echo "✗ Push 重試 3 次仍失敗"
+          exit 1
 
       - name: 無變更通知
         if: steps.changes.outputs.changed == 'false'

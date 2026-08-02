@@ -110,7 +110,9 @@ html = f'''<!--
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>房貸儀表板｜18 項市場指標即時追蹤｜鋮馨租賃</title>
-<link rel="canonical" href="https://cx468.com.tw/cx_radar_v4_demo.html">
+<!-- canonical 收斂：本頁為 A01–A03 子集 DEMO，與旗艦頁 radar-index 同質，
+     指向旗艦頁避免自我競食（沿用 2026-07 弱頁 canonical 指強頁裁示） -->
+<link rel="canonical" href="https://cx468.com.tw/radar-index.html">
 <meta name="description" content="央行利率、房貸利率、移轉棟數、房價指數、逾放比、美債與匯率——18 項房貸市場指標每日自動更新，十年歷史實值走勢一頁看懂。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="房貸儀表板｜18 項市場指標即時追蹤｜鋮馨租賃">

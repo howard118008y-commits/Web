@@ -464,7 +464,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <section class="art-hero">
   <div class="art-tag">新北市・區域百科</div>
   <h1>$town 房市與生活機能總覽</h1>
-  <div class="art-hero-meta">鋮馨租賃有限公司 · 資料更新 $today · 含實價登錄即時行情</div>
+  <div class="art-hero-meta">鋮馨租賃有限公司 · 實價登錄行情每月 2/12/22 自動同步</div>
 </section>
 
 <div class="art-body">
