@@ -6,6 +6,27 @@
 
 ---
 
+## ✅ 修補紀錄（2026-08-03 同日，老闆授權後執行）
+
+第一節 9 項全數修完，逐頁 render 複驗（桌機 1280＋手機 390，本機 HTTP、include 有跑）：
+0 水平溢出、0 JS 錯誤、0 破圖、0 星號外洩、0 樣板變數外洩、私人信箱 0 命中、guide 頁 logo 由 192px 回到 44px。
+
+| # | 修法 | 複驗證據 |
+|---|---|---|
+| 1 | `magick ... -quality 80` 重轉 AVIF | PIL 解碼通過；瀏覽器 hero 實際畫出建物照（截圖） |
+| 2 | 刪私人 Gmail，只留 cx468468@gmail.com | 全站 grep 0 命中 |
+| 3 | 4 篇 guide 頁補上 nav-tool include 需要的 `nav{} / img.nav-logo{} / .nav-back{}` CSS | navH 60px、logoH 44px（原 192px） |
+| 4 | **方向與初判相反**：`scripts/tax-config.json` 顯示宜蘭/嘉義縣/花蓮/台東的累進起點地價本來就是舊年度估值（`est:true`），錯的是名詞解釋硬寫 115-116。改成各頁真實年度，並修 `scripts/_gen_definedterms2.py` 讓年度一律讀 config | 4 頁可見文字與 DefinedTerm schema 同源一致；生成器不再寫死 |
+| 5 | `{稅率}` 改為隨輸入更新的 `<span id="d-deed-rate">` | 頁面 innerText 無 `{...}` 殘留 |
+| 6 | 生成器加 markdown→`<strong>` 轉換（含 HTML escape），並修好已產出的頁面 | 全站 `**` 0 命中 |
+| 7 | 補「累進差額」列——實際缺的是 **7 頁**不是 1 頁（嘉義縣/南投/新北/澎湖/台北/宜蘭/雲林），含 JS 綁定 | 8 頁實跑試算：稅額＝課稅地價×稅率－累進差額 逐頁對得上，0 JS 錯誤 |
+| 8 | 「三個理由」→「四個理由」（卡片實為 4 張） | 全站 grep 0 命中舊字串 |
+| 9 | 14 頁未載 style.css：**沒有硬塞 style.css**（會撞頁內自訂樣式），改補該頁缺的 `a{text-decoration:none}` | 13 頁 render 後 underline anchors = 0；en/index 本來就有該規則 |
+
+未做（需老闆決策，原因見第四節）：配圖治理、設計系統收斂、topic 系列數字同源、`#0071e3` 是否收斂。
+
+---
+
 ## 一、已用指令複驗＝真缺陷（可直接動手）
 
 | # | 缺陷 | 位置（可重驗） | 複驗指令／證據 |

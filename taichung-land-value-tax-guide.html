@@ -21,6 +21,10 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
+/* NAV（nav-tool include 需要的樣式；缺這段 logo 會以 192px 原尺寸撐破導覽列） */
+nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+.nav-back{font-size:14px;color:#b45309;text-decoration:none;font-weight:500}
 .art-hero{background:linear-gradient(135deg,#0f2042 0%,#1a3a6b 100%);padding:80px 2rem 56px;text-align:center}
 .art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:rgba(99,179,237,.2);color:#90cdf4;margin-bottom:1rem;letter-spacing:.06em;text-transform:uppercase}
 .art-hero h1{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.18;max-width:760px;margin:0 auto 1rem}

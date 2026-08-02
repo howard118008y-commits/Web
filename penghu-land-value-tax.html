@@ -334,6 +334,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <td class="rate-cell">10‰</td>
         <td class="rate-cell">6‰</td>
       </tr>
+      <tr>
+        <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
+        <td class="course-price" id="deductGeneral">—</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+      </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
         <td class="tax-cell" id="taxGeneral">0</td>
@@ -485,12 +492,14 @@ function calcAll() {
     document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">' + (tier.rate*1000).toFixed(0) + '‰（第' + tier.level + '級）</span>';
     document.getElementById('tierDisplay').textContent = '第' + tier.level + '級（' + (tier.rate*1000).toFixed(0) + '‰）';
     document.getElementById('tierDisplay').classList.remove('pending');
+    document.getElementById('deductGeneral').textContent = fmt(Math.round(T * tier.coef));
     for (let i=1;i<=6;i++) { const r=document.getElementById('tr-'+i); if(r) r.classList.toggle('hit',i===tier.level); }
     document.getElementById('tierWrap').style.display = 'block';
   } else {
     document.getElementById('rateGeneral').innerHTML = '<span style="color:#2563eb">10‰至55‰</span>';
     document.getElementById('tierDisplay').textContent = '--';
     document.getElementById('tierDisplay').classList.add('pending');
+    document.getElementById('deductGeneral').textContent = '—';
   }
 }
 

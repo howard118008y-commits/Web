@@ -11,7 +11,9 @@
 from datetime import datetime, timedelta
 from pathlib import Path
 from shutil import copy2
+from html import escape as html_escape
 import json
+import re
 import aeo_blocks
 
 import pandas as pd
@@ -78,9 +80,14 @@ def build_html(generated_at: str, season_label: str,
     # AI 摘要 section（若有）
     ai_section_html = ""
     if ai_report:
-        # 轉成 HTML 段落
+        # 轉成 HTML 段落（AI 回來的是 markdown，**粗體** 要轉 <strong>，
+        # 否則星號會原樣印在頁面上——2026-08-03 目檢實際踩到）
+        def _md_inline(p):
+            s = html_escape(p, quote=False)
+            return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+
         paragraphs = [p.strip() for p in ai_report.split("\n") if p.strip()]
-        para_html = "".join(f"<p>{p}</p>" for p in paragraphs)
+        para_html = "".join(f"<p>{_md_inline(p)}</p>" for p in paragraphs)
         ai_section_html = f"""
   <div class="section-title">本期 AI 摘要</div>
   <div class="ai-card">
