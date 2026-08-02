@@ -209,7 +209,16 @@ body{
 .ov-dot.yellow{background:var(--st-yellow)}
 .ov-dot.red{background:var(--st-red)}
 .ov-code{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-dim);min-width:28px;flex-shrink:0}
-.ov-name{flex:1;font-size:12px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* flex:1 會把後面的「?」推到數值旁、看起來像數值註記，改成靠名稱右側＋spacer 撐開 */
+.ov-name{flex:0 1 auto;min-width:0;font-size:12px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-spacer{flex:1 1 auto}
+/* 指標名詞就地解釋。氣泡改自 Uiverse vinodjangid07 / funny-panther-79（MIT），漸層改品牌紅。 */
+.ov-help{width:15px;height:15px;border-radius:50%;border:0;padding:0;flex-shrink:0;background:#C61B1C;background-image:linear-gradient(147deg,#C61B1C 0%,#8A1416 74%);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:help;position:relative}
+.ov-tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);opacity:0;visibility:hidden;background:#C61B1C;background-image:linear-gradient(147deg,#C61B1C 0%,#8A1416 74%);color:#fff;padding:8px 12px;border-radius:7px;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:400;line-height:1.6;letter-spacing:.3px;width:230px;text-align:left;white-space:normal;pointer-events:none;transition:opacity .2s,visibility .2s,bottom .2s;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.ov-tip:before{content:"";position:absolute;width:10px;height:10px;background:#8A1416;transform:rotate(45deg);bottom:-4px;left:50%;margin-left:-5px}
+.ov-help:hover .ov-tip,.ov-help:focus .ov-tip{opacity:1;visibility:visible;bottom:calc(100% + 8px)}
+.ov-help:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(max-width:768px){.ov-tip{width:min(230px,62vw)}}
 .ov-val{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0}
 .ov-val.sg{color:var(--st-green)}
 .ov-val.sy{color:var(--st-yellow)}
@@ -679,6 +688,27 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
     C:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'風險預警',en:'RISK WARNING'},
     D:{color:'rgba(29,29,31,0.85)',bg:'transparent',label:'國際資金',en:'GLOBAL CAP'}
   };
+  /* 指標名詞解釋（中性定義，不含核貸承諾與利率預測）。鍵＝cx_data.json 的 name。 */
+  var DESC = {
+    '央行重貼現率':'中央銀行對銀行融通資金的基準利率，調整方向常帶動銀行放款與存款利率跟進。',
+    '房貸利率':'五大行庫新承作購屋貸款的平均利率，由央行按月統計；實際條件因人、因案而異。',
+    '新增房貸金額':'銀行體系當期新承作的購屋貸款總額，反映市場資金投入不動產的力道。',
+    '不動產放款集中度':'銀行對不動產相關放款占總放款的比重，比重偏高時主管機關可能收緊相關授信。',
+    '新青安貸款占比':'政策性青年安心成家購屋貸款在新增房貸中的比重，反映政策戶的市場占比。',
+    '買賣移轉棟數':'全國不動產完成所有權買賣移轉登記的棟數，是實際成交量最直接的指標。',
+    '信義房價指數':'信義房屋依成交資料編製的住宅價格指數，用於觀察房價趨勢。',
+    '國泰房價指數':'國泰建設與學術單位合編的預售及新屋價格指數，偏向反映新推案價格。',
+    '六都移轉棟數':'台北、新北、桃園、台中、台南、高雄六個直轄市的買賣移轉棟數合計。',
+    '六都房價':'六個直轄市的住宅價格水準，用於比較都會區之間的價格差異。',
+    '房貸逾放比':'房貸中逾期放款占總放款的比率，比率上升代表借款人還款壓力升高。',
+    '房價所得比':'房價中位數相對家庭年可支配所得中位數的倍數，數字越高代表購屋負擔越重。',
+    '建照核發':'主管機關核發的建造執照數量或樓地板面積，領先反映未來 2–3 年的新增供給。',
+    '建照 vs 使照':'建照（開工端）與使照（完工端）的對照，差距可看出供給推進與去化的落差。',
+    '美十年期公債殖利率':'美國十年期公債殖利率，是全球長期資金成本的參考基準，牽動國際利率走向。',
+    '美元台幣匯率':'新台幣兌美元匯率，影響外資進出與國內資金寬鬆程度。',
+    '台股加權指數':'台灣證券交易所發行量加權股價指數，反映國內資產市場的整體資金氛圍。',
+    '台灣CPI':'消費者物價指數年增率，是央行判斷是否升降息的主要參考之一。'
+  };
   fetch('cx_data.json')
     .then(function(r){return r.json();})
     .then(function(data){
@@ -706,6 +736,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
           html+='<span class="ov-dot '+ind.status+'"></span>';
           html+='<span class="ov-code">'+ind.code+'</span>';
           html+='<span class="ov-name">'+ind.name+'</span>';
+          if(DESC[ind.name]){
+            html+='<button type="button" class="ov-help" data-ov-help aria-label="'+ind.name+' 說明">?'
+                 +'<span class="ov-tip" role="tooltip">'+DESC[ind.name]+'</span></button>';
+          }
+          html+='<span class="ov-spacer"></span>';
           html+='<span class="ov-val '+vc+'">'+ind.value+'</span>';
           html+='<span class="ov-trend '+tr.cls+'">'+tr.arrow+'</span>';
           html+='<span class="ov-date">'+ind.updated+'</span>';
@@ -714,6 +749,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
         html+='</div>';
       });
       grid.innerHTML=html;
+      /* 「?」在 series-block 的 onclick 範圍內，不擋住會直接跳走 topic 頁 */
+      grid.addEventListener('click',function(e){
+        if(e.target.closest('[data-ov-help]')){e.stopPropagation();e.preventDefault();}
+      },true);
       if(meta&&data.generated)meta.textContent='DATA · '+data.generated;
     })
     .catch(function(){

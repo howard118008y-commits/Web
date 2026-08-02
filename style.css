@@ -45,13 +45,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 /* === Common Buttons === */
 .btn-line{display:inline-block;background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
 .btn-green{background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px;display:inline-block}
+
+/* === 漣漪效果（改自 Uiverse iZOXVL / wise-goat-75，MIT） ===
+   直接長進既有的 .btn-green/.btn-line，22 頁不用改一行 HTML。
+   底色／圓角／字級全部維持各頁原樣，只加 hover 時的 radial-gradient 擴散。
+   漣漪色綁 currentColor：白字深底按鈕得到白漣漪，contact/services/bad-credit 那幾頁
+   覆寫成白底黑字的精品款則自動變深色漣漪，不會「白漣漪打在白底上等於沒效果」。 */
+.btn-green,.btn-line{position:relative;overflow:hidden;--ripple:rgba(255,255,255,.25)}
+@supports (color:color-mix(in srgb,red 50%,transparent)){
+  .btn-green,.btn-line{--ripple:color-mix(in srgb,currentColor 20%,transparent)}
+}
+.btn-green::after,.btn-line::after{
+  content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(circle,var(--ripple) 0%,transparent 70%);
+  transform:scale(0);transition:transform .5s ease;pointer-events:none;
+}
+.btn-green:hover::after,.btn-line:hover::after{transform:scale(4)}
+@media(prefers-reduced-motion:reduce){.btn-green::after,.btn-line::after{display:none}}
 .btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
 .btn-white{background:#fff;color:#1d1d1f;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
 .btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
 .btn-row,.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
+/* === 漣漪按鈕（改自 Uiverse iZOXVL / wise-goat-75，MIT） ===
+   原作是暗底＋白色 radial-gradient 漣漪；這裡只換色不換機制，三個變體對齊站上既有按鈕色：
+   預設＝品牌紅（主 CTA）／.is-line＝LINE 綠（表單送出、加 LINE）／.is-dark＝墨黑（次要）。
+   尺寸也壓到站上按鈕的級距（14px/12px 28px），不用原作的 1.2rem/15px 30px。 */
+.btn-ripple{
+  display:inline-block;padding:12px 30px;font-size:14px;font-weight:700;line-height:1.4;
+  color:#fff;background-color:#C61B1C;border:2px solid #DA4142;border-radius:24px;
+  cursor:pointer;outline:none;position:relative;overflow:hidden;font-family:inherit;
+  transition:background-color .4s ease,border-color .4s ease;
+}
+.btn-ripple::after{
+  content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(circle,rgba(255,255,255,.25) 0%,rgba(255,255,255,0) 70%);
+  transform:scale(0);transition:transform .5s ease;pointer-events:none;
+}
+.btn-ripple:hover::after{transform:scale(4)}
+.btn-ripple:hover{background-color:#D62324;border-color:#F07071}
+.btn-ripple:focus-visible{outline:2px solid #1D1D1F;outline-offset:3px}
+.btn-ripple.is-line{background-color:#048456;border-color:#0AA06C}
+.btn-ripple.is-line:hover{background-color:#059A64;border-color:#3FC79A}
+.btn-ripple.is-dark{background-color:#1d1d1f;border-color:#3a3a3c}
+.btn-ripple.is-dark:hover{background-color:#292929;border-color:#666}
+/* 動效偏好：關閉漣漪，保留底色變化 */
+@media(prefers-reduced-motion:reduce){
+  .btn-ripple::after{display:none}
+  .btn-ripple{transition:background-color .01s}
+}
+
 /* === CTA Strip (黑底大型 CTA 區塊) === */
-.cta-strip{background:#1d1d1f;padding:80px 24px;text-align:center}
+/* 點陣底紋改自 Uiverse kennyotsu / short-warthog-33（MIT）。只加疊圖，底色 #1d1d1f 不動。
+   點色帶品牌紅（rgba(198,27,28)）而非中性白，底紋才算品牌資產不是通用材質。 */
+.cta-strip{background-color:#1d1d1f;background-image:radial-gradient(rgba(198,27,28,.34) 1.7px,transparent 0);background-size:26px 26px;background-position:-4px -4px;padding:80px 24px;text-align:center}
 .cta-strip h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-bottom:16px}
 .cta-strip p{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
 
