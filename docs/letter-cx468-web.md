@@ -7,12 +7,12 @@
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | `d59e795` feat(ui): 導入 Uiverse 元件並全部改綁品牌色 | `cd ~/cx468-web && git log --oneline -1` |
+| HEAD | `f48ae87` fix(visual): 全站目檢第一批 9 類缺陷修補（32 檔），**已上線驗證** | `cd ~/cx468-web && git log --oneline -1` |
 | 本地 vs 遠端 | 一致（`main...origin/main`，無 ahead/behind） | `git status -sb`；`git ls-remote origin HEAD` |
 | 工作區 | 乾淨，僅一個既有未追蹤檔 `scripts/archive/goal-scores.jsonl`（非本 session 產生，勿 add） | `git status -sb` |
 | 線上 | 首頁與關鍵頁全 200 | `curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/` |
 | 頁面數 | sitemap 115 筆、repo 根目錄 132 個 html | `grep -c '<loc>' sitemap.xml` |
-| 本 session 程式碼改動 | **零**。純唯讀目檢，只新增 `docs/` 兩份文件 | `git show --stat HEAD` |
+| 本 session 程式碼改動 | 目檢 115 頁 → 修 9 類缺陷、32 檔，已 push 並線上驗證通過 | `git show --stat HEAD`；驗證清單見 `docs/visual-audit-2026-08-03.md` 的修補紀錄 |
 
 ⚠️ **工作目錄在 `~/cx468-web/`，不在 iCloud 專案夾**。iCloud 那份是行銷產出與制度檔，動網站程式碼一律走 `~/cx468-web/`（memory: `feedback_icloud_conflict_copies`）。
 
@@ -37,11 +37,14 @@ memory: `feedback_broken_avif_renders_blank`
 - 無。本 session 未觸發任何期限型任務。
 
 ### 可選不急（本 session 產出，全部待修）
-1. **`docs/visual-audit-2026-08-03.md` 第一節 9 項已複驗缺陷** ← 下個 session 的第一順位入口。每項都附了重驗指令，動手前先自己跑一次確認還在。修完要逐頁瀏覽器 render 驗（memory: `feedback_browser_verify_every_page`）
-2. 手機表格逐字直排（同一份 table CSS 影響 8+ 頁）
-3. 14 頁補載 `style.css`（清單在報告第一節第 7 列；要先確認不撞頁內自訂樣式）
-4. 配圖治理：美國 IRS 表單／洛杉磯地標／廟宇照／塑膠模型屋，換 `房屋圖片/` 真實圖庫（需老闆選圖，memory: `feedback_boss_prefers_human_visuals`、`feedback_photo_library_labels_unverified`）
-5. 設計系統收斂（兩套表單元件、舊綠 #16A34A 殘留、非品牌色整頁）——專案級，建議獨立立項
+> 第一節 9 項已於 2026-08-03 全數修完並上線（見報告開頭的修補紀錄），以下是**還沒動**的。
+> 老闆 2026-08-05 已口頭認可「以你建議的修改」，但當次 session 隨即收尾部署，實際未動工——下個 session 可直接接手，動工前再確認一次範圍。
+
+1. **配圖治理**：約 12 處離題 hero（美國 IRS 報稅表單＝article-inherited-shared-ownership、洛杉磯地標×2＝knowledge.html、廟宇/廟會照×3、塑膠模型屋×3、北美豪宅客廳×2）。素材庫 `鋮馨cloud code/房屋圖片/`（24 張，檔名已標「已用/未用/避用」但**標籤不保證乾淨**，用前逐張 Read 目檢，memory: `feedback_photo_library_labels_unverified`）
+2. **手機表格逐字直排**：8+ 頁共用同型 table CSS。建議一律 `overflow-x:auto` ＋首欄 `min-width`／`nowrap` ＋捲動提示（比逐頁改卡片式風險低）
+3. **設計系統收斂**：兩套表單元件（底線式＋圖示卡 vs 灰底框＋原生 select，後者在 article-home-equity/article-second-mortgage/hsinchu-second-mortgage/article-second-mortgage-rates）；舊綠 #16A34A 殘留 7 頁 → #048456；market-insight/rental-management-news/glossary/compare-options 整頁藍色系
+4. **topic-a/b/c/d 快速答案數字與 radar-index 對不上**：真實來源是 `cx_data.json`（`fetch_indicators.py` 餵），建議寫成 build 期腳本重寫四頁數字＋統一月/季口徑標示；勿手改
+5. **`#0071e3` 藍**：58 檔 262 處。建議只改「文字連結」用途（`color:#0071e3`）→ 品牌綠 #048456，`background:`／`border:` 用途另案，避免整站按鈕變色
 
 ### 日常常態
 - 每天 12:00 精進會議（session 級排程，每個 session 要重設）
