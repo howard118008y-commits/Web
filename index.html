@@ -7,7 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/hero-d.jpg" imagesrcset="img/hero-m.jpg 1000w, img/hero-d.jpg 2200w" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(max-width:768px)" href="img/hero-m.avif" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(min-width:769px)" href="img/hero-d-1600.avif" imagesrcset="img/hero-d-1600.avif 1600w, img/hero-d-2560.avif 2560w, img/hero-d-3840.avif 3840w" imagesizes="100vw" fetchpriority="high">
 <title>新北貸款整合・二胎房貸｜鋮馨租賃有限公司｜售後回租・包租代管</title>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta name="description" content="多筆負債整合成一筆、二胎房貸與售後回租依個案評估，另提供包租代管出租管理。鋮馨深耕新北中和 20 年以上、39 家以上合作銀行，LINE 線上諮詢，不申請不收費；最終核貸由金融機構決定。">
@@ -756,8 +757,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <section id="hero">
   <div class="hero">
     <picture>
+      <source media="(max-width:768px)" srcset="img/hero-m.avif" type="image/avif">
+      <source media="(max-width:768px)" srcset="img/hero-m.webp" type="image/webp">
       <source media="(max-width:768px)" srcset="img/hero-m.jpg">
-      <picture><source srcset="img/hero-d-1600.avif 1600w, img/hero-d-2560.avif 2560w, img/hero-d-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/hero-d-1600.webp 1600w, img/hero-d-2560.webp 2560w, img/hero-d-3840.webp 3840w" sizes="100vw" type="image/webp"><img src="img/hero-d.jpg" alt="黃昏金色光線下的台灣都會天際線" fetchpriority="high" loading="eager"/></picture>
+      <source srcset="img/hero-d-1600.avif 1600w, img/hero-d-2560.avif 2560w, img/hero-d-3840.avif 3840w" sizes="100vw" type="image/avif">
+      <source srcset="img/hero-d-1600.webp 1600w, img/hero-d-2560.webp 2560w, img/hero-d-3840.webp 3840w" sizes="100vw" type="image/webp">
+      <img src="img/hero-d.jpg" alt="黃昏金色光線下的台灣都會天際線" fetchpriority="high" loading="eager"/>
     </picture>
     <div class="hero-overlay"></div>
     <div class="hero-body">
