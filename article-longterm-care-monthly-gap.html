@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>長照撐到第三年那筆帳：每月自付缺口怎麼算｜鋮馨租賃</title>
+<meta name="description" content="長照給付不是全額買單。缺口來自三處：額度內的部分負擔、超出額度的全額自費、給付範圍外的支出。本文用結構性算式算出每月缺口與可能期間，不編造費用金額。">
+<meta property="og:title" content="長照撐到第三年那筆帳：每月自付缺口怎麼算">
+<meta property="og:description" content="長照給付不是全額買單。缺口來自三處：額度內的部分負擔、超出額度的全額自費、給付範圍外的支出。本文用結構性算式算出每月缺口與可能期間，不編造費用金額。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cx468.com.tw/article-longterm-care-monthly-gap.html">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="鋮馨租賃有限公司">
+<link rel="canonical" href="https://cx468.com.tw/article-longterm-care-monthly-gap.html">
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+.btn-green-lg{display:inline-block;background:#048456;color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:28px;text-decoration:none}
+.art-hero{background:#1a3a2a;padding:100px 2rem 60px;text-align:center}
+.art-tag{display:inline-block;font-size:10px;font-weight:500;padding:0 0 8px;border-radius:0;background:transparent;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(255,255,255,.4);margin-bottom:1.2rem;letter-spacing:.26em;text-transform:uppercase}
+.art-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.4;max-width:760px;margin:0 auto 1rem}
+.art-hero-sub{font-size:15px;color:rgba(255,255,255,.72);max-width:640px;margin:0 auto 1rem;line-height:1.8}
+.art-hero-meta{font-size:13px;color:rgba(255,255,255,.45)}
+.art-body{max-width:720px;margin:0 auto;padding:4rem 2rem 5rem}
+.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6}
+.art-body h3{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;letter-spacing:.01em;margin:1.9rem 0 .75rem}
+.art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.25rem}
+.art-body ul,.art-body ol{margin:.5rem 0 1.25rem 1.5rem}
+.art-body li{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:.4rem}
+.highlight-box{background:#f6f5f3;border:1px solid #e3e3e6;border-radius:0;padding:1.5rem 2rem;margin:2rem 0}
+.highlight-box p{margin-bottom:0}
+.warning-box{background:#faf6f5;border:1px solid #eddedd;border-left:2px solid #C61B1C;border-radius:0;padding:1.25rem 1.5rem;margin:2rem 0}
+.warning-box p{margin-bottom:0;color:#3d3d3f}
+.cta-box{background:#1a3a2a;border-radius:0;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h3{font-family:"Noto Serif TC","Songti TC",serif;font-size:23px;font-weight:600;color:#fff;letter-spacing:.01em;margin-bottom:.75rem}
+.cta-box p{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:1.5rem;line-height:1.8}
+.cta-box a{display:inline-block;background:#048456;color:#fff;padding:14px 32px;border-radius:0;font-size:15px;font-weight:600;text-decoration:none;margin-right:8px}
+.cta-box a.cta-secondary{background:rgba(255,255,255,.14);border:.5px solid rgba(255,255,255,.3)}
+.compare-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
+.compare-table th{background:#1a3a2a;color:#fff;padding:12px 16px;text-align:left}
+.compare-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.6}
+.compare-table tr:nth-child(even) td{background:#f9f9f9}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:2rem;text-decoration:none}
+.check-card{background:#f0fdf4;border-left:4px solid #16a34a;border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.check-card h4{font-size:16px;font-weight:700;color:#166534;margin-bottom:.5rem}
+.check-card p,.check-card li{font-size:15px;color:#3d3d3f;margin-bottom:.3rem}
+@media(max-width:768px){.art-hero h1{font-size:28px}.art-body h2{font-size:22px}}
+.trust-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem;margin-top:1.4rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.14)}
+.trust-badges span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.78);letter-spacing:.02em}
+.trust-badges svg{width:15px;height:15px;flex-shrink:0;color:#e0b978}
+.toc-box{background:#fff;border:1px solid #e3e3e6;border-left:2px solid #1a3a2a;padding:1.1rem 1.5rem;margin:0 0 2.2rem}
+.toc-box .toc-label{font-size:12px;font-weight:700;color:#86868b;letter-spacing:.18em;margin-bottom:.6rem;text-transform:uppercase}
+.toc-box ol{margin:0;padding-left:1.2rem;columns:2;column-gap:2rem}
+.toc-box li{font-size:14px;line-height:2;margin-bottom:0}
+.toc-box a{color:#1d1d1f;text-decoration:none;border-bottom:1px solid transparent}
+.toc-box a:hover{border-bottom-color:#1a3a2a;color:#1a3a2a}
+.card-icon{display:inline-flex;vertical-align:-3px;margin-right:4px}
+.card-icon svg{width:17px;height:17px}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0;border-radius:4px}
+.table-scroll .compare-table{margin:0;min-width:560px}
+.table-scroll::-webkit-scrollbar{height:6px}
+.table-scroll::-webkit-scrollbar-thumb{background:#d8d8dc;border-radius:3px}
+.src-table td{font-size:13px}
+@media(max-width:600px){.toc-box ol{columns:1}.trust-badges{gap:1rem 1.4rem}.trust-badges span{font-size:11.5px}}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "長照撐到第三年那筆帳：每月自付缺口怎麼算",
+ "description": "長照給付不是全額買單。缺口來自三處：額度內的部分負擔、超出額度的全額自費、給付範圍外的支出。本文用結構性算式算出每月缺口與可能期間，不編造費用金額。",
+ "author": {
+  "@type": "Organization",
+  "name": "鋮馨融資顧問團隊",
+  "url": "https://cx468.com.tw/about.html"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "鋮馨租賃有限公司",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://cx468.com.tw/img/logo.jpg"
+  }
+ },
+ "datePublished": "2026-08-12",
+ "dateModified": "2026-08-12",
+ "url": "https://cx468.com.tw/article-longterm-care-monthly-gap.html",
+ "mainEntityOfPage": "https://cx468.com.tw/article-longterm-care-monthly-gap.html",
+ "keywords": "長照費用,長照自付額,部分負擔,長照給付額度,住宿式服務機構使用者補助,照顧缺口,長照3.0,鋮馨租賃",
+ "inLanguage": "zh-TW",
+ "speakable": {
+  "@type": "SpeakableSpecification",
+  "cssSelector": [
+   "h1"
+  ]
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Q1：長照給付是政府全額補助嗎？為什麼申請了還是要自付？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不是全額補助。長照採額度制與部分負擔制：照管專員評估長照需要等級後核定給付額度，使用者在額度內依經濟狀況的身分別自付一定比率——依衛福部長照專區公告，第一類政府全額補助、第二類自付 5～10%、第三類自付 16～30%。此外，超出核定額度的服務由使用者全額自行負擔，因此即使已申請長照服務，家庭通常仍會有自付缺口。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Q2：每月的自付缺口該怎麼算？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "建議用結構性算式而非平均數：每月照顧與生活相關支出總額，減去長照給付當月實際折抵的金額（核定額度內使用的服務金額扣除部分負擔後的部分），再減去其他補助換算成月的金額、長輩本人每月可支應的固定收入、以及家庭成員目前每月實際分攤的金額，得到的才是每月缺口。要注意不能直接用「核定額度」相減，因為核定額度是上限而非實際折抵金額，超出額度的支出必須留在支出端。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Q3：長照給付的額度會不會過期？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "會。依《長期照顧服務申請及給付辦法》，照顧及專業服務與交通接送服務按月核給，額度以六個月為一期，未使用完得於六個月內保留使用，期滿歸零；輔具及居家無障礙環境改善服務為每三年給付一次，喘息服務為每年給付一次。因此「捨不得用」反而可能造成額度歸零。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Q4：住宿式服務機構使用者補助可以補多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "依衛福部公告，補助對象須經評估符合長照需要等級第 4 級以上或具身心障礙證明中度以上，且當年度累計入住達 180 天，未滿者按月計算；金額自 112 年度起由每人每年最高 6 萬元調增為每人每年最高 12 萬元，並取消排富規定。惟本方案逐年公告，2026（115）年度的實際額度、資格與申請期間，請以衛福部及各縣市當年度公告為準，或洽當地長期照顧管理中心。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Q5：住宿式機構一個月要多少錢、看護行情多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "本文不提供費用金額區間。住宿式服務機構的收費與看護費用，依機構、地區、照顧等級與服務內容而異，且無官方全國統一公告的費用區間，任何網路上的平均數都不適合當作你家的計算基礎。建議直接向擬入住的機構索取正式收費明細，再用實際數字填入本文的缺口算式。"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"知識專欄","item":"https://cx468.com.tw/knowledge.html"},{"@type":"ListItem","position":3,"name":"長照撐到第三年那筆帳：每月自付缺口怎麼算","item":"https://cx468.com.tw/article-longterm-care-monthly-gap.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","logo":{"@type":"ImageObject","url":"https://cx468.com.tw/img/og-image.jpg"},"image":"https://cx468.com.tw/img/og-image.jpg","description":"鋮馨租賃有限公司提供不動產售後回租、貸款整合、民間轉銀行專業諮詢與媒合服務。20 年以上經驗，整合39 家以上合作銀行。","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":25.0070,"longitude":121.4912},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"]}
+</script>
+<script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="長照撐到第三年那筆帳：每月自付缺口怎麼算">
+<meta name="twitter:description" content="長照給付不是全額買單。缺口來自三處：額度內的部分負擔、超出額度的全額自費、給付範圍外的支出。本文用結構性算式算出每月缺口與可能期間，不編造費用金額。">
+<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+});
+</script>
+<meta name="author" content="鋮馨租賃有限公司">
+<meta name="geo.region" content="TW-NWT">
+<meta name="geo.placename" content="新北市中和區">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","@id":"https://cx468.com.tw/article-longterm-care-monthly-gap.html#webpage","url":"https://cx468.com.tw/article-longterm-care-monthly-gap.html","name":"長照撐到第三年那筆帳：每月自付缺口怎麼算","speakable":{"@type":"SpeakableSpecification","cssSelector":["#quick-answer"]},"primaryImageOfPage":{"@type":"ImageObject","url":"https://cx468.com.tw/img/og-image.jpg"},"inLanguage":"zh-TW"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"DefinedTermSet","name":"長照制度名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"長照需要等級","description":"由照管專員評估後認定的長期照顧需要程度，決定給付額度與可用服務。"},{"@type":"DefinedTerm","name":"部分負擔","description":"長照給付在核定額度內，由使用者依經濟狀況身分別自行負擔的比率。"},{"@type":"DefinedTerm","name":"核定給付額度","description":"依長照需要等級核定、可使用長照服務的金額上限；超出部分由使用者全額自行負擔。"},{"@type":"DefinedTerm","name":"住宿式服務機構使用者補助","description":"衛福部針對入住住宿式服務機構者提供的補助方案，資格、額度與申請期間依當年度公告為準。"},{"@type":"DefinedTerm","name":"售後回租","description":"房子過戶給投資方、同時簽租約繼續住、並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。"}]}
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27280305434986441');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div data-include="nav"></div>
+
+<section class="art-hero">
+  <div class="art-tag">長照規劃 · 家庭財務</div>
+  <h1>長照撐到第三年那筆帳：<br>每月自付缺口怎麼算</h1>
+  <p class="art-hero-sub">長照給付不是全額買單。缺口來自額度內的部分負擔、超出額度的全額自費，以及給付範圍外的支出。</p>
+  <div class="art-hero-meta">鋮馨融資顧問團隊 · 2026年8月 · 閱讀約 10 分鐘</div>
+  <div class="trust-badges">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>20+ 年不動產融資經驗</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>合作銀行39家以上</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9v.01M15 9v.01M9 13v.01M15 13v.01"/></svg>新北中和實體辦公室</span>
+  </div>
+</section>
+
+<div class="art-body">
+  <a href="knowledge.html" class="back-link">← 返回知識專欄</a>
+
+  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1a3a2a;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+    <div style="font-size:13px;font-weight:700;color:#1a3a2a;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
+    <p style="font-size:16px;line-height:1.75;color:#1d1d1f;margin:0 0 14px;"><strong>先講結論：</strong>長照給付不是「政府全額買單」，它是<strong>在核定額度之內、依身分別分攤</strong>。所以自付缺口的來源有三個：①額度內你要負擔的<strong>部分負擔</strong>比率；②<strong>超出核定額度</strong>的服務，全額自費；③<strong>根本不在四類給付範圍內</strong>的支出（例如住宿式機構的費用，走的是另一套補助方案）。算缺口不是查平均數，是把你家這三筆加起來、再乘上「可能要撐多久」。</p>
+    <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
+      <li>長照給付分四類：照顧及專業服務、交通接送、輔具及居家無障礙環境改善、喘息服務；前兩類按月核給額度，輔具類每三年一次，喘息每年一次（依《長期照顧服務申請及給付辦法》）</li>
+      <li>部分負擔依經濟狀況分三類：第一類政府全額補助、第二類自付 5～10%、第三類自付 16～30%（衛福部長照專區公告）</li>
+      <li>超出核定額度的部分，由使用者全額自行負擔——這是最常被漏算的一筆</li>
+      <li>住宿式服務機構使用者補助自 112 年度起為每人每年最高 12 萬元、取消排富；<strong>方案逐年公告，115（2026）年度額度以中央與各縣市當年度公告為準</strong></li>
+      <li>本文<strong>不列任何照顧費用金額區間</strong>：機構收費與看護行情依機構、地區、照顧等級與服務內容而異，且無官方全國統一公告</li>
+      <li>本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定</li>
+    </ul>
+  </div>
+
+  <div class="toc-box">
+    <div class="toc-label">本文目錄</div>
+    <ol>
+      <li><a href="#intro">第一年靠意志，第三年靠算術</a></li>
+      <li><a href="#notfull">長照給付不是全額買單</a></li>
+      <li><a href="#gap1">來源①｜額度內的部分負擔</a></li>
+      <li><a href="#gap2">來源②｜超出額度全額自費</a></li>
+      <li><a href="#gap3">來源③｜給付範圍外的支出</a></li>
+      <li><a href="#residential">住宿式機構的補助怎麼算</a></li>
+      <li><a href="#formula">那筆帳怎麼算：可重複使用的算式</a></li>
+      <li><a href="#longterm">缺口長期化，改變的是什麼</a></li>
+      <li><a href="#alternatives">還有哪些方向可以評估</a></li>
+      <li><a href="#faq">常見問題</a></li>
+      <li><a href="#sources">查證來源清單</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro">開場｜第一年靠意志，第三年靠算術</h2>
+
+  <p>長照剛開始的時候，家裡通常是靠意志力撐的。誰請假、誰跑醫院、誰半夜起來翻身，大家咬著牙排班，沒有人在算錢。</p>
+
+  <p>問題出在後面。照顧不是一個事件，是一段<strong>期間</strong>。當它從幾個月變成幾年，靠意志力排出來的班表會先垮，接著垮的是現金流——因為每個月都在流出，而收入那一側沒有跟著長大。</p>
+
+  <p>先說清楚一件事：<strong>本文標題的「第三年」不是統計數字，也不是預測。</strong>照顧會持續多久，沒有人能事先知道，本文也不引用任何來源不明的平均年限。「第三年」只是一個提醒：長照這筆帳真正的殺傷力不在單月金額，而在它會<strong>乘以一個你無法決定的期間</strong>。</p>
+
+  <p>所以這篇文章只做一件事——把「每個月到底差多少」這個數字，用一個可以重複使用的算式攤開。你家的數字要用你家的帳單填，不能用網路上的平均數。</p>
+
+  <h2 id="notfull">先破除一個誤會：長照給付不是全額買單</h2>
+
+  <p>很多家庭第一次接觸長照服務時，會有一個直覺的期待：「政府有長照，那應該就有人來幫忙照顧了吧。」</p>
+
+  <p>實際的制度設計不是這樣。長照給付是<strong>額度制＋部分負擔制</strong>：照管專員先評估出長照需要等級，依等級核定給付額度；你在額度內使用服務，再依經濟狀況的身分別，自付一定比率。</p>
+
+  <p>依《長期照顧服務申請及給付辦法》，給付分四類，額度週期各不相同：</p>
+
+  <div class="table-scroll">
+  <table class="compare-table">
+    <tr><th>給付類別</th><th>額度週期</th></tr>
+    <tr><td>照顧及專業服務</td><td>按月核給（額度以六個月為一期，未使用完得於六個月內保留使用，期滿歸零）</td></tr>
+    <tr><td>交通接送服務</td><td>按月核給（同上，以六個月為一期）</td></tr>
+    <tr><td>輔具及居家無障礙環境改善服務</td><td>每三年給付一次</td></tr>
+    <tr><td>喘息服務</td><td>每年給付一次</td></tr>
+  </table>
+  </div>
+
+  <p>這張表本身就藏著兩個常被忽略的重點：</p>
+
+  <ol>
+    <li><strong>額度會過期。</strong>照顧及專業服務與交通接送的額度以六個月為一期，沒用完可以在六個月內保留，期滿歸零。很多家庭是「捨不得用」，結果額度過期歸零，等於白白少領。</li>
+    <li><strong>輔具三年一次、喘息一年一次。</strong>這兩類不是隨時可用的水龍頭，需要提前規劃。喘息服務尤其常被家庭照顧者放到最後才想到，而那通常已經是撐不下去的時候。</li>
+  </ol>
+
+  <p>部分負擔則依經濟狀況分三類：<strong>第一類政府全額補助、第二類自付 5～10%、第三類自付 16～30%</strong>（衛福部長照專區公告）。</p>
+
+  <h2 id="gap1">缺口的三個來源｜來源①：額度內的部分負擔</h2>
+
+  <p>這是最好算的一筆：你在核定額度內用了多少服務，就依身分別的比率自付。這一筆的特性是<strong>可預期、隨使用量等比例變動</strong>，也是三者中最容易被家庭接受的一筆。</p>
+
+  <h2 id="gap2">來源②｜超出核定額度的部分，全額自費</h2>
+
+  <p>這一筆才是缺口真正的主要來源。</p>
+
+  <p>核定額度是依長照需要等級算出來的，而實際的照顧需求不會剛好等於等級。當照顧需求高於等級所核定的額度——例如需要的服務時數更多、需要的服務組合更密集——<strong>超過的部分不再適用部分負擔比率，而是由使用者全額自行負擔</strong>。</p>
+
+  <div class="highlight-box">
+    <p>用一句話說：<strong>部分負擔是「額度內」的折扣；額度用完之後，就沒有折扣了。</strong></p>
+  </div>
+
+  <p>這解釋了一個很多家庭的困惑：明明領到了長照給付，為什麼每個月還是差這麼多？因為長照給付填的是額度內那一格，而你家的需求可能站在格子外面。</p>
+
+  <h2 id="gap3">來源③｜不在四類給付範圍內的支出</h2>
+
+  <p>第三筆最容易被整個漏掉，因為它甚至沒有出現在長照的帳單上。</p>
+
+  <p>長照給付的四類服務是有邊界的。<strong>住宿式服務機構的費用就是最典型的例子</strong>——它不是靠上面那四類給付支應，而是走另一套獨立的方案：「住宿式服務機構使用者補助方案」。制度上這是兩條不同的路，不是同一條路的延伸。</p>
+
+  <div class="warning-box">
+    <p><span class="card-icon" style="color:#C61B1C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17v.01"/></svg></span><strong>誠實揭露</strong>：關於「哪些支出不在長照給付範圍內」，本文查證時<strong>未能找到衛福部或縣市長照中心的官方逐條排除清單</strong>。因此本文不列舉任何「官方認定不給付」的項目清單，只依制度結構說明：長照給付涵蓋的是上述四類服務；住宿式機構費用另循補助方案辦理。其餘支出是否在給付範圍內，請以照管專員核定的照顧計畫與各縣市長照管理中心的說明為準。</p>
+  </div>
+
+  <h2 id="residential">住宿式機構這條路，補助怎麼算</h2>
+
+  <p>如果長輩已經入住或準備入住住宿式服務機構，要看的是另一個方案。</p>
+
+  <p>依衛福部公告，<strong>住宿式服務機構使用者補助</strong>的條件是：經評估符合<strong>長照需要等級第 4 級以上，或具身心障礙證明中度以上</strong>，且<strong>當年度累計入住達 180 天</strong>；未滿者按月計算。</p>
+
+  <p>金額沿革要看清楚：</p>
+
+  <ul>
+    <li>108–111 年度：每人每年最高 6 萬元，且有排富規定（所得稅率未達 20%）</li>
+    <li><strong>112 年度起：長照需要等級 4 級以上住民調增為每人每年最高 12 萬元，並取消排富規定</strong></li>
+  </ul>
+
+  <div class="warning-box">
+    <p><span class="card-icon" style="color:#C61B1C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17v.01"/></svg></span><strong>但這裡有一個必須講的但書</strong>：這是<strong>逐年公告</strong>的補助方案。本文查證日（2026-08-12）確認，部分縣市 115（2026）年度的公告仍載明「補助金額尚待中央公告」。<strong>所以請不要把 12 萬當成 2026 年度已經定案的數字</strong>——實際額度、資格與申請期間，一律以衛福部及你所在縣市當年度的公告為準，或直接洽詢當地長期照顧管理中心。</p>
+  </div>
+
+  <p>即使補助足額，這筆錢在算術上的意義也要看清楚：<strong>它是年度額度，換算成月，是把年度額度除以 12。</strong>用年度數字去對月缺口，會把自己算得太樂觀。</p>
+
+  <h2 id="formula">那筆帳怎麼算：一個可以重複使用的算式</h2>
+
+  <p>以下是結構性算式，<strong>沒有任何一格由本文代填數字</strong>——每一格都要用你家的實際帳單與核定結果填。</p>
+
+  <h3>第一步：算出每月缺口</h3>
+
+  <div class="check-card">
+    <h4>每月自付缺口 ＝</h4>
+    <ul>
+      <li>① 每月照顧與生活相關支出總額（用實際帳單，不用平均數）</li>
+      <li>－ ② 長照給付當月實際折抵的金額（＝核定額度內使用的服務金額 × (1 － 你家身分別的部分負擔比率)）</li>
+      <li>－ ③ 其他補助換算成月的金額（例如住宿式補助：當年度核定額度 ÷ 12）</li>
+      <li>－ ④ 長輩本人每月可支應的固定收入（年金給付、退休金、租金等固定收入，以及可規律提用的存款）</li>
+      <li>－ ⑤ 家庭成員目前每月實際分攤的金額</li>
+    </ul>
+  </div>
+
+  <p><strong>幾個容易算錯的地方，先標出來：</strong></p>
+
+  <ul>
+    <li><strong>②不要用「核定額度」直接減。</strong>核定額度是上限，不是實際折抵金額；你實際用了多少服務、多少落在額度內，才是能折抵的部分。超出額度的服務金額，要留在①裡，不能減掉。</li>
+    <li><strong>③是年度額度換算的月數字，不是當月一次入帳。</strong></li>
+    <li><strong>⑤要寫實際數字，不是「大概吧」。</strong>這一格模糊，全家後面的討論就會失焦——因為爭執通常不是發生在「該不該幫」，而是發生在「我以為你出得比較多」。</li>
+    <li><strong>①要含容易漏記的品項：</strong>耗材、交通、額外增加的水電與伙食、為了照顧而減少的工作收入（這一項是隱形支出，但它真的在流失）。</li>
+  </ul>
+
+  <h3>第二步：把缺口乘上期間</h3>
+
+  <div class="highlight-box">
+    <p><strong>資金需求量級 ＝ 每月自付缺口 × 可能要撐的月數</strong></p>
+  </div>
+
+  <p>期間沒有人算得準，所以這一步不是要你「猜對」，是要你<strong>看到量級</strong>。同一個月缺口，乘 12 個月和乘 36 個月，是兩個完全不同性質的問題：</p>
+
+  <ul>
+    <li><strong>短期缺口（幾個月到一年）</strong>：適合用可逆性高、成本低的方式處理——公部門資源、家庭分攤、既有存款與保單的動用順序。</li>
+    <li><strong>長期缺口（好幾年）</strong>：用短期方式反覆填，會變成每隔幾個月就重來一次的消耗戰；這時候才需要把量級更大、可逆性較低的方案拿出來評估。</li>
+  </ul>
+
+  <p><strong>這一步的價值不在算出正確答案，在於避免用錯量級的工具。</strong>用長期方案去解短期缺口，成本會過高；用短期方案去撐長期缺口，會反覆重來，而且每一次重來都在消耗全家人的耐心。</p>
+
+  <h2 id="longterm">缺口長期化，真正改變的是什麼</h2>
+
+  <p>當缺口從「這個月比較緊」變成「每個月都差這麼多、而且看不到終點」，有三件事會跟著改變，值得在做任何決定前先看見：</p>
+
+  <ol>
+    <li><strong>決策的性質變了。</strong>短期缺口是週轉問題，長期缺口是結構問題。結構問題用週轉的方法處理，只會把時間換成更大的壓力。</li>
+    <li><strong>家庭關係開始計價。</strong>分攤如果沒有明確化、沒有期限、沒有寫下來，時間一拉長，手足之間的默契會磨損。<strong>把分攤寫成文字，不是傷感情，是保護感情。</strong></li>
+    <li><strong>可逆性變成最重要的判準。</strong>缺口拉長時，家庭很容易急著找一個「一次解決」的方案。但在資訊不完整的情況下做不可逆的決定，是這整個過程裡風險最高的一步。</li>
+  </ol>
+
+  <h2 id="alternatives">還有哪些方向可以評估（中性收束）</h2>
+
+  <p>把算式填完之後，才輪到談方向。以下這幾類<strong>沒有優劣之分，只有適不適合</strong>，而且<strong>建議照這個順序評估</strong>：</p>
+
+  <ol>
+    <li><strong>先把公部門資源領滿。</strong>長照服務、住宿式服務機構使用者補助等，申請與否跟房子無關，該領先領。可撥打長照專線 <strong>1966</strong>、聯絡當地長期照顧管理中心（或線上申請）、住院期間聯絡出院準備銜接長照服務小組。額度會過期歸零，「捨不得用」等於白白少領。制度上補到哪裡、邊界在哪裡，見〈<a href="article-longterm-care-30-coverage.html" style="color:#0071e3;">長照 3.0 補了什麼、沒補什麼</a>〉。</li>
+    <li><strong>家庭內部的分攤與協議。</strong>成本最低、可逆性最高，卻最常因為沒人開口而被跳過。把分攤金額、期間與調整方式寫成文字。</li>
+    <li><strong>既有資源的動用順序。</strong>存款、保單、既有往來金融機構的方案，各自的成本與可逆性不同，值得先排順序再動。</li>
+    <li><strong>房屋擔保類的貸款方案。</strong>以房子為擔保的各類貸款方案由金融機構承作，條件依個案財務狀況、不動產與擔保條件而定，<strong>最終核貸由金融機構決定</strong>。若曾被婉拒，建議先確認是哪一項條件不符，再決定下一步（延伸閱讀：〈<a href="article-reverse-mortgage-declined.html" style="color:#0071e3;">銀行說我家不能辦以房養老，為什麼？六個常見的不符條件</a>〉）。</li>
+    <li><strong>不動產本身的活化安排。</strong>例如售後回租——<strong>房屋過戶給投資方（承作方）、同時簽租約繼續居住，並保有日後依約買回的權利</strong>；是否適合，依個案不動產條件、財務狀況與家庭共識評估，詳見〈<a href="article-sale-leaseback.html" style="color:#0071e3;">售後回租是什麼？流程、費用、風險與適合對象一次看懂</a>〉。</li>
+  </ol>
+
+  <p>至於「這個家的房子要不要動」，那是另一個更前面的問題——建議先把〈<a href="article-parents-house-sell-or-not.html" style="color:#0071e3;">爸媽的房子要不要賣？先問這 6 個問題</a>〉那六題按順序過一遍，再回頭看這裡的第 4、5 類。<strong>產權人本人的理解與同意，是任何方案的前提。</strong></p>
+
+  <h2 id="faq">常見問題</h2>
+
+  <h3>Q1：長照給付是政府全額補助嗎？為什麼申請了還是要自付？</h3>
+  <p>不是全額補助。長照採額度制與部分負擔制：照管專員評估長照需要等級後核定給付額度，使用者在額度內依經濟狀況的身分別自付一定比率——依衛福部長照專區公告，第一類政府全額補助、第二類自付 5～10%、第三類自付 16～30%。此外，超出核定額度的服務由使用者全額自行負擔，因此即使已申請長照服務，家庭通常仍會有自付缺口。</p>
+
+  <h3>Q2：每月的自付缺口該怎麼算？</h3>
+  <p>建議用結構性算式而非平均數：每月照顧與生活相關支出總額，減去長照給付當月實際折抵的金額（核定額度內使用的服務金額扣除部分負擔後的部分），再減去其他補助換算成月的金額、長輩本人每月可支應的固定收入、以及家庭成員目前每月實際分攤的金額，得到的才是每月缺口。要注意不能直接用「核定額度」相減，因為核定額度是上限而非實際折抵金額，超出額度的支出必須留在支出端。</p>
+
+  <h3>Q3：長照給付的額度會不會過期？</h3>
+  <p>會。依《長期照顧服務申請及給付辦法》，照顧及專業服務與交通接送服務按月核給，額度以六個月為一期，未使用完得於六個月內保留使用，期滿歸零；輔具及居家無障礙環境改善服務為每三年給付一次，喘息服務為每年給付一次。因此「捨不得用」反而可能造成額度歸零。</p>
+
+  <h3>Q4：住宿式服務機構使用者補助可以補多少？</h3>
+  <p>依衛福部公告，補助對象須經評估符合長照需要等級第 4 級以上或具身心障礙證明中度以上，且當年度累計入住達 180 天，未滿者按月計算；金額自 112 年度起由每人每年最高 6 萬元調增為每人每年最高 12 萬元，並取消排富規定。惟本方案逐年公告，2026（115）年度的實際額度、資格與申請期間，請以衛福部及各縣市當年度公告為準，或洽當地長期照顧管理中心。</p>
+
+  <h3>Q5：住宿式機構一個月要多少錢、看護行情多少？</h3>
+  <p>本文不提供費用金額區間。住宿式服務機構的收費與看護費用，依機構、地區、照顧等級與服務內容而異，且無官方全國統一公告的費用區間，任何網路上的平均數都不適合當作你家的計算基礎。建議直接向擬入住的機構索取正式收費明細，再用實際數字填入本文的缺口算式。</p>
+
+  <h2 id="sources">查證來源清單（查證日期均為 2026-08-12）</h2>
+
+  <div class="table-scroll">
+  <table class="compare-table src-table">
+    <tr><th>事實</th><th>來源</th></tr>
+    <tr>
+      <td>長照服務對象（長照需要等級 2 級以上；65 歲以上老人／55 歲以上原住民／50 歲以上失智症者，115-01-01 起新增 49 歲以下失智症者／失能身心障礙者／115-01-01 起新增急性後期整合照護計畫收案對象）；申請四管道；部分負擔三類（第一類全額補助／第二類 5～10%／第三類 16～30%）</td>
+      <td><a href="https://1966.gov.tw/LTC/cp-6533-70777-207.html" target="_blank" rel="nofollow noopener" style="color:#0071e3;">衛福部長照專區 1966「申請長照服務」（官方）</a></td>
+    </tr>
+    <tr>
+      <td>四類給付額度週期：照顧及專業服務與交通接送按月核給、額度以六個月為一期未用完得保留六個月期滿歸零；輔具及居家無障礙環境改善每三年一次；喘息服務每年一次。核定給付額度後依身分別自負擔一定比率；超出核定額度部分由使用者全額自行負擔</td>
+      <td><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0070059" target="_blank" rel="nofollow noopener" style="color:#0071e3;">全國法規資料庫《長期照顧服務申請及給付辦法》</a></td>
+    </tr>
+    <tr>
+      <td>長照給付四大類別分類</td>
+      <td><a href="https://1966.gov.tw/LTC/np-6450-207.html" target="_blank" rel="nofollow noopener" style="color:#0071e3;">衛福部長照專區 1966「給付及支付」（官方）</a></td>
+    </tr>
+    <tr>
+      <td>住宿式服務機構使用者補助：108–111 年度每人每年最高 6 萬元且有排富（所得稅率未達 20%）；112 年度起長照需要等級 4 級以上調增為每人每年 12 萬元並取消排富</td>
+      <td><a href="https://1966.gov.tw/LTC/cp-6457-69925-207.html" target="_blank" rel="nofollow noopener" style="color:#0071e3;">衛福部長照專區 1966「住宿式服務使用者補助方案」（官方）</a></td>
+    </tr>
+    <tr>
+      <td>住宿式補助資格：長照需要等級第 4 級以上或身心障礙證明中度以上、當年度累計入住達 180 天、未滿者按月計算</td>
+      <td><a href="https://www.mohw.gov.tw/cp-6564-74655-1.html" target="_blank" rel="nofollow noopener" style="color:#0071e3;">衛福部新聞稿（官方）</a></td>
+    </tr>
+    <tr>
+      <td>115（2026）年度住宿式補助金額中央尚未重新公告（縣市公告載明「補助金額尚待中央公告」）</td>
+      <td><a href="https://health.kcg.gov.tw/News_Content.aspx?n=A354A5298C8A4AA8&amp;sms=26BD5515159837CE&amp;s=484E377966C45E85" target="_blank" rel="nofollow noopener" style="color:#0071e3;">高雄市政府衛生局 115 年度公告（官方）</a></td>
+    </tr>
+    <tr>
+      <td>長照 3.0 經行政院 114-12-31 核定、期程 115–124 年、2026 年起實施</td>
+      <td><a href="https://1966.gov.tw/LTC/cp-6572-85008-207.html" target="_blank" rel="nofollow noopener" style="color:#0071e3;">衛福部長照專區 1966「長照十年計畫 3.0」（官方）</a></td>
+    </tr>
+  </table>
+  </div>
+
+  <h2>延伸閱讀</h2>
+  <ul>
+    <li><a href="article-longterm-care-30-coverage.html" style="color:#0071e3;">長照 3.0 補了什麼、沒補什麼：一次看懂涵蓋範圍與邊界 →</a></li>
+    <li><a href="article-parents-house-sell-or-not.html" style="color:#0071e3;">爸媽的房子要不要賣？先問這 6 個問題 →</a></li>
+    <li><a href="article-reverse-mortgage-declined.html" style="color:#0071e3;">銀行說我家不能辦以房養老，為什麼？六個常見的不符條件 →</a></li>
+    <li><a href="article-retirement-property.html" style="color:#0071e3;">退休族房產活化 3 種方法：月息繳了 10 年本金還在那裡 →</a></li>
+  </ul>
+
+  <p style="font-size:12px;color:#86868b;margin-top:3rem;line-height:1.9;">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
+</div>
+
+<div class="cta-box" style="max-width:720px;margin:0 auto 3rem;">
+  <h3>免費評估你的狀況</h3>
+  <p>歡迎全家人一起來談；任何方案都以產權人本人的意願與同意為準。<br>新北市中和區中正路 468 號<br>不申請不收費，面談不收費。</p>
+  <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 聯繫我們</a>
+  <a href="tel:+886-931-087-996" class="cta-secondary">來電 0931-087-996</a>
+</div>
+<div id="lead-form"><div data-include="lead-form"></div></div>
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>
