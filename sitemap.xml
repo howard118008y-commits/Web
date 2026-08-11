@@ -182,9 +182,21 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/article-reverse-mortgage-declined.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/article-parents-house-sell-or-not.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/financing-data.html</loc>
