@@ -1,141 +1,122 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後重寫：2026-08-12（獲客結構轉向：下游→上游 session 收尾）
-> 本次重寫原因：8/05 版的重心是配圖與 Render 帳單，已非現況重心。本 session 老闆拍板**獲客從市場末端轉上游**，網站與廣告雙線都改了方向，舊版「未竟五項」有兩項降級、新增上游內容線與廣告重建線。舊段落已刪除重寫，未堆疊。
+> 最後重寫：2026-08-14（付費獲客三線齊發＋Meta 永久權杖打通 session 收尾）
+> 本次重寫原因：8/12 版的重心是「上游內容轉向」，內容線已落地；本 session 重心移到**付費獲客與工具權限**——Meta 名單型廣告上線、Google 搜尋廣告上線、Meta 系統用戶永久權杖打通、名單自動推播接好。舊版「未竟五項」有三項完成、兩項降級。舊段落已刪除重寫，未堆疊。
 
 ## 一、當前狀態快照
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `77f5b3a`（本 session 四顆：`607000d` 長照 A/B 上線、`a9745be` 標題修復 14 頁、`ef56cf6` 長照 C/D＋B 更正、`2bc6e36` 中性表單） | `cd ~/cx468-web && git log --oneline -6` |
-| 本地 vs 遠端 | 一致（本 session 收尾已 rebase） | `git status -sb`；`git ls-remote origin main` |
+| cx468-web HEAD | `09b4966`（本 session 四顆：`8c6fa0d` 稅務權威文、`2b7a6ae` 廣告 LP、`4ce0f78` 座標校正 75 頁、`b4362e8` 新聞卡＋更新頻率、`09b4966` 隱私權政策） | `cd ~/cx468-web && git log --oneline -6` |
+| 本地 vs 遠端 | 一致 | `git status -sb`；`git ls-remote origin main` |
 | 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`（非本 session 產生，**勿 add**） | `git status -sb` |
-| 長照系列四篇線上 | 全 200 | `for U in article-reverse-mortgage-declined article-parents-house-sell-or-not article-longterm-care-monthly-gap article-longterm-care-30-coverage; do curl -s -o /dev/null -w "$U %{http_code}\n" https://cx468.com.tw/$U.html; done` |
-| FAQ 同源 | 含 FAQPage 120 頁，同源 120、漂移 0 | `python3 scripts/audit_faq_samesource.py` |
-| SEO/AEO/GEO | 新頁皆 16/16；全站僅 privacy-policy／terms-of-service 13/16（AEO 豁免既有基線） | `python3 scripts/audit_seo.py` |
-| Meta 廣告 | **只剩 1 支在跑**：`inherit-era-img3`（TRAFFIC／LPV、日預算 400、年齡 40–64、Advantage Audience 已關） | 見第二節「廣告查法」 |
-| Threads bot | token 已換新（8/9 事故）、防重複機制上線；8/10 12:30 實發成功 | `crn-d8jnsps8aovs73d86pig` log 找 `[OK] posted` |
-| LINE OA | 資格四問已上線（含 Q4 貸款狀況）；富者一語推播已改**每週一** 09:00（`cx468-linebot` `dee338e`） | `cd ~/cx468-linebot && git log --oneline -1` |
+| 新頁線上 | 全 200 | `for U in article-estate-tax-transfer-certificate lp-reverse-mortgage-declined privacy-policy radar-index; do curl -s -o /dev/null -w "$U %{http_code}\n" https://cx468.com.tw/$U.html; done` |
+| FAQ 同源 | 121 頁、漂移 0 | `python3 scripts/audit_faq_samesource.py` |
+| SEO/AEO/GEO | 123 頁，缺口僅 privacy／terms（AEO 豁免） | `python3 scripts/audit_seo.py` |
+| **Meta 廣告** | **兩支 ACTIVE**：`rm-declined-leads-202608`（名單型 200/日）、`rm-declined-lp`（流量 100/日）。`inherit-era-img3` 已 PAUSED | 見第二節「Meta 查法」 |
+| **Google 廣告** | `rm-declined-search-202608` ACTIVE、200/日、最大化點擊 | 見第二節「Google 查法」 |
+| 名單輪詢 | launchd `com.cx468.leadspoll` 每 15 分鐘 | `launchctl list \| grep cx468`；`tail -3 ~/.cx468/leads/poller.log` |
+| 三日健檢 | 已加「檢查4 週期任務時效」（commit `b6176f7`，本機未 push） | `cd ~/cx468-ga4-daily && ./venv/bin/python -c "import health_check as h;[print(l) for l in h.check4_stale()]"` |
 
 ⚠️ **工作目錄在 `~/cx468-web/`，不在 iCloud 專案夾**（memory: `feedback_icloud_conflict_copies`）。
 
 ## 二、可複用資產／程序
 
-### 本 session 的核心判準（比任何腳本都重要）
+### 🔑 Meta 權杖（本 session 最大解鎖，永不過期）
 
-**「錢字測試」**：搜尋詞裡出現 貸款／借款／額度／利率／過件／財力 任一詞 → 已被代辦與導客聯盟洗滿，我們排不進去也不該搶。真上游詞只帶**事件、稅制、產權、流程、期限、費用名目**。
-GSC 實據：106 個帶錢字的詞、867 曝光、**0 點擊**；上游詞 1,135 曝光拿走全部 15 次點擊。
-→ 新選題開寫前先過這一關（memory: `project_lead_quality_baseline_and_lateness`）。
-
-### 三套表單 include（不可混用，memory: `feedback_disclaimer_four_variants_and_neutral_cta`）
-| 檔案 | 用在哪 | 頁數 |
-|---|---|---|
-| `lead-form.html` | 「免費評估」帽的頁（轉換主力） | 39 |
-| `lead-form-nofree.html` | 二胎主商品場景 | 5 |
-| `lead-form-neutral.html` | 中性橋接帽的頁（純衛教／他行商品解釋） | 2（A、D 篇）|
-
-判準＝**表單跟著 CTA 帽走**，一頁不得混搭。三檔的**結構與腳本必須同步維護**，只有文案與 hidden 欄位（信件主旨、gtag `form` 參數）可以有差異；`generate_lead` 事件名**不可改**（Ads 主要轉換）。
-
-### 廣告查法（免 Sir 開後台）
-token `~/.cx468/fb_ads_management_long.token`，帳戶 `act_1693554028195795`。
-```bash
-TOKEN=$(cat ~/.cx468/fb_ads_management_long.token)
-curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/campaigns" \
-  --data-urlencode "access_token=$TOKEN" --data-urlencode "fields=name,effective_status,daily_budget"
-```
-- 逐日成效加 `insights?time_increment=1&fields=spend,impressions,cpm,inline_link_clicks,actions`
-- 版位／年齡拆解用 `breakdowns=publisher_platform,platform_position` 與 `breakdowns=age,gender`
-- ⚠️ 改 targeting 前要先關 `targeting_automation.advantage_audience`（開著時 age_max 改不動，回 error_subcode 1870188）
-
-### Render 狀態查法
-鑰匙 `~/.cx468/render_api.key`，owner `tea-d7gmpj57vvec73ag4nbg`。服務 ID：
-| 服務 | id |
+| 檔案（皆 chmod 600、不進 git） | 用途 |
 |---|---|
-| cx468-crawl | `crn-d887thjbc2fs73emk9ag` |
-| cx468-post | `crn-d887thjbc2fs73emk9a0` |
-| cx468-indexing-daily | `crn-d978sr8k1i2s73aabbig` |
-| cx468-threads-bot | `crn-d8jnsps8aovs73d86pig` |
-| cx468-ga4-daily | `crn-d8jmii6gvqtc73ehq370` |
-| cx468-linebot | `srv-d86fe9lckfvc73cmddvg` |
-| cx468-fb-news-db | `dpg-d887ss3bc2fs73emjit0-a` |
+| `~/.cx468/fb_system_user.token` | 系統用戶・建廣告／改預算／換素材／開關活動 |
+| `~/.cx468/fb_page_system.token` | 粉專・建即時表單／抓名單 |
+| `~/.cx468/fb_ads_management_long.token` | 舊的長效 user token（備援，會過期） |
 
-log：`GET /v1/logs?ownerId=<owner>&resource=<id>&limit=40`（ANSI 色碼要 `re.sub(r'\x1b\[[0-9;]*m','',msg)` 清掉）。
-⚠️ **改 queue/env 後別馬上手動觸發 cron**——Render 可能還在用舊 build（8/9 實際踩到：log 顯示新 commit、跑的卻是舊 queue，害 Threads 提前發錯篇）。先確認 `GET /v1/services/<id>/deploys?limit=1` 是 `status=live` 且 commit 對得上。
+**打通過程的坑（別再走一次）**：粉專掛在 BM「程子顥」（`business_id=823252302396450`）、廣告帳戶原屬「程式設計｜ai 數位轉型實驗室」BM。個人授權的 `me/accounts` **永遠看不到 BM 資產**，Graph API Explorer 的粉專清單也不會出現。正解是 BM → 系統用戶 `CX468FB-Post-System` → 指派粉專＋廣告帳戶資產（廣告帳戶要先跨 BM「要求存取」再核准）。權限改完 Meta 端**要幾分鐘傳播**，立刻測會誤判成沒權限。
+
+### Meta 查法
+```bash
+T=$(cat ~/.cx468/fb_system_user.token)
+curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
+  --data-urlencode "access_token=$T" --data-urlencode "level=campaign" \
+  --data-urlencode "fields=campaign_name,spend,impressions,inline_link_clicks,cpm" \
+  --data-urlencode "date_preset=today"
+```
+- 建活動必填：`is_adset_budget_sharing_enabled`、`regional_regulated_categories=["TAIWAN_UNIVERSAL"]`、`regional_regulation_identities`（beneficiary/payer 皆 `2154353671792733`）
+- 名單型廣告額外要求：粉專先接受《名單型廣告服務條款》、creative 的 `link` **必須是外部網址**（填粉專網址會被擋）
+- creative 一律 `degrees_of_freedom_spec` 全 OPT_OUT，否則 Meta AI 會改寫媽祖核過的字
+
+### Google Ads 查法（無 API 金鑰，用指令碼）
+後台 → 工具 → 大量操作 → 指令碼 → `CX468-設定稽核`（腳本原始碼：`行銷產出/Google廣告/audit_campaign.gs`）。
+**為什麼要它**：Google 建立精靈的「查看頁」會**假顯示**——實測顯示「地區：所有國家」「AI Max 已開啟」「廣告：無」，但 API 讀出來三項全是對的。**判準一律以指令碼輸出為準**。
+
+### GA4（本來就有，不用另外要金鑰）
+service account 在 `~/cx468-ga4-daily/cx468-ga4-945f85bddfbd.json`，資源 ID `535643191`。
+```bash
+cd ~/cx468-ga4-daily && GOOGLE_SA_FILE=$PWD/cx468-ga4-945f85bddfbd.json ./venv/bin/python -c "..."
+```
+**本 session 靠它抓到最重要的發現**：`inherit-era-img3` 兩週買進 1,279 個工作階段、**平均參與 1.0 秒**、跳出率 92.3%——Meta 後台看起來 CTR 6.85%／CPC 0.93 很漂亮，實際是誤觸。對照組：Google 搜尋 13.1 秒、自然搜尋 30.4 秒。**判讀付費流量一律並排 GA4 平均參與秒數**（memory: `feedback_cheap_cpc_conversions_are_misclicks`）。
+
+### 名單輪詢（PII，紀律見 memory）
+`~/.cx468/leads_poller.py`＋launchd `com.cx468.leadspoll`（900 秒）。去重狀態 `~/.cx468/leads/seen_lead_ids.json`——**刪掉會把舊名單全部重推＝同一位長輩被重複致電**。Telegram 目標已實查為 `private` chat（@hohodl1），非群組。
+
+### 銀行條文存證（付費廣告舉證用）
+`知識庫/context/銀行條文存證-以房養老-2026-08-12/`：五家 HTML＋第一銀行全頁截圖（該頁 JS 渲染 curl 抓不到）。
+⚠️ **投放期間每 30 天複查一次**；任一行改條件 → 當日更新落地頁與查證日或暫停該組。
 
 ### 上線驗證（Pages 佇列會塞車）
-GitHub Pages 部署曾排隊 10 分鐘後 timeout（8/6 實例，`gh run rerun <id>` 重跑即可）。**用 until 迴圈輪詢實際內容，不要只看 workflow 狀態**：
 ```bash
 until curl -s https://cx468.com.tw/ | grep -q "關鍵句"; do sleep 10; done
 ```
-
-### 全站視覺目檢管線（2026-08-03 建立，仍有效）
-venv：`python3 -m venv pw && ./pw/bin/pip install playwright pillow && ./pw/bin/playwright install chromium`；sitemap 取 URL → 桌機 1280×900／手機 390×844 → `add_init_script` 塞 `localStorage.cx_antifraud_v1` 繞反詐 modal → 捲到底再回頂觸發 GSAP → full_page 截圖 → PIL 切 tile。
-⚠️ zsh 不做 `set -- $var` 詞分割，批次迴圈參數要寫死。
-⚠️ `img.complete=true` 且 `naturalWidth>0` **不代表畫得出來**，損毀 AVIF 渲染全白 → PIL 逐檔解碼（memory: `feedback_broken_avif_renders_blank`）。
+本 session 四次部署皆 40–90 秒生效。
 
 ## 三、未竟任務
 
-### 🔴 第一順位：稅務頁接服務層（老闆 2026-08-12 指定，下個 session 首項）
+### 🔴 第一順位：三支廣告的首週判讀（8/15–8/17）
+三支同題材、不同管道，**這是本 session 最大的實驗**：
 
-**問題**：上游流量全落在稅務／試算工具頁（`rental-yield-calculator` 352 曝光、`new-taipei-house-tax` 185、`new-taipei-land-value-tax` 122…），**一個服務頁都沒進榜**。人來算完稅就走，中間沒有橋。這是目前最大的漏。
+| 活動 | 管道 | 日預算 | 目標 |
+|---|---|---|---|
+| `rm-declined-leads-202608` | Meta 即時表單 | 200 | 收姓名電話 |
+| `rm-declined-lp` | Meta 流量 | 100 | 進落地頁 |
+| `rm-declined-search-202608` | Google 搜尋 | 200 | 進落地頁 |
 
-**為什麼這是對的切點**：查地價稅／房屋稅的人 100% 有房，而**稅要用現金繳**——正是「有房但手上沒現金」的瞬間，且他還沒開始想貸款（沒被錢字污染）。時間點比繼承更準（有法定繳納期限）。
+**判準表（8/15 依此決定 B–E 變體要不要開）**：
+- frequency > 2.0 → 受眾疲乏，開 D（子女視角）
+- 連結 CTR < 1% → Hook 不夠力，開 B（同一間房不同答案）
+- CTR ≥ 1.5% 且 frequency < 1.5 → 不動，繼續學
+- **GA4 平均參與秒數 < 10 秒 → 流量品質差，先修落地頁，別加碼買量**
 
-**可執行規格**：
+素材包：`行銷產出/FB廣告圖/2026-08-12-以房養老被拒-廣告文案-FINAL.md`（B–E 四組已過媽祖）。
 
-1. **目標頁清單**（依 GSC 曝光排序，全部在 `~/cx468-web/`）：
-   - `rental-yield-calculator.html`、`new-taipei-house-tax.html`、`new-taipei-land-value-tax.html`
-   - `taipei-land-value-tax.html` / `-guide`、`taichung-land-value-tax.html`、`taoyuan-land-value-tax.html` / `-guide`、`kaohsiung-land-value-tax.html`
-   - `land-tax-calculator.html`、`realestate-tax-calculator.html`、`purchase-cost-calculator.html`
-   - 資料來源：`行銷產出/週報/2026-08-10-GSC上游關鍵字盤點.md`（119 個上游詞全清單在附錄 A）
+### 🔴 第二順位：Google 廣告否定關鍵字驗數
+老闆已貼 51 個否定字但**未回報存檔結果**。跑一次 `CX468-設定稽核` 指令碼，看最後一行「否定關鍵字數量」是否為 51。0 就是沒存進去——沒有它，「以房養老 利率／試算／代辦」會直接進來燒錢。
 
-2. **橋接元件規格**（新元件，建議 `tax-bridge.html` 走 `data-include`）：
-   - 位置：算完稅的結果區**下方**，不是頁首（人要先拿到他要的東西）
-   - 內容框架：「稅算出來了，接下來多數人會遇到的問題是——**這筆錢要從哪裡來**」→ 三條中性路徑（自有資金／與家人分攤／以不動產規劃）→ 連到對應服務頁
-   - 🔴 **禁招攬鉤與錢字**：不可寫「貸款」「額度」「利率」，否則這頁就從上游掉進下游語意場，前功盡棄
-   - 🔴 CTA 帽用**中性橋接帽**（裁示①⑤家族），配 `lead-form-neutral.html`——這些是工具頁不是轉換頁
-   - 免責選版：工具頁無商品敘述 → 傾向**衛教版**，但要請媽祖裁（衛教版原本是為政策文寫的）
+### 🟡 第三順位：順風耳〈以房養老來電三句話 SOP〉
+媽祖硬要求，**名單已經開始進來了才做等於來不及**。第一句必須身分切割（「我們不是銀行，也不提供以房養老」）。出稿要過媽祖。理由：表單守住了、電話裡一句「我幫你問問看銀行」全破功。
 
-3. **必經流程**：橋接文案是對客文案 → **必過 `/媽祖把關`**；她第一輪已建立「表單跟著 CTA 帽走」判準，本案沿用但新元件文案仍需逐字核定。
-
-4. **驗收**：橋接元件上線後 4 週回 GSC 看這批頁的「工具頁→服務頁」內部點擊，以及 GA4 這些頁的下一頁路徑。
-
-**相關 memory**：`project_lead_quality_baseline_and_lateness`（為什麼要做）、`feedback_disclaimer_four_variants_and_neutral_cta`（帽與表單規則）、`feedback_provide_url_list_for_gsc`（改完給 URL）。
-
-### 🟡 第二順位：地政士上游通路（要老闆本人）
-合作對象：**蘆洲・合一地政士事務所**（老闆既有關係）。研究結論在 `行銷產出/競品研究/2026-08-10-上游獲客研究.md`：
-- 🔴 **不能給轉介費**（地政士法 §27(5)，法定後果停業或除名）；**不能在事務所放我方貸款文宣**（§27(4)，台北市已有 6 起以上申誡停業實例）
-- 價值主張要講「**幫你把卡在錢上的案子做完**」——遺贈稅法 §41-1／§42：稅沒繳清不能分割、不能設定負擔，地政士自己沒有資金解方就收不了尾
-- 量級：新北平均每位地政士約 9.8 件繼承／年，一家事務所 10–30 件／年
-- 建議：先把合一當**樣本不是通路**，跑通一個完整案件流程再談擴點
-
-### 🟡 第三順位：其餘上游族群內容
-族群排序在 `行銷產出/競品研究/2026-08-10-上游關鍵字族群研究.md`：🥇查封／法拍前期（分最高但品牌風險也最高）、🥈長照（**已完成四篇**）、🥉自營業稅務線（401 報表，對應憲法 A 客群）。
-⚠️ 共有／分家線**建議收縮**：「持分」關鍵字被持分收購業者（市價 5–6 折）佔滿，進去會被 Google 與 AI 歸類成同類。
-⚠️ 自營業族群最常見的真實請求是「幫我把 401 弄好看一點」——**與客戶佐證文件紅線同級**，內容要主動寫明不代造。
+### 🟡 第四順位：地政士上游通路（要老闆本人）
+合作對象**蘆洲・合一地政士事務所**。面談包已過媽祖：`行銷產出/策略簡報/2026-08-12-合一地政士事務所面談包-FINAL.md`。
+🔴 四條紅線：不給轉介費（§27(5)）、**不由地政士轉發我方連結**（§27(3)(4)，我方 LP 有 CTA 不是零招攬頁）、不在事務所放文宣、不接觸銀行行員。詳見 memory `project_land_agent_channel_heyi`。
 
 ### 🟢 可選不急
-1. **宜蘭／台東地價稅頁資料過期**：`yilan-land-value-tax.html` 描述寫「107-108 年累進起點地價」、`taitung-land-value-tax.html` 寫「113-114 年」，title 卻掛 2026。要查官方最新數字才能改，**勿臆造**。
-2. **「租機報酬率」191 曝光、排名 4.5、90 天 0 點擊**：全站具名查詢第一名，落在 `rental-yield-calculator.html`。「租機」字面是機具租賃（無此業務），也可能是「租金」錯字。**單獨查核，別混進標題修復的成效判讀**。
-3. **配圖治理第二批**：`knw-hillside.jpg`（海岸山景用在法拍文，最離題）、`knw-arch.jpg`（knowledge.html 重複用兩次）、`audience-credit.jpg`、`article-home-equity.jpg`、`gen-yonghe.jpg`。素材只剩「重裁可救 6 張」（圖庫分級見 memory `feedback_photo_library_labels_unverified`），一對一配不完。
-4. **Postgres `cx468-fb-news-db` 每月 US$21.02**：免費 30 天期滿自動升級付費。實際只有兩張表、資料幾百筆。搬走要改 `~/cx468-fb-news-bot/src/db.py`；⚠️ Render cron job 無 persistent disk，不能直接換 SQLite。
-5. **手機表格逐字直排**（8+ 頁共用同型 table CSS）、**設計系統收斂**（兩套表單元件、舊綠 `#16A34A` 殘留 7 頁、`#0071e3` 藍 58 檔 262 處）。
-6. **goshoot「Daily site audit」連續失敗**（跨事業線）：稽核抓到 22 個 SEO 缺失後 exit 1，缺失集中在 4 檔（`goshoot-mobile` / `homepage-cover-preview` / `ichiban-story` / `pools`）。
+1. **新聞焦點卡硬截止**：🔴 **2026-08-21** 滿 7 天須換稿、**2026-09-01** 六都公布 8 月數字前絕對換。健檢檢查4 會自動盯並推 Telegram。
+2. **GEO 站外 GMB**：座標與 NAP 已對齊（本 session 修好 75 頁差 1.4 公里的錯誤座標＋FB 粉專營業時間／郵遞區號）。剩「補完商家檔案類別、次要電話 0958-139-786、照片、收評論」——要老闆 Google 帳號登入。
+3. **Anthropic auto-reload 未開**：老闆按了 X 跳過。健檢檢查4 已加餘額探針，餘額不足會紅字告警。餘額現為 $19.88，月用量約 $7.66。
+4. **Postgres `cx468-fb-news-db` 每月 US$21.02**、**手機表格逐字直排**、**設計系統收斂**（舊綠 `#16A34A` 殘留 7 頁、`#0071e3` 藍 58 檔）。
+5. **goshoot「Daily site audit」連續失敗**（跨事業線）。
 
 ### 日常常態
 - 每天 12:00 精進會議（session 級排程，每個 session 要重設）
-- 三日健檢 launchd `com.cx468.healthcheck`（memory: `project_three_day_healthcheck`）
-- 曝光每日巡檢 08:12（memory: `project_daily_exposure_patrol`）
-- Threads 自動發文每日 12:30，繼承系列排到 **8/29**（queue 在 `~/cx468-threads-bot/queue.json`）
-- ⚠️ **Threads 長效 token 約 60 天到期且過期後不能 refresh**，下次到期約 2026-10 月初。重產路徑在 memory `project_threads_autopost`
+- 三日健檢 launchd `com.cx468.healthcheck`——**已加檢查4**：新聞卡年齡／Threads token 倒數／queue 存量／Anthropic 餘額探針
+- 名單輪詢 launchd `com.cx468.leadspoll` 每 15 分鐘
+- 曝光每日巡檢 08:12、Threads 每日 12:30（queue 排到 8/31）
+- ⚠️ **Threads token 2026-10 月初到期**，換發後**務必更新 `~/.cx468/threads_token_issued`** 的日期，否則健檢倒數是錯的
 
 ## 四、等使用者的事項
 
-1. **GSC 網址審查**：14 條稅務／工具頁老闆 8/12 已送。**還沒送的 6 條**——
-   `article-longterm-care-monthly-gap.html`、`article-longterm-care-30-coverage.html`、`article-parents-house-sell-or-not.html`、`article-reverse-mortgage-declined.html`、`knowledge.html`（Sitemap 欄只放 `sitemap.xml`）
-2. **合一地政士事務所洽談**（未竟第二順位）——只有老闆本人能談
-3. **廣告要不要加值**：目前只剩 1 支在跑、日燒 400，runway 兩週以上，不急。等上游內容累積出訊號再決定重開幾支
-4. **10 筆 A/B/C 基線已收**（8/10：`C C B A A A B C A C`，A×4／B×2／C×4）——但老闆補註「**A 級全是貸滿件、做不了**」，所以下次標記要分「A（有空間）／A-（有房沒空間）」
-5. **Postgres US$21.02 去留**（未竟可選第 4 項）
-6. **Render API 寫入權限**：改排程／觸發 sync 會被 Claude Code 權限攔截，需要老闆在設定加 Bash 允許規則，或他本人到 Dashboard 按 Manual sync
+1. **Google 廣告否定字確認**（第二順位）——跑稽核腳本看數量
+2. **合一地政士事務所洽談**——只有老闆本人能談
+3. **Anthropic auto-reload**：console.anthropic.com → Billing → 建議設「低於 $5 自動補到 $50」
+4. **GMB 補完＋收評論**——要 Google 帳號登入
+5. **名單進來後的回電**：名單推到 Telegram（private chat）。⚠️ 回電前務必先看 SOP（第三順位），且**名單禁止回灌 Meta 做自訂受眾／類似受眾**
+6. **FB 粉專城市欄**現為 `Zhonghe District`（比原要求更準，已結案，不需再動）
