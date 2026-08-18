@@ -124,8 +124,8 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
 .footer-link-sm{font-size:11px;color:#86868b;display:inline-flex;align-items:center;min-height:44px}
 .footer-link-sm:hover{color:#f5f5f7}
 
-/* === Mobile LINE Floating Action Button === */
-.mobile-line-fab{display:none}
+/* === Mobile Sticky CTA Bar（值與 footer.html 的 fallback 區段相同，改動時同步） === */
+.cx-sticky-cta{display:none}
 
 /* === Mobile Breakpoint === */
 @media(max-width:768px){
@@ -135,6 +135,9 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
   .page-sub{font-size:15px}
   .cta-strip h2{font-size:28px}
   .footer-cols{grid-template-columns:1fr}
-  footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#048456;box-shadow:0 4px 16px rgba(6,199,85,.45)}
+  footer{padding:1.75rem 1.25rem 6rem}
+  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1d1d1f;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
+  .cx-sticky-cta .cx-sticky-line{background:#048456}
+  .cx-sticky-cta .cx-sticky-tel{background:#C61B1C}
 }

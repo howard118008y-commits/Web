@@ -52,7 +52,7 @@ footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
 .footer-links-row{display:flex;gap:1.5rem}
 .footer-link-sm{font-size:11px;color:#86868b}
 .footer-link-sm:hover{color:#f5f5f7}
-.mobile-line-fab{display:none}
+.cx-sticky-cta{display:none}
 @media(max-width:768px){
   nav{padding:0 1rem}
   .nav-links{display:none}
@@ -60,8 +60,11 @@ footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
   .page-sub{font-size:15px}
   .cta-strip h2{font-size:28px}
   .footer-cols{grid-template-columns:1fr}
-  footer{padding:1.75rem 1.25rem 5rem}
-  .mobile-line-fab{display:flex;align-items:center;justify-content:center;position:fixed;bottom:20px;right:18px;z-index:999;width:56px;height:56px;border-radius:50%;background:#048456;box-shadow:0 4px 16px rgba(6,199,85,.45)}
+  footer{padding:1.75rem 1.25rem 6rem}
+  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1d1d1f;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
+  .cx-sticky-cta .cx-sticky-line{background:#048456}
+  .cx-sticky-cta .cx-sticky-tel{background:#C61B1C}
 }
 /* === end inlined style.css === */
 
@@ -1453,10 +1456,17 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<!-- 手機版浮動 LINE 按鈕 -->
-<a href="https://lin.ee/PHIfSoY" target="_blank" class="mobile-line-fab" aria-label="加入LINE">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
-</a>
+<!-- 手機版底部快速聯絡條 -->
+<div class="cx-sticky-cta" role="navigation" aria-label="快速聯絡">
+  <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" class="cx-sticky-line" onclick="if(typeof gtag==='function')gtag('event','line_click',{link_location:'sticky_bar'})">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="22" height="22" aria-hidden="true"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
+    LINE 線上諮詢
+  </a>
+  <a href="tel:+886-2-2249-0517" class="cx-sticky-tel" onclick="if(typeof gtag==='function')gtag('event','phone_click',{link_location:'sticky_bar'})">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    一鍵撥號
+  </a>
+</div>
 <script>
 (function(){
   var API = 'https://script.google.com/macros/s/AKfycbwt2bmdXtOCfX6DN1ITBbUilqa67r24j2ccpfZ7OzUqUs2KQ1X2beJsEtLHI26e5ygS/exec';
