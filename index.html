@@ -1200,7 +1200,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       return;
     }
     var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
-    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(){});}catch(e){}
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(e){try{fetch('https://cx468-linebot.onrender.com/lead-fail',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({track:'web_form_lead',err:String(e).slice(0,120)})}).catch(function(){});}catch(_){}});}catch(e){}
     fetch('https://api.web3forms.com/submit',{
       method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
     })

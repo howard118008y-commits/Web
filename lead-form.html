@@ -193,7 +193,7 @@
     }
     var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
     // 同步通知自家後端推 LINE 給工作機（best-effort，失敗不影響主流程）
-    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(){});}catch(e){}
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(e){try{fetch('https://cx468-linebot.onrender.com/lead-fail',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({track:'web_form_lead',err:String(e).slice(0,120)})}).catch(function(){});}catch(_){}});}catch(e){}
     fetch('https://api.web3forms.com/submit',{
       method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
     })
