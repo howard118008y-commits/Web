@@ -407,6 +407,38 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     "@type": "Answer",
     "text": "儀表板幫你看懂市場方向，若想了解對自身房貸或負債的實際影響，可預約免費諮詢，由顧問依你的個案評估可行方向。不申請不收費；本公司非金融機構、不放貸，實際貸款條件依個案而定，最終核貸由金融機構決定。"
    }
+  },
+  {
+   "@type": "Question",
+   "name": "這個儀表板是給誰看的？需要金融背景嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "為一般屋主與購屋族設計，不需要金融背景。每項指標都附白話解讀，頁面下方另有名詞解釋，目的是讓你在做房貸或資金相關決策前，能快速掌握市場環境的大方向。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "LTV、DBR、DSR 這些名詞是什麼意思？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "三個銀行審核常見名詞：LTV 是貸款成數（貸款占房價的比例）、DBR 是無擔保負債比、DSR 是每月還款占收入的比例。本頁名詞解釋區有完整說明，實際認定依各金融機構規定與個案而定。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "指標之間互相矛盾時，該以哪個為準？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "指標本來就可能不同調，例如量縮但價穩。沒有單一指標能代表全局，建議以系列為單位看方向、多項指標交叉印證，並留意各指標的資料時間點不同，避免用單一數字下結論。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "儀表板的資訊可以直接當成買房或貸款的依據嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "不建議。本頁是公開統計的整理與呈現，僅供了解市場環境，非投資或貸款建議。個人決策仍需依自身財務狀況評估；本公司非金融機構、不放貸，最終核貸由金融機構決定。"
+   }
   }
  ]
 }
@@ -662,9 +694,25 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">18 項指標分成哪幾個系列？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">分為四大系列：A 房貸金融（央行利率與銀行端管制）、B 交易量價（房市成交量與房價指數）、C 風險預警（逾放、房價所得比等風險訊號）、D 國際資金（美債殖利率、匯率、股市與物價等外部訊號）。每個系列都可點入看完整指標與走勢。</p>
     </div>
-    <div style="padding:20px 0">
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
       <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">看完指標後，可以做什麼？</h3>
       <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">儀表板幫你看懂市場方向，若想了解對自身房貸或負債的實際影響，可預約免費諮詢，由顧問依你的個案評估可行方向。不申請不收費；本公司非金融機構、不放貸，實際貸款條件依個案而定，最終核貸由金融機構決定。</p>
+    </div>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">這個儀表板是給誰看的？需要金融背景嗎？</h3>
+      <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">為一般屋主與購屋族設計，不需要金融背景。每項指標都附白話解讀，頁面下方另有名詞解釋，目的是讓你在做房貸或資金相關決策前，能快速掌握市場環境的大方向。</p>
+    </div>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">LTV、DBR、DSR 這些名詞是什麼意思？</h3>
+      <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">三個銀行審核常見名詞：LTV 是貸款成數（貸款占房價的比例）、DBR 是無擔保負債比、DSR 是每月還款占收入的比例。本頁名詞解釋區有完整說明，實際認定依各金融機構規定與個案而定。</p>
+    </div>
+    <div style="border-bottom:1px solid rgba(0,0,0,0.07);padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">指標之間互相矛盾時，該以哪個為準？</h3>
+      <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">指標本來就可能不同調，例如量縮但價穩。沒有單一指標能代表全局，建議以系列為單位看方向、多項指標交叉印證，並留意各指標的資料時間點不同，避免用單一數字下結論。</p>
+    </div>
+    <div style="padding:20px 0">
+      <h3 style="font-family:'Noto Serif TC',serif;font-weight:600;font-size:17px;color:var(--ink);margin:0 0 8px">儀表板的資訊可以直接當成買房或貸款的依據嗎？</h3>
+      <p style="font-size:14px;line-height:1.85;color:var(--ink-mid);margin:0">不建議。本頁是公開統計的整理與呈現，僅供了解市場環境，非投資或貸款建議。個人決策仍需依自身財務狀況評估；本公司非金融機構、不放貸，最終核貸由金融機構決定。</p>
     </div>
   </div>
   <!-- ════════════ 常見問題 END ════════════ -->

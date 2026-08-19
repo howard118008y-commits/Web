@@ -176,6 +176,46 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     "@type": "Answer",
     "text": "指房價約等於家庭 14.62 年的可支配所得（六都，2025-Q4）。數字越高代表購屋負擔越重，是衡量房市可負擔性的常用指標之一。"
    }
+  },
+  {
+   "@type": "Question",
+   "name": "買賣移轉棟數有包含繼承或贈與嗎？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "沒有。買賣移轉棟數統計的是以「買賣」為登記原因的所有權移轉；繼承、贈與屬其他移轉原因，另行統計。判讀市場交易熱度時，用買賣棟數較能反映真實的成交活動。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "移轉棟數為什麼跟現在感覺到的市況有落差？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "因為它以「完成所有權移轉登記」的時間計算，從簽約到登記通常有一到兩個月的作業時間，統計反映的是稍早之前的成交。市況急轉時，這個數字會晚一步跟上，判讀要注意時間差。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "六都成交量比較，能看出什麼？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "能看出交易熱度的區域差異：哪些都會區量能相對熱絡、哪些正在降溫。搭配六都均價比較一起看，可以大致掌握「量與價」在不同城市的走向，作為觀察區域市況的參考。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "房價指數和實價登錄的成交價，哪個比較有參考性？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "兩者用途不同。實價登錄是逐筆成交紀錄，反映個案價格；房價指數是統計處理後的趨勢線，消除了個案差異。看整體走向用指數，查特定區域行情用實價登錄，兩者互為補充。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "成交量萎縮時，想賣房或申請貸款的人要注意什麼？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "量縮期買方通常觀望，銷售期可能拉長，銀行估價也可能趨於保守，進而影響可貸金額。若有資金規劃需求，建議提早評估、預留時間。實際條件依個案評估，最終核貸由金融機構決定。"
+   }
   }
  ]
 }
@@ -325,6 +365,26 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
     <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">房價所得比 14.62 倍是什麼意思？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">指房價約等於家庭 14.62 年的可支配所得（六都，2025-Q4）。數字越高代表購屋負擔越重，是衡量房市可負擔性的常用指標之一。</div>
+  </div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">買賣移轉棟數有包含繼承或贈與嗎？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">沒有。買賣移轉棟數統計的是以「買賣」為登記原因的所有權移轉；繼承、贈與屬其他移轉原因，另行統計。判讀市場交易熱度時，用買賣棟數較能反映真實的成交活動。</div>
+  </div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">移轉棟數為什麼跟現在感覺到的市況有落差？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">因為它以「完成所有權移轉登記」的時間計算，從簽約到登記通常有一到兩個月的作業時間，統計反映的是稍早之前的成交。市況急轉時，這個數字會晚一步跟上，判讀要注意時間差。</div>
+  </div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">六都成交量比較，能看出什麼？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">能看出交易熱度的區域差異：哪些都會區量能相對熱絡、哪些正在降溫。搭配六都均價比較一起看，可以大致掌握「量與價」在不同城市的走向，作為觀察區域市況的參考。</div>
+  </div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">房價指數和實價登錄的成交價，哪個比較有參考性？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">兩者用途不同。實價登錄是逐筆成交紀錄，反映個案價格；房價指數是統計處理後的趨勢線，消除了個案差異。看整體走向用指數，查特定區域行情用實價登錄，兩者互為補充。</div>
+  </div>
+  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">成交量萎縮時，想賣房或申請貸款的人要注意什麼？</div>
+    <div style="font-size:14px;line-height:1.9;color:#5a5750">量縮期買方通常觀望，銷售期可能拉長，銀行估價也可能趨於保守，進而影響可貸金額。若有資金規劃需求，建議提早評估、預留時間。實際條件依個案評估，最終核貸由金融機構決定。</div>
   </div>
   </div>
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
