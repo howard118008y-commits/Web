@@ -10,8 +10,12 @@ def has(s, pat): return re.search(pat, s, re.I|re.S) is not None
 
 # --- 新鮮度：JSON-LD dateModified vs git 最後實質 commit 日 ---
 # 實質 commit＝排除 [datemod-sync]（update_schema_datemod.py 的同步 commit），
-# 否則同步一跑，git 日期永遠是同步日，比對失去意義。偏差 >30 天記 flag。
-FRESH_TOLERANCE_DAYS = 30
+# 否則同步一跑，git 日期永遠是同步日，比對失去意義。偏差 > 容差天數記 flag。
+# 2026-08-19 晚審：容差 30→7 天。30 天太寬，改內容卻沒 bump dateModified 的頁
+# 可以躺整整一個月才被抓到（4b09011 五頁補 FAQ 未 bump 就是被 30 天容差蓋過去的）。
+# 項目名保留 fresh30 不改（改名會斷掉既有分數表與健檢 regex 的欄位對照），
+# 實際門檻一律以 FRESH_TOLERANCE_DAYS 為準。
+FRESH_TOLERANCE_DAYS = 7
 LDJSON_RE = re.compile(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.I|re.S)
 DATEMOD_RE = re.compile(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})')
 
@@ -24,7 +28,7 @@ def git_real_date(relpath):
 stale_detail = {}  # relpath -> (dateModified, git_date, 偏差天數)
 
 def check_fresh(s, relpath):
-    """有 dateModified 且與 git 實質 commit 日偏差 ≤30 天才算新鮮。"""
+    """有 dateModified 且與 git 實質 commit 日偏差 ≤ FRESH_TOLERANCE_DAYS（7 天）才算新鮮。"""
     dates = []
     for block in LDJSON_RE.findall(s):
         dates += DATEMOD_RE.findall(block)

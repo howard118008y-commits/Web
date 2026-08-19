@@ -9,6 +9,7 @@
   python3 scripts/add_faq_items.py            # 插入（冪等：已含新題的頁跳過）
   python3 scripts/add_faq_items.py --verify   # 逐頁比對 JSON-LD Q/A == 可見 DOM Q/A
 """
+import datetime
 import json
 import pathlib
 import re
@@ -100,6 +101,30 @@ RADAR_ANCHOR = '  </div>\n  <!-- ════════════ 常見問�
 JSONLD_RE = re.compile(r'(<script type="application/ld\+json">\n)(\{.*?\})(\n</script>)', re.S)
 
 
+DATEMOD_RE = re.compile(r'("dateModified"\s*:\s*")(\d{4}-\d{2}-\d{2})(")')
+
+
+def bump_datemod(html: str, today: str) -> tuple[str, int]:
+    """改完內容一併把該頁 JSON-LD dateModified 設為今日。
+
+    2026-08-19 晚審踩坑：本腳本補了五頁 FAQ 內容卻沒動 dateModified，
+    schema 上仍掛 7/24～8/14，等於對 Google 宣稱「內容沒更新」——
+    改內容不 bump 就是假鮮度（memory feedback_no_hardcoded_freshness_stamp）。
+    只改 dateModified，datePublished 與可見文字一律不碰。
+    之後全站再跑 scripts/update_schema_datemod.py 也會得到同一個日期（git 實質 commit 日＝今天）。
+    """
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        if m.group(2) == today:
+            return m.group(0)
+        n += 1
+        return m.group(1) + today + m.group(3)
+
+    return DATEMOD_RE.sub(repl, html), n
+
+
 def extend_jsonld(html: str, faqs) -> str:
     """把 faqs 附加進頁內 FAQPage JSON-LD（同一資料結構，重新序列化保持 indent=1 風格）。"""
     hit = 0
@@ -151,8 +176,10 @@ def insert_page(fname: str) -> str:
         assert html.count(TOPIC_ANCHOR) == 1, f"{fname} FAQ 容器 anchor 不唯一"
         html = html.replace(TOPIC_ANCHOR, block + TOPIC_ANCHOR)
 
+    today = datetime.date.today().isoformat()
+    html, bumped = bump_datemod(html, today)
     path.write_text(html, encoding="utf-8")
-    return f"+{len(faqs)} 題"
+    return f"+{len(faqs)} 題，dateModified→{today}（{bumped} 處）"
 
 
 # ── 驗證：JSON-LD Q/A 與可見 DOM Q/A 逐題精確比對（sch==vis） ─────────────
