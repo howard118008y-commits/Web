@@ -1,11 +1,44 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """全站 SEO/GEO/AEO 體檢：掃所有真實頁面，逐頁打分、列缺漏。"""
-import os, re, glob, json
+import os, re, glob, json, subprocess
+from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def has(s, pat): return re.search(pat, s, re.I|re.S) is not None
+
+# --- 新鮮度：JSON-LD dateModified vs git 最後實質 commit 日 ---
+# 實質 commit＝排除 [datemod-sync]（update_schema_datemod.py 的同步 commit），
+# 否則同步一跑，git 日期永遠是同步日，比對失去意義。偏差 >30 天記 flag。
+FRESH_TOLERANCE_DAYS = 30
+LDJSON_RE = re.compile(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.I|re.S)
+DATEMOD_RE = re.compile(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})')
+
+def git_real_date(relpath):
+    out = subprocess.run(
+        ["git","log","-1","--format=%cs","--invert-grep","--grep","datemod-sync","--",relpath],
+        cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    return out or None
+
+stale_detail = {}  # relpath -> (dateModified, git_date, 偏差天數)
+
+def check_fresh(s, relpath):
+    """有 dateModified 且與 git 實質 commit 日偏差 ≤30 天才算新鮮。"""
+    dates = []
+    for block in LDJSON_RE.findall(s):
+        dates += DATEMOD_RE.findall(block)
+    if not dates:
+        return False  # 連 dateModified 都沒有，datemod 項也會 fail
+    gd = git_real_date(relpath)
+    if not gd:
+        return True  # 無 git 歷史（未 commit 新檔）不誤判為腐爛
+    dm = max(dates)
+    drift = abs((date.fromisoformat(dm) - date.fromisoformat(gd)).days)
+    if drift > FRESH_TOLERANCE_DAYS:
+        stale_detail[relpath] = (dm, gd, drift)
+        return False
+    return True
 
 def audit(path):
     s = open(path, encoding="utf-8", errors="ignore").read()
@@ -35,6 +68,7 @@ def audit(path):
     r['breadcrumb']  = has(s, r'"BreadcrumbList"')
     r['answercard']  = has(s, r'快速答案|一句話|answer-card|tldr|quick-answer')  # 快速答案卡
     r['datemod']     = has(s, r'dateModified|datePublished')  # 鮮度
+    r['fresh30']     = check_fresh(s, os.path.relpath(path, ROOT))  # 鮮度真實性（vs git）
     # --- GEO ---
     r['org_schema']  = has(s, r'"Organization"|"RealEstateAgent"|"LocalBusiness"')
     # 紅線：不可用 FinancialService
@@ -43,14 +77,18 @@ def audit(path):
 
 # 權重（衝分用：缺的越多分越低）
 SEO = ['title','desc','canonical','og','twitter','h1_single','viewport','lang']
-AEO = ['faq','speakable','definedterm','breadcrumb','answercard','datemod']
+AEO = ['faq','speakable','definedterm','breadcrumb','answercard','datemod','fresh30']
 GEO = ['org_schema','no_finsvc']
 
 pages = {}
-# en/ 子目錄一併納入母體（2026-07-07：掃描母體要跟著站點結構長，勿只掃頂層）
-for p in sorted(glob.glob(os.path.join(ROOT, "*.html")) + glob.glob(os.path.join(ROOT, "en", "*.html"))):
+# 掃描母體含全部子目錄（en/world/tools-lab…），跟著站點結構長，勿只掃頂層
+EXCLUDE_DIRS = {".git", "node_modules", "scripts"}
+for p in sorted(glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True)):
+    rel = os.path.relpath(p, ROOT)
+    if rel.split(os.sep)[0] in EXCLUDE_DIRS:
+        continue
     r = audit(p)
-    if r: pages[os.path.relpath(p, ROOT)] = r
+    if r: pages[rel] = r
 
 def score(r, keys): return sum(1 for k in keys if r[k]), len(keys)
 
@@ -64,6 +102,13 @@ def gaps(keys, label):
         print(f"  {flag} {k:12s} 缺 {len(miss):3d} 頁")
     print()
 gaps(SEO, "SEO"); gaps(AEO, "AEO"); gaps(GEO, "GEO")
+
+# 鮮度腐爛清單：dateModified 與 git 實質 commit 日偏差 >30 天
+if stale_detail:
+    print(f"=== 🕰 鮮度腐爛（dateModified vs git 偏差 >{FRESH_TOLERANCE_DAYS} 天，共 {len(stale_detail)} 頁）===")
+    for n,(dm,gd,drift) in sorted(stale_detail.items(), key=lambda x:-x[1][2]):
+        print(f"  {drift:4d} 天  dateModified={dm}  git={gd}  {n}")
+    print("  → 跑 scripts/update_schema_datemod.py 同步\n")
 
 # 紅線：用了 FinancialService 的頁（嚴重）
 fin = [n for n,r in pages.items() if not r['no_finsvc']]
