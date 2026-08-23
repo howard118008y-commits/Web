@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>公司財務體質健檢｜鋮馨租賃有限公司</title>
+<meta name="description" content="備齊三年 401 表、營所稅申報書與近 12 個月公司存摺，30 分鐘完成公司財務體質健檢報告，指出紅黃燈與補件清單。">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://cx468.com.tw/corporate-checkup.html">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+.page-hero{background:#0e0e10;padding:120px 2rem 72px;text-align:center}
+.page-eyebrow{font-size:11px;letter-spacing:.26em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:16px}
+.page-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#fff;margin-bottom:14px}
+.page-sub{font-size:15px;letter-spacing:.04em;line-height:1.8;color:rgba(255,255,255,.65);max-width:600px;margin:0 auto}
+.ck-wrap{max-width:760px;margin:0 auto;padding:56px 24px 80px}
+.ck-what{border:1px solid #e3e3e6;background:#f6f5f3;padding:28px 24px;margin-bottom:40px}
+.ck-what h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#141414;margin:0 0 14px}
+.ck-what ol{margin:0;padding-left:20px}
+.ck-what li{font-size:14px;color:#3a3a3c;line-height:1.85;margin-bottom:6px}
+.ck-what .note{font-size:12.5px;color:#6e6e73;line-height:1.75;margin:14px 0 0}
+.form-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.form-privacy{display:flex;gap:12px;align-items:flex-start;background:#f0faf3;border:1px solid rgba(6,199,85,.25);border-radius:14px;padding:16px 18px;margin-bottom:28px}
+.form-privacy .lock{font-size:20px;line-height:1.4;flex-shrink:0}
+.form-privacy p{font-size:13px;color:#1d1d1f;line-height:1.65;margin:0}
+.form-privacy a{color:#0F7A4F;font-weight:600}
+.grp-title{font-size:12px;letter-spacing:.12em;color:#C61B1C;font-weight:700;margin:32px 0 16px;text-transform:uppercase}
+.grp-title:first-of-type{margin-top:0}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:14px;font-weight:600;color:#1d1d1f;margin-bottom:8px}
+.field label .opt{font-weight:400;color:#86868b;font-size:12px}
+.field label .req{color:#c8102e;margin-left:2px}
+.field input,.field select,.field textarea{width:100%;font-size:16px;color:#1d1d1f;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#048456;background:#fff}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,.consent input:focus-visible,.form-submit:focus-visible,.up-btn:focus-within{outline:2px solid #1D1D1F;outline-offset:2px}
+.field textarea{resize:vertical;min-height:88px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.up-box{border:1.5px dashed #d2d2d7;border-radius:16px;padding:24px 20px;text-align:center;background:#fafafa;transition:.15s}
+.up-box.drag{border-color:#C61B1C;background:#fff6f6}
+.up-btn{display:inline-block;background:#141414;color:#fff;font-size:14px;font-weight:600;padding:12px 26px;border-radius:12px;cursor:pointer;letter-spacing:.04em}
+.up-btn input{display:none}
+.up-hint{font-size:12.5px;color:#86868b;line-height:1.7;margin-top:12px}
+.up-list{list-style:none;margin:16px 0 0;padding:0;text-align:left}
+.up-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:#1d1d1f;background:#f5f5f7;border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.up-list .sz{color:#86868b;font-size:12px;flex-shrink:0}
+.up-list button{background:none;border:none;color:#c8102e;font-size:13px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.up-total{font-size:12.5px;color:#6e6e73;margin-top:10px;text-align:left}
+.up-err{font-size:13px;color:#c8102e;margin-top:10px;text-align:left;line-height:1.7}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:24px 0}
+.consent input{width:24px;height:24px;flex-shrink:0;accent-color:#048456;cursor:pointer}
+.consent label{font-size:13px;color:#6e6e73;line-height:1.6;cursor:pointer;padding:3px 0}
+.consent a{color:#0F7A4F;font-weight:600}
+.form-submit{width:100%;background:#048456;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.form-submit:hover{opacity:.9}
+.form-submit:disabled{opacity:.5;cursor:not-allowed}
+.form-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
+.form-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
+.form-msg.ok{display:block;background:#f0faf3;color:#157347;border:1px solid rgba(6,199,85,.3)}
+.form-msg.err{display:block;background:#fdf0f1;color:#c8102e;border:1px solid rgba(200,16,46,.3);margin-top:18px}
+.form-msg.ok a,.form-msg.err a{color:#0F7A4F;font-weight:600}
+.hp{position:absolute!important;left:-9999px!important;opacity:0}
+.ck-alt{margin-top:40px;padding:28px 24px;border:1px solid #e3e3e6;background:#f6f5f3;text-align:center}
+.ck-alt-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;color:#141414;margin-bottom:8px}
+.ck-alt p{font-size:13px;color:#6e6e73;line-height:1.8;margin-bottom:16px}
+.ck-alt .btn-line{display:inline-block;background:#141414;color:#fff;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
+.ck-alt .btn-tel{display:inline-block;background:transparent;color:#141414;border:1px solid #d9d6d1;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
+.ck-disclaimer{font-size:11.5px;color:#a1a1a6;line-height:1.8;margin-top:36px;text-align:center}
+@media(max-width:640px){.page-h1{font-size:26px}.page-hero{padding:72px 1.25rem 28px}.ck-wrap{padding:24px 16px 120px}.form-card{padding:28px 20px}.two{grid-template-columns:1fr}}
+</style>
+<script src="include.js" defer></script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+});
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27280305434986441');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div data-include="nav"></div>
+
+<div class="page-hero">
+  <div class="page-eyebrow">公司財務體質健檢 · Corporate Check-up</div>
+  <h1 class="page-h1">把資料交出去之前，<br>先用銀行的眼睛看一遍。</h1>
+  <p class="page-sub">備齊三年 401 表、三年營所稅申報書與近 12 個月公司存摺，我們在 30 分鐘內完成一份體質健檢：哪裡是綠燈、哪裡是紅燈、紅燈要補什麼。</p>
+</div>
+
+<div class="ck-wrap">
+
+  <div class="ck-what">
+    <h2>健檢報告會告訴你四件事</h2>
+    <ol>
+      <li><strong>總覽燈號</strong>——綠燈、黃燈、紅燈，一眼看完。</li>
+      <li><strong>五項指標</strong>——金流勾稽率、申報營收年增率、還款覆蓋率試算、單一客戶集中度、負責人聯徵概況。</li>
+      <li><strong>紅黃燈明細</strong>——命中哪一條、成因是什麼、要補什麼資料。</li>
+      <li><strong>下一步</strong>——還缺哪些文件、補齊預估需要幾天。</li>
+    </ol>
+    <p class="note">本報告為<strong>資料整理與體質分析，非核貸預測</strong>。我們只整理你提供的真實資料，不代為產製任何憑證或流水。實際條件依個案財務狀況及承作機構審核而定，最終核貸由金融機構決定。</p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-privacy">
+      <span class="lock">🔒</span>
+      <p><strong>你上傳的文件，我們認真對待。</strong>檔案採加密傳輸並存放於本公司自行管理的主機，<strong>不經第三方表單服務</strong>，僅承辦人員可讀，結案後 6 個月內刪除。本表單<strong>不索取負責人身分證字號</strong>。詳見<a href="privacy-policy.html">隱私權政策</a>。</p>
+    </div>
+
+    <form id="ckForm" novalidate>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+      <div class="grp-title">一、公司基本資料</div>
+      <div class="field"><label for="ck-company">公司名稱<span class="req">*</span></label>
+        <input type="text" id="ck-company" name="company" required autocomplete="organization"></div>
+      <div class="two">
+        <div class="field"><label for="ck-tax">統一編號<span class="req">*</span></label>
+          <input type="text" id="ck-tax" name="tax_id" required inputmode="numeric" pattern="\d{8}" maxlength="8" placeholder="8 碼"></div>
+        <div class="field"><label for="ck-founded">成立年份<span class="req">*</span></label>
+          <input type="text" id="ck-founded" name="founded" required inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="例：2015"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="ck-contact">聯絡人／職稱<span class="req">*</span></label>
+          <input type="text" id="ck-contact" name="contact" required placeholder="例：王先生／負責人"></div>
+        <div class="field"><label for="ck-phone">聯絡電話<span class="req">*</span></label>
+          <input type="tel" id="ck-phone" name="phone" required inputmode="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="ck-line">LINE ID <span class="opt">（選填，補件用）</span></label>
+        <input type="text" id="ck-line" name="line_id"></div>
+
+      <div class="grp-title">二、健檢分析背景</div>
+      <div class="two">
+        <div class="field"><label for="ck-rev">近一年營業額<span class="req">*</span></label>
+          <select id="ck-rev" name="revenue_band" required>
+            <option value="">請選擇</option>
+            <option>未達 3,000 萬</option>
+            <option>3,000 萬 – 1 億</option>
+            <option>1 億以上</option>
+          </select></div>
+        <div class="field"><label for="ck-amt">資金規劃規模 <span class="opt">（還款覆蓋率試算用）</span><span class="req">*</span></label>
+          <select id="ck-amt" name="amount" required>
+            <option value="">請選擇</option>
+            <option>500 萬以下</option>
+            <option>500 萬 – 1,500 萬</option>
+            <option>1,500 萬 – 3,000 萬</option>
+            <option>3,000 萬以上</option>
+            <option>還不確定</option>
+          </select></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="ck-purpose">資金用途<span class="req">*</span></label>
+          <select id="ck-purpose" name="purpose" required>
+            <option value="">請選擇</option>
+            <option>營運週轉金</option>
+            <option>購置設備</option>
+            <option>購置不動產</option>
+            <option>營建資金</option>
+            <option>其他</option>
+          </select></div>
+        <div class="field"><label for="ck-term">規劃期間<span class="req">*</span></label>
+          <select id="ck-term" name="term" required>
+            <option value="">請選擇</option>
+            <option>1 年以內</option>
+            <option>1 – 3 年</option>
+            <option>3 年以上</option>
+          </select></div>
+      </div>
+      <div class="field"><label for="ck-private">目前有無民間借款<span class="req">*</span></label>
+        <select id="ck-private" name="private_loan" required>
+          <option value="">請選擇</option>
+          <option>有</option>
+          <option>無</option>
+          <option>不確定</option>
+        </select></div>
+      <div class="field"><label for="ck-msg">補充說明 <span class="opt">（選填）</span></label>
+        <textarea id="ck-msg" name="message" placeholder="例：去年跟銀行談過，後來沒下文，對方也沒說原因。"></textarea></div>
+
+      <div class="grp-title">三、上傳文件</div>
+      <div class="ck-what" style="margin-bottom:20px;background:#fff;border-color:#e8e8ea">
+        <ol style="padding-left:18px">
+          <li><strong>401 表</strong>——近三年全部期別（必要）</li>
+          <li><strong>營所稅結算申報書</strong>——近三年各一份（必要）</li>
+          <li><strong>公司存摺往來明細</strong>——近 12 個月、全部帳戶（必要）</li>
+          <li>公司變更登記表（建議）</li>
+          <li>負責人個人信用報告（聯徵紀錄，建議；可自行向聯徵中心申請）</li>
+          <li>不動產權狀或謄本（有擔保品才需要）</li>
+        </ol>
+        <p class="note">缺前三項無法出具完整報告；先送出也可以，我們會聯繫你補件。手機直接拍照上傳即可。</p>
+      </div>
+
+      <div class="up-box" id="upBox">
+        <label class="up-btn">選擇檔案／拍照
+          <input type="file" id="ckFiles" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.heif,.webp,image/*,application/pdf">
+        </label>
+        <div class="up-hint">支援 PDF、JPG、PNG、HEIC ｜ 單檔 10MB 以內、合計 50MB 以內、最多 20 個檔<br>也可以把檔案直接拖曳到這個框裡</div>
+        <ul class="up-list" id="upList"></ul>
+        <div class="up-total" id="upTotal"></div>
+        <div class="up-err" id="upErr"></div>
+      </div>
+
+      <div class="consent">
+        <input type="checkbox" id="ckConsent">
+        <label for="ckConsent">我已閱讀並同意<a href="privacy-policy.html">隱私權政策</a>，同意鋮馨租賃有限公司為本次公司財務體質健檢之目的，蒐集、處理及利用上述資料與上傳文件，並於結案後 6 個月內刪除。</label>
+      </div>
+
+      <button type="submit" class="form-submit" id="ckBtn">送出，開始健檢</button>
+      <p class="form-foot">送出後專人將於上班時間（週一至五 09:00–18:00）與你聯繫確認。</p>
+      <div class="form-msg" id="ckMsg"></div>
+    </form>
+  </div>
+
+  <div class="ck-alt">
+    <div class="ck-alt-title">檔案太多、不方便上傳？</div>
+    <p>可以先加 LINE 說明狀況，我們協助你確認要準備哪幾份。</p>
+    <a class="btn-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">加入官方 LINE 諮詢</a>
+    <a class="btn-tel" href="tel:+886-2-2249-0517">來電 02-2249-0517</a>
+  </div>
+
+  <p class="ck-disclaimer">本頁服務為資料整理與財務體質分析，非要約或個案承諾，亦非核貸預測。分析結果依您提供之文件內容而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，如後續進行融資申請，最終核貸由金融機構決定。<br>您提供的資料僅用於本次公司財務體質健檢，不作其他用途。</p>
+</div>
+
+<div data-include="footer"></div>
+
+<script>
+(function(){
+  var ENDPOINT='https://cx468-linebot.onrender.com/checkup';
+  var MAX_FILE=10*1024*1024, MAX_TOTAL=50*1024*1024, MAX_N=20;
+  var OK_EXT=['pdf','jpg','jpeg','png','heic','heif','webp'];
+
+  var form=document.getElementById('ckForm');
+  if(!form)return;
+  var input=document.getElementById('ckFiles');
+  var box=document.getElementById('upBox');
+  var list=document.getElementById('upList');
+  var totalEl=document.getElementById('upTotal');
+  var errEl=document.getElementById('upErr');
+  var btn=document.getElementById('ckBtn');
+  var msg=document.getElementById('ckMsg');
+  var consent=document.getElementById('ckConsent');
+  var picked=[];
+
+  function fmt(b){return b<1024*1024?(b/1024).toFixed(0)+' KB':(b/1024/1024).toFixed(1)+' MB';}
+  function ext(n){var i=n.lastIndexOf('.');return i<0?'':n.slice(i+1).toLowerCase();}
+  function total(){return picked.reduce(function(s,f){return s+f.size;},0);}
+
+  function render(){
+    list.innerHTML='';
+    picked.forEach(function(f,i){
+      var li=document.createElement('li');
+      var nm=document.createElement('span');nm.textContent=f.name;
+      var sz=document.createElement('span');sz.className='sz';sz.textContent=fmt(f.size);
+      var rm=document.createElement('button');rm.type='button';rm.textContent='移除';
+      rm.addEventListener('click',function(){picked.splice(i,1);render();});
+      li.appendChild(nm);li.appendChild(sz);li.appendChild(rm);
+      list.appendChild(li);
+    });
+    totalEl.textContent=picked.length?('已選 '+picked.length+' 個檔案，合計 '+fmt(total())):'';
+  }
+
+  function add(files){
+    var errs=[];
+    Array.prototype.forEach.call(files,function(f){
+      if(picked.length>=MAX_N){errs.push('最多 '+MAX_N+' 個檔，'+f.name+' 未加入。');return;}
+      if(OK_EXT.indexOf(ext(f.name))<0){errs.push(f.name+'：不支援的檔案格式。');return;}
+      if(f.size>MAX_FILE){errs.push(f.name+'：超過單檔 10MB。');return;}
+      if(total()+f.size>MAX_TOTAL){errs.push(f.name+'：合計超過 50MB。');return;}
+      picked.push(f);
+    });
+    errEl.innerHTML=errs.join('<br>');
+    render();
+  }
+
+  input.addEventListener('change',function(){add(input.files);input.value='';});
+  ['dragenter','dragover'].forEach(function(ev){box.addEventListener(ev,function(e){e.preventDefault();box.classList.add('drag');});});
+  ['dragleave','drop'].forEach(function(ev){box.addEventListener(ev,function(e){e.preventDefault();box.classList.remove('drag');});});
+  box.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files)add(e.dataTransfer.files);});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    msg.className='form-msg';msg.innerHTML='';
+    if(!form.checkValidity()){
+      msg.className='form-msg err';msg.innerHTML='請填寫必填欄位（標示 * 者）。';
+      form.reportValidity();return;
+    }
+    if(!consent.checked){
+      msg.className='form-msg err';msg.innerHTML='請先勾選同意隱私權政策。';return;
+    }
+    var fd=new FormData(form);
+    picked.forEach(function(f){fd.append('files',f,f.name);});
+    var orig=btn.textContent;btn.disabled=true;btn.textContent='上傳中，請勿關閉頁面…';
+    fetch(ENDPOINT,{method:'POST',body:fd})
+      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){
+        if(!res.ok)throw new Error(res.j.error||'upload_failed');
+        form.style.display='none';
+        msg.className='form-msg ok';
+        msg.innerHTML='✅ 已收到，案號 <strong>'+res.j.case_id+'</strong>（共 '+res.j.files+' 份文件）。<br>承辦人員將於上班時間與你聯繫，健檢報告完成後以 LINE 或 Email 交付。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+        if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'corporate_checkup'});
+        if(window.fbq)fbq('track','Lead');
+      })
+      .catch(function(){
+        btn.disabled=false;btn.textContent=orig;
+        msg.className='form-msg err';
+        msg.innerHTML='送出失敗，請稍後再試，或加 LINE 告訴我們，由專人協助你完成上傳：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+      });
+  });
+})();
+</script>
+</body>
+</html>
