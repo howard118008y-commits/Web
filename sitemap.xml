@@ -182,7 +182,7 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -292,7 +292,7 @@
   <!-- 免費工具 -->
   <url>
     <loc>https://cx468.com.tw/tools.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -562,7 +562,7 @@
   <!-- 房貸儀表板 -->
   <url>
     <loc>https://cx468.com.tw/radar-index.html</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -593,19 +593,19 @@
 
   <url>
     <loc>https://cx468.com.tw/lvr-observatory.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/lvr-presale.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/lvr-rental.html</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
