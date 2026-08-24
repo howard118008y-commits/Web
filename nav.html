@@ -16,7 +16,7 @@
 .cx-burger[aria-expanded="true"] .cx-burger-box span:nth-child(2){width:0;opacity:0}
 .cx-burger[aria-expanded="true"] .cx-burger-box span:nth-child(3){transform:rotate(-45deg);top:15px;left:3px}
 
-.cx-mobile-menu{display:none;position:fixed;inset:60px 0 0 0;background:#fff;z-index:99;padding:24px 24px 40px;flex-direction:column;gap:0;overflow-y:auto;animation:cxMenuSlide .25s ease}
+.cx-mobile-menu{display:none;position:fixed;inset:var(--cx-nav-h,48px) 0 0 0;background:#fff;z-index:99;padding:24px 24px 40px;flex-direction:column;gap:0;overflow-y:auto;animation:cxMenuSlide .25s ease}
 .cx-mobile-menu.cx-open{display:flex}
 @keyframes cxMenuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .cx-mobile-menu a{font-size:18px;font-weight:600;color:#1d1d1f;padding:18px 4px;border-bottom:.5px solid #e8e8ed;text-decoration:none;display:flex;justify-content:space-between;align-items:center}
@@ -26,7 +26,7 @@
 .cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:#141414;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-radar::after{content:""}
 .cx-mobile-menu a.active{color:var(--red,#C61B1C)}
-body.cx-menu-open{overflow:hidden}
+body.cx-menu-open{position:fixed;left:0;right:0;width:100%;overflow:hidden;overscroll-behavior:none}
 body.cx-menu-open .cx-social-dock{display:none}
 
 /* 房貸儀表板按鈕 — 精品輪廓款（去漸層藍，對齊全站精品系統） */
@@ -110,6 +110,15 @@ body.cx-menu-open .cx-social-dock{display:none}
 </div>
 <script>
 (function(){
+  function closeMenu(){
+    var menu = document.querySelector('[data-cx-mobile-menu]');
+    if (menu) { menu.classList.remove('cx-open'); menu.setAttribute('aria-hidden','true'); }
+    var b = document.querySelector('[data-cx-burger]');
+    if (b) b.setAttribute('aria-expanded','false');
+    document.body.classList.remove('cx-menu-open');
+    document.body.style.top = '';
+    if (window.__cxScrollY != null) { window.scrollTo(0, window.__cxScrollY); window.__cxScrollY = null; }
+  }
   document.addEventListener('click', function(e){
     var burger = e.target.closest('[data-cx-burger]');
     var menu = document.querySelector('[data-cx-mobile-menu]');
@@ -119,16 +128,25 @@ body.cx-menu-open .cx-social-dock{display:none}
       menu.classList.toggle('cx-open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       menu.setAttribute('aria-hidden', open ? 'false' : 'true');
-      document.body.classList.toggle('cx-menu-open', open);
+      if (open) {
+        // 記住當下位置：position:fixed 鎖版會讓 body 脫離文件流
+        var navEl = document.querySelector('nav');
+        if (navEl) {
+          // 全站 nav 有 48/49/60px 三種高度，寫死會露縫或蓋住 nav，量測後才定位
+          document.documentElement.style.setProperty(
+            '--cx-nav-h', Math.round(navEl.getBoundingClientRect().height) + 'px');
+        }
+        window.__cxScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.style.top = '-' + window.__cxScrollY + 'px';
+        document.body.classList.add('cx-menu-open');
+      } else {
+        closeMenu();
+      }
       return;
     }
     var inLink = e.target.closest('[data-cx-mobile-menu] a');
     if (inLink) {
-      menu.classList.remove('cx-open');
-      var b = document.querySelector('[data-cx-burger]');
-      if (b) b.setAttribute('aria-expanded','false');
-      menu.setAttribute('aria-hidden','true');
-      document.body.classList.remove('cx-menu-open');
+      closeMenu();
     }
   });
 })();

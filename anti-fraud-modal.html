@@ -45,7 +45,8 @@
   .afm-check{font-size:13px}
   .afm-btn{font-size:15px;padding:13px 20px}
 }
-body.afm-lock{overflow:hidden}
+/* iOS Safari 不認 body{overflow:hidden}（實際捲動容器是 documentElement）：彈窗開著時背景仍會滑動，半透明黑遮罩下就是「整頁變黑」。改 position:fixed 鎖版。 */
+body.afm-lock{position:fixed;left:0;right:0;width:100%;overflow:hidden;overscroll-behavior:none}
 /* 廣告點擊改用頂端細條（不擋內容），自然流量維持全屏聲明 */
 .afm-bar{display:flex;align-items:center;gap:10px;background:#fff8e6;border-bottom:1px solid #f0e2b6;color:#6b5b1e;font-size:12.5px;line-height:1.4;padding:8px 12px;position:relative;z-index:998}
 .afm-bar-text{flex:1;min-width:0}
@@ -88,6 +89,16 @@ body.afm-lock{overflow:hidden}
 
 <script>
 (function(){
+  function afmLock(){
+    window.__afmScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.top = '-' + window.__afmScrollY + 'px';
+    document.body.classList.add('afm-lock');
+  }
+  function afmUnlock(){
+    document.body.classList.remove('afm-lock');
+    document.body.style.top = '';
+    if (window.__afmScrollY != null) { window.scrollTo(0, window.__afmScrollY); window.__afmScrollY = null; }
+  }
   var KEY = 'cx_antifraud_v1';
   var AD_SESSION = 'cx_afm_adsession';
   var DAYS = 7;
@@ -107,7 +118,7 @@ body.afm-lock{overflow:hidden}
   }
   function closeOverlay(){
     overlay.classList.remove('afm-show');
-    document.body.classList.remove('afm-lock');
+    afmUnlock();
   }
   function removeBar(){
     var bar = document.getElementById('afmBar');
@@ -156,7 +167,7 @@ body.afm-lock{overflow:hidden}
     }
     document.getElementById('afmBarView').addEventListener('click', function(){
       overlay.classList.add('afm-show');
-      document.body.classList.add('afm-lock');
+      afmLock();
     });
     document.getElementById('afmBarClose').addEventListener('click', function(){
       markSeen();
@@ -170,6 +181,6 @@ body.afm-lock{overflow:hidden}
   }
 
   overlay.classList.add('afm-show');
-  document.body.classList.add('afm-lock');
+  afmLock();
 })();
 </script>
