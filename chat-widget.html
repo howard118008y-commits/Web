@@ -20,7 +20,7 @@
 .cw-msg{max-width:86%;font-size:14px;line-height:1.7;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
 .cw-msg.cw-bot{background:#fff;border:1px solid #e8e8ea;color:#1d1d1f;border-radius:2px 14px 14px 14px;align-self:flex-start}
 .cw-msg.cw-user{background:#141414;color:#fff;border-radius:14px 2px 14px 14px;align-self:flex-end}
-.cw-msg a{color:#C61B1C;font-weight:600;text-decoration:none}
+.cw-msg a{color:#C61B1C;font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
 .cw-typing{align-self:flex-start;font-size:13px;color:#a1a1a6;padding:4px 14px}
 .cw-rate{display:flex;gap:6px;margin-top:8px}
 .cw-rate button{background:#fff;border:1px solid #d2d2d7;color:#8e8e93;font-size:12px;line-height:1;padding:5px 10px;border-radius:980px;cursor:pointer;font-family:inherit}
@@ -135,10 +135,24 @@
   };
   var START_CHIPS = ['flow:slb', 'flow:debt', 'flow:p2b', 'flow:apply', 'flow:human'];
 
+  // 小鋮回覆裡的網址要能直接點（原本走 textContent，網址只是死字串，訪客得自己複製貼上）
+  // 先跳脫 HTML 再 linkify，避免把模型輸出或訪客輸入當標記執行。
+  var CW_URL_RE = /https?:\/\/[^\s，。、；）)》」』】＞<>"']+/g;
+  function cwEscape(t){
+    return t.replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function cwLinkify(t){
+    return cwEscape(t).replace(CW_URL_RE, function(u){
+      return '<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + u + '</a>';
+    });
+  }
+
   function addMsg(role, text){
     var div = document.createElement('div');
     div.className = 'cw-msg ' + (role === 'user' ? 'cw-user' : 'cw-bot');
-    div.textContent = text;
+    div.innerHTML = cwLinkify(text);
     msgsEl.appendChild(div);
     msgsEl.scrollTop = msgsEl.scrollHeight;
     history.push({role: role === 'user' ? 'user' : 'assistant', content: text});
