@@ -1,0 +1,40 @@
+name: 每週更新 site-index.json
+
+# 為什麼要有這支：官網 AI 助理「小鋮」的服務清單原本寫死在 linebot 的 system prompt，
+# 新開的頁（如 2026-08-24 的公司財務健檢）不會自己進去，訪客問就得到「沒有這個服務」。
+# 改成小鋮啟動時抓線上 site-index.json；這支每週一重掃全站、有變更就 commit，
+# 小鋮 6 小時內自動吃到新內容，不必改 linebot 程式碼。
+# 排在 UTC 01:20 = 台北 09:20（讓 sitemap-lastmod 01:00 那支先跑完）。
+
+on:
+  schedule:
+    - cron: '20 1 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 掃全站產出 site-index.json
+        run: python3 scripts/build_site_index.py
+
+      - name: 有變更就 commit
+        run: |
+          if [[ -z "$(git status --porcelain site-index.json)" ]]; then
+            echo "site-index.json 無變更，跳過"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site-index.json
+          git commit -m "chore: 每週更新 site-index.json（小鋮網站內容索引）"
+          git push
