@@ -1,38 +1,71 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後重寫：2026-08-14 18:5x（新聞卡換稿＋精進會議落地＋企業貸款新專案線交接）
-> 本次重寫原因：上一版（同日 08:20）的「未竟五項」第一順位仍在（8/15 廣告判讀），但**第三順位已結案、GMB 判定被推翻、新增一條專案線（CX-FUNDING）**。故整節重寫、未堆疊。
+> 最後重寫：2026-08-29（全站改 AI 時代定位）
+> 本次重寫原因：**品牌定位轉向**——Sir 8/29 拍板「繼承時代結束，全站改成 AI 時代」，第一、五節整節重寫。
+> ⚠️ 第三、四節多數項目是 **8/14 版留下、本次未重驗**，逐項已標註；接手前先自行查證狀態再行動。
 
 ## 一、當前狀態快照
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `37aef9c`，與遠端一致 | `cd ~/cx468-web && git status -sb` |
-| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`（**勿 add**） | 同上 |
-| cx468-ga4-daily | `c586911`，**ahead 已歸零**（8/14 老闆授權推送）。未追蹤 `baseline.py`／`logs/`（勿 add） | `cd ~/cx468-ga4-daily && git status -sb` |
-| 新聞焦點卡 | **央行信用管制成效**（8/14 08:42 上線），下次硬截止 **2026-08-21** | 見第三節「⚠️ 換稿前必讀」 |
-| SEO/AEO/GEO | 123 頁，SEO 8 項全 0 缺、GEO 全 0 缺、AEO 僅 privacy／terms（豁免）。radar-index 16/16 | `python3 scripts/audit_seo.py` |
-| FAQ 同源 | 121 頁、漂移 0 | `python3 scripts/audit_faq_samesource.py` |
-| **Meta 廣告** | 兩支 ACTIVE：`rm-declined-leads-202608`（名單 200/日）、`rm-declined-lp`（流量 100/日）。`inherit-era-img3` 已於 8/14 03:09 暫停 | 見第二節 |
-| **Google 廣告** | `rm-declined-search-202608` ENABLED、200/日、七項稽核全綠（8/14 08:08） | 見第二節 |
-| 排程 | `com.cx468.healthcheck`／`indicators-local`／`leadspoll` 三支 launchd 全載入 exit 0 | `launchctl list \| grep cx468` |
-| 名單 | poller 每 15 分鐘正常心跳，email 側 **1 筆**（LINE 側 28 筆不經此檔） | `tail -3 ~/.cx468/leads/poller.log` |
-| **期限型任務** | 回電 SOP 實錄複核 剩 14 天 0/3 通；銀行條文存證複查 剩 28 天 0/1 次 | 見第二節「期限型任務登記表」 |
+| cx468-web HEAD | `3e60f28`，**ahead 1（未 push，等 Sir 授權部署）** | `cd ~/cx468-web && git status -sb` |
+| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本次產物） | 同上 |
+| 線上站點 | 200，**尚未含本次改動** | `curl -s https://cx468.com.tw/ \| grep -c "先問小鋮 AI"` → 現為 0；push 後應為 1 |
+| SEO/AEO/GEO | 124 頁。index/services 16/17（唯一失分 `fresh30`），其餘 5 個服務頁 17/17 | `python3 scripts/audit_seo.py` |
+| FAQ 同源 | 122 頁、漂移 0 | `python3 scripts/audit_faq_samesource.py` |
+| 排程 | `healthcheck`／`indicators-local`／`leadspoll`／`adsreport`／`fanjiuzhang-watch` 五支 launchd 全載入 exit 0 | `launchctl list \| grep cx468` |
+| cx468-ga4-daily | `b3902b1`，**ahead 3（別的 session 留的，本次未處理）** | `cd ~/cx468-ga4-daily && git status -sb` |
+| cx468-linebot | `c750fd2`，與遠端一致 | `cd ~/cx468-linebot && git status -sb` |
+
+### 🚨 部署前必做
+
+```bash
+cd ~/cx468-web && python3 scripts/update_schema_datemod.py
+```
+`fresh30` 失分＝index/services 的 `dateModified` 落後 git 8–16 天。不同步就上線＝新內容配舊 schema，會擋住重爬（memory `feedback_sitemap_lastmod_gates_indexing`）。
 
 ⚠️ **三個路徑陷阱**：
 1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**。
-2. `行銷產出/`、`知識庫/`、`制度/`、`鋮馨企業貸款補助/` 在 **iCloud 專案夾**，在 repo 裡 `ls` 會空手而回。
+2. `行銷產出/`、`知識庫/`、`制度/` 在 **iCloud 專案夾**，在 repo 裡 `ls` 會空手而回。
 3. LINE bot 查驗一律用 `~/cx468-linebot`，iCloud 專案夾內那份是凍結殭屍複本。
 
 ## 二、可複用資產／程序
 
-### 🆕 期限型任務登記表（8/14 精進會議落成）
+### 🆕 本機預覽與真回覆測試（8/29 建立）
 
-`~/.cx468/pending_reviews.json` → 三日健檢檢查4 自動倒數，逾期推 Telegram。
-**凡是有硬截止、又沒有其他系統在盯的任務，一律登記進去，不要只寫在清單或交接信裡。**
-新增任務**改 JSON 即可，不必動程式碼**。分級：已完成🟢可結案／逾期🔴含天數／≤3天🔴／≤7天⚠️／其餘🟢。
-程式在 `~/cx468-ga4-daily/health_check.py` 檢查4 第 (5) 段。已測三種邊界。
+```bash
+# 靜態站
+cd ~/cx468-web && python3 -m http.server 8931
+# chat API（沒開的話小鋮只會回「連線暫時不穩」）
+cd ~/cx468-linebot && ANTHROPIC_API_KEY="$(cat ~/.cx468/anthropic.key)" PORT=5001 .venv/bin/python app.py
+```
+chat-widget 只在 `localhost`／`127.0.0.1` 打 :5001，其餘打 Render 正式站。
+`/chat` 收 `{"messages":[{"role":"user","content":"…"}]}`，**不是** `{"message":"…"}`（送錯回 400）。
+
+### 🆕 headless 目檢管線（8/29 建立，比 playwright MCP 可靠）
+
+playwright MCP 會被別的 session 佔住（`Browser is already in use`）。改用 CDP：
+
+```bash
+CH="$HOME/Library/Caches/ms-playwright/chromium-1234/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+"$CH" --headless=new --disable-gpu --no-sandbox --remote-debugging-port=9333 \
+      --user-data-dir=/tmp/cdpX --window-size=1440,900 about:blank &
+```
+Node v26 內建 WebSocket，直接寫 CDP client。三個雷（memory `feedback_cdp_screenshot_traps`）：
+- `Emulation.setDeviceMetricsOverride` ＋ `Page.captureScreenshot` 會**永久 hang**。要換視窗尺寸就重啟 chrome 帶 `--window-size`。
+- 用 `/json/new` 開分頁後截圖可能拍到**別的 active 分頁**。附著到啟動時那個分頁、反覆 `Page.navigate` 才穩。
+- 反詐 modal 會擋住目檢：先 `localStorage.setItem('cx_antifraud_v1', String(Date.now()))` 再 reload。
+
+### 🧩 ai-bar.html（8/29 新元件）
+
+服務頁 AI 詢問列。掛法：頁面 hero 內插一行
+```html
+<div data-include="ai-bar" data-ai-q="問題一？|問題二？|問題三？"></div>
+```
+- chips 文字＝問題前 14 字；點擊送全文給小鋮，開全屏對話（`window.cxAskFull`）。
+- 顏色與對齊**自動讀該頁 h1**，深底淺底都不用改 CSS。
+- 🔴 `include.js` 會在 script 執行後移除容器 div，所以元件內是用 `document.querySelector('[data-include="ai-bar"]')` 取 `data-ai-q`，**不能用 `currentScript.closest()`**（會靜默退回預設題）。
 
 ### 🔑 Meta 權杖（永不過期）
 
@@ -41,7 +74,6 @@
 | `~/.cx468/fb_system_user.token` | 系統用戶・建廣告／改預算／換素材／開關／讀 insights |
 | `~/.cx468/fb_page_system.token` | 粉專・建即時表單／抓名單 |
 
-**Meta 查法**：
 ```bash
 T=$(cat ~/.cx468/fb_system_user.token)
 curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
@@ -49,10 +81,6 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
   --data-urlencode "fields=campaign_name,spend,impressions,inline_link_clicks,ctr,frequency" \
   --data-urlencode "date_preset=today"
 ```
-- 帳戶時區 Asia/Taipei、幣別 TWD
-- **配額類數字一定要配改動史看**：`/act_xxx/activities?since=...` 過濾 `spend_limit`／`billing`。`amount_spent` 是「自上次重置起」的累計，不是歷史總量（8/14 踩過，memory `feedback_quota_snapshot_needs_reset_history`）
-- 建活動必填：`is_adset_budget_sharing_enabled`、`regional_regulated_categories=["TAIWAN_UNIVERSAL"]`、`regional_regulation_identities`（皆 `2154353671792733`）
-- creative 一律 `degrees_of_freedom_spec` 全 OPT_OUT
 
 ### Google Ads 查法（無 API 金鑰，用指令碼）
 
@@ -69,115 +97,75 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
 
 `行銷產出/LINE/2026-08-14-以房養老來電三句話SOP-FINAL.md` v2，媽祖已核。
 四道閘門：①第一句身分切割 ②「我幫你問問看銀行」列禁語第一條 ③轉場售後回租需四條件全中 ④**弱勢否決凌駕四條件**。
-🔴 媽祖裁示：上線兩週內（**8/28 前**）抽聽或自報三通實錄複核。**已進期限型任務登記表自動倒數。**
+
+### 期限型任務登記表
+
+`~/.cx468/pending_reviews.json` → 三日健檢檢查4 自動倒數，逾期推 Telegram。
+**凡是有硬截止、又沒有其他系統在盯的任務，一律登記進去。** 新增改 JSON 即可，不必動程式碼。
 
 ## 三、未竟任務
 
-### 🔴 第一順位：三支廣告首週判讀（8/15，就是明天）
+### 🔴 第一順位：本次改動等部署（唯一本次產生、狀態已實證）
 
-| 活動 | 管道 | 日預算 |
-|---|---|---|
-| `rm-declined-leads-202608` | Meta 即時表單 | 200 |
-| `rm-declined-lp` | Meta 流量 | 100 |
-| `rm-declined-search-202608` | Google 搜尋 | 200 |
+`3e60f28` ahead 1。Sir 尚未說「部署」。要上線時：
 
-**判準表**：frequency > 2.0 → 開 D（子女視角）／連結 CTR < 1% → 開 B（同一間房不同答案）／CTR ≥ 1.5% 且 frequency < 1.5 → 不動／**GA4 平均參與秒數 < 10 秒 → 先修落地頁，別加碼買量**。
-素材包：`行銷產出/FB廣告圖/2026-08-12-以房養老被拒-廣告文案-FINAL.md`（B–E 已過媽祖）。
+```bash
+cd ~/cx468-web
+python3 scripts/update_schema_datemod.py     # 先同步 dateModified
+git fetch && git rebase origin/main
+git add <指名檔案>                            # 禁 git add -A
+git push
+curl -s https://cx468.com.tw/ | grep -c "先問小鋮 AI"   # 應為 1
+```
+上線後給 Sir URL 清單送 GSC：首頁＋7 個服務頁（services / second-mortgage / sale-leaseback / debt-consolidation / private-to-bank / corporate-checkup / property-management）。
 
-⚠️ **`rm-declined-leads-202608` 零出量已排查完畢（8/14）**：三層 ACTIVE、零 issues、表單 ACTIVE 且合規、粉專名單條款已接受、受眾 140–160 萬、帳戶正常 → **結論是冷啟動，不是故障**。8/15 若仍零曝光，查序：learning stage → `LOWEST_COST_WITHOUT_CAP` 在 58–65 窄齡搶不到版位 → **才輪素材。表單已驗乾淨，別動。**
+### 🟡 定位轉向的後續（本次未做，Sir 未指示）
 
-### 🔴 第二順位：企業貸款補助專案（CX-FUNDING）——新專案線
+1. **nav 的「免費評估」按鈕**：全站共用 nav，二胎頁會繼承。Sir 2026-07 定過二胎主商品場景禁「免費評估」招攬鉤子（memory `feedback_compliance_no_free_eval_second_mortgage`）。既有缺口，已向 Sir 報告、等指示。
+2. **lp-\* 與地區變體頁**（`lp-private-to-bank` / `xinbei-*` / `zhonghe-*` / `banqiao-*` 等約 10 頁）本次未加 AI 詢問列。要鋪的話照第二節 ai-bar 掛法，一頁一行。
+3. **繼承那 8 頁一行未動**（Sir 拍板保留帶曝光）。若日後要調，先查 canonical 收斂狀態（memory `project_canonical_consolidation`）。
+4. **AI 模式預設值**：目前預設「完整版」，AI 模式只記本次瀏覽（sessionStorage）。要改成預設 AI 模式，改 index.html 那行 `sessionStorage.getItem('cxHomeMode') === 'ai'` 即可——但會讓自然搜尋到站的訪客被覆蓋層擋住。
 
-專案夾：`鋮馨企業貸款補助/`（iCloud 專案夾，三個平放檔：`CLAUDE.md` 29KB／`programs.json` 20 筆方案／`company-facts.json`）
+### ⚠️ 以下為 8/14 版留下、**本次未重驗**，接手前先查證
 
-**定位（已判定，勿再誤讀）**：**鋮馨這間公司自己去申請**政府補助／貸款／輔導，**不是新開一條幫客戶辦企業貸款的服務線**。該專案 §0-2 明訂「不得產出對外文案，僅供內部決策與送件準備」；§9.3 紅線禁止出現「我們協助申請」「代辦過件」。唯一與客戶有關的是 §6.3——鋮馨自己不適用的一般政策性貸款轉為 SEO 內容資產。
-
-**專案狀態：`BLOCKED`**，卡 §2 三個未知數：`paid_in_capital`（實收資本額）、`responsible_person_in_labor_insurance_roster`（負責人是否在勞保投保名冊）、`business_scope_codes`（營業項目代碼）。
-🔴 該專案自訂鐵則：**任何欄位為 null 時，需要它的任務一律停止並詢問，不得以估算值代替。**
-
-**最高槓桿三件**（依檔案自帶 priority）：
-1. **產業競爭力輔導團**（priority 0）—— 免費、無身分門檻、線上入案 `eii.nat.gov.tw/moeai-plus/`。一件事換三個用途：SBIR 技術佐證＋原民會立案基礎＋貸款「曾獲政府輔導培育」免擔保免保人資格。專案稱「CP 值最高的單一動作」。
-2. **SBIR Phase 1**（priority 1）—— 150 萬**不用還**、隨到隨審全年開放、通過率約 43%、無身分門檻。已有計畫書骨架 v1（但**該檔不在資料夾內**，見下方落差）。
-3. **原住民族事業貸款**（priority 1）—— 額度最大、利率最低（約 1.6%）、以負責人名義申辦不看股權比例。**硬門檻卡在創業輔導課程 0/20 小時。**
-
-**🔴 唯一硬期限：2026-09-22 中午 iPAS 報名截止**（距今 39 天）。
-**⏳ 時效**：`programs.json` 多數 `verified_at` 為 2026-08-12、`revalidate_after_days: 90` → **2026-11-10 起全部須重新查證**。
-
----
-
-#### 📄 下一個工作（老闆 8/14 指定）：工序＋條件對照 PDF
-
-**產出**：一份 UI 清楚、可直接預覽的 PDF，回答「鋮馨要做這個企業貸款，**需要哪些工序、符合哪些條件**」。
-
-**素材全部現成，不用重新研究**——該專案 CLAUDE.md 已寫好：
-- §2.2 決策樹（以勞保投保名冊為分岔點的分流邏輯）
-- §3 資格總表（14 方案 × 判定／額度／卡點）
-- §4.5 貸款應備文件 8 項 checkbox
-- §8 執行時序（8.1 本週四動作／8.2 三通電話含問句逐字／8.3 硬期限／8.5 時程軸）
-- §9 資格檢核表（通用排除 6 條／執行地雷 4 條／對外紅線 6 條）
-- §11 任務看板（四色 12 個 checkbox，目前**無一勾選**）
-
-**PDF 建議結構**（供下個 session 參考，非定案）：
-1. 封面＋一頁摘要：現在卡在哪三個數字、解鎖後能拿到什麼
-2. **決策樹圖**（§2.2）——投保名冊 in/out 兩條路徑分流，這是全案樞紐
-3. **方案資格總表**（§3）——✅適用／❌不適用／⚠️待確認 三色
-4. **工序時序圖**（§8.5）——含 9/22 iPAS 硬期限標記
-5. **應備文件 checklist**（§4.5＋5 份待調文件）
-6. **紅線頁**（§9.3 六條，不得暗示與政府機關有從屬或代辦關係）
-
-**做 PDF 的工具**：有 `make-pdf` skill 可用；或寫 HTML 再列印成 PDF（本專案熟悉的路數，且能做出好看的 UI）。
-**⚠️ 紀律**：null 欄位一律如實標「待確認」，**不可用估算值或一般常識填空**——這份會拿去做送件準備，編造會出事。這也正是 PDF 的價值：讓老闆一眼看到卡點在哪。
-
-#### 🔴 該專案三處資料不一致（做 PDF 前先跟老闆確認）
-
-| 欄位 | `company-facts.json` | 憲法 CLAUDE.md | 處置 |
-|---|---|---|---|
-| 統一編號 | `null` | `60602537` | 直接補上即可 |
-| email | `jaroma1314@gmail.com`／`cz468@gmail.com` | `cx468468@gmail.com` | **問老闆哪個是對的** |
-| 合作銀行 | 「**40+**」 | 「39 家以上」，且**明文禁寫「逾40家」** | 🔴 **踩憲法紅線，須改為「39 家以上」**（memory `feedback_ad_claims_match_constitution`） |
-
-**另有目錄落差**：該專案 §0 宣告的結構是 `data/`、`docs/`、`tracking/` 子夾，實際是三個檔平放；`docs/sbir-phase1-outline.md`（宣稱「已有 v1」）**不在資料夾內**，位置未載——下個 session 要先找它或確認是否根本沒建。
-
-### 🟡 第三順位：回電 SOP 實地複核（8/28 前）
-
-SOP 已上架但**還沒有任何一通實際來電驗證過**。媽祖要求兩週內抽聽或自報三通實錄。**已進期限型任務登記表自動倒數（剩 14 天，0/3 通）。**
-
-### 🟢 可選不急
-
-1. **新聞焦點卡下次硬截止 2026-08-21**。
-   ⚠️ **換稿前必讀**：先跑 `git log --oneline -5 -- radar-index.html` 查上次換稿時間算**實際服役天數**。硬截止日是**到期日不是動手日**——8/14 就因為讀錯而同日換了兩次，舊卡只活 6 小時 41 分（memory `feedback_check_content_age_before_rotating`）。
-   ⚠️ 改卡片註解格式會弄壞 `~/cx468-ga4-daily/health_check.py` 的 regex（跨 repo 字串耦合，8/14 踩過，memory `feedback_cross_repo_string_coupling`）。
-2. **Anthropic auto-reload**（本機查不到，API 無餘額端點，只能 console 看）。
-3. **Postgres `cx468-fb-news-db` 每月 US$21.02**、手機表格逐字直排、設計系統收斂（舊綠 `#16A34A` 殘留 7 頁、`#0071e3` 藍 58 檔）。
-4. **goshoot「Daily site audit」連續失敗**（跨事業線）。
+- 三支廣告首週判讀（原訂 8/15）、新聞焦點卡硬截止（原訂 8/21）、回電 SOP 實錄複核（原訂 8/28）——**三個日期都已過**，狀態不明，先查 `~/.cx468/pending_reviews.json` 與健檢報告再決定。
+- 企業貸款補助專案（CX-FUNDING）三處資料不一致＋三個阻塞數字。
+- Anthropic auto-reload、Postgres `cx468-fb-news-db` 每月 US$21.02、設計系統收斂（舊綠 `#16A34A` 殘留 7 頁、`#0071e3` 藍 58 檔）。
+- ⚠️ Threads token 8/14 時剩 55 天（約 2026-10-08 到期），換發後更新 `~/.cx468/threads_token_issued`。
 
 ### 日常常態
 
 - 每天 12:00 精進會議（**session 級排程，每個 session 要用 CronCreate 重設**）
-- 三日健檢 `com.cx468.healthcheck`（檢查4 五項：新聞卡年齡／Threads token／queue 存量／Anthropic 餘額／**期限型任務登記表**）
-- 名單輪詢 `com.cx468.leadspoll` 每 15 分鐘｜本機指標 5/25 號 10:30｜曝光巡檢 08:12｜Threads 12:30（queue 排到 8/31）
-- ⚠️ **Threads token 剩 55 天（約 2026-10-08 到期）**，換發後務必更新 `~/.cx468/threads_token_issued`
+- 三日健檢 `com.cx468.healthcheck`（檢查4 五項）
+- 名單輪詢 `com.cx468.leadspoll` 每 15 分鐘｜本機指標 5/25 號 10:30｜曝光巡檢 08:12｜Threads 12:30
+- ⚠️ 換新聞卡前先跑 `git log --oneline -5 -- radar-index.html` 算實際服役天數；硬截止日是**到期日不是動手日**（memory `feedback_check_content_age_before_rotating`）。改卡片註解格式會弄壞 `~/cx468-ga4-daily/health_check.py` 的 regex（memory `feedback_cross_repo_string_coupling`）。
 
 ## 四、等使用者的事項
 
-1. 🔴 **GMB 影片驗證**——GEO 站外總開關，卡三週。**站外簡介工作 7/23 就做完 90%**（四平台結案，別再誤判「未動」）；剩服務區域／次要電話／「更多」屬性三項全部等驗證通過。逐步帶法：`行銷產出/技術記錄/2026-08-14-GMB驗證解鎖checklist.md`
-2. **企業貸款專案三處資料不一致**（統編／email／合作銀行 40+）＋三個阻塞數字（資本額／勞保投保名冊／營業項目代碼）
-3. **Meta `spend_cap`**：剩 2,483（距 8/5 重置 9 天），日花約 300 → 約 **8/22** 撞頂。撞到全帳戶停投，兩支廣告一起死
-4. **Anthropic auto-reload**：console.anthropic.com → Billing，建議「低於 $5 自動補到 $50」
-5. **名單進來後的回電**——SOP 已備妥，**回電前務必先讀**；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
-6. **通話實錄回報**——8/28 前三通，交媽祖複核
-7. **合一地政士事務所洽談**——只有老闆本人能談（面談包 `行銷產出/策略簡報/2026-08-12-合一地政士事務所面談包-FINAL.md` 已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
+> 1–6 為 8/14 版留下、本次未重驗。
 
-## 五、本 session（8/14 早–晚）做了什麼
+1. 🔴 **GMB 影片驗證**——GEO 站外總開關。站外簡介工作 7/23 已完成 90%（四平台結案，別再誤判「未動」）；剩服務區域／次要電話／「更多」屬性等驗證通過。帶法：`行銷產出/技術記錄/2026-08-14-GMB驗證解鎖checklist.md`
+2. **企業貸款專案三處資料不一致**＋三個阻塞數字（資本額／勞保投保名冊／營業項目代碼）
+3. **Meta `spend_cap`**——8/14 估約 8/22 撞頂，**日期已過，務必先查現值**
+4. **Anthropic auto-reload**：console.anthropic.com → Billing，建議「低於 $5 自動補到 $50」
+5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
+6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
+7. 🆕 **本次改動的部署授權**——Sir 說「部署」才 push（見第三節第一順位）
+
+## 五、本 session（8/29）做了什麼
+
+Sir 拍板：**繼承時代結束，全站改成 AI 時代定位**。對標 better.com 的 Betsy AI 首頁。
 
 | 事項 | 證據 |
 |---|---|
-| Meta leads 零出量全鏈路排查 → 判定冷啟動非故障 | API 實讀三層狀態＋表單＋粉專條款＋受眾規模 |
-| 新聞焦點卡換稿（央行信用管制成效）上線 | `37aef9c`，媽祖零必改通過，線上像素驗證（動態範圍 170、101 色塊） |
-| 精進會議：Step 0 七項驗收、教訓落地 4 條 | `行銷產出/精進會議/2026-08-14.md` |
-| 檢查4 增列期限型任務登記表 | `c586911`，六項全綠＋三種邊界已測 |
-| **推翻 GMB「四次未動」誤判** | 7/23 稽核檔第八節有完整執行紀錄＋截圖證據 |
-| GMB 驗證解鎖 checklist | `行銷產出/技術記錄/2026-08-14-GMB驗證解鎖checklist.md` |
-| 企業貸款專案情報掃描 | 本檔第三節第二順位 |
+| better.com 實抓分析（SPA，WebFetch 只拿得到 nav，要 headless render） | 整頁只剩 nav／AI 對話 hero／免責 footer；傳統首頁收進 Classic Mode |
+| 首頁定位轉向：eyebrow／h1／副標／CTA 移除繼承語 | h1 改「房子的問題，先問小鋮 AI」；順修「深耕二十年」主詞為團隊 |
+| AI 模式全屏入口（覆蓋層，DOM 不動） | 首訪 overlay `on=false` 實測；SEO 稽核 16/17 不變、字數 3,798、h2 12、內鏈 21 全不動 |
+| chat-widget 新增 `window.cxAskFull()` | 全屏對話＋遮罩，關閉自動復原，內頁 widget 未受影響 |
+| ai-bar.html 掛進 7 個服務頁 | 7 頁 chips 逐頁正確、無 JS 錯、點 chip 進全屏對話真回覆 |
+| 修 sale-leaseback h1 被 nav 蓋住 | 桌機＋手機兩組 CSS；修後 7 頁桌機／手機皆 0 頁被蓋 |
+| 合規掃描 | 我的改動 0 命中；SLB chips 無 借/貸/押/還款/利息/贖回 |
 
-**本 session 落地的 memory**：`feedback_check_content_age_before_rotating`、`feedback_cross_repo_string_coupling`、`feedback_quota_snapshot_needs_reset_history`（新）／`feedback_disclaimer_four_variants_and_neutral_cta`、`feedback_verify_external_artifact_not_logs`（更新）
+**Sir 的定位判斷**（寫下來免得下個 session 重問）：繼承內容頁保留帶曝光，定位層改 AI；服務頁鋪 AI 入口，文章頁不鋪。
+
+**本 session 落地的 memory**：`feedback_shared_component_into_existing_hero`、`feedback_cdp_screenshot_traps`（皆新）
