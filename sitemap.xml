@@ -36,7 +36,7 @@
   <!-- 主頁 -->
   <url>
     <loc>https://cx468.com.tw/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -44,7 +44,7 @@
   <!-- 核心服務頁 -->
   <url>
     <loc>https://cx468.com.tw/sale-leaseback.html</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -62,13 +62,13 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/private-to-bank.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/services.html</loc>
-    <lastmod>2026-08-29</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -80,7 +80,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/second-mortgage.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -122,13 +122,13 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/debt-consolidation.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/property-management.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -510,7 +510,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-property-loan.html</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -522,19 +522,19 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-loan-seized.html</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-shared-ownership.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-estate-tax-timeline.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
