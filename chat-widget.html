@@ -8,6 +8,11 @@
 .cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:#fff;color:#1d1d1f;font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid #e3e3e6;border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;max-width:200px}
 .cw-panel{position:fixed;bottom:96px;right:24px;z-index:9991;width:min(330px,calc(100vw - 32px));height:min(520px,68vh);background:#faf9f7;border:2px solid #C61B1C;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:visible}
 .cw-panel.cw-open{display:flex}
+/* 全屏對話模式（首頁 AI 模式進來時使用） */
+.cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(8,8,12,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cw-panel.cw-full{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:min(820px,94vw);height:min(760px,86vh)}
+.cw-panel.cw-full::before,.cw-panel.cw-full::after{display:none}
+.cw-panel.cw-full .cw-msg{max-width:78%;font-size:15px}
 .cw-panel::before,.cw-panel::after{content:'';position:absolute;top:-17px;width:38px;height:38px;background:#141414;border:2px solid #C61B1C;transform:rotate(45deg);z-index:-1}
 .cw-panel::before{left:26px;border-radius:50% 8px 0 8px}
 .cw-panel::after{right:26px;border-radius:8px 50% 8px 0}
@@ -137,7 +142,7 @@
 
   // 小鋮回覆裡的網址要能直接點（原本走 textContent，網址只是死字串，訪客得自己複製貼上）
   // 先跳脫 HTML 再 linkify，避免把模型輸出或訪客輸入當標記執行。
-  var CW_URL_RE = /https?:\/\/[^\s，。、；）)》」』】＞<>"']+/g;
+  var CW_URL_RE = /https?:\/\/[^\s，。、；：！？）)》」』】＞<>"']+/g;
   function cwEscape(t){
     return t.replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -299,8 +304,42 @@
   }
   function closePanel(){
     panel.classList.remove('cw-open');
+    exitFull();
     launch.setAttribute('aria-expanded', 'false');
   }
+  /* 全屏對話：首頁 AI 模式送出問題時放大成主畫面 */
+  var backdrop = null;
+  function enterFull(){
+    if (backdrop) return;
+    backdrop = document.createElement('div');
+    backdrop.className = 'cw-full-backdrop';
+    backdrop.addEventListener('click', closePanel);
+    document.body.appendChild(backdrop);
+    panel.classList.add('cw-full');
+  }
+  function exitFull(){
+    panel.classList.remove('cw-full');
+    if (backdrop) { backdrop.remove(); backdrop = null; }
+  }
+
+  /* 對外 API：讓 hero 的 AI 輸入列可以直接把問題丟給小鋮（index.html 使用） */
+  window.cxAsk = function(text){
+    var q = (text || '').trim();
+    if (!q) { openPanel(); return; }
+    openPanel();
+    inputEl.value = q;
+    sendFree();
+  };
+  window.cxAskFull = function(text){
+    enterFull();
+    window.cxAsk(text);
+  };
+  /* widget 是 window load 後才注入，早於它的點擊會先進佇列，這裡補跑 */
+  try {
+    var pending = window.__cxAskQueue || [];
+    window.__cxAskQueue = null;
+    pending.forEach(function(q){ window.cxAskFull(q); });
+  } catch(e){}
 
   launch.addEventListener('click', function(){
     panel.classList.contains('cw-open') ? closePanel() : openPanel();

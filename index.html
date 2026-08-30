@@ -70,10 +70,10 @@ footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
 
 /* === 精品 hero：全幅攝影、襯線巨型字、低語氣 === */
 .serif{font-family:"Noto Serif TC","Songti TC",serif}
-.hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:#0a0a0c}
+.hero{position:relative;height:auto;min-height:100vh;overflow:hidden;background:#0a0a0c}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(.9) contrast(1.05) brightness(.95)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,12,.66) 0%,rgba(8,8,12,.22) 34%,rgba(8,8,12,.06) 56%,rgba(8,8,12,.46) 100%)}
-.hero-body{position:absolute;inset:0;display:flex;align-items:flex-end;padding:0 64px 84px}
+.hero-body{position:relative;display:flex;align-items:flex-end;min-height:100vh;padding:120px 64px 84px}
 .hero-eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:500;color:rgba(255,255,255,.74);letter-spacing:.26em;text-transform:uppercase;margin-bottom:1.6rem}
 .hero-eyebrow::before{content:"";width:36px;height:1px;background:rgba(255,255,255,.55)}
 .hero-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:70px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.16;margin-bottom:1.2rem;text-shadow:0 2px 28px rgba(0,0,0,.25)}
@@ -87,6 +87,74 @@ footer{background:#0e0e10;color:#f5f5f7;padding:4.5rem 4rem 2.5rem}
 .hero .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:2px;padding:13px 30px;font-size:13px;font-weight:500;letter-spacing:.14em}
 .hero .btn-white:hover{background:rgba(255,255,255,.88)}
 .hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+/* === hero AI 詢問列（小鋮入口）=== */
+.hero-ai{margin-bottom:1.8rem;max-width:660px}
+.hero-ai-bar{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.97);border-radius:14px;padding:10px 10px 10px 16px;box-shadow:0 10px 40px rgba(0,0,0,.28)}
+.hero-ai-mark{width:26px;height:26px;flex-shrink:0;border-radius:7px;background:#8B1A1A;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:0}
+.hero-ai-bar input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#111;font-family:inherit}
+.hero-ai-bar input::placeholder{color:#8a8a8a}
+.hero-ai-send{flex-shrink:0;width:36px;height:36px;border:0;border-radius:10px;background:#111;color:#fff;font-size:16px;line-height:1;cursor:pointer;transition:background .2s}
+.hero-ai-send:hover{background:#8B1A1A}
+.hero-ai-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hero-ai-chips button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.34);color:rgba(255,255,255,.92);border-radius:999px;padding:7px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;transition:background .2s,border-color .2s}
+.hero-ai-chips button:hover{background:rgba(255,255,255,.2);border-color:#fff}
+.hero-ai-note{font-size:11px;color:rgba(255,255,255,.5);margin-top:10px;letter-spacing:.05em}
+/* 信任數字（貼在 AI 詢問列上方） */
+.hero-trust{display:flex;gap:34px;margin-bottom:14px}
+.hero-trust-inline{gap:24px;margin-bottom:10px;align-items:baseline;flex-wrap:wrap}
+.hero-trust-inline>span{display:flex;align-items:baseline;gap:8px}
+.hero-trust-inline .hero-trust-n{font-size:19px}
+.hero-trust-inline .hero-trust-l{margin-top:0;letter-spacing:.1em}
+.hero-ai-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.hero-ai-foot .hero-ai-note{margin-top:0}
+.hero-ai-foot .hero-mode{margin-top:0;padding:6px 14px;font-size:11.5px}
+.hero-trust-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:30px;font-weight:600;color:#fff;line-height:1.1;letter-spacing:.01em}
+.hero-trust-l{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.16em;margin-top:5px}
+/* 語音輸入鈕 */
+.hero-ai-mic{flex-shrink:0;width:34px;height:34px;border:0;border-radius:10px;background:transparent;color:#6b6b6b;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.hero-ai-mic[hidden]{display:none}
+.hero-ai-mic:hover{background:#f0efec;color:#111}
+.hero-ai-mic.on{background:#8B1A1A;color:#fff}
+/* 模式切換 */
+.hero-mode{margin-top:12px;background:transparent;border:1px solid rgba(255,255,255,.34);color:rgba(255,255,255,.86);border-radius:999px;padding:7px 16px;font-size:12px;font-family:inherit;letter-spacing:.08em;cursor:pointer;transition:background .2s,border-color .2s}
+.hero-mode:hover{background:rgba(255,255,255,.14);border-color:#fff}
+/* === AI 模式：全屏入口 === */
+#aiMode{position:fixed;inset:0;z-index:9992;background:#0a0a0c;display:none;overflow-y:auto}
+#aiMode.on{display:block}
+.am-wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:88px 24px 56px;text-align:center}
+.am-mark{width:46px;height:46px;border-radius:13px;background:#8B1A1A;color:#fff;font-family:"Noto Serif TC","Songti TC",serif;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.am-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:44px;font-weight:600;color:#fff;line-height:1.3;letter-spacing:.01em;margin-bottom:14px;max-width:20em}
+.am-h1 em{font-style:normal;color:#E0806B;margin-right:.5em}
+.am-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.85;letter-spacing:.04em;max-width:34em;margin-bottom:34px}
+.am-trust{display:flex;gap:52px;justify-content:center;margin-bottom:26px}
+.am-form{display:flex;align-items:center;gap:10px;background:#fff;border-radius:16px;padding:12px 12px 12px 18px;box-shadow:0 18px 60px rgba(0,0,0,.5);width:min(660px,100%)}
+.am-form input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:16px;color:#111;font-family:inherit}
+.am-form input::placeholder{color:#8a8a8a}
+.am-send{flex-shrink:0;width:40px;height:40px;border:0;border-radius:11px;background:#111;color:#fff;font-size:17px;line-height:1;cursor:pointer;transition:background .2s}
+.am-send:hover{background:#8B1A1A}
+.am-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px;max-width:min(720px,100%)}
+.am-chips button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.9);border-radius:999px;padding:9px 17px;font-size:13px;font-family:inherit;cursor:pointer;transition:background .2s,border-color .2s}
+.am-chips button:hover{background:rgba(255,255,255,.18);border-color:#fff}
+.am-note{font-size:11.5px;color:rgba(255,255,255,.45);letter-spacing:.05em;line-height:1.8;margin-top:30px;max-width:38em}
+.am-exit{margin-top:26px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.82);border-radius:999px;padding:10px 22px;font-size:12.5px;font-family:inherit;letter-spacing:.08em;cursor:pointer}
+.am-exit:hover{background:rgba(255,255,255,.12);border-color:#fff}
+@media(max-width:768px){
+  .hero-trust{gap:24px;margin-bottom:12px}
+  .hero-trust-n{font-size:24px}
+  .am-wrap{padding:76px 20px 44px}
+  .am-h1{font-size:29px}
+  .am-h1 em{display:block;margin-right:0;margin-bottom:4px}
+  .am-h1 br{display:none}
+  .am-sub{font-size:14px;margin-bottom:26px}
+  .am-trust{gap:32px}
+  .am-form input{font-size:16px}
+}
+@media(max-width:768px){
+  .hero-ai{max-width:none;margin-bottom:1.2rem}
+  .hero-ai-bar{padding:9px 9px 9px 13px}
+  .hero-ai-bar input{font-size:16px}
+  .hero-ai-chips button{font-size:12px;padding:6px 12px}
+}
 /* nav 透明疊在 hero 上（僅此頁 scoped，不動共用 nav 檔） */
 nav{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
 body.at-top nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
@@ -771,9 +839,32 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="hero-body">
       <div class="hero-flex">
         <div class="hero-left">
-          <div class="hero-eyebrow">鋮馨租賃有限公司 — 新北市中和不動產融資諮詢 · 深耕二十年 · 大繼承時代的家庭顧問</div>
-          <h1 class="hero-h1">繼承了房子，卻誰都動不了？<br>先產權、後方案，鋮馨陪你把路走清楚</h1>
-          <p class="hero-sub">大繼承時代已經開始：內政部統計，2025 年全台繼承登記 78,324 棟，占移轉比重升到 17.4%。繼承登記、共有人、遺產稅期限、舊設定——第一次繼承沒有說明書，鋮馨把規則講成人話、流程攤開全家看懂；登記與分割協議等專業事項協同地政士辦理，資金方案媒合銀行等機構評估。</p>
+          <div class="hero-eyebrow">鋮馨租賃有限公司 — 新北市中和不動產融資諮詢 · 團隊深耕二十年 · AI 線上助理即問即答</div>
+          <h1 class="hero-h1">房子的問題，<br>先問小鋮 AI</h1>
+          <p class="hero-sub">貸款整合、售後回租、民間轉銀行、二胎房貸——四條路各自適合不同狀況，先看懂你在哪一條上。不用先留電話，也不用先跑一趟。把你的狀況打進下面那一格，小鋮 AI 會告訴你有哪幾條路、各自要準備什麼、順序該怎麼走。登記與分割協議等專業事項協同地政士辦理，資金方案媒合銀行等機構評估；最終核貸由金融機構決定。</p>
+          <div class="hero-ai">
+            <div class="hero-trust hero-trust-inline">
+              <span><b class="hero-trust-n">39 家以上</b><span class="hero-trust-l">合作銀行</span></span>
+              <span><b class="hero-trust-n">20+ 年</b><span class="hero-trust-l">團隊不動產租賃資歷</span></span>
+            </div>
+            <form class="hero-ai-bar" id="heroAiBar" autocomplete="off">
+              <span class="hero-ai-mark" aria-hidden="true">鋮</span>
+              <input id="heroAiInput" type="text" maxlength="200" placeholder="想問什麼？例如：繼承的房子還有貸款怎麼辦" aria-label="向小鋮 AI 提問">
+              <button type="button" class="hero-ai-mic" id="heroAiMic" aria-label="語音輸入" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
+              <button type="submit" class="hero-ai-send" aria-label="送出問題">↑</button>
+            </form>
+            <div class="hero-ai-chips" id="heroAiChips">
+              <button type="button" data-q="繼承的房子還有貸款，可以怎麼處理？">繼承的房子還有貸款</button>
+              <button type="button" data-q="民間借款想轉回銀行，流程是什麼？">民間借款想轉銀行</button>
+              <button type="button" data-q="多筆負債想整合成一筆，怎麼評估？">多筆負債想整合</button>
+              <button type="button" data-q="賣掉房子還能繼續住在裡面嗎？">賣了房子還想住原地</button>
+              <button type="button" data-q="公司財務健檢在做什麼？">公司財務健檢</button>
+            </div>
+            <div class="hero-ai-foot">
+              <span class="hero-ai-note">小鋮是 AI 線上服務助理，回答僅供參考，不代表核貸結果。</span>
+              <button type="button" class="hero-mode" id="heroModeBtn">切換 AI 模式 ⇄</button>
+            </div>
+          </div>
           <div class="hero-calc-mob">
             <div class="hcalc" id="hcal-m">
               <div class="hcalc-hd">面談時段・線上預約</div>
@@ -790,7 +881,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
             </div>
           </div>
           <div class="btn-row">
-            <a href="#form" class="btn-white">LINE 免費評估繼承狀況</a>
+            <a href="#form" class="btn-white">LINE 免費評估你的狀況</a>
             <a href="tel:0222490517" class="btn-ghost">電話諮詢</a>
             <a href="apply.html" class="btn-ghost">填表試算</a>
           </div>
@@ -817,6 +908,133 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
+<!-- AI 模式：全屏詢問入口（首頁內容不移除，僅覆蓋，SEO 不受影響） -->
+<div id="aiMode" role="dialog" aria-modal="true" aria-label="小鋮 AI 詢問模式">
+  <div class="am-wrap">
+    <div class="am-mark" aria-hidden="true">鋮</div>
+    <h2 class="am-h1"><em>小鋮 AI</em>幫你把房子的問題，<br>一次問清楚。</h2>
+    <p class="am-sub">繼承、二胎增貸、民間轉銀行、售後回租、公司財務健檢——先問一句，弄懂了再決定要不要往下走。</p>
+    <div class="am-trust hero-trust">
+      <div><div class="hero-trust-n">39 家以上</div><div class="hero-trust-l">合作銀行</div></div>
+      <div><div class="hero-trust-n">20+ 年</div><div class="hero-trust-l">團隊不動產租賃資歷</div></div>
+    </div>
+    <form class="am-form" id="amForm" autocomplete="off">
+      <input id="amInput" type="text" maxlength="200" placeholder="想問什麼？" aria-label="向小鋮 AI 提問">
+      <button type="button" class="hero-ai-mic" id="amMic" aria-label="語音輸入" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
+      <button type="submit" class="am-send" aria-label="送出問題">↑</button>
+    </form>
+    <div class="am-chips" id="amChips">
+      <button type="button" data-q="繼承的房子還有貸款，可以怎麼處理？">繼承的房子還有貸款</button>
+      <button type="button" data-q="民間借款想轉回銀行，流程是什麼？">民間借款想轉銀行</button>
+      <button type="button" data-q="多筆負債想整合成一筆，怎麼評估？">多筆負債想整合</button>
+      <button type="button" data-q="賣掉房子還能繼續住在裡面嗎？">賣了房子還想住原地</button>
+      <button type="button" data-q="公司財務健檢在做什麼？">公司財務健檢</button>
+    </div>
+    <p class="am-note">小鋮是 AI 線上服務助理，回答僅供參考、不代表核貸結果。鋮馨為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定；實際結果依個案不動產條件、財務狀況與市場情況而定。</p>
+    <button type="button" class="am-exit" id="amExit">切換完整版網站 →</button>
+  </div>
+</div>
+
+<script>
+/* hero AI 詢問列：把問題送進小鋮（chat-widget 於 window load 後注入，未就緒先排隊） */
+(function(){
+  function ask(q){
+    q = (q || '').trim();
+    if (!q) return;
+    try{ if (typeof gtag === 'function') gtag('event', 'hero_ai_ask', {cw_label: q.slice(0,60)}); }catch(e){}
+    if (typeof window.cxAskFull === 'function') { window.cxAskFull(q); return; }
+    if (typeof window.cxAsk === 'function') { window.cxAsk(q); return; }
+    window.__cxAskQueue = window.__cxAskQueue || [];
+    window.__cxAskQueue.push(q);
+  }
+  var bar = document.getElementById('heroAiBar');
+  var input = document.getElementById('heroAiInput');
+  if (bar) bar.addEventListener('submit', function(e){ e.preventDefault(); ask(input.value); input.value=''; });
+  var chips = document.getElementById('heroAiChips');
+  if (chips) chips.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-q]');
+    if (b) ask(b.dataset.q);
+  });
+
+  /* ── AI 模式：全屏詢問入口 ── */
+  var overlay = document.getElementById('aiMode');
+  var amForm = document.getElementById('amForm');
+  var amInput = document.getElementById('amInput');
+  var amChips = document.getElementById('amChips');
+  var modeBtn = document.getElementById('heroModeBtn');
+
+  function openMode(){
+    if (!overlay) return;
+    overlay.classList.add('on');
+    document.body.style.overflow = 'hidden';
+    try{ sessionStorage.setItem('cxHomeMode','ai'); }catch(e){}
+    try{ if (typeof gtag === 'function') gtag('event','home_mode',{cw_label:'ai'}); }catch(e){}
+    setTimeout(function(){ if (amInput) amInput.focus(); }, 60);
+  }
+  function closeMode(){
+    if (!overlay) return;
+    overlay.classList.remove('on');
+    document.body.style.overflow = '';
+    try{ sessionStorage.setItem('cxHomeMode','classic'); }catch(e){}
+    try{ if (typeof gtag === 'function') gtag('event','home_mode',{cw_label:'classic'}); }catch(e){}
+  }
+  if (modeBtn) modeBtn.addEventListener('click', openMode);
+  var amExit = document.getElementById('amExit');
+  if (amExit) amExit.addEventListener('click', closeMode);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('on')) closeMode();
+  });
+  if (amForm) amForm.addEventListener('submit', function(e){
+    e.preventDefault(); var q = amInput.value; amInput.value=''; closeMode(); ask(q);
+  });
+  if (amChips) amChips.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-q]');
+    if (b) { closeMode(); ask(b.dataset.q); }
+  });
+  /* 只在本次瀏覽記住模式：跨造訪一律回完整版，避免自然搜尋到站被覆蓋層擋住 */
+  try{ if (sessionStorage.getItem('cxHomeMode') === 'ai') openMode(); }catch(e){}
+
+  /* ── 輪播 placeholder（Better 的打字機提示列）── */
+  var PH = ['繼承的房子還有貸款怎麼辦？','民間借款想轉回銀行，怎麼開始？','多筆負債想整合成一筆？','賣了房子還想住在原地？','公司要跟銀行往來，先看什麼？'];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function typewriter(el){
+    if (!el || reduce) return;
+    var i = 0, ch = 0, del = false;
+    setInterval(function(){
+      if (document.activeElement === el || el.value) return;
+      var t = PH[i];
+      ch += del ? -1 : 1;
+      el.placeholder = t.slice(0, ch);
+      if (!del && ch >= t.length) { del = true; }
+      else if (del && ch <= 0) { del = false; i = (i + 1) % PH.length; }
+    }, 90);
+  }
+  typewriter(input); typewriter(amInput);
+
+  /* ── 語音輸入（瀏覽器不支援就整顆隱藏）── */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  function wireMic(btn, target){
+    if (!btn || !target || !SR) return;
+    btn.hidden = false;
+    var rec = null, on = false;
+    btn.addEventListener('click', function(){
+      if (on && rec) { rec.stop(); return; }
+      rec = new SR(); rec.lang = 'zh-TW'; rec.interimResults = true; rec.continuous = false;
+      rec.onstart = function(){ on = true; btn.classList.add('on'); };
+      rec.onend = function(){ on = false; btn.classList.remove('on'); };
+      rec.onerror = function(){ on = false; btn.classList.remove('on'); };
+      rec.onresult = function(ev){
+        var txt = '';
+        for (var k = 0; k < ev.results.length; k++) txt += ev.results[k][0].transcript;
+        target.value = txt.slice(0, 200);
+      };
+      try{ rec.start(); }catch(e){}
+    });
+  }
+  wireMic(document.getElementById('heroAiMic'), input);
+  wireMic(document.getElementById('amMic'), amInput);
+})();
+</script>
 <script>
 /* index.html only：hero 全幅時 nav 透明，捲動後回到白底（scoped，不動共用 nav 檔） */
 (function(){

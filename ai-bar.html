@@ -1,0 +1,118 @@
+<style>
+/* ── 服務頁 AI 詢問列（小鋮入口）── 顏色繼承所在 hero 的文字色，深/淺底皆可用 ── */
+.aib{max-width:660px;margin:1.6rem 0 1.8rem;text-align:left}
+.aib.aib-center{margin-left:auto;margin-right:auto}
+.aib.aib-center .aib-chips{justify-content:center}
+.aib.aib-center .aib-note{text-align:center}
+.aib-form{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 10px 10px 16px;box-shadow:0 10px 40px rgba(0,0,0,.22)}
+.aib-mark{width:26px;height:26px;flex-shrink:0;border-radius:7px;background:#8B1A1A;color:#fff;font-family:'Noto Serif TC','Songti TC',serif;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.aib-form input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#111;font-family:inherit}
+.aib-form input::placeholder{color:#8a8a8a}
+.aib-mic{flex-shrink:0;width:34px;height:34px;border:0;border-radius:10px;background:transparent;color:#6b6b6b;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.aib-mic:hover{background:#f0efec;color:#111}
+.aib-mic.on{background:#8B1A1A;color:#fff}
+.aib-mic[hidden]{display:none}
+.aib-send{flex-shrink:0;width:36px;height:36px;border:0;border-radius:10px;background:#111;color:#fff;font-size:16px;line-height:1;cursor:pointer;transition:background .2s}
+.aib-send:hover{background:#8B1A1A}
+.aib-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.aib-chips button{background:transparent;border:1px solid currentColor;color:inherit;opacity:.82;border-radius:999px;padding:7px 14px;font-size:12.5px;font-family:inherit;cursor:pointer;transition:opacity .2s,background .2s}
+.aib-chips button:hover{opacity:1;background:rgba(127,127,127,.16)}
+.aib-note{font-size:11px;color:inherit;opacity:.55;margin-top:10px;letter-spacing:.05em}
+@media(max-width:768px){
+  .aib{max-width:none;margin-top:1.2rem}
+  .aib-form{padding:9px 9px 9px 13px}
+  .aib-form input{font-size:16px}
+  .aib-chips button{font-size:12px;padding:6px 12px}
+}
+</style>
+<div class="aib">
+  <form class="aib-form" autocomplete="off">
+    <span class="aib-mark" aria-hidden="true">鋮</span>
+    <input type="text" maxlength="200" placeholder="想問什麼？" aria-label="向小鋮 AI 提問">
+    <button type="button" class="aib-mic" aria-label="語音輸入" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
+    <button type="submit" class="aib-send" aria-label="送出問題">↑</button>
+  </form>
+  <div class="aib-chips"></div>
+  <div class="aib-note">小鋮是 AI 線上服務助理，回答僅供參考，不代表核貸結果。</div>
+</div>
+<script>
+/* 每頁的問題由容器的 data-ai-q 帶入（以 | 分隔），沒帶就用通用三題 */
+(function(){
+  /* include.js 會把容器 div 移除，但移除發生在本 script 執行之後，
+     所以這裡還抓得到容器（拿 data-ai-q）與剛插入的 .aib（取最後一個）。 */
+  var host = document.querySelector('[data-include="ai-bar"]');
+  var bars = document.querySelectorAll('.aib');
+  var root = bars[bars.length - 1];
+  if (!root) return;
+  var input = root.querySelector('input');
+  var chips = root.querySelector('.aib-chips');
+
+  /* 顏色與對齊跟著所在 hero 的標題走：chips 與免責字才不會在深底變隱形 */
+  (function matchHero(){
+    var box = root.parentNode, h = null, hops = 0;
+    while (box && hops++ < 4 && !h) { h = box.querySelector('h1'); box = box.parentNode; }
+    if (h) {
+      var cs = getComputedStyle(h);
+      root.style.color = cs.color;
+      if (cs.textAlign === 'center') root.classList.add('aib-center');
+    }
+  })();
+
+  var raw = (host && host.dataset.aiQ) || '這項服務適合我嗎？|需要準備哪些文件？|流程大概多久？';
+  var QS = raw.split('|').map(function(x){ return x.trim(); }).filter(Boolean);
+  QS.forEach(function(q){
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = q.length > 14 ? q.slice(0,14) : q;
+    b.addEventListener('click', function(){ ask(q); });
+    chips.appendChild(b);
+  });
+
+  function ask(q){
+    q = (q || '').trim();
+    if (!q) return;
+    try{ if (typeof gtag === 'function') gtag('event','ai_bar_ask',{cw_label:q.slice(0,60), page_path:location.pathname}); }catch(e){}
+    if (typeof window.cxAskFull === 'function') { window.cxAskFull(q); return; }
+    if (typeof window.cxAsk === 'function') { window.cxAsk(q); return; }
+    window.__cxAskQueue = window.__cxAskQueue || [];
+    window.__cxAskQueue.push(q);
+  }
+  root.querySelector('form').addEventListener('submit', function(e){
+    e.preventDefault(); ask(input.value); input.value='';
+  });
+
+  /* 輪播 placeholder */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && QS.length) {
+    var i = 0, ch = 0, del = false;
+    setInterval(function(){
+      if (document.activeElement === input || input.value) return;
+      var t = QS[i];
+      ch += del ? -1 : 1;
+      input.placeholder = t.slice(0, ch);
+      if (!del && ch >= t.length) del = true;
+      else if (del && ch <= 0) { del = false; i = (i + 1) % QS.length; }
+    }, 90);
+  }
+
+  /* 語音輸入（不支援就整顆隱藏） */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var mic = root.querySelector('.aib-mic');
+  if (SR && mic) {
+    mic.hidden = false;
+    var rec = null, on = false;
+    mic.addEventListener('click', function(){
+      if (on && rec) { rec.stop(); return; }
+      rec = new SR(); rec.lang = 'zh-TW'; rec.interimResults = true; rec.continuous = false;
+      rec.onstart = function(){ on = true; mic.classList.add('on'); };
+      rec.onend = function(){ on = false; mic.classList.remove('on'); };
+      rec.onerror = function(){ on = false; mic.classList.remove('on'); };
+      rec.onresult = function(ev){
+        var txt = '';
+        for (var k = 0; k < ev.results.length; k++) txt += ev.results[k][0].transcript;
+        input.value = txt.slice(0, 200);
+      };
+      try{ rec.start(); }catch(e){}
+    });
+  }
+})();
+</script>
