@@ -43,25 +43,15 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ============ NAV ============ */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,42,38,.82);
-  backdrop-filter:blur(14px);border-bottom:1px solid var(--forest-line)}
-.nav-in{max-width:var(--maxw);margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:32px}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Noto Serif TC',serif;
-  font-weight:900;font-size:18px;letter-spacing:.04em;white-space:nowrap}
+
+/* ============ 共用按鈕／標誌（nav 由 nav.js 提供） ============ */
 .logo-mark{width:31px;height:31px;border-radius:7px;background:var(--gold);color:var(--forest-deep);
   display:grid;place-items:center;font-size:17px;font-weight:900;flex:none}
-.nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--cream-dim);margin-left:auto}
-.nav-links a:hover{color:var(--cream)}
-.nav-cta{display:flex;gap:10px;align-items:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;
   border-radius:999px;font-size:14.5px;font-weight:500;border:1px solid transparent;
   cursor:pointer;transition:.18s;font-family:inherit;white-space:nowrap}
-.btn-ghost{border-color:var(--forest-line);color:var(--cream-dim)}
-.btn-ghost:hover{border-color:var(--gold);color:var(--cream)}
 .btn-gold{background:var(--gold);color:var(--forest-deep);font-weight:700}
 .btn-gold:hover{background:var(--gold-soft)}
-.nav-burger{display:none;background:none;border:0;color:var(--cream);font-size:22px;cursor:pointer;margin-left:auto}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:112px 24px 52px;overflow:hidden}
@@ -219,9 +209,6 @@ h1 em{font-style:normal;color:var(--gold)}
   .foot-cols{grid-template-columns:1fr 1fr;gap:34px}
 }
 @media(max-width:860px){
-  .nav-links{display:none}.nav-burger{display:block}.nav-cta .btn-ghost{display:none}
-  .nav-in{gap:14px}.nav-cta{flex:none}
-  .nav-cta .btn-gold{padding:9px 14px;font-size:13.5px}
   .hero{padding-top:92px}
   .three-lead{font-size:15px;margin-bottom:14px}
   .three{flex-direction:column;gap:9px}
@@ -243,9 +230,6 @@ h1 em{font-style:normal;color:var(--gold)}
   .quick{margin-top:30px}
   .group{padding:60px 20px}
 }
-@media(max-width:400px){
-  .nav-in{padding:12px 14px;gap:10px}.logo{font-size:15.5px;gap:7px}
-}
 @media(max-width:560px){
   .stats > div{padding:10px 4px}
   .stat-l{font-size:9.5px}
@@ -254,12 +238,6 @@ h1 em{font-style:normal;color:var(--gold)}
 }
 
 /* ============ 本頁補充（移植區塊／手機選單／sticky CTA）============ */
-.nav-menu{position:fixed;top:57px;left:0;right:0;z-index:99;background:rgba(18,42,38,.97);
-  backdrop-filter:blur(14px);border-bottom:1px solid var(--forest-line);padding:10px 24px 18px;
-  display:flex;flex-direction:column}
-.nav-menu[hidden]{display:none}
-.nav-menu a{padding:12px 0;border-bottom:1px solid var(--forest-line);font-size:15.5px;color:var(--cream)}
-.nav-menu a:last-child{border-bottom:0;color:var(--gold);font-family:'JetBrains Mono',monospace}
 .sec{padding:80px 24px}
 .sec-in{max-width:var(--maxw);margin:0 auto}
 .sec-narrow{max-width:760px;margin:0 auto}
@@ -474,7 +452,7 @@ h1 em{font-style:normal;color:var(--gold)}
  "url": "https://cx468.com.tw",
  "description": "新北市售後回租・貸款整合・包租代管專業服務",
  "inLanguage": "zh-TW",
- "dateModified": "2026-09-01",
+ "dateModified": "2026-09-03",
  "datePublished": "2026-04-29"
 }
 </script>
@@ -525,7 +503,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw",
- "dateModified": "2026-09-01",
+ "dateModified": "2026-09-03",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -571,31 +549,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-in">
-    <a href="/" class="logo"><span class="logo-mark">鋮</span>鋮馨租賃有限公司</a>
-    <div class="nav-links">
-      <a href="services.html">服務項目</a>
-      <a href="tools.html">小工具</a>
-      <a href="knowledge.html">知識專欄</a>
-      <a href="about.html">關於我們</a>
-      <a href="faq.html">常見問題</a>
-    </div>
-    <button class="nav-burger" id="navBurger" aria-label="開啟選單" aria-expanded="false" aria-controls="navMenu">☰</button>
-    <div class="nav-cta">
-      <a class="btn btn-ghost" href="tel:0222490517">02-2249-0517</a>
-      <a class="btn btn-gold" href="apply.html">免費評估</a>
-    </div>
-  </div>
-</nav>
-<div class="nav-menu" id="navMenu" hidden>
-  <a href="services.html">服務項目</a>
-  <a href="tools.html">小工具</a>
-  <a href="knowledge.html">知識專欄</a>
-  <a href="about.html">關於我們</a>
-  <a href="faq.html">常見問題</a>
-  <a href="tel:0222490517">02-2249-0517</a>
-</div>
+<div id="nav"></div>
+<script src="nav.js"></script>
 
 <header class="hero">
   <div class="hero-bg"></div>
@@ -1072,17 +1027,6 @@ document.getElementById('float').addEventListener('click', ()=>{
   ta.focus(); ta.scrollIntoView({block:'center'});
 });
 
-/* ---------- 手機選單 ---------- */
-const burger = document.getElementById('navBurger');
-const menu = document.getElementById('navMenu');
-function setMenu(open){
-  menu.hidden = !open;
-  burger.setAttribute('aria-expanded', String(open));
-  burger.textContent = open ? '✕' : '☰';
-}
-burger.addEventListener('click', ()=> setMenu(menu.hidden));
-menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> setMenu(false)));
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !menu.hidden) setMenu(false); });
 
 /* ---------- 模式切換(就地切換,URL 不變) ---------- */
 const sw = document.getElementById('mode');
