@@ -36,7 +36,7 @@
   <!-- 主頁 -->
   <url>
     <loc>https://cx468.com.tw/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -188,7 +188,7 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -298,7 +298,7 @@
   <!-- 免費工具 -->
   <url>
     <loc>https://cx468.com.tw/tools.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

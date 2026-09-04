@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開始評估｜鋮馨租賃有限公司</title>
+<meta name="description" content="三個問題,先讓小鋮知道你的狀況:想處理哪一件事、走到哪一步、房子在哪。不申請不收費,最終核貸由金融機構決定。">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://cx468.com.tw/intake.html">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1B3B36;--forest-deep:#122A26;--gold:#C8945A;--gold-deep:#9A6D3A;
+  --paper:#FBFAF7;--line:#D9D5CC;--ink:#1E2A27;--ink-dim:#5A6F6A;--ink-faint:#8C9B97;--maxw:1210px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:6px}
+
+/* ---- 頂欄(對應 Better 的 ‹ Better ... Call anytime) ---- */
+.top{max-width:var(--maxw);margin:0 auto;padding:22px 24px 0;display:flex;align-items:center;gap:18px}
+.back{width:36px;height:36px;border:0;background:none;cursor:pointer;font-size:22px;color:var(--ink);display:grid;place-items:center;border-radius:50%;margin-left:-8px}
+.back:hover{background:rgba(27,59,54,.06)}
+.back[hidden]{display:none}
+.brand{display:flex;align-items:center;gap:9px;font-family:'Noto Serif TC',serif;font-weight:900;font-size:19px;letter-spacing:.03em;white-space:nowrap}
+.brand-mark{width:30px;height:30px;border-radius:7px;background:var(--gold);color:var(--forest-deep);display:grid;place-items:center;font-size:16px;flex:none}
+.call{margin-left:auto;display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;white-space:nowrap}
+.call svg{width:22px;height:22px}
+.call .lbl{color:var(--ink)}
+@media(max-width:600px){.call .lbl{display:none}.top{padding:16px 16px 0}}
+
+/* ---- 進度條 ---- */
+.prog{max-width:var(--maxw);margin:20px auto 0;padding:0 24px}
+.prog[hidden]{display:none}
+.prog-bar{height:4px;background:#E5E2DA;border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:#2E6B4F;border-radius:2px;width:0;transition:width .35s ease}
+.prog-pct{font-size:13.5px;color:var(--ink-dim);margin-top:10px}
+@media(max-width:600px){.prog{padding:0 16px}}
+
+/* ---- 題目區(對應 Better 528px 中欄) ---- */
+main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
+.q{font-family:'Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,40px);line-height:1.22;letter-spacing:.005em;text-align:center;margin-bottom:34px;color:#22302C}
+.q-sub{text-align:center;margin:-18px 0 30px;font-size:15px}
+.q-sub a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+.opts{display:flex;flex-direction:column;gap:22px}
+.opt{display:flex;align-items:center;gap:22px;width:100%;min-height:64px;padding:12px 20px;background:#fff;border:1px solid #C7C3BA;border-radius:6px;font-size:17.5px;font-weight:500;color:#22302C;text-align:left;cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--forest);background:#F4F7F5}
+.opt.on{background:#2E6B4F;border-color:#2E6B4F;color:#fff}
+.opt svg{width:38px;height:38px;flex:none;color:#2E6B4F}
+.opt.on svg{color:#fff}
+.opt-center{justify-content:center;text-align:center;font-weight:500}
+
+/* ---- 輸入 ---- */
+.field{position:relative}
+.field input{width:100%;height:64px;border:1px solid #9AA39F;border-radius:6px;padding:22px 16px 6px;font:inherit;font-size:17px;color:var(--ink);background:#fff;outline:0;transition:.15s}
+.field input:focus{border:2px solid #2E6B4F}
+.field label{position:absolute;left:16px;top:20px;font-size:16px;color:var(--ink-dim);pointer-events:none;transition:.15s}
+.field input:focus + label,.field input:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2E6B4F}
+.hint{font-size:13.5px;color:var(--ink-dim);margin-top:10px}
+.next{width:100%;height:64px;margin-top:30px;border:0;border-radius:6px;background:#BDBFB8;color:#fff;font-size:17px;font-weight:700;cursor:not-allowed;transition:.15s}
+.next.ready{background:#2E6B4F;cursor:pointer}
+.next.ready:hover{background:#26593F}
+
+/* ---- 題目下方社會證明 / 護欄(不造假客戶評價,放可查證的事實) ---- */
+.trust{margin-top:44px;text-align:center;font-size:14.5px;color:var(--ink-dim);line-height:1.8}
+.trust b{color:var(--ink);font-weight:700}
+.legal{margin-top:34px;font-size:12px;color:var(--ink-faint);line-height:1.8;text-align:center}
+
+/* ---- 右下 Ask 小鋮(chat-widget 自帶紅框啟動鈕隱藏,改用本頁按鈕) ---- */
+.cw-launch,.cw-teaser{display:none!important}
+.ask{position:fixed;right:24px;bottom:24px;z-index:90;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 24px 0 16px;border-radius:999px;border:0;background:var(--forest-deep);color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.28);transition:.2s}
+.ask:hover{transform:translateY(-1px)}
+.ask .dot{width:26px;height:26px;border-radius:50%;background:#2E6B4F;display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-size:13px;color:var(--gold);box-shadow:0 0 0 4px rgba(46,107,79,.35)}
+@media(max-width:600px){.ask{right:16px;bottom:16px;height:50px;padding:0 18px 0 12px;font-size:14.5px}}
+
+.stack{display:flex;flex-direction:column;gap:18px}
+.field textarea{width:100%;min-height:104px;border:1px solid #9AA39F;border-radius:6px;padding:26px 16px 10px;font:inherit;font-size:16px;color:var(--ink);background:#fff;outline:0;resize:vertical;transition:.15s}
+.field textarea:focus{border:2px solid #2E6B4F}
+.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2E6B4F}
+.consent{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:13.5px;color:var(--ink-dim);line-height:1.6}
+.consent input{margin-top:4px;width:16px;height:16px;flex:none;accent-color:#2E6B4F}
+.consent a{text-decoration:underline;color:var(--ink)}
+.form-msg{margin-top:14px;font-size:14px;text-align:center;min-height:1.4em}
+.form-msg.err{color:#B3261E}
+.next[type=submit]{background:#2E6B4F;cursor:pointer}
+.next[type=submit]:disabled{background:#BDBFB8;cursor:not-allowed}
+.done{text-align:center}
+.done-mark{width:56px;height:56px;border-radius:50%;margin:0 auto 26px;background:#2E6B4F;color:var(--gold);display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-weight:900;font-size:24px;box-shadow:0 0 0 8px rgba(46,107,79,.18),0 0 32px rgba(46,107,79,.45)}
+.done-list{list-style:none;text-align:left;max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:14px;font-size:15.5px;color:var(--ink)}
+.done-list li{padding-left:32px;position:relative}
+.done-list li::before{content:"";position:absolute;left:4px;top:5px;width:10px;height:16px;border-right:2.5px solid #2E6B4F;border-bottom:2.5px solid #2E6B4F;transform:rotate(45deg)}
+.done-line{display:flex;align-items:center;justify-content:center;background:#06C755!important;margin-top:36px}
+.pane[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+});
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27280305434986441');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script src="include.js" defer></script>
+</head>
+<body>
+
+<header class="top">
+  <button class="back" id="back" aria-label="上一步">‹</button>
+  <a class="brand" href="/"><span class="brand-mark">鋮</span>鋮馨租賃有限公司</a>
+  <a class="call" href="tel:0222490517" aria-label="撥打 02-2249-0517">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/><path d="M15 3h6v6"/><path d="M21 3l-7 7"/></svg>
+    <span class="lbl">隨時來電 02-2249-0517</span>
+  </a>
+</header>
+
+<div class="prog" id="prog" hidden>
+  <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+  <div class="prog-pct" id="progPct">0%</div>
+</div>
+
+<main>
+
+  <!-- Step 0:哪一件事(nav 帶 ?topic= 時跳過) -->
+  <section class="pane" id="s0">
+    <h1 class="q">你想處理的是<br>哪一件事?</h1>
+    <div class="opts">
+      <button class="opt" data-topic="corporate">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 34V12l10-5v27"/><path d="M16 14h18v20H6z"/><path d="M21 19h3M27 19h3M21 24h3M27 24h3M21 29h3M27 29h3"/></svg>
+        <span>企業健檢</span>
+      </button>
+      <button class="opt" data-topic="private-to-bank">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l15-8 15 8H5z"/><path d="M9 16v12M17 16v12M23 16v12M31 16v12"/><path d="M5 32h30"/><path d="M14 22h12M22 18l4 4-4 4"/></svg>
+        <span>民間借款想轉回銀行</span>
+      </button>
+      <button class="opt" data-topic="inherited">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19L20 7l14 12"/><path d="M9 17v17h22V17"/><path d="M15 34V24h10v10"/><path d="M26 11h6v5"/></svg>
+        <span>繼承貸款</span>
+      </button>
+      <button class="opt" data-topic="leaseback">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19L20 7l14 12"/><path d="M9 17v17h22V17"/><circle cx="20" cy="24" r="3.5"/><path d="M20 27.5V33M18 31h4"/></svg>
+        <span>售後回租</span>
+      </button>
+      <button class="opt" data-topic="financing">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h28v20H16l-7 6v-6H6z"/><path d="M17 15.5a3 3 0 1 1 4.2 2.7c-.9.5-1.2 1-1.2 2.1"/><path d="M20 24h.01"/></svg>
+        <span>詢問融資方式</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Step 1:走到哪一步(對應 Better「Where are you in the process」) -->
+  <section class="pane" id="s1" hidden>
+    <h1 class="q" id="s1q">你目前<br>走到哪一步?</h1>
+    <div class="opts" id="s1opts"></div>
+  </section>
+
+  <!-- Step 2:地址(對應 Better「What is the address of the new property」) -->
+  <section class="pane" id="s2" hidden>
+    <h1 class="q" id="s2q">好的!房子的<br>地址是?</h1>
+    <p class="q-sub"><a href="#why" id="whyLink">為什麼要問地址?</a></p>
+    <div class="field">
+      <input id="addr" type="text" autocomplete="street-address" maxlength="80" placeholder=" " aria-label="地址">
+      <label for="addr">地址</label>
+    </div>
+    <p class="hint" id="addrHint">填到路名與門牌即可,不用樓層。</p>
+    <button class="next" id="next" disabled>下一步</button>
+    <p class="trust" id="why" hidden>地址只用來查公開的實價登錄與土地使用分區,先估房子大概的價值區間;<br>不會拿去做其他用途,也不會有人未經同意就聯絡你。</p>
+  </section>
+
+  <!-- Step use / type / lien:通用單選題(對應 Better 用途→房型→三年內持有),題目與選項由 JS 依 topic 填 -->
+  <section class="pane" id="sq" hidden>
+    <h1 class="q" id="sqq"></h1>
+    <p class="q-sub" id="sqsub" hidden><a href="#" id="sqhelpLink"></a></p>
+    <p class="trust" id="sqhelp" hidden></p>
+    <div class="opts" id="sqopts"></div>
+  </section>
+
+  <!-- Step 3:基本資料(詢問融資方式:選完直接到這裡) -->
+  <section class="pane" id="s3" hidden>
+    <h1 class="q" id="s3q">留下基本資料,<br>顧問跟你說明融資方式</h1>
+    <form id="leadForm" novalidate>
+      <input type="hidden" name="access_key" value="b2959b73-847e-4a81-bd4f-e3a9de65713a">
+      <input type="hidden" name="subject" value="鋮馨官網｜評估精靈新進件">
+      <input type="hidden" name="from_name" value="鋮馨官網 評估精靈">
+      <input type="hidden" name="Service" id="fService" value="">
+      <input type="hidden" name="Stage" id="fStage" value="">
+      <input type="hidden" name="Property_Address" id="fAddress" value="">
+      <input type="hidden" name="Source" value="intake">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px">
+      <div class="stack">
+        <div class="field"><input id="fName" name="Name" type="text" autocomplete="name" maxlength="40" required placeholder=" " aria-required="true"><label for="fName">姓名或稱呼 *</label></div>
+        <div class="field"><input id="fPhone" name="Phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" required placeholder=" " aria-required="true"><label for="fPhone">手機 *</label></div>
+        <div class="field"><input id="fLine" name="LINE_ID" type="text" maxlength="40" placeholder=" "><label for="fLine">LINE ID(選填)</label></div>
+        <div class="field field-ta"><textarea id="fMsg" name="Message" maxlength="500" rows="3" placeholder=" "></textarea><label for="fMsg">想先問的事(選填)</label></div>
+      </div>
+      <label class="consent"><input type="checkbox" id="consent" required><span>我已閱讀<a href="privacy-policy.html" target="_blank" rel="noopener">隱私權政策</a>,同意鋮馨以電話或 LINE 與我聯繫,說明服務內容。</span></label>
+      <button class="next" id="submit" type="submit">送出</button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+    <p class="hint" style="text-align:center;margin-top:18px">按下送出即表示同意上述聯繫用途。我們不會把資料提供給第三方作行銷用途。</p>
+  </section>
+
+  <!-- Step 4:完成(對應 Better「We are finding you...」) -->
+  <section class="pane done" id="s4" hidden>
+    <div class="done-mark" aria-hidden="true">鋮</div>
+    <h1 class="q">收到了,<br>正在為你安排顧問…</h1>
+    <ul class="done-list">
+      <li>小鋮已把你的狀況整理成一份摘要</li>
+      <li>顧問會在 1–2 個工作日內用電話或 LINE 聯繫你</li>
+      <li id="doneTopic">說明依你狀況可能走得通的融資方式與要準備的文件</li>
+    </ul>
+    <a class="next ready done-line" href="https://lin.ee/PHIfSoY">急件直接加 LINE:@0931087996</a>
+  </section>
+
+  <p class="trust"><b>不申請不收費,面談不收費。</b><br>最終核貸由金融機構依個案決定,本公司非金融機構。</p>
+  <p class="legal">你提供的資料僅用於本次評估與後續聯繫,保存一年;依個資法第 8 條之完整告知見<a href="privacy-policy.html" style="text-decoration:underline">隱私權政策</a>。</p>
+</main>
+
+<button class="ask" id="ask" aria-label="問小鋮"><span class="dot">鋮</span>問小鋮</button>
+
+<script>
+(function(){
+  var KEY='cx_intake_v1';
+  var TOPIC_LABEL={corporate:'企業健檢','private-to-bank':'民間轉銀行',inherited:'繼承貸款',leaseback:'售後回租',financing:'詢問融資方式'};
+  var STAGE_LABEL={researching:'還在了解','bank-declined':'已問過銀行被拒/條件不理想','private-lien':'名下已有民間借款或設定',urgent:'有時間壓力','first-time':'第一次跟銀行往來',declined:'曾被銀行退件',checkup:'想先知道公司體質',supplement:'收到補件通知'};
+
+  /* 第二題選項:一般四線共用;企業線另一組 */
+  var STAGE_COMMON=[
+    ['researching','還在了解,先看看有哪些路', 'M6 19L20 7l14 12 M9 17v17h22V17 M23 27a5 5 0 1 0-7.1-7.1A5 5 0 0 0 23 27z M26 30l4 4'],
+    ['bank-declined','已經問過銀行,被拒或條件不理想', 'M10 6h14l6 6v22H10z M24 6v6h6 M15 22l10 10 M25 22L15 32'],
+    ['private-lien','名下已有民間借款或設定', 'M10 6h14l6 6v22H10z M24 6v6h6 M15 20h10M15 25h10 M15 30h6'],
+    ['urgent','有時間壓力,希望盡快處理', 'M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 12v8l6 4']
+  ];
+  var STAGE_CORP=[
+    ['first-time','第一次要跟銀行往來', 'M5 16l15-8 15 8H5z M9 16v12M17 16v12M23 16v12M31 16v12 M5 32h30'],
+    ['declined','曾被銀行退件,不知道原因', 'M10 6h14l6 6v22H10z M24 6v6h6 M15 22l10 10 M25 22L15 32'],
+    ['checkup','想先知道公司體質、紅黃燈在哪', 'M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M13 22l4 4 10-10'],
+    ['supplement','收到補件通知,不知道怎麼補', 'M10 6h14l6 6v22H10z M24 6v6h6 M20 18v10 M15 23h10']
+  ];
+  var S2Q={
+    corporate:['好的!公司的<br>營業地址是?','填公司主要營業地點,登記地址不同也沒關係。'],
+    'private-to-bank':['好的!房子的<br>地址是?','填到路名與門牌即可,不用樓層。'],
+    inherited:['好的!繼承的房子<br>地址是?','填到路名與門牌即可;還沒辦繼承登記也可以先填。'],
+    leaseback:['好的!房子的<br>地址是?','填到路名與門牌即可,不用樓層。']
+  };
+  /* 具名步驟流程(對應 Better:選線→階段→地址→用途→房型→持有→個資→完成) */
+  var FLOW_COMMON=['topic','stage','address','use','type','lien','lead','done'];
+  var FLOW_FIN=['topic','lead','done'];
+  var PCT={topic:0,stage:12,address:23,use:25,type:33,lien:38,lead:48,done:100};
+
+  /* 通用三題(四線共用)與企業線三題 */
+  var Q={
+    use:{
+      q:'這間房子<br>目前的使用狀況?',
+      opts:[['self','自住','M6 19L20 7l14 12 M9 17v17h22V17 M15 34V24h10v10'],
+            ['rented','出租中','M6 19L20 7l14 12 M9 17v17h22V17 M16 22h8M16 27h8'],
+            ['vacant','空屋或閒置','M6 19L20 7l14 12 M9 17v17h22V17 M15 23l10 8M25 23l-10 8'],
+            ['commercial','店面、辦公室或廠房','M6 34V14h28v20z M6 14l4-6h20l4 6 M14 34V24h12v10']]
+    },
+    type:{
+      q:'房子是<br>哪一種類型?',
+      opts:[['apartment','公寓(無電梯)','M8 34V8h24v26z M14 14h4M22 14h4M14 21h4M22 21h4M14 28h4M22 28h4'],
+            ['elevator','電梯大樓','M8 34V6h24v28z M14 12h4M22 12h4M14 18h4M22 18h4M14 24h4M22 24h4 M17 34v-5h6v5'],
+            ['house','透天厝','M6 17L20 6l14 11 M9 15v19h22V15 M16 34V25h8v9'],
+            ['shop','店面或廠辦','M6 34V14h28v20z M6 14l4-6h20l4 6 M12 20h16v8H12z'],
+            ['land','土地','M5 30l10-8 8 5 12-9 M5 34h30 M9 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6z']]
+    },
+    lien:{
+      q:'房子目前<br>有沒有貸款或設定?',
+      help:['什麼是「設定」?','向銀行或民間借款時,對方會在房子的謄本上登記抵押權,這個登記就叫「設定」。謄本上的「他項權利部」看得到。'],
+      opts:[['bank','有銀行貸款','M5 16l15-8 15 8H5z M9 16v12M17 16v12M23 16v12M31 16v12 M5 32h30'],
+            ['private','有民間借款或設定','M10 6h14l6 6v22H10z M24 6v6h6 M15 20h10M15 25h10 M15 30h6'],
+            ['both','銀行和民間都有','M5 16l15-8 15 8H5z M9 16v10M31 16v10 M5 30h30 M14 20h12v12H14z'],
+            ['none','都沒有,房子沒有貸款','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M13 22l4 4 10-10']]
+    }
+  };
+  var QC={
+    use:{
+      q:'公司成立<br>多久了?',
+      opts:[['lt1','未滿 1 年','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 12v8l4 2'],
+            ['y1_3','1–3 年','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 12v8l6 4'],
+            ['y3_5','3–5 年','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 12v8l-6 4'],
+            ['gt5','5 年以上','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M13 22l4 4 10-10']]
+    },
+    type:{
+      q:'公司主要的<br>營收型態?',
+      opts:[['b2b','開發票給公司(B2B)','M10 6h14l6 6v22H10z M24 6v6h6 M15 20h10M15 25h10 M15 30h6'],
+            ['b2c','零售或服務一般消費者','M8 12h24l-2 16H10z M14 12V9a6 6 0 0 1 12 0v3 M14 34h12'],
+            ['mixed','兩種都有','M6 34V14h28v20z M6 14l4-6h20l4 6 M20 14v20'],
+            ['other','其他(承攬、租金、平台等)','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 26h.01 M16.5 16a3.5 3.5 0 1 1 5 3.2c-1 .6-1.5 1.2-1.5 2.3']]
+    },
+    lien:{
+      q:'公司過去一年<br>跟銀行往來的情況?',
+      opts:[['has-loan','已經有銀行貸款','M5 16l15-8 15 8H5z M9 16v12M17 16v12M23 16v12M31 16v12 M5 32h30'],
+            ['declined','申請過,被退件或額度不夠','M10 6h14l6 6v22H10z M24 6v6h6 M15 22l10 10 M25 22L15 32'],
+            ['none','還沒跟銀行往來過','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M13 20h14 M20 13v14'],
+            ['unsure','不確定,要看帳','M20 34a14 14 0 1 0 0-28 14 14 0 0 0 0 28z M20 26h.01 M16.5 16a3.5 3.5 0 1 1 5 3.2c-1 .6-1.5 1.2-1.5 2.3']]
+    }
+  };
+
+  var st={};
+  try{ st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+
+  var qs=new URLSearchParams(location.search);
+  if(qs.get('restart')||st.done){ st={}; }
+  var qTopic=qs.get('topic');
+  if(qTopic && TOPIC_LABEL[qTopic]){
+    if(st.topic!==qTopic){ st={topic:qTopic}; }
+    if(!st.stepName || st.stepName==='topic') st.stepName = qTopic==='financing' ? 'lead' : 'stage';
+  }
+  function flow(){ return st.topic==='financing' ? FLOW_FIN : FLOW_COMMON; }
+  var cur = (st.topic && st.stepName && flow().indexOf(st.stepName)>-1) ? st.stepName : 'topic';
+  if(cur==='done') cur='topic';
+  /* 舊版以數字 step 存的進度 → 給 nav「回到我的評估」用 */
+  function stepIndex(){ return flow().indexOf(cur); }
+
+  var PANE={topic:'s0',stage:'s1',address:'s2',use:'sq',type:'sq',lien:'sq',lead:'s3',done:'s4'};
+  var panes=['s0','s1','s2','sq','s3','s4'].map(function(i){ return document.getElementById(i); });
+  var prog=document.getElementById('prog'), fill=document.getElementById('progFill'), pct=document.getElementById('progPct');
+  var back=document.getElementById('back');
+
+  function svg(d){ return '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="'+d+'"/></svg>'; }
+
+  function renderStage(){
+    var list = st.topic==='corporate' ? STAGE_CORP : STAGE_COMMON;
+    document.getElementById('s1q').innerHTML = st.topic==='corporate' ? '公司目前<br>走到哪一步?' : '你目前<br>走到哪一步?';
+    document.getElementById('s1opts').innerHTML = list.map(function(o){
+      return '<button class="opt'+(st.stage===o[0]?' on':'')+'" data-stage="'+o[0]+'">'+svg(o[2])+'<span>'+o[1]+'</span></button>';
+    }).join('');
+  }
+  function renderAddr(){
+    var c=S2Q[st.topic]||S2Q.leaseback;
+    document.getElementById('s2q').innerHTML=c[0];
+    document.getElementById('addrHint').textContent=c[1];
+    var inp=document.getElementById('addr'); inp.value=st.address||''; check();
+  }
+  function renderQ(name){
+    var def=(st.topic==='corporate'?QC:Q)[name];
+    document.getElementById('sqq').innerHTML=def.q;
+    var sub=document.getElementById('sqsub'), help=document.getElementById('sqhelp');
+    help.hidden=true;
+    if(def.help){ sub.hidden=false; document.getElementById('sqhelpLink').textContent=def.help[0]; help.textContent=def.help[1]; }
+    else sub.hidden=true;
+    st.answers=st.answers||{};
+    document.getElementById('sqopts').innerHTML=def.opts.map(function(o){
+      return '<button class="opt'+(st.answers[name]===o[0]?' on':'')+'" data-val="'+o[0]+'" data-label="'+o[1]+'">'+svg(o[2])+'<span>'+o[1]+'</span></button>';
+    }).join('');
+  }
+  function show(name){
+    cur=name; st.stepName=name; st.step=stepIndex(); save();
+    var id=PANE[name];
+    panes.forEach(function(p){ p.hidden = p.id!==id; });
+    prog.hidden = name==='topic';
+    fill.style.width=PCT[name]+'%'; pct.textContent=PCT[name]+'%';
+    back.hidden = (name==='topic' || name==='done');
+    if(name==='stage') renderStage();
+    if(name==='address'){ renderAddr(); setTimeout(function(){ document.getElementById('addr').focus(); },60); }
+    if(name==='use'||name==='type'||name==='lien') renderQ(name);
+    if(name==='lead') renderLead();
+    var u=new URL(location.href); if(st.topic) u.searchParams.set('topic',st.topic); u.searchParams.set('step',name); u.searchParams.delete('restart'); history.replaceState(null,'',u);
+    window.scrollTo(0,0);
+    if(window.gtag) gtag('event','intake_step',{step:name,topic:st.topic||''});
+  }
+  function goNext(){ var f=flow(), i=f.indexOf(cur); show(f[Math.min(i+1,f.length-1)]); }
+  function goPrev(){ var f=flow(), i=f.indexOf(cur); show(f[Math.max(i-1,0)]); }
+
+  /* Step 0 */
+  document.querySelectorAll('#s0 .opt').forEach(function(b){
+    b.addEventListener('click',function(){ st.topic=b.dataset.topic; st.stage=null; st.answers={}; goNext(); });
+  });
+  /* Step 1 */
+  document.getElementById('s1opts').addEventListener('click',function(e){
+    var b=e.target.closest('.opt'); if(!b) return;
+    st.stage=b.dataset.stage; b.classList.add('on');
+    setTimeout(goNext,160);
+  });
+  /* Step 2 */
+  var inp=document.getElementById('addr'), next=document.getElementById('next');
+  function check(){ var ok=inp.value.trim().length>=6; next.disabled=!ok; next.classList.toggle('ready',ok); }
+  inp.addEventListener('input',function(){ st.address=inp.value; save(); check(); });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter' && !next.disabled) next.click(); });
+  next.addEventListener('click',function(){
+    if(next.disabled) return;
+    st.address=inp.value.trim(); save();
+    if(window.gtag) gtag('event','intake_address',{topic:st.topic});
+    goNext();
+  });
+  /* 通用單選題 */
+  document.getElementById('sqopts').addEventListener('click',function(e){
+    var b=e.target.closest('.opt'); if(!b) return;
+    st.answers=st.answers||{}; st.answers[cur]=b.dataset.val; st.answerLabels=st.answerLabels||{}; st.answerLabels[cur]=b.dataset.label; save();
+    b.classList.add('on'); setTimeout(goNext,160);
+  });
+  document.getElementById('sqhelpLink').addEventListener('click',function(e){ e.preventDefault(); var h=document.getElementById('sqhelp'); h.hidden=!h.hidden; });
+  document.getElementById('whyLink').addEventListener('click',function(e){ e.preventDefault(); var w=document.getElementById('why'); w.hidden=!w.hidden; });
+
+  /* 上一步 */
+  back.addEventListener('click',function(){
+    if(cur==='topic'){ location.href='/'; return; }
+    if(qTopic && flow().indexOf(cur)===1){ location.href='/'; return; }
+    goPrev();
+  });
+
+  /* Step 3:基本資料(與 lead-form.html 同一條進線軌:linebot /lead best-effort + Web3Forms) */
+  var form=document.getElementById('leadForm'), fmsg=document.getElementById('formMsg'), sbtn=document.getElementById('submit');
+  function renderLead(){
+    document.getElementById('fService').value=TOPIC_LABEL[st.topic]||'';
+    var L=st.answerLabels||{}, extra=[L.use,L.type,L.lien].filter(Boolean).join(' / ');
+    document.getElementById('fStage').value=(STAGE_LABEL[st.stage]||'')+(extra?' ｜ '+extra:'');
+    document.getElementById('fAddress').value=st.address||'';
+    document.getElementById('s3q').innerHTML = st.topic==='financing' ? '留下基本資料,<br>顧問跟你說明融資方式' : '最後一步,<br>留下聯絡方式';
+    setTimeout(function(){ document.getElementById('fName').focus(); },60);
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    fmsg.className='form-msg'; fmsg.textContent='';
+    var consent=document.getElementById('consent');
+    if(!form.checkValidity()||!consent.checked){
+      fmsg.className='form-msg err';
+      fmsg.textContent=consent.checked?'請填寫姓名與手機。':'請先勾選同意隱私權政策。';
+      return;
+    }
+    var orig=sbtn.textContent; sbtn.disabled=true; sbtn.textContent='送出中…';
+    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(e){try{fetch('https://cx468-linebot.onrender.com/lead-fail',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({track:'intake_lead',err:String(e).slice(0,120)})}).catch(function(){});}catch(_){}});}catch(e){}
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(!j.success) throw new Error(j.message||'送出失敗');
+      if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'intake',topic:st.topic});
+      if(window.fbq)fbq('track','Lead');
+      st.done=true; save();
+      show('done');
+    })
+    .catch(function(){
+      sbtn.disabled=false; sbtn.textContent=orig;
+      fmsg.className='form-msg err';
+      fmsg.innerHTML='送出失敗,請稍後再試,或直接加 LINE:<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">@0931087996</a>';
+    });
+  });
+
+  /* 問小鋮:chat-widget 由 include.js 載入,未就緒先排隊 */
+  document.getElementById('ask').addEventListener('click',function(){
+    if(window.cxAsk){ window.cxAsk(''); return; }
+    window.__cxAskQueue = window.__cxAskQueue || []; window.__cxAskQueue.push('');
+  });
+
+  show(cur);
+})();
+</script>
+</body>
+</html>

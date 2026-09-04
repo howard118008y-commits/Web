@@ -50,23 +50,23 @@
 
   var MENU = [
     { label: '企業健檢', items: [
-      ['開始企業評估', '/corporate-checkup.html', 1],
+      ['開始企業評估', '/intake.html?topic=corporate', 1],
       ['企業相關文章', '/knowledge.html']
     ]},
     { label: '民間轉銀行', items: [
-      ['開始評估', '/apply.html', 1],
+      ['開始評估', '/intake.html?topic=private-to-bank', 1],
       ['民間轉銀行怎麼運作', '/private-to-bank.html'],
       ['多筆負債整合', '/xinbei-debt-consolidation.html'],
       ['轉貸相關文章', '/knowledge.html']
     ]},
     { label: '繼承房貸', items: [
-      ['開始評估', '/apply.html', 1],
+      ['開始評估', '/intake.html?topic=inherited', 1],
       ['繼承的房子怎麼處理', '/inherited-property.html'],
       ['共有持分可以辦嗎?', '/article-inherited-co-owned-house-stuck.html'],
       ['產權相關文章', '/knowledge.html']
     ]},
     { label: '售後回租', items: [
-      ['開始評估', '/apply.html', 1],
+      ['開始評估', '/intake.html?topic=leaseback', 1],
       ['售後回租怎麼運作', '/sale-leaseback.html'],
       ['回租相關文章', '/knowledge.html']
     ]},
@@ -101,15 +101,15 @@
         '<ul class="cx-menu">' + desktop + '</ul>' +
         '<div class="cx-right">' +
           '<a class="cx-phone" href="tel:0222490517" aria-label="撥打 02-2249-0517">☎</a>' +
-          '<a class="cx-resume" id="cxResume" href="/apply.html" hidden>回到我的評估</a>' +
-          '<a class="cx-cta" href="/apply.html">免費評估</a>' +
+          '<a class="cx-resume" id="cxResume" href="/intake.html" hidden>回到我的評估</a>' +
+          '<a class="cx-cta" href="/intake.html">免費評估</a>' +
           '<button class="cx-burger" type="button" aria-label="開啟選單" aria-expanded="false">☰</button>' +
         '</div>' +
       '</div>' +
     '</nav>' +
     '<div class="cx-sheet" id="cxSheet">' + mobile +
       '<div class="cx-sheet-foot">' +
-        '<a class="cta" href="/apply.html">免費評估</a>' +
+        '<a class="cta" href="/intake.html">免費評估</a>' +
         '<a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>' +
         '<a href="tel:0222490517">撥打 02-2249-0517</a>' +
       '</div>' +
@@ -150,10 +150,11 @@
   /* 有填過的進度才顯示「回到我的評估」(對應 Better 的 Sign in) */
   try {
     var s = JSON.parse(localStorage.getItem('cx_intake_v1') || '{}');
-    if (s.step > 0 && s.step < 6) {
+    if (s.topic && s.stepName && s.stepName !== 'topic' && !s.done) {
       var r = document.getElementById('cxResume');
       r.hidden = false;
-      r.textContent = '回到我的評估(第 ' + (s.step + 1) + ' 步)';
+      r.href = '/intake.html?topic=' + encodeURIComponent(s.topic);
+      r.textContent = '回到我的評估';
     }
   } catch (e) {}
 
