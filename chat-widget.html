@@ -28,6 +28,8 @@
 .cw-msg a{color:#1B2F4A;font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
 .cw-msg.cw-user a{color:#E0B685}
 .cw-typing{align-self:flex-start;font-size:13px;color:#a1a1a6;padding:4px 14px}
+.cw-src{margin-top:8px;padding-top:6px;border-top:1px dashed #e8e8ea;font-size:12px;color:#8e8e93;line-height:1.6}
+.cw-src a{font-weight:500;margin-right:8px;word-break:normal}
 .cw-rate{display:flex;gap:6px;margin-top:8px}
 .cw-rate button{background:#fff;border:1px solid #d2d2d7;color:#8e8e93;font-size:12px;line-height:1;padding:5px 10px;border-radius:980px;cursor:pointer;font-family:inherit}
 .cw-rate button:hover{border-color:#1B2F4A;color:#1B2F4A}
@@ -168,6 +170,27 @@
     return div;
   }
 
+  // /chat 回的 sources（RAG 命中頁）渲染成「參考頁面」連結；回覆正文已貼過的網址不重複列
+  function addSources(msgDiv, sources, replyText){
+    var seen = {}, list = [];
+    (sources || []).forEach(function(s){
+      if (!s || !s.url || seen[s.url] || (replyText || '').indexOf(s.url) !== -1) return;
+      seen[s.url] = 1; list.push(s);
+    });
+    if (!list.length) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'cw-src';
+    wrap.appendChild(document.createTextNode('參考頁面：'));
+    list.slice(0, 3).forEach(function(s){
+      var a = document.createElement('a');
+      a.href = s.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = (s.title || s.url).split('｜')[0].trim();
+      a.onclick = function(){ track('cw_source', s.url.split('/').pop()); };
+      wrap.appendChild(a);
+    });
+    msgDiv.appendChild(wrap);
+  }
+
   // 👍/👎 只掛在自由輸入的 API 回覆上；每則限送一次
   function addRating(msgDiv){
     var wrap = document.createElement('div');
@@ -259,6 +282,7 @@
       .then(function(d){
         showTyping(false);
         var botDiv = addMsg('bot', d.reply || '抱歉，這題由專員回答更準確。歡迎加 LINE 或來電 02-2249-0517。');
+        if (d.reply) addSources(botDiv, d.sources, d.reply);
         addRating(botDiv);
         renderChips(['flow:apply', 'flow:human']);
       })
