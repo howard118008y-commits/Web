@@ -10,7 +10,7 @@
 .cw-panel.cw-open{display:flex}
 /* 全屏對話模式（首頁 AI 模式進來時使用） */
 .cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(18,33,58,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.cw-panel.cw-full{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:min(820px,94vw);height:min(760px,86vh)}
+.cw-panel.cw-full{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:min(640px,92vw);height:min(680px,82vh);height:min(680px,82dvh)}
 .cw-panel.cw-full::before,.cw-panel.cw-full::after{display:none}
 .cw-panel.cw-full .cw-msg{max-width:78%;font-size:15px}
 .cw-panel::before,.cw-panel::after{content:'';position:absolute;top:-17px;width:38px;height:38px;background:#12213A;border:2px solid #1B2F4A;transform:rotate(45deg);z-index:-1}
@@ -37,7 +37,7 @@
 .cw-chip{background:#fff;border:1px solid #d2d2d7;color:#1B2F4A;font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
 .cw-chip:hover{border-color:#1B2F4A;color:#1B2F4A}
 .cw-inrow{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #ececef}
-.cw-input{flex:1;border:1px solid #d2d2d7;border-radius:10px;font-size:14px;padding:10px 12px;outline:none;font-family:inherit}
+.cw-input{flex:1;min-width:0;border:1px solid #d2d2d7;border-radius:10px;font-size:16px;padding:10px 12px;outline:none;font-family:inherit}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 .cw-input:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
 .cw-input:focus{border-color:#1B2F4A}
@@ -51,7 +51,9 @@
   .cw-launch{bottom:88px;right:16px;width:54px;height:54px}
   .cw-teaser{bottom:98px;right:80px}
   /* 手機版縮小：右下浮窗不滿版，不擋頁面操作（老闆 2026-07-14 令） */
-  .cw-panel{left:auto;right:12px;bottom:152px;width:min(300px,calc(100vw - 24px));height:min(560px,68vh);border-radius:18px}
+  .cw-panel{left:auto;right:12px;bottom:152px;width:min(300px,calc(100vw - 24px));height:min(560px,calc(100dvh - 170px));border-radius:18px}
+  .cw-panel.cw-full{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);border-radius:14px}
+  .cw-panel.cw-full .cw-msg{font-size:15px}
   .cw-msg{font-size:13px}
   .cw-head{padding:10px 14px}
 }
@@ -243,7 +245,7 @@
     var q = inputEl.value.trim();
     if (!q) return;
     inputEl.value = '';
-    inputEl.focus();
+    focusInput();
     addMsg('user', q);
     renderChips([]);
     track('cw_freetext');
@@ -265,7 +267,7 @@
         addMsg('bot', '連線暫時不穩。歡迎直接加 LINE（點下方綠色按鈕）或來電 02-2249-0517，專員為您服務。');
         renderChips(['flow:human']);
       })
-      .finally(function(){ busy = false; sendBtn.disabled = false; inputEl.focus(); });
+      .finally(function(){ busy = false; sendBtn.disabled = false; focusInput(); });
   }
 
   // 依宿主頁 pathname 換開場白（文案紅線：無保證性字眼；二胎頁不出現「免費評估/免費諮詢」；售後回租零借貸語彙）
@@ -291,6 +293,8 @@
   }
 
   var started = false;
+  var isTouch = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  function focusInput(){ if (!isTouch) inputEl.focus(); }
   function openPanel(){
     panel.classList.add('cw-open');
     launch.setAttribute('aria-expanded', 'true');
@@ -301,7 +305,7 @@
       addMsg('bot', pageGreeting());
       renderChips(START_CHIPS);
     }
-    inputEl.focus();
+    focusInput();
   }
   function closePanel(){
     panel.classList.remove('cw-open');
