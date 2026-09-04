@@ -28,10 +28,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --forest:#1B3B36;--forest-deep:#122A26;--forest-line:#2C544D;
+  --forest:#1B2F4A;--forest-deep:#12213A;--forest-line:#2C4A6B;
   --gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
   --cream:#F2EFE8;--cream-dim:rgba(242,239,232,.66);--cream-faint:rgba(242,239,232,.4);
-  --ink:#1B3B36;--ink-dim:#5A6F6A;--ink-faint:#8C9B97;
+  --ink:#1B2F4A;--ink-dim:#5A6878;--ink-faint:#8C97A5;
   --paper:#F7F5F0;--paper-line:#E2DED4;
   --maxw:1180px;
 }
@@ -57,7 +57,7 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:112px 24px 52px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;
   background:radial-gradient(120% 90% at 78% 12%,rgba(200,148,90,.16),transparent 58%),
-             linear-gradient(180deg,#1E4139 0%,#1B3B36 45%,#122A26 100%)}
+             linear-gradient(180deg,#1E3556 0%,#1B2F4A 45%,#12213A 100%)}
 .hero-bg::after{content:'';position:absolute;inset:0;
   background-image:linear-gradient(rgba(242,239,232,.028) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(242,239,232,.028) 1px,transparent 1px);
@@ -95,16 +95,16 @@ h1 em{font-style:normal;color:var(--gold)}
   display:grid;place-items:center;font-size:16px;font-weight:900;flex:none;
   font-family:'Noto Serif TC',serif;margin-top:2px}
 .ask-input{flex:1;min-width:0;border:0;outline:0;resize:none;background:transparent;
-  font-family:inherit;font-size:17px;line-height:1.65;color:#18211F;
+  font-family:inherit;font-size:17px;line-height:1.65;color:#181E27;
   height:62px;padding:3px 0;overflow:hidden}
-.ask-input::placeholder{color:#A8AFAD}
+.ask-input::placeholder{color:#A8ADB5}
 .ask-tools{display:flex;align-items:center;gap:8px;flex:none;margin-top:2px}
 .icon-btn{width:34px;height:34px;border-radius:50%;border:0;background:transparent;
-  color:#9AA3A0;font-size:16px;cursor:pointer;transition:.18s;display:grid;place-items:center}
+  color:#9AA0A8;font-size:16px;cursor:pointer;transition:.18s;display:grid;place-items:center}
 .icon-btn:hover{background:#F0EEE9;color:var(--forest)}
 .icon-btn.rec{background:#FDECEC;color:#D24B4B}
 .ask-send{width:36px;height:36px;border-radius:50%;border:0;background:#E8E5DE;
-  color:#8C9B97;font-size:17px;cursor:pointer;transition:.18s;flex:none}
+  color:#8C97A5;font-size:17px;cursor:pointer;transition:.18s;flex:none}
 .ask-send.on{background:var(--forest);color:var(--gold)}
 
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}

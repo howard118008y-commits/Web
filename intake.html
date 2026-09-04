@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root{--forest:#1B3B36;--forest-deep:#122A26;--gold:#C8945A;--gold-deep:#9A6D3A;
-  --paper:#FBFAF7;--line:#D9D5CC;--ink:#1E2A27;--ink-dim:#5A6F6A;--ink-faint:#8C9B97;--maxw:1210px}
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--gold:#C8945A;--gold-deep:#9A6D3A;
+  --paper:#FBFAF7;--line:#D9D5CC;--ink:#1E2532;--ink-dim:#5A6878;--ink-faint:#8C97A5;--maxw:1210px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
@@ -25,7 +25,7 @@ button{font-family:inherit}
 /* ---- 頂欄(對應 Better 的 ‹ Better ... Call anytime) ---- */
 .top{max-width:var(--maxw);margin:0 auto;padding:22px 24px 0;display:flex;align-items:center;gap:18px}
 .back{width:36px;height:36px;border:0;background:none;cursor:pointer;font-size:22px;color:var(--ink);display:grid;place-items:center;border-radius:50%;margin-left:-8px}
-.back:hover{background:rgba(27,59,54,.06)}
+.back:hover{background:rgba(27,47,74,.06)}
 .back[hidden]{display:none}
 .brand{display:flex;align-items:center;gap:9px;font-family:'Noto Serif TC',serif;font-weight:900;font-size:19px;letter-spacing:.03em;white-space:nowrap}
 .brand-mark{width:30px;height:30px;border-radius:7px;background:var(--gold);color:var(--forest-deep);display:grid;place-items:center;font-size:16px;flex:none}
@@ -38,29 +38,29 @@ button{font-family:inherit}
 .prog{max-width:var(--maxw);margin:20px auto 0;padding:0 24px}
 .prog[hidden]{display:none}
 .prog-bar{height:4px;background:#E5E2DA;border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:#2E6B4F;border-radius:2px;width:0;transition:width .35s ease}
+.prog-fill{height:100%;background:#2F5B8F;border-radius:2px;width:0;transition:width .35s ease}
 .prog-pct{font-size:13.5px;color:var(--ink-dim);margin-top:10px}
 @media(max-width:600px){.prog{padding:0 16px}}
 
 /* ---- 題目區(對應 Better 528px 中欄) ---- */
 main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
-.q{font-family:'Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,40px);line-height:1.22;letter-spacing:.005em;text-align:center;margin-bottom:34px;color:#22302C}
+.q{font-family:'Noto Sans TC',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,40px);line-height:1.22;letter-spacing:.005em;text-align:center;margin-bottom:34px;color:#222A36}
 .q-sub{text-align:center;margin:-18px 0 30px;font-size:15px}
 .q-sub a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
 .opts{display:flex;flex-direction:column;gap:22px}
-.opt{display:flex;align-items:center;gap:22px;width:100%;min-height:64px;padding:12px 20px;background:#fff;border:1px solid #C7C3BA;border-radius:6px;font-size:17.5px;font-weight:500;color:#22302C;text-align:left;cursor:pointer;transition:.15s}
-.opt:hover{border-color:var(--forest);background:#F4F7F5}
-.opt.on{background:#2E6B4F;border-color:#2E6B4F;color:#fff}
-.opt svg{width:38px;height:38px;flex:none;color:#2E6B4F}
+.opt{display:flex;align-items:center;gap:22px;width:100%;min-height:64px;padding:12px 20px;background:#fff;border:1px solid #C7C3BA;border-radius:6px;font-size:17.5px;font-weight:500;color:#222A36;text-align:left;cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--forest);background:#F3F6FA}
+.opt.on{background:#2F5B8F;border-color:#2F5B8F;color:#fff}
+.opt svg{width:38px;height:38px;flex:none;color:#2F5B8F}
 .opt.on svg{color:#fff}
 .opt-center{justify-content:center;text-align:center;font-weight:500}
 
 /* ---- 輸入 ---- */
 .field{position:relative}
 .field input{width:100%;height:64px;border:1px solid #9AA39F;border-radius:6px;padding:22px 16px 6px;font:inherit;font-size:17px;color:var(--ink);background:#fff;outline:0;transition:.15s}
-.field input:focus{border:2px solid #2E6B4F}
+.field input:focus{border:2px solid #2F5B8F}
 .field label{position:absolute;left:16px;top:20px;font-size:16px;color:var(--ink-dim);pointer-events:none;transition:.15s}
-.field input:focus + label,.field input:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2E6B4F}
+.field input:focus + label,.field input:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2F5B8F}
 .hint{font-size:13.5px;color:var(--ink-dim);margin-top:10px}
 .hint.err{color:#B3261E}
 .field.err input,.field.err textarea{border:2px solid #B3261E}
@@ -68,8 +68,8 @@ main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
 .field-msg{font-size:13px;color:#B3261E;margin-top:6px;min-height:1.2em}
 .field-msg:empty{display:none}
 .next{width:100%;height:64px;margin-top:30px;border:0;border-radius:6px;background:#BDBFB8;color:#fff;font-size:17px;font-weight:700;cursor:not-allowed;transition:.15s}
-.next.ready{background:#2E6B4F;cursor:pointer}
-.next.ready:hover{background:#26593F}
+.next.ready{background:#2F5B8F;cursor:pointer}
+.next.ready:hover{background:#26497A}
 
 /* ---- 題目下方社會證明 / 護欄(不造假客戶評價,放可查證的事實) ---- */
 .trust{margin-top:44px;text-align:center;font-size:14.5px;color:var(--ink-dim);line-height:1.8}
@@ -80,25 +80,25 @@ main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
 .cw-launch,.cw-teaser{display:none!important}
 .ask{position:fixed;right:24px;bottom:24px;z-index:90;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 24px 0 16px;border-radius:999px;border:0;background:var(--forest-deep);color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.28);transition:.2s}
 .ask:hover{transform:translateY(-1px)}
-.ask .dot{width:26px;height:26px;border-radius:50%;background:#2E6B4F;display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-size:13px;color:var(--gold);box-shadow:0 0 0 4px rgba(46,107,79,.35)}
+.ask .dot{width:26px;height:26px;border-radius:50%;background:#2F5B8F;display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-size:13px;color:var(--gold);box-shadow:0 0 0 4px rgba(47,91,143,.35)}
 @media(max-width:600px){.ask{right:16px;bottom:16px;height:50px;padding:0 18px 0 12px;font-size:14.5px}}
 
 .stack{display:flex;flex-direction:column;gap:18px}
 .field textarea{width:100%;min-height:104px;border:1px solid #9AA39F;border-radius:6px;padding:26px 16px 10px;font:inherit;font-size:16px;color:var(--ink);background:#fff;outline:0;resize:vertical;transition:.15s}
-.field textarea:focus{border:2px solid #2E6B4F}
-.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2E6B4F}
+.field textarea:focus{border:2px solid #2F5B8F}
+.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{top:9px;font-size:12px;color:#2F5B8F}
 .consent{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:13.5px;color:var(--ink-dim);line-height:1.6}
-.consent input{margin-top:4px;width:16px;height:16px;flex:none;accent-color:#2E6B4F}
+.consent input{margin-top:4px;width:16px;height:16px;flex:none;accent-color:#2F5B8F}
 .consent a{text-decoration:underline;color:var(--ink)}
 .form-msg{margin-top:14px;font-size:14px;text-align:center;min-height:1.4em}
 .form-msg.err{color:#B3261E}
-.next[type=submit]{background:#2E6B4F;cursor:pointer}
+.next[type=submit]{background:#2F5B8F;cursor:pointer}
 .next[type=submit]:disabled{background:#BDBFB8;cursor:not-allowed}
 .done{text-align:center}
-.done-mark{width:56px;height:56px;border-radius:50%;margin:0 auto 26px;background:#2E6B4F;color:var(--gold);display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-weight:900;font-size:24px;box-shadow:0 0 0 8px rgba(46,107,79,.18),0 0 32px rgba(46,107,79,.45)}
+.done-mark{width:56px;height:56px;border-radius:50%;margin:0 auto 26px;background:#2F5B8F;color:var(--gold);display:grid;place-items:center;font-family:'Noto Serif TC',serif;font-weight:900;font-size:24px;box-shadow:0 0 0 8px rgba(47,91,143,.18),0 0 32px rgba(47,91,143,.45)}
 .done-list{list-style:none;text-align:left;max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:14px;font-size:15.5px;color:var(--ink)}
 .done-list li{padding-left:32px;position:relative}
-.done-list li::before{content:"";position:absolute;left:4px;top:5px;width:10px;height:16px;border-right:2.5px solid #2E6B4F;border-bottom:2.5px solid #2E6B4F;transform:rotate(45deg)}
+.done-list li::before{content:"";position:absolute;left:4px;top:5px;width:10px;height:16px;border-right:2.5px solid #2F5B8F;border-bottom:2.5px solid #2F5B8F;transform:rotate(45deg)}
 .done-line{display:flex;align-items:center;justify-content:center;background:#06C755!important;margin-top:36px}
 .pane[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
