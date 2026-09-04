@@ -4,7 +4,7 @@
  */
 (function () {
   var css = [
-    '.cx-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,33,58,.92);',
+    '.cx-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:block;height:auto;padding:0;background:rgba(18,33,58,.92);',
     'backdrop-filter:blur(14px);border-bottom:1px solid #2C4A6B;font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;color:#F2EFE8}',
     '.cx-nav *{box-sizing:border-box}',
     '.cx-nav a{color:inherit;text-decoration:none}',

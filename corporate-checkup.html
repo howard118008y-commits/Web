@@ -23,70 +23,236 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"服務項目","item":"https://cx468.com.tw/services.html"},{"@type":"ListItem","position":3,"name":"公司財務健檢","item":"https://cx468.com.tw/corporate-checkup.html"}]}
 </script>
-<link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-.page-hero{background:#12213A;padding:120px 2rem 72px;text-align:center}
-.page-eyebrow{font-size:11px;letter-spacing:.26em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:16px}
-.page-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#fff;margin-bottom:14px}
-.page-sub{font-size:15px;letter-spacing:.04em;line-height:1.8;color:rgba(255,255,255,.65);max-width:600px;margin:0 auto}
-.ck-wrap{max-width:760px;margin:0 auto;padding:56px 24px 80px}
-.ck-what{border:1px solid #e3e3e6;background:#f6f5f3;padding:28px 24px;margin-bottom:40px}
-.ck-what h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#12213A;margin:0 0 14px}
-.ck-what ol{margin:0;padding-left:20px}
-.ck-what li{font-size:14px;color:#3a3a3c;line-height:1.85;margin-bottom:6px}
-.ck-what .note{font-size:12.5px;color:#6e6e73;line-height:1.75;margin:14px 0 0}
-.form-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
-.form-privacy{display:flex;gap:12px;align-items:flex-start;background:#f0faf3;border:1px solid rgba(6,199,85,.25);border-radius:14px;padding:16px 18px;margin-bottom:28px}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
+
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
+}
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁補充：深藍帶清單＋健檢表單／上傳元件（功能沿用原頁，外觀改用上方 token） === */
+.bt-dark ol{margin:0 0 24px;padding-left:22px}
+.bt-dark ol li{font-size:16px;line-height:24px;color:rgba(255,255,255,.82);margin-bottom:10px}
+.bt-dark ol li strong{color:#fff}
+.bt-dark .bt-note{font-size:14px;line-height:20px;color:rgba(255,255,255,.6)}
+.bt-dark .bt-note strong{color:rgba(255,255,255,.9)}
+.bt-form{background:var(--paper)}
+.form-privacy{display:flex;gap:12px;align-items:flex-start;background:var(--tint);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:28px}
 .form-privacy .lock{font-size:20px;line-height:1.4;flex-shrink:0}
-.form-privacy p{font-size:13px;color:#1B2F4A;line-height:1.65;margin:0}
-.form-privacy a{color:#0F7A4F;font-weight:600}
-.grp-title{font-size:12px;letter-spacing:.12em;color:#1B2F4A;font-weight:700;margin:32px 0 16px;text-transform:uppercase}
+.form-privacy p{font-size:14px;line-height:20px;color:var(--ink);margin:0}
+.form-privacy a,.consent a,.form-msg a{color:var(--action);font-weight:700;text-decoration:underline}
+.grp-title{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin:32px 0 16px}
 .grp-title:first-of-type{margin-top:0}
-.grp-note{font-size:13px;color:#6e6e73;line-height:1.7;margin:-8px 0 18px}
+.grp-note{font-size:14px;line-height:20px;color:var(--ink-dim);margin:-8px 0 18px}
 .field{margin-bottom:20px}
-.field label{display:block;font-size:14px;font-weight:600;color:#1B2F4A;margin-bottom:8px}
-.field label .opt{font-weight:400;color:#86868b;font-size:12px}
-.field label .req{color:#1B2F4A;margin-left:2px}
-.field input,.field select,.field textarea{width:100%;font-size:16px;color:#1B2F4A;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#048456;background:#fff}
-.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,.consent input:focus-visible,.form-submit:focus-visible,.up-btn:focus-within{outline:2px solid #1B2F4A;outline-offset:2px}
+.field label{display:block;font-size:14px;line-height:20px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.field label .opt{font-weight:400;color:var(--ink-dim);font-size:12px}
+.field label .req{color:var(--gold-deep);margin-left:2px}
+.field input,.field select,.field textarea{width:100%;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:inherit;transition:border-color .3s ease-in-out,background-color .3s ease-in-out}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--action);background:#fff}
 .field textarea{resize:vertical;min-height:88px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.up-box{border:1.5px dashed #d2d2d7;border-radius:16px;padding:24px 20px;text-align:center;background:#fafafa;transition:.15s}
-.up-box.drag{border-color:#1B2F4A;background:#fff6f6}
-.up-btn{display:inline-block;background:#12213A;color:#fff;font-size:14px;font-weight:600;padding:12px 26px;border-radius:12px;cursor:pointer;letter-spacing:.04em}
+.bt-doclist{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:20px}
+.bt-doclist ol{margin:0;padding-left:20px}
+.bt-doclist li{font-size:14px;line-height:22px;color:var(--ink-dim);margin-bottom:6px}
+.bt-doclist li strong{color:var(--ink)}
+.bt-doclist .note{font-size:14px;line-height:20px;color:var(--ink-dim);margin:12px 0 0}
+.up-box{border:1.5px dashed var(--line);border-radius:8px;padding:24px 20px;text-align:center;background:var(--paper);transition:border-color .3s ease-in-out,background-color .3s ease-in-out}
+.up-box.drag{border-color:var(--action);background:var(--tint)}
+.up-btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:background-color .3s ease-in-out}
+.up-btn:hover{background:var(--forest-deep)}
 .up-btn input{display:none}
-.up-hint{font-size:12.5px;color:#86868b;line-height:1.7;margin-top:12px}
+.up-hint{font-size:14px;line-height:20px;color:var(--ink-dim);margin-top:12px}
 .up-list{list-style:none;margin:16px 0 0;padding:0;text-align:left}
-.up-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:#1B2F4A;background:#f5f5f7;border-radius:10px;padding:10px 12px;margin-bottom:8px}
-.up-list .sz{color:#86868b;font-size:12px;flex-shrink:0}
-.up-list button{background:none;border:none;color:#1B2F4A;font-size:13px;cursor:pointer;padding:0 2px;flex-shrink:0}
-.up-total{font-size:12.5px;color:#6e6e73;margin-top:10px;text-align:left}
-.up-err{font-size:13px;color:#1B2F4A;margin-top:10px;text-align:left;line-height:1.7}
+.up-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.up-list .sz{color:var(--ink-dim);font-size:12px;flex-shrink:0}
+.up-list button{background:none;border:none;color:var(--action);font-size:14px;cursor:pointer;padding:0 2px;flex-shrink:0;font-family:inherit}
+.up-total{font-size:14px;line-height:20px;color:var(--ink-dim);margin-top:10px;text-align:left}
+.up-err{font-size:14px;line-height:20px;color:var(--gold-deep);margin-top:10px;text-align:left}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:24px 0}
-.consent input{width:24px;height:24px;flex-shrink:0;accent-color:#048456;cursor:pointer}
-.consent label{font-size:13px;color:#6e6e73;line-height:1.6;cursor:pointer;padding:3px 0}
-.consent a{color:#0F7A4F;font-weight:600}
-.form-submit{width:100%;background:#048456;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
-.form-submit:hover{opacity:.9}
+.consent input{width:24px;height:24px;flex-shrink:0;accent-color:var(--action);cursor:pointer}
+.consent label{font-size:14px;line-height:20px;color:var(--ink-dim);cursor:pointer;padding:3px 0}
+.form-submit{width:100%}
 .form-submit:disabled{opacity:.5;cursor:not-allowed}
-.form-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
-.form-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
-.form-msg.ok{display:block;background:#f0faf3;color:#157347;border:1px solid rgba(6,199,85,.3)}
-.form-msg.err{display:block;background:#fdf0f1;color:#1B2F4A;border:1px solid rgba(27,47,74,.3);margin-top:18px}
-.form-msg.ok a,.form-msg.err a{color:#0F7A4F;font-weight:600}
+.form-foot{font-size:14px;line-height:20px;color:var(--ink-dim);text-align:center;margin-top:16px}
+.form-msg{display:none;border-radius:8px;padding:18px 20px;font-size:16px;line-height:24px}
+.form-msg.ok{display:block;background:var(--tint);color:var(--ink);border:1px solid var(--line)}
+.form-msg.err{display:block;background:var(--cream);color:var(--ink);border:1px solid var(--gold);margin-top:18px}
 .hp{position:absolute!important;left:-9999px!important;opacity:0}
-.ck-alt{margin-top:40px;padding:28px 24px;border:1px solid #e3e3e6;background:#f6f5f3;text-align:center}
-.ck-alt-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;color:#12213A;margin-bottom:8px}
-.ck-alt p{font-size:13px;color:#6e6e73;line-height:1.8;margin-bottom:16px}
-.ck-alt .btn-line{display:inline-block;background:#12213A;color:#fff;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
-.ck-alt .btn-tel{display:inline-block;background:transparent;color:#12213A;border:1px solid #d9d6d1;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
-.ck-disclaimer{font-size:11.5px;color:#a1a1a6;line-height:1.8;margin-top:36px;text-align:center}
-@media(max-width:640px){.page-h1{font-size:26px}.page-hero{padding:72px 1.25rem 28px}.ck-wrap{padding:24px 16px 120px}.form-card{padding:28px 20px}.two{grid-template-columns:1fr}}
+.bt-cta .bt-disclaimer{max-width:760px;margin:32px auto 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script src="include.js" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -121,29 +287,51 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="page-hero">
-  <div class="page-eyebrow">公司財務健檢 · Corporate Check-up</div>
-  <h1 class="page-h1">把資料交出去之前，<br>先用銀行的眼睛看一遍。</h1>
-  <p class="page-sub">備齊三年 401 表、三年營所稅申報書與近 12 個月公司存摺，我們在 30 分鐘內完成一份財務健檢：哪裡是綠燈、哪裡是紅燈、紅燈要補什麼。</p>
-<div data-include="ai-bar" data-ai-q="健檢要準備什麼？|多久看得到結果？|哪些狀況算紅燈？"></div>
-</div>
-
-<div class="ck-wrap">
-
-  <div class="ck-what">
-    <h2>健檢報告會告訴你四件事</h2>
-    <ol>
-      <li><strong>總覽燈號</strong>——綠燈、黃燈、紅燈，一眼看完。</li>
-      <li><strong>五項指標</strong>——金流勾稽率、申報營收年增率、還款覆蓋率試算、單一客戶集中度、負責人聯徵概況。</li>
-      <li><strong>紅黃燈明細</strong>——命中哪一條、成因是什麼、要補什麼資料。</li>
-      <li><strong>下一步</strong>——還缺哪些文件、補齊預估需要幾天。</li>
-    </ol>
-    <p class="note">本報告為<strong>資料整理與體質分析，非核貸預測</strong>。我們只整理你提供的真實資料，不代為產製任何憑證或流水。實際條件依個案財務狀況及承作機構審核而定，最終核貸由金融機構決定。</p>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">公司財務健檢</div>
+      <h1 class="bt-h1">把資料交出去之前，<br><em>先用銀行的眼睛看一遍。</em></h1>
+      <p class="bt-p">備齊三年 401 表、三年營所稅申報書與近 12 個月公司存摺，我們在 30 分鐘內完成一份財務健檢：哪裡是綠燈、哪裡是紅燈、紅燈要補什麼。</p>
+      <div class="bt-btns">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn" target="_blank" rel="noopener">加入官方 LINE 諮詢</a>
+        <a href="tel:+886-2-2249-0517" class="bt-btn bt-btn-ghost">來電 02-2249-0517</a>
+      </div>
+      <div data-include="ai-bar" data-ai-q="健檢要準備什麼？|多久看得到結果？|哪些狀況算紅燈？"></div>
+    </div>
+    <img class="bt-hero-img" src="img/article-bank-audit.jpg" alt="企業主在桌前逐頁核對公司報表與申報文件，準備公司財務健檢" fetchpriority="high" loading="eager">
   </div>
+</section>
 
-  <div class="form-card">
+<!-- 2. 深色帶：健檢報告會告訴你四件事 -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-grid">
+      <figure>
+        <img class="bt-dark-img" src="img/gen-home-desk.jpg" alt="書桌上攤開的筆記本與眼鏡，逐項整理公司文件的情境" loading="lazy">
+      </figure>
+      <div>
+        <h2 class="bt-h2">健檢報告會告訴你四件事</h2>
+        <ol>
+          <li><strong>總覽燈號</strong>——綠燈、黃燈、紅燈，一眼看完。</li>
+          <li><strong>五項指標</strong>——金流勾稽率、申報營收年增率、還款覆蓋率試算、單一客戶集中度、負責人聯徵概況。</li>
+          <li><strong>紅黃燈明細</strong>——命中哪一條、成因是什麼、要補什麼資料。</li>
+          <li><strong>下一步</strong>——還缺哪些文件、補齊預估需要幾天。</li>
+        </ol>
+        <p class="bt-note">本報告為<strong>資料整理與體質分析，非核貸預測</strong>。我們只整理你提供的真實資料，不代為產製任何憑證或流水。實際條件依個案財務狀況及承作機構審核而定，最終核貸由金融機構決定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 健檢表單（本頁特有：上傳／表單行為沿用原頁 JS） -->
+<section class="bt-form bt-sec-80">
+  <div class="bt-narrow">
+    <div class="bt-card" id="checkup-form">
     <div class="form-privacy">
       <span class="lock">🔒</span>
       <p><strong>你上傳的文件，我們認真對待。</strong>檔案採加密傳輸並存放於本公司自行管理的主機，<strong>不經第三方表單服務</strong>，僅承辦人員可讀，結案後 6 個月內刪除。本表單<strong>不索取負責人身分證字號</strong>。詳見<a href="privacy-policy.html">隱私權政策</a>。</p>
@@ -219,8 +407,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <textarea id="ck-msg" name="message" placeholder="例：去年跟銀行談過，後來沒下文，對方也沒說原因。"></textarea></div>
 
       <div class="grp-title">三、上傳文件</div>
-      <div class="ck-what" style="margin-bottom:20px;background:#fff;border-color:#e8e8ea">
-        <ol style="padding-left:18px">
+      <div class="bt-doclist">
+        <ol>
           <li><strong>401 表</strong>——近三年全部期別（必要）</li>
           <li><strong>營所稅結算申報書</strong>——近三年各一份（必要）</li>
           <li><strong>公司存摺往來明細</strong>——近 12 個月、全部帳戶（必要）</li>
@@ -246,21 +434,26 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <label for="ckConsent">我已閱讀並同意<a href="privacy-policy.html">隱私權政策</a>，同意鋮馨租賃有限公司為本次公司財務健檢之目的，蒐集、處理及利用上述資料與上傳文件，並於結案後 6 個月內刪除。</label>
       </div>
 
-      <button type="submit" class="form-submit" id="ckBtn">送出，開始健檢</button>
+      <button type="submit" class="bt-btn form-submit" id="ckBtn">送出，開始健檢</button>
       <p class="form-foot">送出後專人將於上班時間（週一至五 09:00–18:00）與你聯繫確認。</p>
       <div class="form-msg" id="ckMsg"></div>
     </form>
+    </div>
   </div>
+</section>
 
-  <div class="ck-alt">
-    <div class="ck-alt-title">檔案太多、不方便上傳？</div>
-    <p>可以先加 LINE 說明狀況，我們協助你確認要準備哪幾份。</p>
-    <a class="btn-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">加入官方 LINE 諮詢</a>
-    <a class="btn-tel" href="tel:+886-2-2249-0517">來電 02-2249-0517</a>
+<!-- 4. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">檔案太多、不方便上傳？</h2>
+    <p class="bt-p">可以先加 LINE 說明狀況，我們協助你確認要準備哪幾份。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn" target="_blank" rel="noopener">加入官方 LINE 諮詢</a>
+      <a href="tel:+886-2-2249-0517" class="bt-btn bt-btn-ghost">來電 02-2249-0517</a>
+    </div>
+    <p class="bt-small bt-disclaimer">本頁服務為資料整理與財務體質分析，非要約或個案承諾，亦非核貸預測。分析結果依您提供之文件內容而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，如後續進行融資申請，最終核貸由金融機構決定。<br>您提供的資料僅用於本次公司財務健檢，不作其他用途。</p>
   </div>
-
-  <p class="ck-disclaimer">本頁服務為資料整理與財務體質分析，非要約或個案承諾，亦非核貸預測。分析結果依您提供之文件內容而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，如後續進行融資申請，最終核貸由金融機構決定。<br>您提供的資料僅用於本次公司財務健檢，不作其他用途。</p>
-</div>
+</section>
 
 <div data-include="footer"></div>
 
