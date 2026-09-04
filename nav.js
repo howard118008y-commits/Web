@@ -13,6 +13,7 @@
     '.cx-mark{width:30px;height:30px;border-radius:7px;background:#C8945A;color:#12213A;display:grid;place-items:center;font-size:16px;flex:none}',
     '.cx-menu{display:flex;gap:4px;list-style:none;margin:0;padding:0;margin-left:8px}',
     '.cx-menu>li{position:relative}',
+    '.cx-menu>li::after{content:"";position:absolute;left:0;right:0;top:100%;height:10px}',
     '.cx-menu>li>button{background:none;border:0;color:rgba(242,239,232,.7);font:inherit;font-size:14.5px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:.15s}',
     '.cx-menu>li>button:hover,.cx-menu>li.open>button{color:#F2EFE8;background:rgba(242,239,232,.06)}',
     '.cx-dd{position:absolute;top:calc(100% + 6px);left:0;min-width:240px;background:#F7F5F0;border:1px solid #E2DED4;border-radius:12px;',
@@ -75,6 +76,12 @@
       ['二胎增貸試算', '/zhonghe-second-mortgage.html'],
       ['新北房屋稅試算', '/new-taipei-house-tax.html'],
       ['全部小工具', '/tools.html']
+    ]},
+    { label: '案例分享', items: [
+      ['中和屋主的貸款整合(匿名)', '/article-debt-consolidation.html'],
+      ['核可案例:民間轉銀行(新北中和,匿名)', '/lp-loan-integration.html'],
+      ['被朋友拖下水,三個月走出來', '/article-private-loan-credit-damage.html'],
+      ['月收入 6 萬、多筆負債怎麼整理', '/article-loan-integration.html']
     ]}
   ];
 
@@ -127,8 +134,9 @@
   }
   lis.forEach(function (li) {
     var btn = li.querySelector('button');
-    li.addEventListener('mouseenter', function () { closeAll(); li.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); });
-    li.addEventListener('mouseleave', function () { li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
+    var leaveT = null;
+    li.addEventListener('mouseenter', function () { clearTimeout(leaveT); closeAll(); li.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); });
+    li.addEventListener('mouseleave', function () { leaveT = setTimeout(function () { li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }, 180); });
     btn.addEventListener('click', function () {
       var on = li.classList.contains('open'); closeAll();
       if (!on) { li.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
