@@ -1,36 +1,39 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後重寫：2026-08-29（全站改 AI 時代定位）
-> 本次重寫原因：**品牌定位轉向**——Sir 8/29 拍板「繼承時代結束，全站改成 AI 時代」，第一、五節整節重寫。
-> ⚠️ 第三、四節多數項目是 **8/14 版留下、本次未重驗**，逐項已標註；接手前先自行查證狀態再行動。
+> 最後重寫：2026-09-04 深夜（Better 對拷專案第一頁上線）
+> 本次重寫原因：一、三、五節整節重寫；二、四節為 8/29 版保留、**本次未重驗**，接手前先查證。
 
-## 一、當前狀態快照
+## 一、當前狀態快照（2026-09-04 22:49 實測）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `3e60f28`，**ahead 1（未 push，等 Sir 授權部署）** | `cd ~/cx468-web && git status -sb` |
-| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本次產物） | 同上 |
-| 線上站點 | 200，**尚未含本次改動** | `curl -s https://cx468.com.tw/ \| grep -c "先問小鋮 AI"` → 現為 0；push 後應為 1 |
-| SEO/AEO/GEO | 124 頁。index/services 16/17（唯一失分 `fresh30`），其餘 5 個服務頁 17/17 | `python3 scripts/audit_seo.py` |
-| FAQ 同源 | 122 頁、漂移 0 | `python3 scripts/audit_faq_samesource.py` |
-| 排程 | `healthcheck`／`indicators-local`／`leadspoll`／`adsreport`／`fanjiuzhang-watch` 五支 launchd 全載入 exit 0 | `launchctl list \| grep cx468` |
-| cx468-ga4-daily | `b3902b1`，**ahead 3（別的 session 留的，本次未處理）** | `cd ~/cx468-ga4-daily && git status -sb` |
-| cx468-linebot | `c750fd2`，與遠端一致 | `cd ~/cx468-linebot && git status -sb` |
-
-### 🚨 部署前必做
-
-```bash
-cd ~/cx468-web && python3 scripts/update_schema_datemod.py
-```
-`fresh30` 失分＝index/services 的 `dateModified` 落後 git 8–16 天。不同步就上線＝新內容配舊 schema，會擋住重爬（memory `feedback_sitemap_lastmod_gates_indexing`）。
+| cx468-web HEAD | `7403ce9`，與 origin/main 一致、已部署 | `cd ~/cx468-web && git status -sb && git log --oneline -3` |
+| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本 session 產物） | 同上 |
+| 售後回租頁（Better 版型原型） | 線上 200、含 `data-theme="light"`、h1＝1 | `curl -s https://cx468.com.tw/sale-leaseback.html \| grep -c 'data-theme="light"'` → 1 |
+| nav.js 淺色主題 | 線上 15 處 `cx-light` | `curl -s https://cx468.com.tw/nav.js \| grep -c cx-light` → 15 |
+| 首頁 | 200，深色 nav 未受影響（真瀏覽器實開驗過） | `curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/` |
+| 全站配色 | 149 檔已海軍藍 #1B2F4A＋金 #C8945A（commit b45c85b、3688f39），紅 #C61B1C 0 檔 | `grep -l C61B1C *.html \| wc -l` → 0 |
+| launchd | `fanjiuzhang-watch`／`healthcheck`／`indicators-local`／`adsreport` 四支 exit 0；**`leadspoll` 不在清單，原因本次未查** | `launchctl list \| grep cx468` |
+| SEO/AEO/GEO 分數、FAQ 同源 | **本次未重跑**（改版頁 FAQ 同源用 evaluate 驗過相等） | `python3 scripts/audit_seo.py`、`python3 scripts/audit_faq_samesource.py` |
 
 ⚠️ **三個路徑陷阱**：
-1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**。
+1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**；iCloud `ＡＩ鋮馨/AI鋮馨官網/` 只是草稿鏡像（index／intake／sale-leaseback 有副本）。
 2. `行銷產出/`、`知識庫/`、`制度/` 在 **iCloud 專案夾**，在 repo 裡 `ls` 會空手而回。
 3. LINE bot 查驗一律用 `~/cx468-linebot`，iCloud 專案夾內那份是凍結殭屍複本。
 
-## 二、可複用資產／程序
+🚨 部署前照舊：`python3 scripts/update_schema_datemod.py` 同步 dateModified（本次 sale-leaseback sitemap lastmod 已是 09-04，未另跑）。
+
+## 二、可複用資產／程序（8/29 版保留＋9/4 新增）
+
+### 🆕 Better 對拷專案的入口（9/4 建立）
+
+- **拆解報告**：iCloud `行銷產出/策略簡報/2026-09-04-better.com官網拆解.md`（365 行：§3 逐頁 section 表、§5 色碼/字級/按鈕/卡片/間距實測、§6 技術棧、§8 不能照抄的 11 條）。143 張截圖在 `行銷產出/視覺風格/better.com-2026-09-04/`（`17-mortgage-*.png`＝內頁模板對標）。
+- **內頁模板正本**＝`sale-leaseback.html`（已上線）。全站套用時照它的 `<style>` 與 section 順序：hero 左文右圖 → 深藍帶 → 流程/要點格 → 適合對象 → CTA 帶 → 相關文章 → 案例 → 比較表 → FAQ → LINE → 表單。原型截圖 `行銷產出/視覺風格/better-rebuild-2026-09-04/`。
+- **nav.js 淺色主題**：頁面放 `<div id="nav" data-theme="light"></div>` ＋ `<script src="nav.js"></script>`，body `padding-top` 64/58。不帶屬性＝深色（首頁用）。
+- 🔴 **`style.css` 雷**：其全域 `nav{height:48px;display:flex}` 會壓壞 nav.js。原型頁直接**不載 style.css**（footer／line-qr／lead-form 自帶 fallback 樣式，實測無破版）。全站套用前要 Sir 拍板：改 style.css 還是逐頁不載。
+- **本機目檢**：`cd ~/cx468-web && python3 -m http.server 8765`，Playwright venv 在 session scratchpad（會消失），重建：`python3 -m venv ~/pw && ~/pw/bin/pip install playwright && ~/pw/bin/playwright install chromium`。截圖前 `addInitScript` 設 `localStorage cx_antifraud_v1` 關反詐 modal。
+- Token 對照（Better → 鋮馨）：頁底 #F7F5F0、卡片白、次底 #F2EFE8、深帶 #1B2F4A、主 CTA #2F5B8F（hover #26497A）、header CTA 金 #C8945A、眉標 #9A6D3A、文字 #1B2F4A／#5A6878、邊線 #E2DED4、淡藍帶 #EEF2F7；全頁 Noto Sans TC；CTA 64px 圓角 8px；卡片 8px＋shadow-md；section 64/80/96。
 
 ### 🆕 本機預覽與真回覆測試（8/29 建立）
 
@@ -105,40 +108,29 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
 
 ## 三、未竟任務
 
-### 🔴 第一順位：本次改動等部署（唯一本次產生、狀態已實證）
+### 🔴 第一順位：Better 版型套到其餘服務頁（Sir 定調「規格一模一樣、內容換鋮馨」）
 
-`3e60f28` ahead 1。Sir 尚未說「部署」。要上線時：
+先向 Sir 要三條拍板（9/4 已提、尚未回）：①眉標用「房屋售後回租」型還是原「不動產售後回租 · Sale-Leaseback」型 ②`style.css` 改全域 nav 規則還是逐頁不載 ③深藍底上的 CTA 用金色可否。
+拍板後下一批：`debt-consolidation.html`／`private-to-bank.html`／`corporate-checkup.html`（各 449／589／353 行），每頁規則同原型：**文字一字不改、只換版型**、FAQ schema 與可見文字同源、h1＝1、console 0 error、手機 scrollWidth 390、禁語掃 0 新增；二胎相關頁記得「免費評估」禁令（memory `feedback_compliance_no_free_eval_second_mortgage`）。派工模板：本 session 給建造者的 prompt 要點都在第二節「Better 對拷專案的入口」。部署仍須 Sir 說「部署」，一律指名檔案。
 
-```bash
-cd ~/cx468-web
-python3 scripts/update_schema_datemod.py     # 先同步 dateModified
-git fetch && git rebase origin/main
-git add <指名檔案>                            # 禁 git add -A
-git push
-curl -s https://cx468.com.tw/ | grep -c "先問小鋮 AI"   # 應為 1
-```
-上線後給 Sir URL 清單送 GSC：首頁＋7 個服務頁（services / second-mortgage / sale-leaseback / debt-consolidation / private-to-bank / corporate-checkup / property-management）。
+### 🟡 同專案的後續
 
-### 🟡 定位轉向的後續（本次未做，Sir 未指示）
+1. nav.js MENU 原稿 24 個目標頁（compare／prepare／concept-*／investors 等）尚未建（memory `project_homepage_green_rebuild`）；建好才加回 MENU。
+2. 141 頁仍用 `data-include="nav"`（舊 nav.html）。全站換 nav.js 是套版型的一部分，不要單獨先換。
+3. 首頁形式：Better 首頁是單屏 AI 框；我方首頁已縮到只剩快速答案框（commit ea9fbaa 移除 FAQ/名詞/工具段與 FAQPage schema）。SEO/GEO 是最大目標（memory `feedback_seo_aeo_top_priority`），首頁可索引內容減少的影響下次精進會議要看數據。
+4. 不放假客戶評價（Better 每頁有五星語錄，我方無可查證來源）。
 
-1. **nav 的「免費評估」按鈕**：全站共用 nav，二胎頁會繼承。Sir 2026-07 定過二胎主商品場景禁「免費評估」招攬鉤子（memory `feedback_compliance_no_free_eval_second_mortgage`）。既有缺口，已向 Sir 報告、等指示。
-2. **lp-\* 與地區變體頁**（`lp-private-to-bank` / `xinbei-*` / `zhonghe-*` / `banqiao-*` 等約 10 頁）本次未加 AI 詢問列。要鋪的話照第二節 ai-bar 掛法，一頁一行。
-3. **繼承那 8 頁一行未動**（Sir 拍板保留帶曝光）。若日後要調，先查 canonical 收斂狀態（memory `project_canonical_consolidation`）。
-4. **AI 模式預設值**：目前預設「完整版」，AI 模式只記本次瀏覽（sessionStorage）。要改成預設 AI 模式，改 index.html 那行 `sessionStorage.getItem('cxHomeMode') === 'ai'` 即可——但會讓自然搜尋到站的訪客被覆蓋層擋住。
+### ⚠️ 以下為 8/29 版留下、本次未重驗
 
-### ⚠️ 以下為 8/14 版留下、**本次未重驗**，接手前先查證
-
-- 三支廣告首週判讀（原訂 8/15）、新聞焦點卡硬截止（原訂 8/21）、回電 SOP 實錄複核（原訂 8/28）——**三個日期都已過**，狀態不明，先查 `~/.cx468/pending_reviews.json` 與健檢報告再決定。
-- 企業貸款補助專案（CX-FUNDING）三處資料不一致＋三個阻塞數字。
-- Anthropic auto-reload、Postgres `cx468-fb-news-db` 每月 US$21.02、設計系統收斂（舊綠 `#16A34A` 殘留 7 頁、`#0071e3` 藍 58 檔）。
-- ⚠️ Threads token 8/14 時剩 55 天（約 2026-10-08 到期），換發後更新 `~/.cx468/threads_token_issued`。
+- nav「免費評估」按鈕在二胎頁的合規缺口（8/29 已報 Sir、未指示）。
+- lp-\*／地區變體頁未鋪 ai-bar；繼承 8 頁保留不動；AI 模式預設值仍「完整版」。
+- 8/14 遺留：廣告首週判讀、新聞卡截止、回電 SOP 複核、CX-FUNDING 三處不一致、Anthropic auto-reload、Postgres 月費、Threads token（約 2026-10-08 到期，換發後更新 `~/.cx468/threads_token_issued`）。
 
 ### 日常常態
 
-- 每天 12:00 精進會議（**session 級排程，每個 session 要用 CronCreate 重設**）
-- 三日健檢 `com.cx468.healthcheck`（檢查4 五項）
-- 名單輪詢 `com.cx468.leadspoll` 每 15 分鐘｜本機指標 5/25 號 10:30｜曝光巡檢 08:12｜Threads 12:30
-- ⚠️ 換新聞卡前先跑 `git log --oneline -5 -- radar-index.html` 算實際服役天數；硬截止日是**到期日不是動手日**（memory `feedback_check_content_age_before_rotating`）。改卡片註解格式會弄壞 `~/cx468-ga4-daily/health_check.py` 的 regex（memory `feedback_cross_repo_string_coupling`）。
+- 每天 12:00 精進會議（session 級排程，每個 session 用 CronCreate 重設）。
+- 三日健檢 `com.cx468.healthcheck`；本機指標；曝光巡檢 08:12；Threads 12:30；`leadspoll` 目前不在 launchd 清單（見第一節）。
+- 換新聞卡前 `git log --oneline -5 -- radar-index.html` 算服役天數；改卡片註解格式會弄壞 `~/cx468-ga4-daily/health_check.py` regex。
 
 ## 四、等使用者的事項
 
@@ -150,22 +142,18 @@ curl -s https://cx468.com.tw/ | grep -c "先問小鋮 AI"   # 應為 1
 4. **Anthropic auto-reload**：console.anthropic.com → Billing，建議「低於 $5 自動補到 $50」
 5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
 6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
-7. 🆕 **本次改動的部署授權**——Sir 說「部署」才 push（見第三節第一順位）
 
-## 五、本 session（8/29）做了什麼
+## 五、本 session（9/4 晚）做了什麼
 
-Sir 拍板：**繼承時代結束，全站改成 AI 時代定位**。對標 better.com 的 Betsy AI 首頁。
+Sir 指令：「官網要改成 better.com 這樣，先把它每一步點過、測過、記錄下來」→「做下一步」→「部署」→「交接」。
 
 | 事項 | 證據 |
 |---|---|
-| better.com 實抓分析（SPA，WebFetch 只拿得到 nav，要 headless render） | 整頁只剩 nav／AI 對話 hero／免責 footer；傳統首頁收進 Classic Mode |
-| 首頁定位轉向：eyebrow／h1／副標／CTA 移除繼承語 | h1 改「房子的問題，先問小鋮 AI」；順修「深耕二十年」主詞為團隊 |
-| AI 模式全屏入口（覆蓋層，DOM 不動） | 首訪 overlay `on=false` 實測；SEO 稽核 16/17 不變、字數 3,798、h2 12、內鏈 21 全不動 |
-| chat-widget 新增 `window.cxAskFull()` | 全屏對話＋遮罩，關閉自動復原，內頁 widget 未受影響 |
-| ai-bar.html 掛進 7 個服務頁 | 7 頁 chips 逐頁正確、無 JS 錯、點 chip 進全屏對話真回覆 |
-| 修 sale-leaseback h1 被 nav 蓋住 | 桌機＋手機兩組 CSS；修後 7 頁桌機／手機皆 0 頁被蓋 |
-| 合規掃描 | 我的改動 0 命中；SLB chips 無 借/貸/押/還款/利息/贖回 |
+| better.com 全站拆解（24 頁桌機＋手機截圖、5 下拉、漏斗走到第 4 步停在地址個資、3 計算器改值、getComputedStyle 實量、curl robots/sitemap） | 報告 365 行＋143 張截圖（路徑見第二節）；playwright MCP 全程被佔，改本機 Playwright |
+| 售後回租頁重排成 Better /mortgage 版型＋nav.js 加 light 主題 | commit `7403ce9`（+446/−460）；文字守恆：新版多出的只有「相關文章」「房屋售後回租」眉標與 nav 選單字 |
+| 驗收 | console 0 error；h1＝1；6 段 JSON-LD parse OK；FAQ 同源相等；手機 scrollWidth 390；金管會 8 禁語 0；SLB 借貸語彙 0 新增 |
+| 部署 | fetch+rebase+push，`git ls-remote`＝本機；線上 60 秒後生效，真瀏覽器 nav 底色 rgb(255,255,255) |
+| 手機修 | 浮動小鋮鈕蓋住 ai-bar 送出鈕 → 本頁 CSS `padding-right:70px`＋grid `minmax(0,1fr)` |
 
-**Sir 的定位判斷**（寫下來免得下個 session 重問）：繼承內容頁保留帶曝光，定位層改 AI；服務頁鋪 AI 入口，文章頁不鋪。
+**Sir 未回的三條拍板**見第三節第一順位。**本 session 落地的 memory**：`project_homepage_green_rebuild` 追加兩段（報告位置、原型狀態與 style.css 雷）。
 
-**本 session 落地的 memory**：`feedback_shared_component_into_existing_hero`、`feedback_cdp_screenshot_traps`（皆新）
