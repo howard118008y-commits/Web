@@ -23,81 +23,244 @@
 <meta name="geo.placename" content="新北市新店區">
 <meta name="geo.position" content="24.9678;121.5419">
 <meta name="ICBM" content="24.9678, 121.5419">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-.art-hero{background:#12213A;padding:120px 2rem 76px;text-align:center}
-.art-tag{display:inline-block;font-size:10px;font-weight:500;padding:0 0 8px;border-radius:0;background:transparent;color:rgba(255,255,255,.72);border-bottom:1px solid rgba(255,255,255,.4);margin-bottom:1.2rem;letter-spacing:.26em;text-transform:uppercase}
-.art-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.4;max-width:760px;margin:0 auto .75rem}
-.art-hero-meta{font-size:13px;color:rgba(255,255,255,.7)}
-.art-body{max-width:720px;margin:0 auto;padding:3rem 2rem 5rem}
-.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:25px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6}
-.art-body h3{font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;letter-spacing:.01em;margin:1.5rem 0 .5rem}
-.art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.1rem}
-.art-body ul{margin:.5rem 0 1.25rem 1.4rem}
-.art-body li{font-size:16px;line-height:1.8;color:#3d3d3f;margin-bottom:.4rem}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:1.5rem}
-.faq-item{border-bottom:1px solid #f0f0f0;padding-bottom:.5rem;margin-bottom:1rem}
-.live-stats{margin:1.5rem 0 .5rem}
-.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.live-card{background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px;padding:18px 18px 16px}
-.live-card h4{font-size:13px;color:#6e6e73;font-weight:600;margin:0 0 10px}
-.live-big{font-size:30px;font-weight:700;color:#0F172A;letter-spacing:-.02em}
-.live-big .u{font-size:14px;font-weight:600;color:#86868b;margin-left:4px}
-.live-row{display:flex;justify-content:space-between;font-size:13px;color:#3d3d3f;padding:5px 0;border-top:1px dashed #e6e9ec}
-.live-row b{color:#1B2F4A}
-.live-note{font-size:12px;color:#86868b;margin-top:10px;line-height:1.6}
-.live-note a{color:#2F5B8F;text-decoration:none}
-.cta-box{background:#0a2a1a;border-radius:20px;padding:2.25rem;text-align:center;margin:3rem 0 1rem}
-.cta-box h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:.6rem}
-.cta-box p{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:1.3rem}
-.cta-box a{display:inline-block;background:#fff;color:#1B2F4A;padding:11px 30px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none}
-.disclaimer{font-size:12px;color:#9b9b9f;line-height:1.7;margin-top:1.5rem}
-.loc-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:14px;align-items:stretch;margin:1.25rem 0 .5rem}
-.loc-card{background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px;padding:16px;display:flex;flex-direction:column}
-.loc-card h4{font-size:13px;color:#6e6e73;font-weight:600;margin:0 0 10px}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
+
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
+}
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁延伸（區域百科型內容映射到 Better 版型；不改共用 token） === */
+.bt-crumb{margin-bottom:16px}
+.bt-crumb a{color:var(--action)}
+.bt-meta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:500;color:var(--ink)}
+.bt-hero figure{margin:0}
+.bt-hero figcaption{font-size:14px;line-height:20px;color:var(--ink-dim);margin-top:12px;text-align:center}
+.bt-hero figcaption a{color:var(--action)}
+.loc-card h4,.live-card h4,.chart-card h4,.poi-card h4{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.loc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;align-items:stretch;margin-top:32px}
+.loc-card{display:flex;flex-direction:column}
 .tw-wrap{flex:1;display:flex;align-items:center;justify-content:center}
-.tw-wrap svg{width:auto;height:200px;max-width:100%}
-.tw-island{fill:#e3e9ef;stroke:#cfd8e1;stroke-width:1.5}
-.tw-pin{fill:#EF4444}
-.tw-pin-ring{fill:none;stroke:#EF4444;stroke-width:2;opacity:.55;transform-origin:center}
-@keyframes pin-pulse{0%{r:5;opacity:.6}70%{r:16;opacity:0}100%{r:16;opacity:0}}
-.tw-label{font-size:12px;fill:#1B2F4A;font-weight:700}
-.map-embed{flex:1;min-height:240px;border:0;width:100%;border-radius:10px}
-.area-photo{margin:1.25rem 0 .5rem}
-.area-photo img{width:100%;border-radius:14px;display:block}
-.area-photo figcaption{font-size:12px;color:#86868b;text-align:center;margin-top:8px}
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.25rem 0 .5rem}
-.chart-card{background:#fff;border:1px solid #eef1f4;border-radius:14px;padding:16px}
-.chart-card h4{font-size:13px;color:#1B2F4A;font-weight:700;margin:0 0 4px}
-.chart-card .sub{font-size:11px;color:#86868b;margin:0 0 10px}
-.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:12px}
-.bar-name{width:84px;color:#3d3d3f;flex:none;white-space:nowrap}
-.bar-track{flex:1;background:#f0f2f5;border-radius:6px;height:18px;overflow:hidden}
-.bar-fill{height:100%;border-radius:6px;transition:width .5s ease}
-.bar-val{width:74px;text-align:right;color:#1B2F4A;font-weight:600;flex:none}
-.chart-empty{font-size:12px;color:#86868b;padding:14px 0;text-align:center}
+.tw-wrap svg{width:auto;height:220px;max-width:100%}
+.tw-island{fill:var(--tint);stroke:var(--line);stroke-width:1.5}
+.tw-pin{fill:var(--action)}
+.tw-pin-ring{fill:none;stroke:var(--action);stroke-width:2;opacity:.55;transform-origin:center}
+.tw-label{font-size:12px;fill:var(--ink);font-weight:700}
+.map-embed{flex:1;min-height:280px;border:0;width:100%;border-radius:8px}
+.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.live-card{border-top:4px solid var(--action)}
+.live-card:nth-child(2){border-top-color:var(--gold)}
+.live-big{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink)}
+.live-big .u{font-size:14px;font-weight:500;color:var(--ink-dim);margin-left:4px}
+.live-row{display:flex;justify-content:space-between;font-size:14px;line-height:20px;color:var(--ink-dim);padding:8px 0;border-top:1px solid var(--line)}
+.live-row:first-of-type{margin-top:12px}
+.live-row b{color:var(--ink)}
+.live-note{font-size:14px;line-height:20px;color:rgba(255,255,255,.7);margin-top:24px}
+.live-note a{color:var(--gold-soft);font-weight:600}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.chart-card .sub{font-size:14px;line-height:20px;color:var(--ink-dim);margin:-4px 0 16px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:14px}
+.bar-name{width:84px;color:var(--ink);flex:none;white-space:nowrap}
+.bar-track{flex:1;background:var(--tint);border-radius:6px;height:18px;overflow:hidden}
+.bar-fill{display:block;height:100%;border-radius:6px;transition:width .5s ease}
+.bar-val{width:74px;text-align:right;color:var(--ink);font-weight:700;flex:none}
+.chart-empty{font-size:14px;color:var(--ink-dim);padding:16px 0;text-align:center}
 .bar-dot{width:9px;height:9px;border-radius:50%;flex:none;margin-right:2px}
-.bar-tag{font-size:10px;font-weight:700;color:#fff;background:#1B2F4A;border-radius:6px;padding:1px 5px;margin-left:6px}
-.live-card:nth-child(1){border-top:3px solid #2F5B8F}
-.live-card:nth-child(2){border-top:3px solid #16A34A}
-.timeline{list-style:none;margin:1rem 0 1.25rem;padding:0;border-left:2px solid #e6e9ec}
-.timeline li{position:relative;padding:0 0 1rem 1.1rem}
-.timeline li::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:#16A34A;border:2px solid #fff;box-shadow:0 0 0 1px #cfe8d6}
-.tl-year{display:inline-block;font-size:12px;font-weight:700;color:#16A34A;background:#eafff1;border-radius:6px;padding:2px 8px;margin-right:8px}
-.tl-desc{font-size:15px;color:#3d3d3f;line-height:1.7}
-.poi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1rem 0 1.25rem}
-.poi-card{background:#f7f9fb;border:1px solid #eef1f4;border-radius:12px;padding:14px 16px}
-.poi-card h4{font-size:13px;font-weight:700;color:#0F172A;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid #e6e9ec}
-.poi-card ul{margin:0;padding-left:1.1rem}
-.poi-card li{font-size:13.5px;color:#3d3d3f;line-height:1.7;margin-bottom:2px}
-@media(max-width:768px){.art-hero h1{font-size:27px}.live-grid{grid-template-columns:1fr}.loc-grid{grid-template-columns:1fr}.chart-grid{grid-template-columns:1fr}.tw-wrap svg{height:170px}.poi-grid{grid-template-columns:1fr}}
+.bar-tag{font-size:10px;font-weight:700;color:#fff;background:var(--forest);border-radius:6px;padding:1px 5px;margin-left:6px}
+.bt-points-2{grid-template-columns:repeat(2,1fr);margin-top:48px;padding-top:0;border-top:0}
+.bt-points-2 .bt-h3{font-size:22px;line-height:1.3;font-weight:700;color:var(--ink);margin-bottom:12px}
+.bt-points-2 .bt-p+.bt-p{margin-top:12px}
+.timeline{list-style:none;margin:32px 0 0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 20px 24px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--action);border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.tl-year{display:inline-block;font-size:14px;line-height:20px;font-weight:700;color:var(--action);background:var(--tint);border-radius:6px;padding:2px 10px;margin-right:12px}
+.tl-desc{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.poi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.poi-card ul{margin:0;padding-left:20px}
+.poi-card li{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.poi-card li+li{margin-top:4px}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-rel-noarrow .bt-rel-card{min-height:auto}
+.bt-rel-noarrow .bt-rel-card::after{content:none}
+@media(max-width:900px){.loc-grid,.live-grid,.chart-grid,.poi-grid,.bt-points-2{grid-template-columns:1fr}.tw-wrap svg{height:180px}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["Place","AdministrativeArea"],"name":"新店區","alternateName":"新北市新店區","description":"新店區（新北市）區域百科：碧潭風景區、松山新店線與環狀線、央北與十四張重劃區，生活機能與不動產特徵，並附實價登錄近 180 天即時單價與租金行情，更新時間以內政部資料釋出為準。","geo":{"@type":"GeoCoordinates","latitude":24.9678,"longitude":121.5419},"containedInPlace":{"@type":"AdministrativeArea","name":"新北市","containedInPlace":{"@type":"Country","name":"臺灣"}},"url":"https://cx468.com.tw/area-xindian.html"}
@@ -111,6 +274,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":24.9944428,"longitude":121.4900325},"areaServed":[{"@type":"AdministrativeArea","name":"新北市中和區"},{"@type":"AdministrativeArea","name":"新北市永和區"},{"@type":"AdministrativeArea","name":"新北市板橋區"},{"@type":"AdministrativeArea","name":"新北市新店區"},{"@type":"AdministrativeArea","name":"新北市土城區"}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"]}
 </script>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script src="include.js" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
@@ -135,7 +299,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   ]
  },
  "inLanguage": "zh-TW",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-06-03"
 }
 </script>
@@ -161,144 +325,217 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<section class="art-hero">
-  <div class="art-tag">新北市・區域百科</div>
-  <h1>新店區 房市與生活機能總覽</h1>
-  <div class="art-hero-meta">鋮馨融資顧問團隊 · 實價登錄行情每月 2/12/22 自動同步</div>
-</section>
-
-<div class="art-body">
-  <a href="lvr-observatory.html" class="back-link">← 返回實價登錄觀察室</a>
-
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-    <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 14px;"><strong>新店區有房，被銀行拒或缺現金，在地就有人能幫。</strong>新店區是新北重要住宅區，房價與生活機能成熟。名下在新店區有不動產時，即使信用瑕疵或被銀行拒貸，仍可透過售後回租、二胎、民間轉銀行等方式重新評估取得資金。鋮馨租賃位於中和中正路 468 號、深耕在地 20 年。本公司非金融機構，最終核貸由金融機構決定。</p>
-    <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
-      <li><strong>新店區房市</strong>：即時行情可參考實價登錄觀察室。</li>
-      <li><strong>有房可走</strong>：售後回租、二胎、民間轉銀行（市值約 7–9 成可評估）。</li>
-      <li><strong>在地優勢</strong>：鋮馨在中和、熟悉新店區行情與銀行管道、20 年經驗。</li>
-      <li><strong>適合</strong>：新店區信用瑕疵、銀行被拒、急需周轉的屋主。</li>
-      <li><strong>提醒</strong>：結果依個案財務狀況與市場情況而定。</li>
-    </ul>
-  </div>
-
-  <p>新店區位於新北市南端，面積廣大、多丘陵與水域，新店溪與碧潭是著名地景。</p>
-  <p>區內涵蓋大坪林、七張、新店、安坑、央北、十四張等次區域，發展型態差異大。</p>
-
-  <h2>新店區 在哪裡？</h2>
-  <div class="loc-grid">
-    <div class="loc-card">
-      <h4>台灣位置</h4>
-      <div class="tw-wrap">
-        <svg viewBox="0 0 210 320" role="img" aria-label="新店區 在台灣的位置">
-          <path class="tw-island" d="M118,16 C138,26 150,52 156,84 C162,112 170,144 166,178 C162,208 152,242 138,272 C130,290 120,302 109,298 C100,294 95,282 89,268 C76,238 62,206 54,172 C47,142 43,108 52,80 C61,52 78,30 100,18 C106,14 112,13 118,16 Z"/>
-          <circle class="tw-pin-ring" cx="138.7" cy="46.9" r="6"><animate attributeName="r" values="5;16" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/></circle>
-          <circle class="tw-pin" cx="138.7" cy="46.9" r="5"/>
-          <text class="tw-label" x="138.7" y="46.9" dx="-8" dy="-10" text-anchor="end">新北市新店區</text>
-        </svg>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-small bt-crumb"><a href="lvr-observatory.html">← 返回實價登錄觀察室</a></p>
+      <p class="bt-eyebrow">新店區在地房市</p>
+      <h1 class="bt-h1">新店區 房市與生活機能總覽</h1>
+      <p class="bt-p">新店區位於新北市南端，面積廣大、多丘陵與水域，新店溪與碧潭是著名地景。</p>
+      <p class="bt-p">區內涵蓋大坪林、七張、新店、安坑、央北、十四張等次區域，發展型態差異大。</p>
+      <div class="bt-meta">
+        <span class="bt-tag">新北市・區域百科</span>
+        <span>鋮馨融資顧問團隊 · 實價登錄行情每月 2/12/22 自動同步</span>
       </div>
     </div>
-    <div class="loc-card" style="padding:8px">
-      <iframe class="map-embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAdXf11vCfYR0YYPcyWS40cISihhR87Kjw&q=新北市新店區&zoom=13&language=zh-TW"
-        title="新店區 地圖"></iframe>
+    <figure class="area-photo">
+      <img class="bt-hero-img" src="img/area/xindian.jpg" alt="新北市新店區 地標：碧潭" fetchpriority="high" loading="eager"
+        onerror="this.closest('.area-photo').remove()">
+      <figcaption>碧潭　·　<a href="https://commons.wikimedia.org/wiki/File:Bitan_Xindian_Taiwan.jpg" target="_blank" rel="noopener">攝影：Ken Marshall／CC BY 2.0（Wikimedia Commons）</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>新店區有房，被銀行拒或缺現金，在地就有人能幫。</strong>新店區是新北重要住宅區，房價與生活機能成熟。名下在新店區有不動產時，即使信用瑕疵或被銀行拒貸，仍可透過售後回租、二胎、民間轉銀行等方式重新評估取得資金。鋮馨租賃位於中和中正路 468 號、深耕在地 20 年。本公司非金融機構，最終核貸由金融機構決定。</p>
+      <ul>
+        <li><strong>新店區房市</strong>：即時行情可參考實價登錄觀察室。</li>
+        <li><strong>有房可走</strong>：售後回租、二胎、民間轉銀行（市值約 7–9 成可評估）。</li>
+        <li><strong>在地優勢</strong>：鋮馨在中和、熟悉新店區行情與銀行管道、20 年經驗。</li>
+        <li><strong>適合</strong>：新店區信用瑕疵、銀行被拒、急需周轉的屋主。</li>
+        <li><strong>提醒</strong>：結果依個案財務狀況與市場情況而定。</li>
+      </ul>
     </div>
   </div>
+</section>
 
-  <figure class="area-photo">
-    <img src="img/area/xindian.jpg" alt="新北市新店區 地標：碧潭" loading="lazy"
-      onerror="this.closest('.area-photo').remove()">
-    <figcaption>碧潭　·　<a href="https://commons.wikimedia.org/wiki/File:Bitan_Xindian_Taiwan.jpg" target="_blank" rel="noopener">攝影：Ken Marshall／CC BY 2.0（Wikimedia Commons）</a></figcaption>
-  </figure>
-
-  <h2>新店區 實價登錄即時行情</h2>
-  <div class="live-stats" id="liveStats" data-town="新店區">
-    <div class="live-grid">
-      <div class="live-card"><h4>買賣行情（近 180 天）</h4><div class="live-big" id="buyMain">載入中…</div></div>
-      <div class="live-card"><h4>租金行情（近 180 天）</h4><div class="live-big" id="rentMain">載入中…</div></div>
-    </div>
-    <div class="live-note">資料來源：內政部不動產實價登錄，近 180 天成交中位數，更新時間以內政部資料釋出為準。完整 75 區比較見
-      <a href="lvr-observatory.html">買賣觀察室</a>與<a href="lvr-rental.html">租金報酬頁</a>。數字僅供參考，非投資建議。</div>
-  </div>
-
-  <h2>新店區 與鄰近精選區租金比較</h2>
-  <div class="chart-grid">
-    <div class="chart-card">
-      <h4>住宅月租每坪中位</h4><p class="sub">元／坪／月 · 近 180 天</p>
-      <div id="chartRent"><div class="chart-empty">載入中…</div></div>
-    </div>
-    <div class="chart-card">
-      <h4>店面月租中位</h4><p class="sub">整間月租金 · 元／月 · 近 180 天</p>
-      <div id="chartShop"><div class="chart-empty">載入中…</div></div>
+<!-- 2. 在哪裡：台灣位置＋地圖（卡片格） -->
+<section class="bt-sec">
+  <div class="bt-in">
+    <h2 class="bt-h2" style="margin-bottom:0">新店區 在哪裡？</h2>
+    <div class="loc-grid">
+      <div class="bt-card loc-card">
+        <h4>台灣位置</h4>
+        <div class="tw-wrap">
+          <svg viewBox="0 0 210 320" role="img" aria-label="新店區 在台灣的位置">
+            <path class="tw-island" d="M118,16 C138,26 150,52 156,84 C162,112 170,144 166,178 C162,208 152,242 138,272 C130,290 120,302 109,298 C100,294 95,282 89,268 C76,238 62,206 54,172 C47,142 43,108 52,80 C61,52 78,30 100,18 C106,14 112,13 118,16 Z"/>
+            <circle class="tw-pin-ring" cx="138.7" cy="46.9" r="6"><animate attributeName="r" values="5;16" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite"/></circle>
+            <circle class="tw-pin" cx="138.7" cy="46.9" r="5"/>
+            <text class="tw-label" x="138.7" y="46.9" dx="-8" dy="-10" text-anchor="end">新北市新店區</text>
+          </svg>
+        </div>
+      </div>
+      <div class="bt-card loc-card" style="padding:8px">
+        <iframe class="map-embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAdXf11vCfYR0YYPcyWS40cISihhR87Kjw&q=新北市新店區&zoom=13&language=zh-TW"
+          title="新店區 地圖"></iframe>
+      </div>
     </div>
   </div>
+</section>
 
-  <h2>生活機能與商圈</h2>
-  <p>碧潭風景區與碧潭吊橋是新店代表性景點；大坪林一帶有裕隆城等大型商場，醫療則有慈濟醫院新店院區與耕莘醫院。</p>
-  <p>央北與十四張為近年的重劃新興住宅區，生活機能持續成形。</p>
-  <h2>交通路網</h2>
-  <p>捷運松山新店線（綠線）設大坪林、七張、新店區公所、新店等站；環狀線有十四張、秀朗橋站；安坑輕軌串連安坑地區，並有國道 3 號安坑交流道聯外。</p>
-  <h2>不動產型態與市場特徵</h2>
-  <p>重劃區（央北、十四張）的新成屋成交，使新店整體屋齡結構與單價中位數波動較大；大坪林商圈與捷運沿線保值性相對佳。實際成交行情請見下方即時數字。</p>
-
-  <h2>學區與教育資源</h2>
-  <p>新店學區以新店高中、安康高中為代表，公立國中有新店國中、中正國中等；國小包括北新國小、大豐國小、復興國小、雙峰國小等，央北與大坪林一帶近年因新住宅湧入、學區需求成長。</p>
-  <h2>重大建設與發展時程</h2>
-  <ul class="timeline">
-    <li><span class="tl-year">2023</span><span class="tl-desc">安坑輕軌通車（K1–K9），改善安坑地區對外交通。</span></li>
-    <li><span class="tl-year">2023</span><span class="tl-desc">大坪林裕隆城開幕，成為新店新興商業地標。</span></li>
-    <li><span class="tl-year">2020</span><span class="tl-desc">環狀線十四張、秀朗橋站通車。</span></li>
-    <li><span class="tl-year">開發中</span><span class="tl-desc">央北重劃區、十四張（中央新村北側）重劃區新案陸續完工。</span></li>
-  </ul>
-  <h2>生活機能一覽</h2>
-  <div class="poi-grid">
-    <div class="poi-card"><h4>醫療</h4><ul><li>台北慈濟醫院（醫學中心，建國路）</li><li>天主教耕莘醫院總院（中正路）</li></ul></div>
-    <div class="poi-card"><h4>購物賣場</h4><ul><li>裕隆城（大坪林）</li><li>家樂福新店店</li></ul></div>
-    <div class="poi-card"><h4>市場</h4><ul><li>新店第一公有市場</li><li>大坪林商圈</li></ul></div>
-    <div class="poi-card"><h4>公園綠地</h4><ul><li>碧潭風景區</li><li>陽光運動公園</li><li>和美山步道</li></ul></div>
-    <div class="poi-card"><h4>景點</h4><ul><li>碧潭吊橋</li><li>新店渡（人力擺渡）</li><li>銀河洞越嶺步道</li></ul></div>
+<!-- 3. 深色帶：實價登錄即時行情（互動元件整段保留，id／class 不動） -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <h2 class="bt-h2" style="margin-bottom:0">新店區 實價登錄即時行情</h2>
+    <div class="live-stats" id="liveStats" data-town="新店區">
+      <div class="live-grid">
+        <div class="bt-card live-card"><h4>買賣行情（近 180 天）</h4><div class="live-big" id="buyMain">載入中…</div></div>
+        <div class="bt-card live-card"><h4>租金行情（近 180 天）</h4><div class="live-big" id="rentMain">載入中…</div></div>
+      </div>
+      <div class="live-note">資料來源：內政部不動產實價登錄，近 180 天成交中位數，更新時間以內政部資料釋出為準。完整 75 區比較見
+        <a href="lvr-observatory.html">買賣觀察室</a>與<a href="lvr-rental.html">租金報酬頁</a>。數字僅供參考，非投資建議。</div>
+    </div>
   </div>
+</section>
 
-  <h2>常見問題</h2>
-  <div class="faq-item">
-    <h3>新店區有哪些重劃區？</h3>
-    <p>央北與十四張是新店近年主要的重劃新興住宅區。</p>
+<!-- 4. 租金比較長條圖（卡片格） -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2" style="margin-bottom:0">新店區 與鄰近精選區租金比較</h2>
+    <div class="chart-grid">
+      <div class="bt-card chart-card">
+        <h4>住宅月租每坪中位</h4><p class="sub">元／坪／月 · 近 180 天</p>
+        <div id="chartRent"><div class="chart-empty">載入中…</div></div>
+      </div>
+      <div class="bt-card chart-card">
+        <h4>店面月租中位</h4><p class="sub">整間月租金 · 元／月 · 近 180 天</p>
+        <div id="chartShop"><div class="chart-empty">載入中…</div></div>
+      </div>
+    </div>
   </div>
-  <div class="faq-item">
-    <h3>新店的捷運有哪些？</h3>
-    <p>松山新店線（綠線）、環狀線，以及串連安坑地區的安坑輕軌。</p>
+</section>
+
+<!-- 5. 要點格：生活機能／交通／不動產型態／學區 -->
+<section class="bt-sec-80" style="padding-top:0">
+  <div class="bt-in">
+    <div class="bt-points bt-points-2">
+      <div class="bt-point">
+        <h2 class="bt-h3">生活機能與商圈</h2>
+        <p class="bt-p">碧潭風景區與碧潭吊橋是新店代表性景點；大坪林一帶有裕隆城等大型商場，醫療則有慈濟醫院新店院區與耕莘醫院。</p>
+        <p class="bt-p">央北與十四張為近年的重劃新興住宅區，生活機能持續成形。</p>
+      </div>
+      <div class="bt-point">
+        <h2 class="bt-h3">交通路網</h2>
+        <p class="bt-p">捷運松山新店線（綠線）設大坪林、七張、新店區公所、新店等站；環狀線有十四張、秀朗橋站；安坑輕軌串連安坑地區，並有國道 3 號安坑交流道聯外。</p>
+      </div>
+      <div class="bt-point">
+        <h2 class="bt-h3">不動產型態與市場特徵</h2>
+        <p class="bt-p">重劃區（央北、十四張）的新成屋成交，使新店整體屋齡結構與單價中位數波動較大；大坪林商圈與捷運沿線保值性相對佳。實際成交行情請見下方即時數字。</p>
+      </div>
+      <div class="bt-point">
+        <h2 class="bt-h3">學區與教育資源</h2>
+        <p class="bt-p">新店學區以新店高中、安康高中為代表，公立國中有新店國中、中正國中等；國小包括北新國小、大豐國小、復興國小、雙峰國小等，央北與大坪林一帶近年因新住宅湧入、學區需求成長。</p>
+      </div>
+    </div>
   </div>
-  <div class="faq-item">
-    <h3>為什麼新店單價中位數變動較大？</h3>
-    <p>因新成屋與老屋的成交結構變化，會牽動單價中位數，並非單純的漲跌。</p>
+</section>
+
+<!-- 6. 重大建設時程（bt-narrow） -->
+<section class="bt-sec" style="background:var(--cream)">
+  <div class="bt-narrow">
+    <h2 class="bt-h2" style="margin-bottom:0">重大建設與發展時程</h2>
+    <ul class="timeline">
+      <li><span class="tl-year">2023</span><span class="tl-desc">安坑輕軌通車（K1–K9），改善安坑地區對外交通。</span></li>
+      <li><span class="tl-year">2023</span><span class="tl-desc">大坪林裕隆城開幕，成為新店新興商業地標。</span></li>
+      <li><span class="tl-year">2020</span><span class="tl-desc">環狀線十四張、秀朗橋站通車。</span></li>
+      <li><span class="tl-year">開發中</span><span class="tl-desc">央北重劃區、十四張（中央新村北側）重劃區新案陸續完工。</span></li>
+    </ul>
   </div>
+</section>
 
-  <div class="cta-box">
-    <h3>在地深耕 20 年，懂新店區的房子</h3>
-    <p>不動產售後回租、貸款整合、民間轉銀行——免費評估你的狀況，不申請不收費。</p>
-    <a href="evaluate.html">免費諮詢與評估</a>
+<!-- 7. 生活機能一覽（卡片格） -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">生活機能一覽</h2>
+    <div class="poi-grid">
+      <div class="bt-card poi-card"><h4>醫療</h4><ul><li>台北慈濟醫院（醫學中心，建國路）</li><li>天主教耕莘醫院總院（中正路）</li></ul></div>
+      <div class="bt-card poi-card"><h4>購物賣場</h4><ul><li>裕隆城（大坪林）</li><li>家樂福新店店</li></ul></div>
+      <div class="bt-card poi-card"><h4>市場</h4><ul><li>新店第一公有市場</li><li>大坪林商圈</li></ul></div>
+      <div class="bt-card poi-card"><h4>公園綠地</h4><ul><li>碧潭風景區</li><li>陽光運動公園</li><li>和美山步道</li></ul></div>
+      <div class="bt-card poi-card"><h4>景點</h4><ul><li>碧潭吊橋</li><li>新店渡（人力擺渡）</li><li>銀河洞越嶺步道</li></ul></div>
+    </div>
   </div>
+</section>
 
-  <p class="disclaimer">本頁區域資訊與實價登錄數字僅供參考，實際成交與市場狀況可能變動。鋮馨租賃有限公司為融資租賃業者，
-  非金融機構，相關貸款或核貸結果最終由金融機構依個案決定。</p>
+<!-- 8. FAQ -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
 
-  <h2>其他精選區</h2>
-  <ul>
-    <li><a href="area-zhonghe.html">中和區房市與生活機能 →</a></li>
-    <li><a href="area-yonghe.html">永和區房市與生活機能 →</a></li>
-    <li><a href="area-banqiao.html">板橋區房市與生活機能 →</a></li>
-    <li><a href="area-tucheng.html">土城區房市與生活機能 →</a></li>
-    <li><a href="lvr-observatory.html">實價登錄觀察室（75 區比較）→</a></li>
-  </ul>
-</div>
+    <details open>
+      <summary><h3>新店區有哪些重劃區？</h3></summary>
+      <p>央北與十四張是新店近年主要的重劃新興住宅區。</p>
+    </details>
 
-<div style="max-width:720px;margin:2.5rem auto 1rem;padding:24px 26px;background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px">
-  <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.12em;margin-bottom:6px">新店・在地融資諮詢</div>
-  <p style="font-size:14.5px;line-height:1.8;color:#3d3d3f;margin:0 0 12px">鋮馨租賃位於新北市中和區中正路 468 號，服務範圍涵蓋新店一帶。名下在新店有房卻被銀行拒貸或缺現金時，可評估二胎房貸、售後回租（房子過戶給投資方＋簽租約續住＋可依約買回）、貸款整合、民間轉銀行等合法管道；是否適合依個案不動產與財務狀況評估，本公司非金融機構。</p>
-  <div style="display:flex;flex-wrap:wrap;gap:8px"><a href="zhonghe-property-finance.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">中和不動產融資諮詢 →</a><a href="second-mortgage.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">二胎房貸 →</a><a href="zhonghe-sale-leaseback.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">售後回租 →</a><a href="debt-consolidation.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">貸款整合 →</a></div>
-</div>
+    <details>
+      <summary><h3>新店的捷運有哪些？</h3></summary>
+      <p>松山新店線（綠線）、環狀線，以及串連安坑地區的安坑輕軌。</p>
+    </details>
+
+    <details>
+      <summary><h3>為什麼新店單價中位數變動較大？</h3></summary>
+      <p>因新成屋與老屋的成交結構變化，會牽動單價中位數，並非單純的漲跌。</p>
+    </details>
+  </div>
+</section>
+
+<!-- 9. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h3 class="bt-h2">在地深耕 20 年，懂新店區的房子</h3>
+    <p class="bt-p">不動產售後回租、貸款整合、民間轉銀行——免費評估你的狀況，不申請不收費。</p>
+    <div class="bt-btns">
+      <a href="evaluate.html" class="bt-btn">免費諮詢與評估</a>
+    </div>
+    <p class="bt-small" style="max-width:760px;margin:32px auto 0">本頁區域資訊與實價登錄數字僅供參考，實際成交與市場狀況可能變動。鋮馨租賃有限公司為融資租賃業者，
+    非金融機構，相關貸款或核貸結果最終由金融機構依個案決定。</p>
+  </div>
+</section>
+
+<!-- 10. 其他精選區（相關連結卡列） -->
+<section class="bt-related bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">其他精選區</h2>
+    <div class="bt-rel-grid bt-rel-noarrow">
+      <a class="bt-card bt-rel-card" href="area-zhonghe.html"><h3>中和區房市與生活機能 →</h3></a>
+      <a class="bt-card bt-rel-card" href="area-yonghe.html"><h3>永和區房市與生活機能 →</h3></a>
+      <a class="bt-card bt-rel-card" href="area-banqiao.html"><h3>板橋區房市與生活機能 →</h3></a>
+      <a class="bt-card bt-rel-card" href="area-tucheng.html"><h3>土城區房市與生活機能 →</h3></a>
+      <a class="bt-card bt-rel-card" href="lvr-observatory.html"><h3>實價登錄觀察室（75 區比較）→</h3></a>
+    </div>
+  </div>
+</section>
+
+<!-- 11. 在地融資諮詢（相關方案卡） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-card bt-local" style="margin-top:0">
+      <div class="bt-label">新店・在地融資諮詢</div>
+      <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號，服務範圍涵蓋新店一帶。名下在新店有房卻被銀行拒貸或缺現金時，可評估二胎房貸、售後回租（房子過戶給投資方＋簽租約續住＋可依約買回）、貸款整合、民間轉銀行等合法管道；是否適合依個案不動產與財務狀況評估，本公司非金融機構。</p>
+      <div class="bt-chips"><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="second-mortgage.html">二胎房貸 →</a><a href="zhonghe-sale-leaseback.html">售後回租 →</a><a href="debt-consolidation.html">貸款整合 →</a></div>
+    </div>
+  </div>
+</section>
+
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
