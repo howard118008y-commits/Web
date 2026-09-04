@@ -115,6 +115,17 @@
     return '<details><summary>' + m.label + '</summary>' + links(m.items, 'go') + '</details>';
   }).join('');
 
+  /* 二胎等場景合規:<div id="nav" data-cta="line"></div> 時,兩顆「免費評估」鈕改為「LINE 線上諮詢」 */
+  var mount = document.getElementById('nav');
+  var ctaLine = !!(mount && mount.getAttribute('data-cta') === 'line');
+  var ctaHtml = ctaLine
+    ? '<a class="cx-cta" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>'
+    : '<a class="cx-cta" href="/intake.html">免費評估</a>';
+  var sheetCtaHtml = ctaLine
+    ? '<a class="cta" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>'
+    : '<a class="cta" href="/intake.html">免費評估</a>' +
+      '<a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>';
+
   var html =
     '<nav class="cx-nav" aria-label="主導覽">' +
       '<div class="cx-in">' +
@@ -123,21 +134,19 @@
         '<div class="cx-right">' +
           '<a class="cx-phone" href="tel:0222490517" aria-label="撥打 02-2249-0517">☎</a>' +
           '<a class="cx-resume" id="cxResume" href="/intake.html" hidden>回到我的評估</a>' +
-          '<a class="cx-cta" href="/intake.html">免費評估</a>' +
+          ctaHtml +
           '<button class="cx-burger" type="button" aria-label="開啟選單" aria-expanded="false">☰</button>' +
         '</div>' +
       '</div>' +
     '</nav>' +
     '<div class="cx-sheet" id="cxSheet">' + mobile +
       '<div class="cx-sheet-foot">' +
-        '<a class="cta" href="/intake.html">免費評估</a>' +
-        '<a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>' +
+        sheetCtaHtml +
         '<a href="tel:0222490517">撥打 02-2249-0517</a>' +
       '</div>' +
     '</div>';
 
   document.head.insertAdjacentHTML('beforeend', '<style>' + css + '</style>');
-  var mount = document.getElementById('nav');
   if (mount) mount.innerHTML = html;
   else document.body.insertAdjacentHTML('afterbegin', html);
   if (mount && mount.getAttribute('data-theme') === 'light') {
