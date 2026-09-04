@@ -13,218 +13,182 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cx468.com.tw/sale-leaseback.html">
 <link rel="canonical" href="https://cx468.com.tw/sale-leaseback.html">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* === 精品編輯系統（與首頁 v2 同語彙：襯線＋髮絲線＋矩形＋全幅攝影） === */
-/* Hero */
-.hero{position:relative;height:auto;min-height:86vh;background:#12213A;overflow:hidden}
-
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 64%;filter:saturate(.9) contrast(1.04) brightness(.9)}
-
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(18,33,58,.72) 0%,rgba(18,33,58,.30) 40%,rgba(18,33,58,.10) 62%,rgba(18,33,58,.46) 100%)}
-
-.hero-body{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:86vh;padding:110px 64px 76px;max-width:1280px;margin:0 auto}
-
-.hero-eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:500;color:rgba(255,255,255,.74);letter-spacing:.26em;text-transform:uppercase;margin-bottom:1.4rem}
-.hero-eyebrow::before{content:"";width:36px;height:1px;background:rgba(255,255,255,.55)}
-
-.hero-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:46px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.22;margin-bottom:18px;max-width:720px;text-shadow:0 2px 28px rgba(0,0,0,.25)}
-
-.hero-h1 em{color:#fff;font-style:normal;border-bottom:2px solid rgba(27,47,74,.85)}
-
-.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.82);line-height:1.8;letter-spacing:.04em;margin-bottom:30px;max-width:560px}
-
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-
-.btn-gold{display:inline-block;background:#fff;color:#12213A;font-size:13px;font-weight:600;padding:14px 30px;border-radius:0;letter-spacing:.14em}
-.btn-gold:hover{background:rgba(255,255,255,.88)}
-
-.btn-ghost-w{display:inline-block;background:transparent;color:#fff;font-size:13px;font-weight:500;padding:14px 30px;border-radius:0;border:1px solid rgba(255,255,255,.55);letter-spacing:.14em}
-.btn-ghost-w:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-
-@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.hero-body>*{animation:heroIn 1.1s cubic-bezier(.22,.61,.36,1) .15s both}
-@media(prefers-reduced-motion:reduce){.hero-body>*{animation:none}}
-
-/* nav 透明疊 hero（僅此頁 scoped，不動共用 nav 檔） */
-nav{transition:background .35s ease,border-color .35s ease}
-body.at-top nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
-body.at-top nav .nav-logo span,body.at-top nav .nav-links a{color:#fff}
-body.at-top nav .nav-links a.active{color:#fff;opacity:1}
-body.at-top nav .nav-cta{background:rgba(255,255,255,.14);border:.5px solid rgba(255,255,255,.45);color:#fff}
-body.at-top nav .nav-radar-btn{color:#fff!important;border-color:rgba(255,255,255,.45)!important;background:transparent!important;box-shadow:none!important}
-body.at-top nav .cx-burger-box span{background:#fff}
-.nav-radar-btn{background:transparent!important;color:#2a2a2a!important;border:1px solid #d9d6d1!important;box-shadow:none!important}
-
-
-/* What is it */
-.what-wrap{max-width:960px;margin:0 auto;padding:110px 24px 0}
-
-.label-tag{font-size:11px;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
-
-.section-h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:40px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#12213A;margin-bottom:24px}
-
-.section-body{font-size:15px;color:#6e6e73;line-height:1.85;letter-spacing:.02em;max-width:640px}
-
-.definition-box{margin-top:44px;background:#12213A;border-radius:0;padding:48px 44px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
-
-.def-item{text-align:center}
-
-.def-num{font-family:"Noto Serif TC","Songti TC",serif;font-size:30px;font-weight:600;color:#fff;letter-spacing:.02em;margin-bottom:10px}
-
-.def-label{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;letter-spacing:.04em}
-
-
-/* How it works */
-.how-wrap{max-width:960px;margin:0 auto;padding:110px 24px 0}
-
-.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;align-items:center}
-
-.how-visual{background:#f6f5f3;border-radius:0;padding:40px 36px;display:flex;flex-direction:column;gap:0}
-
-.flow-step{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid #ddddd8;position:relative}
-
-.flow-step:last-child{border-bottom:none}
-
-.flow-dot{width:38px;height:38px;border-radius:0;background:#12213A;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:"Noto Serif TC","Songti TC",serif}
-
-.flow-dot.gold{background:#1B2F4A;color:#fff}
-
-.flow-text strong{display:block;font-family:"Noto Serif TC","Songti TC",serif;font-size:16px;font-weight:600;color:#12213A;margin-bottom:4px;letter-spacing:.01em}
-
-.flow-text span{font-size:13px;color:#6e6e73;line-height:1.7;letter-spacing:.02em}
-
-.how-points{display:flex;flex-direction:column;gap:0;border-top:1px solid #e3e3e6}
-
-.how-point{display:flex;gap:16px;align-items:flex-start;padding:24px 4px;border-bottom:1px solid #e3e3e6}
-
-.point-icon{display:none}
-
-.point-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#12213A;margin-bottom:8px;letter-spacing:.01em}
-
-.point-desc{font-size:13.5px;color:#6e6e73;line-height:1.75;letter-spacing:.02em}
-
-
-/* Who */
-.who-wrap{background:#f6f5f3;padding:110px 24px;margin-top:110px}
-
-.who-inner{max-width:1100px;margin:0 auto}
-
-.who-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border-top:1px solid #ddddd8}
-
-.who-card{background:transparent;border-radius:0;padding:40px 32px 44px;border:none;border-right:1px solid #ddddd8}
-.who-card:last-child{border-right:none}
-
-.who-emoji{display:none}
-
-.who-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:20px;font-weight:600;color:#12213A;margin-bottom:12px;line-height:1.5;letter-spacing:.01em}
-
-.who-desc{font-size:13.5px;color:#6e6e73;line-height:1.75;letter-spacing:.02em}
-
-.who-check{display:flex;flex-direction:column;gap:8px;margin-top:18px}
-
-.who-check span{font-size:13px;color:#12213A;display:flex;gap:8px;align-items:flex-start;letter-spacing:.02em}
-
-.who-check span::before{content:'—';color:#1B2F4A;font-weight:600;flex-shrink:0}
-
-
-/* Compare */
-.compare-wrap{max-width:780px;margin:0 auto;padding:110px 24px 0}
-
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0;max-width:100%}
-.compare-table{width:100%;border-collapse:collapse;margin-top:40px;border-radius:0;overflow:hidden;border:1px solid #e3e3e6}
-
-.compare-table th{padding:15px 20px;font-size:12px;font-weight:600;text-align:center;letter-spacing:.06em}
-
-.compare-table th:first-child{text-align:left;background:#f6f5f3;width:32%}
-
-.compare-table th.col-sl{background:#12213A;color:#fff}
-
-.compare-table th.col-sell{background:#f6f5f3;color:#6e6e73}
-
-.compare-table th.col-loan{background:#f6f5f3;color:#6e6e73}
-
-.compare-table td{padding:15px 20px;font-size:13.5px;border-top:1px solid #e3e3e6;text-align:center;color:#6e6e73;letter-spacing:.02em}
-
-.compare-table td:first-child{text-align:left;font-weight:600;color:#12213A;background:#fafafa}
-
-.compare-table td.highlight{background:rgba(20,20,20,.03);color:#12213A;font-weight:600}
-
-.yes{color:#12213A;font-weight:700}
-
-.no{color:#1B2F4A}
-
-
-/* FAQ */
-.faq-wrap{max-width:720px;margin:0 auto;padding:110px 24px}
-
-details{border-top:1px solid #ddddd8;padding:26px 0}
-
-details:last-child{border-bottom:1px solid #ddddd8}
-
-summary{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#12213A;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
-
-summary::-webkit-details-marker{display:none}
-
-.plus{font-size:22px;color:#86868b;font-weight:300;flex-shrink:0;transition:transform .2s}
-
-details[open] .plus{transform:rotate(45deg)}
-
-details p{font-size:14.5px;color:#6e6e73;line-height:1.8;margin-top:14px;letter-spacing:.02em}
-
-
-/* CTA */
-.cta-strip{background:#12213A;padding:120px 24px;text-align:center;position:relative;overflow:hidden}
-
-.cta-strip>*{position:relative;z-index:1}
-
-.cta-h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:40px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.35;margin-bottom:18px}
-
-.cta-h2 em{color:#fff;font-style:normal;border-bottom:2px solid rgba(27,47,74,.85)}
-
-.cta-sub{font-size:14.5px;color:rgba(255,255,255,.6);margin-bottom:38px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8;letter-spacing:.03em}
-
-
-.btn-gold-lg{display:inline-block;background:#fff;color:#12213A;font-size:13px;font-weight:600;padding:15px 36px;border-radius:0;letter-spacing:.16em}
-
-.btn-outline-w{display:inline-block;background:transparent;color:#fff;font-size:13px;padding:15px 30px;border-radius:0;border:1px solid rgba(255,255,255,.45);letter-spacing:.14em}
-
-.promise-row{display:flex;gap:28px;justify-content:center;margin-top:44px;flex-wrap:wrap}
-
-.promise-item{font-size:12px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:8px;letter-spacing:.06em}
-
-.promise-item::before{content:'—';color:#1B2F4A;font-weight:600}
-
-
-
-
-
-
-
-
-
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
+
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
+}
 @media(max-width:768px){
-  .hero{height:auto;min-height:88svh}
-  .hero-body{min-height:88svh;padding:96px 22px 44px}
-  .hero-h1{font-size:30px;line-height:1.3}
-  .hero-sub{font-size:13.5px}
-  .hero-btns{flex-direction:column;align-items:stretch}
-  .btn-gold,.btn-ghost-w{text-align:center}
-  .what-wrap,.how-wrap,.compare-wrap,.faq-wrap{padding-left:18px;padding-right:18px;padding-top:72px}
-  .section-h2{font-size:27px}
-  .definition-box{grid-template-columns:1fr;padding:32px 26px;gap:24px}
-  .how-grid{grid-template-columns:1fr}
-  .who-cards{grid-template-columns:1fr}
-  .who-card{border-right:none;border-bottom:1px solid #ddddd8;padding:28px 4px 32px}
-  .who-card:last-child{border-bottom:none}
-  .who-wrap{padding:72px 18px;margin-top:72px}
-  .compare-table{font-size:12px}
-  .compare-table th,.compare-table td{padding:10px 12px}
-  .cta-strip{padding:80px 20px}
-  .cta-h2{font-size:26px}
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
 }
 </style>
 <script type="application/ld+json">
@@ -280,6 +244,7 @@ details p{font-size:14.5px;color:#6e6e73;line-height:1.8;margin-top:14px;letter-
   }
 }
 </script>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -358,37 +323,34 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-</head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<!-- Hero -->
-<div class="hero">
-  <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w, img/svc-leaseback-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w, img/svc-leaseback-3840.webp 3840w" sizes="100vw" type="image/webp"><img class="hero-img" src="img/svc-leaseback.jpg" alt="台灣獨棟透天厝與前院，售後回租常見的自住物件型態" fetchpriority="high" loading="eager"></picture>
-  <div class="hero-overlay"></div>
-  <div class="hero-body">
-    <div class="hero-eyebrow">不動產售後回租 · Sale-Leaseback</div>
-    <h1 class="hero-h1">銀行說不，不代表沒有路：<br>房屋售後回租——過戶換現金，<em>租約續住、依約買回。</em></h1>
-    <p class="hero-sub">3 家銀行都說不？不代表這間房子沒有價值。售後回租是：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利——因為是買賣加租約，看的是不動產本身的價值，曾被銀行婉拒仍可重新評估。資金約市值 7–9 成、2–4 週到位，是否適合依個案不動產與財務狀況評估。</p>
-<div data-include="ai-bar" data-ai-q="過戶後我還能住嗎？|買回權利怎麼約定？|價金大約幾成？"></div>
-    <div class="hero-btns">
-      <a href="evaluate.html" class="btn-gold">免費評估我的狀況</a>
-      <a href="https://lin.ee/PHIfSoY" class="btn-ghost-w">加入 LINE 諮詢</a>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">房屋售後回租</div>
+      <h1 class="bt-h1">銀行說不，不代表沒有路：<br>房屋售後回租——過戶換現金，<em>租約續住、依約買回。</em></h1>
+      <p class="bt-p">3 家銀行都說不？不代表這間房子沒有價值。售後回租是：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利——因為是買賣加租約，看的是不動產本身的價值，曾被銀行婉拒仍可重新評估。資金約市值 7–9 成、2–4 週到位，是否適合依個案不動產與財務狀況評估。</p>
+      <div class="bt-btns">
+        <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 諮詢</a>
+      </div>
+      <div data-include="ai-bar" data-ai-q="過戶後我還能住嗎？|買回權利怎麼約定？|價金大約幾成？"></div>
     </div>
+    <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/webp"><img class="bt-hero-img" src="img/svc-leaseback.jpg" alt="台灣獨棟透天厝與前院，售後回租常見的自住物件型態" fetchpriority="high" loading="eager"></picture>
   </div>
-</div>
-<script>
-(function(){
-  function onScroll(){document.body.classList.toggle('at-top',window.scrollY<60);}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-})();
-</script>
+</section>
 
-  <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:26px 28px;margin:36px auto;">
-      <div style="font-size:11px;font-weight:600;color:#1B2F4A;letter-spacing:.22em;margin-bottom:10px;">快速答案</div>
-      <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 14px;"><strong>賣掉房子，還能繼續住，並保留買回權利。</strong>售後回租是把不動產出售並過戶給投資方、同時簽租約繼續居住的安排——可一次取得市值約 7–9 成的資金，且因為是買賣加租約而非貸款，不全看信用分數。適合信用瑕疵、被銀行拒、或不想搬家又急需大筆資金的屋主。本公司非金融機構，最終成交條件依個案而定。</p>
-      <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>賣掉房子，還能繼續住，並保留買回權利。</strong>售後回租是把不動產出售並過戶給投資方、同時簽租約繼續居住的安排——可一次取得市值約 7–9 成的資金，且因為是買賣加租約而非貸款，不全看信用分數。適合信用瑕疵、被銀行拒、或不想搬家又急需大筆資金的屋主。本公司非金融機構，最終成交條件依個案而定。</p>
+      <ul>
         <li><strong>本質</strong>：不動產過戶＋租約，不是貸款，所以不全看信用。</li>
         <li><strong>可動用</strong>：市值約 7–9 成（依個案），一次取得。</li>
         <li><strong>保留</strong>：過戶後以租約續住，並保有日後依約買回的權利。</li>
@@ -397,127 +359,112 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </ul>
     </div>
   </div>
+</section>
 
-<div data-include="trust-block"></div>
-
-<!-- 什麼是售後回租 -->
-<div class="what-wrap">
-  <div class="label-tag">什麼是售後回租</div>
-  <h2 class="section-h2">魚與熊掌，<br>可以兼得。</h2>
-  <p class="section-body">售後回租（Sale-Leaseback）是一種靈活的不動產資金運用方式：屋主將名下房屋出售並過戶給投資方取得現金，同時與投資方簽訂長期租約，以租客身份繼續居住在同一處，並在合約中保有按約定條件買回房產的選擇權。</p>
-  <p class="section-body" style="margin-top:14px">因為租約與買賣同步簽訂，過戶後仍住在原處、生活不中斷，卻能快速取得大額資金處理財務需求。</p>
-  <figure style="margin:28px auto 4px;max-width:920px;">
-    <img src="img/gen-home-living.jpg" alt="台灣公寓客廳，售後回租後繼續住在原本的家" loading="lazy" style="width:100%;height:auto;border-radius:12px;display:block;">
-    <figcaption style="font-size:13px;color:#8a8a8a;text-align:center;margin-top:12px;letter-spacing:.03em;line-height:1.7;">過戶換現金、簽租約繼續住在自己家，生活不中斷。（情境示意）</figcaption>
-  </figure>
-  <div class="definition-box">
-    <div class="def-item">
-      <div class="def-num">過戶</div>
-      <div class="def-label">房屋過戶給投資方<br>一次取得大額資金，依物件條件核定</div>
-    </div>
-    <div class="def-item">
-      <div class="def-num">租約</div>
-      <div class="def-label">同步簽訂租約<br>繼續住在原處，居住受合約保障</div>
-    </div>
-    <div class="def-item">
-      <div class="def-num">買回</div>
-      <div class="def-label">保有日後<br>依約買回的權利</div>
-    </div>
-  </div>
-</div>
-
-<!-- 流程 -->
-<div class="how-wrap">
-  <div class="label-tag">辦理流程</div>
-  <h2 class="section-h2">從諮詢到資金到位，<br>全程專人陪同。</h2>
-  <div class="how-grid">
-    <div class="how-visual">
-      <div class="flow-step">
-        <div class="flow-dot">1</div>
-        <div class="flow-text">
-          <strong>免費評估</strong>
-          <span>提供物件基本資料，顧問試算可取得資金金額</span>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-dot">2</div>
-        <div class="flow-text">
-          <strong>提案說明</strong>
-          <span>面談詳細說明方案條件，不收諮詢費</span>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-dot gold">3</div>
-        <div class="flow-text">
-          <strong>簽訂合約</strong>
-          <span>買賣契約＋租賃契約同步簽訂，條件全部透明</span>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-dot gold">4</div>
-        <div class="flow-text">
-          <strong>資金到位</strong>
-          <span>完成過戶手續後資金入帳，繼續住在原處</span>
-        </div>
+<!-- 2. 深色帶：什麼是售後回租＋三要件 -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-grid">
+      <figure>
+        <img class="bt-dark-img" src="img/gen-home-living.jpg" alt="台灣公寓客廳，售後回租後繼續住在原本的家" loading="lazy">
+        <figcaption>過戶換現金、簽租約繼續住在自己家，生活不中斷。（情境示意）</figcaption>
+      </figure>
+      <div>
+        <div class="bt-label">什麼是售後回租</div>
+        <h2 class="bt-h2">魚與熊掌，<br>可以兼得。</h2>
+        <p class="bt-p">售後回租（Sale-Leaseback）是一種靈活的不動產資金運用方式：屋主將名下房屋出售並過戶給投資方取得現金，同時與投資方簽訂長期租約，以租客身份繼續居住在同一處，並在合約中保有按約定條件買回房產的選擇權。</p>
+        <p class="bt-p">因為租約與買賣同步簽訂，過戶後仍住在原處、生活不中斷，卻能快速取得大額資金處理財務需求。</p>
       </div>
     </div>
-    <div class="how-points">
-      <div class="how-point">
-        <div class="point-icon">🔒</div>
-        <div>
-          <div class="point-title">居住權受合約保障</div>
-          <div class="point-desc">房屋過戶給投資方的同時，租約與買賣合約同步簽訂，你的居住權在法律文件中明確記載；並可保有日後依約買回的權利。</div>
-        </div>
+    <div class="bt-def">
+      <div class="bt-def-item">
+        <div class="bt-def-num">過戶</div>
+        <div class="bt-def-label">房屋過戶給投資方<br>一次取得大額資金，依物件條件核定</div>
       </div>
-      <div class="how-point">
-        <div class="point-icon">📋</div>
-        <div>
-          <div class="point-title">透明條件，無隱藏費用</div>
-          <div class="point-desc">所有費用、租金、買回條件在簽約前完整說明，沒有簽了才發現的額外費用。</div>
-        </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">租約</div>
+        <div class="bt-def-label">同步簽訂租約<br>繼續住在原處，居住受合約保障</div>
       </div>
-      <div class="how-point">
-        <div class="point-icon">⚡</div>
-        <div>
-          <div class="point-title">快速取得資金</div>
-          <div class="point-desc">相較傳統銀行貸款流程，售後回租資金到位速度更快，適合有時間壓力的財務需求。</div>
-        </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">買回</div>
+        <div class="bt-def-label">保有日後<br>依約買回的權利</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- 適合對象 -->
-<div class="who-wrap">
-  <div class="who-inner">
-    <div class="label-tag" style="text-align:center">適合對象</div>
-    <h2 class="section-h2" style="text-align:center;margin-bottom:0">你適合售後回租嗎？</h2>
-    <div class="who-cards">
-      <div class="who-card">
-        <div class="who-emoji">💸</div>
-        <div class="who-title">急需大額資金<br>但不想賣房</div>
-        <div class="who-desc">面臨資金缺口（週轉、投資、債務清償），房子是最大資產，希望保留日後依約買回的可能。</div>
-        <div class="who-check">
+<!-- 3. 特色格：流程四步＋三要點（純文字） -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">辦理流程</div>
+    <h2 class="bt-h2">從諮詢到資金到位，<br>全程專人陪同。</h2>
+    <div class="bt-steps">
+      <div class="bt-step">
+        <div class="bt-step-num">1</div>
+        <div class="bt-h4">免費評估</div>
+        <p class="bt-p">提供物件基本資料，顧問試算可取得資金金額</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num">2</div>
+        <div class="bt-h4">提案說明</div>
+        <p class="bt-p">面談詳細說明方案條件，不收諮詢費</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num gold">3</div>
+        <div class="bt-h4">簽訂合約</div>
+        <p class="bt-p">買賣契約＋租賃契約同步簽訂，條件全部透明</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num gold">4</div>
+        <div class="bt-h4">資金到位</div>
+        <p class="bt-p">完成過戶手續後資金入帳，繼續住在原處</p>
+      </div>
+    </div>
+    <div class="bt-points">
+      <div class="bt-point">
+        <div class="bt-h4">居住權受合約保障</div>
+        <p class="bt-p">房屋過戶給投資方的同時，租約與買賣合約同步簽訂，你的居住權在法律文件中明確記載；並可保有日後依約買回的權利。</p>
+      </div>
+      <div class="bt-point">
+        <div class="bt-h4">透明條件，無隱藏費用</div>
+        <p class="bt-p">所有費用、租金、買回條件在簽約前完整說明，沒有簽了才發現的額外費用。</p>
+      </div>
+      <div class="bt-point">
+        <div class="bt-h4">快速取得資金</div>
+        <p class="bt-p">相較傳統銀行貸款流程，售後回租資金到位速度更快，適合有時間壓力的財務需求。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 適合對象（卡片） -->
+<section class="bt-who bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label bt-center">適合對象</div>
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">你適合售後回租嗎？</h2>
+    <div class="bt-who-grid">
+      <div class="bt-card bt-who-card">
+        <div class="bt-h4">急需大額資金<br>但不想賣房</div>
+        <p class="bt-p">面臨資金缺口（週轉、投資、債務清償），房子是最大資產，希望保留日後依約買回的可能。</p>
+        <div class="bt-check">
           <span>過戶後簽租約，原地續住</span>
           <span>快速取得資金</span>
           <span>保有依約買回權利</span>
         </div>
       </div>
-      <div class="who-card">
-        <div class="who-emoji">🏦</div>
-        <div class="who-title">曾被銀行拒貸<br>或信用條件不佳</div>
-        <div class="who-desc">信用分數低、負債比高、或有信用瑕疵，導致銀行貸款申請受阻。</div>
-        <div class="who-check">
+      <div class="bt-card bt-who-card">
+        <div class="bt-h4">曾被銀行拒貸<br>或信用條件不佳</div>
+        <p class="bt-p">信用分數低、負債比高、或有信用瑕疵，導致銀行貸款申請受阻。</p>
+        <div class="bt-check">
           <span>以資產價值評估，非信用分數</span>
           <span>不需完美信用記錄</span>
           <span>多筆負債也能評估</span>
         </div>
       </div>
-      <div class="who-card">
-        <div class="who-emoji">🔄</div>
-        <div class="who-title">多筆高利率負債<br>想一次清償</div>
-        <div class="who-desc">有多筆民間借款或高利率信貸，月付壓力沉重，想一次解決財務問題。</div>
-        <div class="who-check">
+      <div class="bt-card bt-who-card">
+        <div class="bt-h4">多筆高利率負債<br>想一次清償</div>
+        <p class="bt-p">有多筆民間借款或高利率信貸，月付壓力沉重，想一次解決財務問題。</p>
+        <div class="bt-check">
           <span>一次清償多筆負債</span>
           <span>降低每月支出壓力</span>
           <span>重建財務健康</span>
@@ -525,140 +472,161 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- 去識別化案例情境 -->
-<div style="max-width:760px;margin:72px auto 24px;padding:0 24px;">
-  <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:10px;">案例情境 · 去識別化示意</div>
-  <h2 style="font-family:'Noto Serif TC','Songti TC',serif;font-size:30px;font-weight:600;color:#1B2F4A;line-height:1.35;margin:0 0 8px;">銀行都說不之後，他沒有搬家。</h2>
-  <p style="font-size:15px;color:#6e6e73;margin:0 0 28px;">50 多歲、經營小生意二十多年的屋主。以下為去識別化情境示意，非個別承諾。</p>
-
-  <div style="border-left:2px solid #1B2F4A;background:#f6f5f3;padding:20px 24px;margin-bottom:14px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:6px;">困境</div>
-    <p style="font-size:15px;line-height:1.8;color:#1B2F4A;margin:0;">幾筆信用瑕疵，3 家銀行接連婉拒。生意等著資金周轉，名下最大的資產就是這間住了十幾年的房子——最怕的是拿到錢，卻要全家搬走。</p>
-  </div>
-
-  <div style="border-left:2px solid #1B2F4A;background:#f6f5f3;padding:20px 24px;margin-bottom:14px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:6px;">處理</div>
-    <p style="font-size:15px;line-height:1.8;color:#1B2F4A;margin:0;">鋮馨評估物件條件後提出售後回租：房子出售並過戶給投資方、同步簽訂租約繼續住在原處，合約中保有日後依約買回的權利。所有費用、租金與買回條件，簽約前全部攤開說明。</p>
-  </div>
-
-  <div style="border-left:2px solid #1B2F4A;background:#f6f5f3;padding:20px 24px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:6px;">結果</div>
-    <p style="font-size:15px;line-height:1.8;color:#1B2F4A;margin:0;">完成過戶後取得市值約 7–9 成的資金（依個案），一般約 2–4 週到位，多筆財務缺口一次處理。生活照舊——同一個門牌、同一張餐桌，多的是一份載明居住權與買回權利的合約。</p>
-  </div>
-
-  <p style="font-size:12px;color:#8e8e93;line-height:1.7;margin:18px 0 22px;">以上為去識別化情境示意，非個別承諾。售後回租＝房屋過戶給投資方＋簽租約繼續居住＋保有依約買回權利，三者一組；是否適合與實際條件、時程依個案不動產與財務狀況評估，本公司非金融機構。</p>
-</div>
-
-<!-- 比較表 -->
-<div class="compare-wrap">
-  <div class="label-tag">方案比較</div>
-  <h2 class="section-h2">售後回租 vs 其他選擇</h2>
-  <div class="table-wrap"><table class="compare-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th class="col-sl">售後回租<br>（鋮馨）</th>
-        <th class="col-sell">直接出售</th>
-        <th class="col-loan">銀行貸款</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>繼續居住</td>
-        <td class="highlight"><span class="yes">✓ 可以</span></td>
-        <td><span class="no">✗ 需搬家</span></td>
-        <td><span class="yes">✓ 可以</span></td>
-      </tr>
-      <tr>
-        <td>快速取得資金</td>
-        <td class="highlight"><span class="yes">✓ 快速</span></td>
-        <td>視成交時間</td>
-        <td>需審核 2–4 週</td>
-      </tr>
-      <tr>
-        <td>信用不完美可評估</td>
-        <td class="highlight"><span class="yes">✓ 可以</span></td>
-        <td><span class="yes">✓ 可以</span></td>
-        <td><span class="no">✗ 有限制</span></td>
-      </tr>
-      <tr>
-        <td>保有買回機會</td>
-        <td class="highlight"><span class="yes">✓ 有選擇權</span></td>
-        <td><span class="no">✗ 無</span></td>
-        <td><span class="yes">✓ 仍持有</span></td>
-      </tr>
-      <tr>
-        <td>適合急需資金者</td>
-        <td class="highlight"><span class="yes">✓ 最適合</span></td>
-        <td>尚可</td>
-        <td>條件受限</td>
-      </tr>
-    </tbody>
-  </table></div>
-  <p style="font-size:11.5px;color:#a1a1a6;margin-top:14px;line-height:1.7;letter-spacing:.02em;">售後回租＝房屋過戶給投資方＋簽租約繼續居住＋保有依約買回權利，三者一組。是否適合依個案不動產條件與財務狀況評估；本公司非金融機構。</p>
-  <div style="margin-top:48px;background:#12213A;border-radius:0;padding:40px 36px;text-align:center;">
-    <div style="font-family:'Noto Serif TC','Songti TC',serif;font-size:22px;font-weight:600;color:#fff;line-height:1.5;letter-spacing:.01em;margin-bottom:10px;">不確定售後回租適不適合你？</div>
-    <p style="font-size:14px;color:rgba(255,255,255,.62);line-height:1.8;letter-spacing:.02em;margin:0 auto 26px;max-width:420px;">提供物件基本資料，由顧問替你免費評估可取得的資金與條件。不申請不收費，充分了解後再決定。</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:#fff;color:#12213A;font-size:13px;font-weight:600;padding:14px 30px;border-radius:0;letter-spacing:.14em;text-decoration:none;">加入 LINE 免費評估</a>
-      <a href="tel:0222490517" style="display:inline-block;background:transparent;color:#fff;font-size:13px;font-weight:500;padding:14px 30px;border-radius:0;border:1px solid rgba(255,255,255,.45);letter-spacing:.14em;text-decoration:none;">電話諮詢 02-2249-0517</a>
+<!-- 4. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">準備好了解<br><em>你的房子值多少</em>嗎？</h2>
+    <p class="bt-p">免費評估，1–2 個工作日內回覆初步結果。不申請不收費，充分了解後再決定。</p>
+    <div class="bt-btns">
+      <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 直接諮詢</a>
+    </div>
+    <div class="bt-promise">
+      <span>完全免費評估</span>
+      <span>不申請不收費</span>
+      <span>信用不完美也能評估</span>
+      <span>快速回覆</span>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FAQ -->
-<div class="faq-wrap">
-  <div class="label-tag" style="text-align:center">常見問題</div>
-  <h2 class="section-h2" style="text-align:center">售後回租常見疑問</h2>
-
-  <details open>
-    <summary>辦理售後回租之後，我還是房子的主人嗎？<span class="plus">＋</span></summary>
-    <p>辦理後，不動產過戶（所有權移轉）至投資方，你成為租客。但合約中保有買回選擇權，你可以在約定期間內按原定條件買回房屋，重新成為所有人。在此期間，你的居住權受租約完整保障。</p>
-  </details>
-
-  <details>
-    <summary>售後回租能拿到多少錢？<span class="plus">＋</span></summary>
-    <p>可取得的資金金額依物件條件、地段、屋況、屋齡及市場行情而定，個案差異可能很大。鋮馨租賃提供免費評估，加入 LINE 說明物件基本資料即可取得初步試算。</p>
-  </details>
-
-  <details>
-    <summary>信用不好、被銀行拒貸，可以申請售後回租嗎？<span class="plus">＋</span></summary>
-    <p>可以。售後回租以不動產市值為主要評估依據，信用分數並非唯一條件。即使曾遭銀行拒貸、有信用瑕疵、或有多筆負債，只要名下有不動產，均可申請免費評估。</p>
-  </details>
-
-  <details>
-    <summary>售後回租之後一定要買回嗎？<span class="plus">＋</span></summary>
-    <p>買回為屋主的「選擇權」，並非強制義務。若屆期選擇不行使買回權，依合約條款協議處理。所有細節在簽約前會逐條說明，你充分了解後再做決定，沒有任何強迫。</p>
-  </details>
-
-  <details>
-    <summary>租金怎麼算？會比外面的行情貴嗎？<span class="plus">＋</span></summary>
-    <p>租金依據市場行情及物件條件議定，並在簽約前明確載入租約。整體財務安排在提案說明時會完整試算給你看，確保方案對你有利才進入簽約階段。</p>
-  </details>
-</div>
-
-<!-- CTA -->
-<div class="cta-strip">
-  <h2 class="cta-h2">準備好了解<br><em>你的房子值多少</em>嗎？</h2>
-  <p class="cta-sub">免費評估，1–2 個工作日內回覆初步結果。不申請不收費，充分了解後再決定。</p>
-  <div class="cta-row">
-    <a href="evaluate.html" class="btn-gold-lg">免費評估我的狀況</a>
-    <a href="https://lin.ee/PHIfSoY" class="btn-outline-w">加入 LINE 直接諮詢</a>
+<!-- 5. 相關文章 -->
+<section class="bt-related bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關文章</h2>
+    <div class="bt-rel-grid">
+      <a class="bt-card bt-rel-card" href="article-sale-leaseback.html"><h3>售後回租是什麼？流程、費用、風險與適合對象一次看懂</h3></a>
+      <a class="bt-card bt-rel-card" href="article-sale-leaseback-guide.html"><h3>售後回租完整指南：名下有房但缺現金怎麼辦？</h3></a>
+      <a class="bt-card bt-rel-card" href="article-sale-leaseback-safety.html"><h3>售後回租會不會被騙？簽約前必看的 5 件事</h3></a>
+    </div>
   </div>
-  <div class="promise-row">
-    <span class="promise-item">完全免費評估</span>
-    <span class="promise-item">不申請不收費</span>
-    <span class="promise-item">信用不完美也能評估</span>
-    <span class="promise-item">快速回覆</span>
+</section>
+
+<!-- 去識別化案例情境 -->
+<section class="bt-sec">
+  <div class="bt-in">
+    <div class="bt-label">案例情境 · 去識別化示意</div>
+    <h2 class="bt-h2" style="margin-bottom:8px">銀行都說不之後，他沒有搬家。</h2>
+    <p class="bt-p">50 多歲、經營小生意二十多年的屋主。以下為去識別化情境示意，非個別承諾。</p>
+    <div class="bt-case-grid">
+      <div class="bt-card bt-case-card">
+        <div class="bt-label">困境</div>
+        <p>幾筆信用瑕疵，3 家銀行接連婉拒。生意等著資金周轉，名下最大的資產就是這間住了十幾年的房子——最怕的是拿到錢，卻要全家搬走。</p>
+      </div>
+      <div class="bt-card bt-case-card">
+        <div class="bt-label">處理</div>
+        <p>鋮馨評估物件條件後提出售後回租：房子出售並過戶給投資方、同步簽訂租約繼續住在原處，合約中保有日後依約買回的權利。所有費用、租金與買回條件，簽約前全部攤開說明。</p>
+      </div>
+      <div class="bt-card bt-case-card">
+        <div class="bt-label">結果</div>
+        <p>完成過戶後取得市值約 7–9 成的資金（依個案），一般約 2–4 週到位，多筆財務缺口一次處理。生活照舊——同一個門牌、同一張餐桌，多的是一份載明居住權與買回權利的合約。</p>
+      </div>
+    </div>
+    <p class="bt-small" style="margin-top:24px">以上為去識別化情境示意，非個別承諾。售後回租＝房屋過戶給投資方＋簽租約繼續居住＋保有依約買回權利，三者一組；是否適合與實際條件、時程依個案不動產與財務狀況評估，本公司非金融機構。</p>
   </div>
-</div>
-<div style="max-width:760px;margin:40px auto;padding:24px 26px;background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px">
-  <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.12em;margin-bottom:6px">中和在地・相關方案</div>
-  <p style="font-size:14.5px;line-height:1.8;color:#3d3d3f;margin:0 0 12px">鋮馨租賃位於新北市中和區中正路 468 號、在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
-  <div style="display:flex;flex-wrap:wrap;gap:8px"><a href="zhonghe-sale-leaseback.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">中和售後回租 →</a><a href="xinbei-sale-leaseback.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">新北售後回租 →</a><a href="zhonghe-property-finance.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">中和不動產融資諮詢 →</a><a href="compare-options.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">售後回租 vs 二胎 vs 民間轉銀行 →</a><a href="article-sale-leaseback-guide.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">售後回租完整指南 →</a><a href="debt-consolidation.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">貸款整合 →</a><a href="second-mortgage.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">二胎房貸 →</a></div>
-</div>
+</section>
+
+<!-- 比較表 -->
+<section class="bt-compare bt-sec">
+  <div class="bt-in">
+    <div class="bt-label">方案比較</div>
+    <h2 class="bt-h2" style="margin-bottom:0">售後回租 vs 其他選擇</h2>
+    <div class="bt-table-wrap"><table class="bt-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-sl">售後回租<br>（鋮馨）</th>
+          <th class="col-sell">直接出售</th>
+          <th class="col-loan">銀行貸款</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>繼續居住</td>
+          <td class="highlight"><span class="yes">✓ 可以</span></td>
+          <td><span class="no">✗ 需搬家</span></td>
+          <td><span class="yes">✓ 可以</span></td>
+        </tr>
+        <tr>
+          <td>快速取得資金</td>
+          <td class="highlight"><span class="yes">✓ 快速</span></td>
+          <td>視成交時間</td>
+          <td>需審核 2–4 週</td>
+        </tr>
+        <tr>
+          <td>信用不完美可評估</td>
+          <td class="highlight"><span class="yes">✓ 可以</span></td>
+          <td><span class="yes">✓ 可以</span></td>
+          <td><span class="no">✗ 有限制</span></td>
+        </tr>
+        <tr>
+          <td>保有買回機會</td>
+          <td class="highlight"><span class="yes">✓ 有選擇權</span></td>
+          <td><span class="no">✗ 無</span></td>
+          <td><span class="yes">✓ 仍持有</span></td>
+        </tr>
+        <tr>
+          <td>適合急需資金者</td>
+          <td class="highlight"><span class="yes">✓ 最適合</span></td>
+          <td>尚可</td>
+          <td>條件受限</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <p class="bt-small" style="margin-top:16px">售後回租＝房屋過戶給投資方＋簽租約繼續居住＋保有依約買回權利，三者一組。是否適合依個案不動產條件與財務狀況評估；本公司非金融機構。</p>
+    <div class="bt-dark-card">
+      <div class="bt-h4">不確定售後回租適不適合你？</div>
+      <p class="bt-p">提供物件基本資料，由顧問替你免費評估可取得的資金與條件。不申請不收費，充分了解後再決定。</p>
+      <div class="bt-btns">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-gold">加入 LINE 免費評估</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-outline">電話諮詢 02-2249-0517</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FAQ -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題</div>
+    <h2 class="bt-h2 bt-center">售後回租常見疑問</h2>
+
+    <details open>
+      <summary>辦理售後回租之後，我還是房子的主人嗎？<span class="plus">＋</span></summary>
+      <p>辦理後，不動產過戶（所有權移轉）至投資方，你成為租客。但合約中保有買回選擇權，你可以在約定期間內按原定條件買回房屋，重新成為所有人。在此期間，你的居住權受租約完整保障。</p>
+    </details>
+
+    <details>
+      <summary>售後回租能拿到多少錢？<span class="plus">＋</span></summary>
+      <p>可取得的資金金額依物件條件、地段、屋況、屋齡及市場行情而定，個案差異可能很大。鋮馨租賃提供免費評估，加入 LINE 說明物件基本資料即可取得初步試算。</p>
+    </details>
+
+    <details>
+      <summary>信用不好、被銀行拒貸，可以申請售後回租嗎？<span class="plus">＋</span></summary>
+      <p>可以。售後回租以不動產市值為主要評估依據，信用分數並非唯一條件。即使曾遭銀行拒貸、有信用瑕疵、或有多筆負債，只要名下有不動產，均可申請免費評估。</p>
+    </details>
+
+    <details>
+      <summary>售後回租之後一定要買回嗎？<span class="plus">＋</span></summary>
+      <p>買回為屋主的「選擇權」，並非強制義務。若屆期選擇不行使買回權，依合約條款協議處理。所有細節在簽約前會逐條說明，你充分了解後再做決定，沒有任何強迫。</p>
+    </details>
+
+    <details>
+      <summary>租金怎麼算？會比外面的行情貴嗎？<span class="plus">＋</span></summary>
+      <p>租金依據市場行情及物件條件議定，並在簽約前明確載入租約。整體財務安排在提案說明時會完整試算給你看，確保方案對你有利才進入簽約階段。</p>
+    </details>
+
+    <div class="bt-card bt-local">
+      <div class="bt-label">中和在地・相關方案</div>
+      <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號、在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
+      <div class="bt-chips"><a href="zhonghe-sale-leaseback.html">中和售後回租 →</a><a href="xinbei-sale-leaseback.html">新北售後回租 →</a><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="compare-options.html">售後回租 vs 二胎 vs 民間轉銀行 →</a><a href="article-sale-leaseback-guide.html">售後回租完整指南 →</a><a href="debt-consolidation.html">貸款整合 →</a><a href="second-mortgage.html">二胎房貸 →</a></div>
+    </div>
+  </div>
+</section>
+
+<div data-include="trust-block"></div>
 <div data-include="line-qr"></div>
 <div data-include="lead-form"></div>
 <div data-include="footer"></div>

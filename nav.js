@@ -46,7 +46,21 @@
     '.cx-sheet .cx-sheet-foot a{padding:14px;border-radius:10px;border:1px solid #2C4A6B;text-align:center;font-size:15px}',
     '.cx-sheet .cx-sheet-foot a.cta{background:#C8945A;color:#12213A;border-color:#C8945A;font-weight:700}',
     '@media(max-width:900px){.cx-in{height:58px;gap:14px}.cx-menu,.cx-resume,.cx-phone{display:none}.cx-burger{display:block}.cx-cta{padding:9px 16px;font-size:14px}}',
-    '@media(max-width:400px){.cx-in{padding:0 14px;gap:8px}.cx-logo{font-size:15px;gap:7px}.cx-right{gap:6px}.cx-cta{padding:8px 12px;font-size:13.5px}}'
+    '@media(max-width:400px){.cx-in{padding:0 14px;gap:8px}.cx-logo{font-size:15px;gap:7px}.cx-right{gap:6px}.cx-cta{padding:8px 12px;font-size:13.5px}}',
+    /* 淺色主題(opt-in):<div id="nav" data-theme="light"></div>。白底、深字、金色 CTA 不變;沒帶屬性的頁面維持原深色 */
+    '.cx-nav.cx-light{background:#FFF;backdrop-filter:none;border-bottom-color:#E2DED4;color:#1B2F4A}',
+    '.cx-light .cx-menu>li>button{color:#1B2F4A;border-radius:999px}',
+    '.cx-light .cx-menu>li>button:hover,.cx-light .cx-menu>li.open>button{color:#1B2F4A;background:#F2EFE8}',
+    '.cx-light .cx-phone{border-color:#E2DED4;color:#1B2F4A}',
+    '.cx-light .cx-phone:hover{border-color:#C8945A;color:#1B2F4A}',
+    '.cx-light .cx-resume{color:#5A6878}',
+    '.cx-light .cx-resume:hover{color:#1B2F4A;border-color:#E2DED4}',
+    '.cx-light .cx-burger{color:#1B2F4A}',
+    '.cx-sheet.cx-light{background:#FFF;color:#1B2F4A}',
+    '.cx-sheet.cx-light details{border-bottom-color:#E2DED4}',
+    '.cx-sheet.cx-light a{color:#1B2F4A}',
+    '.cx-sheet.cx-light a.go{color:#9A6D3A}',
+    '.cx-sheet.cx-light .cx-sheet-foot a{border-color:#E2DED4}'
   ].join('');
 
   var MENU = [
@@ -126,6 +140,10 @@
   var mount = document.getElementById('nav');
   if (mount) mount.innerHTML = html;
   else document.body.insertAdjacentHTML('afterbegin', html);
+  if (mount && mount.getAttribute('data-theme') === 'light') {
+    document.querySelector('.cx-nav').classList.add('cx-light');
+    document.getElementById('cxSheet').classList.add('cx-light');
+  }
 
   /* 桌機下拉:hover 開、點擊切換、點外面關、Esc 關 */
   var lis = document.querySelectorAll('.cx-menu>li');
