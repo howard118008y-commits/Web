@@ -1,38 +1,39 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後重寫：2026-09-04 深夜（Better 對拷專案第一頁上線）
-> 本次重寫原因：一、三、五節整節重寫；二、四節為 8/29 版保留、**本次未重驗**，接手前先查證。
+> 最後重寫：2026-09-05 00:10（Better 版型第二批三頁上線、三條拍板定案）
+> 本次重寫原因：一、三、五節整節重寫、二節「Better 入口」段更新；四節為 8/14 版保留、**本次未重驗**，接手前先查證。
 
-## 一、當前狀態快照（2026-09-04 22:49 實測）
+## 一、當前狀態快照（2026-09-05 00:10 實測）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `7403ce9`，與 origin/main 一致、已部署 | `cd ~/cx468-web && git status -sb && git log --oneline -3` |
-| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本 session 產物） | 同上 |
-| 售後回租頁（Better 版型原型） | 線上 200、含 `data-theme="light"`、h1＝1 | `curl -s https://cx468.com.tw/sale-leaseback.html \| grep -c 'data-theme="light"'` → 1 |
-| nav.js 淺色主題 | 線上 15 處 `cx-light` | `curl -s https://cx468.com.tw/nav.js \| grep -c cx-light` → 15 |
-| 首頁 | 200，深色 nav 未受影響（真瀏覽器實開驗過） | `curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/` |
-| 全站配色 | 149 檔已海軍藍 #1B2F4A＋金 #C8945A（commit b45c85b、3688f39），紅 #C61B1C 0 檔 | `grep -l C61B1C *.html \| wc -l` → 0 |
-| launchd | `fanjiuzhang-watch`／`healthcheck`／`indicators-local`／`adsreport` 四支 exit 0；**`leadspoll` 不在清單，原因本次未查** | `launchctl list \| grep cx468` |
-| SEO/AEO/GEO 分數、FAQ 同源 | **本次未重跑**（改版頁 FAQ 同源用 evaluate 驗過相等） | `python3 scripts/audit_seo.py`、`python3 scripts/audit_faq_samesource.py` |
+| cx468-web HEAD | `bf114cf`＋本封交接信 commit，與 origin/main 一致、已部署 | `cd ~/cx468-web && git status -sb && git log --oneline -3` |
+| 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本專案產物） | 同上 |
+| Better 版型已套 4 頁 | sale-leaseback／debt-consolidation／private-to-bank／corporate-checkup 線上 200、各含 `data-theme="light"`、眉標短型 | `for f in sale-leaseback debt-consolidation private-to-bank corporate-checkup; do curl -s https://cx468.com.tw/$f.html \| grep -o 'bt-eyebrow">[^<]*'; done` → 4 行 |
+| nav.js 自我防護 | 線上含 `display:block;height:auto;padding:0`（載 style.css 也不被壓壞） | `curl -s https://cx468.com.tw/nav.js \| grep -c 'height:auto;padding:0'` → 1 |
+| nav 現況 | 84 頁仍 `data-include="nav"`（舊 nav.html）、5 頁 nav.js | `grep -l 'data-include="nav"' *.html \| wc -l` |
+| 首頁 | 200，深色 nav 無回歸（真瀏覽器實開驗過） | `curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/` |
+| 全站配色 | 149 檔海軍藍 #1B2F4A＋金 #C8945A，紅 #C61B1C 0 檔 | `grep -l C61B1C *.html \| wc -l` → 0 |
+| launchd | `fanjiuzhang-watch`／`healthcheck`／`indicators-local`／`adsreport` 四支 exit 0；**`leadspoll` 不在清單，原因未查** | `launchctl list \| grep cx468` |
+| SEO/AEO/GEO 分數、FAQ 同源 | **本次未重跑**（改版四頁 FAQ 同源用腳本驗過 0 漂移） | `python3 scripts/audit_seo.py`、`python3 scripts/audit_faq_samesource.py` |
 
 ⚠️ **三個路徑陷阱**：
-1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**；iCloud `ＡＩ鋮馨/AI鋮馨官網/` 只是草稿鏡像（index／intake／sale-leaseback 有副本）。
+1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**；iCloud `ＡＩ鋮馨/AI鋮馨官網/` 只是草稿鏡像（index／intake／sale-leaseback 有副本，**本次三頁未同步過去**）。
 2. `行銷產出/`、`知識庫/`、`制度/` 在 **iCloud 專案夾**，在 repo 裡 `ls` 會空手而回。
 3. LINE bot 查驗一律用 `~/cx468-linebot`，iCloud 專案夾內那份是凍結殭屍複本。
 
-🚨 部署前照舊：`python3 scripts/update_schema_datemod.py` 同步 dateModified（本次 sale-leaseback sitemap lastmod 已是 09-04，未另跑）。
+🚨 部署前照舊：`python3 scripts/update_schema_datemod.py` 同步 dateModified（本次跑過，四頁已是 09-04，改 0 頁）。
 
 ## 二、可複用資產／程序（8/29 版保留＋9/4 新增）
 
 ### 🆕 Better 對拷專案的入口（9/4 建立）
 
 - **拆解報告**：iCloud `行銷產出/策略簡報/2026-09-04-better.com官網拆解.md`（365 行：§3 逐頁 section 表、§5 色碼/字級/按鈕/卡片/間距實測、§6 技術棧、§8 不能照抄的 11 條）。143 張截圖在 `行銷產出/視覺風格/better.com-2026-09-04/`（`17-mortgage-*.png`＝內頁模板對標）。
-- **內頁模板正本**＝`sale-leaseback.html`（已上線）。全站套用時照它的 `<style>` 與 section 順序：hero 左文右圖 → 深藍帶 → 流程/要點格 → 適合對象 → CTA 帶 → 相關文章 → 案例 → 比較表 → FAQ → LINE → 表單。原型截圖 `行銷產出/視覺風格/better-rebuild-2026-09-04/`。
+- **內頁模板正本**＝`sale-leaseback.html`（已上線；debt-consolidation／private-to-bank／corporate-checkup 三頁為第二批範例，含表格/表單/五步驟等變體寫法）。全站套用時照它的 `<style>` 與 section 順序：hero 左文右圖 → 深藍帶 → 流程/要點格 → 適合對象 → CTA 帶 → 相關文章 → 案例 → 比較表 → FAQ → LINE → 表單。原型截圖 `行銷產出/視覺風格/better-rebuild-2026-09-04/`。
 - **nav.js 淺色主題**：頁面放 `<div id="nav" data-theme="light"></div>` ＋ `<script src="nav.js"></script>`，body `padding-top` 64/58。不帶屬性＝深色（首頁用）。
-- 🔴 **`style.css` 雷**：其全域 `nav{height:48px;display:flex}` 會壓壞 nav.js。原型頁直接**不載 style.css**（footer／line-qr／lead-form 自帶 fallback 樣式，實測無破版）。全站套用前要 Sir 拍板：改 style.css 還是逐頁不載。
-- **本機目檢**：`cd ~/cx468-web && python3 -m http.server 8765`，Playwright venv 在 session scratchpad（會消失），重建：`python3 -m venv ~/pw && ~/pw/bin/pip install playwright && ~/pw/bin/playwright install chromium`。截圖前 `addInitScript` 設 `localStorage cx_antifraud_v1` 關反詐 modal。
+- ✅ **`style.css` 雷已解（9/5）**：nav.js `.cx-nav` 自帶 `display:block;height:auto;padding:0`，全域 `nav{}` 壓不到；Better 版型頁仍照原型**不載 style.css**（footer／line-qr／lead-form 自帶 fallback 樣式）。**不要改 style.css 的 nav 選擇器**（特異性副作用見第五節）。
+- **本機目檢**：`cd ~/cx468-web && python3 -m http.server 8765`，Playwright venv 在 `~/pw`（`~/pw/bin/python`，chromium-1234 已裝；不見了重建：`python3 -m venv ~/pw && ~/pw/bin/pip install playwright && ~/pw/bin/playwright install chromium`）。文字守恆自驗：`python3 scripts/verify_text_conservation.py <file.html>`（比 HEAD vs 工作區）。截圖前 `addInitScript` 設 `localStorage cx_antifraud_v1` 關反詐 modal。
 - Token 對照（Better → 鋮馨）：頁底 #F7F5F0、卡片白、次底 #F2EFE8、深帶 #1B2F4A、主 CTA #2F5B8F（hover #26497A）、header CTA 金 #C8945A、眉標 #9A6D3A、文字 #1B2F4A／#5A6878、邊線 #E2DED4、淡藍帶 #EEF2F7；全頁 Noto Sans TC；CTA 64px 圓角 8px；卡片 8px＋shadow-md；section 64/80/96。
 
 ### 🆕 本機預覽與真回覆測試（8/29 建立）
@@ -108,19 +109,21 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
 
 ## 三、未竟任務
 
-### 🔴 第一順位：Better 版型套到其餘服務頁（Sir 定調「規格一模一樣、內容換鋮馨」）
+### 🔴 第一順位：Better 版型套到其餘頁（Sir 定調「規格一模一樣、內容換鋮馨」；三條拍板 9/4 已定，見 memory `project_homepage_green_rebuild`）
 
-先向 Sir 要三條拍板（9/4 已提、尚未回）：①眉標用「房屋售後回租」型還是原「不動產售後回租 · Sale-Leaseback」型 ②`style.css` 改全域 nav 規則還是逐頁不載 ③深藍底上的 CTA 用金色可否。
-拍板後下一批：`debt-consolidation.html`／`private-to-bank.html`／`corporate-checkup.html`（各 449／589／353 行），每頁規則同原型：**文字一字不改、只換版型**、FAQ schema 與可見文字同源、h1＝1、console 0 error、手機 scrollWidth 390、禁語掃 0 新增；二胎相關頁記得「免費評估」禁令（memory `feedback_compliance_no_free_eval_second_mortgage`）。派工模板：本 session 給建造者的 prompt 要點都在第二節「Better 對拷專案的入口」。部署仍須 Sir 說「部署」，一律指名檔案。
+已套 4 服務頁。**下一批候選由 Sir 指名**（可能：在地頁 zhonghe-*／文章頁 article-*／小工具頁；首頁形式另議）。每頁規則同前：**文字一字不改、只換版型**（允許新增：眉標短型、「相關文章」＋卡片標題＝各文章 title）、不載 style.css、`<div id="nav" data-theme="light"></div>`＋`nav.js`、FAQ schema 與可見文字同源、h1＝1、console 0 error、手機 scrollWidth 390、禁語計數＝舊版；二胎相關頁記得「免費評估」禁令（memory `feedback_compliance_no_free_eval_second_mortgage`）；公司財務健檢線不掛貸款字樣、不連貸款主題文章。
+
+**接手三步**：① 讀第二節「Better 對拷專案的入口」；② 派工 prompt 照本次三頁那套（範本＝`sale-leaseback.html`，自驗用 `scripts/verify_text_conservation.py <file>`：比 HEAD vs 工作區可見文字差集＋h1＋JSON-LD＋FAQ 同源）；③ 一頁一個建造者平行派、施工者不 add/commit，主對話統一驗收後 commit 指名檔案。部署仍須 Sir 說「部署」。
 
 ### 🟡 同專案的後續
 
 1. nav.js MENU 原稿 24 個目標頁（compare／prepare／concept-*／investors 等）尚未建（memory `project_homepage_green_rebuild`）；建好才加回 MENU。
-2. 141 頁仍用 `data-include="nav"`（舊 nav.html）。全站換 nav.js 是套版型的一部分，不要單獨先換。
-3. 首頁形式：Better 首頁是單屏 AI 框；我方首頁已縮到只剩快速答案框（commit ea9fbaa 移除 FAQ/名詞/工具段與 FAQPage schema）。SEO/GEO 是最大目標（memory `feedback_seo_aeo_top_priority`），首頁可索引內容減少的影響下次精進會議要看數據。
+2. 84 頁仍用 `data-include="nav"`（舊 nav.html）。全站換 nav.js 是套版型的一部分，不要單獨先換。nav.js 已自我防護，載 style.css 的頁面換上去也不會破。
+3. 首頁形式：Better 首頁是單屏 AI 框；我方首頁已縮到只剩快速答案框（commit ea9fbaa）。SEO/GEO 是最大目標（memory `feedback_seo_aeo_top_priority`），首頁可索引內容減少的影響下次精進會議要看數據。
 4. 不放假客戶評價（Better 每頁有五星語錄，我方無可查證來源）。
+5. iCloud 草稿鏡像 `AI鋮馨官網/` 三頁未同步（可選；正本永遠是 repo）。
 
-### ⚠️ 以下為 8/29 版留下、本次未重驗
+### ⚠️ 以下為 8/29 版留下、未重驗
 
 - nav「免費評估」按鈕在二胎頁的合規缺口（8/29 已報 Sir、未指示）。
 - lp-\*／地區變體頁未鋪 ai-bar；繼承 8 頁保留不動；AI 模式預設值仍「完整版」。
@@ -143,17 +146,17 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" \
 5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
 6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
 
-## 五、本 session（9/4 晚）做了什麼
+## 五、本 session（9/4 深夜→9/5）做了什麼
 
-Sir 指令：「官網要改成 better.com 這樣，先把它每一步點過、測過、記錄下來」→「做下一步」→「部署」→「交接」。
+Sir 指令：「三條拍板都可以，開始全部都做，部署」→「交接」。
 
 | 事項 | 證據 |
 |---|---|
-| better.com 全站拆解（24 頁桌機＋手機截圖、5 下拉、漏斗走到第 4 步停在地址個資、3 計算器改值、getComputedStyle 實量、curl robots/sitemap） | 報告 365 行＋143 張截圖（路徑見第二節）；playwright MCP 全程被佔，改本機 Playwright |
-| 售後回租頁重排成 Better /mortgage 版型＋nav.js 加 light 主題 | commit `7403ce9`（+446/−460）；文字守恆：新版多出的只有「相關文章」「房屋售後回租」眉標與 nav 選單字 |
-| 驗收 | console 0 error；h1＝1；6 段 JSON-LD parse OK；FAQ 同源相等；手機 scrollWidth 390；金管會 8 禁語 0；SLB 借貸語彙 0 新增 |
-| 部署 | fetch+rebase+push，`git ls-remote`＝本機；線上 60 秒後生效，真瀏覽器 nav 底色 rgb(255,255,255) |
-| 手機修 | 浮動小鋮鈕蓋住 ai-bar 送出鈕 → 本頁 CSS `padding-right:70px`＋grid `minmax(0,1fr)` |
+| 三條拍板定案 | ①眉標短型 ②style.css 不動、nav.js `.cx-nav` 補 `display:block;height:auto;padding:0` 自防（實測載不載 style.css 高 65/59、白底一致；首頁深色 nav 無回歸）③深底 CTA 金色 `.bt-btn-gold`（三頁無深底 CTA 內容，未硬加）。**否決過的路**：`nav:not(.cx-nav)` 特異性升到 0,1,1 會反壓 36 頁內聯 nav 規則；`:where()` 降到 0,0,0 會輸給頁內 `*{padding:0}`——都驗過才改走 nav.js |
+| 三頁套版型（三個 fable 建造者平行、一頁一人） | commit `bf114cf`（debt +400/−248、p2b +372/−373、checkup +275/−82、nav.js 1 行） |
+| 驗收 | 可見文字守恆：舊有新無 0（僅刪舊「XX · English」徽章）；新增只有眉標＋相關文章標題；h1＝1；JSON-LD 6/7/2 塊全 parse；FAQ 同源 0 漂移；禁語計數＝舊版；本機＋線上各跑一輪 Playwright：桌機/手機 console 0、scrollWidth 390、nav rgb(255,255,255)；corporate-checkup 上傳表單實測 set_input_files 仍可用 |
+| 部署 | fetch+rebase+push，`git ls-remote`＝本機；線上 50 秒後生效 |
+| 落地工具 | `scripts/verify_text_conservation.py`（本封交接信 commit 一併入庫）；Playwright venv 改放 `~/pw`（不在 scratchpad，重開 session 還在） |
 
-**Sir 未回的三條拍板**見第三節第一順位。**本 session 落地的 memory**：`project_homepage_green_rebuild` 追加兩段（報告位置、原型狀態與 style.css 雷）。
+corporate-checkup「相關文章」0 篇（全站無非貸款主題文章）屬故意。**本 session 落地的 memory**：`project_homepage_green_rebuild` 追加拍板結果與 style.css 特異性雷。
 
