@@ -1,51 +1,52 @@
 <meta name="robots" content="noindex">
 <style>
 /* ── 小鋮 AI 服務助理（chat-widget）── Oriental Terminal ── */
-.cw-launch{position:fixed;bottom:24px;right:24px;z-index:9990;width:58px;height:58px;border-radius:50%;background:#141414;border:1.5px solid #C61B1C;box-shadow:0 6px 22px rgba(0,0,0,.28);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s ease}
+.cw-launch{position:fixed;bottom:24px;right:24px;z-index:9990;width:58px;height:58px;border-radius:50%;background:#12213A;border:1.5px solid #1B2F4A;box-shadow:0 6px 22px rgba(0,0,0,.28);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s ease}
 .cw-launch:hover{transform:scale(1.06)}
 .cw-launch .cw-zi{font-family:'Noto Serif TC','Songti TC',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
-.cw-launch .cw-ai{position:absolute;top:-4px;right:-4px;background:#C61B1C;color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 5px;border-radius:8px}
-.cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:#fff;color:#1d1d1f;font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid #e3e3e6;border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;max-width:200px}
-.cw-panel{position:fixed;bottom:96px;right:24px;z-index:9991;width:min(330px,calc(100vw - 32px));height:min(520px,68vh);background:#faf9f7;border:2px solid #C61B1C;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:visible}
+.cw-launch .cw-ai{position:absolute;top:-4px;right:-4px;background:#1B2F4A;color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 5px;border-radius:8px}
+.cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:#fff;color:#1B2F4A;font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid #e3e3e6;border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;max-width:200px}
+.cw-panel{position:fixed;bottom:96px;right:24px;z-index:9991;width:min(330px,calc(100vw - 32px));height:min(520px,68vh);background:#faf9f7;border:2px solid #1B2F4A;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:visible}
 .cw-panel.cw-open{display:flex}
 /* 全屏對話模式（首頁 AI 模式進來時使用） */
-.cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(8,8,12,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(18,33,58,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .cw-panel.cw-full{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:min(820px,94vw);height:min(760px,86vh)}
 .cw-panel.cw-full::before,.cw-panel.cw-full::after{display:none}
 .cw-panel.cw-full .cw-msg{max-width:78%;font-size:15px}
-.cw-panel::before,.cw-panel::after{content:'';position:absolute;top:-17px;width:38px;height:38px;background:#141414;border:2px solid #C61B1C;transform:rotate(45deg);z-index:-1}
+.cw-panel::before,.cw-panel::after{content:'';position:absolute;top:-17px;width:38px;height:38px;background:#12213A;border:2px solid #1B2F4A;transform:rotate(45deg);z-index:-1}
 .cw-panel::before{left:26px;border-radius:50% 8px 0 8px}
 .cw-panel::after{right:26px;border-radius:8px 50% 8px 0}
-.cw-head{background:#141414;padding:14px 16px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0}
+.cw-head{background:#12213A;padding:14px 16px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0}
 .cw-head-title{font-family:'Noto Serif TC','Songti TC',serif;font-size:18px;font-weight:600;color:#fff;letter-spacing:.04em}
 .cw-head-sub{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.18em;margin-top:2px}
 .cw-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);font-size:22px;line-height:1;cursor:pointer;padding:4px}
 .cw-disc{background:#f1efec;font-size:10.5px;color:#8e8e93;line-height:1.55;padding:8px 14px;letter-spacing:.02em}
 .cw-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .cw-msg{max-width:86%;font-size:14px;line-height:1.7;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
-.cw-msg.cw-bot{background:#fff;border:1px solid #e8e8ea;color:#1d1d1f;border-radius:2px 14px 14px 14px;align-self:flex-start}
-.cw-msg.cw-user{background:#141414;color:#fff;border-radius:14px 2px 14px 14px;align-self:flex-end}
-.cw-msg a{color:#C61B1C;font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
+.cw-msg.cw-bot{background:#fff;border:1px solid #e8e8ea;color:#1B2F4A;border-radius:2px 14px 14px 14px;align-self:flex-start}
+.cw-msg.cw-user{background:#12213A;color:#fff;border-radius:14px 2px 14px 14px;align-self:flex-end}
+.cw-msg a{color:#1B2F4A;font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
+.cw-msg.cw-user a{color:#E0B685}
 .cw-typing{align-self:flex-start;font-size:13px;color:#a1a1a6;padding:4px 14px}
 .cw-rate{display:flex;gap:6px;margin-top:8px}
 .cw-rate button{background:#fff;border:1px solid #d2d2d7;color:#8e8e93;font-size:12px;line-height:1;padding:5px 10px;border-radius:980px;cursor:pointer;font-family:inherit}
-.cw-rate button:hover{border-color:#C61B1C;color:#C61B1C}
+.cw-rate button:hover{border-color:#1B2F4A;color:#1B2F4A}
 .cw-rate.cw-rated button{pointer-events:none;opacity:.35}
-.cw-rate.cw-rated button.cw-sel{opacity:1;border-color:#C61B1C;color:#C61B1C}
+.cw-rate.cw-rated button.cw-sel{opacity:1;border-color:#1B2F4A;color:#1B2F4A}
 .cw-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}
-.cw-chip{background:#fff;border:1px solid #d2d2d7;color:#1d1d1f;font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
-.cw-chip:hover{border-color:#C61B1C;color:#C61B1C}
+.cw-chip{background:#fff;border:1px solid #d2d2d7;color:#1B2F4A;font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
+.cw-chip:hover{border-color:#1B2F4A;color:#1B2F4A}
 .cw-inrow{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #ececef}
 .cw-input{flex:1;border:1px solid #d2d2d7;border-radius:10px;font-size:14px;padding:10px 12px;outline:none;font-family:inherit}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.cw-input:focus-visible{outline:2px solid #1D1D1F;outline-offset:2px}
-.cw-input:focus{border-color:#C61B1C}
-.cw-send{background:#C61B1C;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;padding:0 18px;cursor:pointer;letter-spacing:.06em}
+.cw-input:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
+.cw-input:focus{border-color:#1B2F4A}
+.cw-send{background:#1B2F4A;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;padding:0 18px;cursor:pointer;letter-spacing:.06em}
 .cw-send:disabled{opacity:.4;cursor:default}
 .cw-foot{display:flex;gap:8px;padding:8px 12px 12px;background:#fff;border-radius:0 0 16px 16px}
 .cw-cta{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:10px 8px;border-radius:10px;text-decoration:none;letter-spacing:.04em}
 .cw-cta.cw-line{background:#048456;color:#fff}
-.cw-cta.cw-form{background:#141414;color:#fff}
+.cw-cta.cw-form{background:#12213A;color:#fff}
 @media(max-width:768px){
   .cw-launch{bottom:88px;right:16px;width:54px;height:54px}
   .cw-teaser{bottom:98px;right:80px}

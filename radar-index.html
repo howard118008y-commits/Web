@@ -25,9 +25,9 @@
 :root {
   --bg:#fff;--panel:#faf8f4;
   --hair:rgba(0,0,0,0.08);--hair-strong:rgba(0,0,0,0.25);
-  --ink:#1d1d1f;--ink-mid:rgba(29,29,31,0.72);--ink-dim:rgba(29,29,31,0.45);
-  --red:#c8102e;--gold:#D4AF37;
-  --st-green:#1a7f37;--st-yellow:#9a7b0a;--st-red:#c8102e;
+  --ink:#1B2F4A;--ink-mid:rgba(29,29,31,0.72);--ink-dim:rgba(29,29,31,0.45);
+  --red:#1B2F4A;--gold:#D4AF37;
+  --st-green:#1a7f37;--st-yellow:#9a7b0a;--st-red:#1B2F4A;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -60,7 +60,7 @@ body{
 }
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(100deg,rgba(8,8,12,0.82) 0%,rgba(8,8,12,0.62) 38%,rgba(8,8,12,0.12) 70%,transparent 100%);
+  background:linear-gradient(100deg,rgba(18,33,58,0.82) 0%,rgba(18,33,58,0.62) 38%,rgba(18,33,58,0.12) 70%,transparent 100%);
 }
 .hero-left{flex:0 0 460px;max-width:460px;position:relative;z-index:2}
 .hero-right{flex:1;min-height:400px;position:relative;z-index:2}
@@ -95,7 +95,7 @@ body{
   display:inline-flex;align-items:stretch;
   margin-bottom:36px;position:relative;z-index:2;
   border:1px solid rgba(255,255,255,0.35);
-  background:rgba(8,8,12,0.45);
+  background:rgba(18,33,58,0.45);
 }
 .hero-metric{
   padding:18px 32px;text-align:center;
@@ -123,7 +123,7 @@ body{
   transition:background .2s,color .2s;
   text-decoration:none;display:inline-flex;align-items:center;
 }
-.htag:hover{background:#fff;color:#141414}
+.htag:hover{background:#fff;color:#12213A}
 
 /* Section heading */
 .section-heading{display:flex;align-items:center;gap:16px;margin-bottom:28px}
@@ -200,7 +200,7 @@ body{
 .sb-badge{width:28px;height:28px;border:1px solid var(--hair-strong);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:13px;font-weight:600;flex-shrink:0;color:var(--ink)!important;background:transparent!important}
 .sb-title{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;flex:1;color:var(--ink-mid)!important}
 .sb-warn{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--st-red);letter-spacing:0.1em;flex-shrink:0;
-  padding:3px 8px;border:1px solid rgba(200,16,46,0.3);}
+  padding:3px 8px;border:1px solid rgba(27,47,74,0.3);}
 .ov-row{display:flex;align-items:center;gap:9px;padding:11px 18px;border-bottom:1px solid rgba(0,0,0,0.06);transition:background .18s}
 .ov-row:last-child{border-bottom:0}
 .ov-row:hover{background:rgba(0,0,0,0.03)}
@@ -213,9 +213,9 @@ body{
 .ov-name{flex:0 1 auto;min-width:0;font-size:12px;color:var(--ink-mid);font-family:"Noto Sans TC",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ov-spacer{flex:1 1 auto}
 /* 指標名詞就地解釋。氣泡改自 Uiverse vinodjangid07 / funny-panther-79（MIT），漸層改品牌紅。 */
-.ov-help{width:15px;height:15px;border-radius:50%;border:0;padding:0;flex-shrink:0;background:#C61B1C;background-image:linear-gradient(147deg,#C61B1C 0%,#8A1416 74%);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:help;position:relative}
-.ov-tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);opacity:0;visibility:hidden;background:#C61B1C;background-image:linear-gradient(147deg,#C61B1C 0%,#8A1416 74%);color:#fff;padding:8px 12px;border-radius:7px;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:400;line-height:1.6;letter-spacing:.3px;width:230px;text-align:left;white-space:normal;pointer-events:none;transition:opacity .2s,visibility .2s,bottom .2s;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,.18)}
-.ov-tip:before{content:"";position:absolute;width:10px;height:10px;background:#8A1416;transform:rotate(45deg);bottom:-4px;left:50%;margin-left:-5px}
+.ov-help{width:15px;height:15px;border-radius:50%;border:0;padding:0;flex-shrink:0;background:#1B2F4A;background-image:linear-gradient(147deg,#1B2F4A 0%,#12213A 74%);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:help;position:relative}
+.ov-tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);opacity:0;visibility:hidden;background:#1B2F4A;background-image:linear-gradient(147deg,#1B2F4A 0%,#12213A 74%);color:#fff;padding:8px 12px;border-radius:7px;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:400;line-height:1.6;letter-spacing:.3px;width:230px;text-align:left;white-space:normal;pointer-events:none;transition:opacity .2s,visibility .2s,bottom .2s;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.ov-tip:before{content:"";position:absolute;width:10px;height:10px;background:#12213A;transform:rotate(45deg);bottom:-4px;left:50%;margin-left:-5px}
 .ov-help:hover .ov-tip,.ov-help:focus .ov-tip{opacity:1;visibility:visible;bottom:calc(100% + 8px)}
 .ov-help:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 @media(max-width:768px){.ov-tip{width:min(230px,62vw)}}
@@ -250,7 +250,7 @@ body{
   .hero{flex-direction:row;flex-wrap:nowrap;min-height:440px;padding:64px 20px 80px;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}
   .hero-right{display:none}
-  .hero::after{background:linear-gradient(180deg,rgba(8,8,12,0.6) 0%,rgba(8,8,12,0.55) 55%,rgba(8,8,12,0.78) 100%)}
+  .hero::after{background:linear-gradient(180deg,rgba(18,33,58,0.6) 0%,rgba(18,33,58,0.55) 55%,rgba(18,33,58,0.78) 100%)}
   .hero-title{font-size:36px}
   .hero-metrics{display:flex;width:100%}
   .hero-metric{flex:1;padding:14px 10px}
@@ -546,8 +546,8 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-dim);letter-spacing:0.2em">2026 · 09 · 第 1 週</span>
     </div>
     <h2 style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:22px;color:var(--ink);line-height:1.45;margin:0 0 14px">民俗月沒有冷場：兩家房仲的 8 月數字一增一減，但「比去年同期多」是共同答案</h2>
-    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 12px">先看官方最新一期：<strong style="color:#1d1d1f">六都地政局</strong>統計，2026 年 <strong style="color:#1d1d1f">7 月</strong>建物買賣移轉合計 <strong style="color:#1d1d1f">20,506 棟</strong>，月增約 <strong style="color:#1d1d1f">12%</strong>、年增約 <strong style="color:#1d1d1f">8.8%</strong>，是 19 個月以來首度站回 2 萬棟。8 月官方數字於本文查證時<strong style="color:#1d1d1f">尚未公布</strong>，目前只有兩家房仲各自的成交統計，而且方向不一致：<strong style="color:#1d1d1f">永慶</strong>版為全台月增約 6%、年增約 17%；<strong style="color:#1d1d1f">中信</strong>版為全台月減約 1.6%、年增約 3.4%。兩者<strong style="color:#1d1d1f">樣本與門市分布不同，不能互相加減</strong>，也不宜當成全市場結論；真正的共同點是<strong style="color:#1d1d1f">年增皆為正</strong>——過去買氣常轉淡的農曆七月，今年並未出現明顯急凍（以上為各機構自行發布之統計與媒體彙整，非官方數字、非本公司預測）。</p>
-    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#1d1d1f">對你的意義：</strong>成交量是<strong style="color:#1d1d1f">市場溫度</strong>，不是<strong style="color:#1d1d1f">你的條件</strong>。量能回到 2 萬棟之上，代表可比對的近期成交案例變多了——對名下有房、正在盤點資金或負債結構的人來說，這件事的實際用途是「<strong style="color:#1d1d1f">你那一區最近有沒有可對照的成交</strong>」，而不是「行情漲了所以我的條件會變好」。同一份市場數據，在成交熱絡的生活圈與整季沒幾筆成交的老市區，能提供的參考力道差很多。建議把所在區域的<strong style="color:#1d1d1f">實價登錄成交趨勢</strong>與本頁的<strong style="color:#1d1d1f">利率、成數相關指標</strong>逐項對過再做判斷，更新時間以各機構資料釋出為準。個別條件仍依不動產現況、財務狀況及市場情況而定，最終核貸由金融機構決定。</p>
+    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 12px">先看官方最新一期：<strong style="color:#1B2F4A">六都地政局</strong>統計，2026 年 <strong style="color:#1B2F4A">7 月</strong>建物買賣移轉合計 <strong style="color:#1B2F4A">20,506 棟</strong>，月增約 <strong style="color:#1B2F4A">12%</strong>、年增約 <strong style="color:#1B2F4A">8.8%</strong>，是 19 個月以來首度站回 2 萬棟。8 月官方數字於本文查證時<strong style="color:#1B2F4A">尚未公布</strong>，目前只有兩家房仲各自的成交統計，而且方向不一致：<strong style="color:#1B2F4A">永慶</strong>版為全台月增約 6%、年增約 17%；<strong style="color:#1B2F4A">中信</strong>版為全台月減約 1.6%、年增約 3.4%。兩者<strong style="color:#1B2F4A">樣本與門市分布不同，不能互相加減</strong>，也不宜當成全市場結論；真正的共同點是<strong style="color:#1B2F4A">年增皆為正</strong>——過去買氣常轉淡的農曆七月，今年並未出現明顯急凍（以上為各機構自行發布之統計與媒體彙整，非官方數字、非本公司預測）。</p>
+    <p style="font-size:15px;line-height:1.9;color:var(--ink-mid);margin:0 0 14px"><strong style="color:#1B2F4A">對你的意義：</strong>成交量是<strong style="color:#1B2F4A">市場溫度</strong>，不是<strong style="color:#1B2F4A">你的條件</strong>。量能回到 2 萬棟之上，代表可比對的近期成交案例變多了——對名下有房、正在盤點資金或負債結構的人來說，這件事的實際用途是「<strong style="color:#1B2F4A">你那一區最近有沒有可對照的成交</strong>」，而不是「行情漲了所以我的條件會變好」。同一份市場數據，在成交熱絡的生活圈與整季沒幾筆成交的老市區，能提供的參考力道差很多。建議把所在區域的<strong style="color:#1B2F4A">實價登錄成交趨勢</strong>與本頁的<strong style="color:#1B2F4A">利率、成數相關指標</strong>逐項對過再做判斷，更新時間以各機構資料釋出為準。個別條件仍依不動產現況、財務狀況及市場情況而定，最終核貸由金融機構決定。</p>
     <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;border-top:1px solid rgba(0,0,0,0.08);padding-top:12px">資料來源：7 月數字為六都地政局建物買賣移轉棟數統計，經鉅亨網、安傳媒不動產新聞網等多則報導交叉查證；8 月數字為永慶房產集團與中信房屋各自發布之成交統計，經壹蘋新聞網、匯流新聞網、民生電子報 2026-08-31 報導彙整（2026-09-01 查證）。兩家房仲統計樣本不同、方向不一致，本卡並列呈現且不做加權或推算；六都 8 月官方移轉棟數公布後，本卡將以官方數字更新。本則為公開資訊整理與市場觀察，非投資或貸款建議；市場情況隨時變動，過往表現不代表未來走勢。本公司非金融機構、不放貸，提供不動產相關之諮詢與媒合協助。</div>
     </div>
   </div>
@@ -645,7 +645,7 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
   <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#141414;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
+    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
     <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
   </div>
 </div>

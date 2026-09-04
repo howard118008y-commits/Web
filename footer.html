@@ -4,10 +4,10 @@
    為什麼需要：26 個頁面（article 系列、二胎在地頁等）沒有載入 style.css，
    注入的 footer 會裸奔成透明底 + 黑字 + 預設藍色底線連結。
    為什麼用 :where()：specificity 恆為 0，任何頁面自己的規則都能蓋過它——
-   index.html（自訂 #0e0e10 深色 footer）、land-value-tax-calculator 與
+   index.html（自訂 #12213A 深色 footer）、land-value-tax-calculator 與
    tools-lab（<footer> 是卡片頁尾、非全站頁尾）都不受影響，只有「完全沒有
    footer 規則」的頁面才吃這份 fallback。改動時與 style.css 同步。 */
-:where(.cx-site-footer){background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
+:where(.cx-site-footer){background:#1B2F4A;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
 :where(.cx-site-footer .footer-cols){display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
 :where(.cx-site-footer .footer-col-title){font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
 :where(.cx-site-footer .footer-link){display:block;font-size:11px;color:#86868b;margin-bottom:0;padding:12px 0;text-decoration:none}
@@ -23,10 +23,10 @@
 @media(max-width:768px){
   :where(.cx-site-footer .footer-cols){grid-template-columns:1fr}
   :where(.cx-site-footer){padding:1.75rem 1.25rem 6rem}
-  :where(.cx-sticky-cta){position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1d1d1f;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+  :where(.cx-sticky-cta){position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1B2F4A;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
   :where(.cx-sticky-cta a){flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
   :where(.cx-sticky-cta .cx-sticky-line){background:#048456}
-  :where(.cx-sticky-cta .cx-sticky-tel){background:#C61B1C}
+  :where(.cx-sticky-cta .cx-sticky-tel){background:#1B2F4A}
 }
 </style>
 <footer class="cx-site-footer">

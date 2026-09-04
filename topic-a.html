@@ -23,16 +23,16 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root{
-  --accent:#c8102e;--accent-glow:transparent;--accent-bg:rgba(200,16,46,0.06);
+  --accent:#1B2F4A;--accent-glow:transparent;--accent-bg:rgba(27,47,74,0.06);
   --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
-  --ink:#1d1d1f;--ink-mid:#5a5750;--ink-dim:#8a867c;
+  --ink:#1B2F4A;--ink-mid:#5a5750;--ink-dim:#8a867c;
   --gold:#D4AF37;--line:rgba(0,0,0,0.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;min-height:480px;background:#141414;border-bottom:1px solid rgba(0,0,0,0.08);}
+.hero{position:relative;overflow:hidden;min-height:480px;background:#12213A;border-bottom:1px solid rgba(0,0,0,0.08);}
 
 
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
@@ -43,7 +43,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
 .hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
 .hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#141414;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
+.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#12213A;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
 .btn-fill:hover{opacity:.85}
 .btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
@@ -79,12 +79,12 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
 .cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
 .cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#141414;color:#fff;transition:opacity .2s;}
+.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#12213A;color:#fff;transition:opacity .2s;}
 .cta-main:hover{opacity:.85}
-.cta-main2{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;border:1px solid rgba(0,0,0,0.3);color:#1d1d1f;transition:border-color .2s;}
-.cta-main2:hover{border-color:#141414}
+.cta-main2{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;border:1px solid rgba(0,0,0,0.3);color:#1B2F4A;transition:border-color .2s;}
+.cta-main2:hover{border-color:#12213A}
 .cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1d1d1f}
+.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1B2F4A}
 
 @media(max-width:900px){
   .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
@@ -299,24 +299,24 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">季更</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">季更</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">資料頻率</text>
         </svg>
       </div>
@@ -333,10 +333,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="breadcrumb">
     <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>房貸金融 A系列</span>
   </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #c8102e;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#c8102e;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#1d1d1f;margin:0 0 14px"><strong style="color:#1d1d1f">想知道「銀行願不願意放款、利率往哪走」，先看這 5 個房貸金融面指標。</strong>A 系列追蹤央行政策利率、實際房貸利率、新增房貸量、不動產放款集中度與新青安占比，是研判台灣房貸授信環境鬆緊的第一道訊號。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1d1d1f">央行重貼現率 2.00%</strong>：政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。</li><li><strong style="color:#1d1d1f">房貸利率 2.322%（2026-05）</strong>：銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。</li><li><strong style="color:#1d1d1f">新增房貸 469 億/月（2026-05）</strong>：反映市場購屋需求與信用擴張的強度。</li><li><strong style="color:#1d1d1f">不動產放款集中度 35.17%（2026-05）</strong>：銀行對房市的曝險程度，金管會設有警戒上限。</li><li><strong style="color:#1d1d1f">新青安占比 下滑中（2026-01）</strong>：政策補貼房貸。青安 2.0 已於 2026-07-31 落日，青安 3.0 自 2026-08-01 接替上路，利息補貼滿 3 年後逐年遞減、6 年後退場。</li></ul>
+<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #1B2F4A;padding:24px 26px;margin-bottom:48px">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#1B2F4A;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
+  <p style="font-size:16px;line-height:1.85;color:#1B2F4A;margin:0 0 14px"><strong style="color:#1B2F4A">想知道「銀行願不願意放款、利率往哪走」，先看這 5 個房貸金融面指標。</strong>A 系列追蹤央行政策利率、實際房貸利率、新增房貸量、不動產放款集中度與新青安占比，是研判台灣房貸授信環境鬆緊的第一道訊號。</p>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1B2F4A">央行重貼現率 2.00%</strong>：政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。</li><li><strong style="color:#1B2F4A">房貸利率 2.322%（2026-05）</strong>：銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。</li><li><strong style="color:#1B2F4A">新增房貸 469 億/月（2026-05）</strong>：反映市場購屋需求與信用擴張的強度。</li><li><strong style="color:#1B2F4A">不動產放款集中度 35.17%（2026-05）</strong>：銀行對房市的曝險程度，金管會設有警戒上限。</li><li><strong style="color:#1B2F4A">新青安占比 下滑中（2026-01）</strong>：政策補貼房貸。青安 2.0 已於 2026-07-31 落日，青安 3.0 自 2026-08-01 接替上路，利息補貼滿 3 年後逐年遞減、6 年後退場。</li></ul>
   <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
 </div>
   <div class="sec-head">
@@ -372,44 +372,44 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px">
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">央行重貼現率跟我的房貸利率有什麼關係？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">央行重貼現率跟我的房貸利率有什麼關係？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">央行重貼現率是政策基準利率（目前 2.00%），決定銀行資金成本，房貸利率通常隨它連動。央行升降息會牽動未來月付，但實際房貸利率仍由各銀行依個案核定。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">「不動產放款集中度」過高代表什麼？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">「不動產放款集中度」過高代表什麼？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">它是銀行總放款中不動產貸款的占比（目前約 35.17%）。比率過高代表銀行體系對房市曝險偏高，金管會設有警戒上限，可能促使銀行收緊房貸條件或降低成數。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">新青安占比下滑，對首購族有什麼影響？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">新青安占比下滑，對首購族有什麼影響？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">新青安（青安 2.0）已於 2026 年 7 月 31 日落日，占比下滑反映舊方案進入尾聲；青安 3.0 自 2026 年 8 月 1 日接替上路，申請期間至 2029 年 7 月 31 日。新制並非取消補貼，而是門檻與補貼機制改變：新增雙重年齡門檻與分區房屋總價上限，利息補貼滿 3 年後逐年遞減、6 年後全數退場。對首購族而言，能否申請、額度與補貼幅度都與舊制不同，建議依自身年齡、所得與購屋總價重新試算負擔，並比較其他可行方案。實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">頁面上的「房貸利率」跟我實際拿到的利率一樣嗎？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">頁面上的「房貸利率」跟我實際拿到的利率一樣嗎？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">不一定一樣。頁面顯示的是全體銀行新承做房貸的加權平均，屬市場參考值；個人利率由銀行依信用狀況、收入、擔保品條件核定，可能高於或低於平均。實際條件依個案評估，最終核貸由金融機構決定。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">新增房貸金額變多或變少，代表什麼？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">新增房貸金額變多或變少，代表什麼？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">它反映市場購屋需求與銀行放款意願的強度。快速增長常見於市場轉熱，也可能引來央行信用管制；縮量則代表授信趨於保守。單月數字波動較大，判讀時建議看趨勢方向，不看單點。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">什麼是選擇性信用管制（限貸令）？對一般人有影響嗎？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">什麼是選擇性信用管制（限貸令）？對一般人有影響嗎？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">這是央行針對特定對象或區域調整貸款成數、寬限期等條件的工具。若名下已有房貸、或購買受管制區域的物件，可貸條件可能受影響。實際適用範圍以央行公告為準，最終核貸由金融機構決定。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">央行升息，已經在繳的房貸月付會馬上變多嗎？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">央行升息，已經在繳的房貸月付會馬上變多嗎？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">多數房貸採機動計息，利率會隨指標利率調整，通常在銀行公告調整後的下一期反映到月付；若在固定利率期間內則暫不受影響。實際調整時點與幅度，依各銀行契約條款與個案而定。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">銀行授信環境緊縮時，準備貸款的人可以怎麼因應？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">銀行授信環境緊縮時，準備貸款的人可以怎麼因應？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">授信趨緊時，銀行對成數、利率與收入證明的要求通常更嚴。可先整理收入與信用資料、確認自身負債狀況，並預留較充裕的申辦時間。實際條件依個案評估，最終核貸由金融機構決定。</div>
   </div>
   </div>
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">央行重貼現率</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 中央銀行對銀行融通資金的基準利率，是房貸利率的政策定錨。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">不動產放款集中度</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 銀行總放款中不動產相關貸款的占比，金管會設有警戒上限。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">新青安貸款</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 政府「新青年安心成家」政策性房貸方案，提供首購族補貼利率。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">選擇性信用管制</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">央行重貼現率</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 中央銀行對銀行融通資金的基準利率，是房貸利率的政策定錨。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">不動產放款集中度</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 銀行總放款中不動產相關貸款的占比，金管會設有警戒上限。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">新青安貸款</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 政府「新青年安心成家」政策性房貸方案，提供首購族補貼利率。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">選擇性信用管制</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
   </div>
   <div class="cta-box">
     <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
@@ -423,11 +423,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </div>
 
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #c8102e;text-align:center">
+<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #1B2F4A;text-align:center">
   <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
   <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#141414;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
+    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
     <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
   </div>
 </div>

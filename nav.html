@@ -6,9 +6,9 @@
    線條區另用 .cx-burger-box 定位，避免 X 的頂點跑到 44px 框的角落。 */
 .cx-burger{display:none;background:none;border:0;width:44px;height:44px;flex-shrink:0;padding:0;cursor:pointer;position:relative;align-items:center;justify-content:center;font-family:inherit}
 .cx-burger-box{position:relative;display:block;width:24px;height:16px}
-.cx-burger-box span{display:block;position:absolute;left:0;width:100%;height:2.5px;background:#1d1d1f;border-radius:9px;opacity:1;transform:rotate(0deg);transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s ease,width .28s cubic-bezier(.4,0,.2,1),background .28s ease}
+.cx-burger-box span{display:block;position:absolute;left:0;width:100%;height:2.5px;background:#1B2F4A;border-radius:9px;opacity:1;transform:rotate(0deg);transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s ease,width .28s cubic-bezier(.4,0,.2,1),background .28s ease}
 /* 收合成 X 時轉品牌紅：狀態變化＝品牌色，與 nav logo 的「鋮」同一組紅 */
-.cx-burger[aria-expanded="true"] .cx-burger-box span{background:var(--red,#C61B1C)}
+.cx-burger[aria-expanded="true"] .cx-burger-box span{background:var(--red,#1B2F4A)}
 .cx-burger-box span:nth-child(1){top:0;transform-origin:left center}
 .cx-burger-box span:nth-child(2){top:50%;transform:translateY(-50%);transform-origin:left center}
 .cx-burger-box span:nth-child(3){top:100%;transform:translateY(-100%);transform-origin:left center}
@@ -19,13 +19,13 @@
 .cx-mobile-menu{display:none;position:fixed;inset:var(--cx-nav-h,48px) 0 0 0;background:#fff;z-index:99;padding:24px 24px 40px;flex-direction:column;gap:0;overflow-y:auto;animation:cxMenuSlide .25s ease}
 .cx-mobile-menu.cx-open{display:flex}
 @keyframes cxMenuSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.cx-mobile-menu a{font-size:18px;font-weight:600;color:#1d1d1f;padding:18px 4px;border-bottom:.5px solid #e8e8ed;text-decoration:none;display:flex;justify-content:space-between;align-items:center}
+.cx-mobile-menu a{font-size:18px;font-weight:600;color:#1B2F4A;padding:18px 4px;border-bottom:.5px solid #e8e8ed;text-decoration:none;display:flex;justify-content:space-between;align-items:center}
 .cx-mobile-menu a::after{content:"›";color:#c7c7cc;font-size:22px;font-weight:300}
 .cx-mobile-menu a.cx-mobile-cta{margin-top:18px;background:#048456;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-cta::after{content:""}
-.cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:#141414;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
+.cx-mobile-menu a.cx-mobile-radar{margin-top:10px;background:#12213A;color:#fff;border:0;border-radius:12px;padding:18px 22px;justify-content:center;font-size:17px;font-weight:700}
 .cx-mobile-menu a.cx-mobile-radar::after{content:""}
-.cx-mobile-menu a.active{color:var(--red,#C61B1C)}
+.cx-mobile-menu a.active{color:var(--red,#1B2F4A)}
 body.cx-menu-open{position:fixed;left:0;right:0;width:100%;overflow:hidden;overscroll-behavior:none}
 body.cx-menu-open .cx-social-dock{display:none}
 
@@ -33,13 +33,13 @@ body.cx-menu-open .cx-social-dock{display:none}
 .nav-radar-btn{
   font-size:12px;font-weight:600;
   background:transparent;
-  color:#141414;padding:5px 14px;border-radius:20px;
-  border:1px solid #141414;
+  color:#12213A;padding:5px 14px;border-radius:20px;
+  border:1px solid #12213A;
   white-space:nowrap;letter-spacing:.06em;
   text-decoration:none;
   transition:background .2s,color .2s;
 }
-.nav-radar-btn:hover{background:#141414;color:#fff}
+.nav-radar-btn:hover{background:#12213A;color:#fff}
 
 
 .nav-center{display:flex;align-items:center;gap:24px}
@@ -47,7 +47,7 @@ body.cx-menu-open .cx-social-dock{display:none}
 /* 手機版導覽列常駐轉換入口（藥丸） */
 /* 觸控目標 ≥44px（WCAG 2.5.8）。直接把藥丸拉到 44px 會塞滿 48px 導覽列、視覺走樣，
    故維持藥丸原尺寸，改用 ::after 透明覆蓋層把「可點範圍」撐到 44px（視覺零變動）。 */
-.nav-apply-pill{display:none;background:var(--red,#C61B1C);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;letter-spacing:.02em;position:relative}
+.nav-apply-pill{display:none;background:var(--red,#1B2F4A);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;letter-spacing:.02em;position:relative}
 .nav-apply-pill::after{content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:44px}
 
 @media(max-width:768px){
@@ -63,12 +63,12 @@ body.cx-menu-open .cx-social-dock{display:none}
    只有「完全沒有 nav 容器規則」的頁才吃這份。值與 style.css 的 Navigation 區段同步。
    article 頁的 .art-hero{padding-top:48px} 正好補償這裡的 fixed nav 48px 高度。 */
 :where(nav){position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
-:where(.nav-logo){font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;color:#1d1d1f}
+:where(.nav-logo){font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;color:#1B2F4A}
 :where(.nav-links){display:flex;gap:1.75rem}
-:where(.nav-links a){font-size:12px;color:#1d1d1f;opacity:.8;text-decoration:none}
+:where(.nav-links a){font-size:12px;color:#1B2F4A;opacity:.8;text-decoration:none}
 :where(.nav-links a:hover){opacity:1}
-:where(.nav-links a.active){opacity:1;font-weight:600;color:var(--red,#C61B1C)}
-:where(.nav-cta){font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none}
+:where(.nav-links a.active){opacity:1;font-weight:600;color:var(--red,#1B2F4A)}
+:where(.nav-cta){font-size:12px;font-weight:500;background:#1B2F4A;color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none}
 @media(max-width:768px){
   :where(nav){padding:0 1rem}
   :where(.nav-links){display:none}
@@ -77,7 +77,7 @@ body.cx-menu-open .cx-social-dock{display:none}
 <nav>
   <a class="nav-logo" href="/">
     <img src="favicon-192.png" alt="鋮馨" style="height:34px;width:34px;object-fit:contain;border-radius:4px;">
-    <span style="font-size:15px;font-weight:500;"><span style="color:var(--red,#C61B1C);font-weight:700;">鋮</span>馨租賃有限公司</span>
+    <span style="font-size:15px;font-weight:500;"><span style="color:var(--red,#1B2F4A);font-weight:700;">鋮</span>馨租賃有限公司</span>
   </a>
   <div class="nav-center">
     <div class="nav-links">

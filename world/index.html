@@ -9,7 +9,7 @@
   :root{
     /* 引擎底色維持深綠(對齊前段小模型場景)；抵達頁與頁腳走暖夜金(對齊尾景「入夜燈亮」) */
     --sw-bg:#0f1d1a; --sw-ink:#f7f0e6; --sw-ink-soft:rgba(247,240,230,.72);
-    --sw-accent:#C61B1C;
+    --sw-accent:#1B2F4A;
     --cx-warm:#140d07; --cx-warm-soft:#1d130a; --cx-amber:#d9a441;
     --sw-font-display:'Noto Serif TC','Songti TC',serif;
     --sw-font-body:'Noto Sans TC','PingFang TC',sans-serif;
@@ -26,7 +26,7 @@
   .cx-en-title{font-family:'Noto Serif TC','Songti TC',serif;font-size:clamp(34px,7vw,66px);font-weight:600;line-height:1.2;margin:0 0 16px;text-shadow:0 3px 30px rgba(0,0,0,.55)}
   .cx-en-sub{font-size:15px;color:rgba(247,240,230,.8);letter-spacing:.05em;margin:0 0 44px;max-width:420px;line-height:1.8}
   .cx-en-btn{appearance:none;cursor:pointer;font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.08em;color:#fff;
-    background:var(--sw-accent);border:0;border-radius:999px;padding:16px 44px;box-shadow:0 10px 30px rgba(198,27,28,.4);transition:transform .2s ease}
+    background:var(--sw-accent);border:0;border-radius:999px;padding:16px 44px;box-shadow:0 10px 30px rgba(27,47,74,.4);transition:transform .2s ease}
   .cx-en-btn:hover{transform:translateY(-2px)}
   .cx-en-hint{margin-top:22px;font-size:12px;letter-spacing:.2em;color:rgba(247,240,230,.5);animation:cx-bob 1.8s ease-in-out infinite}
   @keyframes cx-bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:.9}}
@@ -64,11 +64,11 @@
   .cx-arr-left p{font-size:15px;line-height:1.9;color:rgba(247,240,230,.82);margin:0 0 30px}
   .cx-arr-btns{display:flex;flex-direction:column;gap:12px}
   .cx-arr-btns a{display:block;text-align:center;text-decoration:none;font-size:15px;font-weight:600;padding:15px 20px;border-radius:12px;letter-spacing:.04em}
-  .cx-arr-btns .go{background:#C61B1C;color:#fff}
+  .cx-arr-btns .go{background:#1B2F4A;color:#fff}
   .cx-arr-btns .line{background:#048456;color:#fff}
   .cx-arr-btns .tel{background:transparent;color:#f5f3f0;border:1px solid rgba(245,243,240,.4)}
   .cx-arr-right{flex:1 1 340px;max-width:480px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.4);display:flex;flex-direction:column}
-  .cx-arr-right .cap{font-size:13px;font-weight:600;color:#1d1d1f;padding:16px 20px 6px;letter-spacing:.03em}
+  .cx-arr-right .cap{font-size:13px;font-weight:600;color:#1B2F4A;padding:16px 20px 6px;letter-spacing:.03em}
   .cx-arr-right iframe{width:100%;height:620px;border:0;background:#fff}
   @media(max-width:760px){.cx-arrival{padding:48px 16px;gap:28px}.cx-arr-left h2{font-size:26px}.cx-arr-right iframe{height:560px}}
   /* ── 主題統一覆寫（老闆 2026-07-21：不要米色分割帶、整頁都是房子場景）──
@@ -81,7 +81,7 @@
   /* 導覽列：白霜膠囊改暖夜半透明，文字轉亮色 */
   #world .sw-nav{background:rgba(20,13,7,.55);border-color:rgba(217,164,65,.28)}
   /* 段落 CTA 主鈕：原本吃 --sw-ink 當底，轉亮後會變米底白字，改品牌紅 */
-  #world .sw-btn--primary{background:var(--sw-accent,#C61B1C);color:#fff}
+  #world .sw-btn--primary{background:var(--sw-accent,#1B2F4A);color:#fff}
   /* 抵達區進入視窗後，引擎固定文案層/路徑點淡出，避免與抵達區文字雙重疊字 */
   #world .sw-copylayer,#world .sw-route{transition:opacity .45s ease}
   body.cx-arrived #world .sw-copylayer,body.cx-arrived #world .sw-route{opacity:0!important;pointer-events:none!important}
@@ -145,7 +145,7 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
   connScroll: 1.3,
   sections: [
     { id: 'street', label: '中和', still: 'assets/s1_street_169.png', clip: 'assets/web_dive_s1_street.mp4',
-      accent: '#C61B1C', eyebrow: '鋮馨租賃・新北中和', title: '往下捲，走進來',
+      accent: '#1B2F4A', eyebrow: '鋮馨租賃・新北中和', title: '往下捲，走進來',
       body: '不動產融資諮詢與媒合顧問，在中和中正路 468 號，開了二十多年。' },
     { id: 'home', label: '售後回租', still: 'assets/s2_living_169.png', clip: 'assets/web_dive_s2_living.mp4',
       accent: '#d9a441', eyebrow: '售後回租', title: '房子，還是家', linger: 0.4,
@@ -154,7 +154,7 @@ if (!CX_MOBILE) mountScrollWorld(document.getElementById('world'), {
       accent: '#d9a441', eyebrow: '貸款整合', title: '多筆，變一筆', linger: 0.4,
       body: '信貸、卡循、民間——整合成一筆銀行房貸，每個月只繳一筆。依個案評估。' },
     { id: 'dawn', label: '入夜燈亮', still: 'assets/s4b_home_graded.png', clip: 'assets/web_dive_s4b_final.mp4',
-      accent: '#C61B1C', eyebrow: '民間轉銀行', title: '本金，開始下降',
+      accent: '#1B2F4A', eyebrow: '民間轉銀行', title: '本金，開始下降',
       body: '長年只繳息的日子，有機會翻頁。依個案評估，最終核貸由金融機構決定。',
       cta: { primary: { label: '繼續往下，抵達鋮馨門口 ↓', href: '#arrival' } } },
   ],

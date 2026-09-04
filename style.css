@@ -8,10 +8,10 @@
    新頁面／新改版一律用這組變數，不要再手打色碼。
    舊頁尚未轉換前，內聯色碼仍是實際生效值，變數只在已採用的地方生效。 */
 :root{
-  --red:#C61B1C;         /* 品牌主色：CTA、連結、強調、深色面板底 */
-  --red-dark:#8A1416;    /* 深紅：漸層/hover 加深 */
-  --ink:#141414;         /* 主要內文黑 */
-  --ink-soft:#1d1d1f;    /* 次要內文黑（略淺） */
+  --red:#1B2F4A;         /* 品牌主色：CTA、連結、強調、深色面板底 */
+  --red-dark:#12213A;    /* 深紅：漸層/hover 加深 */
+  --ink:#12213A;         /* 主要內文黑 */
+  --ink-soft:#1B2F4A;    /* 次要內文黑（略淺） */
   --text-secondary:#6e6e73;
   --text-tertiary:#86868b;
   --text-quaternary:#a1a1a6;
@@ -20,8 +20,8 @@
   --bg-off:#fafafa;
   --border-hairline:#e3e3e6;
   --border-input:#d2d2d7;
-  --dark-bg:#0a0a0c;     /* 深色面板（hero/CTA band） */
-  --dark-bg-soft:#0e0e10;
+  --dark-bg:#12213A;     /* 深色面板（hero/CTA band） */
+  --dark-bg-soft:#12213A;
   --line-green:#048456;  /* LINE 品牌綠 */
   --font-serif:"Noto Serif TC","Songti TC",serif;
 }
@@ -29,7 +29,7 @@
 /* === Reset === */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1d1d1f;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;background:#fff;color:#1B2F4A;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
 /* === Navigation === */
@@ -37,10 +37,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 .nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
 .nav-logo span{color:var(--red);font-weight:700}
 .nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:12px;color:#1d1d1f;opacity:.8}
+.nav-links a{font-size:12px;color:#1B2F4A;opacity:.8}
 .nav-links a:hover{opacity:1}
 .nav-links a.active{opacity:1;font-weight:600;color:var(--red)}
-.nav-cta{font-size:12px;font-weight:500;background:#1d1d1f;color:#fff;padding:6px 16px;border-radius:20px}
+.nav-cta{font-size:12px;font-weight:500;background:#1B2F4A;color:#fff;padding:6px 16px;border-radius:20px}
 
 /* === Common Buttons === */
 .btn-line{display:inline-block;background:#048456;color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:24px}
@@ -63,7 +63,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 .btn-green:hover::after,.btn-line:hover::after{transform:scale(4)}
 @media(prefers-reduced-motion:reduce){.btn-green::after,.btn-line::after{display:none}}
 .btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
-.btn-white{background:#fff;color:#1d1d1f;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
+.btn-white{background:#fff;color:#1B2F4A;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
 .btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
 .btn-row,.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
@@ -73,7 +73,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
    尺寸也壓到站上按鈕的級距（14px/12px 28px），不用原作的 1.2rem/15px 30px。 */
 .btn-ripple{
   display:inline-block;padding:12px 30px;font-size:14px;font-weight:700;line-height:1.4;
-  color:#fff;background-color:#C61B1C;border:2px solid #DA4142;border-radius:24px;
+  color:#fff;background-color:#1B2F4A;border:2px solid #2F5B8F;border-radius:24px;
   cursor:pointer;outline:none;position:relative;overflow:hidden;font-family:inherit;
   transition:background-color .4s ease,border-color .4s ease;
 }
@@ -83,11 +83,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
   transform:scale(0);transition:transform .5s ease;pointer-events:none;
 }
 .btn-ripple:hover::after{transform:scale(4)}
-.btn-ripple:hover{background-color:#D62324;border-color:#F07071}
-.btn-ripple:focus-visible{outline:2px solid #1D1D1F;outline-offset:3px}
+.btn-ripple:hover{background-color:#2F5B8F;border-color:#2F5B8F}
+.btn-ripple:focus-visible{outline:2px solid #1B2F4A;outline-offset:3px}
 .btn-ripple.is-line{background-color:#048456;border-color:#0AA06C}
 .btn-ripple.is-line:hover{background-color:#059A64;border-color:#3FC79A}
-.btn-ripple.is-dark{background-color:#1d1d1f;border-color:#3a3a3c}
+.btn-ripple.is-dark{background-color:#1B2F4A;border-color:#3a3a3c}
 .btn-ripple.is-dark:hover{background-color:#292929;border-color:#666}
 /* 動效偏好：關閉漣漪，保留底色變化 */
 @media(prefers-reduced-motion:reduce){
@@ -96,9 +96,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 }
 
 /* === CTA Strip (黑底大型 CTA 區塊) === */
-/* 點陣底紋改自 Uiverse kennyotsu / short-warthog-33（MIT）。只加疊圖，底色 #1d1d1f 不動。
+/* 點陣底紋改自 Uiverse kennyotsu / short-warthog-33（MIT）。只加疊圖，底色 #1B2F4A 不動。
    點色帶品牌紅（rgba(198,27,28)）而非中性白，底紋才算品牌資產不是通用材質。 */
-.cta-strip{background-color:#1d1d1f;background-image:radial-gradient(rgba(198,27,28,.34) 1.7px,transparent 0);background-size:26px 26px;background-position:-4px -4px;padding:80px 24px;text-align:center}
+.cta-strip{background-color:#1B2F4A;background-image:radial-gradient(rgba(27,47,74,.34) 1.7px,transparent 0);background-size:26px 26px;background-position:-4px -4px;padding:80px 24px;text-align:center}
 .cta-strip h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-bottom:16px}
 .cta-strip p{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
 
@@ -110,7 +110,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 .page-sub{font-size:18px;color:rgba(255,255,255,.7);max-width:540px;margin:0 auto 32px;line-height:1.6}
 
 /* === Footer === */
-footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
+footer{background:#1B2F4A;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
 .footer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
 .footer-col-title{font-size:11px;font-weight:500;color:#f5f5f7;margin-bottom:.75rem}
 /* 觸控目標：連結本體 16px 高 → padding 撐到 40px、彼此間距 ≥12px（WCAG 2.5.8） */
@@ -136,8 +136,8 @@ footer{background:#1d1d1f;color:#f5f5f7;padding:2rem 2.5rem 1.75rem}
   .cta-strip h2{font-size:28px}
   .footer-cols{grid-template-columns:1fr}
   footer{padding:1.75rem 1.25rem 6rem}
-  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1d1d1f;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1B2F4A;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
   .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
   .cx-sticky-cta .cx-sticky-line{background:#048456}
-  .cx-sticky-cta .cx-sticky-tel{background:#C61B1C}
+  .cx-sticky-cta .cx-sticky-tel{background:#1B2F4A}
 }

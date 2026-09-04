@@ -23,13 +23,13 @@
 <link rel="stylesheet" href="style.css">
 <style>
 :root{
-  --accent:#c8102e;--accent-glow:transparent;--accent-bg:rgba(200,16,46,0.06);
+  --accent:#1B2F4A;--accent-glow:transparent;--accent-bg:rgba(27,47,74,0.06);
   --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
-  --ink:#1d1d1f;--ink-mid:#5a5750;--ink-dim:#8a867c;--gold:#D4AF37;--line:rgba(0,0,0,0.07);
+  --ink:#1B2F4A;--ink-mid:#5a5750;--ink-dim:#8a867c;--gold:#D4AF37;--line:rgba(0,0,0,0.07);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
-.hero{position:relative;overflow:hidden;min-height:480px;background:#141414;border-bottom:1px solid rgba(0,0,0,0.08);}
+.hero{position:relative;overflow:hidden;min-height:480px;background:#12213A;border-bottom:1px solid rgba(0,0,0,0.08);}
 
 
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
@@ -40,7 +40,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
 .hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
 .hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#141414;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
+.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#12213A;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
 .btn-fill:hover{opacity:.85}
 .btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
@@ -67,10 +67,10 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
 .cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
 .cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#141414;color:#fff;transition:opacity .2s;}
+.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#12213A;color:#fff;transition:opacity .2s;}
 .cta-main:hover{opacity:.85}
 .cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1d1d1f}
+.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1B2F4A}
 @media(max-width:900px){
   .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
   .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}.hero-right{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:0.55;height:auto}
@@ -282,24 +282,24 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
         </svg>
       </div>
       <div class="stat-ring">
         <svg width="96" height="96" viewBox="0 0 96 96">
           <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#c8102e" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1d1d1f" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">6都</text>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">6都</text>
           <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">區域比較</text>
         </svg>
       </div>
@@ -316,10 +316,10 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="breadcrumb">
     <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>交易量價 B系列</span>
   </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #c8102e;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#c8102e;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#1d1d1f;margin:0 0 14px"><strong style="color:#1d1d1f">想知道「現在房市是熱還是冷、價格撐不撐得住」，看這組量價指標。</strong>B 系列追蹤買賣移轉棟數、信義與國泰房價指數、六都移轉與房價所得比，量（成交）與價（房價）一起看，才不會被單一數字誤導。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1d1d1f">買賣移轉 80,476 棟（2026-04）</strong>：全國成交量，量縮通常領先價格鬆動。</li><li><strong style="color:#1d1d1f">六都移轉 62,687 棟（2026-04）</strong>：六大都會成交量，占全國多數。</li><li><strong style="color:#1d1d1f">信義房價指數 量縮價穩（2026-Q1）</strong>：以純住中古屋為主，目前量縮但價格緩穩。</li><li><strong style="color:#1d1d1f">國泰房價指數 預售趨緩（2026-Q1）</strong>：含預售與新成屋，預售市場轉趨保守。</li><li><strong style="color:#1d1d1f">六都房價所得比 14.62 倍（2025-Q4）</strong>：房價約等於 14.62 年家庭可支配所得，負擔概略指標。</li></ul>
+<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #1B2F4A;padding:24px 26px;margin-bottom:48px">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#1B2F4A;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
+  <p style="font-size:16px;line-height:1.85;color:#1B2F4A;margin:0 0 14px"><strong style="color:#1B2F4A">想知道「現在房市是熱還是冷、價格撐不撐得住」，看這組量價指標。</strong>B 系列追蹤買賣移轉棟數、信義與國泰房價指數、六都移轉與房價所得比，量（成交）與價（房價）一起看，才不會被單一數字誤導。</p>
+  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1B2F4A">買賣移轉 80,476 棟（2026-04）</strong>：全國成交量，量縮通常領先價格鬆動。</li><li><strong style="color:#1B2F4A">六都移轉 62,687 棟（2026-04）</strong>：六大都會成交量，占全國多數。</li><li><strong style="color:#1B2F4A">信義房價指數 量縮價穩（2026-Q1）</strong>：以純住中古屋為主，目前量縮但價格緩穩。</li><li><strong style="color:#1B2F4A">國泰房價指數 預售趨緩（2026-Q1）</strong>：含預售與新成屋，預售市場轉趨保守。</li><li><strong style="color:#1B2F4A">六都房價所得比 14.62 倍（2025-Q4）</strong>：房價約等於 14.62 年家庭可支配所得，負擔概略指標。</li></ul>
   <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
 </div>
   <div class="sec-head">
@@ -355,44 +355,44 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px">
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">買賣移轉棟數下降，代表房價要跌嗎？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">買賣移轉棟數下降，代表房價要跌嗎？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">不必然。移轉棟數（目前 80,476 棟）是成交量，量縮通常領先價格鬆動，但價格還受利率、供給與政策影響。量與價要一起看，不宜用單一數字判斷。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">信義和國泰房價指數有什麼不同？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">信義和國泰房價指數有什麼不同？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">信義指數以純住宅中古屋為主（目前量縮價穩）；國泰指數涵蓋預售與新成屋（目前預售趨緩）。兩者編製口徑不同，分別反映成屋與預售市場。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">房價所得比 14.62 倍是什麼意思？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房價所得比 14.62 倍是什麼意思？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">指房價約等於家庭 14.62 年的可支配所得（六都，2025-Q4）。數字越高代表購屋負擔越重，是衡量房市可負擔性的常用指標之一。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">買賣移轉棟數有包含繼承或贈與嗎？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">買賣移轉棟數有包含繼承或贈與嗎？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">沒有。買賣移轉棟數統計的是以「買賣」為登記原因的所有權移轉；繼承、贈與屬其他移轉原因，另行統計。判讀市場交易熱度時，用買賣棟數較能反映真實的成交活動。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">移轉棟數為什麼跟現在感覺到的市況有落差？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">移轉棟數為什麼跟現在感覺到的市況有落差？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">因為它以「完成所有權移轉登記」的時間計算，從簽約到登記通常有一到兩個月的作業時間，統計反映的是稍早之前的成交。市況急轉時，這個數字會晚一步跟上，判讀要注意時間差。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">六都成交量比較，能看出什麼？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">六都成交量比較，能看出什麼？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">能看出交易熱度的區域差異：哪些都會區量能相對熱絡、哪些正在降溫。搭配六都均價比較一起看，可以大致掌握「量與價」在不同城市的走向，作為觀察區域市況的參考。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">房價指數和實價登錄的成交價，哪個比較有參考性？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房價指數和實價登錄的成交價，哪個比較有參考性？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">兩者用途不同。實價登錄是逐筆成交紀錄，反映個案價格；房價指數是統計處理後的趨勢線，消除了個案差異。看整體走向用指數，查特定區域行情用實價登錄，兩者互為補充。</div>
   </div>
   <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1d1d1f;margin-bottom:10px">成交量萎縮時，想賣房或申請貸款的人要注意什麼？</div>
+    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">成交量萎縮時，想賣房或申請貸款的人要注意什麼？</div>
     <div style="font-size:14px;line-height:1.9;color:#5a5750">量縮期買方通常觀望，銷售期可能拉長，銀行估價也可能趨於保守，進而影響可貸金額。若有資金規劃需求，建議提早評估、預留時間。實際條件依個案評估，最終核貸由金融機構決定。</div>
   </div>
   </div>
   <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
   <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">買賣移轉棟數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 一定期間內完成所有權移轉登記的不動產棟數，反映市場成交量。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">房價所得比</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 房價中位數相對家庭年可支配所得中位數的倍數，衡量購屋負擔。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">信義房價指數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 以純住宅中古屋成交價編製的房價走勢指數。</span></div>
-    <div style="border-left:2px solid rgba(200,16,46,0.35);padding:7px 0 7px 16px"><strong style="color:#1d1d1f;font-size:14px">國泰房價指數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 涵蓋預售與新成屋的房價走勢指數。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">買賣移轉棟數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 一定期間內完成所有權移轉登記的不動產棟數，反映市場成交量。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">房價所得比</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 房價中位數相對家庭年可支配所得中位數的倍數，衡量購屋負擔。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">信義房價指數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 以純住宅中古屋成交價編製的房價走勢指數。</span></div>
+    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">國泰房價指數</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 涵蓋預售與新成屋的房價走勢指數。</span></div>
   </div>
   <div class="cta-box">
     <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
@@ -405,11 +405,11 @@ fetch('nav.html').then(r=>r.text()).then(h=>{
 </div>
 
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #c8102e;text-align:center">
+<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #1B2F4A;text-align:center">
   <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
   <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#141414;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
+    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
     <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
   </div>
 </div>
