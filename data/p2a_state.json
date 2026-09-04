@@ -9,6 +9,11 @@
    "date": "2026-09-03",
    "file": null,
    "status": "gate_regex"
+  },
+  "threads:18142134709571256": {
+   "date": "2026-09-04",
+   "file": null,
+   "status": "gate_ai"
   }
  },
  "published": [
