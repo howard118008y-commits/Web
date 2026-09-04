@@ -32,7 +32,7 @@
     }
   },
   "datePublished": "2026-07-23",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "url": "https://cx468.com.tw/xinbei-debt-consolidation.html",
   "mainEntityOfPage": "https://cx468.com.tw/xinbei-debt-consolidation.html",
   "keywords": "新北貸款整合,貸款整合,以房整合,信貸整合,卡循整合,鋮馨租賃",
@@ -97,61 +97,174 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 本頁未載入共用 style.css，補上全站的去底線規則（否則按鈕與內文連結都帶瀏覽器預設底線） */
-a{text-decoration:none}
-/* Hero */
-.art-hero{padding-top:48px}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.art-hero-img{width:100%;height:420px;object-fit:cover;display:block}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.art-hero-body{max-width:760px;margin:0 auto;padding:2.5rem 2rem 0}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-p strong{color:var(--ink)}
+.bt-p a,.bt-qa a,.bt-case-card a{color:var(--action);font-weight:600}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.art-breadcrumb{font-size:12px;color:#86868b;margin-bottom:1.5rem}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
-.art-breadcrumb a{color:#2F5B8F}
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:rgba(0,122,255,.1);color:#2F5B8F}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-crumb{font-size:14px;line-height:20px;color:var(--ink-dim);margin-bottom:24px}
+.bt-crumb a{color:var(--action)}
+.bt-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:8px;background:var(--tint);color:var(--action);font-weight:700;font-size:13px}
 
-.art-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.4;margin-bottom:1rem}
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa p:last-child{margin-bottom:0}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
 
-.art-sub{font-size:18px;color:#6e6e73;line-height:1.65;margin-bottom:1.5rem}
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark .bt-p strong{color:#fff}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
 
-.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:#86868b;padding-bottom:2rem;border-bottom:.5px solid #e5e5e7}
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
 
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
 
-/* Body */
-.art-body{max-width:760px;margin:0 auto;padding:2rem 2rem 4rem}
+/* 兩路徑對照卡 */
+.bt-cmp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px}
+.bt-cmp-card .bt-label{margin-bottom:8px}
 
-.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem}
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
 
-.art-body h3{font-size:20px;font-weight:600;margin:2rem 0 .75rem}
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
 
-.art-body p{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:1.25rem}
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
 
-.art-body ul,.art-body ol{margin:0 0 1.25rem 1.5rem}
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+.bt-dark-card .bt-small{color:rgba(255,255,255,.55);max-width:640px;margin:24px auto 0}
 
-.art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
 
-.path-chip{display:inline-block;background:#C8945A;color:#fff;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;margin-right:6px;vertical-align:2px}
+/* 在地相關方案 */
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
 
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* CTA */
-.art-cta{background:#1B2F4A;padding:3.5rem 2rem;text-align:center;margin-top:3rem}
-
-.art-cta h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:.75rem}
-
-.art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
-
-.art-cta a{display:inline-block;background:#fff;color:#1B2F4A;padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
-
-
-
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-cmp-grid{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
+}
 @media(max-width:768px){
-  .art-title{font-size:28px}
-  .art-hero-img{height:240px}
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
 }
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -249,93 +362,189 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="art-hero">
-  <picture><source srcset="img/xinbei-dc-hero.avif" type="image/avif"><source srcset="img/xinbei-dc-hero.webp" type="image/webp"><img loading="lazy" src="img/xinbei-dc-hero.jpg" alt="新北貸款整合怎麼開始？有房與無房的月付重整地圖" class="art-hero-img"></picture>
-  <div class="art-hero-body">
-    <div class="art-breadcrumb">
-      <a href="/">首頁</a> › <a href="knowledge.html">知識專欄</a> › 新北貸款整合
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-crumb"><a href="/">首頁</a> › <a href="knowledge.html">知識專欄</a> › 新北貸款整合</div>
+      <div class="bt-eyebrow">新北貸款整合</div>
+      <h1 class="bt-h1">新北貸款整合怎麼開始？<br><em>有房與無房的月付重整地圖</em></h1>
+      <p class="bt-p">卡循、信貸、分期各咬一口，月付端全面吃重、繳款日四散——先把月付攤開，再分路。</p>
+      <div class="bt-meta">
+        <span class="bt-tag">貸款整合・新北全區</span>
+        <span>2026年7月</span>
+        <span>鋮馨租賃有限公司</span>
+        <span>閱讀時間約 6 分鐘</span>
+      </div>
     </div>
-    <span class="art-tag" style="background:rgba(27,59,54,.1);color:#1B2F4A;">貸款整合・新北全區</span>
-    <h1 class="art-title">新北貸款整合怎麼開始？<br>有房與無房的月付重整地圖</h1>
-    <p class="art-sub">卡循、信貸、分期各咬一口，月付端全面吃重、繳款日四散——先把月付攤開，再分路。</p>
-    <div class="art-meta-row">
-      <span>2026年7月</span>
-      <span>鋮馨租賃有限公司</span>
-      <span>閱讀時間約 6 分鐘</span>
+    <img class="bt-hero-img" src="img/gen-home-desk.jpg" alt="新北貸款整合怎麼開始？有房與無房的月付重整地圖" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>先說結論：在新北談貸款整合，第一步不是找產品，是把月付攤開——幾筆、各多少、繳款日散在哪幾天；第二步才分路：名下有房，走以房整合；沒有房，走信貸整合。</strong>貸款整合是什麼？一句話：把多筆高利率債務併成一筆、往清償終點走的還款重整；判斷標準與陷阱拆解由<a href="/article-debt-consolidation.html">〈貸款整合好嗎〉</a>承載，本篇只做新北級的情境判斷與分流。</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="art-body">
-
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-    <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 6px;"><strong>先說結論：在新北談貸款整合，第一步不是找產品，是把月付攤開——幾筆、各多少、繳款日散在哪幾天；第二步才分路：名下有房，走以房整合；沒有房，走信貸整合。</strong>貸款整合是什麼？一句話：把多筆高利率債務併成一筆、往清償終點走的還款重整；判斷標準與陷阱拆解由<a href="/article-debt-consolidation.html" style="color:#1B2F4A;font-weight:600;">〈貸款整合好嗎〉</a>承載，本篇只做新北級的情境判斷與分流。</p>
+<!-- 2. 深色帶：新北的月付現實（左圖右文） -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-grid">
+      <figure>
+        <picture><source srcset="img/xinbei-dc-hero.avif" type="image/avif"><source srcset="img/xinbei-dc-hero.webp" type="image/webp"><img class="bt-dark-img" loading="lazy" src="img/xinbei-dc-hero.jpg" alt="新北貸款整合怎麼開始？有房與無房的月付重整地圖"></picture>
+      </figure>
+      <div>
+        <h2 class="bt-h2">新北的月付現實：雙薪通勤家庭的多頭繳款</h2>
+        <p class="bt-p">依內政部房價負擔能力統計，2025 年第 3 季新北市房貸負擔率為 56.77%，屬負擔能力「過低」等級——住板橋、中永和、三重、新莊，通勤台北的雙薪家庭，光房貸就吃掉過半的可支配所得。</p>
+        <p class="bt-p">房貸之外還在疊。依金管會統計，截至 2025 年 12 月底，全體信用卡循環信用餘額約 1,186 億元；卡循、信貸與分期各咬一口，月付端全面吃重、繳款日四散——這就是新北月付重整需求的起點。</p>
+        <p class="bt-p">同一組數字，新北二胎那頭看的是「銀行端收窄」，本篇看的是「月付端吃重」：角度不同，解法也不同。</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <h2>新北的月付現實：雙薪通勤家庭的多頭繳款</h2>
-  <p>依內政部房價負擔能力統計，2025 年第 3 季新北市房貸負擔率為 56.77%，屬負擔能力「過低」等級——住板橋、中永和、三重、新莊，通勤台北的雙薪家庭，光房貸就吃掉過半的可支配所得。</p>
-  <p>房貸之外還在疊。依金管會統計，截至 2025 年 12 月底，全體信用卡循環信用餘額約 1,186 億元；卡循、信貸與分期各咬一口，月付端全面吃重、繳款日四散——這就是新北月付重整需求的起點。</p>
-  <p>同一組數字，新北二胎那頭看的是「銀行端收窄」，本篇看的是「月付端吃重」：角度不同，解法也不同。</p>
-
-  <h2>三種新北情境，整合各自解什麼題</h2>
-  <p><strong>多卡卡循族（新北通勤帶的隱形月付）</strong>：三、四張卡各繳最低應繳，年利率上限 15% 的循環息滾著、本金幾乎不動。整合解的是「利率降階」的題——把循環級的債，換成一筆利率較低、有清償終點的貸款。</p>
-  <p><strong>信貸＋分期分散族（中永和、板橋的家庭帳單）</strong>：裝修分期、車貸、一兩筆信貸，單筆都不重，加總才發現月付破表、繳款日四散，漏繳與違約金風險跟著來。整合解的是「集中」的題——單一月付、單一繳款日。</p>
-  <p><strong>自營業者多筆融資（三重新莊工商帶、雙和街邊店）</strong>：週轉東一筆西一筆，成本高低不一。整合解的是「成本盤點」的題——每筆利率攤開，高成本的優先收攏。</p>
-  <p>新北三種題共用同一把尺：降低總利息、單一月付、有清償終點的還款重整——三者不齊，就不叫整合。月付變輕、年限拉長的陷阱，第四篇已用三列試算拆給您看。</p>
-
-  <h2>有房、無房，路徑就此二分</h2>
-  <p><span class="path-chip">有房</span><strong>名下有房→以房整合</strong>：用房屋殘值把多筆高利率債務收進一筆二順位。示意（中永和量級）：市值 1,000 萬的公寓、一胎餘 300 萬，殘值空間約 400 萬元（示意，依個案審核）——收攏 80 萬卡循加 60 萬信貸綽綽有餘。各區殘值怎麼看，見<a href="/xinbei-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈新北二胎房貸〉</a>；永和屋主可先看<a href="/yonghe-home-loan.html" style="color:#1B2F4A;font-weight:600;">〈永和房屋貸款決策地圖〉</a>的整合節點。</p>
-  <p><span class="path-chip">無房</span><strong>名下無房→信貸整合</strong>：以一筆無擔保信貸清償多筆，額度與利率依信用條件由金融機構核定；三檢核與流程回到第四篇即可，新北案件比照辦理。</p>
-  <p>利率不分行政區——新北與各區相同，分路徑：以房整合適用二順位區間（銀行約 3.4%–10%、融資公司約 7%–16%）；信貸整合依信用條件核定。均依個案審核為準，比較請看總費用年百分率（APR）。</p>
-  <p>兩條岔路照樣標上：在新北被銀行婉拒，先讀<a href="/article-loan-rejected-first-step.html" style="color:#1B2F4A;font-weight:600;">〈銀行貸款被拒後的第一步〉</a>；債務已在民間、想分階段回到銀行體系，見<a href="/private-to-bank.html" style="color:#1B2F4A;font-weight:600;">民間轉銀行服務頁</a>。</p>
-
-  <h2>動手前，先把數字並排</h2>
-  <p>新北案件動筆前，先用<a href="/mortgage-calculator.html" style="color:#1B2F4A;font-weight:600;">房貸試算表</a>跑一輪整合前後的月付與總利息對比。省多少的算法很直白：省額＝原多筆月付合計−整合後單一月付——但請同時盯總利息，月付降不代表總成本降。</p>
-  <p>以我們服務過的一位中和屋主為例（匿名）：多筆債務整合為一筆銀行房貸後，月付從約 14.5 萬元降為約 4.5 萬元——屬過往單一個案，實際結果依個案而定，最終核貸由金融機構決定。</p>
-  <p>原則照舊，新北的整合案件也不例外：核貸前不付費、不交權狀存摺正本；怎麼分辨見<a href="/article-second-mortgage-scam.html" style="color:#1B2F4A;font-weight:600;">〈二胎房貸詐騙怎麼分辨〉</a>，有疑慮撥 165。</p>
-
-  <h2>想當面把債務攤開？新北案件怎麼約</h2>
-  <p>帶三樣東西：各筆債務最近一期帳單（餘額與利率）、收入證明，名下有房者加權狀影本。先以官網表單或 LINE 預約，到中和區中正路 468 號——環狀線與台 64 線可達，板橋、三重、新莊案件同一套流程。</p>
-  <p>新北案件的方案框架見<a href="/debt-consolidation.html" style="color:#1B2F4A;font-weight:600;">貸款整合服務頁</a>。債務攤開後若整合不划算，鋮馨會直接說，不催促您做決定。</p>
-
-  <div class="cta-box" style="background:#1B2F4A;border-radius:12px;padding:2rem 1.75rem;margin:2.5rem 0;text-align:center;">
-    <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 .6rem;">想把每筆月付攤開並排比？</h3>
-    <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 1.4rem;">帶各筆債務帳單與收入證明，透過官網表單或 LINE 預約到中和店面——攤開後不划算，鋮馨會直接說，不催促您做決定。</p>
-    <a href="/apply.html" style="display:inline-block;background:#C8945A;color:#fff;padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">官網表單預約 →</a>
-    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:#fff;color:#1B2F4A;padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 預約</a>
-    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
-    <p style="font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，非要約或個案承諾。貸款方案條件均依個案財務狀況、不動產與擔保條件及市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，最終核貸由金融機構決定。申請前請詳閱契約條款，並衡量自身還款能力。</p>
+<!-- 3. 適合對象：三種新北情境（卡片） -->
+<section class="bt-who bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">三種新北情境，整合各自解什麼題</h2>
+    <div class="bt-who-grid">
+      <div class="bt-card bt-who-card">
+        <p class="bt-p"><strong>多卡卡循族（新北通勤帶的隱形月付）</strong>：三、四張卡各繳最低應繳，年利率上限 15% 的循環息滾著、本金幾乎不動。整合解的是「利率降階」的題——把循環級的債，換成一筆利率較低、有清償終點的貸款。</p>
+      </div>
+      <div class="bt-card bt-who-card">
+        <p class="bt-p"><strong>信貸＋分期分散族（中永和、板橋的家庭帳單）</strong>：裝修分期、車貸、一兩筆信貸，單筆都不重，加總才發現月付破表、繳款日四散，漏繳與違約金風險跟著來。整合解的是「集中」的題——單一月付、單一繳款日。</p>
+      </div>
+      <div class="bt-card bt-who-card">
+        <p class="bt-p"><strong>自營業者多筆融資（三重新莊工商帶、雙和街邊店）</strong>：週轉東一筆西一筆，成本高低不一。整合解的是「成本盤點」的題——每筆利率攤開，高成本的優先收攏。</p>
+      </div>
+    </div>
+    <p class="bt-p bt-center" style="margin-top:40px">新北三種題共用同一把尺：降低總利息、單一月付、有清償終點的還款重整——三者不齊，就不叫整合。月付變輕、年限拉長的陷阱，第四篇已用三列試算拆給您看。</p>
   </div>
+</section>
 
-  <h2>新北貸款整合常見問題（FAQ）</h2>
-  <h3>Q1：新北貸款整合，從哪一步開始？</h3>
-  <p>第一步是把月付攤開：列出每筆債務的餘額、利率、月付與繳款日。第二步分路——名下有房評估以房整合、無房走信貸整合，再用試算器並排比較。</p>
-  <h3>Q2：名下有房，整合額度會不會比較高？</h3>
-  <p>通常會：以房整合用殘值空間收攏債務，額度與利率條件多半優於無擔保。殘值＝估值×成數−一胎餘額，實際依個案審核；各區拆解見新北二胎專頁。</p>
-  <h3>Q3：卡循、信貸、分期可以一次整合嗎？</h3>
-  <p>可以評估：整合本就以多筆併一筆為目的，關鍵是新貸額度足以覆蓋。新北案件亦同：清償順序由高利率者優先；能否全數收攏，依個案審核為準。</p>
-  <h3>Q4：整合後每月省下的錢怎麼算？</h3>
-  <p>省額＝原多筆月付合計−整合後單一月付，但請同時比較總利息。月付降低不等於總成本降低——年限拉長的陷阱，〈貸款整合好嗎〉有三列試算可對照，新北案件同一把尺。</p>
-  <h3>Q5：新北想當面把債務攤開試算，怎麼約？</h3>
-  <p>先以 LINE 或官網表單預約。帶各筆債務帳單與收入證明到中和區中正路 468 號；有房者加帶權狀影本，環狀線與台 64 線可達；攤開後不划算，鋮馨會直接說。</p>
+<!-- 4. 兩條路徑：有房／無房 -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2" style="margin-bottom:0">有房、無房，路徑就此二分</h2>
+    <div class="bt-cmp-grid">
+      <div class="bt-card bt-cmp-card">
+        <div class="bt-label">有房</div>
+        <p class="bt-p"><strong>名下有房→以房整合</strong>：用房屋殘值把多筆高利率債務收進一筆二順位。示意（中永和量級）：市值 1,000 萬的公寓、一胎餘 300 萬，殘值空間約 400 萬元（示意，依個案審核）——收攏 80 萬卡循加 60 萬信貸綽綽有餘。各區殘值怎麼看，見<a href="/xinbei-second-mortgage.html">〈新北二胎房貸〉</a>；永和屋主可先看<a href="/yonghe-home-loan.html">〈永和房屋貸款決策地圖〉</a>的整合節點。</p>
+      </div>
+      <div class="bt-card bt-cmp-card">
+        <div class="bt-label">無房</div>
+        <p class="bt-p"><strong>名下無房→信貸整合</strong>：以一筆無擔保信貸清償多筆，額度與利率依信用條件由金融機構核定；三檢核與流程回到第四篇即可，新北案件比照辦理。</p>
+      </div>
+    </div>
+    <p class="bt-p" style="margin-top:32px">利率不分行政區——新北與各區相同，分路徑：以房整合適用二順位區間（銀行約 3.4%–10%、融資公司約 7%–16%）；信貸整合依信用條件核定。均依個案審核為準，比較請看總費用年百分率（APR）。</p>
+    <p class="bt-p">兩條岔路照樣標上：在新北被銀行婉拒，先讀<a href="/article-loan-rejected-first-step.html">〈銀行貸款被拒後的第一步〉</a>；債務已在民間、想分階段回到銀行體系，見<a href="/private-to-bank.html">民間轉銀行服務頁</a>。</p>
+  </div>
+</section>
 
-  <h2>相關文章</h2>
-  <ul>
-    <li><a href="article-debt-consolidation.html" style="color:#1B2F4A;">貸款整合好嗎？適合誰、不適合誰、與債務協商差在哪 →</a></li>
-    <li><a href="xinbei-second-mortgage.html" style="color:#1B2F4A;">新北二胎房貸怎麼評估？銀行趨嚴下的殘值活用地圖 →</a></li>
-    <li><a href="yonghe-home-loan.html" style="color:#1B2F4A;">永和房屋貸款怎麼選？增貸、二胎到售後回租的決策地圖 →</a></li>
-  </ul>
+<!-- 5. 案例：動手前先把數字並排（三卡） -->
+<section class="bt-compare bt-sec">
+  <div class="bt-in">
+    <h2 class="bt-h2" style="margin-bottom:0">動手前，先把數字並排</h2>
+    <div class="bt-case-grid">
+      <div class="bt-card bt-case-card">
+        <p>新北案件動筆前，先用<a href="/mortgage-calculator.html">房貸試算表</a>跑一輪整合前後的月付與總利息對比。省多少的算法很直白：省額＝原多筆月付合計−整合後單一月付——但請同時盯總利息，月付降不代表總成本降。</p>
+      </div>
+      <div class="bt-card bt-case-card">
+        <p>以我們服務過的一位中和屋主為例（匿名）：多筆債務整合為一筆銀行房貸後，月付從約 14.5 萬元降為約 4.5 萬元——屬過往單一個案，實際結果依個案而定，最終核貸由金融機構決定。</p>
+      </div>
+      <div class="bt-card bt-case-card">
+        <p>原則照舊，新北的整合案件也不例外：核貸前不付費、不交權狀存摺正本；怎麼分辨見<a href="/article-second-mortgage-scam.html">〈二胎房貸詐騙怎麼分辨〉</a>，有疑慮撥 165。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- 6. 怎麼約＋深色 CTA 卡 -->
+<section class="bt-sec-80">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">想當面把債務攤開？新北案件怎麼約</h2>
+    <p class="bt-p">帶三樣東西：各筆債務最近一期帳單（餘額與利率）、收入證明，名下有房者加權狀影本。先以官網表單或 LINE 預約，到中和區中正路 468 號——環狀線與台 64 線可達，板橋、三重、新莊案件同一套流程。</p>
+    <p class="bt-p">新北案件的方案框架見<a href="/debt-consolidation.html">貸款整合服務頁</a>。債務攤開後若整合不划算，鋮馨會直接說，不催促您做決定。</p>
+    <div class="bt-dark-card">
+      <div class="bt-h4">想把每筆月付攤開並排比？</div>
+      <p class="bt-p">帶各筆債務帳單與收入證明，透過官網表單或 LINE 預約到中和店面——攤開後不划算，鋮馨會直接說，不催促您做決定。</p>
+      <div class="bt-btns">
+        <a href="/apply.html" class="bt-btn bt-btn-gold">官網表單預約 →</a>
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-outline">LINE 預約</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-outline">電話諮詢</a>
+      </div>
+      <p class="bt-small">本文為一般資訊分享，非要約或個案承諾。貸款方案條件均依個案財務狀況、不動產與擔保條件及市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，最終核貸由金融機構決定。申請前請詳閱契約條款，並衡量自身還款能力。</p>
+    </div>
+  </div>
+</section>
 
-<div class="art-cta" style="background:#1B2F4A;">
-  <h2>月付攤開，路才分得清</h2>
-  <p>帶帳單與收入證明到中和店面，把整合前後的數字並排比——鋮馨不催促您做決定。</p>
-  <a href="https://lin.ee/PHIfSoY" style="background:#C8945A;color:#fff;">LINE 預約</a>
-</div>
+<!-- 7. FAQ -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">新北貸款整合常見問題（FAQ）</h2>
+
+    <details open>
+      <summary>Q1：新北貸款整合，從哪一步開始？</summary>
+      <p>第一步是把月付攤開：列出每筆債務的餘額、利率、月付與繳款日。第二步分路——名下有房評估以房整合、無房走信貸整合，再用試算器並排比較。</p>
+    </details>
+
+    <details>
+      <summary>Q2：名下有房，整合額度會不會比較高？</summary>
+      <p>通常會：以房整合用殘值空間收攏債務，額度與利率條件多半優於無擔保。殘值＝估值×成數−一胎餘額，實際依個案審核；各區拆解見新北二胎專頁。</p>
+    </details>
+
+    <details>
+      <summary>Q3：卡循、信貸、分期可以一次整合嗎？</summary>
+      <p>可以評估：整合本就以多筆併一筆為目的，關鍵是新貸額度足以覆蓋。新北案件亦同：清償順序由高利率者優先；能否全數收攏，依個案審核為準。</p>
+    </details>
+
+    <details>
+      <summary>Q4：整合後每月省下的錢怎麼算？</summary>
+      <p>省額＝原多筆月付合計−整合後單一月付，但請同時比較總利息。月付降低不等於總成本降低——年限拉長的陷阱，〈貸款整合好嗎〉有三列試算可對照，新北案件同一把尺。</p>
+    </details>
+
+    <details>
+      <summary>Q5：新北想當面把債務攤開試算，怎麼約？</summary>
+      <p>先以 LINE 或官網表單預約。帶各筆債務帳單與收入證明到中和區中正路 468 號；有房者加帶權狀影本，環狀線與台 64 線可達；攤開後不划算，鋮馨會直接說。</p>
+    </details>
+  </div>
+</section>
+
+<!-- 8. 相關文章 -->
+<section class="bt-related bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關文章</h2>
+    <div class="bt-rel-grid">
+      <a class="bt-card bt-rel-card" href="article-debt-consolidation.html"><h3>貸款整合好嗎？適合誰、不適合誰、與債務協商差在哪</h3></a>
+      <a class="bt-card bt-rel-card" href="article-loan-integration.html"><h3>多筆貸款整合完整攻略：房貸二胎信貸一次整合降月付</h3></a>
+      <a class="bt-card bt-rel-card" href="article-debt-negotiation-vs-consolidation.html"><h3>債務協商 vs 貸款整合差在哪？搞錯一個會傷信用</h3></a>
+    </div>
+    <div class="bt-chips" style="margin-top:32px;justify-content:center">
+      <a href="article-debt-consolidation.html">貸款整合好嗎？適合誰、不適合誰、與債務協商差在哪 →</a>
+      <a href="xinbei-second-mortgage.html">新北二胎房貸怎麼評估？銀行趨嚴下的殘值活用地圖 →</a>
+      <a href="yonghe-home-loan.html">永和房屋貸款怎麼選？增貸、二胎到售後回租的決策地圖 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">月付攤開，路才分得清</h2>
+    <p class="bt-p">帶帳單與收入證明到中和店面，把整合前後的數字並排比——鋮馨不催促您做決定。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">LINE 預約</a>
+    </div>
+  </div>
+</section>
 
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
