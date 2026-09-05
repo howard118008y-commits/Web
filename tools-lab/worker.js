@@ -10,6 +10,27 @@ const ALLOWED_ORIGINS = [
   "https://www.cx468.com.tw",
 ];
 
+// ── 額度護欄（2026-09-05 資安五問第 9 項）──
+// Origin 可偽造，單靠它擋不住盜刷 Claude 額度。正解是 Cloudflare Access（內部工具本來就該登入才用，
+// 老闆在 Cloudflare 後台設定，見交接信）；在那之前先用 isolate 記憶體做每 IP 節流＋全域日上限：
+// 重啟會歸零、多個 isolate 各算各的，所以是「減災」不是「防線」，數字故意設得寬。
+const RATE_PER_IP_PER_HOUR = 12;   // 一個承辦人一小時判讀 12 份謄本已很多
+const DAILY_CAP = 150;             // 全域每日上限（單 isolate 內），超過即拒、保護 API 額度
+const _ipHits = new Map();         // ip -> [timestamps]
+let _dayKey = "";
+let _dayCount = 0;
+
+function rateOk(ip) {
+  const now = Date.now();
+  const day = new Date(now).toISOString().slice(0, 10);
+  if (day !== _dayKey) { _dayKey = day; _dayCount = 0; _ipHits.clear(); }
+  if (_dayCount >= DAILY_CAP) return false;
+  const hits = (_ipHits.get(ip) || []).filter((t) => now - t < 3600_000);
+  if (hits.length >= RATE_PER_IP_PER_HOUR) { _ipHits.set(ip, hits); return false; }
+  hits.push(now); _ipHits.set(ip, hits); _dayCount += 1;
+  return true;
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
@@ -25,6 +46,11 @@ export default {
     // 來源檢查
     if (!ALLOWED_ORIGINS.includes(origin)) {
       return json({ error: "來源不允許" }, 403, corsHeaders);
+    }
+    const ip = request.headers.get("CF-Connecting-IP") || "0.0.0.0";
+    if (!rateOk(ip)) {
+      console.log("RATE_LIMIT ip=" + ip + " day=" + _dayCount);
+      return json({ error: "請求過於頻繁，請稍後再試" }, 429, corsHeaders);
     }
 
     let body;
@@ -70,7 +96,7 @@ export default {
       if (!resp.ok) {
         const errText = await resp.text();
         console.log("CLAUDE_ERROR status=" + resp.status + " body=" + errText);
-        return json({ error: "Claude API 錯誤", detail: errText }, 502, corsHeaders);
+        return json({ error: "Claude API 錯誤（status " + resp.status + "），請稍後再試" }, 502, corsHeaders);
       }
 
       const data = await resp.json();
@@ -93,7 +119,7 @@ export default {
       return json(parsed, 200, corsHeaders);
     } catch (e) {
       console.log("WORKER_EXCEPTION " + String(e));
-      return json({ error: "後端例外", detail: String(e) }, 500, corsHeaders);
+      return json({ error: "後端例外，請稍後再試" }, 500, corsHeaders);
     }
   },
 };

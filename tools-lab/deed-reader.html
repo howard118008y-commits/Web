@@ -6,6 +6,9 @@
 <title>謄本判讀 v0.1（測試中）｜鋮馨租賃</title>
 <meta name="description" content="鋮馨內部測試中：台灣地政電子謄本自動判讀工具">
 <meta name="robots" content="noindex, nofollow">
+<!-- CSP（2026-09-05 資安五問第 9 項）：本頁只准 cdnjs 腳本、自家 Worker 連線；inline 保留因兩段內嵌腳本＋一個 onclick。
+     改動本頁若新增外部來源（新 CDN／新 API），要同步加進對應指令，否則瀏覽器靜默擋掉。 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; worker-src blob: https://cdnjs.cloudflare.com; connect-src https://cx468-deed-reader.howard118008y.workers.dev https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="canonical" href="https://cx468.com.tw/tools-lab/deed-reader.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,8 +190,8 @@ h1{font-size:44px;font-weight:700;letter-spacing:-0.02em;margin:0 0 14px;color:#
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha384-Yv5O+t3uE3hunW8uyrbpPW3iw6/5/Y7HitWJBLgqfMoA36NogMmy+8wWZMpn3HWc" crossorigin="anonymous"></script>
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
