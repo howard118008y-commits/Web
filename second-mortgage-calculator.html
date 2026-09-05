@@ -17,59 +17,224 @@
 <meta name="twitter:description" content="銀行二胎拒絕？不知道房子還能借多少？輸入房屋市價、一胎本金，立即算出民間二胎可貸金額與月付金額。鋮馨租賃專業諮詢媒合，LINE 線上諮詢。">
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <meta name="description" content="銀行二胎拒絕？不知道房子還能借多少？輸入房屋市價、一胎本金，立即算出民間二胎可貸金額與月付金額。鋮馨租賃專業諮詢媒合，LINE 線上諮詢。">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-.btn-purple{display:inline-block;background:#1B2F4A;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none}
-/* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#1B2F4A;text-decoration:none;font-weight:500}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-/* HERO — purple→blue→green gradient */
-.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-elevator-apt.jpg') center/cover no-repeat;padding:60px 24px 44px;text-align:center}
-.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
-.hero p{font-size:17px;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto}
-@media(max-width:768px){
-  .hero h1{font-size:32px}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
+
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁補充（試算器頁通用）：試算器選擇器沿用原頁一字不改、只換 token；FAQ「＋」CSS 生成；名詞解釋列 === */
+/* 試算器外框 */
+.bt-tool .bt-qa{margin-bottom:24px}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:var(--cream)}
 
-.calc-wrap{max-width:760px;margin:40px auto;padding:0 20px 80px}
+.calc-wrap{margin:0 auto}
 
-.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:32px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:12px;font-weight:600;color:var(--ink-dim);letter-spacing:.07em;text-transform:uppercase;margin-bottom:24px}
 
 .field{margin-bottom:24px}
-.field label{display:block;font-size:15px;font-weight:600;color:#1B2F4A;margin-bottom:8px}
-.field-note{font-size:12px;color:#6e6e73;margin-bottom:8px}
+.field label{display:block;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.field-note{font-size:12px;color:var(--ink-dim);margin-bottom:8px}
 .input-row{display:flex;align-items:center;gap:10px}
-.input-row input[type=number]{flex:1;height:48px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 14px;font-size:16px;color:#1B2F4A;transition:border-color .2s;outline:none;background:#fff}
+.input-row input[type=number]{flex:1;height:48px;border:1.5px solid var(--line);border-radius:8px;padding:0 14px;font-size:16px;color:var(--ink);transition:border-color .3s ease-in-out;outline:none;background:#fff;font-family:inherit}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.input-row input[type=number]:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-.input-row input[type=number]:focus{border-color:#1B2F4A}
-.unit{font-size:14px;color:#6e6e73;white-space:nowrap;min-width:28px}
+.input-row input[type=number]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.input-row input[type=number]:focus{border-color:var(--gold)}
+.unit{font-size:14px;color:var(--ink-dim);white-space:nowrap;min-width:28px}
+.g3>*,.g4>*{min-width:0}.field select,.field input{width:100%;min-width:0;box-sizing:border-box}
+input,select{font-size:16px!important}
 
-input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#e8e8ed;outline:none;cursor:pointer;margin-top:10px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--line);outline:none;cursor:pointer;margin-top:10px}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-input[type=range]:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#12213A;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:#12213A;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
-input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e8e8ed}
-.range-labels{display:flex;justify-content:space-between;font-size:11px;color:#6e6e73;margin-top:4px}
+input[type=range]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--action);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:var(--action);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--line)}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-dim);margin-top:4px}
 
 /* Stacked Bar（design_handoff_cx468_cards 3g）— 一胎/二胎 LTV 佔比 */
 .st{margin-bottom:18px}
-.st-bar{height:34px;display:flex;background:#f0f0f2;border-radius:8px;overflow:hidden;margin-bottom:10px}
+.st-bar{height:34px;display:flex;background:var(--cream);border-radius:8px;overflow:hidden;margin-bottom:10px}
 .st-bar i{height:100%;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff;letter-spacing:.06em;white-space:nowrap;overflow:hidden;transition:width .8s cubic-bezier(.22,.61,.36,1)}
-.st-1{background:#12213A}
-.st-2{background:#1B2F4A}
-.st-cap{position:relative;height:16px;border-left:1px solid #d2d2d7;border-right:1px solid #d2d2d7;margin-bottom:14px}
-.st-cap i{position:absolute;top:0;height:100%;border-top:1px solid #d2d2d7}
-.st-cap span{position:absolute;top:3px;text-align:center;font-size:9.5px;color:#a1a1a6;letter-spacing:.06em;white-space:nowrap}
-.st-key{display:flex;gap:16px;font-size:10.5px;color:#6e6e73;flex-wrap:wrap}
+.st-1{background:var(--forest-deep)}
+.st-2{background:var(--action)}
+.st-cap{position:relative;height:16px;border-left:1px solid var(--line);border-right:1px solid var(--line);margin-bottom:14px}
+.st-cap i{position:absolute;top:0;height:100%;border-top:1px solid var(--line)}
+.st-cap span{position:absolute;top:3px;text-align:center;font-size:9.5px;color:var(--ink-dim);letter-spacing:.06em;white-space:nowrap}
+.st-key{display:flex;gap:16px;font-size:10.5px;color:var(--ink-dim);flex-wrap:wrap}
 .st-key div{display:flex;align-items:center;gap:6px}
 .st-key b{width:9px;height:9px;border-radius:2px;flex:none;display:inline-block}
 
@@ -78,15 +243,24 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e8e
 @media(max-width:500px){
   .result-grid{grid-template-columns:1fr}
 }
-.result-card{background:#f5f5f7;border-radius:14px;padding:20px 16px;text-align:center}
-.result-card.hl-purple{background:#12213A;color:#fff}
-.result-card.hl-green{background:#16A34A;color:#fff}
+.result-card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:20px 16px;text-align:center}
+.result-card.hl-purple{background:var(--action);border-color:var(--action);color:#fff}
+.result-card.hl-green{background:var(--gold);border-color:var(--gold);color:var(--forest-deep)}
 .result-label{font-size:12px;font-weight:500;letter-spacing:.05em;opacity:.85;margin-bottom:6px}
 .result-value{font-size:24px;font-weight:700;letter-spacing:-.02em}
 .result-sub{font-size:11px;opacity:.7;margin-top:4px}
 
-.calc-note{font-size:12px;color:#6e6e73;line-height:1.6;padding:14px 16px;background:#f5f5f7;border-radius:10px;margin-top:8px}
+.calc-note{font-size:12px;color:var(--ink-dim);line-height:1.6;padding:14px 16px;background:var(--paper);border:.5px solid var(--line);border-radius:8px;margin-top:8px}
+
+/* FAQ：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+
+/* CTA 帶：小標＋多鈕＋免責 */
+.bt-cta .bt-disclaimer{max-width:760px;margin:32px auto 0}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -106,7 +280,7 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e8e
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-05-29"
  }
 }
@@ -128,7 +302,7 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e8e
   ]
  },
  "inLanguage": "zh-TW",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-05-29"
 }
 </script>
@@ -160,30 +334,38 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
+<div id="nav" data-theme="light" data-cta="line"></div>
+<script src="nav.js"></script>
 
-<div data-include="nav-tool"></div>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">二胎房貸試算</div>
+      <p class="bt-label">Second Mortgage Calculator</p>
+      <h1 class="bt-h1">二胎試算</h1>
+      <p class="bt-p">輸入房屋市價與一胎本金，立即試算二胎可貸金額與每月本利攤還。</p>
+    </div>
+    <img class="bt-hero-img" src="img/article-second-mortgage.jpg" alt="二胎試算" width="800" height="459" fetchpriority="high" loading="eager">
+  </div>
+</section>
 
-<div class="hero">
-  <p class="eyebrow">Second Mortgage Calculator</p>
-  <h1>二胎試算</h1>
-  <p>輸入房屋市價與一胎本金，立即試算二胎可貸金額與每月本利攤還。</p>
-</div>
+<!-- 2. 試算器（功能沿用原頁：id／class／oninput 與試算 JS 一字不改） -->
+<section class="bt-sec bt-tool">
+  <div class="bt-in">
 
-  <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:24px auto;">
-      <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-      <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 14px;"><strong>二胎能借多少，看房子的剩餘淨值。</strong>二胎額度概算＝房屋現值 × 可貸成數 − 第一順位房貸餘額。輸入房屋現值、第一胎餘額與成數，就能估算二胎可動用金額。利率通常高於第一胎、低於信貸，實際依個案與金融機構核定。</p>
-      <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>二胎能借多少，看房子的剩餘淨值。</strong>二胎額度概算＝房屋現值 × 可貸成數 − 第一順位房貸餘額。輸入房屋現值、第一胎餘額與成數，就能估算二胎可動用金額。利率通常高於第一胎、低於信貸，實際依個案與金融機構核定。</p>
+      <ul>
         <li><strong>額度</strong>：看房屋淨值（現值 − 第一胎餘額）。</li>
         <li><strong>算法</strong>：現值 × 成數 − 第一胎餘額。</li>
         <li><strong>利率</strong>：通常高於第一胎、低於信貸；銀行二胎低於民間。</li>
         <li><strong>提醒</strong>：核貸與利率依個案與金融機構決定。</li>
       </ul>
     </div>
-  </div>
 
 <div class="calc-wrap">
-
   <div class="card">
     <div class="card-title">輸入條件</div>
 
@@ -254,8 +436,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
       <div class="st-key">
         <div><b style="background:#12213A"></b>一胎剩餘本金</div>
-        <div><b style="background:#1B2F4A"></b>可貸二胎金額</div>
-        <div><b style="background:#f0f0f2;border:1px solid #d2d2d7"></b>剩餘房屋淨值</div>
+        <div><b style="background:#2F5B8F"></b>可貸二胎金額</div>
+        <div><b style="background:#F2EFE8;border:1px solid #E2DED4"></b>剩餘房屋淨值</div>
       </div>
     </div>
 
@@ -285,18 +467,23 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       本試算結果僅供參考。實際可貸金額、利率、條件依個案不動產條件、財務狀況與市場情況而定。本公司為融資租賃業者，非金融機構，最終核貸由金融機構決定。
     </div>
   </div>
+</div>
 
-  <div class="cta-strip">
-    <h2>想了解你的二胎方案？</h2>
-    <p>民間借款轉銀行、二胎整合，線上諮詢專業評估。</p>
-    <div class="cta-row">
-      <a href="https://lin.ee/PHIfSoY" class="btn-green">加入 LINE 線上諮詢</a>
-      <a href="tel:+886-931-087-996" class="btn-purple">直接來電</a>
-      <a href="apply.html" class="tool-apply-cta" style="display:inline-block;padding:14px 22px;background:#12213A;color:#fff;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none">填表申請，專員回電</a>
+  </div>
+</section>
+
+<!-- 3. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">想了解你的二胎方案？</h2>
+    <p class="bt-p">民間借款轉銀行、二胎整合，線上諮詢專業評估。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">加入 LINE 線上諮詢</a>
+      <a href="tel:+886-931-087-996" class="bt-btn bt-btn-outline-dark">直接來電</a>
+      <a href="apply.html" class="tool-apply-cta bt-btn bt-btn-outline-dark">填表申請，專員回電</a>
     </div>
   </div>
-
-</div>
+</section>
 
 <script>
 function syncSlider(a,b){document.getElementById(b).value=document.getElementById(a).value}
@@ -347,35 +534,34 @@ function calculate(){
 calculate();
 </script>
 
-<section class="faq" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
-  <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px">常見問題</div>
-  <div style="background:#fff;border:.5px solid #e3e3e6;border-radius:16px;padding:8px 24px">
-    <div style="padding:18px 0;border-bottom:.5px solid #ededf0">
-      <h3 style="font-size:16px;font-weight:700;color:#1B2F4A;margin:0 0 8px">二胎可以借多少？</h3>
-      <p style="font-size:14px;line-height:1.8;color:#3a3a3c;margin:0">二胎能動用的額度主要看房屋的剩餘淨值：概算方式為「房屋現值 × 可貸成數 − 第一順位房貸餘額」。可貸成數會依屋況、地段、屋齡而不同，一般落於 70–85%。實際可貸金額仍依個案不動產條件、財務狀況與市場情況而定，最終核貸由金融機構決定。</p>
-    </div>
-    <div style="padding:18px 0;border-bottom:.5px solid #ededf0">
-      <h3 style="font-size:16px;font-weight:700;color:#1B2F4A;margin:0 0 8px">二胎利率大概多少？</h3>
-      <p style="font-size:14px;line-height:1.8;color:#3a3a3c;margin:0">二胎利率通常高於第一順位房貸、低於一般信用貸款，其中銀行二胎又低於民間二胎。實際利率因人而異，會依個案財務狀況、抵押條件與市場情況評估，最終利率與核貸由金融機構決定，試算頁的利率僅供概算參考。</p>
-    </div>
-    <div style="padding:18px 0;border-bottom:.5px solid #ededf0">
-      <h3 style="font-size:16px;font-weight:700;color:#1B2F4A;margin:0 0 8px">二胎和增貸差在哪？</h3>
-      <p style="font-size:14px;line-height:1.8;color:#3a3a3c;margin:0">增貸是在原銀行、原房貸架構下再往上加額度，通常維持同一順位；二胎則是在既有第一順位房貸之外，另設定第二順位抵押取得資金，資金來源可為銀行或民間。兩者的成數、利率與審核標準都不同，適合哪一種需依個案財務狀況評估。</p>
-    </div>
-    <div style="padding:18px 0">
-      <h3 style="font-size:16px;font-weight:700;color:#1B2F4A;margin:0 0 8px">銀行二胎被拒還有機會嗎？</h3>
-      <p style="font-size:14px;line-height:1.8;color:#3a3a3c;margin:0">曾遭銀行二胎婉拒，不代表沒有其他路徑。可以重新盤點房屋淨值、負債結構與還款能力，評估民間二胎或後續轉回銀行的分階段方案。是否可行、條件如何，仍依個案不動產與財務狀況評估，最終核貸由金融機構決定；歡迎 LINE 線上諮詢，不申請不收費。</p>
-    </div>
-  </div>
-</section>
+<!-- 4. FAQ（與 FAQPage JSON-LD 逐字同源）＋ 延伸閱讀 -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
 
-<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
-  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
-    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-      <a href="article-second-mortgage.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎房貸完整指南 →</a>
-      <a href="second-mortgage.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">二胎服務介紹 →</a>
-      <a href="mortgage-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">一胎房貸試算 →</a>
+    <details open>
+      <summary><h3>二胎可以借多少？</h3></summary>
+      <p>二胎能動用的額度主要看房屋的剩餘淨值：概算方式為「房屋現值 × 可貸成數 − 第一順位房貸餘額」。可貸成數會依屋況、地段、屋齡而不同，一般落於 70–85%。實際可貸金額仍依個案不動產條件、財務狀況與市場情況而定，最終核貸由金融機構決定。</p>
+    </details>
+
+    <details>
+      <summary><h3>二胎利率大概多少？</h3></summary>
+      <p>二胎利率通常高於第一順位房貸、低於一般信用貸款，其中銀行二胎又低於民間二胎。實際利率因人而異，會依個案財務狀況、抵押條件與市場情況評估，最終利率與核貸由金融機構決定，試算頁的利率僅供概算參考。</p>
+    </details>
+
+    <details>
+      <summary><h3>二胎和增貸差在哪？</h3></summary>
+      <p>增貸是在原銀行、原房貸架構下再往上加額度，通常維持同一順位；二胎則是在既有第一順位房貸之外，另設定第二順位抵押取得資金，資金來源可為銀行或民間。兩者的成數、利率與審核標準都不同，適合哪一種需依個案財務狀況評估。</p>
+    </details>
+
+    <details>
+      <summary><h3>銀行二胎被拒還有機會嗎？</h3></summary>
+      <p>曾遭銀行二胎婉拒，不代表沒有其他路徑。可以重新盤點房屋淨值、負債結構與還款能力，評估民間二胎或後續轉回銀行的分階段方案。是否可行、條件如何，仍依個案不動產與財務狀況評估，最終核貸由金融機構決定；歡迎 LINE 線上諮詢，不申請不收費。</p>
+    </details>
+
+    <div class="bt-card bt-local">
+      <div class="bt-label">延伸閱讀</div>
+      <div class="bt-chips"><a href="article-second-mortgage.html">二胎房貸完整指南 →</a><a href="second-mortgage.html">二胎服務介紹 →</a><a href="mortgage-calculator.html">一胎房貸試算 →</a></div>
     </div>
   </div>
 </section>

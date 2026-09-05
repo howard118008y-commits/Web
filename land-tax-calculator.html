@@ -5,166 +5,293 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>土地增值稅試算 2026｜稅務專用物價指數表・自用優惠稅率</title>
 <meta name="description" content="輸入前次與本次移轉現值，自動帶入財政部稅務專用物價指數，算出土地漲價總數額與一般用地 20%／30%／40% 或自用住宅優惠稅率應納稅額，並附物價指數完整表。">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
-body{background:#fff}
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#16A34A;text-decoration:none;font-weight:500}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-detached.jpg') center/cover no-repeat;padding:60px 24px 44px;text-align:center}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.35;margin-bottom:14px;color:#fff}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero p{font-size:16px;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto}
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-@media(max-width:768px){
-  .hero h1{font-size:30px}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁補充（土增稅試算頁）：試算器選擇器沿用原頁一字不改、只換 token；FAQ「＋」CSS 生成；名詞解釋列 === */
+/* 試算器外框 */
+.bt-tool .bt-qa{margin-bottom:24px}
+.bt-qa .bt-btns{margin-top:16px}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:var(--tint)}
+.bt-sec-tight{padding-top:0}
+.bt-local.bt-local-solo{margin-top:0}
 
-.wrap{max-width:780px;margin:40px auto;padding:0 20px 80px}
-
-.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-
-.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px}
-
-.section-label{font-size:14px;font-weight:700;color:#1B2F4A;margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid #f0f0f0}
-
+/* CARD */
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:32px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card-title{font-size:13px;font-weight:700;color:var(--gold-deep);letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.section-label{font-size:14px;font-weight:700;color:var(--ink);margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid var(--line)}
 .section-label:first-of-type{margin-top:0}
 
+/* FIELD（輸入框 ≥16px：iOS 不放大整頁） */
 .field{margin-bottom:16px}
-
-.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:#1B2F4A;margin-bottom:6px}
-
-.field label span{font-size:11px;font-weight:400;color:#6e6e73}
-
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field label span{font-size:11px;font-weight:400;color:var(--ink-dim)}
 .input-row{display:flex;align-items:center;gap:8px}
-
-.input-row input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1B2F4A;outline:none;background:#fff;transition:border-color .2s}
+.input-row input[type=number]{flex:1;height:46px;border:1.5px solid var(--line);border-radius:8px;padding:0 12px;font-size:16px;color:var(--ink);outline:none;background:#fff;font-family:inherit;transition:border-color .3s ease-in-out}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.input-row input[type=number]:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-
-.input-row input[type=number]:focus{border-color:#16A34A}
-
-.input-row select{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1B2F4A;outline:none;background:#fff;transition:border-color .2s;cursor:pointer}
+.input-row input[type=number]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.input-row input[type=number]:focus{border-color:var(--gold)}
+.input-row select{flex:1;height:46px;border:1.5px solid var(--line);border-radius:8px;padding:0 12px;font-size:16px;color:var(--ink);outline:none;background:#fff;font-family:inherit;transition:border-color .3s ease-in-out;cursor:pointer}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.input-row select:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-
-.input-row select:focus{border-color:#16A34A}
-
-.unit{font-size:13px;color:#6e6e73;white-space:nowrap;min-width:20px}
-
+.input-row select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.input-row select:focus{border-color:var(--gold)}
+.unit{font-size:13px;color:var(--ink-dim);white-space:nowrap;min-width:20px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-
 @media(max-width:540px){
   .row2{grid-template-columns:1fr}
   .row3{grid-template-columns:1fr 1fr}
 }
-
-.toggle-row{display:flex;gap:0;border:1.5px solid #d2d2d7;border-radius:10px;overflow:hidden}
-
-.toggle-btn{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:500;color:#6e6e73;cursor:pointer;border:none;background:#fff;transition:all .2s;border-right:1px solid #d2d2d7}
-
+.row2>*,.row3>*{min-width:0}.field select,.field input{width:100%;min-width:0;box-sizing:border-box}
+input,select{font-size:16px!important}
+.toggle-row{display:flex;gap:0;border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.toggle-btn{flex:1;padding:11px;text-align:center;font-size:13px;font-weight:500;color:var(--ink-dim);cursor:pointer;border:none;background:#fff;font-family:inherit;transition:all .3s ease-in-out;border-right:1px solid var(--line)}
 .toggle-btn:last-child{border-right:none}
-
-.toggle-btn.active{background:#16A34A;color:#fff;font-weight:700}
-
+.toggle-btn.active{background:var(--action);color:#fff;font-weight:700}
 
 /* CPI lookup */
-.cpi-lookup{background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:1.5px solid #16A34A;border-radius:16px;padding:20px 22px;margin-bottom:18px}
-
-.cpi-lookup-title{font-size:13px;font-weight:700;color:#166534;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-
-.cpi-result-tag{display:inline-block;background:#16A34A;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:10px}
-
-.cpi-note{font-size:11px;color:#6e6e73;margin-top:6px}
-
+.cpi-lookup{background:var(--tint);border:1.5px solid var(--action);border-radius:8px;padding:20px 22px;margin-bottom:18px}
+.cpi-lookup-title{font-size:13px;font-weight:700;color:var(--action);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.cpi-result-tag{display:inline-block;background:var(--action);color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:8px;margin-top:10px}
+.cpi-note{font-size:11px;color:var(--ink-dim);margin-top:6px}
 
 /* Results — Ticket Notch（design_handoff_cx468_cards 3c） */
 .tc-hd{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.tc-ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;flex:none;background:#12213A}
+.tc-ico{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--forest-deep)}
 .tc-ico svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.tc-nm{font-family:"Noto Serif TC","Songti TC",serif;font-size:15.5px;font-weight:600;color:#12213A;letter-spacing:.01em}
-.tc-sub{font-size:10.5px;color:#a1a1a6;letter-spacing:.05em;margin-top:3px}
-.tc-out{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid #e3e3e6;margin-top:16px;padding-top:14px}
-.tc-ol{font-size:10.5px;color:#86868b;letter-spacing:.1em}
-.tc-ov{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#12213A}
-.tc-ov em{font-style:normal;font-size:12px;color:#86868b;margin-left:2px;font-weight:500}
-.tc-note{font-size:9.5px;color:#a1a1a6;line-height:1.7;margin-top:10px;letter-spacing:.02em}
-
-.rc-line{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:#6e6e73;letter-spacing:.02em}
-.rc-line b{color:#12213A;font-weight:600;font-variant-numeric:tabular-nums}
-
-.tk{position:relative;background:#fff;border:1px solid #e3e3e6;padding:26px 24px;--n:11px}
-.tk::before,.tk::after{content:"";position:absolute;top:112px;width:var(--n);height:calc(var(--n)*2);background:#fff;border:1px solid #e3e3e6}
+.tc-nm{font-size:15.5px;font-weight:700;color:var(--forest-deep);letter-spacing:.01em}
+.tc-sub{font-size:10.5px;color:var(--ink-dim);letter-spacing:.05em;margin-top:3px}
+.tc-out{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.tc-ol{font-size:10.5px;color:var(--ink-dim);letter-spacing:.1em}
+.tc-ov{font-size:26px;font-weight:700;color:var(--forest-deep)}
+.tc-ov em{font-style:normal;font-size:12px;color:var(--ink-dim);margin-left:2px;font-weight:500}
+.tc-note{font-size:9.5px;color:var(--ink-dim);line-height:1.7;margin-top:10px;letter-spacing:.02em}
+.rc-line{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--ink-dim);letter-spacing:.02em}
+.rc-line b{color:var(--forest-deep);font-weight:600;font-variant-numeric:tabular-nums}
+.tk{position:relative;background:#fff;border:1px solid var(--line);padding:26px 24px;--n:11px}
+.tk::before,.tk::after{content:"";position:absolute;top:112px;width:var(--n);height:calc(var(--n)*2);background:#fff;border:1px solid var(--line)}
 .tk::before{left:-1px;border-left:none;border-radius:0 999px 999px 0}
 .tk::after{right:-1px;border-right:none;border-radius:999px 0 0 999px}
-.tk-perf{border-top:1.5px dashed #d2d2d7;margin:16px -24px 14px}
-.tk-stamp{position:absolute;right:20px;top:22px;width:52px;height:52px;border:1.5px solid rgba(27,47,74,.34);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-13deg);font-size:8.5px;font-weight:600;color:#1B2F4A;letter-spacing:.08em;line-height:1.35}
+.tk-perf{border-top:1.5px dashed var(--line);margin:16px -24px 14px}
+.tk-stamp{position:absolute;right:20px;top:22px;width:52px;height:52px;border:1.5px solid rgba(27,47,74,.34);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-13deg);font-size:8.5px;font-weight:600;color:var(--ink);letter-spacing:.08em;line-height:1.35}
+.info-box{background:var(--tint);border:1.5px solid var(--action);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--ink);line-height:1.75}
+.warn-box{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--gold-deep);line-height:1.75}
 
-.info-box{background:#f0fdf4;border:1.5px solid #16A34A;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#166534;line-height:1.75}
-
-.warn-box{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#9A6D3A;line-height:1.75}
-
-
-/* Speed table */
-.speed-table{width:100%;border-collapse:collapse;font-size:12px}
-
-.speed-table th{background:#1B2F4A;color:#fff;padding:10px;text-align:center;font-weight:600}
-
+/* Speed table（外層 .speed-table-wrap 可橫向捲動） */
+.speed-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.speed-table{width:100%;border-collapse:collapse;font-size:12px;min-width:480px}
+.speed-table th{background:var(--forest);color:#fff;padding:10px;text-align:center;font-weight:600}
 .speed-table th:first-child{text-align:left}
-
-.speed-table td{padding:9px 10px;text-align:center;border-bottom:.5px solid #f0f0f0;color:#1B2F4A}
-
-.speed-table td:first-child{text-align:left;color:#6e6e73;font-weight:500}
-
-.speed-table tr.active-row td{background:#f0fdf4;color:#16A34A;font-weight:700}
-
+.speed-table td{padding:9px 10px;text-align:center;border-bottom:.5px solid var(--line);color:var(--ink)}
+.speed-table td:first-child{text-align:left;color:var(--ink-dim);font-weight:500}
+.speed-table tr.active-row td{background:var(--tint);color:var(--action);font-weight:700}
 .speed-table tr:last-child td{border-bottom:none}
 
-
 /* CPI full table */
-.cpi-table-wrap{overflow-x:auto;max-height:360px;overflow-y:auto;margin-top:12px;border-radius:10px;border:1px solid #e8e8ed}
-
+.cpi-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:360px;overflow-y:auto;margin-top:12px;border-radius:8px;border:1px solid var(--line)}
 .cpi-full-table{width:100%;border-collapse:collapse;font-size:11px}
-
-.cpi-full-table th{background:#1B2F4A;color:#fff;padding:7px 8px;text-align:center;font-weight:600;position:sticky;top:0;z-index:1}
-
+.cpi-full-table th{background:var(--forest);color:#fff;padding:7px 8px;text-align:center;font-weight:600;position:sticky;top:0;z-index:1}
 .cpi-full-table th:first-child{text-align:center;min-width:48px}
+.cpi-full-table td{padding:6px 8px;text-align:center;border-bottom:.5px solid var(--line);color:var(--ink);white-space:nowrap}
+.cpi-full-table tr:nth-child(even) td{background:var(--paper)}
+.cpi-full-table tr.highlight-year td{background:var(--cream);font-weight:700}
+.cpi-full-table tr.selected-row td{background:var(--tint)!important;font-weight:700;color:var(--action)}
+.cpi-full-table tr.selected-row td.selected-cell{background:var(--action)!important;color:#fff!important;font-weight:700;border-radius:4px}
 
-.cpi-full-table td{padding:6px 8px;text-align:center;border-bottom:.5px solid #f0f0f0;color:#1B2F4A;white-space:nowrap}
-
-.cpi-full-table tr:nth-child(even) td{background:#fafafa}
-
-.cpi-full-table tr.highlight-year td{background:#fef9c3;font-weight:700}
-
-.cpi-full-table tr.selected-row td{background:#dcfce7!important;font-weight:700;color:#166534}
-
-.cpi-full-table tr.selected-row td.selected-cell{background:#16A34A!important;color:#fff!important;font-weight:700;border-radius:4px}
-
-
-.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
-
-
-.cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
-
-
-
-
-.btn-purple{background:#1B2F4A;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+/* DISCLAIMER */
+.disclaimer{font-size:11px;color:var(--ink-dim);line-height:1.7;margin-top:16px;padding:12px 16px;background:var(--paper);border-radius:8px;border:.5px solid var(--line)}
 
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 #fracDen,#fracNum{outline:none}
-#fracDen:focus-visible,#fracNum:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
+#fracDen:focus-visible,#fracNum:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* FAQ：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+
+/* 名詞解釋 */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -256,7 +383,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/land-tax-calculator.html",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -334,22 +461,33 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav-tool"></div>
-<div class="hero">
-  <p class="eyebrow">Land Value Increment Tax</p>
-  <h1>土地增值稅試算</h1>
-  <p>依財政部官方公式，內建民國48–115年物價指數表，自動帶入計算。</p>
-</div>
-<div class="wrap">
-<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #1B2F4A;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
-  <p style="font-size:15.5px;line-height:1.8;color:#1B2F4A;margin:0 0 8px"><strong>賣房時的土地增值稅，是依「土地公告現值的漲幅」課徵，不是看成交價。</strong>稅基＝移轉時土地公告現值 −（前次移轉現值 × 物價指數調整）。一般用地按漲幅採 20%／30%／40% 三級累進；符合自用住宅用地條件可適用 10% 優惠稅率（一生一次，另有「一生一屋」可再適用）。本工具幫你快速估算。</p>
-  <div style="font-size:11px;color:#86868b;line-height:1.65">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
-<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1B2F4A;padding:9px 18px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:9px 18px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
+
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">土增稅試算</div>
+      <p class="bt-label">Land Value Increment Tax</p>
+      <h1 class="bt-h1">土地增值稅試算</h1>
+      <p class="bt-p">依財政部官方公式，內建民國48–115年物價指數表，自動帶入計算。</p>
+    </div>
+    <img class="bt-hero-img" src="img/gen-landscape-taiwan.jpg" alt="土地增值稅試算" width="1600" height="893" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 試算器（功能沿用原頁：id／class／onclick／oninput／onchange 與試算 JS 一字不改） -->
+<section class="bt-sec bt-tool">
+  <div class="bt-in">
+
+<div id="quick-answer" class="bt-card bt-qa">
+  <div class="bt-label">快速答案</div>
+  <p><strong>賣房時的土地增值稅，是依「土地公告現值的漲幅」課徵，不是看成交價。</strong>稅基＝移轉時土地公告現值 −（前次移轉現值 × 物價指數調整）。一般用地按漲幅採 20%／30%／40% 三級累進；符合自用住宅用地條件可適用 10% 優惠稅率（一生一次，另有「一生一屋」可再適用）。本工具幫你快速估算。</p>
+  <div class="bt-small">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
+  <div class="bt-btns"><a href="tel:0222490517" class="bt-btn bt-btn-sm bt-btn-ghost">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-sm">加 LINE 免費諮詢</a></div>
 </div>
 
-
-<!-- 輸入 (依國稅局欄位順序) -->
 <div class="card">
   <div class="card-title">輸入資料</div>
 
@@ -368,7 +506,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <!-- 3. 前次移轉年期 + 消費者物價總指數 (可選擇模式) -->
   <div class="cpi-lookup">
     <div class="cpi-lookup-title">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#16A34A" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2F5B8F" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#2F5B8F" stroke-width="2" stroke-linecap="round"/></svg>
       前次移轉年期 ・ 消費者物價總指數（民國 115年3月為基準）
     </div>
     <div class="row3">
@@ -389,7 +527,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
       <div style="display:flex;flex-direction:column;justify-content:flex-end">
         <label style="font-size:13px;font-weight:600;color:#1B2F4A;margin-bottom:6px;display:block">查詢結果</label>
-        <div id="cpiTag" style="height:46px;background:#f0fdf4;border:1.5px solid #16A34A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#16A34A">—</div>
+        <div id="cpiTag" style="height:46px;background:#EEF2F7;border:1.5px solid #2F5B8F;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#2F5B8F">—</div>
       </div>
     </div>
     <div class="cpi-note" id="cpiNote">選擇前次移轉年月自動帶入物價總指數，亦可下方手動覆寫</div>
@@ -418,11 +556,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="field">
     <label>移轉或設典範圍 <span id="fracDisplay">1／1 = 100%</span></label>
     <div class="input-row" style="gap:8px">
-      <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分子</span>
-      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;text-align:center;background:#fff" oninput="updateFrac()">
-      <span style="font-size:18px;color:#6e6e73;flex-shrink:0">／</span>
-      <span style="font-size:13px;color:#6e6e73;flex-shrink:0;font-weight:600">分母</span>
-      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;text-align:center;background:#fff" oninput="updateFrac()">
+      <span style="font-size:13px;color:#5A6878;flex-shrink:0;font-weight:600">分子</span>
+      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:#1B2F4A;font-family:inherit" oninput="updateFrac()">
+      <span style="font-size:18px;color:#5A6878;flex-shrink:0">／</span>
+      <span style="font-size:13px;color:#5A6878;flex-shrink:0;font-weight:600">分母</span>
+      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:#1B2F4A;font-family:inherit" oninput="updateFrac()">
     </div>
   </div>
 
@@ -465,19 +603,19 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 
   <!-- 申報現值總額（自動算） -->
-  <div style="margin-top:18px;padding:14px 18px;background:#f0fdf4;border-radius:10px;border:1px solid #16A34A;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-    <span style="font-size:13px;font-weight:600;color:#166534">申報現值總額（系統自動計算）</span>
-    <span style="font-size:18px;font-weight:700;color:#16A34A" id="sellTotalDisplay">—</span>
+  <div style="margin-top:18px;padding:14px 18px;background:#EEF2F7;border-radius:8px;border:1px solid #2F5B8F;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <span style="font-size:13px;font-weight:600;color:#1B2F4A">申報現值總額（系統自動計算）</span>
+    <span style="font-size:18px;font-weight:700;color:#2F5B8F" id="sellTotalDisplay">—</span>
   </div>
 
   <!-- 估算 / 清除 按鈕 -->
   <div style="display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap">
-    <button onclick="calc()" style="background:#1e40af;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">增值稅估算</button>
-    <button onclick="clearAll()" style="background:#737373;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">清除資料</button>
+    <button onclick="calc()" style="background:#2F5B8F;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">增值稅估算</button>
+    <button onclick="clearAll()" style="background:#fff;color:#5A6878;font-size:16px;font-weight:700;padding:14px 36px;border:1.5px solid #E2DED4;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">清除資料</button>
   </div>
 
   <!-- 貼心提醒 -->
-  <p style="font-size:13px;color:#dc2626;text-align:center;margin-top:18px;line-height:1.7;font-weight:500">
+  <p style="font-size:13px;color:#9A6D3A;text-align:center;margin-top:18px;line-height:1.7;font-weight:500">
     《貼心提醒》請於試算前先點選「清除資料」清空各欄位後再輸入資料，<br>以避免欄項內殘留前一筆資料，造成試算結果錯誤。
   </p>
 </div>
@@ -519,12 +657,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <div id="infoBox" class="info-box" style="display:none"></div>
   <div id="warnBox" class="warn-box" style="display:none"></div>
-  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#12213A;color:#fff;border-radius:12px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
+  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#2F5B8F;color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
 <!-- 速算稅率表 -->
 <div class="card">
   <div class="card-title">官方速算稅率表</div>
+  <div class="speed-table-wrap">
   <table class="speed-table">
     <thead><tr><th>持有年限</th><th>漲價未達100%</th><th>漲價100%–200%</th><th>漲價超過200%</th></tr></thead>
     <tbody>
@@ -534,7 +673,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <tr id="row-40"><td>超過40年</td><td>×20%</td><td>×26% − A×6%</td><td>×32% − A×18%</td></tr>
     </tbody>
   </table>
-  <div style="font-size:12px;color:#6e6e73;margin-top:12px;line-height:1.8">
+  </div>
+  <div style="font-size:12px;color:#5A6878;margin-top:12px;line-height:1.8">
     A = 調整後原地價 ｜ 自用住宅：一律10% ｜ 重劃後首次移轉：查定稅額再減40%
   </div>
 </div>
@@ -542,7 +682,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- 物價指數完整表 -->
 <div class="card">
   <div class="card-title">民國115年3月消費者物價總指數表（稅務專用）</div>
-  <p style="font-size:12px;color:#6e6e73;margin-bottom:10px">以各年(月)為基期=100，115年3月所屬指數。點選年月可自動帶入上方試算。</p>
+  <p style="font-size:12px;color:#5A6878;margin-bottom:10px">以各年(月)為基期=100，115年3月所屬指數。點選年月可自動帶入上方試算。</p>
   <div class="cpi-table-wrap">
     <table class="cpi-full-table" id="cpiFullTable">
       <thead><tr><th>民國年</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr></thead>
@@ -551,15 +691,20 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </div>
 
-<div class="cta-strip">
-  <h2>要出售不動產？先試算後再決策。</h2>
-  <p>想出售又不想搬走？售後回租是「過戶給投資方＋簽租約續住＋可依約買回」一組安排，先免費評估適不適合你的個案。</p>
-  <div class="cta-row">
-    <a href="https://lin.ee/PHIfSoY" class="btn-green">加入 LINE 諮詢</a>
-    <a href="sale-leaseback.html" class="btn-purple">了解售後回租</a>
   </div>
-</div>
-</div>
+</section>
+
+<!-- 3. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">要出售不動產？先試算後再決策。</h2>
+    <p class="bt-p">想出售又不想搬走？售後回租是「過戶給投資方＋簽租約續住＋可依約買回」一組安排，先免費評估適不適合你的個案。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">加入 LINE 諮詢</a>
+      <a href="sale-leaseback.html" class="bt-btn bt-btn-outline-dark">了解售後回租</a>
+    </div>
+  </div>
+</section>
 
 <script>
 // 民國115年3月物價指數表（稅務專用）- 各年月為基期=100
@@ -844,32 +989,54 @@ buildCPITable();
 document.getElementById('row-0').classList.add('active-row');
 lookupCPI();
 </script>
-<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
-  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
-    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-      <a href="private-to-bank.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">民間轉銀行 →</a>
-      <a href="second-mortgage.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">房屋二胎增貸 →</a>
-      <a href="sale-leaseback.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">不動產售後回租 →</a>
-      <a href="realestate-tax-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">房地合一稅試算 →</a>
-      <a href="article-sale-leaseback-guide.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">售後回租完整指南 →</a>
+
+<!-- 4. 延伸閱讀 -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-card bt-local bt-local-solo">
+      <div class="bt-label">延伸閱讀</div>
+      <div class="bt-chips"><a href="private-to-bank.html">民間轉銀行 →</a><a href="second-mortgage.html">房屋二胎增貸 →</a><a href="sale-leaseback.html">不動產售後回租 →</a><a href="realestate-tax-calculator.html">房地合一稅試算 →</a><a href="article-sale-leaseback-guide.html">售後回租完整指南 →</a></div>
     </div>
   </div>
 </section>
-<section style="max-width:760px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">名詞解釋</h2>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">土地增值稅</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 土地移轉時，就土地公告現值漲價部分課徵的稅，賣方繳納。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">漲價總數額</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 移轉時公告現值減前次移轉現值（經物價指數調整）後的漲價金額，為課稅基礎。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">自用住宅優惠稅率</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 符合自用條件可適用 10% 優惠稅率，有「一生一次」與「一生一屋」。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">重購退稅</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 出售自用住宅後一定期間內重購、符合條件者，可申請退還已繳土地增值稅。</span></div>
+
+<!-- 5. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec bt-sec-tight">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">名詞解釋</h2>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>土地增值稅</strong><span> — 土地移轉時，就土地公告現值漲價部分課徵的稅，賣方繳納。</span></div>
+      <div class="bt-term"><strong>漲價總數額</strong><span> — 移轉時公告現值減前次移轉現值（經物價指數調整）後的漲價金額，為課稅基礎。</span></div>
+      <div class="bt-term"><strong>自用住宅優惠稅率</strong><span> — 符合自用條件可適用 10% 優惠稅率，有「一生一次」與「一生一屋」。</span></div>
+      <div class="bt-term"><strong>重購退稅</strong><span> — 出售自用住宅後一定期間內重購、符合條件者，可申請退還已繳土地增值稅。</span></div>
+    </div>
+  </div>
 </section>
+
 <div data-include="line-qr"></div>
-<section style="max-width:720px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">常見問題</h2>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">自用住宅優惠稅率 10% 怎麼適用？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">需符合本人或配偶、直系親屬設籍、無出租或營業使用、都市土地 3 公畝（非都市 7 公畝）以內等條件，並於申報時提出；「一生一次」用過後，符合條件可再用「一生一屋」。實際以稅捐稽徵機關核定為準。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">土地增值稅和地價稅有什麼不同？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">地價稅是「持有」期間每年課徵；土地增值稅是「移轉（賣出）」時才課，課的是土地公告現值的漲價部分。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">重購自用住宅可以退稅嗎？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">出售自用住宅後一定期間內重購、且符合條件者，可申請退還已繳土地增值稅；依稅法規定與稽徵機關核定。</p></div>
+
+<!-- 6. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
+
+    <details open>
+      <summary><h3>自用住宅優惠稅率 10% 怎麼適用？</h3></summary>
+      <p>需符合本人或配偶、直系親屬設籍、無出租或營業使用、都市土地 3 公畝（非都市 7 公畝）以內等條件，並於申報時提出；「一生一次」用過後，符合條件可再用「一生一屋」。實際以稅捐稽徵機關核定為準。</p>
+    </details>
+
+    <details>
+      <summary><h3>土地增值稅和地價稅有什麼不同？</h3></summary>
+      <p>地價稅是「持有」期間每年課徵；土地增值稅是「移轉（賣出）」時才課，課的是土地公告現值的漲價部分。</p>
+    </details>
+
+    <details>
+      <summary><h3>重購自用住宅可以退稅嗎？</h3></summary>
+      <p>出售自用住宅後一定期間內重購、且符合條件者，可申請退還已繳土地增值稅；依稅法規定與稽徵機關核定。</p>
+    </details>
+  </div>
 </section>
+
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 <script id="cx-embed-guard">

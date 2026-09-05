@@ -5,50 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>空屋成本計算機｜每月房貸利息＋管理費損失一次看｜鋮馨租賃</title>
 <meta name="description" content="房子閒置一個月你損失多少？輸入房貸利息、管理費、稅金、機會成本，立刻算出空屋每月燒錢金額。新北中和鋮馨租賃提供包租代管，把空屋變現金流。">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#ef4444;text-decoration:none;font-weight:500}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-renovation.jpg') center/cover no-repeat;padding:60px 24px 44px;text-align:center}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.eyebrow{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.hero h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px;color:#fff}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:rgba(27,47,74,.08)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero p{font-size:16px;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto}
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-@media(max-width:768px){
-  .hero h1{font-size:30px}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 延伸閱讀 chips */
+.bt-local .bt-label{margin-bottom:8px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+}
+/* === 本頁補充（試算器頁通用）：試算器選擇器沿用原頁一字不改、只換 token；FAQ「＋」CSS 生成；名詞解釋列 === */
+/* 試算器外框 */
+.bt-tool .bt-qa{margin-bottom:24px}
+.bt-tool .bt-qa .bt-btns{margin-top:14px}
 
-.wrap{max-width:780px;margin:40px auto;padding:0 20px 80px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:32px;margin-bottom:20px;box-shadow:var(--shadow)}
 
-.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-title{font-size:14px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:20px}
 
-.card-title{font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px}
-
-.sec{font-size:14px;font-weight:700;color:#1B2F4A;margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid #f0f0f0}
+.sec{font-size:14px;font-weight:700;color:var(--ink);margin:24px 0 14px;padding-bottom:8px;border-bottom:1.5px solid var(--line)}
 
 .sec:first-of-type{margin-top:0}
 
 .field{margin-bottom:16px}
 
-.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:#1B2F4A;margin-bottom:6px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
 
-.field label span{font-size:11px;font-weight:400;color:#6e6e73}
+.field label span{font-size:11px;font-weight:400;color:var(--ink-dim)}
 
 .irow{display:flex;align-items:center;gap:8px}
 
-.irow input[type=number]{flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:10px;padding:0 12px;font-size:15px;color:#1B2F4A;outline:none;background:#fff;transition:border-color .2s}
+.g3>*,.g4>*{min-width:0}.field select,.field input{width:100%;min-width:0;box-sizing:border-box}
+input,select{font-size:16px!important}
+.irow input[type=number]{flex:1;height:46px;border:1.5px solid var(--line);border-radius:8px;padding:0 12px;font-size:16px;color:var(--ink);outline:none;background:#fff;font-family:inherit;transition:border-color .3s ease-in-out}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.irow input[type=number]:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
+.irow input[type=number]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 
-.irow input:focus{border-color:#ef4444}
+.irow input:focus{border-color:var(--gold)}
 
-.unit{font-size:13px;color:#6e6e73;white-space:nowrap}
+.unit{font-size:13px;color:var(--ink-dim);white-space:nowrap}
 
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
@@ -57,13 +140,13 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 }
 
 /* Odometer（design_handoff_cx468_cards 3j）— 深底跳字碼表，逐位數動畫收斂至真實試算值（非展示用假動畫） */
-.res-main{background:#12213A;border-radius:16px;padding:28px;text-align:center;margin-bottom:16px}
+.res-main{background:var(--forest-deep);border-radius:8px;padding:28px;text-align:center;margin-bottom:16px}
 
 .res-main-lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}
 
 .od-win{display:flex;align-items:flex-end;justify-content:center;gap:3px;flex-wrap:wrap;margin:10px 0 4px}
 
-.od-d{width:26px;height:42px;overflow:hidden;position:relative;background:#1a1a1e;border:1px solid rgba(255,255,255,.15);border-radius:4px}
+.od-d{width:26px;height:42px;overflow:hidden;position:relative;background:var(--forest);border:1px solid rgba(255,255,255,.15);border-radius:4px}
 
 .od-d ul{position:absolute;top:0;left:0;right:0;height:auto;margin:0;padding:0;list-style:none;transition:transform .8s cubic-bezier(.22,.61,.36,1)}
 
@@ -83,58 +166,64 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
   .rg{grid-template-columns:1fr 1fr}
 }
 
-.rc{background:#f5f5f7;border-radius:12px;padding:16px 12px;text-align:center}
+.rc{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 12px;text-align:center}
 
-.rc-lbl{font-size:11px;color:#6e6e73;margin-bottom:5px}
+.rc-lbl{font-size:11px;color:var(--ink-dim);margin-bottom:5px}
 
-.rc-val{font-size:17px;font-weight:700;color:#1B2F4A}
+.rc-val{font-size:17px;font-weight:700;color:var(--ink)}
 
-.rc-sub{font-size:10px;color:#aaa;margin-top:2px}
+.rc-sub{font-size:10px;color:var(--ink-dim);margin-top:2px}
 
-.rc.red{background:#ef4444}
+.rc.red{background:var(--action);border-color:var(--action)}
 
 .rc.red .rc-lbl,.rc.red .rc-sub{color:rgba(255,255,255,.65)}
 
 .rc.red .rc-val{color:#fff}
 
-.rc.amber{background:#f59e0b}
+.rc.amber{background:var(--gold);border-color:var(--gold)}
 
-.rc.amber .rc-lbl,.rc.amber .rc-sub{color:rgba(255,255,255,.65)}
+.rc.amber .rc-lbl,.rc.amber .rc-sub{color:rgba(18,33,58,.7)}
 
-.rc.amber .rc-val{color:#fff}
+.rc.amber .rc-val{color:var(--forest-deep)}
 
-.detail{background:#f5f5f7;border-radius:12px;padding:18px 20px;font-size:13px;line-height:2.1}
+.detail{background:var(--paper);border-radius:8px;padding:18px 20px;font-size:13px;line-height:2.1;overflow-x:auto}
 
-.dr{display:flex;justify-content:space-between;border-bottom:.5px solid #e8e8ed;padding:3px 0}
+.dr{display:flex;justify-content:space-between;border-bottom:.5px solid var(--line);padding:3px 0}
 
-.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:#ef4444}
+.dr:last-child{border-bottom:none;font-weight:700;font-size:14px;color:var(--action)}
 
-.dr.minus span:last-child{color:#ef4444}
+.dr.minus span:last-child{color:var(--gold-deep)}
 
-.month-strip{background:linear-gradient(135deg,#fff7ed,#fef2f2);border:1.5px solid #fca5a5;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.month-strip{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
 
-.month-big{font-size:36px;font-weight:700;color:#ef4444}
+.month-big{font-size:36px;font-weight:700;color:var(--action)}
 
-.month-label{font-size:12px;color:#9ca3af}
+.month-label{font-size:12px;color:var(--ink-dim)}
 
-.info-box{background:#f0fdf4;border:1.5px solid #16A34A;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#166534;line-height:1.75}
+.info-box{background:var(--tint);border:1.5px solid var(--action);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--ink);line-height:1.75}
 
-.warn-box{background:#fff7ed;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#9A6D3A;line-height:1.75}
+.warn-box{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--gold-deep);line-height:1.75}
 
-.alert-box{background:#fef2f2;border:1.5px solid #ef4444;border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px;color:#b91c1c;line-height:1.75}
+.alert-box{background:var(--cream);border:1.5px solid var(--gold-deep);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--forest-deep);line-height:1.75}
 
-.disclaimer{font-size:11px;color:#6e6e73;line-height:1.7;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
+.disclaimer{font-size:11px;color:var(--ink-dim);line-height:1.7;margin-top:16px;padding:12px 16px;background:var(--paper);border-radius:8px;border:.5px solid var(--line)}
 
+.tool-apply-cta{display:block;margin:16px 0 0;padding:18px;background:var(--action);color:#fff;border-radius:8px;text-align:center;font-size:16px;font-weight:700;transition:background-color .3s ease-in-out}
+.tool-apply-cta:hover{background:var(--action-hover)}
 
-.cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+/* FAQ：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
 
-
-
-
-.btn-blue{background:#2F5B8F;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block}
+/* 名詞解釋 */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
-
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -224,7 +313,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/vacancy-cost-calculator.html",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -297,19 +386,31 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav-tool"></div>
-<div class="hero">
-  <p class="eyebrow">Vacancy Cost Calculator</p>
-  <h1>空屋成本計算機</h1>
-  <p>計算空屋期間每日燃燒的隱形成本，包含持有費用與機會成本。</p>
-</div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="wrap">
-<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #1B2F4A;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
-  <p style="font-size:15.5px;line-height:1.8;color:#1B2F4A;margin:0 0 8px"><strong>房子空著，不是「沒收入」而已，是每個月真的在燒錢。</strong>空屋成本主要兩塊：①持有成本（房貸利息、管理費、地價稅與房屋稅分攤、保險）②機會成本（這間房若出租可收的租金）。本工具把兩者加總，估出空置每月的隱形損失，幫你判斷該調整租金、加速出租，還是另作資金規劃。</p>
-  <div style="font-size:11px;color:#86868b;line-height:1.65">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
-<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1B2F4A;padding:9px 18px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:9px 18px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">空屋成本試算</div>
+      <p class="bt-label">Vacancy Cost Calculator</p>
+      <h1 class="bt-h1">空屋成本計算機</h1>
+      <p class="bt-p">計算空屋期間每日燃燒的隱形成本，包含持有費用與機會成本。</p>
+    </div>
+    <img class="bt-hero-img" src="img/gen-studio.jpg" alt="空屋成本計算機" width="1600" height="893" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 試算器（功能沿用原頁：id／class／oninput 與試算 JS 一字不改） -->
+<section class="bt-sec bt-tool">
+  <div class="bt-in">
+
+<div id="quick-answer" class="bt-card bt-qa">
+  <div class="bt-label">快速答案</div>
+  <p><strong>房子空著，不是「沒收入」而已，是每個月真的在燒錢。</strong>空屋成本主要兩塊：①持有成本（房貸利息、管理費、地價稅與房屋稅分攤、保險）②機會成本（這間房若出租可收的租金）。本工具把兩者加總，估出空置每月的隱形損失，幫你判斷該調整租金、加速出租，還是另作資金規劃。</p>
+  <div class="bt-small">本工具為試算參考，實際稅費以各主管／稅捐稽徵機關核定為準；本公司非金融機構。</div>
+<div class="bt-btns"><a href="tel:0222490517" class="bt-btn bt-btn-sm bt-btn-ghost">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-sm">加 LINE 免費諮詢</a></div>
 </div>
 
 <div class="card">
@@ -423,18 +524,23 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div id="alertBox" class="alert-box" style="display:none"></div>
 
   <p class="disclaimer">* 本試算含每月固定費用、年繳稅費（按月分攤）及租金機會成本。未含資金利息成本。空屋稅（部分縣市實施）請另行洽詢稅捐稽徵處。</p>
-  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#12213A;color:#fff;border-radius:12px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
+  <a class="tool-apply-cta" href="apply.html">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
-<div class="cta-strip">
-  <h2>空屋越久，損失越大</h2>
-  <p>鋮馨租賃提供包租代管服務，協助您快速找到優質房客，消除空屋風險。</p>
-  <div class="cta-row">
-    <a href="https://lin.ee/PHIfSoY" class="btn-green">LINE 免費諮詢</a>
-    <a href="services.html" class="btn-blue">了解包租代管</a>
   </div>
-</div>
-</div>
+</section>
+
+<!-- 3. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">空屋越久，損失越大</h2>
+    <p class="bt-p">鋮馨租賃提供包租代管服務，協助您快速找到優質房客，消除空屋風險。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">LINE 免費諮詢</a>
+      <a href="services.html" class="bt-btn bt-btn-outline-dark">了解包租代管</a>
+    </div>
+  </div>
+</section>
 
 <script>
 function fmt(n){if(isNaN(n)||n===null)return'—';return Math.round(n).toLocaleString('zh-TW');}
@@ -518,28 +624,51 @@ function calc(){
 
 calc();
 </script>
-<section class="related-reads" style="max-width:760px;margin:0 auto 40px;padding:0 24px">
-  <div style="background:#f5f5f7;border-radius:16px;padding:28px 24px">
-    <div style="font-size:12px;font-weight:600;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;text-align:center">延伸閱讀</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-      <a href="article-rental-management.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">包租代管 vs 自管比較 →</a>
-      <a href="services.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">鋮馨服務項目 →</a>
-      <a href="rental-yield-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 18px;border-radius:980px;text-decoration:none;font-weight:500">租金報酬率試算 →</a>
+
+<!-- 4. 延伸閱讀 -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-card bt-local">
+      <div class="bt-label">延伸閱讀</div>
+      <div class="bt-chips"><a href="article-rental-management.html">包租代管 vs 自管比較 →</a><a href="services.html">鋮馨服務項目 →</a><a href="rental-yield-calculator.html">租金報酬率試算 →</a></div>
     </div>
   </div>
 </section>
-<section style="max-width:760px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">名詞解釋</h2>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">持有成本</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 空屋期間仍須支出的費用：房貸利息、管理費、地價稅與房屋稅分攤、保險等。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">機會成本</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 空屋未出租而少賺的潛在租金收入，是空置最大的隱形損失。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">囤房稅</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 房屋稅對非自住住家用房屋採較高累進稅率（各縣市規定不同），空置且未出租可能適用。</span></div>
+
+<!-- 5. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">名詞解釋</h2>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>持有成本</strong><span> — 空屋期間仍須支出的費用：房貸利息、管理費、地價稅與房屋稅分攤、保險等。</span></div>
+      <div class="bt-term"><strong>機會成本</strong><span> — 空屋未出租而少賺的潛在租金收入，是空置最大的隱形損失。</span></div>
+      <div class="bt-term"><strong>囤房稅</strong><span> — 房屋稅對非自住住家用房屋採較高累進稅率（各縣市規定不同），空置且未出租可能適用。</span></div>
+    </div>
+  </div>
 </section>
+
 <div data-include="line-qr"></div>
-<section style="max-width:720px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">常見問題</h2>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">空屋最大的隱形成本是什麼？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">通常是「機會成本」——原本可收的租金；再加上房貸利息照繳，空一個月等於雙重損失。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">空屋會被課比較重的稅嗎？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">房屋稅對非自住住家用房屋採較高稅率（各縣市不同，部分採囤房稅累進）；空置且未出租可能適用較高稅率，實際依各地方政府規定與認定。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">空屋太久該怎麼辦？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">可評估調整租金、委託包租代管加速出租；若同時有資金壓力，也可評估名下不動產的其他資金規劃方式，依個案而定。</p></div>
+
+<!-- 6. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
+
+    <details open>
+      <summary><h3>空屋最大的隱形成本是什麼？</h3></summary>
+      <p>通常是「機會成本」——原本可收的租金；再加上房貸利息照繳，空一個月等於雙重損失。</p>
+    </details>
+
+    <details>
+      <summary><h3>空屋會被課比較重的稅嗎？</h3></summary>
+      <p>房屋稅對非自住住家用房屋採較高稅率（各縣市不同，部分採囤房稅累進）；空置且未出租可能適用較高稅率，實際依各地方政府規定與認定。</p>
+    </details>
+
+    <details>
+      <summary><h3>空屋太久該怎麼辦？</h3></summary>
+      <p>可評估調整租金、委託包租代管加速出租；若同時有資金壓力，也可評估名下不動產的其他資金規劃方式，依個案而定。</p>
+    </details>
+  </div>
 </section>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>

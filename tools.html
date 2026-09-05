@@ -5,69 +5,232 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>免費房產試算工具 10+1｜房貸．二胎．房地合一．地價稅｜鋮馨租賃</title>
 <meta name="description" content="免費房產試算工具：房貸、二胎可貸額度、貸款負擔能力、土增稅、房地合一、地價稅、房屋稅、購屋費用、租金報酬、空屋成本，10+1 個一次算清，免費免登入｜鋮馨租賃。">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 計算機/工具頁專屬 nav 樣式（覆蓋 style.css） */
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#1B2F4A;text-decoration:none;font-weight:500}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-landscape-taiwan.jpg') center/cover no-repeat;padding:96px 24px 72px;text-align:center}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.eyebrow{font-size:10px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:42px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#fff;margin-bottom:14px}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
-.hero p{font-size:14.5px;color:rgba(255,255,255,.65);letter-spacing:.04em;max-width:460px;margin:0 auto}
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-@media(max-width:600px){
-  .hero h1{font-size:32px}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁補充（工具總覽頁）：工具卡格 3 欄／資料中心深帶／FAQ「＋」CSS 生成／名詞解釋列／CTA 次鈕 === */
+/* 工具卡格：桌機 3 欄／手機 1 欄，整卡可點（h3＋p＋連結文字） */
+.bt-tools .bt-h2{margin-bottom:24px}
+.bt-tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
+.bt-tool-grid:last-child{margin-bottom:0}
+.bt-tool-card{display:flex;flex-direction:column;border:1px solid var(--line);transition:box-shadow .3s ease-in-out}
+.bt-tool-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-tool-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-tool-card p{font-size:14px;line-height:22px;color:var(--ink-dim);flex:1}
+.bt-tool-cta{display:block;margin-top:24px;font-size:14px;font-weight:700;color:var(--action)}
 
-.wrap{max-width:860px;margin:0 auto;padding:48px 20px 80px}
+/* 資料中心：深藍帶＋統計格＋3 張入口卡 */
+.bt-hub .bt-small{color:rgba(255,255,255,.6);margin-bottom:12px}
+.bt-hub .bt-h2{margin-bottom:32px}
+.bt-hub .bt-def{grid-template-columns:repeat(4,1fr);margin-top:0}
+.bt-hub-desc{margin-top:24px}
+.bt-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-hub-card{display:flex;flex-direction:column;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;transition:background-color .3s ease-in-out}
+.bt-hub-card:hover{background:rgba(255,255,255,.12)}
+.bt-hub-card .bt-label{margin-bottom:8px}
+.bt-hub-card h3{font-size:18px;line-height:1.4;font-weight:700;color:#fff;margin-bottom:8px}
+.bt-hub-card p{font-size:14px;line-height:22px;color:rgba(255,255,255,.75);flex:1}
+.bt-hub-go{display:block;margin-top:24px;font-size:14px;font-weight:700;color:var(--gold)}
+.bt-hub-go::after{content:" →"}
 
-.group-label{font-size:10px;font-weight:600;color:#a1a1a6;letter-spacing:.26em;text-transform:uppercase;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #e3e3e6}
+/* CTA 帶：次鈕（紙底上的深色外框鈕） */
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:rgba(27,47,74,.06)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:48px}
+/* FAQ：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
 
-.tool-card{display:block;background:#fff;border-radius:0;border:1px solid #e3e3e6;padding:26px 22px;text-decoration:none;transition:background .25s;box-shadow:none}
+/* 名詞解釋（dl/dt/dd 沿用，樣式照先導頁定義列） */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term dt{color:var(--ink);font-size:16px;font-weight:700;margin-bottom:4px}
+.bt-term dd{color:var(--ink-dim);font-size:16px;line-height:24px}
 
-.tool-card:hover{background:#fafafa}
-
-.icon-wrap{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-
-.tool-name{font-family:"Noto Serif TC","Songti TC",serif;font-size:16px;font-weight:600;color:#12213A;margin-bottom:6px;letter-spacing:.01em}
-
-.tool-desc{font-size:13px;color:#6e6e73;line-height:1.55;margin-bottom:14px}
-
-.tool-cta{font-size:13px;font-weight:600}
-
-/* 1 大工具：實價資料中心（Bento Grid） */
-.data-sec{background:#12213A;border-radius:0;padding:44px 40px;margin-bottom:44px}
-.theme-tag{display:inline-block;font:600 9.5px ui-monospace,Menlo,monospace;letter-spacing:.16em;color:#fff;background:#1B2F4A;padding:4px 9px;border-radius:4px;margin-bottom:16px;text-transform:uppercase}
-.data-sec .hub-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.data-sec h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;color:#fff;margin:0 0 24px;letter-spacing:.01em}
-.bento{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px}
-.bt{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);padding:22px 20px;text-decoration:none;display:block;transition:background .3s,border-color .3s}
-.bt:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.34)}
-.bt.lead{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
-.bt-eb{font-size:9.5px;color:rgba(255,255,255,.5);letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
-.bt-t{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:7px}
-.bt-d{font-size:11.5px;color:rgba(255,255,255,.6);line-height:1.7;letter-spacing:.02em}
-.bt-big{font-family:"Noto Serif TC","Songti TC",serif;font-size:44px;font-weight:600;color:#fff;line-height:1}
-.bt-big em{font-style:normal;font-size:17px;color:rgba(255,255,255,.6);margin-left:4px}
-.bt-row{display:flex;gap:26px;margin-top:20px}
-.bt-n{font-family:"Noto Serif TC","Songti TC",serif;font-size:21px;font-weight:600;color:#fff;line-height:1}
-.bt-nl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.12em;margin-top:6px}
-.bt-go{font-size:11px;color:#fff;letter-spacing:.14em;margin-top:14px}
-.bt-go::after{content:" ›"}
-@media(max-width:600px){.bento{grid-template-columns:1fr}.bt.lead{grid-row:auto}.bt[style]{grid-column:auto!important}}
-
-.cta-strip h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:10px}
+@media(max-width:900px){
+  .bt-tool-grid,.bt-hub-grid{grid-template-columns:1fr}
+  .bt-hub .bt-def{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .bt-hub .bt-def{grid-template-columns:1fr}
+}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -106,7 +269,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-04-29"
  },
  "mainEntity": {
@@ -226,7 +389,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/tools.html",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -310,174 +473,130 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav-tool"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="hero">
-  <p class="eyebrow">Free Tools · 鋮馨租賃</p>
-  <h1>1 個資料中心<br>+ 10 個試算工具</h1>
-  <p>實價追蹤 + 財務試算，買房賣房前先把數字算清楚。</p>
-</div>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">房產試算工具</div>
+      <p class="bt-label">Free Tools · 鋮馨租賃</p>
+      <h1 class="bt-h1">1 個資料中心<br>+ 10 個試算工具</h1>
+      <p class="bt-p">實價追蹤 + 財務試算，買房賣房前先把數字算清楚。</p>
+    </div>
+    <img class="bt-hero-img" src="img/gen-compare.jpg" alt="1 個資料中心 + 10 個試算工具" width="1344" height="768" fetchpriority="high" loading="eager">
+  </div>
+</section>
 
-<div class="wrap">
-<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #1B2F4A;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#1B2F4A;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
-  <p style="font-size:15.5px;line-height:1.8;color:#1B2F4A;margin:0 0 8px"><strong>買房、賣房、持有、貸款的每一筆數字，先自己算清楚再決策。</strong>鋮馨整理了 10+ 個免費房產試算工具：房貸試算、二胎可貸額度、房地合一稅、土地增值稅、地價稅、房屋稅、購屋總費用、租金報酬、空屋成本、負擔能力等，全部免費即時、不需留資料。</p>
-  <div style="font-size:11px;color:#86868b;line-height:1.65">試算為估算參考，實際稅費與貸款條件以各主管機關／金融機構核定為準；本公司非金融機構。</div>
-</div>
-
-
-  <!-- 1 大工具：實價資料中心（Bento Grid） -->
-  <div class="data-sec">
-    <span class="theme-tag">Data Hub · 1 大工具</span>
-    <div class="hub-eyebrow">★ 每月 3 次自動更新 · 2/12/22 號</div>
-    <h2>實價資料中心</h2>
-    <div class="bento">
-      <div class="bt lead">
-        <div>
-          <div class="bt-big">79<em>行政區</em></div>
-          <div class="bt-row">
-            <div><div class="bt-n">6.6 萬</div><div class="bt-nl">筆實價資料</div></div>
-            <div><div class="bt-n">9 季</div><div class="bt-nl">跨期追蹤</div></div>
-            <div><div class="bt-n">4</div><div class="bt-nl">縣市</div></div>
-          </div>
-        </div>
-        <div class="bt-d" style="margin-top:22px">台北・新北・台中・桃園，買賣、預售、租金一站全覽。</div>
-      </div>
-      <a class="bt" href="lvr-observatory.html"><div class="bt-eb">01</div><div class="bt-t">買賣觀察室</div><div class="bt-d">YoY 年增率、跨季趨勢、新店深度解析。6 張社群圖卡分享</div><div class="bt-go">進入</div></a>
-      <a class="bt" href="lvr-presale.html"><div class="bt-eb">02</div><div class="bt-t">預售屋觀察</div><div class="bt-d">4 縣市預售案件實價單價追蹤，已排除解約</div><div class="bt-go">進入</div></a>
-      <a class="bt" href="lvr-rental.html" style="grid-column:span 2"><div class="bt-eb">03</div><div class="bt-t">租金報酬觀察</div><div class="bt-d">月租中位數 + 年化報酬率估算（年租 ÷ 售價），跨縣市可比</div><div class="bt-go">進入</div></a>
+<!-- 2. 快速答案 -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>買房、賣房、持有、貸款的每一筆數字，先自己算清楚再決策。</strong>鋮馨整理了 10+ 個免費房產試算工具：房貸試算、二胎可貸額度、房地合一稅、土地增值稅、地價稅、房屋稅、購屋總費用、租金報酬、空屋成本、負擔能力等，全部免費即時、不需留資料。</p>
+      <div class="bt-small">試算為估算參考，實際稅費與貸款條件以各主管機關／金融機構核定為準；本公司非金融機構。</div>
     </div>
   </div>
-
-  <p class="group-label">10 個試算小工具｜買房・賣房</p>
-  <div class="grid">
-
-    <a href="purchase-cost-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:linear-gradient(135deg,#9A6D3A,#f59e0b)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="white" stroke-width="1.8" stroke-linecap="round"/><rect x="9" y="3" width="6" height="4" rx="1" stroke="white" stroke-width="1.8"/><path d="M9 12h6M9 16h4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </div>
-      <div class="tool-name">購屋總費用試算</div>
-      <div class="tool-desc">契稅、印花稅、代書費、仲介費、裝潢，買房的每一筆一次算清楚。</div>
-      <div class="tool-cta" style="color:#9A6D3A">立即試算 ›</div>
-    </a>
-
-    <a href="land-tax-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V9l7-6 7 6v12" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="9" y="14" width="6" height="7" rx="1" stroke="white" stroke-width="1.6"/></svg>
-      </div>
-      <div class="tool-name">土地增值稅試算</div>
-      <div class="tool-desc">出售不動產前估算應繳土地增值稅，含物價指數調整與自用優惠稅率。</div>
-      <div class="tool-cta" style="color:#16A34A">立即試算 ›</div>
-    </a>
-
-    <a href="land-value-tax-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:linear-gradient(135deg,#9A6D3A,#f59e0b)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 21h18" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M5 21V10M19 21V10" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M3 10l9-8 9 8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-5h6v5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.5" fill="white"/></svg>
-      </div>
-      <div class="tool-name">地價稅試算</div>
-      <div class="tool-desc">每年 11 月繳的持有稅，輸入公告地價即時算出自用住宅（2‰）或一般用地累進稅額。</div>
-      <div class="tool-cta" style="color:#9A6D3A">立即試算 ›</div>
-    </a>
-
-    <a href="realestate-tax-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 14l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8"/></svg>
-      </div>
-      <div class="tool-name">房地合一稅試算</div>
-      <div class="tool-desc">自動判斷 1.0／2.0 版，試算出售房地產應繳稅額，含自用住宅400萬免稅。</div>
-      <div class="tool-cta" style="color:#1B2F4A">立即試算 ›</div>
-    </a>
-
-  </div>
-
-  <p class="group-label">10 個試算小工具｜貸款・財務規劃</p>
-  <div class="grid">
-
-    <a href="mortgage-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.8"/><path d="M8 12h8M8 8h4M8 16h6" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </div>
-      <div class="tool-name">房貸試算表</div>
-      <div class="tool-desc">月付金額、總利息、逐年攤還明細，銀行 vs 民間利率對比。</div>
-      <div class="tool-cta" style="color:#1B2F4A">立即試算 ›</div>
-    </a>
-
-    <a href="second-mortgage-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 14h6" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </div>
-      <div class="tool-name">二胎可貸額度試算</div>
-      <div class="tool-desc">輸入房屋市價與一胎本金，算出二胎可貸金額與月付。</div>
-      <div class="tool-cta" style="color:#1B2F4A">立即試算 ›</div>
-    </a>
-
-    <a href="affordability-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="white" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M16 11l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="tool-name">貸款負擔能力試算</div>
-      <div class="tool-desc">輸入月收入，反推可貸多少、可買多少總價，DSR 自動計算。</div>
-      <div class="tool-cta" style="color:#2F5B8F">立即試算 ›</div>
-    </a>
-
-  </div>
-
-  <p class="group-label">10 個試算小工具｜投資・租賃分析</p>
-  <div class="grid">
-
-    <a href="rental-yield-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="tool-name">租金報酬試算</div>
-      <div class="tool-desc">計算毛/淨租金報酬率、回本年數，評估這間房值不值得買來出租。</div>
-      <div class="tool-cta" style="color:#16A34A">立即試算 ›</div>
-    </a>
-
-    <a href="vacancy-cost-calculator.html" class="tool-card">
-      <div class="icon-wrap" style="background:linear-gradient(135deg,#12213A,#1B2F4A)">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="tool-name">空屋成本計算機</div>
-      <div class="tool-desc">空屋每天燒多少錢？持有費用 + 租金機會成本，數字會說話。</div>
-      <div class="tool-cta" style="color:#ef4444">立即計算 ›</div>
-    </a>
-
-    <a href="new-taipei-house-tax.html" class="tool-card">
-      <div class="icon-wrap" style="background:#12213A">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="8" r="1.5" fill="white"/></svg>
-      </div>
-      <div class="tool-name">房屋稅試算（新北市）</div>
-      <div class="tool-desc">依構造別、建造年月、路段率、使用情形試算年度房屋稅，資料來自官方標準單價。</div>
-      <div class="tool-cta" style="color:#26497A">立即試算 ›</div>
-    </a>
-
-  </div>
-
-  <div class="cta-strip">
-    <h2>工具算完，下一步找我們</h2>
-    <p>數字出來了，想知道實際能做什麼方案？鋮馨租賃免費評估，不收任何費用。</p>
-    <a href="https://lin.ee/PHIfSoY" class="btn-line">LINE 免費諮詢</a>
-  </div>
-
-</div>
-<div style="max-width:720px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap"><a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#1B2F4A;padding:10px 20px;border-radius:980px;text-decoration:none">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:10px 20px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a></div>
-<section style="max-width:720px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">常見問題</h2>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">這些試算工具要收費或留資料嗎？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">全部免費、在瀏覽器即時計算，不需註冊或留個資，計算結果不會上傳。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">試算結果可以當正式依據嗎？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">為估算參考，實際稅費與貸款條件以各主管機關／金融機構核定為準；本公司非金融機構。</p></div>
-  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">算完之後想諮詢怎麼辦？</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">可加 LINE 或來電免費諮詢，由顧問協助評估你的個案方向；不申請不收費。</p></div>
 </section>
-<section id="glossary" style="max-width:720px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">名詞解釋</h2>
-  <dl style="margin:0">
-    <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><dt style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">房地合一稅</dt><dd style="font-size:14px;line-height:1.85;color:#515154;margin:0">出售房地時就交易所得課徵的稅，持有期間越短稅率越高；自用住宅符合條件者有免稅額。試算為估算參考，實際以主管機關核定為準。</dd></div>
-    <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><dt style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">地價稅</dt><dd style="font-size:14px;line-height:1.85;color:#515154;margin:0">每年 11 月開徵的土地持有稅，依公告地價計算，自用住宅用地適用 2‰ 優惠稅率，一般用地採累進稅率。</dd></div>
-    <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><dt style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">土地增值稅</dt><dd style="font-size:14px;line-height:1.85;color:#515154;margin:0">移轉土地時就土地漲價總數額課徵的稅，會依消費者物價指數調整原地價，自用住宅用地可適用優惠稅率。</dd></div>
-    <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><dt style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">DBR／DSR</dt><dd style="font-size:14px;line-height:1.85;color:#515154;margin:0">銀行衡量還款能力的指標：DBR 是無擔保負債占月收入的倍數，DSR 是每月應還款項占月所得的比率，數值越低通常越有利，惟最終核貸由金融機構依個案決定。</dd></div>
-    <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><dt style="font-size:15.5px;font-weight:700;color:#1B2F4A;margin:0 0 8px">二胎房貸</dt><dd style="font-size:14px;line-height:1.85;color:#515154;margin:0">在原有第一順位房貸之外，就同一不動產設定第二順位抵押的貸款；可貸額度視房屋現況、剩餘價值與財務條件而定，最終由金融機構核定。</dd></div>
-  </dl>
+
+<!-- 3. 深藍帶：實價資料中心（1 大工具，原 Bento Grid） -->
+<section class="bt-dark bt-sec-80 bt-hub">
+  <div class="bt-in">
+    <div class="bt-label">Data Hub · 1 大工具</div>
+    <p class="bt-small">★ 每月 3 次自動更新 · 2/12/22 號</p>
+    <h2 class="bt-h2">實價資料中心</h2>
+    <div class="bt-def">
+      <div class="bt-def-item"><div class="bt-def-num">79</div><div class="bt-def-label">行政區</div></div>
+      <div class="bt-def-item"><div class="bt-def-num">6.6 萬</div><div class="bt-def-label">筆實價資料</div></div>
+      <div class="bt-def-item"><div class="bt-def-num">9 季</div><div class="bt-def-label">跨期追蹤</div></div>
+      <div class="bt-def-item"><div class="bt-def-num">4</div><div class="bt-def-label">縣市</div></div>
+    </div>
+    <p class="bt-p bt-hub-desc">台北・新北・台中・桃園，買賣、預售、租金一站全覽。</p>
+    <div class="bt-hub-grid">
+      <a class="bt-hub-card" href="lvr-observatory.html"><div class="bt-label">01</div><h3>買賣觀察室</h3><p>YoY 年增率、跨季趨勢、新店深度解析。6 張社群圖卡分享</p><span class="bt-hub-go">進入</span></a>
+      <a class="bt-hub-card" href="lvr-presale.html"><div class="bt-label">02</div><h3>預售屋觀察</h3><p>4 縣市預售案件實價單價追蹤，已排除解約</p><span class="bt-hub-go">進入</span></a>
+      <a class="bt-hub-card" href="lvr-rental.html"><div class="bt-label">03</div><h3>租金報酬觀察</h3><p>月租中位數 + 年化報酬率估算（年租 ÷ 售價），跨縣市可比</p><span class="bt-hub-go">進入</span></a>
+    </div>
+  </div>
 </section>
+
+<!-- 4. 工具卡格（10 個試算小工具，三組） -->
+<section class="bt-sec-80 bt-tools">
+  <div class="bt-in">
+    <h2 class="bt-h2">10 個試算小工具｜買房・賣房</h2>
+    <div class="bt-tool-grid">
+      <a href="purchase-cost-calculator.html" class="bt-card bt-tool-card"><h3>購屋總費用試算</h3><p>契稅、印花稅、代書費、仲介費、裝潢，買房的每一筆一次算清楚。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="land-tax-calculator.html" class="bt-card bt-tool-card"><h3>土地增值稅試算</h3><p>出售不動產前估算應繳土地增值稅，含物價指數調整與自用優惠稅率。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="land-value-tax-calculator.html" class="bt-card bt-tool-card"><h3>地價稅試算</h3><p>每年 11 月繳的持有稅，輸入公告地價即時算出自用住宅（2‰）或一般用地累進稅額。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="realestate-tax-calculator.html" class="bt-card bt-tool-card"><h3>房地合一稅試算</h3><p>自動判斷 1.0／2.0 版，試算出售房地產應繳稅額，含自用住宅400萬免稅。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+    </div>
+
+    <h2 class="bt-h2">10 個試算小工具｜貸款・財務規劃</h2>
+    <div class="bt-tool-grid">
+      <a href="mortgage-calculator.html" class="bt-card bt-tool-card"><h3>房貸試算表</h3><p>月付金額、總利息、逐年攤還明細，銀行 vs 民間利率對比。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="second-mortgage-calculator.html" class="bt-card bt-tool-card"><h3>二胎可貸額度試算</h3><p>輸入房屋市價與一胎本金，算出二胎可貸金額與月付。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="affordability-calculator.html" class="bt-card bt-tool-card"><h3>貸款負擔能力試算</h3><p>輸入月收入，反推可貸多少、可買多少總價，DSR 自動計算。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+    </div>
+
+    <h2 class="bt-h2">10 個試算小工具｜投資・租賃分析</h2>
+    <div class="bt-tool-grid">
+      <a href="rental-yield-calculator.html" class="bt-card bt-tool-card"><h3>租金報酬試算</h3><p>計算毛/淨租金報酬率、回本年數，評估這間房值不值得買來出租。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+      <a href="vacancy-cost-calculator.html" class="bt-card bt-tool-card"><h3>空屋成本計算機</h3><p>空屋每天燒多少錢？持有費用 + 租金機會成本，數字會說話。</p><span class="bt-tool-cta">立即計算 ›</span></a>
+      <a href="new-taipei-house-tax.html" class="bt-card bt-tool-card"><h3>房屋稅試算（新北市）</h3><p>依構造別、建造年月、路段率、使用情形試算年度房屋稅，資料來自官方標準單價。</p><span class="bt-tool-cta">立即試算 ›</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CTA 帶（原 cta-strip＋電話／LINE 膠囊列合併） -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">工具算完，下一步找我們</h2>
+    <p class="bt-p">數字出來了，想知道實際能做什麼方案？鋮馨租賃免費評估，不收任何費用。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">LINE 免費諮詢</a>
+      <a href="tel:0222490517" class="bt-btn bt-btn-outline-dark">☎ 電話諮詢</a>
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-outline-dark">加 LINE 免費諮詢</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
+
+    <details open>
+      <summary><h3>這些試算工具要收費或留資料嗎？</h3></summary>
+      <p>全部免費、在瀏覽器即時計算，不需註冊或留個資，計算結果不會上傳。</p>
+    </details>
+
+    <details>
+      <summary><h3>試算結果可以當正式依據嗎？</h3></summary>
+      <p>為估算參考，實際稅費與貸款條件以各主管機關／金融機構核定為準；本公司非金融機構。</p>
+    </details>
+
+    <details>
+      <summary><h3>算完之後想諮詢怎麼辦？</h3></summary>
+      <p>可加 LINE 或來電免費諮詢，由顧問協助評估你的個案方向；不申請不收費。</p>
+    </details>
+  </div>
+</section>
+
+<!-- 7. 名詞解釋（與 DefinedTermSet JSON-LD 同源，id=glossary 供 schema url 錨點） -->
+<section id="glossary" class="bt-sec" style="padding-top:0">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">名詞解釋</h2>
+    <dl class="bt-terms">
+      <div class="bt-term"><dt>房地合一稅</dt><dd>出售房地時就交易所得課徵的稅，持有期間越短稅率越高；自用住宅符合條件者有免稅額。試算為估算參考，實際以主管機關核定為準。</dd></div>
+      <div class="bt-term"><dt>地價稅</dt><dd>每年 11 月開徵的土地持有稅，依公告地價計算，自用住宅用地適用 2‰ 優惠稅率，一般用地採累進稅率。</dd></div>
+      <div class="bt-term"><dt>土地增值稅</dt><dd>移轉土地時就土地漲價總數額課徵的稅，會依消費者物價指數調整原地價，自用住宅用地可適用優惠稅率。</dd></div>
+      <div class="bt-term"><dt>DBR／DSR</dt><dd>銀行衡量還款能力的指標：DBR 是無擔保負債占月收入的倍數，DSR 是每月應還款項占月所得的比率，數值越低通常越有利，惟最終核貸由金融機構依個案決定。</dd></div>
+      <div class="bt-term"><dt>二胎房貸</dt><dd>在原有第一順位房貸之外，就同一不動產設定第二順位抵押的貸款；可貸額度視房屋現況、剩餘價值與財務條件而定，最終由金融機構核定。</dd></div>
+    </dl>
+  </div>
+</section>
+
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>
