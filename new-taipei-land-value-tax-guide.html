@@ -17,55 +17,164 @@
 <meta name="twitter:description" content="新北市115-116年累進起點地價 7,878,000 元。六級累進稅率10‰至55‰，自用住宅只要2‰。5分鐘看懂計算公式，免費試算你的稅額。">
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="canonical" href="https://cx468.com.tw/new-taipei-land-value-tax-guide.html">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* NAV（nav-tool include 需要的樣式；缺這段 logo 會以 192px 原尺寸撐破導覽列） */
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
-.nav-back{font-size:14px;color:#9A6D3A;text-decoration:none;font-weight:500}
-.art-hero{background:linear-gradient(135deg,#0f2042 0%,#1a3a6b 100%);padding:80px 2rem 56px;text-align:center}
-.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:rgba(99,179,237,.2);color:#90cdf4;margin-bottom:1rem;letter-spacing:.06em;text-transform:uppercase}
-.art-hero h1{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.18;max-width:760px;margin:0 auto 1rem}
-.art-hero-meta{font-size:13px;color:rgba(255,255,255,.45)}
-.art-body{max-width:720px;margin:0 auto;padding:3.5rem 2rem 5rem}
-.art-body h2{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:2.5rem 0 1rem;padding-top:.5rem;border-top:1.5px solid #f0f0f0;color:#1B2F4A}
-.art-body h3{font-size:18px;font-weight:600;margin:1.75rem 0 .6rem;color:#1B2F4A}
-.art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.2rem}
-.art-body ul,.art-body ol{margin:.5rem 0 1.2rem 1.5rem}
-.art-body li{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:.35rem}
-.art-body a{color:#2F5B8F}
-.highlight-box{background:#f0f7ff;border-left:3px solid #2F5B8F;border-radius:0 12px 12px 0;padding:1.2rem 1.5rem;margin:1.75rem 0}
-.highlight-box p{margin-bottom:0;font-size:15px}
-.warn-box{background:#fffbeb;border-left:3px solid #d97706;border-radius:0 12px 12px 0;padding:1.2rem 1.5rem;margin:1.75rem 0}
-.warn-box p{margin-bottom:0;font-size:15px;color:#713f12}
-.tax-table{width:100%;border-collapse:collapse;font-size:14px;margin:1.5rem 0;border-radius:10px;overflow:hidden}
-.tax-table th{background:#1B2F4A;color:#fff;padding:11px 12px;text-align:center;font-weight:600}
-.tax-table th:first-child{text-align:left;padding-left:16px}
-.tax-table td{padding:10px 12px;text-align:center;border-bottom:1px solid #f0f0f0;color:#1B2F4A}
-.tax-table td:first-child{text-align:left;padding-left:16px;font-weight:600;color:#4b5563}
-.tax-table tr:last-child td{border-bottom:none}
-.tax-table tr:nth-child(even) td{background:#fafafa}
-.tool-cta{background:#f0f9ff;border:2px solid #2F5B8F;border-radius:16px;padding:1.75rem;margin:2.5rem 0;text-align:center}
-.tool-cta h3{font-size:18px;font-weight:700;color:#1e40af;margin:0 0 .5rem}
-.tool-cta p{font-size:14px;color:#4b5563;margin:.5rem 0 1.25rem}
-.tool-cta a.btn-tool{display:inline-block;background:#2F5B8F;color:#fff;padding:12px 30px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s}
-.cta-box{background:#0f2042;border-radius:20px;padding:2.5rem;text-align:center;margin:3rem 0}
-.cta-box h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:.75rem}
-.cta-box p{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:1.5rem}
-.cta-box a{display:inline-block;background:#fff;color:#0f2042;padding:12px 32px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;text-decoration:none;margin-bottom:2rem}
-.example-box{background:#f9f9f9;border:1px solid #e5e5e7;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
-.example-box p{margin-bottom:.6rem;font-size:15px}
-.example-box p:last-child{margin-bottom:0}
-.example-box .result{font-size:18px;font-weight:700;color:#9A6D3A;margin-top:.75rem}
-@media(max-width:768px){
-  .art-hero h1{font-size:26px}
-  .art-body{padding:2.5rem 1.25rem 4rem}
-  .tax-table{font-size:12px}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
+
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 比較表 */
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-rel-grid{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+
+/* === 本頁延伸（文章型內容映射到 Better 版型；不改共用 token） === */
+.bt-meta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:500;color:var(--ink)}
+.bt-link{color:var(--action);font-weight:600}
+.bt-qa .bt-small{margin-top:12px}
+.bt-crumb{margin-bottom:16px}
+.bt-art .bt-h2{margin-top:56px}
+.bt-art .bt-h2:first-of-type{margin-top:0}
+.bt-art .bt-p+.bt-h2,.bt-art ul+.bt-h2,.bt-art .bt-card+.bt-h2,.bt-art .bt-table-wrap+.bt-h2,.bt-art .bt-small+.bt-h2{margin-top:56px}
+.bt-art h3{font-size:20px;line-height:1.4;font-weight:700;color:var(--ink);margin:32px 0 12px}
+.bt-art .bt-p{color:var(--ink);margin-bottom:16px}
+.bt-art .bt-p+.bt-p{margin-top:0}
+.bt-art ul{margin:0 0 16px 20px}
+.bt-art li{font-size:16px;line-height:24px;color:var(--ink);margin-bottom:8px}
+.bt-art a{color:var(--action)}
+.bt-art .bt-card{margin:24px 0}
+.bt-art .bt-qa p:last-child{margin-bottom:0}
+.bt-art .bt-warn{border-left:4px solid var(--gold)}
+.bt-art .bt-warn p{font-size:16px;line-height:24px;color:var(--ink);margin:0}
+.bt-art .bt-table-wrap{margin:24px 0 12px}
+.bt-art .bt-table th:first-child{width:auto}
+.bt-art .bt-small{display:block;margin-bottom:16px}
+.bt-ex p{font-size:16px;line-height:24px;color:var(--ink);margin-bottom:8px}
+.bt-ex p:last-child{margin-bottom:0}
+.bt-ex .result{font-size:18px;color:var(--gold-deep)}
+.bt-tool{text-align:center;margin:40px 0}
+.bt-tool .bt-h4{margin-bottom:8px}
+.bt-tool .bt-p{margin-bottom:24px}
+.bt-art .bt-tool a{color:#fff}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-rel-grid-txt .bt-rel-card{min-height:auto}.bt-rel-grid-txt .bt-rel-card::after{content:none}
+.bt-terms{margin-top:8px}
+.bt-terms div{border-left:2px solid var(--line);padding:8px 0 8px 16px}
+.bt-terms div+div{margin-top:12px}
+.bt-terms strong{color:var(--ink);font-size:16px;line-height:24px}
+.bt-terms span{color:var(--ink-dim);font-size:14px;line-height:22px}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script src="include.js" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
@@ -92,7 +201,7 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
   }
  },
  "datePublished": "2026-05-15",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "url": "https://cx468.com.tw/new-taipei-land-value-tax-guide.html",
  "mainEntityOfPage": "https://cx468.com.tw/new-taipei-land-value-tax-guide.html",
  "keywords": "新北市地價稅,新北市地價稅試算,新北市累進起點地價,地價稅怎麼算,自用住宅地價稅,地價稅2026",
@@ -200,196 +309,238 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav-tool"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="art-hero">
-  <span class="art-tag">地產稅務教學</span>
-  <h1>新北市地價稅怎麼算？<br>2026年完整教學</h1>
-  
-<p class="art-hero-meta">115-116年累進起點地價 7,878,000 元・更新：2026-05-15・鋮馨租賃</p>
-</div>
-<img src="img/gen-city-newtaipei.jpg" alt="新北河岸住宅大樓黃昏景色" loading="lazy" width="1344" height="768" style="display:block;width:100%;height:220px;object-fit:cover;opacity:.92">
-
-<div id="quick-answer" style="max-width:760px;margin:20px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid #2F5B8F;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#2F5B8F;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
-  <p style="font-size:15.5px;line-height:1.8;color:#1B2F4A;margin:0 0 10px"><strong>新北市地價稅怎麼算？</strong>先把名下新北市土地的申報地價加總，對照新北市當年「累進起點地價」7,878,000 元：自用住宅用地（符合條件）適用 2‰；一般用地未達起點課 10‰，超過部分按 15‰～55‰ 六級累進。每年 11 月開徵、繳納至 11/30。</p>
-  <div style="font-size:11px;color:#86868b;line-height:1.65">累進起點地價與自用資格依新北市每年公告及稅捐機關認定為準；本文僅供參考，實際稅額以核定為準。</div>
-</div>
-
-<div class="art-body">
-  <a href="land-value-tax-calculator.html" class="back-link">← 全台地價稅試算</a>
-
-  <p>每年11月，新北市超過80萬筆土地的地主都會收到地價稅繳款單——有人繳幾千元，有人繳幾十萬，差距可能來自一個申請表沒填、或是少算了一個級距。本文從基礎概念到實際計算，帶你完整看懂新北市地價稅，並附上免費試算工具，5分鐘掌握自己的稅額。</p>
-
-  <h2>地價稅是什麼？和房屋稅有什麼不同？</h2>
-  <p>很多人把地價稅和房屋稅搞混。兩者都是持有房地產的稅，但課徵對象不同：</p>
-  <ul>
-    <li><strong>地價稅</strong>：針對<strong>土地</strong>課徵，依「課稅地價」計算，每年11月繳納</li>
-    <li><strong>房屋稅</strong>：針對<strong>建物（房屋）</strong>課徵，依房屋評定現值計算，每年5月繳納</li>
-  </ul>
-  <p>買了一間有地的房子，就要同時繳這兩種稅。一般住宅的地價稅每年繳一次，金額依土地面積、申報地價與適用稅率而定。</p>
-
-  <h2>新北市地價稅的計算邏輯</h2>
-  <h3>第一步：算出課稅地價</h3>
-  <p>課稅地價＝<strong>每平方公尺申報地價 × 課稅面積（㎡）</strong></p>
-  <p>申報地價通常為公告地價的 80%。若你不確定自己的申報地價，可向新北市政府稅務局查詢，或使用本文後附的試算工具連結到官方系統查詢。</p>
-
-  <h3>第二步：對照累進起點地價，確認級距</h3>
-  <p>新北市 115-116 年（2026-2027年）<strong>累進起點地價為 7,878,000 元</strong>。你的課稅地價除以這個數字，就知道落在哪個級距：</p>
-
-  <div class="highlight-box">
-    <p>💡 <strong>累進起點地價</strong>是計算地價稅的基準，每兩年由各縣市重新公告一次，新北市115-116年為 <strong>787.8 萬元</strong>（全台第三高，僅次於台北市、嘉義市）。</p>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-small bt-crumb"><a href="land-value-tax-calculator.html" class="bt-link">← 全台地價稅試算</a></p>
+      <p class="bt-eyebrow">新北市地價稅</p>
+      <h1 class="bt-h1">新北市地價稅怎麼算？<br>2026年完整教學</h1>
+      <div class="bt-meta">
+        <span class="bt-tag">地產稅務教學</span>
+        <span>115-116年累進起點地價 7,878,000 元・更新：2026-05-15・鋮馨租賃</span>
+      </div>
+    </div>
+    <img class="bt-hero-img" src="img/gen-city-newtaipei.jpg" alt="新北河岸住宅大樓黃昏景色" width="1344" height="768" fetchpriority="high" loading="eager">
   </div>
-
-  <h3>第三步：套入公式計算稅額</h3>
-  <p>稅額＝課稅地價 × 適用稅率 － 累進差額</p>
-
-  <table class="tax-table">
-    <thead>
-      <tr>
-        <th>級次</th>
-        <th>課稅地價範圍（元）</th>
-        <th>稅率</th>
-        <th>累進差額（元）</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>第一級</td>
-        <td>7,878,000 以下</td>
-        <td>10‰</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>第二級</td>
-        <td>7,878,001 ～ 47,268,000</td>
-        <td>15‰</td>
-        <td>39,390</td>
-      </tr>
-      <tr>
-        <td>第三級</td>
-        <td>47,268,001 ～ 86,658,000</td>
-        <td>25‰</td>
-        <td>512,070</td>
-      </tr>
-      <tr>
-        <td>第四級</td>
-        <td>86,658,001 ～ 126,048,000</td>
-        <td>35‰</td>
-        <td>1,378,650</td>
-      </tr>
-      <tr>
-        <td>第五級</td>
-        <td>126,048,001 ～ 165,438,000</td>
-        <td>45‰</td>
-        <td>2,639,130</td>
-      </tr>
-      <tr>
-        <td>第六級</td>
-        <td>165,438,001 以上</td>
-        <td>55‰</td>
-        <td>4,293,510</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:13px;color:#86868b;margin-top:-8px">依土地稅法第16條及新北市政府公告，115-116年（2026-2027年）適用。</p>
-
-  <h2>實際計算範例</h2>
-  <h3>範例一：板橋區一般住宅用地</h3>
-  <div class="example-box">
-    <p>📋 已知條件：申報地價 45,000 元/㎡，課稅面積 80 ㎡</p>
-    <p>課稅地價 ＝ 45,000 × 80 ＝ <strong>3,600,000 元</strong></p>
-    <p>3,600,000 ÷ 7,878,000 ≈ 0.46 倍 → 第一級（≤1倍）</p>
-    <p>稅額 ＝ 3,600,000 × 10‰ － 0 ＝ <strong class="result">36,000 元／年</strong></p>
-  </div>
-
-  <h3>範例二：新莊區面積較大的土地</h3>
-  <div class="example-box">
-    <p>📋 已知條件：申報地價 30,000 元/㎡，課稅面積 400 ㎡</p>
-    <p>課稅地價 ＝ 30,000 × 400 ＝ <strong>12,000,000 元</strong></p>
-    <p>12,000,000 ÷ 7,878,000 ≈ 1.52 倍 → 第二級（1倍～6倍之間）</p>
-    <p>稅額 ＝ 12,000,000 × 15‰ － 39,390 ＝ 180,000 － 39,390 ＝ <strong class="result">140,610 元／年</strong></p>
-  </div>
-
-  <div class="tool-cta">
-    <h3>🧮 直接用試算工具計算你的稅額</h3>
-    <p>輸入行政區、地段、地號，查到申報地價後填入面積，自動試算四種用地類型</p>
-    <a href="new-taipei-land-value-tax.html" class="btn-tool">新北市地價稅免費試算 →</a>
-  </div>
-
-  <h2>自用住宅申請優惠：從 10‰ 降到 2‰</h2>
-  <p>一般用地的最低稅率是 10‰，但<strong>自用住宅用地只要 2‰</strong>，稅額可差到 5 倍以上。這個優惠不是自動給的，必須主動申請。</p>
-
-  <h3>申請條件</h3>
-  <ul>
-    <li>土地上有建物（房屋）且為住宅使用</li>
-    <li>土地所有人本人、配偶或直系親屬，須在該址設有戶籍登記</li>
-    <li>實際居住使用（非出租、非空屋）</li>
-    <li>每人只能申請一處自用住宅</li>
-  </ul>
-
-  <h3>申請方式與截止日</h3>
-  <ul>
-    <li>每年 <strong>9 月 22 日</strong> 以前向新北市政府稅務局提出申請</li>
-    <li>當年提出 → 同年 11 月地價稅即可適用 2‰ 稅率</li>
-    <li>申請後持續有效（條件未改變不需每年重新申請）</li>
-    <li>可至稅務局臨櫃、或透過新北市政府地方稅務局官網線上申辦</li>
-  </ul>
-
-  <div class="warn-box">
-    <p>⚠️ <strong>常見誤區</strong>：購屋後不知道要申請自用優惠，繼續以一般稅率繳稅，往往多繳好幾年才發現。若有符合條件，建議盡快補申請（最多可溯及申請前一年）。</p>
-  </div>
-
-  <h2>地價稅繳納期限與滯納金</h2>
-  <ul>
-    <li>開徵日：每年 <strong>11 月 1 日</strong></li>
-    <li>繳費截止：每年 <strong>11 月 30 日</strong></li>
-    <li>逾期滯納金：每逾 3 日加徵 1%，最高至 10%</li>
-    <li>繳費方式：銀行臨櫃、ATM、信用卡、超商、行動支付</li>
-  </ul>
-
-  <h2>多筆土地要注意：累進差額分攤</h2>
-  <p>如果你名下有多筆土地，這些土地的課稅地價需要<strong>合計計算</strong>，再依總地價確認級距、分攤累進差額。這個計算比較複雜，本試算工具僅提供<strong>單筆簡易試算</strong>，多筆土地建議直接聯絡新北市政府稅務局或委由專業人員處理。</p>
-
-  <h2>關於新北市地價稅的幾個常見問題</h2>
-  <h3>Q：申報地價和公告地價有什麼差別？</h3>
-  <p>公告地價是政府評定的土地基準價，地主可以依此自行申報，通常申報地價為公告地價的 80%。申報過高，地價稅會增加；申報過低（低於公告地價 80%），則以 80% 計算。</p>
-
-  <h3>Q：地價稅可以分期繳嗎？</h3>
-  <p>目前新北市地價稅不提供分期繳納制度，但稅額較高者可洽稅務局了解其他協助方案。部分信用卡有地價稅分期零利率優惠（需洽發卡銀行）。</p>
-
-  <h3>Q：繼承的土地怎麼算？</h3>
-  <p>繼承後土地以繼承人名義登記，地價稅由繼承人繳納。若多人繼承（公同共有或分別共有），依持分比例分攤課稅地價後，各自計算稅額。</p>
-
-  <h3>Q：工業用地稅率是多少？</h3>
-  <p>依土地稅法規定，工廠用地（工業區內依法設立工廠使用的土地）適用 10‰ 的固定稅率，不適用累進制度。公共設施保留地適用 6‰。</p>
-
-  <div class="cta-box">
-    <h3>地價稅算出來，才知道現金流夠不夠</h3>
-    <p>如果每年的持有稅加上貸款壓力已經讓你喘不過氣，<br>鋮馨提供免費財務評估，幫你找出最省成本的方案。</p>
-    <a href="evaluate.html">免費評估我的財務狀況</a>
-  </div>
-
-  <h2>相關工具與文章</h2>
-  <ul>
-    <li><a href="new-taipei-land-value-tax.html">新北市地價稅免費試算工具 →</a></li>
-    <li><a href="land-value-tax-calculator.html">全台22縣市地價稅試算入口 →</a></li>
-    <li><a href="taipei-land-value-tax.html">台北市地價稅試算（累進起點 4,395.7 萬）→</a></li>
-    <li><a href="land-tax-calculator.html">土地增值稅試算工具 →</a></li>
-    <li><a href="article-mortgage-overdue.html">房貸繳不出來怎麼辦？5 個替代方案 →</a></li>
-    <li><a href="article-sale-leaseback-guide.html">售後回租完整指南：賣房後還能住在裡面？→</a></li>
-  </ul>
-</div>
-
-<section style="max-width:760px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">名詞解釋</h2>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">累進起點地價（新北市）</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 計算地價稅級距的基準，每兩年由各縣市重新公告；新北市 115-116 年為 7,878,000 元，課稅地價與此數的倍數決定適用稅率級距。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">課稅地價</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 每平方公尺申報地價乘以課稅面積所得的金額，是地價稅的稅基；申報地價通常為公告地價的 80%。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">累進差額</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 累進稅率速算用的扣除額：稅額＝課稅地價 × 適用稅率 － 累進差額，各級距的累進差額依各縣市累進起點地價計算後公告。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">自用住宅用地稅率</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 符合設籍、無出租或營業使用等條件的自用住宅用地，地價稅適用 2‰ 優惠稅率；須於 9 月 22 日以前提出申請，同年 11 月即可適用。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">地價稅開徵期間</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 地價稅每年課徵一次，11 月 1 日開徵、繳納期限至 11 月 30 日止；實際稅額以稅捐稽徵機關核定為準。</span></div>
 </section>
+
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>新北市地價稅怎麼算？</strong>先把名下新北市土地的申報地價加總，對照新北市當年「累進起點地價」7,878,000 元：自用住宅用地（符合條件）適用 2‰；一般用地未達起點課 10‰，超過部分按 15‰～55‰ 六級累進。每年 11 月開徵、繳納至 11/30。</p>
+      <div class="bt-small">累進起點地價與自用資格依新北市每年公告及稅捐機關認定為準；本文僅供參考，實際稅額以核定為準。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 文章本文 -->
+<section class="bt-sec" style="padding-top:0">
+  <div class="bt-narrow bt-art">
+    <p class="bt-p">每年11月，新北市超過80萬筆土地的地主都會收到地價稅繳款單——有人繳幾千元，有人繳幾十萬，差距可能來自一個申請表沒填、或是少算了一個級距。本文從基礎概念到實際計算，帶你完整看懂新北市地價稅，並附上免費試算工具，5分鐘掌握自己的稅額。</p>
+
+    <h2 class="bt-h2">地價稅是什麼？和房屋稅有什麼不同？</h2>
+    <p class="bt-p">很多人把地價稅和房屋稅搞混。兩者都是持有房地產的稅，但課徵對象不同：</p>
+    <ul>
+      <li><strong>地價稅</strong>：針對<strong>土地</strong>課徵，依「課稅地價」計算，每年11月繳納</li>
+      <li><strong>房屋稅</strong>：針對<strong>建物（房屋）</strong>課徵，依房屋評定現值計算，每年5月繳納</li>
+    </ul>
+    <p class="bt-p">買了一間有地的房子，就要同時繳這兩種稅。一般住宅的地價稅每年繳一次，金額依土地面積、申報地價與適用稅率而定。</p>
+
+    <h2 class="bt-h2">新北市地價稅的計算邏輯</h2>
+    <h3>第一步：算出課稅地價</h3>
+    <p class="bt-p">課稅地價＝<strong>每平方公尺申報地價 × 課稅面積（㎡）</strong></p>
+    <p class="bt-p">申報地價通常為公告地價的 80%。若你不確定自己的申報地價，可向新北市政府稅務局查詢，或使用本文後附的試算工具連結到官方系統查詢。</p>
+
+    <h3>第二步：對照累進起點地價，確認級距</h3>
+    <p class="bt-p">新北市 115-116 年（2026-2027年）<strong>累進起點地價為 7,878,000 元</strong>。你的課稅地價除以這個數字，就知道落在哪個級距：</p>
+
+    <div class="bt-card bt-qa">
+      <p>💡 <strong>累進起點地價</strong>是計算地價稅的基準，每兩年由各縣市重新公告一次，新北市115-116年為 <strong>787.8 萬元</strong>（全台第三高，僅次於台北市、嘉義市）。</p>
+    </div>
+
+    <h3>第三步：套入公式計算稅額</h3>
+    <p class="bt-p">稅額＝課稅地價 × 適用稅率 － 累進差額</p>
+
+    <div class="bt-table-wrap"><table class="bt-table">
+      <thead>
+        <tr>
+          <th>級次</th>
+          <th>課稅地價範圍（元）</th>
+          <th>稅率</th>
+          <th>累進差額（元）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>第一級</td>
+          <td>7,878,000 以下</td>
+          <td>10‰</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>第二級</td>
+          <td>7,878,001 ～ 47,268,000</td>
+          <td>15‰</td>
+          <td>39,390</td>
+        </tr>
+        <tr>
+          <td>第三級</td>
+          <td>47,268,001 ～ 86,658,000</td>
+          <td>25‰</td>
+          <td>512,070</td>
+        </tr>
+        <tr>
+          <td>第四級</td>
+          <td>86,658,001 ～ 126,048,000</td>
+          <td>35‰</td>
+          <td>1,378,650</td>
+        </tr>
+        <tr>
+          <td>第五級</td>
+          <td>126,048,001 ～ 165,438,000</td>
+          <td>45‰</td>
+          <td>2,639,130</td>
+        </tr>
+        <tr>
+          <td>第六級</td>
+          <td>165,438,001 以上</td>
+          <td>55‰</td>
+          <td>4,293,510</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <p class="bt-small">依土地稅法第16條及新北市政府公告，115-116年（2026-2027年）適用。</p>
+
+    <h2 class="bt-h2">實際計算範例</h2>
+    <h3>範例一：板橋區一般住宅用地</h3>
+    <div class="bt-card bt-ex">
+      <p>📋 已知條件：申報地價 45,000 元/㎡，課稅面積 80 ㎡</p>
+      <p>課稅地價 ＝ 45,000 × 80 ＝ <strong>3,600,000 元</strong></p>
+      <p>3,600,000 ÷ 7,878,000 ≈ 0.46 倍 → 第一級（≤1倍）</p>
+      <p>稅額 ＝ 3,600,000 × 10‰ － 0 ＝ <strong class="result">36,000 元／年</strong></p>
+    </div>
+
+    <h3>範例二：新莊區面積較大的土地</h3>
+    <div class="bt-card bt-ex">
+      <p>📋 已知條件：申報地價 30,000 元/㎡，課稅面積 400 ㎡</p>
+      <p>課稅地價 ＝ 30,000 × 400 ＝ <strong>12,000,000 元</strong></p>
+      <p>12,000,000 ÷ 7,878,000 ≈ 1.52 倍 → 第二級（1倍～6倍之間）</p>
+      <p>稅額 ＝ 12,000,000 × 15‰ － 39,390 ＝ 180,000 － 39,390 ＝ <strong class="result">140,610 元／年</strong></p>
+    </div>
+
+    <div class="bt-card bt-tool">
+      <h3 class="bt-h4">🧮 直接用試算工具計算你的稅額</h3>
+      <p class="bt-p">輸入行政區、地段、地號，查到申報地價後填入面積，自動試算四種用地類型</p>
+      <a href="new-taipei-land-value-tax.html" class="bt-btn">新北市地價稅免費試算 →</a>
+    </div>
+
+    <h2 class="bt-h2">自用住宅申請優惠：從 10‰ 降到 2‰</h2>
+    <p class="bt-p">一般用地的最低稅率是 10‰，但<strong>自用住宅用地只要 2‰</strong>，稅額可差到 5 倍以上。這個優惠不是自動給的，必須主動申請。</p>
+
+    <h3>申請條件</h3>
+    <ul>
+      <li>土地上有建物（房屋）且為住宅使用</li>
+      <li>土地所有人本人、配偶或直系親屬，須在該址設有戶籍登記</li>
+      <li>實際居住使用（非出租、非空屋）</li>
+      <li>每人只能申請一處自用住宅</li>
+    </ul>
+
+    <h3>申請方式與截止日</h3>
+    <ul>
+      <li>每年 <strong>9 月 22 日</strong> 以前向新北市政府稅務局提出申請</li>
+      <li>當年提出 → 同年 11 月地價稅即可適用 2‰ 稅率</li>
+      <li>申請後持續有效（條件未改變不需每年重新申請）</li>
+      <li>可至稅務局臨櫃、或透過新北市政府地方稅務局官網線上申辦</li>
+    </ul>
+
+    <div class="bt-card bt-warn">
+      <p>⚠️ <strong>常見誤區</strong>：購屋後不知道要申請自用優惠，繼續以一般稅率繳稅，往往多繳好幾年才發現。若有符合條件，建議盡快補申請（最多可溯及申請前一年）。</p>
+    </div>
+
+    <h2 class="bt-h2">地價稅繳納期限與滯納金</h2>
+    <ul>
+      <li>開徵日：每年 <strong>11 月 1 日</strong></li>
+      <li>繳費截止：每年 <strong>11 月 30 日</strong></li>
+      <li>逾期滯納金：每逾 3 日加徵 1%，最高至 10%</li>
+      <li>繳費方式：銀行臨櫃、ATM、信用卡、超商、行動支付</li>
+    </ul>
+
+    <h2 class="bt-h2">多筆土地要注意：累進差額分攤</h2>
+    <p class="bt-p">如果你名下有多筆土地，這些土地的課稅地價需要<strong>合計計算</strong>，再依總地價確認級距、分攤累進差額。這個計算比較複雜，本試算工具僅提供<strong>單筆簡易試算</strong>，多筆土地建議直接聯絡新北市政府稅務局或委由專業人員處理。</p>
+  </div>
+</section>
+
+<!-- 3. FAQ -->
+<section class="bt-faq bt-sec" style="padding-top:0">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">關於新北市地價稅的幾個常見問題</h2>
+
+    <details open>
+      <summary><h3>Q：申報地價和公告地價有什麼差別？</h3></summary>
+      <p>公告地價是政府評定的土地基準價，地主可以依此自行申報，通常申報地價為公告地價的 80%。申報過高，地價稅會增加；申報過低（低於公告地價 80%），則以 80% 計算。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：地價稅可以分期繳嗎？</h3></summary>
+      <p>目前新北市地價稅不提供分期繳納制度，但稅額較高者可洽稅務局了解其他協助方案。部分信用卡有地價稅分期零利率優惠（需洽發卡銀行）。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：繼承的土地怎麼算？</h3></summary>
+      <p>繼承後土地以繼承人名義登記，地價稅由繼承人繳納。若多人繼承（公同共有或分別共有），依持分比例分攤課稅地價後，各自計算稅額。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：工業用地稅率是多少？</h3></summary>
+      <p>依土地稅法規定，工廠用地（工業區內依法設立工廠使用的土地）適用 10‰ 的固定稅率，不適用累進制度。公共設施保留地適用 6‰。</p>
+    </details>
+
+    <div class="bt-dark-card">
+      <h3 class="bt-h4">地價稅算出來，才知道現金流夠不夠</h3>
+      <p class="bt-p">如果每年的持有稅加上貸款壓力已經讓你喘不過氣，<br>鋮馨提供免費財務評估，幫你找出最省成本的方案。</p>
+      <div class="bt-btns">
+        <a href="evaluate.html" class="bt-btn bt-btn-gold">免費評估我的財務狀況</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 相關工具與文章 -->
+<section class="bt-related bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關工具與文章</h2>
+    <div class="bt-rel-grid bt-rel-grid-txt">
+      <a class="bt-card bt-rel-card" href="new-taipei-land-value-tax.html"><h3>新北市地價稅免費試算工具 →</h3></a>
+      <a class="bt-card bt-rel-card" href="land-value-tax-calculator.html"><h3>全台22縣市地價稅試算入口 →</h3></a>
+      <a class="bt-card bt-rel-card" href="taipei-land-value-tax.html"><h3>台北市地價稅試算（累進起點 4,395.7 萬）→</h3></a>
+      <a class="bt-card bt-rel-card" href="land-tax-calculator.html"><h3>土地增值稅試算工具 →</h3></a>
+      <a class="bt-card bt-rel-card" href="article-mortgage-overdue.html"><h3>房貸繳不出來怎麼辦？5 個替代方案 →</h3></a>
+      <a class="bt-card bt-rel-card" href="article-sale-leaseback-guide.html"><h3>售後回租完整指南：賣房後還能住在裡面？→</h3></a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 名詞解釋 -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">名詞解釋</h2>
+    <div class="bt-terms">
+      <div><strong>累進起點地價（新北市）</strong><span> — 計算地價稅級距的基準，每兩年由各縣市重新公告；新北市 115-116 年為 7,878,000 元，課稅地價與此數的倍數決定適用稅率級距。</span></div>
+      <div><strong>課稅地價</strong><span> — 每平方公尺申報地價乘以課稅面積所得的金額，是地價稅的稅基；申報地價通常為公告地價的 80%。</span></div>
+      <div><strong>累進差額</strong><span> — 累進稅率速算用的扣除額：稅額＝課稅地價 × 適用稅率 － 累進差額，各級距的累進差額依各縣市累進起點地價計算後公告。</span></div>
+      <div><strong>自用住宅用地稅率</strong><span> — 符合設籍、無出租或營業使用等條件的自用住宅用地，地價稅適用 2‰ 優惠稅率；須於 9 月 22 日以前提出申請，同年 11 月即可適用。</span></div>
+      <div><strong>地價稅開徵期間</strong><span> — 地價稅每年課徵一次，11 月 1 日開徵、繳納期限至 11 月 30 日止；實際稅額以稅捐稽徵機關核定為準。</span></div>
+    </div>
+  </div>
+</section>
+
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
