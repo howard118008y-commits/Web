@@ -1,10 +1,10 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後重寫：2026-09-05 09:20（Better 版型第四～六批 30 頁上線＋nav 二胎合規修正）
-> 本次重寫原因：一、三、五節整節重寫、二節「Better 入口」段補試算器批次規格與線上驗證腳本；四節為 8/14 版保留、**本次未重驗**，接手前先查證。
+> 最後重寫：2026-09-05 16:10（Better 第七批在地 5 頁＋第八批小工具 11 頁上線，累計 55 頁；lvr 生成器模板同步）
+> 本次重寫原因：一、三、五節重寫、二節補小工具批次規格＋生成頁陷阱；四節 1–6 為 8/14 版保留、**本次未重驗**，7 更新為本日兩批 GSC 清單。
 
-## 一、當前狀態快照（2026-09-05 09:20 實測）
+## 一、當前狀態快照（2026-09-05 16:10 實測）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
@@ -102,9 +102,12 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 🟡 順帶發現、未動（Sir 裁）
 
-1. **nav-tool.html 第 1 行帶 `<meta name="robots" content="noindex">`**，由 include.js 注入還在用它的 14 頁；Google 渲染後可能照 noindex 處理。SEO 是最大目標，建議查 GSC 這 14 頁收錄狀態（第一順位表裡的小工具頁改 nav.js 後自然解掉）。
+1. **nav-tool.html 的 noindex**：只剩 cx_radar_v4_demo／lvr-presale／lvr-rental 3 頁還走 nav-tool（其餘 11 頁 9/5 改 nav.js 後自然解掉）。
 2. land-value-tax-calculator.html 正文「目前台北市與新北市已上線，其他縣市陸續建置中」已過時（22 縣市全上線），內容改動需媽祖。
 3. 試算器頁 GA 片段沒有其他頁的 line_click／phone_click 事件（原樣未補）。
+4. **合規**：affordability-calculator.html 既有 CTA 文案「協助您找到最優利率」貼近第六節「最低利率」紅線（舊文，9/5 套版守恆未動）→ 建議送媽祖改寫。
+5. cx_radar_v4_demo.html：canonical 指向 radar-index、只被 radar-index／topic-a 引用的示範頁；套版／下架／不動待 Sir 裁。
+6. lvr 圖表 PNG 與社群圖卡仍紅系（`scripts/lvr/make_charts.py`／`make_social_cards.py` 產），全站藍金後未跟；改色要動這兩支再等 workflow 重跑。
 
 ### 🟡 同專案的後續
 
@@ -135,19 +138,20 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 4. **Anthropic auto-reload**：console.anthropic.com → Billing，建議「低於 $5 自動補到 $50」
 5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
 6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
-7. 🆕 **GSC 催收**：32 條網址清單在 `行銷產出/技術記錄/2026-09-05-GSC網址清單-better第四五六批.txt`，單頁走「網址審查→要求建立索引」；Sitemap 欄只放 sitemap.xml。
+7. 🆕 **GSC 催收**：三份清單在 `行銷產出/技術記錄/`——`2026-09-05-GSC網址清單-better第四五六批.txt`（32 條）、`2026-09-05-GSC網址清單-better第七批在地5頁.txt`（5 條）、`2026-09-05-GSC網址清單-better第八批小工具11頁.txt`（11 條）。單頁走「網址審查→要求建立索引」（每日約 10 條配額，先送二胎與試算器）；Sitemap 欄只放 sitemap.xml。Indexing API 對一般頁無效（indexing_cron.py 檔頭），別再走 API。 **9/5 16:20 實查（Inspection API）：第七＋八批 16 頁全部「已收錄」，但 lastCrawl 全在改版前（最舊 vacancy 06-12）→ 要的是重抓；優先序清單 `2026-09-05-GSC催收優先序-第七八批16頁.txt`（依 lastCrawl 最舊排前）。**
 
-## 五、本 session（9/5 07:40→09:20）做了什麼
+## 五、本 session（9/5 10:00→16:10）做了什麼
 
-Sir 指令：「1＋2＋3」（在地 5 頁／nav 合規／地價稅 25 頁）→「部署」→「交接」。
+Sir 指令：「1」（在地餘 5 頁）→「部署」→「1＋2＋3」（精進會議：平行 session 已開，本 session 只補記）→「1」（小工具 14 頁）→「部署」→「交接＋送索引」。
 
 | 事項 | 證據 |
 |---|---|
-| nav 二胎合規：nav.js 加 `data-cta="line"` 模式，兩頁掛屬性 | `802c8ae`（nav.js +17/−4）；線上兩頁 nav「免費評估」0、CTA＝LINE 線上諮詢，對照頁 services 仍 2 |
-| 第四批在地 5 頁（5 建造者平行；並排目檢後再發 12 點配色對照表對齊） | `3119424`（5 檔 +2097/−903）；守恆 0／禁語 2=2／FAQ 0 漂移；順帶修 `.bar-fill{display:block}`（長條圖原本畫不出來） |
-| 第五批 4 guide＋新北試算器先導 | `04c6c5f`（5 檔 +1842/−883）；主對話補修：台中藍鈕白字、台北 CTA 改 dark-card、新北麵包屑進 hero、卡片 min-height、先導頁手機溢出 16px＋輸入框 16px |
-| 第六批 20 試算器頁（5 建造者 ×4 頁，先導頁當範本） | `5449609`（20 檔 +6824/−2531）；`lvt_verify.py` 20 頁試算結果與 HEAD 逐值相同、手機 sw=390、輸入框 ≥16px、console 0 |
-| 部署 | fetch+rebase+push，`ls-remote`＝本機 5449609；Pages 15 秒；線上 30 頁 200＋眉標＋nav.js＋無 style.css；Playwright 線上 6 頁桌機手機 console 0、Maps 無 403、長條圖 10 條、澎湖試算手機實測 24,000 元 |
-| 落地 | memory 補：`feedback_precommit_hook_sweeps_parallel_session_files`（commit 配方）、`feedback_parallel_agents_same_choice`（段落配色對照表）；iCloud 技術記錄新增試算器批次規格＋`lvt_verify.py`＋`slices.py`＋GSC 網址清單 |
+| 第七批在地 5 頁（{banqiao,sanchong,tucheng}-property-finance＋{banqiao,hsinchu}-second-mortgage） | `c2eb699`→rebase `05d4f37`；守恆 0／FAQ 0 漂移／禁語 old=new；二胎兩頁 data-cta=line；線上 5 頁 200 |
+| 第八批小工具 11 頁（試算器 9＋lvr-observatory＋tools） | `6b61818`→rebase `ded7533`；script diff 0、id 全保留、HEAD vs 新版填同值輸出逐 id 相同（土增稅 829 id）；72 片截圖目檢；線上 11 頁 200、Playwright console 0 |
+| lvr 生成器模板同步 | 同 commit：`scripts/lvr/build_observatory.py` +346/−123，`LVR_HTML_DEST` 可覆寫，stub 生成 vs 手工 diff 0 |
+| 主對話統一分歧 | 第七批：bt-who 底色／四卡寬度／相關文章 4 欄；第八批：試算器外框 bt-in、英文小標 bt-label 置 h1 上、快速答案鈕 LINE 藍＋電話 ghost、表單 CTA 主藍、二胎眉標改「二胎房貸試算」 |
+| 精進會議 | 12:46 版由平行 session 產出；本 session 加「八、補記」＋行動項 15 |
+| 落地 | 技術記錄：`2026-09-05-小工具頁批次規格.md`、GSC 第八批清單；`pw_check.py`／`slices.py` 加去 .html 防呆；memory 新增 `feedback_generated_pages_overwritten_by_workflow`、補 `feedback_parallel_agents_same_choice` 一行 |
 
-建造者回報的可接受偏差（未改）：guide 頁 hero 圖 4/5 直裁橫幅；試算器頁各自查價機制（proxy／openOfficialQuery／無鈕）原樣；keelung 名詞解釋＋在地資訊兩段放 CTA 後；JSON-LD dateModified 由鮮度腳本統一為 commit 日。
+雷點（本 session 親踩）：①`pw_check.py`／`slices.py` 參數不帶 .html（已防呆）；②反詐 modal 鎖捲動→整頁截圖要先 `localStorage.setItem('cx_antifraud_v1',…)`；③`indexing_cron.py` 本機跑近 7 天更動頁 50 頁逐一 Inspection 會超過 10 分鐘，要查特定頁自寫精簡版（scratchpad `inspect16.py` 思路：直接打 `searchconsole.googleapis.com/v1/urlInspection/index:inspect`）。
+
