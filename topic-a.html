@@ -20,81 +20,201 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 <style>
-:root{
-  --accent:#1B2F4A;--accent-glow:transparent;--accent-bg:rgba(27,47,74,0.06);
-  --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
-  --ink:#1B2F4A;--ink-mid:#5a5750;--ink-dim:#8a867c;
-  --gold:#D4AF37;--line:rgba(0,0,0,0.07);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-/* HERO */
-.hero{position:relative;overflow:hidden;min-height:480px;background:#12213A;border-bottom:1px solid rgba(0,0,0,0.08);}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:72px 40px 80px;display:flex;align-items:center;}
-.hero-left{flex:0 0 430px;max-width:430px}
-.series-badge{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.38em;color:var(--accent);margin-bottom:20px;}
-.series-badge::before{content:"";width:28px;height:1px;background:var(--accent)}
-.hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
-.hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#12213A;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
-.btn-fill:hover{opacity:.85}
-.btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
-/* STATS STRIP */
-.stats-strip{background:#faf8f4;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:56px 0;position:relative;z-index:1;}
-.stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
-.stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
-.stat-ring{text-align:center}
-.stat-ring svg{display:block}
-.stat-ring-label{font-size:11px;color:var(--ink-dim);letter-spacing:0.18em;margin-top:8px}
-.stats-sep{width:1px;height:80px;background:rgba(0,0,0,0.1);flex-shrink:0}
-.stats-text{flex:1;min-width:200px}
-.stats-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;color:var(--ink);letter-spacing:0.08em;margin-bottom:12px;}
-.stats-body{font-size:14px;line-height:1.88;color:var(--ink-mid);letter-spacing:0.03em;}
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-/* CARDS */
-.content-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 40px 100px;}
-.breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:60px;}
-.breadcrumb a{color:var(--ink-dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb-sep{opacity:0.4}
-.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
-.sec-line{flex:1;height:1px;background:var(--line)}
-.sec-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
-.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px;}
-.card{background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
-.card:hover{background:var(--bg-elev)}
-.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:#5a5750;border:1px solid rgba(0,0,0,0.18);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
-.card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:0.07em;margin-bottom:12px;}
-.card-desc{font-size:13px;line-height:1.9;color:var(--ink-dim);letter-spacing:0.03em;}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
 
-/* CTA BOX */
-.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;}
-.cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
-.cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#12213A;color:#fff;transition:opacity .2s;}
-.cta-main:hover{opacity:.85}
-.cta-main2{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;border:1px solid rgba(0,0,0,0.3);color:#1B2F4A;transition:border-color .2s;}
-.cta-main2:hover{border-color:#12213A}
-.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1B2F4A}
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
 @media(max-width:900px){
-  .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
-  .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}
-  .hero-title{font-size:38px}
-  .stats-inner{gap:32px}.stat-circles{gap:22px}
-  .content-wrap{padding:60px 24px 80px}
-  .cards-grid{grid-template-columns:1fr}
-  .cta-box{padding:40px 24px}.cta-btns{flex-direction:column;align-items:center}
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+
+/* === 本頁延伸（照 lvr-observatory.html 已套版寫法；資料頁：儀表板導覽） === */
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:var(--tint)}
+.bt-hero .bt-label{margin-bottom:16px}
+.bt-crumb{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.bt-crumb a:hover{color:var(--action)}
+.bt-qa .bt-small{margin-top:4px}
+.bt-dark-text{max-width:720px}
+.bt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-grid .bt-label{margin-bottom:8px}
+.bt-grid .bt-h4{margin-bottom:12px}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
+.bt-source{max-width:720px;margin:48px auto 0;padding-top:20px;border-top:1px solid var(--line)}
+@media(max-width:900px){.bt-grid{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">
 {
@@ -108,7 +228,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-05-16"
  },
  "breadcrumb": {
@@ -134,7 +254,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
    }
   ]
  },
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-05-16",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -266,176 +386,185 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  ]
 }
 </script>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 </head>
 <body>
-<div id="nav-placeholder"></div>
-<script>
-fetch('nav.html').then(r=>r.text()).then(h=>{
-  var el=document.getElementById('nav-placeholder');el.innerHTML=h;
-  el.querySelectorAll('script').forEach(function(orig){var s=document.createElement('script');s.textContent=orig.textContent;document.head.appendChild(s);});
-  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]').forEach(function(a){a.classList.remove('active');});
-});
-</script>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="series-badge">SERIES A · 房貸金融</div>
-      <h1 class="hero-title">房貸金融<br>指標總覽</h1>
-      <p class="hero-desc">銀行體系對房貸的管控指標群，涵蓋央行利率政策、商業銀行放款行為及政策性貸款走向，是研判資金環境的第一道防線。</p>
-      <div class="hero-btns">
-        <a href="cx_radar_v4_demo.html" class="btn-fill">查看雷達圖表 →</a>
-        <a href="radar-index.html" class="btn-ghost">← 返回目錄</a>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-eyebrow">房貸儀表板</p>
+      <p class="bt-label">SERIES A · 房貸金融</p>
+      <h1 class="bt-h1">房貸金融<br>指標總覽</h1>
+      <p class="bt-p">銀行體系對房貸的管控指標群，涵蓋央行利率政策、商業銀行放款行為及政策性貸款走向，是研判資金環境的第一道防線。</p>
+      <div class="bt-btns">
+        <a href="cx_radar_v4_demo.html" class="bt-btn">查看雷達圖表 →</a>
+        <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+      </div>
+    </div>
+    <img class="bt-hero-img" src="img/gen-topic-a.jpg" alt="黃昏時分的台灣住宅街角，轉角老屋與中層磁磚公寓亮起暖燈——房貸金融的市場現場意象" width="1400" height="788" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 深色帶：A 系列簡介＋三數字 -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-text">
+      <h2 class="bt-h2">A 系列 · 房貸金融</h2>
+      <p class="bt-p">從央行政策利率、商業銀行放款集中度到政策性補貼貸款，A 系列完整追蹤影響台灣房貸市場的金融面關鍵變數，是觀察台灣房貸授信環境的核心儀表板。</p>
+    </div>
+    <div class="bt-def">
+      <div class="bt-def-item">
+        <div class="bt-def-num">5</div>
+        <div class="bt-def-label">監測指標</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">10Y</div>
+        <div class="bt-def-label">歷史走勢</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">季更</div>
+        <div class="bt-def-label">資料頻率</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<img src="img/gen-topic-a.jpg" alt="黃昏時分的台灣住宅街角，轉角老屋與中層磁磚公寓亮起暖燈——房貸金融的市場現場意象" loading="lazy" width="1400" height="788" style="display:block;width:100%;height:220px;object-fit:cover;opacity:.92">
+<!-- 快速答案（AEO speakable，id 不動）＋麵包屑 -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <nav class="bt-crumb bt-small" aria-label="breadcrumb">
+      <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>房貸金融 A系列</span>
+    </nav>
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案 · QUICK ANSWER</div>
+      <p><strong>想知道「銀行願不願意放款、利率往哪走」，先看這 5 個房貸金融面指標。</strong>A 系列追蹤央行政策利率、實際房貸利率、新增房貸量、不動產放款集中度與新青安占比，是研判台灣房貸授信環境鬆緊的第一道訊號。</p>
+      <ul><li><strong>央行重貼現率 2.00%</strong>：政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。</li><li><strong>房貸利率 2.322%（2026-05）</strong>：銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。</li><li><strong>新增房貸 469 億/月（2026-05）</strong>：反映市場購屋需求與信用擴張的強度。</li><li><strong>不動產放款集中度 35.17%（2026-05）</strong>：銀行對房市的曝險程度，金管會設有警戒上限。</li><li><strong>新青安占比 下滑中（2026-01）</strong>：政策補貼房貸。青安 2.0 已於 2026-07-31 落日，青安 3.0 自 2026-08-01 接替上路，利息補貼滿 3 年後逐年遞減、6 年後退場。</li></ul>
+      <div class="bt-small">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
+    </div>
+  </div>
+</section>
 
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-circles">
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">5</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
-        </svg>
+<!-- 3. 監測指標卡片格 -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label bt-center">監測指標 · INDICATORS</div>
+    <div class="bt-grid">
+      <div class="bt-card">
+        <div class="bt-label">A01 · DEMO 系列</div>
+        <div class="bt-h4">央行重貼現率</div>
+        <p class="bt-p">台灣中央銀行調控貨幣供給的基準利率，直接決定銀行間的資金成本，是房貸利率走向最重要的政策先行指標。每次央行理監事會議後的利率決議，往往左右未來六個月的房市信貸環境。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">A02 · DEMO 系列</div>
+        <div class="bt-h4">房貸利率</div>
+        <p class="bt-p">各大銀行實際對購屋族核貸的加權平均房貸利率，與央行政策利率高度連動。近年升息壓力使其突破 2% 關卡，每上調一碼對高槓桿購屋族衝擊尤為明顯，是計算月供的直接依據。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="16" font-weight="bold" font-family="IBM Plex Mono,monospace">季更</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">資料頻率</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">A03 · DEMO 系列</div>
+        <div class="bt-h4">新增房貸金額</div>
+        <p class="bt-p">金融機構每季新核發的住宅抵押貸款總額，反映市場購屋需求的實際強度與信用擴張速度。數字快速增長通常預示市場過熱，是央行啟動選擇性信用管制的重要參考依據。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-label">A04 · A 系列</div>
+        <div class="bt-h4">不動產放款集中度</div>
+        <p class="bt-p">銀行總放款中不動產貸款（含建築融資）的占比。金管會設有警戒上限，集中度過高代表銀行體系過度暴露於房地產風險，為系統性金融危機的重要前兆，監管機構將提前介入。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-label">A05 · A 系列</div>
+        <div class="bt-h4">新青安貸款占比</div>
+        <p class="bt-p">政府「新青年安心成家」方案核貸金額占全體新增房貸的比率。高占比顯示政策補貼強力支撐市場；一旦政策退場，需求端可能出現急速修正，值得密切追蹤。</p>
       </div>
     </div>
-    <div class="stats-sep"></div>
-    <div class="stats-text">
-      <div class="stats-title">A 系列 · 房貸金融</div>
-      <div class="stats-body">從央行政策利率、商業銀行放款集中度到政策性補貼貸款，A 系列完整追蹤影響台灣房貸市場的金融面關鍵變數，是觀察台灣房貸授信環境的核心儀表板。</div>
-    </div>
   </div>
-</div>
+</section>
 
-<div class="content-wrap">
-  <div class="breadcrumb">
-    <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>房貸金融 A系列</span>
-  </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #1B2F4A;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#1B2F4A;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#1B2F4A;margin:0 0 14px"><strong style="color:#1B2F4A">想知道「銀行願不願意放款、利率往哪走」，先看這 5 個房貸金融面指標。</strong>A 系列追蹤央行政策利率、實際房貸利率、新增房貸量、不動產放款集中度與新青安占比，是研判台灣房貸授信環境鬆緊的第一道訊號。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1B2F4A">央行重貼現率 2.00%</strong>：政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。</li><li><strong style="color:#1B2F4A">房貸利率 2.322%（2026-05）</strong>：銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。</li><li><strong style="color:#1B2F4A">新增房貸 469 億/月（2026-05）</strong>：反映市場購屋需求與信用擴張的強度。</li><li><strong style="color:#1B2F4A">不動產放款集中度 35.17%（2026-05）</strong>：銀行對房市的曝險程度，金管會設有警戒上限。</li><li><strong style="color:#1B2F4A">新青安占比 下滑中（2026-01）</strong>：政策補貼房貸。青安 2.0 已於 2026-07-31 落日，青安 3.0 自 2026-08-01 接替上路，利息補貼滿 3 年後逐年遞減、6 年後退場。</li></ul>
-  <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
-</div>
-  <div class="sec-head">
-    <div class="sec-line"></div><div class="sec-text">監測指標 · INDICATORS</div><div class="sec-line"></div>
-  </div>
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-code">A01 · DEMO 系列</div>
-      <div class="card-title">央行重貼現率</div>
-      <div class="card-desc">台灣中央銀行調控貨幣供給的基準利率，直接決定銀行間的資金成本，是房貸利率走向最重要的政策先行指標。每次央行理監事會議後的利率決議，往往左右未來六個月的房市信貸環境。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">A02 · DEMO 系列</div>
-      <div class="card-title">房貸利率</div>
-      <div class="card-desc">各大銀行實際對購屋族核貸的加權平均房貸利率，與央行政策利率高度連動。近年升息壓力使其突破 2% 關卡，每上調一碼對高槓桿購屋族衝擊尤為明顯，是計算月供的直接依據。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">A03 · DEMO 系列</div>
-      <div class="card-title">新增房貸金額</div>
-      <div class="card-desc">金融機構每季新核發的住宅抵押貸款總額，反映市場購屋需求的實際強度與信用擴張速度。數字快速增長通常預示市場過熱，是央行啟動選擇性信用管制的重要參考依據。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">A04 · A 系列</div>
-      <div class="card-title">不動產放款集中度</div>
-      <div class="card-desc">銀行總放款中不動產貸款（含建築融資）的占比。金管會設有警戒上限，集中度過高代表銀行體系過度暴露於房地產風險，為系統性金融危機的重要前兆，監管機構將提前介入。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">A05 · A 系列</div>
-      <div class="card-title">新青安貸款占比</div>
-      <div class="card-desc">政府「新青年安心成家」方案核貸金額占全體新增房貸的比率。高占比顯示政策補貼強力支撐市場；一旦政策退場，需求端可能出現急速修正，值得密切追蹤。</div>
-    </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px">
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">央行重貼現率跟我的房貸利率有什麼關係？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">央行重貼現率是政策基準利率（目前 2.00%），決定銀行資金成本，房貸利率通常隨它連動。央行升降息會牽動未來月付，但實際房貸利率仍由各銀行依個案核定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">「不動產放款集中度」過高代表什麼？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">它是銀行總放款中不動產貸款的占比（目前約 35.17%）。比率過高代表銀行體系對房市曝險偏高，金管會設有警戒上限，可能促使銀行收緊房貸條件或降低成數。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">新青安占比下滑，對首購族有什麼影響？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">新青安（青安 2.0）已於 2026 年 7 月 31 日落日，占比下滑反映舊方案進入尾聲；青安 3.0 自 2026 年 8 月 1 日接替上路，申請期間至 2029 年 7 月 31 日。新制並非取消補貼，而是門檻與補貼機制改變：新增雙重年齡門檻與分區房屋總價上限，利息補貼滿 3 年後逐年遞減、6 年後全數退場。對首購族而言，能否申請、額度與補貼幅度都與舊制不同，建議依自身年齡、所得與購屋總價重新試算負擔，並比較其他可行方案。實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">頁面上的「房貸利率」跟我實際拿到的利率一樣嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">不一定一樣。頁面顯示的是全體銀行新承做房貸的加權平均，屬市場參考值；個人利率由銀行依信用狀況、收入、擔保品條件核定，可能高於或低於平均。實際條件依個案評估，最終核貸由金融機構決定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">新增房貸金額變多或變少，代表什麼？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">它反映市場購屋需求與銀行放款意願的強度。快速增長常見於市場轉熱，也可能引來央行信用管制；縮量則代表授信趨於保守。單月數字波動較大，判讀時建議看趨勢方向，不看單點。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">什麼是選擇性信用管制（限貸令）？對一般人有影響嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">這是央行針對特定對象或區域調整貸款成數、寬限期等條件的工具。若名下已有房貸、或購買受管制區域的物件，可貸條件可能受影響。實際適用範圍以央行公告為準，最終核貸由金融機構決定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">央行升息，已經在繳的房貸月付會馬上變多嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">多數房貸採機動計息，利率會隨指標利率調整，通常在銀行公告調整後的下一期反映到月付；若在固定利率期間內則暫不受影響。實際調整時點與幅度，依各銀行契約條款與個案而定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">銀行授信環境緊縮時，準備貸款的人可以怎麼因應？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">授信趨緊時，銀行對成數、利率與收入證明的要求通常更嚴。可先整理收入與信用資料、確認自身負債狀況，並預留較充裕的申辦時間。實際條件依個案評估，最終核貸由金融機構決定。</div>
-  </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">央行重貼現率</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 中央銀行對銀行融通資金的基準利率，是房貸利率的政策定錨。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">不動產放款集中度</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 銀行總放款中不動產相關貸款的占比，金管會設有警戒上限。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">新青安貸款</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 政府「新青年安心成家」政策性房貸方案，提供首購族補貼利率。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">選擇性信用管制</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
-  </div>
-  <div class="cta-box">
-    <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
-    <div class="cta-headline">開啟 A 系列雷達儀表板</div>
-    <div class="cta-btns">
-      <a href="cx_radar_v4_demo.html" class="cta-main">DEMO（A01–A03）</a>
-      <a href="cx_batch2_A04_A05.html" class="cta-main2">A04–A05 完整版</a>
-      <a href="radar-index.html" class="cta-back">← 返回目錄</a>
-    </div>
-  </div>
-</div>
+<!-- 5. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題 · FAQ</div>
 
+    <details open>
+      <summary><h3>央行重貼現率跟我的房貸利率有什麼關係？</h3></summary>
+      <p>央行重貼現率是政策基準利率（目前 2.00%），決定銀行資金成本，房貸利率通常隨它連動。央行升降息會牽動未來月付，但實際房貸利率仍由各銀行依個案核定。</p>
+    </details>
+    <details>
+      <summary><h3>「不動產放款集中度」過高代表什麼？</h3></summary>
+      <p>它是銀行總放款中不動產貸款的占比（目前約 35.17%）。比率過高代表銀行體系對房市曝險偏高，金管會設有警戒上限，可能促使銀行收緊房貸條件或降低成數。</p>
+    </details>
+    <details>
+      <summary><h3>新青安占比下滑，對首購族有什麼影響？</h3></summary>
+      <p>新青安（青安 2.0）已於 2026 年 7 月 31 日落日，占比下滑反映舊方案進入尾聲；青安 3.0 自 2026 年 8 月 1 日接替上路，申請期間至 2029 年 7 月 31 日。新制並非取消補貼，而是門檻與補貼機制改變：新增雙重年齡門檻與分區房屋總價上限，利息補貼滿 3 年後逐年遞減、6 年後全數退場。對首購族而言，能否申請、額度與補貼幅度都與舊制不同，建議依自身年齡、所得與購屋總價重新試算負擔，並比較其他可行方案。實際貸款條件依個案與銀行而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+    </details>
+    <details>
+      <summary><h3>頁面上的「房貸利率」跟我實際拿到的利率一樣嗎？</h3></summary>
+      <p>不一定一樣。頁面顯示的是全體銀行新承做房貸的加權平均，屬市場參考值；個人利率由銀行依信用狀況、收入、擔保品條件核定，可能高於或低於平均。實際條件依個案評估，最終核貸由金融機構決定。</p>
+    </details>
+    <details>
+      <summary><h3>新增房貸金額變多或變少，代表什麼？</h3></summary>
+      <p>它反映市場購屋需求與銀行放款意願的強度。快速增長常見於市場轉熱，也可能引來央行信用管制；縮量則代表授信趨於保守。單月數字波動較大，判讀時建議看趨勢方向，不看單點。</p>
+    </details>
+    <details>
+      <summary><h3>什麼是選擇性信用管制（限貸令）？對一般人有影響嗎？</h3></summary>
+      <p>這是央行針對特定對象或區域調整貸款成數、寬限期等條件的工具。若名下已有房貸、或購買受管制區域的物件，可貸條件可能受影響。實際適用範圍以央行公告為準，最終核貸由金融機構決定。</p>
+    </details>
+    <details>
+      <summary><h3>央行升息，已經在繳的房貸月付會馬上變多嗎？</h3></summary>
+      <p>多數房貸採機動計息，利率會隨指標利率調整，通常在銀行公告調整後的下一期反映到月付；若在固定利率期間內則暫不受影響。實際調整時點與幅度，依各銀行契約條款與個案而定。</p>
+    </details>
+    <details>
+      <summary><h3>銀行授信環境緊縮時，準備貸款的人可以怎麼因應？</h3></summary>
+      <p>授信趨緊時，銀行對成數、利率與收入證明的要求通常更嚴。可先整理收入與信用資料、確認自身負債狀況，並預留較充裕的申辦時間。實際條件依個案評估，最終核貸由金融機構決定。</p>
+    </details>
+  </div>
+</section>
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #1B2F4A;text-align:center">
-  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
-  <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
-    <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
+<!-- 6. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">名詞解釋 · GLOSSARY</div>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>央行重貼現率</strong><span> — 中央銀行對銀行融通資金的基準利率，是房貸利率的政策定錨。</span></div>
+      <div class="bt-term"><strong>不動產放款集中度</strong><span> — 銀行總放款中不動產相關貸款的占比，金管會設有警戒上限。</span></div>
+      <div class="bt-term"><strong>新青安貸款</strong><span> — 政府「新青年安心成家」政策性房貸方案，提供首購族補貼利率。</span></div>
+      <div class="bt-term"><strong>選擇性信用管制</strong><span> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
+    </div>
   </div>
-</div>
-<div style="max-width:1100px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:1">
-  <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(29,29,31,0.42);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
-    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+</section>
+
+<!-- 4. CTA 帶：開啟雷達儀表板 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">查看圖表 · VIEW CHARTS</div>
+    <h2 class="bt-h2">開啟 A 系列雷達儀表板</h2>
+    <div class="bt-btns">
+      <a href="cx_radar_v4_demo.html" class="bt-btn">DEMO（A01–A03）</a>
+      <a href="cx_batch2_A04_A05.html" class="bt-btn bt-btn-outline-dark">A04–A05 完整版</a>
+      <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- 7. 諮詢深色卡（照範本 .bt-dark-card）＋資料來源 -->
+<section class="bt-sec">
+  <div class="bt-in">
+    <div class="bt-dark-card" style="margin-top:0">
+      <div class="bt-h4">看完指標，想知道對你的房貸有什麼影響？</div>
+      <p class="bt-p">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</p>
+      <div class="bt-btns">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-gold">加 LINE 免費諮詢</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-outline">☎ 02-2249-0517</a>
+      </div>
+    </div>
+    <p class="bt-small bt-center bt-source">
+      資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+    </p>
+  </div>
+</section>
+
 <div data-include="footer"></div>
 <script src="include.js" defer></script>
 <!-- Preconnect for Google Analytics -->

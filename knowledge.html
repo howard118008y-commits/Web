@@ -7,92 +7,211 @@
 <meta property="og:description" content="鋮馨租賃知識專欄，深入解析售後回租、多筆貸款整合、民間轉銀行、信用瑕疵貸款、包租代管等不動產財務規劃知識，免費閱讀，立即評估。">
 <meta name="description" content="鋮馨租賃知識專欄，深入解析售後回租、多筆貸款整合、民間轉銀行、信用瑕疵貸款、包租代管等不動產財務規劃知識，免費閱讀，立即評估。">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-<link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Hero */
-.k-hero{background:#12213A;padding:120px 2rem 80px;text-align:center}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.k-hero-label{font-size:12px;color:#86868b;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.k-hero-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:1rem}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
-.k-hero-sub{font-size:18px;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 2rem;line-height:1.6}
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-/* Category tabs */
-.cat-bar{background:#f5f5f7;padding:1.5rem 2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
 
-.cat-btn{font-size:13px;font-weight:500;padding:7px 18px;border-radius:20px;border:none;cursor:pointer;background:#fff;color:#1B2F4A;border:.5px solid #d2d2d7;transition:all .2s}
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
 
-.cat-btn.active,.cat-btn:hover{background:#1B2F4A;color:#fff;border-color:#1B2F4A}
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
 
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
 
-/* Articles grid */
-.articles-wrap{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem}
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
 
-.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
 
-/* 卡片版型（老闆指定 Tailwind blog card 對應：rounded-lg / shadow-sm / hover:shadow-lg / h-56 / p-4 sm:p-6 / line-clamp-3） */
-.art-card{position:relative;display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 1px 2px 0 rgba(0,0,0,.05);transition:box-shadow .3s}
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
 
-.art-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
 
-.art-card-img{width:100%;height:224px;object-fit:cover;display:block}
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
 
-.art-card-body{display:flex;flex-direction:column;flex:1;background:#fff;padding:1rem}
-@media(min-width:640px){.art-card-body{padding:1.5rem}}
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
 
-.art-tag{display:inline-block;align-self:flex-start;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:.75rem;letter-spacing:.04em}
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
 
-.tag-red{background:rgba(27,47,74,.1);color:#1B2F4A}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-.tag-blue{background:rgba(0,122,255,.1);color:#2F5B8F}
-
-.tag-green{background:rgba(52,199,89,.1);color:#1a8a3a}
-
-.tag-orange{background:rgba(255,149,0,.1);color:#b86800}
-
-.art-title{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:.6rem;color:#1B2F4A}
-
-.art-excerpt{font-size:14px;color:#6e6e73;line-height:1.625;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-
-.art-meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-
-.art-date{font-size:11px;color:#86868b}
-
-.art-read{font-size:12px;font-weight:500;color:#2F5B8F}
-
-
-/* Featured article */
-.art-card.featured{grid-column:span 2}
-
-.art-card.featured .art-card-img{height:300px}
-
-.art-card.featured .art-title{font-size:24px}
-
-
-/* CTA strip */
-.k-cta{background:#1B2F4A;padding:4rem 2rem;text-align:center}
-
-.k-cta h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.35;margin-bottom:.75rem}
-
-.k-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:2rem}
-
-.k-cta a{display:inline-block;background:#fff;color:#1B2F4A;padding:12px 32px;border-radius:980px;font-size:15px;font-weight:600}
-
-
-
-
-@media(max-width:768px){
-  .k-hero-h1{font-size:32px}
-  .articles-grid{grid-template-columns:1fr}
-  .art-card.featured{grid-column:span 1}
-  .art-card.featured .art-card-img{height:224px}
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
 }
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+
+/* === 本頁（知識專欄）延伸：分類 chips（.cat-btn 供既有篩選 JS 綁定）、文章卡格、FAQ「＋」、名詞解釋 === */
+.bt-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:48px}
+.cat-btn{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.cat-btn:hover{background:var(--cream)}
+.cat-btn.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.bt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.art-card{padding:0;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s ease-in-out}
+.art-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.art-card-img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.art-card-body{display:flex;flex-direction:column;flex:1;padding:24px}
+.art-tag{align-self:flex-start;font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.art-title{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.art-excerpt{font-size:14px;line-height:22px;color:var(--ink-dim);margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.art-meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.art-date{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.art-read{font-size:14px;line-height:20px;font-weight:700;color:var(--action)}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-terms-sec{background:var(--paper)}
+.bt-terms{display:flex;flex-direction:column;gap:12px}
+.bt-term{background:#fff;border-radius:8px;box-shadow:var(--shadow);border-left:4px solid var(--action);padding:16px 20px}
+.bt-term strong{font-size:16px;line-height:24px;color:var(--ink)}
+.bt-term span{font-size:14px;line-height:22px;color:var(--ink-dim)}
+@media(max-width:900px){.bt-grid{grid-template-columns:1fr}}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -134,7 +253,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-04-29"
  }
 }
@@ -167,7 +286,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/knowledge.html",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -251,35 +370,50 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<section class="k-hero">
-  <div class="k-hero-label">Knowledge Center</div>
-  <h1 class="k-hero-h1">不動產財務知識專欄</h1>
-  <p class="k-hero-sub">深入解析售後回租、貸款整合、包租代管的每一個細節。讓你在面對銀行與資產決策前，先看懂規則。</p>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-label">Knowledge Center</div>
+      <p class="bt-eyebrow">知識專欄</p>
+      <h1 class="bt-h1">不動產財務知識專欄</h1>
+      <p class="bt-p">深入解析售後回租、貸款整合、包租代管的每一個細節。讓你在面對銀行與資產決策前，先看懂規則。</p>
+    </div>
+    <img class="bt-hero-img" src="img/gen-home-desk.jpg" alt="不動產財務知識專欄" fetchpriority="high" loading="eager">
+  </div>
 </section>
 
-<div class="cat-bar">
-  <button class="cat-btn active">全部文章</button>
-  <button class="cat-btn">繼承不動產</button>
-  <button class="cat-btn">售後回租</button>
-  <button class="cat-btn">貸款整合</button>
-  <button class="cat-btn">包租代管</button>
-  <button class="cat-btn">信用修復</button>
-  <button class="cat-btn">民間轉銀行</button>
-  <button class="cat-btn">台灣金融史</button>
-</div>
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>名下有房、卻被銀行拒絕或缺現金，你的選擇通常比想像中多。</strong>這個知識專欄整理售後回租、貸款整合、民間轉銀行、二胎與包租代管五條路的差異與適用情境，幫你在面對銀行前先看懂規則。鋮馨是諮詢與媒合服務，非金融機構、不放貸，最終核貸由金融機構決定。</p>
+      <ul><li><strong>售後回租</strong>：把房子過戶給投資方、同時簽租約繼續居住，並可保有日後依約買回的權利（三者一組）。</li><li><strong>貸款整合</strong>：把多筆高利率債務整併為一筆銀行貸款，目標降低每月月付。</li><li><strong>民間轉銀行</strong>：把高利率民間借款分階段轉回銀行體系，降低利息壓力。</li><li><strong>二胎</strong>：在既有第一順位房貸之外，再設定第二順位抵押取得資金（產權不移轉）。</li><li><strong>包租代管</strong>：把房屋出租與管理委外，穩定收租、減少自管負擔。</li></ul>
+      <div class="bt-small" style="margin-top:12px">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
+    </div>
+  </div>
+</section>
 
-<div id="quick-answer" style="max-width:760px;margin:32px auto 0;padding:22px 24px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A">
-  <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px">快速答案</div>
-  <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 12px"><strong>名下有房、卻被銀行拒絕或缺現金，你的選擇通常比想像中多。</strong>這個知識專欄整理售後回租、貸款整合、民間轉銀行、二胎與包租代管五條路的差異與適用情境，幫你在面對銀行前先看懂規則。鋮馨是諮詢與媒合服務，非金融機構、不放貸，最終核貸由金融機構決定。</p>
-  <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95"><li><strong>售後回租</strong>：把房子過戶給投資方、同時簽租約繼續居住，並可保有日後依約買回的權利（三者一組）。</li><li><strong>貸款整合</strong>：把多筆高利率債務整併為一筆銀行貸款，目標降低每月月付。</li><li><strong>民間轉銀行</strong>：把高利率民間借款分階段轉回銀行體系，降低利息壓力。</li><li><strong>二胎</strong>：在既有第一順位房貸之外，再設定第二順位抵押取得資金（產權不移轉）。</li><li><strong>包租代管</strong>：把房屋出租與管理委外，穩定收租、減少自管負擔。</li></ul>
-  <div style="font-size:11.5px;color:#86868b;line-height:1.7">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</div>
-</div>
-<div class="articles-wrap">
-  <div class="articles-grid">
+<!-- 2. 文章列表：分類 chips（既有篩選 JS 綁 .cat-btn／.art-card／.art-tag，不改）＋卡片格 -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-cats">
+      <button class="cat-btn active">全部文章</button>
+      <button class="cat-btn">繼承不動產</button>
+      <button class="cat-btn">售後回租</button>
+      <button class="cat-btn">貸款整合</button>
+      <button class="cat-btn">包租代管</button>
+      <button class="cat-btn">信用修復</button>
+      <button class="cat-btn">民間轉銀行</button>
+      <button class="cat-btn">台灣金融史</button>
+    </div>
+    <div class="bt-grid">
 
-    <a href="article-sale-leaseback-guide.html" class="art-card featured">
+    <a href="article-sale-leaseback-guide.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-sale-leaseback.jpg" alt="售後回租完整指南" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">售後回租</span>
@@ -292,7 +426,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-co-owned-house-stuck.html" class="art-card">
+    <a href="article-inherited-co-owned-house-stuck.html" class="bt-card art-card">
       <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="繼承的房子三人共有卡住了怎麼辦？" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-red">繼承不動產</span>
         <h2 class="art-title">繼承的房子三人共有卡住了怎麼辦？</h2>
@@ -301,7 +435,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-sale-leaseback-safety.html" class="art-card">
+    <a href="article-sale-leaseback-safety.html" class="bt-card art-card">
       <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w, img/svc-leaseback-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w, img/svc-leaseback-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-leaseback.jpg" alt="售後回租會不會被騙？簽約前必看的5件事" class="art-card-img"></picture>
       <div class="art-card-body"><span class="art-tag tag-red">售後回租</span>
         <h2 class="art-title">售後回租會不會被騙？簽約前必看的 5 件事</h2>
@@ -309,35 +443,35 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="art-meta"><span class="art-date">2026年6月</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
 
-    <a href="compare-options.html" class="art-card">
+    <a href="compare-options.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-arch.jpg" alt="售後回租 vs 二胎 vs 民間轉銀行 方案比較" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-blue">方案比較</span>
         <h2 class="art-title">售後回租 vs 二胎 vs 民間轉銀行，我該選哪個？</h2>
         <p class="art-excerpt">名下有房卻被拒或缺現金，四種方案用一張比較表＋決策指南，依信用、急用金額與是否保留產權幫你選對。</p>
         <div class="art-meta"><span class="art-date">2026年6月</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
-    <a href="glossary.html" class="art-card">
+    <a href="glossary.html" class="bt-card art-card">
       <picture><source srcset="img/proof-bg.avif" type="image/avif"><source srcset="img/proof-bg.webp" type="image/webp"><img loading="lazy" src="img/proof-bg.jpg" alt="不動產融資名詞百科" class="art-card-img"></picture>
       <div class="art-card-body"><span class="art-tag tag-green">名詞百科</span>
         <h2 class="art-title">不動產融資名詞百科：信用、二胎、售後回租一次看懂</h2>
         <p class="art-excerpt">聯徵、DBR、DSR、二胎、售後回租、法拍、限貸令…38 個不動產融資與房產危機名詞一次解釋清楚。</p>
         <div class="art-meta"><span class="art-date">2026年6月</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
-    <a href="market-insight.html" class="art-card">
+    <a href="market-insight.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-findata.jpg" alt="台北新北不動產走勢與銀行放貸分析" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-blue">市場觀察</span>
         <h2 class="art-title">台北新北不動產走勢與銀行放貸分析</h2>
         <p class="art-excerpt">房市量價、銀行 DBR/DSR 與貸款成數走向，先看懂市場脈動再決定資金安排。實際條件依個案與銀行核定為準。</p>
         <div class="art-meta"><span class="art-date">2026年</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
-    <a href="financing-data.html" class="art-card">
+    <a href="financing-data.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-arch.jpg" alt="不動產融資數據速查表" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-green">數據速查</span>
         <h2 class="art-title">不動產融資數據速查表：稅率、利率、DBR／DSR 一次查</h2>
         <p class="art-excerpt">房地合一稅與土增稅級距、契稅、DBR22 與 DSR、民間月息與銀行年息結構、售後回租成數、信用瑕疵留存時間，一張表查清楚（皆依個案與主管機關核定）。</p>
         <div class="art-meta"><span class="art-date">2026年6月</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
-    <a href="article-foreclosure.html" class="art-card">
+    <a href="article-foreclosure.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-hillside.jpg" alt="房子要被法拍怎麼辦" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">房產危機</span>
@@ -349,7 +483,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </div>
       </div>
     </a>
-    <a href="article-loan-integration.html" class="art-card">
+    <a href="article-loan-integration.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-loan-integration.jpg" alt="多筆貸款整合" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -362,7 +496,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-sale-leaseback.html" class="art-card">
+    <a href="article-inherited-sale-leaseback.html" class="bt-card art-card">
       <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="繼承的房子不想賣——售後回租完整解析" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">售後回租</span>
@@ -375,7 +509,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-private-to-bank.html" class="art-card">
+    <a href="article-private-to-bank.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-private-to-bank.jpg" alt="民間借貸轉銀行" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-orange">民間轉銀行</span>
@@ -388,7 +522,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-credit-repair.html" class="art-card">
+    <a href="article-credit-repair.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-credit-repair.jpg" alt="信用瑕疵貸款" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">信用修復</span>
@@ -401,7 +535,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-rental-management.html" class="art-card">
+    <a href="article-rental-management.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-rental-management.jpg" alt="包租代管vs自管" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">包租代管</span>
@@ -414,7 +548,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-bank-audit.html" class="art-card">
+    <a href="article-bank-audit.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-bank-audit.jpg" alt="銀行貸款審核" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -427,7 +561,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-home-equity.html" class="art-card">
+    <a href="article-home-equity.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-home-equity.jpg" alt="房屋淨值貸款" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -440,7 +574,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-dsr-rejected.html" class="art-card">
+    <a href="article-dsr-rejected.html" class="bt-card art-card">
       <picture><source srcset="img/band.avif" type="image/avif"><source srcset="img/band.webp" type="image/webp"><img loading="lazy" src="img/band.jpg" alt="DSR 超標被銀行拒絕" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -453,7 +587,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-credit-control-policy.html" class="art-card">
+    <a href="article-credit-control-policy.html" class="bt-card art-card">
       <picture><source srcset="img/svc-consolidate.avif" type="image/avif"><source srcset="img/svc-consolidate.webp" type="image/webp"><img loading="lazy" src="img/svc-consolidate.jpg" alt="央行選擇性信用管制" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-red">市場趨勢</span>
@@ -466,7 +600,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-property-loan.html" class="art-card">
+    <a href="article-inherited-property-loan.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-temple.jpg" alt="繼承的房子可以貸款嗎" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
@@ -479,7 +613,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-loan-seized.html" class="art-card">
+    <a href="article-inherited-loan-seized.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-hillside.jpg" alt="查封＝完全不能動？繼承房屋舊貸款與查封處理" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
@@ -492,7 +626,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-shared-ownership.html" class="art-card">
+    <a href="article-inherited-shared-ownership.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-loan-integration.jpg" alt="共有人不簽字，房子就卡死？公同共有vs分別共有" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
@@ -505,7 +639,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-inherited-estate-tax-timeline.html" class="art-card">
+    <a href="article-inherited-estate-tax-timeline.html" class="bt-card art-card">
       <img loading="lazy" src="img/band.jpg" alt="遺產稅6個月倒數，繼承貸款的時程規劃" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
@@ -518,7 +652,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-estate-tax-transfer-certificate.html" class="art-card">
+    <a href="article-estate-tax-transfer-certificate.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-art-inherit.jpg" alt="遺產稅還沒繳清，房子為什麼不能過戶也不能分割" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
@@ -531,7 +665,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-retirement-property.html" class="art-card">
+    <a href="article-retirement-property.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-guanshan.jpg" alt="退休族房產活化" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
@@ -544,7 +678,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-reverse-mortgage-declined.html" class="art-card">
+    <a href="article-reverse-mortgage-declined.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-art-retire.jpg" alt="銀行說我家不能辦以房養老，為什麼？" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
@@ -557,7 +691,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-parents-house-sell-or-not.html" class="art-card">
+    <a href="article-parents-house-sell-or-not.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-home-warmth.jpg" alt="爸媽的房子要不要賣？先問這 6 個問題" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
@@ -570,7 +704,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-dajiale-lottery-1980s.html" class="art-card">
+    <a href="article-dajiale-lottery-1980s.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-fanjiuzhang-dajiale.jpg" alt="六千尊神明被丟在路邊：1980 年代大家樂賭風怎麼起、怎麼收" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">台灣金融史</span>
@@ -582,7 +716,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </div>
       </div>
     </a>
-    <a href="article-longterm-care-monthly-gap.html" class="art-card">
+    <a href="article-longterm-care-monthly-gap.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-home-desk.jpg" alt="長照撐到第三年那筆帳：每月自付缺口怎麼算" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
@@ -595,7 +729,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-longterm-care-30-coverage.html" class="art-card">
+    <a href="article-longterm-care-30-coverage.html" class="bt-card art-card">
       <img loading="lazy" src="img/gen-home-dining.jpg" alt="長照 3.0 補了什麼、沒補什麼" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
@@ -608,10 +742,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-property-management-fees.html" class="art-card">
+    <a href="article-property-management-fees.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-rental-management.jpg" alt="包租代管費用怎麼算：包租、代管與政府方案一次看懂" class="art-card-img">
       <div class="art-card-body">
-        <span class="art-tag" style="background:rgba(27,59,54,.1);color:#1B2F4A;">包租代管</span>
+        <span class="art-tag">包租代管</span>
         <h2 class="art-title">包租代管費用怎麼算？包租、代管與政府方案一次看懂</h2>
         <p class="art-excerpt">費用沒有公定價，只有標準問法：代管問服務費幾成、包租問折讓後實拿多少、社宅方案問免稅補助怎麼算。本文攤開房東實拿，附四種出租方式比較與業者合法查證法。</p>
         <div class="art-meta">
@@ -621,7 +755,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-private-loan-to-bank.html" class="art-card">
+    <a href="article-private-loan-to-bank.html" class="bt-card art-card">
       <picture><source srcset="img/svc-consolidate.avif" type="image/avif"><source srcset="img/svc-consolidate.webp" type="image/webp"><img loading="lazy" src="img/svc-consolidate.jpg" alt="為什麼你的民間貸款轉不了銀行：三個關卡與實際流程" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-green">民間轉銀行</span>
@@ -634,7 +768,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-second-mortgage-rates.html" class="art-card">
+    <a href="article-second-mortgage-rates.html" class="bt-card art-card">
       <picture><source srcset="img/second-mortgage-rates-hero.avif" type="image/avif"><source srcset="img/second-mortgage-rates-hero.webp" type="image/webp"><img loading="lazy" src="img/second-mortgage-rates-hero.jpg" alt="二胎房貸利率怎麼看：銀行、融資公司與民間的實際差別" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-green">二胎房貸</span>
@@ -647,7 +781,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-debt-consolidation.html" class="art-card">
+    <a href="article-debt-consolidation.html" class="bt-card art-card">
       <picture><source srcset="img/svc-consolidate.avif" type="image/avif"><source srcset="img/svc-consolidate.webp" type="image/webp"><img loading="lazy" src="img/svc-consolidate.jpg" alt="貸款整合好嗎：適合誰、不適合誰、與債務協商差在哪" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-green">貸款整合</span>
@@ -660,7 +794,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-second-mortgage-scam.html" class="art-card">
+    <a href="article-second-mortgage-scam.html" class="bt-card art-card">
       <picture><source srcset="img/svc-equity-1600.avif 1600w, img/svc-equity-2560.avif 2560w, img/svc-equity-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-equity-1600.webp 1600w, img/svc-equity-2560.webp 2560w, img/svc-equity-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-equity.jpg" alt="二胎房貸詐騙怎麼分辨：五大手法與查證五步" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-orange">防詐教育</span>
@@ -673,7 +807,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-sale-leaseback.html" class="art-card">
+    <a href="article-sale-leaseback.html" class="bt-card art-card">
       <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w, img/svc-leaseback-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w, img/svc-leaseback-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-leaseback.jpg" alt="售後回租是什麼：流程、費用、風險與適合對象" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">售後回租</span>
@@ -686,7 +820,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="xinbei-debt-consolidation.html" class="art-card">
+    <a href="xinbei-debt-consolidation.html" class="bt-card art-card">
       <picture><source srcset="img/xinbei-dc-hero.avif" type="image/avif"><source srcset="img/xinbei-dc-hero.webp" type="image/webp"><img loading="lazy" src="img/xinbei-dc-hero.jpg" alt="新北貸款整合怎麼開始？有房與無房的月付重整地圖" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -699,7 +833,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="xinbei-second-mortgage.html" class="art-card">
+    <a href="xinbei-second-mortgage.html" class="bt-card art-card">
       <picture><source srcset="img/xinbei-2m-hero.avif" type="image/avif"><source srcset="img/xinbei-2m-hero.webp" type="image/webp"><img loading="lazy" src="img/xinbei-2m-hero.jpg" alt="新北二胎房貸怎麼評估？銀行趨嚴下的殘值活用地圖" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">二胎房貸</span>
@@ -712,7 +846,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="yonghe-home-loan.html" class="art-card">
+    <a href="yonghe-home-loan.html" class="bt-card art-card">
       <picture><source srcset="img/yonghe-hero.avif" type="image/avif"><source srcset="img/yonghe-hero.webp" type="image/webp"><img loading="lazy" src="img/yonghe-hero.jpg" alt="永和房屋貸款怎麼選？增貸、二胎到售後回租的決策地圖" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">房屋貸款</span>
@@ -725,7 +859,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="xinbei-sale-leaseback.html" class="art-card">
+    <a href="xinbei-sale-leaseback.html" class="bt-card art-card">
       <picture><source srcset="img/xinbei-hero.avif" type="image/avif"><source srcset="img/xinbei-hero.webp" type="image/webp"><img loading="lazy" src="img/xinbei-hero.jpg" alt="新北售後回租怎麼評估？三種在地情境與挑選標準" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">售後回租</span>
@@ -738,7 +872,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="banqiao-second-mortgage.html" class="art-card">
+    <a href="banqiao-second-mortgage.html" class="bt-card art-card">
       <picture><source srcset="img/svc-equity-1600.avif 1600w, img/svc-equity-2560.avif 2560w, img/svc-equity-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-equity-1600.webp 1600w, img/svc-equity-2560.webp 2560w, img/svc-equity-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-equity.jpg" alt="板橋二胎房貸：新板大樓到老公寓，殘值空間怎麼估" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">二胎房貸</span>
@@ -751,7 +885,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="zhonghe-second-mortgage.html" class="art-card">
+    <a href="zhonghe-second-mortgage.html" class="bt-card art-card">
       <picture><source srcset="img/svc-equity-1600.avif 1600w, img/svc-equity-2560.avif 2560w, img/svc-equity-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-equity-1600.webp 1600w, img/svc-equity-2560.webp 2560w, img/svc-equity-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-equity.jpg" alt="中和二胎房貸：條件、利率、流程與防詐" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">二胎房貸</span>
@@ -764,7 +898,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-second-mortgage.html" class="art-card">
+    <a href="article-second-mortgage.html" class="bt-card art-card">
       <picture><source srcset="img/svc-equity-1600.avif 1600w, img/svc-equity-2560.avif 2560w, img/svc-equity-3840.avif 3840w" sizes="100vw" type="image/avif"><source srcset="img/svc-equity-1600.webp 1600w, img/svc-equity-2560.webp 2560w, img/svc-equity-3840.webp 3840w" sizes="100vw" type="image/webp"><img loading="lazy" src="img/svc-equity.jpg" alt="二胎房貸完整指南" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -777,7 +911,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-loan-rejected-first-step.html" class="art-card">
+    <a href="article-loan-rejected-first-step.html" class="bt-card art-card">
       <img loading="lazy" src="img/service-loan.jpg" alt="被銀行拒貸後第一步" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">信用修復</span>
@@ -787,7 +921,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-bad-credit-loan.html" class="art-card">
+    <a href="article-bad-credit-loan.html" class="bt-card art-card">
       <img loading="lazy" src="img/audience-credit.jpg" alt="信用瑕疵還能貸款嗎" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">信用修復</span>
@@ -797,7 +931,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-self-employed-loan.html" class="art-card">
+    <a href="article-self-employed-loan.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-guanshan.jpg" alt="自營業者貸款攻略" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -807,7 +941,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-mortgage-overdue.html" class="art-card">
+    <a href="article-mortgage-overdue.html" class="bt-card art-card">
       <img loading="lazy" src="img/knw-temple.jpg" alt="房貸繳不出來怎麼辦" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">房產危機</span>
@@ -817,7 +951,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-private-loan-credit-damage.html" class="art-card">
+    <a href="article-private-loan-credit-damage.html" class="bt-card art-card">
       <img loading="lazy" src="img/audience-loan.jpg" alt="民間借款太多信用已損" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-orange">民間轉銀行</span>
@@ -827,7 +961,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-private-loan-interest-trap.html" class="art-card">
+    <a href="article-private-loan-interest-trap.html" class="bt-card art-card">
       <picture><source srcset="img/band.avif" type="image/avif"><source srcset="img/band.webp" type="image/webp"><img loading="lazy" src="img/band.jpg" alt="民間借款只繳利息本金不動" class="art-card-img"></picture>
       <div class="art-card-body">
         <span class="art-tag tag-orange">民間轉銀行</span>
@@ -837,7 +971,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
-    <a href="article-debt-negotiation-vs-consolidation.html" class="art-card">
+    <a href="article-debt-negotiation-vs-consolidation.html" class="bt-card art-card">
       <img loading="lazy" src="img/article-loan-integration.jpg" alt="債務協商 vs 貸款整合" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
@@ -847,28 +981,58 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </a>
 
+    </div>
   </div>
-</div>
+</section>
 
-<div style="max-width:760px;margin:0 auto;padding:0 24px">
-  <h2 style="font-size:22px;font-weight:700;color:#1B2F4A;margin:56px 0 18px">常見問題</h2>
-    <div style="border:1px solid #e5e5e7;border-radius:12px;padding:20px 22px;margin-bottom:12px;background:#fff"><div style="font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:9px">名下有房但信用有瑕疵，還有機會取得資金嗎？</div><div style="font-size:14px;line-height:1.9;color:#515154">有機會。不同方案對信用條件的要求不同，需依個案的不動產條件與財務狀況評估。鋮馨提供免費評估與媒合協助，但本公司非金融機構，最終核貸由金融機構決定。</div></div>
-    <div style="border:1px solid #e5e5e7;border-radius:12px;padding:20px 22px;margin-bottom:12px;background:#fff"><div style="font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:9px">售後回租和二胎、增貸差在哪？</div><div style="font-size:14px;line-height:1.9;color:#515154">售後回租是把房子過戶給投資方、簽訂租約繼續居住、並可保有日後依約買回的權利，產權會移轉；二胎與增貸則是房子仍登記在你名下、再設定抵押借款，產權不移轉。兩者性質與適用情境不同，需依個案評估。</div></div>
-    <div style="border:1px solid #e5e5e7;border-radius:12px;padding:20px 22px;margin-bottom:12px;background:#fff"><div style="font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:9px">貸款整合會不會傷信用？</div><div style="font-size:14px;line-height:1.9;color:#515154">貸款整合是「借新還舊」、把多筆債務整併為一筆，與「債務協商」不同——協商會在聯徵留下紀錄。整合能不能做、條件如何，仍要看個案財務狀況，最終核貸由金融機構決定。</div></div>
-  <h2 style="font-size:22px;font-weight:700;color:#1B2F4A;margin:44px 0 16px">名詞解釋</h2>
-    <div style="border-left:2px solid #d2d2d7;padding:6px 0 6px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14px">售後回租</strong><span style="color:#86868b;font-size:13.5px;line-height:1.85"> — 屋主將不動產過戶給投資方、同時簽訂租約繼續居住，並可保有日後依約買回權利的資金規劃方式。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:6px 0 6px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14px">貸款整合</strong><span style="color:#86868b;font-size:13.5px;line-height:1.85"> — 將房貸、信貸、卡循、民間借款等多筆債務整併為一筆銀行貸款，目標降低每月還款。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:6px 0 6px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14px">民間轉銀行</strong><span style="color:#86868b;font-size:13.5px;line-height:1.85"> — 將高利率的民間借款分階段轉回銀行體系，以降低利息負擔。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:6px 0 6px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14px">二胎</strong><span style="color:#86868b;font-size:13.5px;line-height:1.85"> — 在既有第一順位房貸之外，再設定第二順位抵押取得資金的貸款方式，產權不移轉。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:6px 0 6px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14px">負債比（DBR／DSR）</strong><span style="color:#86868b;font-size:13.5px;line-height:1.85"> — 衡量債務相對收入的指標，過高是常見的拒貸與整合需求原因。</span></div>
-</div>
-<div class="k-cta">
-  <h2>看完文章，下一步是評估你的狀況</h2>
-  <p>每個案子不一樣。免費評估，我們告訴你哪條路最適合你。</p>
-  <a href="evaluate.html">免費評估我的狀況</a>
-</div>
+<!-- 3. FAQ -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
 
-<p style="max-width:760px;margin:40px auto 0;padding:0 24px;font-size:11.5px;color:#a1a1a6;line-height:1.75;letter-spacing:.02em;text-align:center;">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+    <details open>
+      <summary><h3>名下有房但信用有瑕疵，還有機會取得資金嗎？</h3></summary>
+      <p>有機會。不同方案對信用條件的要求不同，需依個案的不動產條件與財務狀況評估。鋮馨提供免費評估與媒合協助，但本公司非金融機構，最終核貸由金融機構決定。</p>
+    </details>
+
+    <details>
+      <summary><h3>售後回租和二胎、增貸差在哪？</h3></summary>
+      <p>售後回租是把房子過戶給投資方、簽訂租約繼續居住、並可保有日後依約買回的權利，產權會移轉；二胎與增貸則是房子仍登記在你名下、再設定抵押借款，產權不移轉。兩者性質與適用情境不同，需依個案評估。</p>
+    </details>
+
+    <details>
+      <summary><h3>貸款整合會不會傷信用？</h3></summary>
+      <p>貸款整合是「借新還舊」、把多筆債務整併為一筆，與「債務協商」不同——協商會在聯徵留下紀錄。整合能不能做、條件如何，仍要看個案財務狀況，最終核貸由金融機構決定。</p>
+    </details>
+  </div>
+</section>
+
+<!-- 名詞解釋 -->
+<section class="bt-terms-sec bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">名詞解釋</h2>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>售後回租</strong><span> — 屋主將不動產過戶給投資方、同時簽訂租約繼續居住，並可保有日後依約買回權利的資金規劃方式。</span></div>
+      <div class="bt-term"><strong>貸款整合</strong><span> — 將房貸、信貸、卡循、民間借款等多筆債務整併為一筆銀行貸款，目標降低每月還款。</span></div>
+      <div class="bt-term"><strong>民間轉銀行</strong><span> — 將高利率的民間借款分階段轉回銀行體系，以降低利息負擔。</span></div>
+      <div class="bt-term"><strong>二胎</strong><span> — 在既有第一順位房貸之外，再設定第二順位抵押取得資金的貸款方式，產權不移轉。</span></div>
+      <div class="bt-term"><strong>負債比（DBR／DSR）</strong><span> — 衡量債務相對收入的指標，過高是常見的拒貸與整合需求原因。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">看完文章，下一步是評估你的狀況</h2>
+    <p class="bt-p">每個案子不一樣。免費評估，我們告訴你哪條路最適合你。</p>
+    <div class="bt-btns">
+      <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
+    </div>
+  </div>
+</section>
+
+<p class="bt-small bt-center" style="max-width:760px;margin:40px auto 0;padding:0 24px">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
 <div data-include="footer"></div>
 
 <script>

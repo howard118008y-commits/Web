@@ -152,3 +152,44 @@ def faq_terms_html(page_key: str) -> str:
 {faq_items}
   </div>
 """
+
+
+# ---- Better 版型（2026-09-05）：字仍取自 PAGES（與 head JSON-LD 同源），只換外層標記 ----
+# 標記與 build_observatory.py 內嵌版逐字相同；observatory 仍用自己的內嵌版，這兩個 helper 給 build_extras.py 用。
+
+def quick_answer_bt_html(page_key: str) -> str:
+    head, text = PAGES[page_key]["quick"]
+    return (f'<div id="quick-answer" class="bt-card bt-qa">\n'
+            f'  <h4>快速答案｜{head}</h4>\n  <p style="margin:0">{text}</p>\n</div>')
+
+
+def faq_terms_bt_html(page_key: str) -> str:
+    p = PAGES[page_key]
+    terms_html = "\n".join(
+        f'      <div class="bt-term"><strong>{t}</strong><span>：{d}</span></div>'
+        for t, d in p["terms"])
+    faq_html = "\n".join(
+        f'    <details{" open" if i == 0 else ""}>\n'
+        f'      <summary><h3>{q}</h3></summary>\n'
+        f'      <p>{a}</p>\n'
+        f'    </details>'
+        for i, (q, a) in enumerate(p["faqs"]))
+    return f"""<!-- 3. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">名詞解釋</h2>
+    <div class="bt-terms">
+{terms_html}
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
+
+{faq_html}
+  </div>
+</section>
+"""

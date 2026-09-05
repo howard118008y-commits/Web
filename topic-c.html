@@ -19,64 +19,135 @@
 <link rel="icon" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --accent:#1B2F4A;--accent-glow:transparent;--accent-bg:rgba(27,47,74,0.06);
-  --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
-  --ink:#1B2F4A;--ink-mid:#5a5750;--ink-dim:#8a867c;--gold:#D4AF37;--line:rgba(0,0,0,0.07);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
-.hero{position:relative;overflow:hidden;min-height:480px;background:#12213A;border-bottom:1px solid rgba(0,0,0,0.08);}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:72px 40px 80px;display:flex;align-items:center;}
-.hero-left{flex:0 0 430px;max-width:430px}
-.series-badge{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.38em;color:var(--accent);margin-bottom:20px;}
-.series-badge::before{content:"";width:28px;height:1px;background:var(--accent)}
-.hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
-.hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#12213A;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
-.btn-fill:hover{opacity:.85}
-.btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
-.stats-strip{background:#faf8f4;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:56px 0;position:relative;z-index:1;}
-.stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
-.stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
-.stat-ring{text-align:center}.stat-ring svg{display:block}
-.stats-sep{width:1px;height:80px;background:rgba(0,0,0,0.1);flex-shrink:0}
-.stats-text{flex:1;min-width:200px}
-.stats-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;color:var(--ink);letter-spacing:0.08em;margin-bottom:12px;}
-.stats-body{font-size:14px;line-height:1.88;color:var(--ink-mid);letter-spacing:0.03em;}
-.content-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 40px 100px;}
-.breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:60px;}
-.breadcrumb a{color:var(--ink-dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb-sep{opacity:0.4}
-.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
-.sec-line{flex:1;height:1px;background:var(--line)}.sec-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
-.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px;}
-.card{background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
-.card:hover{background:var(--bg-elev)}
-.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:#5a5750;border:1px solid rgba(0,0,0,0.18);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
-.card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:0.07em;margin-bottom:12px;}
-.card-desc{font-size:13px;line-height:1.9;color:var(--ink-dim);letter-spacing:0.03em;}
-.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;}
-.cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
-.cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#12213A;color:#fff;transition:opacity .2s;}
-.cta-main:hover{opacity:.85}
-.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1B2F4A}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:var(--tint)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+
+/* 麵包屑 */
+.bt-crumb{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;color:var(--ink-dim);margin-bottom:24px}
+.bt-crumb a:hover{color:var(--action)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0 0 12px;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-text{max-width:720px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 指標卡片格 */
+.bt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-grid .bt-card .bt-label{margin-bottom:8px}
+.bt-grid .bt-h4{margin-bottom:12px}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-dark-card{background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 5. FAQ accordion：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 名詞解釋 */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
+
+/* 資料來源尾注 */
+.bt-source{max-width:720px;margin:48px auto 0;padding-top:20px;border-top:1px solid var(--line)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
 @media(max-width:900px){
-  .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
-  .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}.hero-right{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:0.55;height:auto}
-  .hero-title{font-size:38px}.stats-inner{gap:32px}.stat-circles{gap:22px}
-  .content-wrap{padding:60px 24px 80px}.cards-grid{grid-template-columns:1fr}
-  .cta-box{padding:40px 24px}.cta-btns{flex-direction:column;align-items:center}
+  body{padding-top:58px}
+  .bt-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-grid,.bt-def{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
 }
 </style>
 <script type="application/ld+json">
@@ -91,7 +162,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-05-16"
  },
  "breadcrumb": {
@@ -117,7 +188,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
    }
   ]
  },
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-05-16",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -251,169 +322,177 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div id="nav-placeholder"></div>
-<script>
-fetch('nav.html').then(r=>r.text()).then(h=>{
-  var el=document.getElementById('nav-placeholder');el.innerHTML=h;
-  el.querySelectorAll('script').forEach(function(orig){var s=document.createElement('script');s.textContent=orig.textContent;document.head.appendChild(s);});
-  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]').forEach(function(a){a.classList.remove('active');});
-});
-</script>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="series-badge">SERIES C · 風險預警</div>
-      <h1 class="hero-title">風險預警<br>指標總覽</h1>
-      <p class="hero-desc">用於識別房市潛在壓力與泡沫風險的預警指標群。這些指標大多具有領先性，能在市場正式崩跌前發出早期警示，提供觀察市場變化的早期參考訊號。</p>
-      <div class="hero-btns">
-        <a href="cx_batch4_C01-C04.html" class="btn-fill">查看雷達圖表 →</a>
-        <a href="radar-index.html" class="btn-ghost">← 返回目錄</a>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-eyebrow">房貸儀表板</p>
+      <p class="bt-label">SERIES C · 風險預警</p>
+      <h1 class="bt-h1">風險預警<br>指標總覽</h1>
+      <p class="bt-p">用於識別房市潛在壓力與泡沫風險的預警指標群。這些指標大多具有領先性，能在市場正式崩跌前發出早期警示，提供觀察市場變化的早期參考訊號。</p>
+      <div class="bt-btns">
+        <a href="cx_batch4_C01-C04.html" class="bt-btn">查看雷達圖表 →</a>
+        <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+      </div>
+    </div>
+    <img class="bt-hero-img" src="img/gen-topic-c.jpg" alt="暴雨雲籠罩台灣住宅天際線，一線陽光仍照在公寓外牆——風險預警意象" width="1400" height="788" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 深藍帶：系列說明＋三數字 -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-text">
+      <h2 class="bt-h2">C 系列 · 風險預警</h2>
+      <p class="bt-p">從房貸逾放比、房價所得比到建照核發與完工差距，C 系列追蹤房市泡沫化與金融系統承壓的關鍵前兆指標，是評估市場尾端風險的重要參考工具。</p>
+    </div>
+    <div class="bt-def">
+      <div class="bt-def-item">
+        <div class="bt-def-num">4</div>
+        <div class="bt-def-label">監測指標</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">10Y</div>
+        <div class="bt-def-label">歷史走勢</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">預警</div>
+        <div class="bt-def-label">風險訊號</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<img src="img/gen-topic-c.jpg" alt="暴雨雲籠罩台灣住宅天際線，一線陽光仍照在公寓外牆——風險預警意象" loading="lazy" width="1400" height="788" style="display:block;width:100%;height:220px;object-fit:cover;opacity:.92">
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-crumb">
+      <a href="radar-index.html">房貸儀表板</a><span> › </span><span>風險預警 C系列</span>
+    </div>
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案 · QUICK ANSWER</div>
+      <p><strong>想提前看出「房市風險在累積還是緩解」，看這組風險預警指標。</strong>C 系列追蹤房貸逾放比、房價所得比與建照核發，從「還款違約、買房負擔、未來供給」三個角度提前示警。</p>
+      <ul><li><strong>房貸逾放比 0.08%（2026-Q1）</strong>：房貸違約比率，目前極低，銀行資產品質良好。</li><li><strong>房價所得比 9.32 倍（2025-Q4）</strong>：全國買房負擔倍數，偏高代表可負擔性吃緊。</li><li><strong>建照核發 31,573 戶（2026-04）</strong>：未來新增供給的領先指標。</li><li><strong>建照 vs 使照 42,905 戶（2026-04）</strong>：開工與完工落差，反映建商推案節奏。</li></ul>
+      <div class="bt-small">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
+    </div>
+  </div>
+</section>
 
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-circles">
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="191 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">4</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
-        </svg>
+<!-- 3. 監測指標卡片格 -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label bt-center">監測指標 · INDICATORS</div>
+    <div class="bt-grid">
+      <div class="bt-card">
+        <div class="bt-label">C01 · C 系列</div>
+        <div class="bt-h4">房貸逾放比</div>
+        <p class="bt-p">銀行房貸逾期放款餘額占房貸總餘額的比率，是金融體系承受房市壓力的核心警報指標。逾放比持續攀升代表借款人還款能力惡化，歷史上每次金融危機前夕，此指標均會顯著上升。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">C02 · C 系列</div>
+        <div class="bt-h4">房價所得比</div>
+        <p class="bt-p">房屋總價相對於家庭年所得的倍數，是國際通用的居住負擔能力指標。台北市長期維持 15 倍以上，遠超過國際警戒值（5–6 倍），反映嚴重的資產泡沫化程度與投機性持有需求。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="14" font-weight="bold" font-family="IBM Plex Mono,monospace">預警</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">風險訊號</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">C03 · C 系列</div>
+        <div class="bt-h4">建照核發棟數</div>
+        <p class="bt-p">政府每季核發新建物建造執照的數量，代表開發商對未來市場的信心與供給端預期。建照大量核發通常領先 2–4 年的實際供給增加，是評估未來供需平衡的重要前瞻指標。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-label">C04 · C 系列</div>
+        <div class="bt-h4">建照 vs 使照差距</div>
+        <p class="bt-p">建造執照與使用執照核發數量的累積差距，代表已動工但尚未完工的建案規模。差距持續擴大可能代表資金鏈問題或市場驟變，是評估爛尾樓風險與建商財務壓力的關鍵指標。</p>
       </div>
     </div>
-    <div class="stats-sep"></div>
-    <div class="stats-text">
-      <div class="stats-title">C 系列 · 風險預警</div>
-      <div class="stats-body">從房貸逾放比、房價所得比到建照核發與完工差距，C 系列追蹤房市泡沫化與金融系統承壓的關鍵前兆指標，是評估市場尾端風險的重要參考工具。</div>
-    </div>
   </div>
-</div>
+</section>
 
-<div class="content-wrap">
-  <div class="breadcrumb">
-    <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>風險預警 C系列</span>
-  </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #1B2F4A;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#1B2F4A;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#1B2F4A;margin:0 0 14px"><strong style="color:#1B2F4A">想提前看出「房市風險在累積還是緩解」，看這組風險預警指標。</strong>C 系列追蹤房貸逾放比、房價所得比與建照核發，從「還款違約、買房負擔、未來供給」三個角度提前示警。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1B2F4A">房貸逾放比 0.08%（2026-Q1）</strong>：房貸違約比率，目前極低，銀行資產品質良好。</li><li><strong style="color:#1B2F4A">房價所得比 9.32 倍（2025-Q4）</strong>：全國買房負擔倍數，偏高代表可負擔性吃緊。</li><li><strong style="color:#1B2F4A">建照核發 31,573 戶（2026-04）</strong>：未來新增供給的領先指標。</li><li><strong style="color:#1B2F4A">建照 vs 使照 42,905 戶（2026-04）</strong>：開工與完工落差，反映建商推案節奏。</li></ul>
-  <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
-</div>
-  <div class="sec-head">
-    <div class="sec-line"></div><div class="sec-text">監測指標 · INDICATORS</div><div class="sec-line"></div>
-  </div>
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-code">C01 · C 系列</div>
-      <div class="card-title">房貸逾放比</div>
-      <div class="card-desc">銀行房貸逾期放款餘額占房貸總餘額的比率，是金融體系承受房市壓力的核心警報指標。逾放比持續攀升代表借款人還款能力惡化，歷史上每次金融危機前夕，此指標均會顯著上升。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">C02 · C 系列</div>
-      <div class="card-title">房價所得比</div>
-      <div class="card-desc">房屋總價相對於家庭年所得的倍數，是國際通用的居住負擔能力指標。台北市長期維持 15 倍以上，遠超過國際警戒值（5–6 倍），反映嚴重的資產泡沫化程度與投機性持有需求。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">C03 · C 系列</div>
-      <div class="card-title">建照核發棟數</div>
-      <div class="card-desc">政府每季核發新建物建造執照的數量，代表開發商對未來市場的信心與供給端預期。建照大量核發通常領先 2–4 年的實際供給增加，是評估未來供需平衡的重要前瞻指標。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">C04 · C 系列</div>
-      <div class="card-title">建照 vs 使照差距</div>
-      <div class="card-desc">建造執照與使用執照核發數量的累積差距，代表已動工但尚未完工的建案規模。差距持續擴大可能代表資金鏈問題或市場驟變，是評估爛尾樓風險與建商財務壓力的關鍵指標。</div>
-    </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px">
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房貸逾放比 0.08% 算高還是低？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">偏低。逾放比是房貸逾期放款金額占房貸餘額的比率，0.08%（2026-Q1）代表整體房貸違約極少、銀行資產品質良好。這個數字往上走，才是風險升高的訊號。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房價所得比 9.32 倍代表什麼？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">全國房價約等於 9.32 年的家庭可支配所得（2025-Q4）。比率偏高代表購屋負擔吃緊，是觀察房市可負擔性與泡沫風險的指標之一。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">建照核發數量能預測房市嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">建照是未來房屋供給的領先指標（目前 31,573 戶，2026-04）。核發大增預示未來推案量上升，可能影響供需與價格，但從核發到完工有時間落差，需搭配其他指標一起看。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">「建照 vs 使照差距」是什麼？為什麼要看？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">建照代表未來要開工的供給，使照代表完工交屋的供給。兩者差距擴大，表示已請照但尚未完工的量在累積，未來交屋潮可能集中出現，是觀察供給端壓力的一項參考訊號。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">風險預警指標亮訊號，代表房市要崩盤了嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">不是。預警指標的作用是提早提醒市場壓力正在累積，不等於預測崩盤。單一指標轉差可能只是短期波動，通常要多項指標同方向惡化、且持續一段時間，才比較有參考意義。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房貸逾放比上升，對想貸款的人有什麼影響？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">逾放比上升代表銀行房貸資產品質轉差，銀行放款通常會更審慎，對成數、利率與收入審核可能趨嚴。實際影響依各銀行政策與個案條件而定，最終核貸由金融機構決定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">房價所得比高，就等於我買不起房嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">不完全是。房價所得比衡量的是整體房價相對所得的倍數，屬總體指標；個人負擔能力還要看利率、貸款年限、自備款與家庭支出。總體數字供參考，個人購屋負擔仍需依自身財務狀況試算。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">這些預警指標，一般人多久看一次就夠？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">多數指標為月報或季報，一般自住者每季掃一次即可；若正準備購屋、換屋或申辦貸款，建議在決策前再更新一次數據。指標僅供研判市場環境，非投資或貸款建議。</div>
-  </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">房貸逾放比</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 房貸逾期放款金額占房貸總餘額的比率，衡量銀行房貸資產品質。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">建照核發</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 主管機關核發建造執照的戶數，是未來房屋供給的領先指標。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">使用執照</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 建物完工檢驗合格後核發、可合法使用的證照。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">房價所得比</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 房價相對家庭年所得的倍數，衡量購屋負擔輕重。</span></div>
-  </div>
-  <div class="cta-box">
-    <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
-    <div class="cta-headline">開啟 C 系列雷達儀表板</div>
-    <div class="cta-btns">
-      <a href="cx_batch4_C01-C04.html" class="cta-main">C01–C04 完整版</a>
-      <a href="radar-index.html" class="cta-back">← 返回目錄</a>
-    </div>
-  </div>
-</div>
+<!-- 4. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題 · FAQ</div>
 
+    <details open>
+      <summary><h3>房貸逾放比 0.08% 算高還是低？</h3></summary>
+      <p>偏低。逾放比是房貸逾期放款金額占房貸餘額的比率，0.08%（2026-Q1）代表整體房貸違約極少、銀行資產品質良好。這個數字往上走，才是風險升高的訊號。</p>
+    </details>
+    <details>
+      <summary><h3>房價所得比 9.32 倍代表什麼？</h3></summary>
+      <p>全國房價約等於 9.32 年的家庭可支配所得（2025-Q4）。比率偏高代表購屋負擔吃緊，是觀察房市可負擔性與泡沫風險的指標之一。</p>
+    </details>
+    <details>
+      <summary><h3>建照核發數量能預測房市嗎？</h3></summary>
+      <p>建照是未來房屋供給的領先指標（目前 31,573 戶，2026-04）。核發大增預示未來推案量上升，可能影響供需與價格，但從核發到完工有時間落差，需搭配其他指標一起看。</p>
+    </details>
+    <details>
+      <summary><h3>「建照 vs 使照差距」是什麼？為什麼要看？</h3></summary>
+      <p>建照代表未來要開工的供給，使照代表完工交屋的供給。兩者差距擴大，表示已請照但尚未完工的量在累積，未來交屋潮可能集中出現，是觀察供給端壓力的一項參考訊號。</p>
+    </details>
+    <details>
+      <summary><h3>風險預警指標亮訊號，代表房市要崩盤了嗎？</h3></summary>
+      <p>不是。預警指標的作用是提早提醒市場壓力正在累積，不等於預測崩盤。單一指標轉差可能只是短期波動，通常要多項指標同方向惡化、且持續一段時間，才比較有參考意義。</p>
+    </details>
+    <details>
+      <summary><h3>房貸逾放比上升，對想貸款的人有什麼影響？</h3></summary>
+      <p>逾放比上升代表銀行房貸資產品質轉差，銀行放款通常會更審慎，對成數、利率與收入審核可能趨嚴。實際影響依各銀行政策與個案條件而定，最終核貸由金融機構決定。</p>
+    </details>
+    <details>
+      <summary><h3>房價所得比高，就等於我買不起房嗎？</h3></summary>
+      <p>不完全是。房價所得比衡量的是整體房價相對所得的倍數，屬總體指標；個人負擔能力還要看利率、貸款年限、自備款與家庭支出。總體數字供參考，個人購屋負擔仍需依自身財務狀況試算。</p>
+    </details>
+    <details>
+      <summary><h3>這些預警指標，一般人多久看一次就夠？</h3></summary>
+      <p>多數指標為月報或季報，一般自住者每季掃一次即可；若正準備購屋、換屋或申辦貸款，建議在決策前再更新一次數據。指標僅供研判市場環境，非投資或貸款建議。</p>
+    </details>
+  </div>
+</section>
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #1B2F4A;text-align:center">
-  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
-  <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
-    <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
+<!-- 5. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">名詞解釋 · GLOSSARY</div>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>房貸逾放比</strong><span> — 房貸逾期放款金額占房貸總餘額的比率，衡量銀行房貸資產品質。</span></div>
+      <div class="bt-term"><strong>建照核發</strong><span> — 主管機關核發建造執照的戶數，是未來房屋供給的領先指標。</span></div>
+      <div class="bt-term"><strong>使用執照</strong><span> — 建物完工檢驗合格後核發、可合法使用的證照。</span></div>
+      <div class="bt-term"><strong>房價所得比</strong><span> — 房價相對家庭年所得的倍數，衡量購屋負擔輕重。</span></div>
+    </div>
   </div>
-</div>
-<div style="max-width:1100px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:1">
-  <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(29,29,31,0.42);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
-    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+</section>
+
+<!-- 6. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">查看圖表 · VIEW CHARTS</div>
+    <h2 class="bt-h2">開啟 C 系列雷達儀表板</h2>
+    <div class="bt-btns">
+      <a href="cx_batch4_C01-C04.html" class="bt-btn">C01–C04 完整版</a>
+      <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- 諮詢深色卡＋資料來源尾注 -->
+<section class="bt-sec">
+  <div class="bt-in">
+    <div class="bt-dark-card">
+      <div class="bt-h4">看完指標，想知道對你的房貸有什麼影響？</div>
+      <p class="bt-p">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</p>
+      <div class="bt-btns">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-gold">加 LINE 免費諮詢</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-outline">☎ 02-2249-0517</a>
+      </div>
+    </div>
+    <p class="bt-small bt-center bt-source">
+      資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+    </p>
+  </div>
+</section>
 <div data-include="footer"></div>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script src="include.js" defer></script>
 <!-- Preconnect for Google Analytics -->
 <link rel="preconnect" href="https://www.googletagmanager.com">

@@ -20,63 +20,132 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 <style>
-:root{
-  --accent:#1B2F4A;--accent-glow:transparent;--accent-bg:rgba(27,47,74,0.06);
-  --bg-deep:#ffffff;--bg-panel:#faf8f4;--bg-elev:#f4f1ea;--bg-strip:#faf8f4;
-  --ink:#1B2F4A;--ink-mid:#5a5750;--ink-dim:#8a867c;--gold:#D4AF37;--line:rgba(0,0,0,0.07);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-serif;min-height:100vh;padding-top:48px}
-.hero{position:relative;overflow:hidden;min-height:480px;background:#12213A;border-bottom:1px solid rgba(0,0,0,0.08);}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:72px 40px 80px;display:flex;align-items:center;}
-.hero-left{flex:0 0 430px;max-width:430px}
-.series-badge{display:inline-flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.38em;color:var(--accent);margin-bottom:20px;}
-.series-badge::before{content:"";width:28px;height:1px;background:var(--accent)}
-.hero-title{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:52px;color:#fff;letter-spacing:0.04em;line-height:1.2;margin-bottom:18px;}
-.hero-desc{font-size:15px;line-height:1.88;color:rgba(255,255,255,0.62);letter-spacing:0.04em;margin-bottom:36px;max-width:360px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-fill{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:#12213A;padding:14px 28px;border-radius:0;font-size:13px;font-weight:600;letter-spacing:0.14em;transition:opacity .2s;}
-.btn-fill:hover{opacity:.85}
-.btn-ghost{display:inline-flex;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,0.55);color:#fff;padding:14px 22px;border-radius:0;font-size:13px;font-weight:500;letter-spacing:0.14em;transition:border-color .2s,color .2s;}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
-.stats-strip{background:#faf8f4;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);padding:56px 0;position:relative;z-index:1;}
-.stats-inner{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
-.stat-circles{display:flex;gap:32px;align-items:center;flex-shrink:0}
-.stat-ring{text-align:center}.stat-ring svg{display:block}
-.stats-sep{width:1px;height:80px;background:rgba(0,0,0,0.1);flex-shrink:0}
-.stats-text{flex:1;min-width:200px}
-.stats-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;color:var(--ink);letter-spacing:0.08em;margin-bottom:12px;}
-.stats-body{font-size:14px;line-height:1.88;color:var(--ink-mid);letter-spacing:0.03em;}
-.content-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 40px 100px;}
-.breadcrumb{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:var(--ink-dim);margin-bottom:60px;}
-.breadcrumb a{color:var(--ink-dim);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}.breadcrumb-sep{opacity:0.4}
-.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:32px;}
-.sec-line{flex:1;height:1px;background:var(--line)}.sec-text{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.35em;color:var(--ink-dim);text-transform:uppercase;white-space:nowrap}
-.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px;}
-.card{background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;padding:28px 24px 26px;transition:background .2s;}
-.card:hover{background:var(--bg-elev)}
-.card-code{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.25em;color:#5a5750;border:1px solid rgba(0,0,0,0.18);padding:4px 10px;border-radius:0;display:inline-block;margin-bottom:14px;}
-.card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:0.07em;margin-bottom:12px;}
-.card-desc{font-size:13px;line-height:1.9;color:var(--ink-dim);letter-spacing:0.03em;}
-.cta-box{text-align:center;padding:52px 40px;background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-radius:0;}
-.cta-kicker{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:0.45em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;}
-.cta-headline{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;color:var(--ink);letter-spacing:0.08em;margin-bottom:28px;}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-main{display:inline-block;text-decoration:none;padding:14px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:0.1em;background:#12213A;color:#fff;transition:opacity .2s;}
-.cta-main:hover{opacity:.85}
-.cta-back{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:0;font-size:15px;font-weight:500;border:1.5px solid rgba(0,0,0,0.18);color:var(--ink-mid);transition:border-color .2s,color .2s;}
-.cta-back:hover{border-color:rgba(0,0,0,0.4);color:#1B2F4A}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:var(--tint)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .bt-label{margin-bottom:16px}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0 0 16px;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-text{max-width:720px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 麵包屑 */
+.bt-crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;line-height:20px;color:var(--ink-dim);margin-bottom:24px}
+.bt-crumb a:hover{color:var(--action)}
+
+/* 3. 卡片格（監測指標） */
+.bt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-grid .bt-card .bt-label{margin-bottom:8px}
+.bt-grid .bt-card .bt-h4{margin-bottom:12px}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-dark-card{background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 5. FAQ accordion：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 名詞解釋 */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
+
+/* 資料來源尾注 */
+.bt-source{max-width:720px;margin:48px auto 0;padding-top:20px;border-top:1px solid var(--line)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
 @media(max-width:900px){
-  .hero-inner{flex-direction:column;padding:52px 24px 72px;gap:0;position:relative}
-  .hero-left{flex:none;max-width:100%;width:100%;position:relative;z-index:2}.hero-right{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:0.55;height:auto}
-  .hero-title{font-size:38px}.stats-inner{gap:32px}.stat-circles{gap:22px}
-  .content-wrap{padding:60px 24px 80px}.cards-grid{grid-template-columns:1fr}
-  .cta-box{padding:40px 24px}.cta-btns{flex-direction:column;align-items:center}
+  body{padding-top:58px}
+  .bt-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-grid,.bt-def{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
 }
 </style>
 <script type="application/ld+json">
@@ -91,7 +160,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
   "@type": "WebSite",
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw/",
-  "dateModified": "2026-09-04",
+  "dateModified": "2026-09-05",
   "datePublished": "2026-05-16"
  },
  "breadcrumb": {
@@ -117,7 +186,7 @@ body{background:var(--bg-deep);color:var(--ink);font-family:"Noto Sans TC",sans-
    }
   ]
  },
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-05-16",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -249,170 +318,177 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  ]
 }
 </script>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 </head>
 <body>
-<div id="nav-placeholder"></div>
-<script>
-fetch('nav.html').then(r=>r.text()).then(h=>{
-  var el=document.getElementById('nav-placeholder');el.innerHTML=h;
-  el.querySelectorAll('script').forEach(function(orig){var s=document.createElement('script');s.textContent=orig.textContent;document.head.appendChild(s);});
-  document.querySelectorAll('.nav-links a[data-page],.cx-mobile-menu a[data-page]').forEach(function(a){a.classList.remove('active');});
-});
-</script>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="series-badge">SERIES D · 國際資金</div>
-      <h1 class="hero-title">國際資金<br>指標總覽</h1>
-      <p class="hero-desc">追蹤影響台灣房市的國際總體經濟訊號，包含美國利率政策、匯率動態、股市財富效應及通膨走向。台灣是高度開放的小型經濟體，美聯儲的決策都可能透過資金流動影響本地房市。</p>
-      <div class="hero-btns">
-        <a href="cx_batch5_D01-D04.html" class="btn-fill">查看雷達圖表 →</a>
-        <a href="radar-index.html" class="btn-ghost">← 返回目錄</a>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-eyebrow">房貸儀表板</p>
+      <p class="bt-label">SERIES D · 國際資金</p>
+      <h1 class="bt-h1">國際資金<br>指標總覽</h1>
+      <p class="bt-p">追蹤影響台灣房市的國際總體經濟訊號，包含美國利率政策、匯率動態、股市財富效應及通膨走向。台灣是高度開放的小型經濟體，美聯儲的決策都可能透過資金流動影響本地房市。</p>
+      <div class="bt-btns">
+        <a href="cx_batch5_D01-D04.html" class="bt-btn">查看雷達圖表 →</a>
+        <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+      </div>
+    </div>
+    <img class="bt-hero-img" src="img/gen-topic-d.jpg" alt="藍調時刻的河岸金融區天際線與水面倒影——國際資金流向意象" width="1400" height="788" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 深色帶：三數字 -->
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-text">
+      <h2 class="bt-h2">D 系列 · 國際資金</h2>
+      <p class="bt-p">從美國公債殖利率、美元台幣匯率到台股指數與CPI，D 系列追蹤影響台灣房市的跨境資金動向，是研判利率政策方向與市場長期趨勢的宏觀框架。</p>
+    </div>
+    <div class="bt-def">
+      <div class="bt-def-item">
+        <div class="bt-def-num">4</div>
+        <div class="bt-def-label">監測指標</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">10Y</div>
+        <div class="bt-def-label">歷史走勢</div>
+      </div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">全球</div>
+        <div class="bt-def-label">宏觀視野</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<img src="img/gen-topic-d.jpg" alt="藍調時刻的河岸金融區天際線與水面倒影——國際資金流向意象" loading="lazy" width="1400" height="788" style="display:block;width:100%;height:220px;object-fit:cover;opacity:.92">
+<!-- 快速答案（AEO speakable，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-crumb">
+      <a href="radar-index.html">房貸儀表板</a><span> › </span><span>國際資金 D系列</span>
+    </div>
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案 · QUICK ANSWER</div>
+      <p><strong>想知道「國際資金與物價怎麼牽動台灣房貸」，看這組總體環境指標。</strong>D 系列追蹤美十年期公債殖利率、美元台幣匯率、台股與台灣 CPI；外部資金與通膨會透過利率與資金流，間接影響台灣房市與房貸條件。</p>
+      <ul><li><strong>美十年期公債殖利率 4.493%（2026-06）</strong>：全球利率定錨，牽動台灣資金成本與長天期利率。</li><li><strong>美元台幣匯率 31.71（2026-06）</strong>：影響資金流向與輸入性通膨。</li><li><strong>台股加權指數 47,101 點（2026-06）</strong>：資產與財富效果，間接影響購屋力。</li><li><strong>台灣 CPI 2.20%（2026-05）</strong>：通膨水準，是央行升降息的關鍵依據。</li></ul>
+      <div class="bt-small">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
+    </div>
+  </div>
+</section>
 
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-circles">
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="191 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="22" font-weight="bold" font-family="IBM Plex Mono,monospace">4</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">監測指標</text>
-        </svg>
+<!-- 3. 監測指標卡片格 -->
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label bt-center">監測指標 · INDICATORS</div>
+    <div class="bt-grid">
+      <div class="bt-card">
+        <div class="bt-label">D01 · D 系列</div>
+        <div class="bt-h4">美十年期公債殖利率</div>
+        <p class="bt-p">全球風險資產定價的基準利率，殖利率上升通常帶動全球房貸利率走高，壓抑購屋需求。2022–2023 年急速飆升至 5%，是台灣央行跟進升息、房市急速降溫的直接外部驅動因素。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="239 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="18" font-weight="bold" font-family="IBM Plex Mono,monospace">10Y</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">歷史走勢</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">D02 · D 系列</div>
+        <div class="bt-h4">美元台幣匯率</div>
+        <p class="bt-p">台幣相對美元的匯率走勢，影響外資進出台灣房市的意願。台幣持續貶值時外資購屋吸引力下降；升值時海外資金回流有助支撐資產價格，對豪宅市場影響尤為顯著。</p>
       </div>
-      <div class="stat-ring">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8"/>
-          <circle cx="48" cy="48" r="38" fill="none" stroke="#1B2F4A" stroke-width="8" stroke-dasharray="179 239" stroke-linecap="round" transform="rotate(-90 48 48)"/>
-          <text x="48" y="44" text-anchor="middle" fill="#1B2F4A" font-size="14" font-weight="bold" font-family="IBM Plex Mono,monospace">全球</text>
-          <text x="48" y="60" text-anchor="middle" fill="rgba(29,29,31,0.5)" font-size="9" font-family="Noto Sans TC,sans-serif" letter-spacing="2">宏觀視野</text>
-        </svg>
+      <div class="bt-card">
+        <div class="bt-label">D03 · D 系列</div>
+        <div class="bt-h4">台股加權指數</div>
+        <p class="bt-p">台灣股市的財富效應與房市高度正相關。台股多頭行情帶來的資本利得，是台灣換屋潮與投資性購屋的重要動能。股市急速崩跌則往往先行壓縮購屋意願，是觀察房市短期轉折的輔助訊號。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-label">D04 · D 系列</div>
+        <div class="bt-h4">台灣 CPI 通膨指數</div>
+        <p class="bt-p">台灣消費者物價指數年增率，反映實質通膨壓力。持續高通膨促使央行維持或升息立場，增加房貸成本；但也使部分資金轉向不動產避險，造成房市雙面效應，需結合其他指標綜合研判。</p>
       </div>
     </div>
-    <div class="stats-sep"></div>
-    <div class="stats-text">
-      <div class="stats-title">D 系列 · 國際資金</div>
-      <div class="stats-body">從美國公債殖利率、美元台幣匯率到台股指數與CPI，D 系列追蹤影響台灣房市的跨境資金動向，是研判利率政策方向與市場長期趨勢的宏觀框架。</div>
-    </div>
   </div>
-</div>
+</section>
 
-<div class="content-wrap">
-  <div class="breadcrumb">
-    <a href="radar-index.html">房貸儀表板</a><span class="breadcrumb-sep"> › </span><span>國際資金 D系列</span>
-  </div>
-<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(0,0,0,0.08);border-left:2px solid #1B2F4A;padding:24px 26px;margin-bottom:48px">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;color:#1B2F4A;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>
-  <p style="font-size:16px;line-height:1.85;color:#1B2F4A;margin:0 0 14px"><strong style="color:#1B2F4A">想知道「國際資金與物價怎麼牽動台灣房貸」，看這組總體環境指標。</strong>D 系列追蹤美十年期公債殖利率、美元台幣匯率、台股與台灣 CPI；外部資金與通膨會透過利率與資金流，間接影響台灣房市與房貸條件。</p>
-  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#5a5750;line-height:2"><li><strong style="color:#1B2F4A">美十年期公債殖利率 4.493%（2026-06）</strong>：全球利率定錨，牽動台灣資金成本與長天期利率。</li><li><strong style="color:#1B2F4A">美元台幣匯率 31.71（2026-06）</strong>：影響資金流向與輸入性通膨。</li><li><strong style="color:#1B2F4A">台股加權指數 47,101 點（2026-06）</strong>：資產與財富效果，間接影響購屋力。</li><li><strong style="color:#1B2F4A">台灣 CPI 2.20%（2026-05）</strong>：通膨水準，是央行升降息的關鍵依據。</li></ul>
-  <div style="font-size:11.5px;color:#8a867c;line-height:1.7">本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。</div>
-</div>
-  <div class="sec-head">
-    <div class="sec-line"></div><div class="sec-text">監測指標 · INDICATORS</div><div class="sec-line"></div>
-  </div>
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-code">D01 · D 系列</div>
-      <div class="card-title">美十年期公債殖利率</div>
-      <div class="card-desc">全球風險資產定價的基準利率，殖利率上升通常帶動全球房貸利率走高，壓抑購屋需求。2022–2023 年急速飆升至 5%，是台灣央行跟進升息、房市急速降溫的直接外部驅動因素。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">D02 · D 系列</div>
-      <div class="card-title">美元台幣匯率</div>
-      <div class="card-desc">台幣相對美元的匯率走勢，影響外資進出台灣房市的意願。台幣持續貶值時外資購屋吸引力下降；升值時海外資金回流有助支撐資產價格，對豪宅市場影響尤為顯著。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">D03 · D 系列</div>
-      <div class="card-title">台股加權指數</div>
-      <div class="card-desc">台灣股市的財富效應與房市高度正相關。台股多頭行情帶來的資本利得，是台灣換屋潮與投資性購屋的重要動能。股市急速崩跌則往往先行壓縮購屋意願，是觀察房市短期轉折的輔助訊號。</div>
-    </div>
-    <div class="card">
-      <div class="card-code">D04 · D 系列</div>
-      <div class="card-title">台灣 CPI 通膨指數</div>
-      <div class="card-desc">台灣消費者物價指數年增率，反映實質通膨壓力。持續高通膨促使央行維持或升息立場，增加房貸成本；但也使部分資金轉向不動產避險，造成房市雙面效應，需結合其他指標綜合研判。</div>
-    </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px">
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">美國公債殖利率，關台灣房貸什麼事？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">美十年期公債殖利率（目前 4.493%）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">CPI（消費者物價指數）和房貸利率有關係嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">有。CPI 反映通膨（目前 2.20%，2026-05），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">看這些國際指標，對買房有什麼用？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">它們是房市的「外部環境」訊號：利率、匯率、股市與通膨會透過資金面影響購屋力與房貸條件。僅供研判大方向，實際貸款條件仍依個案與銀行決定。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">美元台幣匯率變動，跟房市有什麼關係？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">匯率牽動外資與台商資金的進出。台幣升值階段常伴隨資金流入，市場資金相對寬鬆；貶值階段資金流出，資金面可能承壓。它是間接影響房市的資金面訊號之一，需搭配其他指標判讀。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">台股漲跌會影響房市嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">市場上有「財富效應」的說法：股市走多時，部分獲利資金可能轉入房市帶動置產需求；股市重挫則可能使購屋決策轉趨保守。兩者並非同步連動，僅屬觀察資金情緒的參考訊號。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">美國聯準會的決策，為什麼台灣要跟著看？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">台灣是高度開放的小型經濟體，聯準會升降息會影響全球資金流向、美債殖利率與美元匯率，進而牽動台灣的利率環境與央行政策空間，間接影響房貸利率的走向。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">通膨高的時候，買房可以「抗通膨」嗎？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">不動產常被視為抗通膨資產之一，但通膨升溫也常伴隨升息，會墊高貸款成本、壓抑購買力，兩股力量方向相反。是否置產仍應依自身財務狀況與需求評估，本頁資訊非投資建議。</div>
-  </div>
-  <div style="border:1px solid rgba(0,0,0,0.08);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">
-    <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:16px;color:#1B2F4A;margin-bottom:10px">D 系列和 A 系列（房貸金融）指標差在哪？</div>
-    <div style="font-size:14px;line-height:1.9;color:#5a5750">D 系列看「外部環境」：美債殖利率、匯率、股市與通膨等國際訊號；A 系列看「內部管道」：央行利率與銀行放款行為。國際訊號通常先影響央行決策與資金成本，再傳導到房貸條件。</div>
-  </div>
-  </div>
-  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>
-  <div style="margin-bottom:56px;display:grid;gap:10px">
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">美十年期公債殖利率</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 美國 10 年期公債的市場殖利率，被視為全球長天期利率的定錨。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">消費者物價指數（CPI）</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 衡量一般物價變動的指標，是中央銀行貨幣政策的重要依據。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">輸入性通膨</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 因進口商品或原物料價格上漲，透過匯率傳導至國內的物價上升。</span></div>
-    <div style="border-left:2px solid rgba(27,47,74,0.35);padding:7px 0 7px 16px"><strong style="color:#1B2F4A;font-size:14px">選擇性信用管制</strong><span style="color:#8a867c;font-size:13.5px;line-height:1.85"> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
-  </div>
-  <div class="cta-box">
-    <div class="cta-kicker">查看圖表 · VIEW CHARTS</div>
-    <div class="cta-headline">開啟 D 系列雷達儀表板</div>
-    <div class="cta-btns">
-      <a href="cx_batch5_D01-D04.html" class="cta-main">D01–D04 完整版</a>
-      <a href="radar-index.html" class="cta-back">← 返回目錄</a>
-    </div>
-  </div>
-</div>
+<!-- 4. FAQ（與 FAQPage JSON-LD 逐字同源） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題 · FAQ</div>
 
+    <details open>
+      <summary><h3>美國公債殖利率，關台灣房貸什麼事？</h3></summary>
+      <p>美十年期公債殖利率（目前 4.493%）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。</p>
+    </details>
+    <details>
+      <summary><h3>CPI（消費者物價指數）和房貸利率有關係嗎？</h3></summary>
+      <p>有。CPI 反映通膨（目前 2.20%，2026-05），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。</p>
+    </details>
+    <details>
+      <summary><h3>看這些國際指標，對買房有什麼用？</h3></summary>
+      <p>它們是房市的「外部環境」訊號：利率、匯率、股市與通膨會透過資金面影響購屋力與房貸條件。僅供研判大方向，實際貸款條件仍依個案與銀行決定。</p>
+    </details>
+    <details>
+      <summary><h3>美元台幣匯率變動，跟房市有什麼關係？</h3></summary>
+      <p>匯率牽動外資與台商資金的進出。台幣升值階段常伴隨資金流入，市場資金相對寬鬆；貶值階段資金流出，資金面可能承壓。它是間接影響房市的資金面訊號之一，需搭配其他指標判讀。</p>
+    </details>
+    <details>
+      <summary><h3>台股漲跌會影響房市嗎？</h3></summary>
+      <p>市場上有「財富效應」的說法：股市走多時，部分獲利資金可能轉入房市帶動置產需求；股市重挫則可能使購屋決策轉趨保守。兩者並非同步連動，僅屬觀察資金情緒的參考訊號。</p>
+    </details>
+    <details>
+      <summary><h3>美國聯準會的決策，為什麼台灣要跟著看？</h3></summary>
+      <p>台灣是高度開放的小型經濟體，聯準會升降息會影響全球資金流向、美債殖利率與美元匯率，進而牽動台灣的利率環境與央行政策空間，間接影響房貸利率的走向。</p>
+    </details>
+    <details>
+      <summary><h3>通膨高的時候，買房可以「抗通膨」嗎？</h3></summary>
+      <p>不動產常被視為抗通膨資產之一，但通膨升溫也常伴隨升息，會墊高貸款成本、壓抑購買力，兩股力量方向相反。是否置產仍應依自身財務狀況與需求評估，本頁資訊非投資建議。</p>
+    </details>
+    <details>
+      <summary><h3>D 系列和 A 系列（房貸金融）指標差在哪？</h3></summary>
+      <p>D 系列看「外部環境」：美債殖利率、匯率、股市與通膨等國際訊號；A 系列看「內部管道」：央行利率與銀行放款行為。國際訊號通常先影響央行決策與資金成本，再傳導到房貸條件。</p>
+    </details>
+  </div>
+</section>
 
-<div style="max-width:1100px;margin:0 auto 56px;padding:36px 40px;background:#faf8f4;border:1px solid rgba(0,0,0,0.08);border-left:3px solid #1B2F4A;text-align:center">
-  <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px">看完指標，想知道對你的房貸有什麼影響？</div>
-  <div style="font-size:13.5px;color:rgba(29,29,31,0.65);margin-bottom:18px">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</div>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a href="tel:0222490517" style="font-size:14px;font-weight:600;color:#fff;background:#12213A;padding:11px 24px;border-radius:980px;text-decoration:none">☎ 02-2249-0517</a>
-    <a href="https://lin.ee/PHIfSoY" style="font-size:14px;font-weight:600;color:#fff;background:#048456;padding:11px 24px;border-radius:980px;text-decoration:none">加 LINE 免費諮詢</a>
+<!-- 5. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">名詞解釋 · GLOSSARY</div>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>美十年期公債殖利率</strong><span> — 美國 10 年期公債的市場殖利率，被視為全球長天期利率的定錨。</span></div>
+      <div class="bt-term"><strong>消費者物價指數（CPI）</strong><span> — 衡量一般物價變動的指標，是中央銀行貨幣政策的重要依據。</span></div>
+      <div class="bt-term"><strong>輸入性通膨</strong><span> — 因進口商品或原物料價格上漲，透過匯率傳導至國內的物價上升。</span></div>
+      <div class="bt-term"><strong>選擇性信用管制</strong><span> — 央行針對特定對象或區域調整貸款成數與條件的工具，俗稱限貸令。</span></div>
+    </div>
   </div>
-</div>
-<div style="max-width:1100px;margin:0 auto;padding:0 40px 64px;position:relative;z-index:1">
-  <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:20px;text-align:center;font-family:'Noto Sans TC',sans-serif;font-size:11px;color:rgba(29,29,31,0.42);line-height:1.85;letter-spacing:0.02em;max-width:720px;margin:0 auto">
-    資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。
+</section>
+
+<!-- 6. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">查看圖表 · VIEW CHARTS</div>
+    <h2 class="bt-h2">開啟 D 系列雷達儀表板</h2>
+    <div class="bt-btns">
+      <a href="cx_batch5_D01-D04.html" class="bt-btn">D01–D04 完整版</a>
+      <a href="radar-index.html" class="bt-btn bt-btn-outline-dark">← 返回目錄</a>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- 7. 諮詢深藍卡＋資料來源尾注 -->
+<section class="bt-sec">
+  <div class="bt-in">
+    <div class="bt-dark-card">
+      <div class="bt-h4">看完指標，想知道對你的房貸有什麼影響？</div>
+      <p class="bt-p">免費諮詢，由顧問依你的個案評估可行方向。不申請不收費，本公司非金融機構，最終核貸由金融機構決定。</p>
+      <div class="bt-btns">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-gold">加 LINE 免費諮詢</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-outline">☎ 02-2249-0517</a>
+      </div>
+    </div>
+    <p class="bt-small bt-center bt-source">資料來源：中央銀行、內政部不動產資訊平台、金融聯合徵信中心等公開統計，更新時間以各機構發布為準。本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構、不放貸，最終核貸由金融機構決定。</p>
+  </div>
+</section>
+
 <div data-include="footer"></div>
 <script src="include.js" defer></script>
 <!-- Preconnect for Google Analytics -->

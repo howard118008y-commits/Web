@@ -13,98 +13,132 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cx468.com.tw/about.html">
 <link rel="canonical" href="https://cx468.com.tw/about.html">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* === 精品編輯系統（與首頁 v2 同語彙） === */
-.nav-radar-btn{background:transparent!important;color:#2a2a2a!important;border:1px solid #d9d6d1!important;box-shadow:none!important}
-.page-hero{background:#12213A;padding:120px 2rem 96px}
-.page-eyebrow{letter-spacing:.26em;color:rgba(255,255,255,.6)}
-.page-h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;letter-spacing:.01em;line-height:1.25}
-.page-sub{font-size:15px;letter-spacing:.04em;line-height:1.8}
-.page-hero::before{content:'';position:absolute;inset:0;background:url('img/svc-consolidate.jpg') center 35%/cover no-repeat;opacity:.28;filter:saturate(.8) brightness(.75)}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.page-hero>*{position:relative;z-index:1}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
 
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.bt-btn-outline-dark:hover{background:rgba(27,47,74,.06)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
 
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
-.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #e3e3e6}
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
 
-.stat{padding:2.8rem 1.5rem;text-align:center;border-right:1px solid #e3e3e6}
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0}
 
-.stat:last-child{border-right:none}
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
 
-.stat-num{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.02em;color:#12213A;margin-bottom:.45rem}
+/* 3. 要點格（卡片） */
+.bt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.bt-grid-3{grid-template-columns:repeat(3,1fr)}
+.bt-grid .bt-card .bt-h4{margin-bottom:12px}
+.bt-hide{display:none}
+.bt-paper{background:var(--paper)}
+.bt-tint{background:var(--tint)}
+.bt-cream{background:var(--cream)}
 
-.stat-label{font-size:13px;color:#6e6e73;line-height:1.5}
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-who-card .bt-label{margin-bottom:8px}
+.bt-who-card .bt-meta{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.bt-case-block+.bt-case-block{margin-top:16px}
+.bt-case-block .bt-label{margin-bottom:4px;letter-spacing:.06em;color:var(--ink-dim)}
+.bt-case-block.result .bt-label{color:var(--action)}
+.bt-case-block.result .bt-p{color:var(--ink);font-weight:500}
 
-.about-wrap{max-width:820px;margin:0 auto;padding:80px 24px}
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
 
-.about-section{margin-bottom:72px}
+/* 6. FAQ accordion（「＋」用 CSS 生成，不增可見文字） */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
 
-.section-label{font-size:11px;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
-.section-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:34px;font-weight:600;letter-spacing:.01em;line-height:1.35;color:#12213A;margin-bottom:20px}
-
-.section-body{font-size:16px;color:#6e6e73;line-height:1.8}
-
-.section-body+.section-body{margin-top:14px}
-
-.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:36px;border-top:1px solid #e3e3e6;border-left:1px solid #e3e3e6}
-
-.value-card{background:#fff;border-radius:0;border-right:1px solid #e3e3e6;border-bottom:1px solid #e3e3e6;padding:30px 28px}
-
-.value-icon{display:none}
-
-.value-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#12213A;margin-bottom:10px;letter-spacing:.01em}
-
-.value-desc{font-size:14px;color:#6e6e73;line-height:1.65}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.scenarios-wrap{background:#f6f5f3;padding:100px 24px}
-.scenarios-inner{max-width:1080px;margin:0 auto}
-.scenarios-intro{max-width:680px;margin:0 auto 40px;text-align:center}
-.scenarios-disclaimer{font-size:12.5px;color:#86868b;margin-top:14px;line-height:1.75;padding:16px 20px;background:#fff;border-radius:0;border:1px solid #e3e3e6;text-align:left}
-.scenarios-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid #ddddd8}
-.scenario-card{background:transparent;border-radius:0;border-right:1px solid #ddddd8;padding:36px 30px;display:flex;flex-direction:column}
-.scenario-card:last-child{border-right:none}
-.scenario-tag{display:inline-block;font-size:10px;font-weight:600;color:#1B2F4A;background:transparent;padding:0;border-radius:0;letter-spacing:.24em;text-transform:uppercase;margin-bottom:16px;align-self:flex-start}
-.scenario-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:19px;font-weight:600;color:#12213A;letter-spacing:.01em;line-height:1.5;margin-bottom:8px}
-.scenario-meta{font-size:13px;color:#86868b;margin-bottom:22px}
-.scenario-block{margin-bottom:18px}
-.scenario-block:last-child{margin-bottom:0}
-.scenario-label{font-size:11px;font-weight:600;color:#86868b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
-.scenario-text{font-size:14px;line-height:1.75;color:#3d3d3f;margin:0}
-.scenario-result .scenario-text{color:#1B2F4A;font-weight:500}
-.scenario-result .scenario-label{color:#1B2F4A}
-
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-grid{grid-template-columns:repeat(2,1fr)}
+  .bt-who-grid,.bt-def{grid-template-columns:1fr}
+}
 @media(max-width:768px){
-  .stats-strip{grid-template-columns:1fr 1fr 1fr}
-  .stat{padding:1.5rem .75rem}
-  .stat-num{font-size:32px}
-  .about-wrap{padding:48px 16px}
-  .section-title{font-size:26px}
-  .values-grid{grid-template-columns:1fr}
-  .scenarios-wrap{padding:56px 16px}
-  .scenarios-grid{grid-template-columns:1fr;gap:16px}
-  .scenario-card{padding:26px 22px}
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-grid{grid-template-columns:1fr}
 }
 </style>
 <script type="application/ld+json">
@@ -134,6 +168,7 @@
   }
 }
 </script>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -193,7 +228,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/about.html",
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -216,173 +251,213 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div class="page-hero">
-  <div class="page-eyebrow">關於鋮馨租賃</div>
-  <h1 class="page-h1">讓每一棟房子，<br>都替主人工作。</h1>
-  <p class="page-sub">深耕新北市不動產租賃超過 20 年，我們懂屋主的煩惱，也懂如何解決它。</p>
-</div>
-
-<div class="stats-strip">
-  <div class="stat">
-    <div class="stat-num">20<span style="font-size:28px">+</span></div>
-    <div class="stat-label">年不動產<br>業界深耕</div>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <p class="bt-eyebrow">關於鋮馨租賃</p>
+      <h1 class="bt-h1">讓每一棟房子，<br>都替主人工作。</h1>
+      <p class="bt-p">深耕新北市不動產租賃超過 20 年，我們懂屋主的煩惱，也懂如何解決它。</p>
+    </div>
+    <img class="bt-hero-img" src="img/card-office.jpg" alt="讓每一棟房子，都替主人工作。" fetchpriority="high" loading="eager">
   </div>
-  <div class="stat">
-    <div class="stat-num">39</div>
-    <div class="stat-label">家銀行合作<br>資源網絡</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">全台</div>
-    <div class="stat-label">服務區域<br>主力新北市</div>
-  </div>
-</div>
+</section>
 
-<div class="about-wrap">
-
-  <div class="about-section" id="quick-answer">
-    <div class="section-label">快速答案</div>
-    <p class="section-body">鋮馨租賃有限公司是一家位於新北市中和區中正路 468 號的不動產融資諮詢與媒合顧問公司，深耕不動產租賃超過 20 年。我們提供售後回租、貸款整合、民間轉銀行三大核心服務，協助屋主活化資產、降低財務壓力。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助，整合39 家以上合作銀行，最終核貸由金融機構決定。初步諮詢與評估免費，不申請不收費。</p>
+<!-- 快速答案（AEO，id 不動） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p>鋮馨租賃有限公司是一家位於新北市中和區中正路 468 號的不動產融資諮詢與媒合顧問公司，深耕不動產租賃超過 20 年。我們提供售後回租、貸款整合、民間轉銀行三大核心服務，協助屋主活化資產、降低財務壓力。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助，整合39 家以上合作銀行，最終核貸由金融機構決定。初步諮詢與評估免費，不申請不收費。</p>
+    </div>
   </div>
+</section>
 
-  <div class="about-section">
-    <div class="section-label">我們是誰</div>
-    <h2 class="section-title">鋮馨租賃有限公司</h2>
-    <p class="section-body">鋮馨租賃有限公司成立於新北市中和區，是一家專注於不動產租賃管理與資產活化的專業公司。公司名稱「鋮馨」代表誠信與溫馨，我們相信每一位客戶都值得被認真對待。</p>
-    <p class="section-body">我們的服務涵蓋包租代管、不動產售後回租、貸款整合三大核心業務，幫助屋主讓房子穩定生錢、在需要資金時找到合適的資金規劃方式，以及整合多筆負債、降低財務壓力。</p>
-    <p class="section-body">多年來，我們累積了整合39 家以上合作銀行，以及豐富的個案處理經驗，讓即使是條件較特殊的客戶，也能找到適合的解決方案。</p>
-  </div>
-
-  <div class="about-section">
-    <div class="section-label">我們的理念</div>
-    <h2 class="section-title">四個堅持</h2>
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon">🏠</div>
-        <div class="value-title">透明收費</div>
-        <div class="value-desc">所有費用在簽約前完整說明，無隱藏收費，無意外帳單。</div>
+<!-- 2. 深色帶：三個數字 -->
+<section class="bt-dark bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-def" style="margin-top:0">
+      <div class="bt-def-item">
+        <div class="bt-def-num">20<span style="font-size:28px">+</span></div>
+        <div class="bt-def-label">年不動產<br>業界深耕</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">📋</div>
-        <div class="value-title">免費評估</div>
-        <div class="value-desc">初步諮詢與評估完全免費，不申請不收費，你的決定我們尊重。</div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">39</div>
+        <div class="bt-def-label">家銀行合作<br>資源網絡</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">🤝</div>
-        <div class="value-title">專人服務</div>
-        <div class="value-desc">從諮詢到執行，全程專屬顧問陪同，不是打電話轉來轉去。</div>
-      </div>
-      <div class="value-card">
-        <div class="value-icon">⚡</div>
-        <div class="value-title">快速回應</div>
-        <div class="value-desc">LINE 訊息 24 小時內回覆，緊急資金需求最快 3 個工作天評估完畢。</div>
+      <div class="bt-def-item">
+        <div class="bt-def-num">全台</div>
+        <div class="bt-def-label">服務區域<br>主力新北市</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="about-section">
-    <div class="section-label">服務範圍</div>
-    <h2 class="section-title">以新北市為核心，服務全台</h2>
-    <p class="section-body">公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務。售後回租與貸款整合業務全台各縣市均可評估，歡迎來電或加入 LINE 確認。</p>
-    <p class="section-body" style="margin-top:16px;">辦公時間：週一至週五 09:00–18:00<br>電話：02-2249-0517 ／ 0931-087-996</p>
+<!-- 3. 公司介紹（純文段） -->
+<section class="bt-sec-80">
+  <div class="bt-narrow">
+    <div class="bt-label">我們是誰</div>
+    <h2 class="bt-h2">鋮馨租賃有限公司</h2>
+    <p class="bt-p">鋮馨租賃有限公司成立於新北市中和區，是一家專注於不動產租賃管理與資產活化的專業公司。公司名稱「鋮馨」代表誠信與溫馨，我們相信每一位客戶都值得被認真對待。</p>
+    <p class="bt-p">我們的服務涵蓋包租代管、不動產售後回租、貸款整合三大核心業務，幫助屋主讓房子穩定生錢、在需要資金時找到合適的資金規劃方式，以及整合多筆負債、降低財務壓力。</p>
+    <p class="bt-p">多年來，我們累積了整合39 家以上合作銀行，以及豐富的個案處理經驗，讓即使是條件較特殊的客戶，也能找到適合的解決方案。</p>
   </div>
+</section>
 
-  <div class="about-section" id="about-faq">
-    <div class="section-label">常見問題</div>
-    <h2 class="section-title">關於鋮馨，你可能想問</h2>
-
-    <h3 class="value-title" style="margin-top:24px;">鋮馨租賃是什麼公司？</h3>
-    <p class="section-body">鋮馨租賃有限公司是一家位於新北市中和區的不動產融資諮詢與媒合顧問公司，深耕不動產租賃超過 20 年，提供售後回租、貸款整合、民間轉銀行三大核心服務，協助屋主活化資產、降低財務壓力。</p>
-
-    <h3 class="value-title" style="margin-top:24px;">你們是不是放貸方或銀行？</h3>
-    <p class="section-body">不是。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助。我們整合39 家以上合作銀行，協助評估與規劃，最終核貸由金融機構決定。</p>
-
-    <h3 class="value-title" style="margin-top:24px;">鋮馨服務哪些地區？</h3>
-    <p class="section-body">公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務；售後回租與貸款整合業務全台各縣市均可評估。</p>
-
-    <h3 class="value-title" style="margin-top:24px;">初步諮詢要收費嗎？</h3>
-    <p class="section-body">初步諮詢與評估完全免費，不申請不收費。所有費用會在簽約前完整說明，無隱藏收費。實際結果依個案不動產條件、財務狀況與市場情況而定。</p>
-  </div>
-
-  <div class="about-section" id="about-glossary">
-    <div class="section-label">名詞解釋</div>
-    <h2 class="section-title">三個你會聽到的名詞</h2>
-
-    <h3 class="value-title" style="margin-top:24px;">售後回租</h3>
-    <p class="section-body">屋主把房子過戶給投資方，同時簽租約繼續住，並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。</p>
-
-    <h3 class="value-title" style="margin-top:24px;">貸款整合</h3>
-    <p class="section-body">把信貸、信用卡循環、民間借款等多筆負債，整合為一筆條件較單純的貸款，以降低每月還款負擔、改善現金流。</p>
-
-    <h3 class="value-title" style="margin-top:24px;">民間轉銀行</h3>
-    <p class="section-body">將高利率的民間借款分階段轉入銀行體系，降低利息負擔，讓本金得以逐步下降；能否轉入及條件依個案財務狀況與金融機構審核而定。</p>
-  </div>
-
-</div>
-
-<section class="scenarios-wrap" id="scenarios">
-  <div class="scenarios-inner">
-    <div class="scenarios-intro">
-      <div class="section-label" style="text-align:center;">典型處理情境</div>
-      <h2 class="section-title" style="text-align:center;">這些處境，<br>我們最常遇到。</h2>
-      <p class="scenarios-disclaimer">
-        以下為彙整自實際服務經驗的「典型情境分類」，非特定客戶的個案。所有金額與數字皆為一般範圍說明，實際結果依個案不動產條件、財務狀況與市場情況而定。
-      </p>
+<!-- 4. 要點格：四個堅持 -->
+<section class="bt-paper bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">我們的理念</div>
+    <h2 class="bt-h2" style="margin-bottom:0">四個堅持</h2>
+    <div class="bt-grid">
+      <div class="bt-card">
+        <div class="bt-hide">🏠</div>
+        <div class="bt-h4">透明收費</div>
+        <p class="bt-p">所有費用在簽約前完整說明，無隱藏收費，無意外帳單。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-hide">📋</div>
+        <div class="bt-h4">免費評估</div>
+        <p class="bt-p">初步諮詢與評估完全免費，不申請不收費，你的決定我們尊重。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-hide">🤝</div>
+        <div class="bt-h4">專人服務</div>
+        <p class="bt-p">從諮詢到執行，全程專屬顧問陪同，不是打電話轉來轉去。</p>
+      </div>
+      <div class="bt-card">
+        <div class="bt-hide">⚡</div>
+        <div class="bt-h4">快速回應</div>
+        <p class="bt-p">LINE 訊息 24 小時內回覆，緊急資金需求最快 3 個工作天評估完畢。</p>
+      </div>
     </div>
-    <div class="scenarios-grid">
+  </div>
+</section>
 
-      <article class="scenario-card">
-        <span class="scenario-tag">情境 1 · 售後回租</span>
-        <h3 class="scenario-title">信用條件被銀行拒，<br>但名下有自住房</h3>
-        <div class="scenario-meta">50+ 歲・自營業者・新北市</div>
-        <div class="scenario-block">
-          <div class="scenario-label">困境</div>
-          <p class="scenario-text">早年因生意周轉有信用瑕疵紀錄。事業需約 300 萬資金，銀行二胎連續被 3 家拒絕。不想搬家，也不願賣掉自住的中和區公寓。</p>
+<!-- 5. 服務範圍（淡藍帶） -->
+<section class="bt-tint bt-sec-80">
+  <div class="bt-narrow">
+    <div class="bt-label">服務範圍</div>
+    <h2 class="bt-h2">以新北市為核心，服務全台</h2>
+    <p class="bt-p">公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務。售後回租與貸款整合業務全台各縣市均可評估，歡迎來電或加入 LINE 確認。</p>
+    <p class="bt-p">辦公時間：週一至週五 09:00–18:00<br>電話：02-2249-0517 ／ 0931-087-996</p>
+  </div>
+</section>
+
+<!-- 6. FAQ -->
+<section class="bt-faq bt-sec" id="about-faq">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題</div>
+    <h2 class="bt-h2 bt-center">關於鋮馨，你可能想問</h2>
+
+    <details open>
+      <summary><h3>鋮馨租賃是什麼公司？</h3></summary>
+      <p>鋮馨租賃有限公司是一家位於新北市中和區的不動產融資諮詢與媒合顧問公司，深耕不動產租賃超過 20 年，提供售後回租、貸款整合、民間轉銀行三大核心服務，協助屋主活化資產、降低財務壓力。</p>
+    </details>
+
+    <details>
+      <summary><h3>你們是不是放貸方或銀行？</h3></summary>
+      <p>不是。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助。我們整合39 家以上合作銀行，協助評估與規劃，最終核貸由金融機構決定。</p>
+    </details>
+
+    <details>
+      <summary><h3>鋮馨服務哪些地區？</h3></summary>
+      <p>公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務；售後回租與貸款整合業務全台各縣市均可評估。</p>
+    </details>
+
+    <details>
+      <summary><h3>初步諮詢要收費嗎？</h3></summary>
+      <p>初步諮詢與評估完全免費，不申請不收費。所有費用會在簽約前完整說明，無隱藏收費。實際結果依個案不動產條件、財務狀況與市場情況而定。</p>
+    </details>
+  </div>
+</section>
+
+<!-- 7. 名詞解釋（次底 3 卡） -->
+<section class="bt-cream bt-sec-80" id="about-glossary">
+  <div class="bt-in">
+    <div class="bt-label">名詞解釋</div>
+    <h2 class="bt-h2" style="margin-bottom:0">三個你會聽到的名詞</h2>
+    <div class="bt-grid bt-grid-3">
+      <div class="bt-card">
+        <h3 class="bt-h4">售後回租</h3>
+        <p class="bt-p">屋主把房子過戶給投資方，同時簽租約繼續住，並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。</p>
+      </div>
+      <div class="bt-card">
+        <h3 class="bt-h4">貸款整合</h3>
+        <p class="bt-p">把信貸、信用卡循環、民間借款等多筆負債，整合為一筆條件較單純的貸款，以降低每月還款負擔、改善現金流。</p>
+      </div>
+      <div class="bt-card">
+        <h3 class="bt-h4">民間轉銀行</h3>
+        <p class="bt-p">將高利率的民間借款分階段轉入銀行體系，降低利息負擔，讓本金得以逐步下降；能否轉入及條件依個案財務狀況與金融機構審核而定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 適合對象／典型處理情境（卡片） -->
+<section class="bt-who bt-sec-80" id="scenarios">
+  <div class="bt-in">
+    <div class="bt-label bt-center">典型處理情境</div>
+    <h2 class="bt-h2 bt-center">這些處境，<br>我們最常遇到。</h2>
+    <p class="bt-small bt-card" style="max-width:680px;margin:0 auto;padding:16px 20px">
+      以下為彙整自實際服務經驗的「典型情境分類」，非特定客戶的個案。所有金額與數字皆為一般範圍說明，實際結果依個案不動產條件、財務狀況與市場情況而定。
+    </p>
+    <div class="bt-who-grid">
+
+      <article class="bt-card bt-who-card">
+        <div class="bt-label">情境 1 · 售後回租</div>
+        <h3 class="bt-h4">信用條件被銀行拒，<br>但名下有自住房</h3>
+        <p class="bt-small bt-meta">50+ 歲・自營業者・新北市</p>
+        <div class="bt-case-block">
+          <div class="bt-label">困境</div>
+          <p class="bt-p">早年因生意周轉有信用瑕疵紀錄。事業需約 300 萬資金，銀行二胎連續被 3 家拒絕。不想搬家，也不願賣掉自住的中和區公寓。</p>
         </div>
-        <div class="scenario-block">
-          <div class="scenario-label">我們的處理</div>
-          <p class="scenario-text">採不動產售後回租 — 房子過戶給投資方、同時簽租約繼續住、並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。</p>
+        <div class="bt-case-block">
+          <div class="bt-label">我們的處理</div>
+          <p class="bt-p">採不動產售後回租 — 房子過戶給投資方、同時簽租約繼續住、並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。</p>
         </div>
-        <div class="scenario-block scenario-result">
-          <div class="scenario-label">結果</div>
-          <p class="scenario-text">資金到位約 3-4 週，依租約繼續住原屋。約定期間內可依約買回，月租金支出比銀行二胎月付低約 30%。</p>
+        <div class="bt-case-block result">
+          <div class="bt-label">結果</div>
+          <p class="bt-p">資金到位約 3-4 週，依租約繼續住原屋。約定期間內可依約買回，月租金支出比銀行二胎月付低約 30%。</p>
         </div>
       </article>
 
-      <article class="scenario-card">
-        <span class="scenario-tag">情境 2 · 貸款整合</span>
-        <h3 class="scenario-title">信貸＋信用卡＋民間借款，<br>月付壓垮現金流</h3>
-        <div class="scenario-meta">40+ 歲・雙薪家庭・板橋區</div>
-        <div class="scenario-block">
-          <div class="scenario-label">困境</div>
-          <p class="scenario-text">信貸年息 12%、信用卡循環 15%、民間借款月息 2%，共 7 筆負債合計約 250 萬。每月還款負擔超過家庭收入 70%，現金流長期周轉不開。</p>
+      <article class="bt-card bt-who-card">
+        <div class="bt-label">情境 2 · 貸款整合</div>
+        <h3 class="bt-h4">信貸＋信用卡＋民間借款，<br>月付壓垮現金流</h3>
+        <p class="bt-small bt-meta">40+ 歲・雙薪家庭・板橋區</p>
+        <div class="bt-case-block">
+          <div class="bt-label">困境</div>
+          <p class="bt-p">信貸年息 12%、信用卡循環 15%、民間借款月息 2%，共 7 筆負債合計約 250 萬。每月還款負擔超過家庭收入 70%，現金流長期周轉不開。</p>
         </div>
-        <div class="scenario-block">
-          <div class="scenario-label">我們的處理</div>
-          <p class="scenario-text">用名下板橋住家辦理銀行二胎，先全額結清信貸與信用卡；3 個月內逐步將民間借款轉入銀行體系。</p>
+        <div class="bt-case-block">
+          <div class="bt-label">我們的處理</div>
+          <p class="bt-p">用名下板橋住家辦理銀行二胎，先全額結清信貸與信用卡；3 個月內逐步將民間借款轉入銀行體系。</p>
         </div>
-        <div class="scenario-block scenario-result">
-          <div class="scenario-label">結果</div>
-          <p class="scenario-text">月付從約 6 萬下降至 2.8 萬。3 年期間累計利息支出減少約 65 萬，DSR 改善後信用評分逐步回升。</p>
+        <div class="bt-case-block result">
+          <div class="bt-label">結果</div>
+          <p class="bt-p">月付從約 6 萬下降至 2.8 萬。3 年期間累計利息支出減少約 65 萬，DSR 改善後信用評分逐步回升。</p>
         </div>
       </article>
 
-      <article class="scenario-card">
-        <span class="scenario-tag">情境 3 · 民間轉銀行</span>
-        <h3 class="scenario-title">民間借款月息 2%，<br>長年還不到本金</h3>
-        <div class="scenario-meta">60+ 歲・退休族・新莊區</div>
-        <div class="scenario-block">
-          <div class="scenario-label">困境</div>
-          <p class="scenario-text">早年向民間借款月息 2%（年息 24%），欠款約 200 萬，房屋已有民間二胎設定。長年只繳得起利息，本金幾乎沒減少。</p>
+      <article class="bt-card bt-who-card">
+        <div class="bt-label">情境 3 · 民間轉銀行</div>
+        <h3 class="bt-h4">民間借款月息 2%，<br>長年還不到本金</h3>
+        <p class="bt-small bt-meta">60+ 歲・退休族・新莊區</p>
+        <div class="bt-case-block">
+          <div class="bt-label">困境</div>
+          <p class="bt-p">早年向民間借款月息 2%（年息 24%），欠款約 200 萬，房屋已有民間二胎設定。長年只繳得起利息，本金幾乎沒減少。</p>
         </div>
-        <div class="scenario-block">
-          <div class="scenario-label">我們的處理</div>
-          <p class="scenario-text">分階段還款規劃 — 先用銀行一胎清償部分民間借款；半年內將剩餘部分逐步轉至銀行，年息降至 2.85%。</p>
+        <div class="bt-case-block">
+          <div class="bt-label">我們的處理</div>
+          <p class="bt-p">分階段還款規劃 — 先用銀行一胎清償部分民間借款；半年內將剩餘部分逐步轉至銀行，年息降至 2.85%。</p>
         </div>
-        <div class="scenario-block scenario-result">
-          <div class="scenario-label">結果</div>
-          <p class="scenario-text">每年利息支出減少約 42 萬。本金第一次開始下降，還款期程明確可預見。</p>
+        <div class="bt-case-block result">
+          <div class="bt-label">結果</div>
+          <p class="bt-p">每年利息支出減少約 42 萬。本金第一次開始下降，還款期程明確可預見。</p>
         </div>
       </article>
 
@@ -390,14 +465,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 
-<div class="cta-strip">
-  <h2>準備好讓房子替你賺錢了嗎？</h2>
-  <p>加入 LINE 或直接來電，免費評估你的不動產最佳方案。</p>
-  <div class="cta-row">
-    <a href="https://lin.ee/PHIfSoY" class="btn-green">加入官方 LINE</a>
-    <a href="contact.html" class="btn-outline">查看聯絡方式</a>
+<!-- 9. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">準備好讓房子替你賺錢了嗎？</h2>
+    <p class="bt-p">加入 LINE 或直接來電，免費評估你的不動產最佳方案。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">加入官方 LINE</a>
+      <a href="contact.html" class="bt-btn bt-btn-outline-dark">查看聯絡方式</a>
+    </div>
   </div>
-</div>
+</section>
+
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
