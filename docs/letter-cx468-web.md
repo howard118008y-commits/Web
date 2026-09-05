@@ -1,14 +1,14 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後更新：2026-09-05 23:45（Better 第九批雜項 9 頁＋lvr 生成頁 2 頁 commit `01e01aa`、affordability 合規句 `790a1d9`，累計 66 頁；**尚未部署，等 Sir 說「部署」**）
+> 最後更新：2026-09-05 23:45（Better 第九批雜項 9 頁＋lvr 生成頁 2 頁 commit `01e01aa`、affordability 合規句 `790a1d9`，累計 66 頁；**Sir 23:50 令「部署」，已 push、線上 12 頁 200 驗過**）
 > 本次更新原因：一、三、五節更新；四節 1–6 為 8/14 版保留、**本次未重驗**，7 補第九批 GSC 清單。
 
 ## 一、當前狀態快照（2026-09-05 23:45 實測）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `790a1d9`（本地）；origin/main 仍在 `80cc5cf`——**`01e01aa`＋`790a1d9` 兩筆未 push、未部署**，Sir 說「部署」才走 `/deploy` | `cd ~/cx468-web && git status -sb && git log --oneline -6` |
+| cx468-web HEAD | `0be1b9e`＋本封 docs commit，與 origin/main 一致、已部署（線上 topic-a 等 12 頁 nav.js=1、affordability 新句=1） | `cd ~/cx468-web && git status -sb && git log --oneline -6` |
 | 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本專案產物） | 同上 |
 | Better 版型已套 **66 頁** | 服務 4＋總覽／二胎／新北三頁＝9；在地 area-{tucheng,xindian,banqiao,yonghe,zhonghe} 5；地價稅 guide 4；地價稅試算器 20 縣市頁＋入口頁 21；**第七批（9/5 13:00）在地融資諮詢 {banqiao,sanchong,tucheng}-property-finance 3＋{banqiao,hsinchu}-second-mortgage 2（後兩頁掛 data-cta=line）**；**第八批（9/5 15:00，commit ded7533）小工具 11 頁：{affordability,land-tax,mortgage,purchase-cost,rental-yield,second-mortgage,realestate-tax,vacancy-cost}-calculator＋new-taipei-house-tax＋lvr-observatory＋tools（second-mortgage-calculator 掛 data-cta=line）**；**第九批（9/5 23:40，commit 01e01aa）雜項 9 頁 topic-a/b/c/d＋faq＋about＋knowledge＋glossary＋contact ＋ 生成頁 lvr-presale／lvr-rental（走 build_extras.py 模板）** | `grep -l 'src="nav.js"' *.html \| wc -l` → 67（含首頁）；線上 `curl -s https://cx468.com.tw/penghu-land-value-tax.html \| grep -o 'bt-eyebrow">[^<]*'` |
 | nav 現況 | 67 頁 nav.js（含首頁）；**64 頁仍 `data-include="nav"`**；**1 頁仍 `data-include="nav-tool"`**（cx_radar_v4_demo，已裁不套版：每日 indicators workflow 自動覆寫、canonical 指 radar-index） | `grep -l 'data-include="nav"' *.html \| wc -l`；`grep -l 'data-include="nav-tool"' *.html` |
@@ -138,7 +138,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 4. **Anthropic auto-reload**：console.anthropic.com → Billing，建議「低於 $5 自動補到 $50」
 5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
 6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
-7. 🆕 **GSC 催收**：三份清單在 `行銷產出/技術記錄/`——`2026-09-05-GSC網址清單-better第四五六批.txt`（32 條）、`2026-09-05-GSC網址清單-better第七批在地5頁.txt`（5 條）、`2026-09-05-GSC網址清單-better第八批小工具11頁.txt`（11 條）。單頁走「網址審查→要求建立索引」（每日約 10 條配額，先送二胎與試算器）；Sitemap 欄只放 sitemap.xml。Indexing API 對一般頁無效（indexing_cron.py 檔頭），別再走 API。 **9/5 16:20 實查（Inspection API）：第七＋八批 16 頁全部「已收錄」，但 lastCrawl 全在改版前（最舊 vacancy 06-12）→ 要的是重抓；優先序清單 `2026-09-05-GSC催收優先序-第七八批16頁.txt`（依 lastCrawl 最舊排前）。** 🆕 第九批清單 `2026-09-06-GSC網址清單-better第九批雜項9頁＋lvr2頁.txt`（12 條，含 affordability）——**部署後才送**。
+7. 🆕 **GSC 催收**：三份清單在 `行銷產出/技術記錄/`——`2026-09-05-GSC網址清單-better第四五六批.txt`（32 條）、`2026-09-05-GSC網址清單-better第七批在地5頁.txt`（5 條）、`2026-09-05-GSC網址清單-better第八批小工具11頁.txt`（11 條）。單頁走「網址審查→要求建立索引」（每日約 10 條配額，先送二胎與試算器）；Sitemap 欄只放 sitemap.xml。Indexing API 對一般頁無效（indexing_cron.py 檔頭），別再走 API。 **9/5 16:20 實查（Inspection API）：第七＋八批 16 頁全部「已收錄」，但 lastCrawl 全在改版前（最舊 vacancy 06-12）→ 要的是重抓；優先序清單 `2026-09-05-GSC催收優先序-第七八批16頁.txt`（依 lastCrawl 最舊排前）。** 🆕 第九批清單 `2026-09-06-GSC網址清單-better第九批雜項9頁＋lvr2頁.txt`（12 條，含 affordability）——已部署，可送。
 
 ## 五、本 session（9/5 10:00→16:10）做了什麼
 
