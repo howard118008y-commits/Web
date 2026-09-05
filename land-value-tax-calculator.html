@@ -5,27 +5,189 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>地價稅試算 2026｜全台縣市地價稅計算｜鋮馨租賃</title>
 <meta name="description" content="全台縣市地價稅試算入口，台北市、新北市支援行政區・地段・地號即時查詢申報地價，自用住宅 2‰ 及一般用地六級累進稅率。">
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-body{background:#f5f5f7}
-.btn-purple{display:inline-block;background:#1B2F4A;color:#fff;padding:12px 24px;border-radius:980px;font-size:15px;font-weight:600;text-decoration:none}
-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,.06);display:inline-block}
-.nav-back{font-size:14px;color:#9A6D3A;text-decoration:none;font-weight:500}
+/* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
+:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
+  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:#fff;padding-top:64px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.hero{background:linear-gradient(rgba(12,12,14,.80),rgba(12,12,14,.88)),url('img/gen-landscape-taiwan.jpg') center/cover no-repeat;padding:52px 24px 40px;text-align:center}
-.eyebrow{font-size:11px;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.hero h1{font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;color:#fff}
-.hero p{font-size:15px;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto}
-@media(max-width:768px){.hero h1{font-size:28px}}
+/* 版心：外框 1440、內容欄 1200、頁邊距 40／24 */
+.bt-in{max-width:1280px;margin:0 auto;padding:0 40px}
+.bt-narrow{max-width:880px;margin:0 auto;padding:0 40px}
+.bt-sec{padding:64px 0}
+.bt-sec-80{padding:80px 0}
+.bt-sec-96{padding:96px 0}
 
-.wrap{max-width:800px;margin:28px auto;padding:0 16px 80px}
+/* 字級 */
+.bt-eyebrow{font-size:18px;line-height:24px;font-weight:500;color:var(--gold-deep);margin-bottom:12px}
+.bt-label{font-size:14px;line-height:20px;font-weight:700;color:var(--gold-deep);letter-spacing:.08em;margin-bottom:12px}
+.bt-h1{font-size:48px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h1 em,.bt-h2 em{font-style:normal;color:var(--action)}
+.bt-h2{font-size:32px;line-height:1.2;font-weight:700;color:var(--ink);margin-bottom:24px}
+.bt-h4{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:8px}
+.bt-p{font-size:16px;line-height:24px;color:var(--ink-dim)}
+.bt-p+.bt-p{margin-top:16px}
+.bt-small{font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-center{text-align:center}
+
+/* 按鈕：主 64px／小 48px、8px 圓角、hover 只變深 300ms */
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;height:64px;padding:0 40px;border-radius:8px;background:var(--action);color:#fff;font-size:16px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;transition:background-color .3s ease-in-out}
+.bt-btn:hover{background:var(--action-hover)}
+.bt-btn-sm{height:48px;padding:0 16px}
+.bt-btn-ghost{background:var(--cream);color:var(--ink)}
+.bt-btn-ghost:hover{background:var(--line)}
+.bt-btn-gold{background:var(--gold);color:var(--forest-deep)}
+.bt-btn-gold:hover{background:var(--gold-soft)}
+.bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.bt-btn-outline:hover{background:rgba(255,255,255,.1)}
+.bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 卡片 */
+.bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
+
+/* 1. Hero 左文右圖 */
+.bt-hero{background:var(--paper)}
+.bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
+.bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
+.bt-hero .aib{margin:24px 0 0}
+.bt-hero .aib-form{box-shadow:var(--shadow);border-radius:8px}
+.bt-hero .aib-chips button{color:var(--ink)}
+
+/* 快速答案 */
+.bt-qa{border-left:4px solid var(--action)}
+.bt-qa p{font-size:16px;line-height:24px;color:var(--ink);margin:0 0 16px}
+.bt-qa ul{margin:0;padding-left:20px;font-size:14px;line-height:22px;color:var(--ink-dim)}
+.bt-qa li+li{margin-top:4px}
+.bt-qa li strong{color:var(--ink)}
+
+/* 2. 深色帶 */
+.bt-dark{background:var(--forest);color:#fff}
+.bt-dark .bt-label{color:var(--gold)}
+.bt-dark .bt-h2{color:#fff}
+.bt-dark .bt-p{color:rgba(255,255,255,.82)}
+.bt-dark-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.bt-dark-img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:8px}
+.bt-dark figcaption{font-size:14px;line-height:20px;color:rgba(255,255,255,.6);margin-top:12px}
+.bt-def{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.bt-def-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:32px 24px;text-align:center}
+.bt-def-num{font-size:32px;line-height:1.2;font-weight:700;color:#fff;margin-bottom:12px}
+.bt-def-label{font-size:16px;line-height:24px;color:rgba(255,255,255,.8)}
+
+/* 3. 特色格（純文字） */
+.bt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;margin-top:48px}
+.bt-step-num{width:40px;height:40px;border-radius:8px;background:var(--forest);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.bt-step-num.gold{background:var(--gold);color:var(--forest-deep)}
+.bt-points{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:64px;padding-top:64px;border-top:1px solid var(--line)}
+
+/* 適合對象卡 */
+.bt-who{background:var(--paper)}
+.bt-who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bt-who-card .bt-h4{margin-bottom:12px}
+.bt-check{display:flex;flex-direction:column;gap:8px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.bt-check span{font-size:14px;line-height:20px;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.bt-check span::before{content:"✓";color:var(--action);font-weight:700;flex-shrink:0}
+
+/* 4. CTA 帶 */
+.bt-cta{background:var(--cream);text-align:center}
+.bt-cta .bt-h2{max-width:640px;margin-left:auto;margin-right:auto}
+.bt-cta .bt-p{max-width:520px;margin:0 auto 32px}
+.bt-cta .bt-btns{justify-content:center}
+.bt-promise{display:flex;gap:12px 28px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.bt-promise span{font-size:14px;line-height:20px;color:var(--ink-dim);display:flex;align-items:center;gap:8px}
+.bt-promise span::before{content:"✓";color:var(--action);font-weight:700}
+
+/* 5. 相關文章 */
+.bt-related{background:var(--tint)}
+.bt-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.bt-rel-card{display:flex;flex-direction:column;justify-content:space-between;min-height:180px;transition:box-shadow .3s ease-in-out}
+.bt-rel-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+.bt-rel-card h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink)}
+.bt-rel-card::after{content:"→";font-size:20px;font-weight:700;color:var(--action);margin-top:24px}
+
+/* 案例 */
+.bt-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.bt-case-card{border-left:4px solid var(--action)}
+.bt-case-card .bt-label{margin-bottom:8px}
+.bt-case-card p{font-size:16px;line-height:24px;color:var(--ink)}
+
+/* 比較表 */
+.bt-compare{background:var(--paper)}
+.bt-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:8px;box-shadow:var(--shadow);margin-top:32px}
+.bt-table{width:100%;border-collapse:collapse;min-width:560px}
+.bt-table th{padding:16px 20px;font-size:16px;font-weight:700;text-align:center;background:var(--cream);color:var(--ink-dim)}
+.bt-table th:first-child{text-align:left;width:30%}
+.bt-table th.col-sl{background:var(--forest);color:#fff}
+.bt-table td{padding:16px 20px;font-size:16px;line-height:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim)}
+.bt-table td:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.bt-table td.highlight{background:var(--tint);color:var(--ink);font-weight:700}
+.bt-table .yes{color:var(--action);font-weight:700}
+.bt-table .no{color:var(--ink-dim)}
+.bt-dark-card{margin-top:48px;background:var(--forest);border-radius:8px;padding:48px 40px;text-align:center;color:#fff}
+.bt-dark-card .bt-h4{color:#fff;font-size:24px;line-height:1.2;margin-bottom:12px}
+.bt-dark-card .bt-p{color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 32px}
+.bt-dark-card .bt-btns{justify-content:center}
+
+/* 6. FAQ accordion */
+.bt-faq details{border-top:1px solid var(--line);padding:24px 0}
+.bt-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.bt-faq summary{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bt-faq summary::-webkit-details-marker{display:none}
+.bt-faq .plus{font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] .plus{transform:rotate(45deg)}
+.bt-faq details p{font-size:16px;line-height:24px;color:var(--ink-dim);margin-top:16px}
+
+/* 在地相關方案 */
+.bt-local{margin-top:64px}
+.bt-local .bt-label{margin-bottom:8px}
+.bt-local p{margin-bottom:16px}
+.bt-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bt-chips a{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);font-size:14px;font-weight:500;color:var(--ink);transition:background-color .3s ease-in-out}
+.bt-chips a:hover{background:var(--cream)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media(max-width:900px){
+  body{padding-top:58px}
+  .bt-hero-grid,.bt-dark-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .bt-hero-img{aspect-ratio:4/3}
+  .bt-steps{grid-template-columns:repeat(2,1fr)}
+  .bt-points,.bt-who-grid,.bt-rel-grid,.bt-case-grid,.bt-def{grid-template-columns:1fr}
+  .bt-rel-card{min-height:auto}
+}
+@media(max-width:768px){
+  .bt-in,.bt-narrow{padding:0 24px}
+  .bt-sec-96{padding:64px 0}
+  .bt-sec-80{padding:64px 0}
+  .bt-h1{font-size:32px}
+  .bt-h2{font-size:32px}
+  .bt-card{padding:24px}
+  .bt-btns{flex-direction:column;align-items:stretch}
+  .bt-btn{width:100%}
+  .bt-dark-card{padding:32px 24px}
+}
+@media(max-width:520px){
+  .bt-steps{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
+  .bt-hero .aib{padding-right:70px}
+}
+/* === 本頁補充（全台入口頁）：城市卡選擇器沿用原頁一字不改、只換 token；FAQ「＋」CSS 生成；名詞解釋列 === */
+/* 試算器外框 */
+.bt-tool .bt-qa{margin-bottom:24px}
 
 /* region section */
-.region-label{font-size:11px;font-weight:700;color:#6e6e73;letter-spacing:.1em;text-transform:uppercase;margin:28px 0 12px;padding-left:4px}
+.region-label{font-size:11px;font-weight:700;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;margin:28px 0 12px;padding-left:4px}
 
 /* city grid */
 .city-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px}
@@ -34,54 +196,61 @@ img.nav-logo{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1p
 
 /* ready card */
 /* Paper Fold 折角（design_handoff_cx468_cards 3d）— 已上線城市卡右上角折角 */
-.city-card{position:relative;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 6px rgba(0,0,0,.06);border:1.5px solid transparent;text-decoration:none;transition:all .2s,box-shadow .4s;cursor:pointer}
-.city-card:not(.soon)::before{content:"";position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 22px 22px 0;border-color:transparent #f0f0f2 transparent transparent;transition:border-width .35s;z-index:1}
-.city-card:not(.soon)::after{content:"";position:absolute;top:0;right:0;width:22px;height:22px;background:linear-gradient(225deg,#d8d8dc 0%,#f0f0f2 48%,transparent 49%);transition:width .35s,height .35s;z-index:1}
+.city-card{position:relative;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:8px;padding:18px;box-shadow:var(--shadow);border:1.5px solid transparent;text-decoration:none;transition:transform .3s ease-in-out,box-shadow .3s ease-in-out,border-color .3s ease-in-out;cursor:pointer}
+.city-card:not(.soon)::before{content:"";position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 22px 22px 0;border-color:transparent var(--paper) transparent transparent;transition:border-width .35s;z-index:1}
+.city-card:not(.soon)::after{content:"";position:absolute;top:0;right:0;width:22px;height:22px;background:linear-gradient(225deg,var(--line) 0%,var(--paper) 48%,transparent 49%);transition:width .35s,height .35s;z-index:1}
 .city-card:not(.soon):hover::before{border-width:0 30px 30px 0}
 .city-card:not(.soon):hover::after{width:30px;height:30px}
-.city-card.ready{border-color:#f59e0b;background:linear-gradient(135deg,#fff7ed,#fffbef)}
-.city-card.ready:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(180,83,9,.15);border-color:#9A6D3A}
-.city-card.soon{background:#fafafa;cursor:default;opacity:.72}
-.city-card.taipei-card{border-color:#9A6D3A;background:linear-gradient(135deg,#fff7ed,#fffbef)}
-.city-card.newtaipei-card{border-color:#16a34a;background:linear-gradient(135deg,#f0fdf4,#dcfce7)}
-.city-card.taipei-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(180,83,9,.18);border-color:#9A6D3A}
-.city-card.newtaipei-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(22,163,74,.15);border-color:#15803d}
+.city-card.ready{border-color:var(--gold);background:var(--cream)}
+.city-card.ready:hover{transform:translateY(-2px);box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);border-color:var(--gold-deep)}
+.city-card.soon{background:var(--paper);cursor:default;opacity:.72}
+.city-card.taipei-card{border-color:var(--gold-deep);background:var(--cream)}
+.city-card.newtaipei-card{border-color:var(--action);background:var(--tint)}
+.city-card.taipei-card:hover{transform:translateY(-2px);box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);border-color:var(--gold-deep)}
+.city-card.newtaipei-card:hover{transform:translateY(-2px);box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);border-color:var(--action-hover)}
 
 .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.city-name{font-size:16px;font-weight:700;color:#1B2F4A}
-.city-card.ready .city-name{color:#9A6D3A}
-.city-card.taipei-card .city-name{color:#9A6D3A}
-.city-card.newtaipei-card .city-name{color:#15803d}
-.city-card.soon .city-name{color:#6e6e73}
+.city-name{font-size:16px;font-weight:700;color:var(--ink)}
+.city-card.ready .city-name{color:var(--gold-deep)}
+.city-card.taipei-card .city-name{color:var(--gold-deep)}
+.city-card.newtaipei-card .city-name{color:var(--action)}
+.city-card.soon .city-name{color:var(--ink-dim)}
 
 .badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}
-.badge-live{background:#9A6D3A;color:#fff}
-.badge-live-green{background:#16a34a;color:#fff}
-.badge-soon{background:#e5e5ea;color:#6e6e73}
+.badge-live{background:var(--gold-deep);color:#fff}
+.badge-live-green{background:var(--action);color:#fff}
+.badge-soon{background:var(--line);color:var(--ink-dim)}
 
-.threshold-line{font-size:12px;color:#6e6e73;margin-bottom:4px}
-.threshold-val{font-size:13px;font-weight:600;color:#9A6D3A}
-.city-card.newtaipei-card .threshold-val{color:#15803d}
-.city-card.soon .threshold-val{color:#8e8e93}
+.threshold-line{font-size:12px;color:var(--ink-dim);margin-bottom:4px}
+.threshold-val{font-size:13px;font-weight:600;color:var(--gold-deep)}
+.city-card.newtaipei-card .threshold-val{color:var(--action)}
+.city-card.soon .threshold-val{color:var(--ink-dim)}
 
 .card-footer{margin-top:10px;font-size:11px;display:flex;align-items:center;gap:4px}
-.city-card.ready .card-footer,.city-card.taipei-card .card-footer{color:#9A6D3A;font-weight:600}
-.city-card.newtaipei-card .card-footer{color:#16a34a;font-weight:600}
-.city-card.soon .card-footer{color:#aeaeb2}
+.city-card.ready .card-footer,.city-card.taipei-card .card-footer{color:var(--gold-deep);font-weight:600}
+.city-card.newtaipei-card .card-footer{color:var(--action);font-weight:600}
+.city-card.soon .card-footer{color:var(--ink-dim)}
 
 /* notice box */
-.notice-card{background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:20px;box-shadow:0 1px 8px rgba(0,0,0,.05);border-left:3px solid #9A6D3A}
-.notice-card p{font-size:13px;color:#1B2F4A;line-height:1.75;margin:0}
-.notice-card strong{color:#9A6D3A}
+.notice-card{background:#fff;border-radius:8px;padding:18px 20px;margin-bottom:20px;box-shadow:var(--shadow);border-left:3px solid var(--gold-deep)}
+.notice-card p{font-size:13px;color:var(--ink);line-height:1.75;margin:0}
+.notice-card strong{color:var(--gold-deep)}
 
-/* FAQ */
-.faq-card{background:#fff;border-radius:18px;padding:24px 28px;margin-top:24px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
-.faq-card h2{font-size:11px;font-weight:700;color:#6e6e73;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
-.faq-card p{font-size:14px;line-height:2;color:#1B2F4A;margin:0 0 14px}
-.faq-card p:last-child{margin-bottom:0}
+/* DISCLAIMER */
+.disclaimer{font-size:11px;color:var(--ink-dim);line-height:1.7;margin-top:20px;padding:12px 16px;background:var(--paper);border-radius:8px;border:.5px solid var(--line)}
 
-.disclaimer{font-size:11px;color:#8e8e93;line-height:1.7;margin-top:20px;padding:12px 16px;background:#fafafa;border-radius:10px;border:.5px solid #e8e8ed}
+/* FAQ：h3 進 summary、「＋」用 CSS 生成免新增文字 */
+.bt-faq summary h3{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);margin:0}
+.bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
+.bt-faq details[open] summary::after{transform:rotate(45deg)}
+
+/* 名詞解釋 */
+.bt-terms{margin-top:8px}
+.bt-term{border-left:3px solid var(--action);padding:8px 0 8px 20px;margin-bottom:16px}
+.bt-term strong{color:var(--ink);font-size:16px;font-weight:700}
+.bt-term span{color:var(--ink-dim);font-size:16px;line-height:24px}
 </style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
 <script src="include.js" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -116,7 +285,7 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
   "name": "鋮馨租賃有限公司",
   "url": "https://cx468.com.tw"
  },
- "dateModified": "2026-09-04",
+ "dateModified": "2026-09-05",
  "datePublished": "2026-05-13",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -226,19 +395,31 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav-tool"></div>
-<div class="hero">
-  <p class="eyebrow">Land Value Tax · 持有稅 · 每年11月</p>
-  <h1>地價稅試算</h1>
-  <p>各縣市獨立試算器，輸入行政區・地段・地號即可查詢申報地價並計算稅額。</p>
-</div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
-<div id="quick-answer" style="max-width:720px;margin:18px auto 0;padding:20px 22px;background:#fff;border:1px solid #e7e0d3;border-left:3px solid #2F5B8F;border-radius:8px">
-  <div style="font-size:12px;font-weight:700;color:#2F5B8F;letter-spacing:.18em;margin-bottom:8px">快速答案</div>
-  <p style="font-size:15.5px;line-height:1.8;color:#1B2F4A;margin:0 0 10px"><strong>地價稅怎麼算？</strong>把名下同一縣市的土地申報地價加總，對照該縣市當年「累進起點地價」：自用住宅用地（符合條件）適用 2‰ 優惠稅率；一般用地未達起點課 10‰，超過部分按 15‰～55‰ 六級累進。各縣市起點不同，選你的縣市即可分別試算。每年 11 月開徵。</p>
-  <div style="font-size:11px;color:#86868b;line-height:1.65">累進起點地價依各縣市每年公告為準；本試算僅供參考，實際稅額以稅捐稽徵機關核定為準。</div>
+<!-- 1. Hero 左文右圖 -->
+<section class="bt-hero bt-sec">
+  <div class="bt-in bt-hero-grid">
+    <div class="bt-hero-text">
+      <div class="bt-eyebrow">全台地價稅試算</div>
+      <div class="bt-label">Land Value Tax · 持有稅 · 每年11月</div>
+      <h1 class="bt-h1">地價稅試算</h1>
+      <p class="bt-p">各縣市獨立試算器，輸入行政區・地段・地號即可查詢申報地價並計算稅額。</p>
+    </div>
+    <img class="bt-hero-img" src="img/gen-home-desk.jpg" alt="地價稅試算" width="1400" height="781" fetchpriority="high" loading="eager">
+  </div>
+</section>
+
+<!-- 2. 縣市入口（沿用原頁：城市卡 class／href 一字不改） -->
+<section class="bt-sec bt-tool">
+  <div class="bt-in">
+
+<div id="quick-answer" class="bt-card bt-qa">
+  <div class="bt-label">快速答案</div>
+  <p><strong>地價稅怎麼算？</strong>把名下同一縣市的土地申報地價加總，對照該縣市當年「累進起點地價」：自用住宅用地（符合條件）適用 2‰ 優惠稅率；一般用地未達起點課 10‰，超過部分按 15‰～55‰ 六級累進。各縣市起點不同，選你的縣市即可分別試算。每年 11 月開徵。</p>
+  <div class="bt-small">累進起點地價依各縣市每年公告為準；本試算僅供參考，實際稅額以稅捐稽徵機關核定為準。</div>
 </div>
-<div class="wrap">
 
 <div class="notice-card">
   <p>每個縣市的<strong>累進起點地價</strong>不同，地段資料也各有差異，因此我們為每個縣市建立獨立試算器，確保資料來源準確。目前台北市與新北市已上線，其他縣市陸續建置中。</p>
@@ -551,52 +732,72 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="disclaimer">⚠️ 各縣市累進起點地價每兩年重新公告，以各縣市稅捐稽徵處公告為準。地價稅每年 11 月 1 至 30 日繳納。本工具僅供試算參考，實際稅額依核定為準。</div>
 <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#12213A;color:#fff;border-radius:12px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 
-<!-- FAQ -->
-<div class="faq-card">
-  <h2>常見問題</h2>
-  <p><strong>Q：地價稅什麼時候繳？</strong><br>
-  A：每年 <strong>11月1日至11月30日</strong>。逾期每逾3天加徵1%滯納金，最多加10%。</p>
-  <p><strong>Q：申報地價在哪裡查？</strong><br>
-  A：土地謄本上「申報地價」欄，或至地政事務所查詢，亦可用公告地價 × 80% 估算。台北市可直接透過本站試算器即時查詢。</p>
-  <p><strong>Q：自用住宅稅率優惠怎麼申請？</strong><br>
-  A：條件：①土地上建有房屋 ②本人、配偶或直系親屬在該址設有戶籍 ③未出租未作營業使用。<br>
-  ⚠️ <strong>截止日：每年 9月22日前</strong>向地方稅捐稽徵處提出，才能適用<strong>當年度</strong>地價稅優惠。</p>
-  <p><strong>Q：累進起點地價是什麼？為何各縣市不同？</strong><br>
-  A：各縣市以轄區內土地7公畝（700㎡）之平均地價為基準，每2年重新公告，反映各地房市差異。台北市高達4千多萬，偏鄉縣市可能不到百萬，差距懸殊。</p>
-  <p><strong>Q：地價稅 vs 土地增值稅，差在哪？</strong><br>
-  A：地價稅是每年持有就繳的「持有稅」；土地增值稅是賣地時才繳的「交易稅」，兩者完全不同。</p>
-</div>
-
-<div class="cta-strip">
-  <h2>每年地價稅壓力大？來評估看看。</h2>
-  <p>資金周轉不靈、稅負偏高，售後回租或貸款整合也許能幫你喘口氣。免費諮詢，不申請不收費。</p>
-  <div class="cta-row">
-    <a href="https://lin.ee/PHIfSoY" class="btn-green">加 LINE 免費諮詢</a>
-    <a href="land-tax-calculator.html" class="btn-purple">土地增值稅試算 →</a>
   </div>
-</div>
+</section>
 
-</div><!-- /wrap -->
+<!-- 3. FAQ（與 FAQPage JSON-LD 逐字同源）＋ 延伸閱讀 -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2 bt-center">常見問題</h2>
 
-<section class="related-reads" style="max-width:800px;margin:0 auto 40px;padding:0 16px">
-  <div style="background:#f5f5f7;border-radius:16px;padding:24px 20px">
-    <div style="font-size:11px;font-weight:700;color:#86868b;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;text-align:center">延伸閱讀</div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-      <a href="taipei-land-value-tax.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">台北市地價稅試算 →</a>
-      <a href="new-taipei-land-value-tax.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">新北市地價稅試算 →</a>
-      <a href="land-tax-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">土地增值稅試算 →</a>
-      <a href="realestate-tax-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">房地合一稅試算 →</a>
-      <a href="purchase-cost-calculator.html" style="font-size:14px;color:#1B2F4A;background:#fff;border:.5px solid #d2d2d7;padding:10px 16px;border-radius:980px;text-decoration:none;font-weight:500">購屋總費用試算 →</a>
+    <details open>
+      <summary><h3>Q：地價稅什麼時候繳？</h3></summary>
+      <p>A：每年 <strong>11月1日至11月30日</strong>。逾期每逾3天加徵1%滯納金，最多加10%。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：申報地價在哪裡查？</h3></summary>
+      <p>A：土地謄本上「申報地價」欄，或至地政事務所查詢，亦可用公告地價 × 80% 估算。台北市可直接透過本站試算器即時查詢。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：自用住宅稅率優惠怎麼申請？</h3></summary>
+      <p>A：條件：①土地上建有房屋 ②本人、配偶或直系親屬在該址設有戶籍 ③未出租未作營業使用。<br>
+  ⚠️ <strong>截止日：每年 9月22日前</strong>向地方稅捐稽徵處提出，才能適用<strong>當年度</strong>地價稅優惠。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：累進起點地價是什麼？為何各縣市不同？</h3></summary>
+      <p>A：各縣市以轄區內土地7公畝（700㎡）之平均地價為基準，每2年重新公告，反映各地房市差異。台北市高達4千多萬，偏鄉縣市可能不到百萬，差距懸殊。</p>
+    </details>
+
+    <details>
+      <summary><h3>Q：地價稅 vs 土地增值稅，差在哪？</h3></summary>
+      <p>A：地價稅是每年持有就繳的「持有稅」；土地增值稅是賣地時才繳的「交易稅」，兩者完全不同。</p>
+    </details>
+
+    <div class="bt-card bt-local">
+      <div class="bt-label">延伸閱讀</div>
+      <div class="bt-chips"><a href="taipei-land-value-tax.html">台北市地價稅試算 →</a><a href="new-taipei-land-value-tax.html">新北市地價稅試算 →</a><a href="land-tax-calculator.html">土地增值稅試算 →</a><a href="realestate-tax-calculator.html">房地合一稅試算 →</a><a href="purchase-cost-calculator.html">購屋總費用試算 →</a></div>
     </div>
   </div>
 </section>
-<section style="max-width:760px;margin:28px auto 0;padding:0 16px">
-  <h2 style="font-size:20px;font-weight:700;color:#1B2F4A;margin:0 0 14px">名詞解釋</h2>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">累進起點地價</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 各縣市以轄區平均地價計算、每兩年公告的金額；土地申報地價總額超過此數，超出部分採累進稅率。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">申報地價</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 土地所有權人申報、作為地價稅稅基的地價；未申報者以公告地價 80% 計。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">自用住宅用地稅率</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 符合自用條件（設籍、無出租營業、面積上限）的土地，地價稅優惠稅率 2‰。</span></div>
-    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1B2F4A;font-size:14.5px">一般用地累進稅率</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — 未達累進起點課 10‰，超過部分按 15‰～55‰ 六級累進。</span></div>
+
+<!-- 4. CTA 帶 -->
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">每年地價稅壓力大？來評估看看。</h2>
+    <p class="bt-p">資金周轉不靈、稅負偏高，售後回租或貸款整合也許能幫你喘口氣。免費諮詢，不申請不收費。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn">加 LINE 免費諮詢</a>
+      <a href="land-tax-calculator.html" class="bt-btn bt-btn-ghost">土地增值稅試算 →</a>
+    </div>
+  </div>
 </section>
+
+<!-- 5. 名詞解釋（與 DefinedTermSet JSON-LD 同源） -->
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <h2 class="bt-h2">名詞解釋</h2>
+    <div class="bt-terms">
+      <div class="bt-term"><strong>累進起點地價</strong><span> — 各縣市以轄區平均地價計算、每兩年公告的金額；土地申報地價總額超過此數，超出部分採累進稅率。</span></div>
+      <div class="bt-term"><strong>申報地價</strong><span> — 土地所有權人申報、作為地價稅稅基的地價；未申報者以公告地價 80% 計。</span></div>
+      <div class="bt-term"><strong>自用住宅用地稅率</strong><span> — 符合自用條件（設籍、無出租營業、面積上限）的土地，地價稅優惠稅率 2‰。</span></div>
+      <div class="bt-term"><strong>一般用地累進稅率</strong><span> — 未達累進起點課 10‰，超過部分按 15‰～55‰ 六級累進。</span></div>
+    </div>
+  </div>
+</section>
+
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
