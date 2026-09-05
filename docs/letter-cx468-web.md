@@ -10,8 +10,8 @@
 |---|---|---|
 | cx468-web HEAD | `5449609`＋本封交接信 commit，與 origin/main 一致、已部署（Pages 15 秒生效） | `cd ~/cx468-web && git status -sb && git log --oneline -6` |
 | 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本專案產物） | 同上 |
-| Better 版型已套 **44 頁** | 服務 4＋總覽／二胎／新北三頁＝9；在地 area-{tucheng,xindian,banqiao,yonghe,zhonghe} 5；地價稅 guide 4；地價稅試算器 20 縣市頁＋入口頁 21；**第七批（9/5 13:00）在地融資諮詢 {banqiao,sanchong,tucheng}-property-finance 3＋{banqiao,hsinchu}-second-mortgage 2（後兩頁掛 data-cta=line）** | `grep -l 'src="nav.js"' *.html \| wc -l` → 40（含首頁）；線上 `curl -s https://cx468.com.tw/penghu-land-value-tax.html \| grep -o 'bt-eyebrow">[^<]*'` |
-| nav 現況 | 45 頁 nav.js；**69 頁仍 `data-include="nav"`**；**14 頁仍 `data-include="nav-tool"`**（小工具頁，清單見第三節） | `grep -l 'data-include="nav"' *.html \| wc -l`；`grep -l 'data-include="nav-tool"' *.html` |
+| Better 版型已套 **55 頁** | 服務 4＋總覽／二胎／新北三頁＝9；在地 area-{tucheng,xindian,banqiao,yonghe,zhonghe} 5；地價稅 guide 4；地價稅試算器 20 縣市頁＋入口頁 21；**第七批（9/5 13:00）在地融資諮詢 {banqiao,sanchong,tucheng}-property-finance 3＋{banqiao,hsinchu}-second-mortgage 2（後兩頁掛 data-cta=line）**；**第八批（9/5 15:00，commit ded7533）小工具 11 頁：{affordability,land-tax,mortgage,purchase-cost,rental-yield,second-mortgage,realestate-tax,vacancy-cost}-calculator＋new-taipei-house-tax＋lvr-observatory＋tools（second-mortgage-calculator 掛 data-cta=line）** | `grep -l 'src="nav.js"' *.html \| wc -l` → 40（含首頁）；線上 `curl -s https://cx468.com.tw/penghu-land-value-tax.html \| grep -o 'bt-eyebrow">[^<]*'` |
+| nav 現況 | 56 頁 nav.js；**69 頁仍 `data-include="nav"`**；**3 頁仍 `data-include="nav-tool"`**（cx_radar_v4_demo／lvr-presale／lvr-rental）（小工具頁，清單見第三節） | `grep -l 'data-include="nav"' *.html \| wc -l`；`grep -l 'data-include="nav-tool"' *.html` |
 | nav.js 合規模式 | `#nav` 帶 `data-cta="line"` → 右上與手機抽屜「免費評估」鈕改「LINE 線上諮詢」；second-mortgage／xinbei-second-mortgage 已掛 | `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'data-cta="line"'` → 1；`curl -s https://cx468.com.tw/nav.js \| grep -c ctaLine` → ≥1 |
 | 全站配色 | 紅 #C61B1C 0 檔 | `grep -l C61B1C *.html \| wc -l` → 0 |
 | launchd | `fanjiuzhang-watch`／`healthcheck`／`indicators-local`／`adsreport` 四支 exit 0；**`leadspoll` 不在清單，原因未查** | `launchctl list \| grep cx468` |
@@ -34,6 +34,8 @@
 - **派工規格**（iCloud `行銷產出/技術記錄/`）：
   - `2026-09-05-better版型派工共用規格.md`（硬規則 9 條＋自驗＋回報格式；9/5 已改為「hero 圖／眉標由 prompt 逐頁指定」＋規則 9「script／iframe 全留」）
   - `2026-09-05-地價稅試算器頁批次規格.md`（試算器型專用：script diff 指令、id 計數、handler 集合）
+  - `2026-09-05-小工具頁批次規格.md`（第八批：段落→版型對照表＋自驗；主對話另有 scratchpad `calc_verify.py` 思路＝HEAD 版與新版起兩個 http.server、填同值比所有帶數字 id 的文字）
+  - ⚠️ **生成頁陷阱**：lvr-observatory／lvr-presale／lvr-rental 由 `scripts/lvr/build_*.py` 產，`.github/workflows/lvr-weekly.yml` 每月 2/12/22 重跑會整頁覆寫；手工套版必同步改生成器模板（observatory 9/5 已移植，extras 未）
   - 派系列頁時 prompt 直接給「段落→底色／卡片／寬度」對照表（第四批 5 頁曾各走各的，並排目檢才發現；memory `feedback_parallel_agents_same_choice`）
 - **驗收腳本**（同夾；⚠️ `<page>` 一律**不帶 .html**，9/5 起帶了也會自動去掉）：`pw_check.py <base_url> <page>…`（sw/h1/nav 底色/眉標/styleCss/console）；`slices.py <out_dir> <page>…`（本機 :8765 桌機 2400px／手機 3200px 切片截圖，主對話 Read 目檢）；`lvt_verify.py <page>…`（試算器頁：與 HEAD 版填同樣數字比對輸出、手機 scrollWidth、<16px 輸入框數）；`scripts/verify_text_conservation.py <file>`（守恆）。
 - **本機目檢**：`cd ~/cx468-web && python3 -m http.server 8765`，Playwright venv `~/pw/bin/python`。Google Maps iframe 在 localhost 回 403（金鑰限 cx468 網域）＝正常，線上不會；LINE QR 在 full-page 截圖裡空白＝lazy 未觸發，非壞圖。
@@ -87,12 +89,12 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 🔴 第一順位：Better 版型套到其餘頁（Sir 定調「規格一模一樣、內容換鋮馨」）
 
-已套 44 頁（第七批 5 頁 9/5 13:00 上線，commit 05d4f37）。剩餘候選（9/5 實掃）：
+已套 55 頁（第七批 5 頁 9/5 13:00、第八批 11 頁 9/5 15:00 上線，commit ded7533）。剩餘候選（9/5 實掃）：
 
 | 群組 | 頁數 | 備註 |
 |---|---|---|
 | ~~在地頁餘下：{banqiao,sanchong,tucheng}-property-finance＋{banqiao,hsinchu}-second-mortgage~~ ✅ 第七批已上線 | 0 | 反 doorway 定例（memory `project_local_page_series_rules`）；**second-mortgage 兩頁要掛 `data-cta="line"`＋禁「免費評估」** |
-| 小工具頁（現用 nav-tool）：affordability-calculator／land-tax-calculator／mortgage-calculator／realestate-tax-calculator／rental-yield-calculator／purchase-cost-calculator／second-mortgage-calculator／vacancy-cost-calculator／new-taipei-house-tax／lvr-observatory／lvr-rental／lvr-presale／tools／cx_radar_v4_demo | 14 | 用試算器批次規格；lvr-* 有即時資料 JS，先各做 1 頁先導；cx_radar_v4_demo 可能是廢頁先問 |
+| ~~小工具頁 14~~ ✅ 第八批 11 頁已上線。**剩 3**：lvr-presale／lvr-rental（**生成頁**：由 `scripts/lvr/build_extras.py` 產，套版前必先移植其 `common_styles()`＋兩個 render 函式＋`aeo_blocks` 兩個 helper 的舊標記，做法照 `build_observatory.py` 9/5 移植：`LVR_HTML_DEST` 式環境變數覆寫＋本機 stub 跑生成 diff 手工版＝0）；cx_radar_v4_demo（canonical 指向 radar-index 的示範頁，Sir 未裁） | 3 |
 | 專題 topic-a~d、faq、about、knowledge、glossary、contact | 9 | 雜項 |
 | 其餘 `data-include="nav"` 頁（繼承 8 頁保留不動、lp-*、文章頁等） | ~60 | `grep -l 'data-include="nav"' *.html` 列清單再分群 |
 
