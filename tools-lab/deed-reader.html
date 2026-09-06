@@ -228,15 +228,22 @@ if (runBtn) {
     setStatus("AI 判讀中，請稍候（約 15-30 秒）…");
     runBtn.disabled = true;
     try {
+      // credentials: include → 帶 Cloudflare Access 登入 cookie（2026-09-06 起 Worker 要 Google 帳號登入）
       const resp = await fetch(WORKER_URL, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ deedText: extractedText }),
       });
       const data = await resp.json();
       if (data.error) { setStatus("判讀失敗：" + data.error); if (data.raw) console.log(data.raw); }
       else { lastData = data; setStatus("判讀完成。"); renderResult(data); }
-    } catch (err) { setStatus("連線失敗：" + err.message); }
+    } catch (err) {
+      // 尚未登入時 Access 會把請求轉去登入頁，瀏覽器以 CORS 錯誤（TypeError）呈現；引導先開新分頁登入再回來
+      if (statusBox) {
+        statusBox.innerHTML = "連線失敗：多半是尚未登入。請先 <a href=\"" + WORKER_URL + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--gold)\">點此用 Google 帳號登入</a>（新分頁看到 JSON 或「只接受 POST」即成功），再回來按一次「開始判讀」。（" + err.message + "）";
+      }
+    }
     finally { runBtn.disabled = false; }
   });
 }

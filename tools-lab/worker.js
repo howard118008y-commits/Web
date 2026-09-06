@@ -20,6 +20,41 @@ const _ipHits = new Map();         // ip -> [timestamps]
 let _dayKey = "";
 let _dayCount = 0;
 
+// ── 登入者配額（老闆 2026-09-06 定）：Cloudflare Access 放行後，Worker 收到
+// Cf-Access-Authenticated-User-Email。每個 Gmail 10 分鐘內只接受 1 次判讀；同一視窗內
+// 連續嘗試超過 5 次（含被擋的）就推 Telegram、點名是哪個 Gmail。一樣是 isolate 記憶體。
+const USER_WINDOW_MS = 10 * 60_000;
+const USER_ALERT_AFTER = 5;
+const _userState = new Map();      // email -> { windowStart, attempts, alerted }
+
+function userGate(email) {
+  const now = Date.now();
+  let st = _userState.get(email);
+  if (!st || now - st.windowStart >= USER_WINDOW_MS) {
+    st = { windowStart: now, attempts: 0, alerted: false };
+    _userState.set(email, st);
+  }
+  st.attempts += 1;
+  const allowed = st.attempts === 1;
+  const alert = !st.alerted && st.attempts > USER_ALERT_AFTER;
+  if (alert) st.alerted = true;
+  const retryAfterSec = Math.ceil((st.windowStart + USER_WINDOW_MS - now) / 1000);
+  return { allowed, alert, attempts: st.attempts, retryAfterSec };
+}
+
+async function tgAlert(env, text) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text }),
+    });
+  } catch (e) {
+    console.log("TG_ALERT_FAIL " + String(e));
+  }
+}
+
 function rateOk(ip) {
   const now = Date.now();
   const day = new Date(now).toISOString().slice(0, 10);
@@ -32,7 +67,7 @@ function rateOk(ip) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const origin = request.headers.get("Origin") || "";
     const corsHeaders = buildCors(origin);
 
@@ -51,6 +86,20 @@ export default {
     if (!rateOk(ip)) {
       console.log("RATE_LIMIT ip=" + ip + " day=" + _dayCount);
       return json({ error: "請求過於頻繁，請稍後再試" }, 429, corsHeaders);
+    }
+    // Access 放行後才有這個 header；有就套「每人 10 分鐘 1 次」
+    const email = request.headers.get("Cf-Access-Authenticated-User-Email") || "";
+    if (email) {
+      const g = userGate(email);
+      if (g.alert) {
+        console.log("USER_FLOOD email=" + email + " attempts=" + g.attempts);
+        ctx.waitUntil(tgAlert(env,
+          "⚠️ 謄本判讀工具｜同一帳號 10 分鐘內連續嘗試 " + g.attempts + " 次\n" +
+          "帳號：" + email + "\nIP：" + ip + "\n※ 規則：每人 10 分鐘 1 次；若不是本人請到 Cloudflare Access 移除該 email"));
+      }
+      if (!g.allowed) {
+        return json({ error: "每 10 分鐘只接受 1 次判讀，請 " + g.retryAfterSec + " 秒後再試" }, 429, corsHeaders);
+      }
     }
 
     let body;
@@ -131,6 +180,7 @@ function buildCors(origin) {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Credentials": "true",   // 前端 fetch 帶 Access cookie（credentials: include）
     "Access-Control-Max-Age": "86400",
   };
 }
