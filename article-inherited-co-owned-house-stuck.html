@@ -182,6 +182,10 @@ a{text-decoration:none}
 .art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
 .art-cta a{display:inline-block;background:#fff;color:#1B2F4A;padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
 @media(max-width:768px){.art-title{font-size:28px}.art-hero-img{height:240px}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script src="include.js" defer></script>
 <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -215,7 +219,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <div class="art-hero">
   <img src="img/inherit-slb-hero.jpg" alt="繼承的房子三人共有卡住了怎麼辦？" class="art-hero-img" fetchpriority="high">

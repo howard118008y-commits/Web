@@ -44,6 +44,10 @@
 .compare-table tr:nth-child(even) td{background:#f9f9f9}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:2rem}
 @media(max-width:768px){.art-hero h1{font-size:28px}.art-body h2{font-size:22px}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {
@@ -171,7 +175,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <div class="art-tag">民間轉銀行</div>

@@ -217,6 +217,10 @@ details p{font-size:15px;color:#6e6e73;line-height:1.75;margin-top:14px}
   .t-seg{padding:14px 24px;align-items:flex-start}
   .cta-h2{font-size:28px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="鋮馨租賃有限公司">
@@ -408,7 +412,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <!-- Hero -->
 <div class="hero">

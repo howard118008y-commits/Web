@@ -46,6 +46,10 @@
 .ct-faq h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:22px;font-weight:600;color:#1B2F4A;margin:0 0 20px}
 .ct-faq h3{font-size:15.5px;font-weight:700;color:#1B2F4A;margin:22px 0 7px}
 .ct-faq p{font-size:14px;line-height:1.85;color:#4a4a4f;margin:0}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -131,7 +135,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <section class="ct-hero">
   <div class="ct-tag">線上預約 · 選擇諮詢項目</div>

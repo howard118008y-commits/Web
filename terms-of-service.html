@@ -54,6 +54,10 @@
   .policy-section-title{font-size:21px}
   .policy-toc{padding:22px 20px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","logo":{"@type":"ImageObject","url":"https://cx468.com.tw/img/og-image.jpg"},"image":"https://cx468.com.tw/img/og-image.jpg","description":"鋮馨租賃有限公司提供不動產售後回租、貸款整合、民間轉銀行專業諮詢與媒合服務。","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}]}
@@ -122,7 +126,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <div class="policy-hero">
   <div class="policy-hero-label">Legal</div>

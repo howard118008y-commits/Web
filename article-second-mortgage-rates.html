@@ -231,6 +231,10 @@ a{text-decoration:none}
   .art-title{font-size:28px}
   .art-hero-img{height:240px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
   <script src="include.js" defer></script>
 
@@ -325,7 +329,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- 複查提醒：本頁含「資料截至 2026 年 7 月」之市場區間數字（銀行二順位 3.4%–10%、融資公司 7%–16%、銀行二胎成數 5–7 成），列入定期複查清單，區間更新時同步改內文＋FAQ 可見文字＋FAQPage JSON-LD（同源）。 -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light" data-cta="line"></div>
+<script src="nav.js"></script>
 
 <div class="art-hero">
   <picture><source srcset="img/second-mortgage-rates-hero.avif" type="image/avif"><source srcset="img/second-mortgage-rates-hero.webp" type="image/webp"><img src="img/second-mortgage-rates-hero.jpg" alt="二胎房貸利率怎麼看：銀行、融資公司與民間管道的差別" loading="lazy" class="art-hero-img" width="1920" height="1097"></picture>

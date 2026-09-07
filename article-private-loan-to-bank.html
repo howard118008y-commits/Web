@@ -229,6 +229,10 @@ a{text-decoration:none}
   .art-title{font-size:28px}
   .art-hero-img{height:240px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
   <script src="include.js" defer></script>
 
@@ -322,7 +326,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <div class="art-hero">
   <img src="img/article-private-to-bank.jpg" alt="石造銀行建築外觀：民間貸款轉銀行的三個關卡" loading="lazy" class="art-hero-img">

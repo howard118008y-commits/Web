@@ -28,6 +28,10 @@
 .apply-alt .btn-tel{display:inline-block;background:transparent;color:#12213A;border:1px solid #d9d6d1;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
 .apply-disclaimer{font-size:11.5px;color:#a1a1a6;line-height:1.8;margin-top:36px;text-align:center}
 @media (max-width:640px){.page-h1{font-size:26px;margin-bottom:10px}.page-hero{padding:72px 1.25rem 28px}.page-sub{font-size:14px;line-height:1.7}.apply-wrap{padding:24px 16px 130px}.apply-frame iframe{height:1800px}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script src="include.js" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -66,7 +70,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <div class="page-hero">
   <div class="page-eyebrow">免費評估申請 · Apply</div>

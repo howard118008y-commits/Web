@@ -155,6 +155,10 @@ a{text-decoration:none}
   .art-title{font-size:28px}
   .art-hero-img{height:240px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
   <script src="include.js" defer></script>
 
@@ -253,7 +257,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light" data-cta="line"></div>
+<script src="nav.js"></script>
 
 <div class="art-hero">
   <picture><source srcset="img/yonghe-hero.avif" type="image/avif"><source srcset="img/yonghe-hero.webp" type="image/webp"><img loading="lazy" src="img/yonghe-hero.jpg" alt="永和房屋貸款怎麼選？增貸、二胎到售後回租的決策地圖" class="art-hero-img"></picture>

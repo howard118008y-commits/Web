@@ -56,6 +56,10 @@
 .disclaimer{font-size:12px;color:#9b9b9f;line-height:1.7;margin-top:1.5rem}
 .back-link{display:inline-flex;gap:6px;font-size:13px;color:#86868b;margin-bottom:1.5rem;text-decoration:none}
 @media(max-width:768px){.art-hero h1{font-size:26px}.svc-grid{grid-template-columns:1fr}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","logo":"https://cx468.com.tw/img/logo.jpg","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","description":"新北市中和區在地不動產融資諮詢與媒合：二胎房貸、售後回租、貸款整合、民間轉銀行。20 年以上經驗，非金融機構。","address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":24.9944428,"longitude":121.4900325},"areaServed":[{"@type":"AdministrativeArea","name":"新北市中和區"},{"@type":"AdministrativeArea","name":"新北市永和區"},{"@type":"AdministrativeArea","name":"新北市板橋區"},{"@type":"AdministrativeArea","name":"新北市新店區"},{"@type":"AdministrativeArea","name":"新北市土城區"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"]}
@@ -89,7 +93,8 @@
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light" data-cta="line"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <div class="art-tag">新北市中和區・在地融資諮詢</div>

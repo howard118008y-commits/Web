@@ -25,7 +25,7 @@
 
 .hero-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:18px}
 
-.hero-h1 em{color:#06C755;font-style:normal}
+.hero-h1 em{color:#C8945A;font-style:normal}
 
 .hero-sub{font-size:18px;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 12px;line-height:1.65}
 
@@ -96,9 +96,9 @@
 
 
 /* CTA Section */
-.cta-section{background:#000;padding:96px 24px;text-align:center;position:relative;overflow:hidden}
+.cta-section{background:#1B2F4A;padding:96px 24px;text-align:center;position:relative;overflow:hidden}
 
-.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(6,199,85,.15) 0%,transparent 70%)}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,148,90,.15) 0%,transparent 70%)}
 
 .cta-section>*{position:relative;z-index:1}
 
@@ -106,7 +106,7 @@
 
 .cta-sub{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
 
-.cta-main-btn{display:inline-block;background:#048456;color:#fff;font-size:16px;font-weight:700;padding:16px 40px;border-radius:32px;margin-bottom:16px;letter-spacing:.01em}
+.cta-main-btn{display:inline-block;background:#C8945A;color:#12213A;font-size:16px;font-weight:700;padding:16px 40px;border-radius:32px;margin-bottom:16px;letter-spacing:.01em}
 
 .cta-phone{display:block;font-size:14px;color:rgba(255,255,255,.45);margin-top:8px}
 
@@ -118,7 +118,7 @@
 
 .guarantee-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.5)}
 
-.guarantee-item::before{content:'✓';color:#06C755;font-weight:700;font-size:16px}
+.guarantee-item::before{content:'✓';color:#C8945A;font-weight:700;font-size:16px}
 
 
 
@@ -141,6 +141,10 @@
   .cta-sub{font-size:15px}
   .guarantee-row{gap:16px;flex-direction:column;align-items:center}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
   <script src="include.js" defer></script>
 
@@ -224,7 +228,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </script>
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <!-- Hero -->
 <div class="hero">

@@ -74,6 +74,10 @@
   .case-card{padding:1.5rem}
   .case-card blockquote{font-size:18px}
 }
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {
@@ -177,7 +181,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <div class="art-tag">民間借款 · 信用修復</div>

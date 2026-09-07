@@ -56,6 +56,10 @@
 .formula-box p{color:#fff;margin-bottom:0;font-size:18px;font-weight:600}
 .formula-box span{color:rgba(255,255,255,.55);font-size:13px;display:block;margin-top:.5rem;font-weight:400}
 @media(max-width:768px){.art-hero h1{font-size:28px}.art-body h2{font-size:22px}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {
@@ -193,7 +197,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <div class="art-tag">退休規劃 · 房產活化</div>

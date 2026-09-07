@@ -47,6 +47,10 @@
 .art-disclaimer{font-size:12px;color:#86868b;line-height:1.7;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid #f0f0f0}
 .art-body h3.q{font-size:19px;font-weight:600;margin:1.75rem 0 .5rem}
 @media(max-width:768px){.art-hero h1{font-size:25px}.art-body{padding:3rem 1.25rem 4rem}.cmp{font-size:12px}.cmp th,.cmp td{padding:10px 8px}.pick{grid-template-columns:1fr}.cta-box{padding:2rem 1.25rem}.cta-box a{display:block;margin:8px 0}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4FX9LNEL7R');</script>
@@ -140,7 +144,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </head>
 <body>
 
-<div data-include="nav"></div>
+<div id="nav" data-theme="light" data-cta="line"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <span class="art-tag">方案比較</span>

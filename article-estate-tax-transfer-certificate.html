@@ -67,6 +67,10 @@
 .table-scroll::-webkit-scrollbar-thumb{background:#d8d8dc;border-radius:3px}
 .src-table td{font-size:13px}
 @media(max-width:600px){.toc-box ol{columns:1}.trust-badges{gap:1rem 1.4rem}.trust-badges span{font-size:11.5px}}
+
+/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
+body{padding-top:16px}
+@media(max-width:900px){body{padding-top:10px}}
 </style>
 <script type="application/ld+json">
 {
@@ -204,7 +208,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<div data-include="nav"></div>
+<div id="nav" data-theme="light"></div>
+<script src="nav.js"></script>
 
 <section class="art-hero">
   <div class="art-tag">遺產稅制度 · 法條整理</div>
