@@ -1,19 +1,23 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後更新：2026-09-08 18:40（SEO 內鏈收斂 7 頁 commit `a1bdb25`，**Sir 令「推」已 push、線上 7 頁內鏈實測全命中**）
-> 本次更新原因：一節 HEAD 更新；三節新增 🔴 第一順位「SEO 地區×品項矩陣」（Sir 09-08 指定下個 session 主線）、Better 版型順延為第二；五節重寫。
-> ⚠️ 二節與三節其餘小節為 9/5 版保留，**本次未重驗**。
+> 最後更新：2026-09-09 03:0x（HEAD `1d4586b`，本 session 三筆 commit 皆已 push、線上實測 200）
+> 本次更新原因：**Sir 09-09 定調「SEO 成敗看有沒有電話來的客戶」**——第三節優先順序整節依此重寫（產頁降級，量得到電話與 GMB 升為第一）；一節 HEAD／線上數字重驗；五節重寫。
+> ⚠️ 二節與三節🟠🟡小節為 9/5 版保留，**本次未重驗**。
 
-## 一、當前狀態快照（2026-09-08 18:40 實測）
+## 一、當前狀態快照（2026-09-09 03:0x 重驗，🆕 列為本次實測）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| cx468-web HEAD | `a1bdb25`（SEO 內鏈收斂 7 頁，線上實測 7/7 命中）；前一個 `3b06bda` 是 indicators workflow 自動 commit；`0be1b9e`＋本封 docs commit，與 origin/main 一致、已部署（線上 topic-a 等 12 頁 nav.js=1、affordability 新句=1） | `cd ~/cx468-web && git status -sb && git log --oneline -6` |
+| cx468-web HEAD | `1d4586b`（媽祖複查逐字修正三支在地頁＋area 頁內鏈，平行 session 推的）；本 session 三筆：`8af471e` 內鏈收斂、`e022fb6` 樞紐頁加重、`c742d42` 三重＋新莊在地頁。與 origin/main 一致、已部署 | `cd ~/cx468-web && git status -sb && git log --oneline -6` |
 | 工作區 | 乾淨。既有未追蹤 `scripts/archive/goal-scores.jsonl`、`scripts/fix_20year_subject.py`（**勿 add**，非本專案產物） | 同上 |
 | Better 版型已套 **66 頁** | 服務 4＋總覽／二胎／新北三頁＝9；在地 area-{tucheng,xindian,banqiao,yonghe,zhonghe} 5；地價稅 guide 4；地價稅試算器 20 縣市頁＋入口頁 21；**第七批（9/5 13:00）在地融資諮詢 {banqiao,sanchong,tucheng}-property-finance 3＋{banqiao,hsinchu}-second-mortgage 2（後兩頁掛 data-cta=line）**；**第八批（9/5 15:00，commit ded7533）小工具 11 頁：{affordability,land-tax,mortgage,purchase-cost,rental-yield,second-mortgage,realestate-tax,vacancy-cost}-calculator＋new-taipei-house-tax＋lvr-observatory＋tools（second-mortgage-calculator 掛 data-cta=line）**；**第九批（9/5 23:40，commit 01e01aa）雜項 9 頁 topic-a/b/c/d＋faq＋about＋knowledge＋glossary＋contact ＋ 生成頁 lvr-presale／lvr-rental（走 build_extras.py 模板）** | `grep -l 'src="nav.js"' *.html \| wc -l` → 67（含首頁）；線上 `curl -s https://cx468.com.tw/penghu-land-value-tax.html \| grep -o 'bt-eyebrow">[^<]*'` |
 | nav 現況 | 67 頁 nav.js（含首頁）；**64 頁仍 `data-include="nav"`**；**1 頁仍 `data-include="nav-tool"`**（cx_radar_v4_demo，已裁不套版：每日 indicators workflow 自動覆寫、canonical 指 radar-index） | `grep -l 'data-include="nav"' *.html \| wc -l`；`grep -l 'data-include="nav-tool"' *.html` |
 | nav.js 合規模式 | `#nav` 帶 `data-cta="line"` → 右上與手機抽屜「免費評估」鈕改「LINE 線上諮詢」；second-mortgage／xinbei-second-mortgage 已掛 | `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'data-cta="line"'` → 1；`curl -s https://cx468.com.tw/nav.js \| grep -c ctaLine` → ≥1 |
+| 🆕 二胎樞紐頁 | `second-mortgage.html` 線上 **5,234 中文字／FAQ 10 題**（09-08 前為 2,380／6） | `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c '<details'` → 10 |
+| 🆕 二胎在地頁 | **22 支**（本 session +3：新店 4,830／三重 4,731／新莊 5,182 中文字，線上實測） | `for u in xindian sanchong xinzhuang; do curl -s https://cx468.com.tw/$u-second-mortgage.html \| grep -c '<details'; done` → 8 8 8 |
+| 🆕 可點電話（render 實測） | 三支新在地頁線上各有 **5 個 `tel:` 連結**（反詐 modal ☎／「撥打 02-2249-0517」／「一鍵撥號」／footer 兩支）＋ **7 個 LINE 連結**。⚠️ **靜態 grep 會誤判為 0**（全靠 include 注入，memory `feedback_audit_cta_needs_render_not_grep`） | playwright 開線上頁跑 `document.querySelectorAll('a[href^="tel:"]').length` |
+| 🆕 phone_click 監聽缺口 | 全站 119 頁有 `tel:`、僅 106 頁有 `phone_click`；**缺 10 頁真頁**（含 banqiao／sanchong／tucheng／yonghe／zhonghe-property-finance 五支在地融資諮詢頁、compare-options、glossary、article-foreclosure、new-taipei-house-tax、zhonghe-sale-leaseback） | `comm -23 <(grep -l 'tel:' *.html \| sort) <(grep -l 'phone_click' *.html \| sort)` |
 | 全站配色 | 紅 #C61B1C 0 檔 | `grep -l C61B1C *.html \| wc -l` → 0 |
 | launchd | `fanjiuzhang-watch`／`healthcheck`／`indicators-local`／`adsreport` 四支 exit 0；**`leadspoll` 不在清單，原因未查** | `launchctl list \| grep cx468` |
 | SEO/AEO/GEO 分數、FAQ 同源 | **本次未重跑**（30 頁 FAQ 同源用守恆腳本逐頁驗過 0 漂移；land-value-tax-calculator mismatch=2 是 HEAD 原有的腳本假陰性〔答案含「A：」前綴與行內 strong〕，非漂移） | `python3 scripts/audit_seo.py`、`python3 scripts/audit_faq_samesource.py` |
@@ -88,40 +92,54 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ## 三、未竟任務
 
-### 🔴 第一順位：SEO 地區 × 品項矩陣擴張（Sir 2026-09-08 指定，下個 session 主線）
+### 🔴 第一順位：讓 SEO 生出「打電話進來的客戶」（Sir 2026-09-09 定調）
 
-**起因**：Sir 聽前公司同仁說當舖靠網站 SEO 做到「一個月 30 通以上電話」，要求參考做法。09-08 實查結論如下。
+**Sir 原話：「SEO 要有電話來的客戶」。** 驗收標準從此不是頁數、字數或排名，是**進線電話數**。
+下面依「離一通電話多近」排序，不是依工程量。
 
-**已查證的事實（都可重驗）**：
+**先認清這條鏈條，哪一段斷了就補哪一段：**
+`在地詞排到前面 → 使用者點進來 → 頁面上按下撥號 → 電話被接到 → 記進 CRM`
 
-| 事實 | 數字 | 重驗法 |
+| 段 | 現況（09-09 實測） | 斷了嗎 |
 |---|---|---|
-| GSC 近 28 天（08-09→09-05） | 曝光 12,829、點擊 362、CTR 2.82%、均排 10.29 | `~/cx468-ga4-daily/gsc.py`（service account，非 OAuth，未過期） |
-| **商業詞全部 0 點擊** | 房屋二胎 88 曝光/排 50.3、二胎房貸 84/61.1、售後回租 40/25.3、二胎 38/39.9 | 同上 |
-| 曝光集中在工具頁 | rental-yield-calculator 1,962 曝光/20 點擊；搜「租金報酬率」的是房東不是客戶 | 同上 |
-| **但在地詞我們是第 1 名** | 「中和 二胎房貸」自然 #1 `second-mortgage.html`、#3 `zhonghe-second-mortgage.html`，**Google AI 摘要引用我方兩篇** | 實機 Playwright、`pws=0`、定位新北中和 |
-| **關鍵字自相殘殺** | 全站 **21 頁** title 帶「二胎」，最大一頁僅 2,796 字 | `grep -l '<title>[^<]*二胎' *.html` |
-| 對照組：華德當舖 | 141 頁；**樞紐頁 `/moto-loan/` 7,559 字＋FAQ 8 題**；地區頁 45 支各 2,085 字（同模板）＋FAQ 2 題＋1 案例 | nicepawn.com.tw/sitemap |
-| 對照組：大展當舖 | 155 頁，其中 **94 頁是 FAQ 一題一頁**，單題頁 2,917 字 | 24079222.com |
-| GMB 差距 | 鋮馨 **1 則評論**（上月 601 次查看、204 次互動）；「新北 房屋二胎」Local Pack 第 1 名只有 **17 則**，第 2、3 名 **0 則照樣上榜** | 實機搜尋 |
-| Local Pack 有無 | 「新北 房屋二胎」有、「中和 貸款諮詢」有、「中和 二胎房貸」**無**（只有付費地點） | 同上 |
+| 排名 | 「中和 二胎房貸」自然結果 #1、AI 摘要引用兩篇 | ✅ 沒斷 |
+| 點擊 | GSC 28 天商業詞**全部 0 點擊**（房屋二胎 88 曝光/排 50.3、二胎房貸 84/61.1） | ⚠️ 泛詞斷；在地詞本身量小 |
+| 按撥號 | 三支新在地頁 render 實測有 5 個 `tel:`、7 個 LINE | ⚠️ 電話被 LINE 蓋過 |
+| 量得到 | 10 支真頁有 `tel:` 卻**沒有 `phone_click` 監聽** | 🔴 斷 |
+| Local Pack | 鋮馨 **1 則評論**；「中和 二胎房貸」根本沒有 Local Pack | 🔴 斷 |
 
-**核心判斷**：泛詞打不贏（對手是當舖／代書／財務公司，砸廣告），**加地區詞就贏**。當舖的「地區 × 品項矩陣」是我方唯一打得贏的戰場，缺的是覆蓋面。
+**依序做這五件：**
 
-**已完成（09-08，`a1bdb25`）**：7 頁補上指向樞紐頁 `second-mortgage.html` 的內鏈，線上 7/7 命中。原本 12/18 已連，補完剩下 7 頁。
+**① 補齊 phone_click 監聽（半天，Code 端可自己做完）**
+沒有這個，就算電話真的進來也不知道是哪一頁帶來的，等於整條 SEO 沒有回饋迴圈。
+缺的 10 頁（`comm` 指令見第一節）：`banqiao/sanchong/tucheng/yonghe/zhonghe-property-finance`（**五支在地融資諮詢頁，正是要接電話的頁**）、`compare-options`、`glossary`、`article-foreclosure`、`new-taipei-house-tax`、`zhonghe-sale-leaseback`。
+做法：抄任一支已有監聽的頁（如 `zhonghe-second-mortgage.html`）的 GA 片段；**改完必須 render 驗**不能只 grep（memory `feedback_audit_cta_needs_render_not_grep`）。
+接著在 GA4 把 `phone_click` 標成轉換、並確認 landing page 維度切得出來（memory `feedback_ga4_import_needs_conversion_category`、`project_ga4_daily_telegram`）。
 
-**下一步（未做，依序）**：
-1. **改指向**：`compare-options.html` 等多頁的「二胎」主連結指向 `article-second-mortgage.html`（文章）而非樞紐頁，兩頁仍在互搶。光加連結不夠。
-2. **樞紐頁加重**：`second-mortgage.html` 現僅 2,004 中文字／FAQ 6 題，對照華德樞紐 7,559 字／FAQ 8 題，缺口 3.8 倍。
-3. **矩陣擴張**：既有 19 支在地頁（中和 5、板橋 3、永和 3、土城 3、新店 1、三重 1）；**台北市 12 區完全沒有在地服務頁**；新北未做：新莊、蘆洲、樹林、汐止、淡水、林口、三峽、五股、泰山等。
-4. **GMB 評論**：只能 Sir 做，從 1 衝到 20 就有機會進 Local Pack。
+**② 二胎頁正文加一顆電話 CTA（半天，需媽祖）**
+本 session 寫的樞紐頁與三支在地頁，**正文 CTA 全是「LINE 線上諮詢」**（因二胎場景禁「免費評估」鉤子，我一律選 LINE）。電話只在 include 注入的區塊。
+50+ 自營業者（族群 A）習慣打電話不是加 LINE——CTA 帶應該是「LINE ｜ 撥打 02-2249-0517」兩顆並列。
+⚠️ 電話鈕本身沒有第六節合規問題，但**文案要過媽祖**；別寫成「免費估價專線」之類的鉤子。
 
-**接手前必讀的禁忌**：
-- ⛔ **當舖鉤子詞一個都不能抄**：免留車／免聯徵／免保人／審核寬鬆／過件率／當日撥款／最低利率 1% 起／銀行不借沒關係——實查列出 14 類全中憲法第六節。我方替代鉤子是「被拒絕過還有路」（三家銀行拒絕、月付繳不出來、只繳利息本金不動）。
-- ⛔ **商家名塞關鍵字不可學**：Local Pack 6 家有 5 家把「地區+品項」整串塞進 GMB 名稱，違反 Google 政策；台北當舖 Pack 第 1 名的金成當舖用純法定名稱照樣贏。
-- ⛔ 我方 GMB 類別是「不動產管理服務」，合規正確，**勿改成金融類**。GMB 營業時間 10:00–17:00 也是對的，勿改（memory `reference_business_hours_gmb_vs_constitution`）。
-- ⚠️ 內容產出派 DeerFlow **必須拆小段**：整包 7,000 字派工會 `GraphRecursionError`（09-08 踩過，100 步繞圈、零產出、exit code 仍是 0 假成功）。派工必給停止條件、限制搜尋次數、明設 `recursion_limit`。
-- 相關 memory：`project_local_page_series_rules`、`feedback_positioning_advisor_not_agent`、`feedback_compliance_no_free_eval_second_mortgage`、`reference_business_hours_gmb_vs_constitution`、`project_seo_geo_aeo_overhaul`
+**③ GMB 評論 1→20（只有 Sir 能做，最短路徑）**
+手機搜「中和 二胎房貸」按下去就是撥號，Local Pack 是最直接的電話來源。實查：「新北 房屋二胎」Local Pack 第 1 名只有 **17 則**評論，第 2、3 名 **0 則**照樣上榜。鋮馨目前 **1 則**、上月商家檔案被查看 601 次／互動 204 次。
+附帶：GMB 最近一則貼文是 4 個月前（09-08 實查，未重驗）。
+⛔ 商家名稱**不可**塞「地區＋品項」關鍵字（Local Pack 6 家有 5 家這樣做，違反 Google 政策）；⛔ 類別維持「不動產管理服務」勿改金融類（memory `reference_business_hours_gmb_vs_constitution`）。
+
+**④ 量三支新頁的真實表現，再決定要不要繼續擴（等 2–4 週）**
+本 session 上線新店、三重、新莊三支。**先看數據再擴頁**——memory `project_local_page_series_rules` 有 2026-07-23 實測：在地頁 10 支近 28 天合計僅 71 曝光、0 點擊，老闆 07-24 拍板「繼續擴，但 KPI 是地緣佐證不是流量」。
+現在 Sir 要的是電話，KPI 換了，**這條舊拍板要重新確認**：如果三支新頁 4 週後仍 0 點擊 0 電話，該把力氣移到 GMB 與站外，而不是再產第 23、24 支。
+重驗：`~/cx468-ga4-daily/gsc.py`（service account，未過期）＋ GA4 的 `phone_click` 依 landing page 切。
+
+**⑤ 台北市 12 區在地頁（目前不建議做）**
+台北市 12 區 0 支在地頁看起來是最大缺口，但我方**在台北市沒有實體據點**，doorway 風險比新北高，且 GMB 服務區域對不上。**建議等 ④ 的數字出來再議。**
+
+**接手前必讀的禁忌（沿用，未變）：**
+- ⛔ **當舖鉤子詞一個都不能抄**：免留車／免聯徵／免保人／審核寬鬆／過件率／當日撥款／最低利率 1% 起／銀行不借沒關係——14 類全中憲法第六節。我方替代鉤子是「被拒絕過還有路」。
+- ⛔ 二胎主商品場景禁「免費評估／免費諮詢」（memory `feedback_compliance_no_free_eval_second_mortgage`）。
+- ⚠️ 在地頁一律走反 doorway 八條定例（memory `project_local_page_series_rules`）。**媽祖 09-09 追加：第 23 支起，防詐段的「查商工登記／審核前先收費是警訊／打 165」共用脊椎改成一句話＋內鏈 `article-second-mortgage-scam.html`，不再逐篇改寫**；三支頁的防詐段原本互相 92% 相似，是 doorway 指紋。
+- ⚠️ 引用 `lvr-data/` 前先比對同夾 last-commit（memory `feedback_stale_data_file_in_fresh_pipeline`）：**`雙北全區排名_近180天.csv` 停更在 2026-05-29**，當期正本是 `排名_w180.json`（09-02）。我用錯過一次，整頁主論述反轉、被媽祖退件。
+- ⚠️ 內容產出派 DeerFlow **必須拆小段**＋給停止條件＋明設 `recursion_limit`，否則 `GraphRecursionError` 繞 100 步零產出、exit code 仍是 0。
 
 ### 🟠 第二順位：Better 版型套到其餘頁（Sir 定調「規格一模一樣、內容換鋮馨」）
 
@@ -175,48 +193,46 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 5. **名單回電**——SOP 已備妥，回電前務必先讀；名單**禁止回灌 Meta 做自訂受眾／類似受眾**
 6. **合一地政士事務所洽談**——只有老闆本人能談（面談包已過媽祖，四條紅線見 memory `project_land_agent_channel_heyi`）
 7. 🆕 **GSC 催收**：三份清單在 `行銷產出/技術記錄/`——`2026-09-05-GSC網址清單-better第四五六批.txt`（32 條）、`2026-09-05-GSC網址清單-better第七批在地5頁.txt`（5 條）、`2026-09-05-GSC網址清單-better第八批小工具11頁.txt`（11 條）。單頁走「網址審查→要求建立索引」（每日約 10 條配額，先送二胎與試算器）；Sitemap 欄只放 sitemap.xml。Indexing API 對一般頁無效（indexing_cron.py 檔頭），別再走 API。 **9/5 16:20 實查（Inspection API）：第七＋八批 16 頁全部「已收錄」，但 lastCrawl 全在改版前（最舊 vacancy 06-12）→ 要的是重抓；優先序清單 `2026-09-05-GSC催收優先序-第七八批16頁.txt`（依 lastCrawl 最舊排前）。** 🆕 第九批清單 `2026-09-06-GSC網址清單-better第九批雜項9頁＋lvr2頁.txt`（12 條，含 affordability）——已部署，可送。
-8. 🆕 **GMB 評論衝量**（只有 Sir 能做，09-08 實查）：鋮馨目前 **1 則評論**，「新北 房屋二胎」Local Pack 第 1 名只有 17 則、第 2/3 名 0 則照樣上榜——**從 1 衝到 20 就有機會進地圖包**。上月商家檔案被查看 601 次、互動 204 次，轉換成評論的比例極低。GMB 最近一則貼文已是 4 個月前。
+8. 🔴 **GMB 評論衝量＝第一順位第③項**（只有 Sir 能做，09-08 實查、09-09 未重驗）：鋮馨 **1 則評論**，「新北 房屋二胎」Local Pack 第 1 名只有 17 則、第 2/3 名 0 則照樣上榜——**從 1 衝到 20 就有機會進地圖包，而地圖包是手機直接按撥號的入口**。上月商家檔案被查看 601 次、互動 204 次；GMB 最近一則貼文已是 4 個月前。
 9. 🆕 **`cx468-crawl` 是否降頻**：一天跑 12 次，超過 Sir 定的「重複檢查一天不超過三次」，但它不打 Anthropic 不花 API 錢。降頻代價是新聞最晚 8 小時才被抓到。**Sir 未裁，未動**。
 
-## 五、本 session（2026-09-08 14:00→18:45）做了什麼
+10. 🆕 **配圖要不要換真人照片**（09-09）：三重用 `img/gen-sanchong.jpg`、新莊用 `img/gen-city-newtaipei.jpg`，都是 AI 生成圖，新莊那張還是泛新北市景不是新莊。媽祖提醒：板橋篇當年就是這個問題被換掉、待裁至今（memory `project_photo_library`：老闆偏好真人照片）。**不擋上線，等 Sir 裁。**
+11. 🆕 **`Organization` schema 的「20 年」主詞是公司**（09-09 媽祖兩度點名）：head JSON-LD 寫「鋮馨租賃有限公司提供…20 年以上經驗」，但公司 114/9 設立未滿一年，主詞只能是團隊（memory `feedback_company_age_vs_team_experience`）。**全站 81 頁共用同一字串**，單頁改只會造成不一致。媽祖給的句子：`鋮馨租賃有限公司提供不動產售後回租、貸款整合、民間轉銀行專業諮詢與媒合服務。團隊具 20 年以上不動產租賃與融資媒合經驗，整合 39 家以上合作銀行。`（順手補回「39」前漏掉的半形空格）。⚠️ 工作區有一支 untracked `scripts/fix_20year_subject.py`，**不是本 session 產物、動它之前先確認來源**。
+12. 🆕 **「成數最高 9 成」沒說明是一、二胎合計**（09-09 媽祖提）：全站 9 處同型措辭，示意例算式用的是合併成數，讀者可能誤讀成二胎單獨可貸 9 成。要改就全站同步改。**未動。**
 
-起點是 Sir 問「當舖靠 SEO 一個月接 30 通電話，我也要」，中途插入一場 API 餘額歸零事故，最後回到 SEO。
+## 五、本 session（2026-09-08 19:00 → 09-09 03:0x）做了什麼
 
-### 5-1 SEO 調查與內鏈收斂（已上線）
-- 兩隻 agent 平行實查：我方現況（19 支在地頁、GSC 28 天數據、電話 CTA 現況）＋當舖業者打法拆解（3 家 sitemap、Local Pack、14 類禁用鉤子詞）。結論全數寫入第三節第一順位。
-- **推翻兩個原本的假設**：①「工具頁缺內鏈」——實查內鏈本來就有（租金報酬率頁 6 個、繼承頁 10 個），CTR 低是搜尋意圖問題不是內鏈問題；②「二胎房貸排 61 名所以打不贏」——加了地區詞「中和 二胎房貸」我方是自然結果第 1 名，AI 摘要還引用兩篇。
-- **已上線**：7 頁補內鏈到樞紐頁（`a1bdb25`），線上 7/7 實測命中。
-- 重驗：`for u in tools glossary compare-options article-loan-integration article-second-mortgage-scam xinbei-second-mortgage yonghe-home-loan; do curl -s "https://cx468.com.tw/$u.html" | grep -c 'href="second-mortgage.html"'; done` → 全部 1
+起點是交接信第三節第一順位「SEO 地區×品項矩陣」，Sir 令「開始改動 全部流程開始做」，收尾時 Sir 定調 **「SEO 要有電話來的客戶」**（已寫進第三節）。
 
-### 5-2 Anthropic API 餘額歸零事故（已排除）
-- 14:2x 發現 `credit balance is too low`，**同一把 key 注入 9 個 Render 服務**（env group `cx468-shared-secrets`），小鋮 LINE AI 客服對客戶啞掉。
-- **根因**：09-05 一天跑了 **12 輪全量 eval、879 題、約 $52.7**。eval 是本機 in-process 跑的**不經 Render，log 完全查不到**，所以第一輪反推誤把 `cx468-crawl`（一天 12 次）當頭號嫌疑——實際上它程式碼零呼叫 Anthropic，完全清白。
-- 事故時間軸（Render log 原文）：09-04 23:51 首次餘額不足 → 09-06 06:14 恢復 → **09-07 10:34Z 撞月度支出上限**（錯誤字串與餘額歸零不同）→ 09-08 台北 14:1x 仍可用 → 之後歸零。
-- Sir 已儲值，18:3x 實測兩把 key 皆可用，小鋮線上實測回話 200／237 字／禁語零命中。
+### 5-1 二胎商業意圖內鏈收斂（`8af471e`，已上線）
+- `compare-options.html` 決策卡「了解二胎」由文章頁改指樞紐頁；5 頁補樞紐頁連結，錨文各異避免過度優化；資訊型錨文（「二胎房貸是什麼」）保留給 `article-second-mortgage.html`。
+- ⚠️ **這筆是被平行 session 順手 push 上線的**（我沒 push，第三次 fetch 才發現它已在 origin/main）——共用工作目錄裡「commit 了但未授權部署」不成立，memory `feedback_parallel_session_moves_head_mid_diagnosis` 已追加此型。
+- 後續平行 session 又推了 `eb25e79` 做錨文強弱優化（方向一致，未衝突）。
 
-### 5-3 eval 花錢閘門（已 push，cx468-linebot `467d810`）
-三道閘門，先撞到哪個算哪個：
-| 閘門 | 上限 | commit |
+### 5-2 樞紐頁加重（`e022fb6`，已上線）
+`second-mortgage.html` **2,380 → 5,234 中文字、FAQ 6 → 10 題**（對照組華德當舖樞紐頁 7,559 字／FAQ 8 題）。新增六段：額度算式＋示意試算／三管道比較表（含月息年化換算）／申辦五步／文件清單／被婉拒五原因與替代路徑／費用四項與查證。
+媽祖 PASS with edits，五處必改全套：「保證核貸」否定句改寫、SLB 帶過句調序、年息 3%→3.4% 對齊本頁區間、示意試算加註假設數字、「一至三週」因事實表無來源改成無數字版。
+重驗：`curl -s https://cx468.com.tw/second-mortgage.html | grep -c '<details'` → 10
+
+### 5-3 在地頁 +3 支（`c742d42` ＋ 平行 session 的 `1d4586b`，已上線）
+| 頁 | 線上字數 | 軸線（刻意各不同構） |
 |---|---|---|
-| 預設只跑 13 題 trap 合規題（全量要 `--full`） | $4.02 → **$0.78** | `08d3b2f` |
-| **每日執行 3 次**（Sir 令：重複檢查一天不超過三次） | — | `467d810` |
-| 每日累計 150 題 | $9 硬頂 | `476797a` |
-- 補掉的洞：原本 lock 只認 `is_full`（沒帶 `--ids/--type`），用 `--ids` 列滿全部 67 個題目 id 即可偽裝抽測跑全量，且估價 $4.02 低於 $5 門檻，**兩道閘門同時失效**。
-- 設計要點：**先記帳再開跑**，中途失敗也算，堵住「失敗→重跑」繞過上限。
-- 實測：149+13 擋下且不記帳、`--ids` 列滿 67 題擋下、連跑 4 次第 4 次擋下、單題放行記帳 1。
-- 套回 09-05：$52.74 → 最多 $2.34。
+| `xindian-second-mortgage.html` | 4,830 | 區內五生活圈實價落差（安坑 35 萬 → 大坪林 71 萬） |
+| `sanchong-second-mortgage.html` | 4,731 | 單價與總價是兩件事（蘆洲當教學例） |
+| `xinzhuang-second-mortgage.html` | 5,182 | 使用分區這道分水嶺＋上下新莊兩市場 |
 
-### 5-4 DeerFlow 金鑰隔離（已完成）
-- DeerFlow（`~/deer-flow`，Sir 09-05 要求安裝）原本與 9 個線上服務**共用同一把 key**，且設定用最貴的 `claude-fable-5-1`（$10/$50）。
-- 09-08 兩次派工全失敗（`GraphRecursionError` 100 步繞圈；第二次撞餘額歸零），**exit code 都是 0**，檔案零落地——不驗檔案就會被騙過去。
-- 歷史成績：4 個 thread、348 步、**1 成 2 敗 1 測試**。唯一成功產出是 `行銷產出/競品研究/2026-09-06-中和區近三個月房價走勢-助理研究.md`（2,138 字、31 個來源、數字抽驗過）。
-- **已改為 workspace-scoped key**（Console → Workspaces → deerflow，Sir 設了預算上限），與 `~/.cx468/anthropic.key` 完全分離，實測有效。重驗：比對 `~/deer-flow/.env` 與 `~/.cx468/anthropic.key` 尾碼應不同。
-- ⚠️ 換 key 不等於隔離預算——**同帳號所有 key 共用餘額池**，只有 Workspace 能設獨立上限。其餘 9 個服務目前仍共用一把，未分。
+在地頁總數 **19 → 22 支**。三支各 FAQ 8 題、schema 與可見 DOM 逐字全等、具名地標 16–35 個、`ci_check` 0 問題。
 
-### 5-5 Sir 的兩個裁示
-1. **GMB 營業時間 10:00–17:00 不改**——「10 點才算是鋮馨租賃店裡有人」。我原本誤判為與憲法 09:00–18:00 不一致的缺失，Sir 當場否決。已寫 memory `reference_business_hours_gmb_vs_constitution`，NAP 稽核時營業時間欄排除比對。
-2. **重複檢查的東西一天不超過三次**——已寫 memory `feedback_repeated_check_max_three_per_day`，並落實到 eval。盤點全部排程後只有 `cx468-crawl`（12 次/日）超標，但它不打 Anthropic 不花 API 錢，**是否降頻 Sir 未裁，未動**。
+### 5-4 媽祖三輪把關擋下的兩類錯（**這節是本 session 最有價值的部分**）
+**A. 資料源過期，害整頁主論述反轉。** 我用 `lvr-data/雙北全區排名_近180天.csv` 寫三重＋新莊，媽祖查出它 **last-commit 停在 2026-05-29**，同夾其他 7 支都是 09-02。當期數字下「三重單價高過板橋」是**錯的**（56.3 < 60.0），屋齡論據也消失。兩頁全部改讀 `排名_w180.json` 重寫。→ memory `feedback_stale_data_file_in_fresh_pipeline`
+**B. 兩個會害屋主得到相反結論的事實錯誤（新莊頁）。** 原稿教屋主「看土地謄本的使用分區欄」——**都市土地那一欄本來就空白**，照做會誤判「我不是工業宅」；且分區證明是**區公所**核發不是地政事務所。依媽祖逐字稿全部改正，並移除維基來源與工業宅的捷運站指名（對丹鳳／迴龍住戶財產的負面評價）。
+**C. doorway 指紋。** 三支頁防詐段互相 92%、FAQ 一題 97% 相似——只換地名。換角度重寫後降至 44–61%；利率句依定例第 6 條保留逐字統一，題目與首句各自在地化。
 
-### 5-6 本 session 新增的 memory
-- `feedback_repeated_check_max_three_per_day`——重複檢查每日 3 次硬閘門、先記帳再開跑
-- `reference_business_hours_gmb_vs_constitution`——GMB 時間 10-17 是對的，勿建議改
+### 5-5 順手發現、已寫 memory
+- `feedback_stale_data_file_in_fresh_pipeline`（新）：資料夾自動更新 ≠ 每個檔都新，引用前比對同夾 last-commit。
+- `feedback_parallel_session_moves_head_mid_diagnosis`（追加）：平行 session 的 push 會把你還沒要上線的本地 commit 一起帶走。
+- `project_local_page_series_rules`（更新）：定例第 6 條的利率舊值 3%–8% 已全站絕跡，改記 3.4%–10%，勿反向照舊值改頁。
+
+### 5-6 本 session 的兩個 harness 事故
+- **Fable 額度滿（429）**：三個查證 agent 第一輪全掛、零產出。依憲法第九節改 `model: opus` 重跑成功。
+- **`update_schema_datemod.py` 會順手改到無關檔**：每跑一次就把 `mortgage-calculator.html`／`affordability-calculator.html`／`second-mortgage-calculator.html` 的 `dateModified` 一起改；本 session 三度 `git checkout` 還原，未夾帶進 commit。**下次跑完記得 `git status` 看一眼。**
