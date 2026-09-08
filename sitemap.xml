@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/area-xindian.html</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -703,6 +703,12 @@
   <url>
     <loc>https://cx468.com.tw/banqiao-second-mortgage.html</loc>
     <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/xindian-second-mortgage.html</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
