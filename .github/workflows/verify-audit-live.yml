@@ -1,0 +1,51 @@
+name: Verify published audit fixes
+on:
+  push:
+    branches: ['codex/verify-live-20260911']
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare public site to tested source without submitting forms
+        shell: bash
+        run: |
+          node <<'VERIFY'
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
+          const paths = ["about.html","article-private-to-bank.html","article-sale-leaseback-guide.html","article-sale-leaseback-safety.html","article-second-mortgage-rates.html","chat-widget.html","contact.html","corporate-checkup.html","footer.html","index.html","intake.html","lead-form-neutral.html","lead-form-nofree.html","lead-form.html","nav.js","privacy-policy.html","second-mortgage-calculator.html","second-mortgage.html","sitemap.xml","xindian-second-mortgage.html"];
+          const sha = '9e11997595ff40c37be82dc6f13352aea91d44e1';
+          const hash = b => crypto.createHash('sha256').update(b).digest('hex');
+          async function check(path) {
+            const target = new URL(path === 'index.html' ? '/' : '/' + path, 'https://cx468.com.tw');
+            target.searchParams.set('audit_version', sha);
+            const response = await fetch(target, { headers: { 'Cache-Control': 'no-cache' }, signal: AbortSignal.timeout(20000) });
+            if (response.status !== 200) throw new Error(path + ': HTTP ' + response.status);
+            if (new URL(response.url).origin !== 'https://cx468.com.tw') throw new Error(path + ': unexpected redirect origin');
+            const actual = Buffer.from(await response.arrayBuffer());
+            const expected = fs.readFileSync(path);
+            if (hash(actual) !== hash(expected)) throw new Error(path + ': published body differs from tested commit');
+            console.log('PASS published 200 and exact SHA-256: ' + path);
+          }
+          (async () => {
+            let pending = paths;
+            for (let attempt=1; attempt<=6 && pending.length; attempt++) {
+              const failed = [];
+              for (let start=0; start<pending.length; start+=4) {
+                const batch = pending.slice(start,start+4);
+                const results = await Promise.allSettled(batch.map(check));
+                results.forEach((result,i) => { if(result.status==='rejected') { failed.push(batch[i]); console.log('WAIT attempt ' + attempt + ': ' + result.reason.message); } });
+              }
+              pending = failed;
+              if(pending.length && attempt<6) await new Promise(resolve=>setTimeout(resolve,20000));
+            }
+            if(pending.length) throw new Error('Unverified published paths: '+pending.join(', '));
+            console.log('VERIFIED ' + paths.length + ' published files match tested commit ' + sha);
+          })().catch(error=>{ console.error(error.message); process.exitCode=1; });
+          VERIFY
