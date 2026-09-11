@@ -273,11 +273,8 @@ img{max-width:100%;display:block}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -296,7 +293,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-</head>
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><script src="consultation-tracking.js" defer></script><link rel="stylesheet" href="consultation.css"></head>
 <body>
 <div id="nav" data-theme="light"></div>
 <script src="nav.js"></script>
@@ -545,6 +542,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 
+<section class="cx-prep" id="checkup-prep"><h2>先看資料清單，再決定是否使用健檢</h2><p>不必先上傳文件或留下個資，就能閱讀<a href="corporate-loan.html#business-prep">企業週轉準備說明</a>與<a href="downloads/business-checklist.html">可列印資料清單</a>。營業額不是可還款現金；請分別整理收款日期、支出與到期借款。健檢使用你提供的資料及模型假設，缺漏或估計值會影響判讀，不能代替會計查核或金融機構審核。</p><p>正式健檢若需提供文件，請先確認本頁同意事項、用途與保留期間。不要把訪客資料或財務敘述貼到公開評論。</p><small>內容核對：2026-09-12。文件與條件以受理機構及正式契約為準。</small></section>
 <div data-include="footer"></div>
 
 <script>
