@@ -311,6 +311,46 @@ test('Intake ignores duplicate submit, records HTTP notification failure, and cl
   assert.ok(!String(failure.init.body).includes('0937051846'), 'Failure telemetry must not contain lead values');
 });
 
+
+test('Pending intake submission blocks Back, clear and resubmit until the same request succeeds', async () => {
+  let completeSubmission;
+  const env = initIntake({
+    fetch(url) {
+      if (url.endsWith('/lead')) return { ok: true, status: 200 };
+      if (url === 'https://api.web3forms.com/submit') {
+        return new Promise(resolve => { completeSubmission = resolve; });
+      }
+      throw new Error('Unexpected fetch target: ' + url);
+    }
+  });
+  env.click(q(env, '[data-topic="financing"]'));
+  q(env, '#fName').value = '測試訪客';
+  q(env, '#fPhone').value = '0937051846';
+  q(env, '#consent').checked = true;
+  env.dispatch(q(env, '#leadForm'), 'submit');
+  await flush();
+  assert.equal(typeof completeSubmission, 'function', 'Web3Forms must still be pending');
+  const pendingDraft = env.localStorage.getItem('cx_intake_v1');
+  assert.ok(pendingDraft, 'Pending draft must exist until success');
+  env.click(q(env, '#back'));
+  env.click(q(env, '#clearProgress'));
+  env.tick(500);
+  visible(env, '#s3');
+  assert.equal(state(env).stepName, 'lead', 'Pending submission must stay on the lead step');
+  assert.equal(env.localStorage.getItem('cx_intake_v1'), pendingDraft, 'Back/clear must not erase or replace pending draft');
+  assert.equal(q(env, '#fName').value, '測試訪客');
+  assert.equal(q(env, '#fPhone').value, '0937051846');
+  env.dispatch(q(env, '#leadForm'), 'submit');
+  await flush();
+  assert.equal(env.requests.filter(r => r.url.endsWith('/lead')).length, 1);
+  assert.equal(env.requests.filter(r => r.url.includes('api.web3forms.com')).length, 1);
+  assert.equal(q(env, '#s4').hidden, true, 'Success must not appear before the response arrives');
+  completeSubmission({ ok: true, status: 200, json: async () => ({ success: true }) });
+  await flush();
+  visible(env, '#s4');
+  assert.equal(env.localStorage.getItem('cx_intake_v1'), null);
+});
+
 test('Shared lead form isolates notification HTTP failure and prevents duplicate submissions', async () => {
   const env = environment('<!doctype html><html><head></head><body>' + read('lead-form.html') + '</body></html>', { fetch: webFormFetch });
   env.run(selectScript('lead-form.html', code => code.includes('evalForm')), 'lead-form.html');

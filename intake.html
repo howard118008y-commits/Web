@@ -445,7 +445,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       return '<button class="opt'+(st.answers[name]===o[0]?' on':'')+'" data-val="'+o[0]+'" data-label="'+o[1]+'">'+svg(o[2])+'<span>'+o[1]+'</span></button>';
     }).join('');
   }
-  var advanceTimer=null, transitionLocked=false;
+  var advanceTimer=null, transitionLocked=false, submitPending=false;
   function cancelAdvance(){
     if(advanceTimer!==null) clearTimeout(advanceTimer);
     advanceTimer=null; transitionLocked=false;
@@ -531,6 +531,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   /* 上一步 */
   back.addEventListener('click',function(){
+    if(submitPending) return;
     cancelAdvance();
     if(cur==='topic'){ location.href='/'; return; }
     if(qTopic && flow().indexOf(cur)===1){ location.href='/'; return; }
@@ -554,7 +555,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   }
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(sbtn.disabled||cur!=='lead') return;
+    if(submitPending||sbtn.disabled||cur!=='lead') return;
     if(st.topic!=='financing'){
       if(!STAGE_LABEL[st.stage]){ show('stage'); return; }
       if(!addrCheck(st.address,st.topic==='corporate').ok){ show('address'); return; }
@@ -571,7 +572,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       return;
     }
     phoneEl.value=pc.digits;
-    var orig=sbtn.textContent; sbtn.disabled=true; sbtn.textContent='送出中…';
+    var orig=sbtn.textContent; submitPending=true; sbtn.disabled=true; sbtn.textContent='送出中…';
     // 通知通道獨立監測；不傳訪客資料至失敗紀錄，也不自動重送造成重複名單。
     var noticeController=typeof AbortController==='function'?new AbortController():null;
     var noticeTimer=noticeController?setTimeout(function(){ noticeController.abort(); },20000):null;
@@ -594,11 +595,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       if(!j.success) throw new Error(j.message||'送出失敗');
       if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'intake',topic:st.topic});
       if(window.fbq)fbq('track','Lead');
+      submitPending=false;
       st={done:true};
       form.reset(); inp.value='';
       show('done');
     })
     .catch(function(){
+      submitPending=false;
       sbtn.disabled=false; sbtn.textContent=orig;
       fmsg.className='form-msg err';
       fmsg.innerHTML='送出失敗,請稍後再試,或直接加 LINE:<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">@0931087996</a>';
@@ -612,7 +615,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   });
 
   document.getElementById('clearProgress').addEventListener('click',function(){
-    if(sbtn.disabled&&cur==='lead') return;
+    if(submitPending) return;
     cancelAdvance(); clearSaved();
     st=qTopic&&TOPIC_LABEL[qTopic]?{topic:qTopic}:{};
     form.reset(); inp.value=''; addrTouched=false;
