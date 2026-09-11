@@ -37,6 +37,9 @@ Disallow: /*.jsonl$
 Disallow: /tools-lab/
 Disallow: /tools-lab.html
 
+# 已出現在索引的公開工具：讓爬蟲讀到頁面既有 noindex。
+Allow: /tools-lab/deed-reader.html$
+
 # 例外：儀表板與實價登錄的資料源必須放行。這些頁面 client-side fetch JSON，
 # 被擋住時爬蟲渲染出來的 radar-index／area-*／lvr-* 是空殼。
 # robots.txt 以「最長匹配」判定，下列 Allow 比 /*.json$ 具體，會勝出。

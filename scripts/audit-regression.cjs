@@ -366,16 +366,41 @@ test('Shared lead form isolates notification HTTP failure and prevents duplicate
 });
 
 test('Each homepage or shared-footer sticky CTA click records one analytics event', () => {
-  const analytics = selectScript('index.html', code => code.includes("function gtag()") && code.includes('line_click'));
+  const analytics = read('consultation-tracking.js');
   for (const file of ['index.html', 'footer.html']) {
     const env = environment(file === 'index.html' ? read(file) : '<!doctype html><html><head></head><body>' + read(file) + '</body></html>');
     env.run(analytics, 'delegated-analytics');
+    env.run(analytics, 'duplicate-load');
     for (const [selector, eventName] of [['.cx-sticky-line', 'line_click'], ['.cx-sticky-tel', 'phone_click']]) {
       const before = env.events().filter(e => e[0] === 'event' && e[1] === eventName).length;
       env.click(q(env, selector));
       const after = env.events().filter(e => e[0] === 'event' && e[1] === eventName).length;
       assert.equal(after - before, 1, file + ' ' + selector + ' must fire exactly once');
     }
+  }
+});
+
+test('Consultation tracking uses one event with fixed attribution and no visitor content', () => {
+  const files = ['index.html','private-to-bank.html','second-mortgage.html','services.html','debt-consolidation.html','corporate-loan.html','article-private-loan-to-bank.html','article-self-employed-loan.html','article-second-mortgage-scam.html'];
+  for (const file of files) {
+    const env = environment(read(file), { url: 'https://cx468.com.tw/' + file + '?phone=PRIVATE&debt=PRIVATE' });
+    // Execute the real GA bootstrap as well as all contact tracking scripts.
+    for (const s of scripts(read(file))) {
+      if (!s.src && s.code.includes('function gtag()')) env.run(s.code);
+    }
+    env.run(read('consultation-tracking.js'));
+    env.run(read('consultation-tracking.js'));
+    const a = q(env, '.cx-call-primary');
+    env.click(a);
+    const events = env.events().filter(e => e[0] === 'event' && e[1] === 'phone_click');
+    assert.equal(events.length, 1, file);
+    assert.deepEqual(Object.keys(events[0][2]).sort(), ['consultation_need','link_location','page_path']);
+    assert.ok(!JSON.stringify(events).includes('PRIVATE'));
+    assert.equal(events[0][2].link_location, file.startsWith('article-') ? 'article_bottom' : 'hero');
+    const expected = file === 'debt-consolidation.html' ? 'private_debt' : file.includes('private') ? 'private_to_bank' : file.includes('second') ? 'second_mortgage' : /corporate|self-employed/.test(file) ? 'corporate_loan' : 'general';
+    assert.equal(events[0][2].consultation_need, expected, file);
+    env.click(a);
+    assert.equal(env.events().filter(e => e[0] === 'event' && e[1] === 'phone_click').length, 2, 'separate clicks are separate events');
   }
 });
 

@@ -64,13 +64,17 @@
   ].join('');
 
   var MENU = [
-    { label: '企業健檢', items: [
+    { label: '企業貸款', items: [
+      ['企業貸款諮詢', '/corporate-loan.html'],
+      ['公司財務健檢', '/corporate-checkup.html'],
       ['開始企業評估', '/intake.html?topic=corporate', 1],
       ['企業相關文章', '/knowledge.html']
     ]},
     { label: '民間轉銀行', items: [
       ['開始評估', '/intake.html?topic=private-to-bank', 1],
       ['民間轉銀行怎麼運作', '/private-to-bank.html'],
+      ['民間借款整理', '/debt-consolidation.html'],
+      ['二胎房貸諮詢', '/second-mortgage.html'],
       ['多筆負債整合', '/xinbei-debt-consolidation.html'],
       ['轉貸相關文章', '/knowledge.html']
     ]},
@@ -118,13 +122,8 @@
   /* 二胎等場景合規:<div id="nav" data-cta="line"></div> 時,兩顆「免費評估」鈕改為「LINE 線上諮詢」 */
   var mount = document.getElementById('nav');
   var ctaLine = !!(mount && mount.getAttribute('data-cta') === 'line');
-  var ctaHtml = ctaLine
-    ? '<a class="cx-cta" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>'
-    : '<a class="cx-cta" href="/intake.html">免費評估</a>';
-  var sheetCtaHtml = ctaLine
-    ? '<a class="cta" href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>'
-    : '<a class="cta" href="/intake.html">免費評估</a>' +
-      '<a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>';
+  var ctaHtml = '<a class="cx-cta" href="tel:0222490517" data-link-location="nav">電話諮詢</a>';
+  var sheetCtaHtml = '<a class="cta" href="tel:0222490517" data-link-location="mobile_menu">電話諮詢 02-2249-0517</a><a href="https://lin.ee/PHIfSoY" data-link-location="mobile_menu">未接通？LINE 留言</a><p>接聽：週一至週五 10:00–17:00</p>';
 
   var html =
     '<nav class="cx-nav" aria-label="主導覽">' +
