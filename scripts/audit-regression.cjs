@@ -459,7 +459,7 @@ test('Shared fragments cannot inject crawler noindex; host and standalone direct
 
 test('Expanded contact pages sanitize GA location/referrer and emit once per independent click', () => {
   const files = fs.readdirSync(ROOT).filter(f => f.endsWith('.html') && read(f).includes('src="consultation-tracking.js"'));
-  assert.equal(files.length, 13);
+  assert.equal(files.length, 14);
   for (const file of files) {
     const html = read(file), env = environment(html.replace('</body>', read('footer.html')+'</body>'), {url:'https://cx468.com.tw/'+file+'?phone=PRIVATE#PRIVATE'});
     Object.defineProperty(env.document, 'referrer', {value:'https://example.com/source?name=PRIVATE#PRIVATE'});
@@ -481,8 +481,8 @@ test('Expanded contact pages sanitize GA location/referrer and emit once per ind
   }
 });
 test('Confirmed phone allowlist rejects unrelated or decorated numbers; nested click and LINE attribution stay private', () => {
-  const allowed = ['tel:0222490517','tel:02-2249-0517','tel:+886222490517','tel:+886-2-2249-0517','tel:+886 2 2249 0517'];
-  const rejected = ['tel:165','tel:0931087996','tel:0958139786','tel:02224905170','tel:0222490517?name=PRIVATE','tel:0222490517;ext=123','tel:+886222490518'];
+  const allowed = ['tel:0222490517','tel:02-2249-0517','tel:+886222490517','tel:+886-2-2249-0517','tel:+886 2 2249 0517','tel:0931087996','tel:0931-087-996','tel:+886931087996','tel:+886-931-087-996','tel:+886 931 087 996','tel:0958139786','tel:0958-139-786','tel:+886958139786','tel:+886-958-139-786','tel:+886 958 139 786'];
+  const rejected = ['tel:165','tel:110','tel:0931087997','tel:0958139787','tel:+886931087996?phone=PRIVATE','tel:0958139786;ext=1','tel:02224905170','tel:0222490517?name=PRIVATE','tel:0222490517;ext=123','tel:+886222490518'];
   const env = environment('<html><body><section data-consultation-need="private_debt" data-link-location="article_bottom"><a id="contact"><span>PRIVATE 財務內容</span></a></section></body></html>', {url:'https://cx468.com.tw/test.html?debt=PRIVATE'});
   env.run(read('consultation-tracking.js')); env.run(read('consultation-tracking.js'));
   const a=q(env,'#contact');
@@ -490,6 +490,11 @@ test('Confirmed phone allowlist rejects unrelated or decorated numbers; nested c
     a.setAttribute('href',href); const before=env.events().length;
     env.click(a.querySelector('span')); env.click(a.querySelector('span'));
     assert.equal(env.events().length-before,allowed.includes(href)?2:0,href);
+    for (const event of env.events().slice(before)) {
+      assert.equal(event[1], 'phone_click');
+      assert.deepEqual(Object.keys(event[2]).sort(), ['consultation_need','link_location','page_path']);
+      assert.ok(!JSON.stringify(event[2]).includes(href.slice(4)), 'No dialled number in analytics');
+    }
   }
   a.setAttribute('href','https://lin.ee/PHIfSoY?name=PRIVATE'); env.click(a);
   const last=env.events().at(-1);
@@ -499,7 +504,7 @@ test('Confirmed phone allowlist rejects unrelated or decorated numbers; nested c
 });
 test('Financial FAQ structured answers match visible answers', () => {
   const normalize = text => text.replace(/\s+/g,'').replace(/[，,]/g,'，');
-  for(const file of ['article-inherited-property-loan.html','article-private-loan-to-bank.html']) {
+  for(const file of ['article-inherited-property-loan.html','article-private-loan-to-bank.html','contact.html']) {
     const doc=parseHTML(read(file)).document;
     const faqs=[...doc.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)).filter(s=>s['@type']==='FAQPage');
     assert.equal(faqs.length,1,file);

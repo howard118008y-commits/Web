@@ -16,8 +16,10 @@
     '/corporate-loan.html': 'corporate_loan',
     '/article-self-employed-loan.html': 'corporate_loan'
   };
-  // Only confirmed company numbers. Secondary numbers await business confirmation.
-  var phoneLinks = ['tel:0222490517', 'tel:02-2249-0517', 'tel:+886222490517', 'tel:+886-2-2249-0517', 'tel:+886 2 2249 0517'];
+  // Confirmed 2026-09-11: 02 main line, 0931 work phone, 0958 owner Ms. Zheng.
+  var phoneLinks = ['tel:0222490517', 'tel:02-2249-0517', 'tel:+886222490517', 'tel:+886-2-2249-0517', 'tel:+886 2 2249 0517',
+    'tel:0931087996', 'tel:0931-087-996', 'tel:+886931087996', 'tel:+886-931-087-996', 'tel:+886 931 087 996',
+    'tel:0958139786', 'tel:0958-139-786', 'tel:+886958139786', 'tel:+886-958-139-786', 'tel:+886 958 139 786'];
   var needs = ['general', 'private_debt', 'private_to_bank', 'second_mortgage', 'corporate_loan'];
   var positions = ['hero', 'after_ai', 'nav', 'mobile_menu', 'sticky_bar', 'footer', 'article_bottom', 'service_bottom', 'page'];
   document.addEventListener('click', function (event) {
