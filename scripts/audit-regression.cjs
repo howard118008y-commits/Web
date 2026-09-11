@@ -396,7 +396,7 @@ test('Consultation tracking uses one event with fixed attribution and no visitor
     assert.equal(events.length, 1, file);
     assert.deepEqual(Object.keys(events[0][2]).sort(), ['consultation_need','link_location','page_path']);
     assert.ok(!JSON.stringify(events).includes('PRIVATE'));
-    assert.equal(events[0][2].link_location, file.startsWith('article-') ? 'article_bottom' : 'hero');
+    assert.equal(events[0][2].link_location, file.startsWith('article-') && file !== 'article-self-employed-loan.html' ? 'article_bottom' : 'hero');
     const expected = file === 'debt-consolidation.html' ? 'private_debt' : file.includes('private') ? 'private_to_bank' : file.includes('second') ? 'second_mortgage' : /corporate|self-employed/.test(file) ? 'corporate_loan' : 'general';
     assert.equal(events[0][2].consultation_need, expected, file);
     env.click(a);
@@ -459,7 +459,7 @@ test('Shared fragments cannot inject crawler noindex; host and standalone direct
 
 test('Expanded contact pages sanitize GA location/referrer and emit once per independent click', () => {
   const files = fs.readdirSync(ROOT).filter(f => f.endsWith('.html') && read(f).includes('src="consultation-tracking.js"'));
-  assert.equal(files.length, 14);
+  assert.equal(files.length, 18);
   for (const file of files) {
     const html = read(file), env = environment(html.replace('</body>', read('footer.html')+'</body>'), {url:'https://cx468.com.tw/'+file+'?phone=PRIVATE#PRIVATE'});
     Object.defineProperty(env.document, 'referrer', {value:'https://example.com/source?name=PRIVATE#PRIVATE'});
@@ -504,7 +504,7 @@ test('Confirmed phone allowlist rejects unrelated or decorated numbers; nested c
 });
 test('Financial FAQ structured answers match visible answers', () => {
   const normalize = text => text.replace(/\s+/g,'').replace(/[，,]/g,'，');
-  for(const file of ['article-inherited-property-loan.html','article-private-loan-to-bank.html','contact.html']) {
+  for(const file of ['article-inherited-property-loan.html','article-private-loan-to-bank.html','article-self-employed-loan.html','contact.html']) {
     const doc=parseHTML(read(file)).document;
     const faqs=[...doc.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)).filter(s=>s['@type']==='FAQPage');
     assert.equal(faqs.length,1,file);
@@ -512,6 +512,20 @@ test('Financial FAQ structured answers match visible answers', () => {
     const visible=normalize(doc.body.textContent);
     for(const q of faqs[0].mainEntity) assert.ok(visible.includes(normalize(q.acceptedAnswer.text)), file+' '+q.name);
   }
+});
+
+test('Mortgage estimates amortize principal, handle zero interest, and do not claim savings', () => {
+ const env=environment(read('mortgage-calculator.html'));
+ env.run(selectScript('mortgage-calculator.html', c=>c.includes('function calculate()')));
+ q(env,'#amount').value='100';q(env,'#rate').value='3';q(env,'#years').value='10';
+ env.run('calculate()');
+ const num=id=>Number(q(env,id).textContent.replace(/[^0-9.]/g,''));
+ assert.equal(num('#monthly'),9656);assert.equal(num('#interest'),158729);
+ q(env,'#rate').value='0';env.run('calculate()');
+ assert.equal(num('#monthly'),8333);assert.equal(num('#interest'),0);
+ env.run("mode='private';calculate()");
+ assert.ok(!q(env,'#savingYearLabel').textContent.includes('每年可省'));
+ assert.equal(env.requests.length,0);assert.equal(env.events().length,0);
 });
 
 (async () => {

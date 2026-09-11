@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>房貸試算 2026｜本息攤還 vs 寬限期月付一次算清｜鋮馨租賃</title>
-<meta name="description" content="免費房貸試算工具，輸入貸款金額、利率、年期，立刻算出每月房貸本息攤還金額、總利息、寬限期效果。新北中和鋮馨租賃，提供貸款整合與民間轉銀行諮詢，免費評估不申請不收費。">
+<meta name="description" content="免費房貸試算工具，輸入貸款金額、利率、年期，立刻算出每月房貸本息攤還金額、總利息、本息攤還明細。新北中和鋮馨租賃，提供貸款整合與民間轉銀行諮詢，免費評估不申請不收費。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -266,7 +266,7 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://cx468.com.tw/mortgage-calculator.html">
 <meta property="og:title" content="房貸試算 2026｜本息攤還 vs 寬限期月付一次算清｜鋮馨租賃">
-<meta property="og:description" content="免費房貸試算工具，輸入貸款金額、利率、年期，立刻算出每月房貸本息攤還金額、總利息、寬限期效果。新北中和鋮馨租賃。">
+<meta property="og:description" content="免費房貸試算工具，輸入貸款金額、利率、年期，立刻算出每月房貸本息攤還金額、總利息、本息攤還明細。新北中和鋮馨租賃。">
 <meta property="og:url" content="https://cx468.com.tw/mortgage-calculator.html">
 <!-- Preconnect for Google Analytics -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
@@ -275,11 +275,8 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+
 </script>
 <script type="application/ld+json">
 {
@@ -287,7 +284,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
   "@type": "WebApplication",
   "name": "房貸試算工具",
   "url": "https://cx468.com.tw/mortgage-calculator.html",
-  "description": "免費房貸試算，輸入貸款金額、利率、年期，立刻算出每月本息攤還、總利息、寬限期效果。",
+  "description": "免費房貸試算，輸入貸款金額、利率、年期，立刻算出每月本息攤還、總利息、本息攤還明細。",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript",
@@ -365,7 +362,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-</head>
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><script src="consultation-tracking.js" defer></script><link rel="stylesheet" href="consultation.css"></head>
 <body>
 <div id="nav" data-theme="light"></div>
 <script src="nav.js"></script>
@@ -423,7 +420,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="field">
       <label>年利率</label>
       <div class="input-row">
-        <input type="number" id="rate" value="2.95" min="0.1" max="30" step="0.05" oninput="syncSlider('rate','rateSlider');calculate()">
+        <input type="number" id="rate" value="2.95" min="0" max="30" step="0.05" oninput="syncSlider('rate','rateSlider');calculate()">
         <span class="unit">%</span>
       </div>
       <input type="range" id="rateSlider" min="0.5" max="20" step="0.05" value="2.95" oninput="syncInput('rateSlider','rate');calculate()">
@@ -495,7 +492,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="bar-track"><div class="bar-fill bar-red" id="privateBar" style="width:80%"></div></div>
       </div>
       <div class="saving-box">
-        <div style="font-size:13px;color:#9A6D3A;margin-bottom:4px;font-weight:600">轉貸後每月可省</div>
+        <div style="font-size:13px;color:#9A6D3A;margin-bottom:4px;font-weight:600">轉貸後每月支出差</div>
         <div class="saving-val" id="savingLabel">—</div>
         <div style="font-size:12px;color:#5A6878;margin-top:4px" id="savingYearLabel"></div>
       </div>
@@ -549,7 +546,7 @@ function calculate(){
   const annualRate=parseFloat(document.getElementById('rate').value)||0;
   const years=parseInt(document.getElementById('years').value)||0;
   const n=years*12, r=annualRate/100/12;
-  if(P<=0||annualRate<=0||years<=0)return;
+  if(P<=0||annualRate<0||years<=0)return;
   const monthly=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
   const total=monthly*n, totalInterest=total-P;
   document.getElementById('monthly').textContent=fmt(monthly);
@@ -564,7 +561,7 @@ function calculate(){
     document.getElementById('bankMonthlyLabel').textContent=fmt(monthly)+' 元';
     document.getElementById('privateMonthlyLabel').textContent=fmt(priv)+' 元';
     document.getElementById('savingLabel').textContent=saving>0?fmt(saving)+' 元':'—';
-    document.getElementById('savingYearLabel').textContent=saving>0?'每年可省 '+fmt(saving*12)+' 元':'';
+    document.getElementById('savingYearLabel').textContent=saving>0?'每月支出不同，不代表總利息或總成本節省':'';
   }
   let balance=P, rows='';
   for(let y=1;y<=years;y++){
@@ -577,6 +574,7 @@ function calculate(){
 calculate();
 </script>
 
+<section class="cx-prep" id="cost-check"><h2>計算假設、月付差與總成本，分開看</h2><p>本工具以固定年利率、每月一期、本息平均攤還計算，月利率＝年利率÷12，期數＝年數×12。月付＝本金×月利率×(1＋月利率)<sup>期數</sup>÷[(1＋月利率)<sup>期數</sup>－1]；零利率時為本金÷期數。不含寬限期、機動利率變動及個別銀行的計息／尾差調整。</p><p>教學示例：本金100萬元、年利率3%、10年共120期，月付約9,656元，總利息約158,729元；這是數學假設，不是市場報價或核貸條件。</p><p>民間只繳息與銀行本息攤還的比較，顯示的是<strong>每月現金支出差</strong>，不是總成本節省：只繳息的本金仍須清償。應比較同一期間結束時的剩餘本金，不能直接將月付差乘12宣稱一年省息。</p><h3>方案總成本比較表：先固定相同需求與期間</h3><div class="cx-table-wrap"><table><thead><tr><th>比較項目</th><th>方案A</th><th>方案B</th></tr></thead><tbody><tr><th>實際可使用資金、撥款與比較截止日期</th><td>待填</td><td>待填</td></tr><tr><th>期間內每期月付及合計（含本金與利息）</th><td>待填</td><td>待填</td></tr><tr><th>截止日尚欠本金／一次到期本金</th><td>待填</td><td>待填</td></tr><tr><th>舊貸清償費、新貸開辦費</th><td>待填</td><td>待填</td></tr><tr><th>代書、設定塗銷、保險、保證費（若有）</th><td>待填</td><td>待填</td></tr><tr><th>媒合服務費：金額、支付及取消條件</th><td>待填</td><td>待填</td></tr><tr><th>未包含於月付的費用合計（勿重複計入）</th><td>待填</td><td>待填</td></tr><tr><th>同期間成本＝期間還款＋期末欠款＋另付費用－實際取得貸款本金</th><td>待填</td><td>待填</td></tr></tbody></table></div><p>上述成本為同期間現金流核對用，未考慮資金時間價值，不是總費用年百分率（APR）。費用若已併入貸款或月付，不要再次加總；舊貸餘額與新借款並存時，先釐清各筆本金，避免重複相加。</p><p><a href="https://www.fsc.gov.tw/uploaddowndoc?file=publicizeinfo%2F202109241416010.pdf&amp;filedisplay=%E9%8A%80%E8%A1%8C%E7%AF%87.pdf&amp;flag=doc">金管會銀行篇消費者教育資料</a>說明總費用年百分率與貸款利率不同，部分外部支出可能不在其涵蓋範圍；請向機構確認正式揭露，再補上實際需負擔的費用。</p><p><a href="downloads/total-cost-comparison.html">免登入列印空白總成本比較表</a> · <a href="private-to-bank.html">民間轉銀行諮詢</a> · <a href="second-mortgage.html">二胎房貸諮詢</a></p><small>內容核對：2026-09-12。文件與條件以受理機構及正式契約為準。</small></section>
 <!-- 4. FAQ（與 FAQPage JSON-LD 逐字同源）＋ 延伸閱讀 -->
 <section class="bt-faq bt-sec">
   <div class="bt-narrow">
@@ -640,7 +638,7 @@ calculate();
     /* nav/footer 由 include.js 後載，持續補新連結 */
     new MutationObserver(patchLinks).observe(document.documentElement, { childList: true, subtree: true });
     if (typeof gtag === 'function') {
-      gtag('event', 'tool_embedded', { embed_referrer: document.referrer || '(unknown)', page_path: location.pathname });
+      gtag('event', 'tool_embedded', { embed_referrer: (function(){try{return new URL(document.referrer).origin;}catch(e){return '(unknown)';}})(), page_path: location.pathname });
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

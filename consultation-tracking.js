@@ -14,6 +14,7 @@
     '/second-mortgage.html': 'second_mortgage',
     '/article-second-mortgage-scam.html': 'second_mortgage',
     '/corporate-loan.html': 'corporate_loan',
+    '/corporate-checkup.html': 'corporate_loan',
     '/article-self-employed-loan.html': 'corporate_loan'
   };
   // Confirmed 2026-09-11: 02 main line, 0931 work phone, 0958 owner Ms. Zheng.

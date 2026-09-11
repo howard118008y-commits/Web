@@ -251,11 +251,8 @@ img{max-width:100%;display:block}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+
 </script>
 <script type="application/ld+json">
 {
@@ -471,7 +468,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  ]
 }
 </script>
-</head>
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><script src="consultation-tracking.js" defer></script><link rel="stylesheet" href="consultation.css"></head>
 <body>
 <div id="nav" data-theme="light"></div>
 <script src="nav.js"></script>
@@ -597,6 +594,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 
+<section class="cx-prep" id="prep-tools"><h2>免登入的諮詢準備清單與總成本比較</h2><ul><li><a href="downloads/private-bank-checklist.html">民間轉銀行資料準備清單</a></li><li><a href="downloads/second-mortgage-checklist.html">二胎諮詢文件清單</a></li><li><a href="downloads/business-checklist.html">企業週轉資料清單</a></li><li><a href="mortgage-calculator.html#cost-check">貸款總成本比較與試算假設</a></li></ul><p>先閱讀、列印或自行整理，再決定是否諮詢；不需提交表單。各工具結果為整理與估算用途，不代表機構核准。</p><small>內容核對：2026-09-12。文件與條件以受理機構及正式契約為準。</small></section>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>
