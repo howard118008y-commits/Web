@@ -187,15 +187,12 @@ img{max-width:100%;display:block}
 <!-- Preconnect for Google Analytics -->
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
+<script src="consultation-tracking.js" defer></script>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -239,7 +236,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://cx468.com.tw/"}, {"@type": "ListItem", "position": 2, "name": "聯絡我們"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","url":"https://cx468.com.tw/contact.html","mainEntity":[{"@type":"Question","name":"鋮馨的營業時間是什麼時候？","acceptedAnswer":{"@type":"Answer","text":"辦公時間為週一至週五 10:00–17:00，週末及國定假日休息。LINE 訊息可隨時傳送，通常 24 小時內回覆；急件請於上班時間撥打行動電話 0931-087-996。"}},{"@type":"Question","name":"怎麼預約諮詢或面談？","acceptedAnswer":{"@type":"Answer","text":"加入官方 LINE（lin.ee/PHIfSoY）傳訊說明需求，或來電 02-2249-0517 約時間即可。來訪公司（新北市中和區中正路 468 號）前，建議先以電話或 LINE 確認時段，以確保有專人接待。"}},{"@type":"Question","name":"初步諮詢要收費嗎？","acceptedAnswer":{"@type":"Answer","text":"初步諮詢與評估免費，不申請不收費。所有費用會在簽約前完整說明，無隱藏收費。實際結果依個案不動產條件、財務狀況與市場情況而定。"}},{"@type":"Question","name":"鋮馨服務哪些地區？","acceptedAnswer":{"@type":"Answer","text":"公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務；售後回租與貸款整合業務全台各縣市均可評估。"}}]}
+{"@context":"https://schema.org","@type":"FAQPage","url":"https://cx468.com.tw/contact.html","mainEntity":[{"@type":"Question","name":"鋮馨的營業時間是什麼時候？","acceptedAnswer":{"@type":"Answer","text":"接聽時間為週一至週五 10:00–17:00，週末公休。主電話 02-2249-0517；工作機 0931-087-996；負責人鄭小姐 0958-139-786。未接通或非接聽時間，請透過官方 LINE 留言。"}},{"@type":"Question","name":"怎麼預約諮詢或面談？","acceptedAnswer":{"@type":"Answer","text":"加入官方 LINE（lin.ee/PHIfSoY）傳訊說明需求，或來電 02-2249-0517 約時間即可。來訪公司（新北市中和區中正路 468 號）前，建議先以電話或 LINE 確認時段，以確保有專人接待。"}},{"@type":"Question","name":"初步諮詢要收費嗎？","acceptedAnswer":{"@type":"Answer","text":"初步諮詢與評估免費，不申請不收費。所有費用會在簽約前完整說明，無隱藏收費。實際結果依個案不動產條件、財務狀況與市場情況而定。"}},{"@type":"Question","name":"鋮馨服務哪些地區？","acceptedAnswer":{"@type":"Answer","text":"公司位於新北市中和區中正路 468 號，主要服務區域涵蓋新北市各行政區（中和、永和、板橋、三重、新莊、土城、樹林等），大台北地區均可服務；售後回租與貸款整合業務全台各縣市均可評估。"}}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"DefinedTermSet","name":"鋮馨租賃名詞解釋","url":"https://cx468.com.tw/contact.html","hasDefinedTerm":[{"@type":"DefinedTerm","name":"售後回租","description":"屋主把房子過戶給投資方，同時簽租約繼續住，並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。"},{"@type":"DefinedTerm","name":"貸款整合","description":"把信貸、信用卡循環、民間借款等多筆負債，整合為一筆條件較單純的貸款，以降低每月還款負擔、改善現金流。"},{"@type":"DefinedTerm","name":"民間轉銀行","description":"將高利率的民間借款分階段轉入銀行體系，降低利息負擔，讓本金得以逐步下降；能否轉入及條件依個案財務狀況與金融機構審核而定。"}]}
@@ -293,7 +290,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div class="bt-label">快速答案</div>
       <h2 class="bt-h2">怎麼聯絡鋮馨租賃？</h2>
       <div class="bt-card bt-qa">
-        <p>聯絡鋮馨租賃有限公司有四種方式：加入官方 LINE（lin.ee/PHIfSoY、ID 0931087996）、來電 02-2249-0517 或 0931-087-996、寄信至 cx468468@gmail.com，或親至新北市中和區中正路 468 號。辦公時間為週一至週五 10:00–17:00。最快的方式是加入 LINE 傳訊說明需求，通常 24 小時內回覆。初步諮詢與評估免費，不申請不收費。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助，最終核貸由金融機構決定。</p>
+        <p>聯絡鋮馨租賃有限公司有四種方式：加入官方 LINE（lin.ee/PHIfSoY、ID 0931087996）、來電主電話 02-2249-0517、工作機 0931-087-996 或負責人鄭小姐 0958-139-786、寄信至 cx468468@gmail.com，或親至新北市中和區中正路 468 號。辦公時間為週一至週五 10:00–17:00。接聽時段可先來電諮詢，未接通或非接聽時間請用 LINE 留言。初步諮詢與評估免費，不申請不收費。鋮馨並非銀行、也非放貸方，本身不放貸，而是提供諮詢與媒合協助，最終核貸由金融機構決定。</p>
       </div>
     </div>
     <div class="bt-grid-4">
@@ -301,15 +298,16 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="contact-card-icon">💬</div>
         <div class="contact-card-label">LINE 官方帳號</div>
         <div class="contact-card-value">加入 LINE<br>免費諮詢</div>
-        <div class="contact-card-sub">最快速的聯絡方式，加入後傳訊說明需求，24 小時內回覆，免費評估不收費。</div>
+        <div class="contact-card-sub">未接通或非接聽時間，可加入 LINE 留言，留下方便聯絡的時段。</div>
         <a href="https://lin.ee/PHIfSoY" target="_blank" class="bt-btn bt-btn-sm">加入官方 LINE</a>
       </div>
       <div class="bt-card contact-card">
         <div class="contact-card-icon">📞</div>
         <div class="contact-card-label">電話諮詢</div>
-        <div class="contact-card-value">02-2249-0517<br>0931-087-996</div>
+        <div class="contact-card-value">02-2249-0517</div>
+        <p class="contact-card-sub">工作機：<a href="tel:0931087996">0931-087-996</a><br>負責人鄭小姐：<a href="tel:0958139786">0958-139-786</a></p>
         <div class="contact-card-sub">歡迎直接來電，專人接聽（週一至週五 10:00–17:00），急件請撥行動電話。</div>
-        <a href="tel:+886-931-087-996" class="bt-btn bt-btn-sm bt-btn-outline-dark">直接來電</a>
+        <a href="tel:0222490517" class="bt-btn bt-btn-sm" data-link-location="page">撥打主電話</a>
       </div>
       <div class="bt-card contact-card">
         <div class="contact-card-icon">✉️</div>
@@ -337,7 +335,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
     <details open>
       <summary><h3>鋮馨的營業時間是什麼時候？</h3></summary>
-      <p>辦公時間為週一至週五 10:00–17:00，週末及國定假日休息。LINE 訊息可隨時傳送，通常 24 小時內回覆；急件請於上班時間撥打行動電話 0931-087-996。</p>
+      <p>接聽時間為週一至週五 10:00–17:00，週末公休。主電話 02-2249-0517；工作機 0931-087-996；負責人鄭小姐 0958-139-786。未接通或非接聽時間，請透過官方 LINE 留言。</p>
     </details>
 
     <details>
@@ -381,7 +379,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 
 <!-- 6. CTA 帶 -->
-<section class="bt-cta bt-sec-80">
+<section class="bt-cta bt-sec-80" data-link-location="service_bottom">
   <div class="bt-in">
     <h2 class="bt-h2">準備好了嗎？</h2>
     <p class="bt-p">免費評估你的不動產最佳方案，不申請不收費。</p>
