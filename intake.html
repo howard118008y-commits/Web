@@ -244,7 +244,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </section>
 
   <p class="trust"><b>不申請不收費,面談不收費。</b><br>最終核貸由金融機構依個案決定,本公司非金融機構。</p>
-  <p class="legal">你提供的資料僅用於本次評估與後續聯繫,保存一年;依個資法第 8 條之完整告知見<a href="privacy-policy.html" style="text-decoration:underline">隱私權政策</a>。</p>
+  <p class="legal">你提供的資料用於本次評估與後續聯繫，保存期間及完整告知見<a href="privacy-policy.html" style="text-decoration:underline">隱私權政策</a>。</p>
+  <p class="legal">尚未送出的進度暫存在此裝置，超過 24 小時未更新會在再次開啟時清除；送出成功後也會清除。<button type="button" id="clearProgress" style="font:inherit;color:inherit;border:0;background:none;text-decoration:underline;cursor:pointer">清除進度並重新填寫</button></p>
 </main>
 
 <button class="ask" id="ask" aria-label="問小鋮"><span class="dot">鋮</span>問小鋮</button>
@@ -385,12 +386,22 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     return {ok:true,value:a};
   }
 
-  var st={};
-  try{ st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){}
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+  var st={}, DRAFT_TTL=24*60*60*1000;
+  function clearSaved(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+  try{
+    st=JSON.parse(localStorage.getItem(KEY)||'{}')||{};
+    if(!Number.isFinite(st.updatedAt) || Date.now()-st.updatedAt>=DRAFT_TTL || st.updatedAt>Date.now() || st.done){
+      st={}; clearSaved();
+    }
+  }catch(e){ st={}; clearSaved(); }
+  function save(){
+    if(st.done){ clearSaved(); return; }
+    st.updatedAt=Date.now();
+    try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){}
+  }
 
   var qs=new URLSearchParams(location.search);
-  if(qs.get('restart')||st.done){ st={}; }
+  if(qs.get('restart')||st.done){ st={}; clearSaved(); }
   var qTopic=qs.get('topic');
   if(qTopic && TOPIC_LABEL[qTopic]){
     if(st.topic!==qTopic){ st={topic:qTopic}; }
@@ -434,7 +445,23 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       return '<button class="opt'+(st.answers[name]===o[0]?' on':'')+'" data-val="'+o[0]+'" data-label="'+o[1]+'">'+svg(o[2])+'<span>'+o[1]+'</span></button>';
     }).join('');
   }
+  var advanceTimer=null, transitionLocked=false;
+  function cancelAdvance(){
+    if(advanceTimer!==null) clearTimeout(advanceTimer);
+    advanceTimer=null; transitionLocked=false;
+  }
+  function scheduleNext(container){
+    if(transitionLocked) return;
+    transitionLocked=true;
+    var from=cur;
+    container.querySelectorAll('.opt').forEach(function(b){ b.disabled=true; });
+    advanceTimer=setTimeout(function(){
+      advanceTimer=null; transitionLocked=false;
+      if(cur===from) goNext();
+    },160);
+  }
   function show(name){
+    cancelAdvance();
     cur=name; st.stepName=name; st.step=stepIndex(); save();
     var id=PANE[name];
     panes.forEach(function(p){ p.hidden = p.id!==id; });
@@ -449,18 +476,28 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     window.scrollTo(0,0);
     if(window.gtag) gtag('event','intake_step',{step:name,topic:st.topic||''});
   }
-  function goNext(){ var f=flow(), i=f.indexOf(cur); show(f[Math.min(i+1,f.length-1)]); }
+  function goNext(){
+    if(cur==='topic' && !TOPIC_LABEL[st.topic]) return;
+    if(cur==='stage' && !STAGE_LABEL[st.stage]) return;
+    if(cur==='address' && !addrCheck(st.address,st.topic==='corporate').ok) return;
+    if(['use','type','lien'].indexOf(cur)>-1 && !(st.answers&&st.answers[cur])) return;
+    if(cur==='lead'||cur==='done') return;
+    var f=flow(), i=f.indexOf(cur); show(f[Math.min(i+1,f.length-1)]);
+  }
   function goPrev(){ var f=flow(), i=f.indexOf(cur); show(f[Math.max(i-1,0)]); }
 
   /* Step 0 */
   document.querySelectorAll('#s0 .opt').forEach(function(b){
-    b.addEventListener('click',function(){ st.topic=b.dataset.topic; st.stage=null; st.answers={}; goNext(); });
+    b.addEventListener('click',function(){
+      if(cur!=='topic'||transitionLocked) return;
+      st.topic=b.dataset.topic; st.stage=null; st.answers={}; st.answerLabels={}; goNext();
+    });
   });
   /* Step 1 */
   document.getElementById('s1opts').addEventListener('click',function(e){
-    var b=e.target.closest('.opt'); if(!b) return;
+    var b=e.target.closest('.opt'); if(!b||b.disabled||cur!=='stage'||transitionLocked) return;
     st.stage=b.dataset.stage; b.classList.add('on');
-    setTimeout(goNext,160);
+    scheduleNext(document.getElementById('s1opts'));
   });
   /* Step 2 */
   var inp=document.getElementById('addr'), next=document.getElementById('next'), addrHint=document.getElementById('addrHint');
@@ -477,7 +514,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   inp.addEventListener('blur',function(){ addrTouched=true; check(); });
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter' && !next.disabled) next.click(); });
   next.addEventListener('click',function(){
-    if(next.disabled) return;
+    if(cur!=='address'||next.disabled) return;
     var ar=addrCheck(inp.value, st.topic==='corporate'); if(!ar.ok){ addrTouched=true; check(); return; }
     st.address=ar.value; save();
     if(window.gtag) gtag('event','intake_address',{topic:st.topic});
@@ -485,15 +522,16 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   });
   /* 通用單選題 */
   document.getElementById('sqopts').addEventListener('click',function(e){
-    var b=e.target.closest('.opt'); if(!b) return;
+    var b=e.target.closest('.opt'); if(!b||b.disabled||['use','type','lien'].indexOf(cur)===-1||transitionLocked) return;
     st.answers=st.answers||{}; st.answers[cur]=b.dataset.val; st.answerLabels=st.answerLabels||{}; st.answerLabels[cur]=b.dataset.label; save();
-    b.classList.add('on'); setTimeout(goNext,160);
+    b.classList.add('on'); scheduleNext(document.getElementById('sqopts'));
   });
   document.getElementById('sqhelpLink').addEventListener('click',function(e){ e.preventDefault(); var h=document.getElementById('sqhelp'); h.hidden=!h.hidden; });
   document.getElementById('whyLink').addEventListener('click',function(e){ e.preventDefault(); var w=document.getElementById('why'); w.hidden=!w.hidden; });
 
   /* 上一步 */
   back.addEventListener('click',function(){
+    cancelAdvance();
     if(cur==='topic'){ location.href='/'; return; }
     if(qTopic && flow().indexOf(cur)===1){ location.href='/'; return; }
     goPrev();
@@ -501,6 +539,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   /* Step 3:基本資料(與 lead-form.html 同一條進線軌:linebot /lead best-effort + Web3Forms) */
   var form=document.getElementById('leadForm'), fmsg=document.getElementById('formMsg'), sbtn=document.getElementById('submit');
+  var submitLabel=sbtn.textContent;
   var phoneEl=document.getElementById('fPhone'), phoneWrap=document.getElementById('fPhoneWrap'), phoneMsg=document.getElementById('fPhoneMsg');
   function showPhone(r){ phoneWrap.classList.toggle('err',!r.ok && !!phoneEl.value); phoneMsg.textContent=(!r.ok && phoneEl.value)?r.msg:''; phoneEl.setAttribute('aria-invalid',String(!r.ok)); }
   phoneEl.addEventListener('blur',function(){ showPhone(phoneCheck(phoneEl.value)); });
@@ -515,6 +554,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   }
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    if(sbtn.disabled||cur!=='lead') return;
+    if(st.topic!=='financing'){
+      if(!STAGE_LABEL[st.stage]){ show('stage'); return; }
+      if(!addrCheck(st.address,st.topic==='corporate').ok){ show('address'); return; }
+      var missing=['use','type','lien'].find(function(k){ return !(st.answers&&st.answers[k]); });
+      if(missing){ show(missing); return; }
+    }
     fmsg.className='form-msg'; fmsg.textContent='';
     var consent=document.getElementById('consent');
     var pc=phoneCheck(phoneEl.value); showPhone(pc);
@@ -526,14 +572,30 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     }
     phoneEl.value=pc.digits;
     var orig=sbtn.textContent; sbtn.disabled=true; sbtn.textContent='送出中…';
-    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(e){try{fetch('https://cx468-linebot.onrender.com/lead-fail',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({track:'intake_lead',err:String(e).slice(0,120)})}).catch(function(){});}catch(_){}});}catch(e){}
+    // 通知通道獨立監測；不傳訪客資料至失敗紀錄，也不自動重送造成重複名單。
+    var noticeController=typeof AbortController==='function'?new AbortController():null;
+    var noticeTimer=noticeController?setTimeout(function(){ noticeController.abort(); },20000):null;
+    Promise.resolve().then(function(){
+      var options={method:'POST',body:new FormData(form)};
+      if(noticeController) options.signal=noticeController.signal;
+      return fetch('https://cx468-linebot.onrender.com/lead',options);
+    }).then(function(r){
+      if(!r.ok) throw new Error('HTTP_'+r.status);
+    }).catch(function(e){
+      var code=e&&e.name==='AbortError'?'timeout':(/^HTTP_\d{3}$/.test(e&&e.message)?e.message:'network_error');
+      return fetch('https://cx468-linebot.onrender.com/lead-fail',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({track:'intake_lead',err:code})
+      }).catch(function(){});
+    }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
-    .then(function(r){return r.json();})
+    .then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();})
     .then(function(j){
       if(!j.success) throw new Error(j.message||'送出失敗');
       if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'intake',topic:st.topic});
       if(window.fbq)fbq('track','Lead');
-      st.done=true; save();
+      st={done:true};
+      form.reset(); inp.value='';
       show('done');
     })
     .catch(function(){
@@ -549,6 +611,17 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     window.__cxAskQueue = window.__cxAskQueue || []; window.__cxAskQueue.push('');
   });
 
+  document.getElementById('clearProgress').addEventListener('click',function(){
+    if(sbtn.disabled&&cur==='lead') return;
+    cancelAdvance(); clearSaved();
+    st=qTopic&&TOPIC_LABEL[qTopic]?{topic:qTopic}:{};
+    form.reset(); inp.value=''; addrTouched=false;
+    sbtn.disabled=false; sbtn.textContent=submitLabel;
+    phoneWrap.classList.remove('err'); phoneMsg.textContent=''; phoneEl.setAttribute('aria-invalid','false');
+    fmsg.className='form-msg'; fmsg.textContent='';
+    show(st.topic?(st.topic==='financing'?'lead':'stage'):'topic');
+    clearSaved();
+  });
   show(cur);
 })();
 </script>

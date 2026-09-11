@@ -1,9 +1,9 @@
 name: 同步 sitemap lastmod
 
-# 為什麼要有這支：indexing_cron.py 靠 sitemap 的 <lastmod> 挑「近 7 天更動頁」送
-# Google Indexing API。lastmod 寫死不動，改了頁面也不會被送出（2026-08-02 實測：
-# 全站 114 條有 108 條過期、5 條根本沒有 lastmod，當天改的 11 頁全部漏送）。
-# 排在 UTC 01:00 = 台北 09:00，早於 indexing cron 的 UTC 01:30。
+# 依實際頁面更新時間維護 sitemap lastmod，供搜尋引擎發現更新。
+# 一般文章使用 sitemap 與 Search Console；Google Indexing API
+# 僅限官方支援的職缺／特定直播頁，不能當成一般頁面的收錄工具。
+# 這支工作流程僅維護 sitemap，不提交 Google Indexing API。
 
 on:
   schedule:

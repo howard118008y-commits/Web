@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'codex/audit-fixes-*']
   pull_request:
     branches: [main]
 
@@ -16,3 +16,10 @@ jobs:
           python-version: "3.x"
       - name: HTML 標籤平衡 + 內部連結檢查
         run: python3 scripts/ci_check.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install isolated DOM test dependency
+        run: npm install --no-save --ignore-scripts --no-package-lock linkedom@0.18.12
+      - name: Form, navigation, analytics and indexing regressions
+        run: node scripts/audit-regression.cjs

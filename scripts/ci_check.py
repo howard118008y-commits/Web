@@ -3,6 +3,7 @@
 import os
 import re
 import sys
+from urllib.parse import unquote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP_DIRS = {".git", "node_modules", "scripts", "world"}
@@ -52,12 +53,10 @@ def check_internal_links(path, html, all_files_set):
             continue  # JS template literal / 樣板占位符，非真實連結
         if re.match(r"^(https?:|mailto:|tel:|javascript:|data:|//)", target):
             continue
-        if target.startswith("/"):
-            continue  # 絕對站內路徑，交給部署後的線上連結檢查處理，避免本機路徑誤判
-        clean = target.split("#")[0].split("?")[0]
+        clean = unquote(target.split("#")[0].split("?")[0])
         if not clean:
             continue
-        resolved = os.path.normpath(os.path.join(base_dir, clean))
+        resolved = os.path.normpath(os.path.join(ROOT, clean.lstrip("/")) if clean.startswith("/") else os.path.join(base_dir, clean))
         if os.path.isdir(resolved):
             if not os.path.isfile(os.path.join(resolved, "index.html")):
                 errors.append(f"  連結目標資料夾內沒有 index.html：{target}")

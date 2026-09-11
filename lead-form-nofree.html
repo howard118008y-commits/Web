@@ -108,6 +108,7 @@
   var consent=document.getElementById('consent');
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    if(btn.disabled) return;
     msg.className='form-msg';msg.innerHTML='';
     if(!form.checkValidity()||!consent.checked){
       msg.className='form-msg err';
@@ -116,11 +117,26 @@
     }
     var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
     // 同步通知自家後端推 LINE 給工作機（best-effort，失敗不影響主流程）
-    try{fetch('https://cx468-linebot.onrender.com/lead',{method:'POST',body:new FormData(form)}).catch(function(e){try{fetch('https://cx468-linebot.onrender.com/lead-fail',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({track:'web_form_lead',err:String(e).slice(0,120)})}).catch(function(){});}catch(_){}});}catch(e){}
+    // 通知通道獨立監測；不傳訪客資料至失敗紀錄，也不自動重送造成重複名單。
+    var noticeController=typeof AbortController==='function'?new AbortController():null;
+    var noticeTimer=noticeController?setTimeout(function(){ noticeController.abort(); },20000):null;
+    Promise.resolve().then(function(){
+      var options={method:'POST',body:new FormData(form)};
+      if(noticeController) options.signal=noticeController.signal;
+      return fetch('https://cx468-linebot.onrender.com/lead',options);
+    }).then(function(r){
+      if(!r.ok) throw new Error('HTTP_'+r.status);
+    }).catch(function(e){
+      var code=e&&e.name==='AbortError'?'timeout':(/^HTTP_\d{3}$/.test(e&&e.message)?e.message:'network_error');
+      return fetch('https://cx468-linebot.onrender.com/lead-fail',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({track:'web_form_lead',err:code})
+      }).catch(function(){});
+    }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
     fetch('https://api.web3forms.com/submit',{
       method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
     })
-    .then(function(r){return r.json();})
+    .then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();})
     .then(function(j){
       if(j.success){
         form.style.display='none';

@@ -417,8 +417,8 @@ h1 em{font-style:normal;color:var(--gold)}
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
 document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
+if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_location:a.dataset.linkLocation||'page'});}
+else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,link_location:a.dataset.linkLocation||'page'});}
 });
 </script>
 <!-- Meta Pixel Code -->
@@ -715,7 +715,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       (一)蒐集機關:鋮馨租賃有限公司。
       (二)蒐集目的:就你提出之諮詢與你聯繫、初步評估與後續服務。
       (三)資料類別:稱呼、聯絡電話、聯絡方式偏好、不動產所在區域與概況、資金需求概況、面談時段。
-      (四)利用期間、地區、對象與方式:自蒐集日起至諮詢結束後一年內;於中華民國境內;僅供本公司顧問使用;以電話、LINE 或當面方式。
+      (四)利用期間、地區、對象與方式:依隱私權政策所列目的與期間保存；由本公司及政策所列服務商於提供服務所需範圍內處理，第三方服務可能在境外處理資料；以電話、LINE、電子郵件或當面方式聯繫。
       (五)你得依法請求查詢、閱覽、複製、補充或更正、停止蒐集處理利用,或刪除你的個人資料。
       (六)你可自由選擇是否提供;不提供時,本公司將無法為你進行評估與聯繫。
       本公司不將你的資料提供予第三方作行銷用途。詳見<a href="privacy-policy.html">隱私權政策</a>與<a href="terms-of-service.html">使用條款</a>。</p>
@@ -735,11 +735,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <!-- 手機版底部快速聯絡條（移植自舊首頁，改用本頁色票） -->
 <div class="cx-sticky-cta" role="navigation" aria-label="快速聯絡">
-  <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" class="cx-sticky-line" onclick="if(typeof gtag==='function')gtag('event','line_click',{link_location:'sticky_bar'})">
+  <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" class="cx-sticky-line" data-link-location="sticky_bar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="22" height="22" aria-hidden="true"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>
     LINE 線上諮詢
   </a>
-  <a href="tel:+886-2-2249-0517" class="cx-sticky-tel" onclick="if(typeof gtag==='function')gtag('event','phone_click',{link_location:'sticky_bar'})">
+  <a href="tel:+886-2-2249-0517" class="cx-sticky-tel" data-link-location="sticky_bar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
     一鍵撥號
   </a>
@@ -801,7 +801,7 @@ ta.addEventListener('input', refreshSend);
 function sendToXiaocheng(q){
   q = (q || '').trim();
   if (!q) return;
-  try{ if (typeof gtag === 'function') gtag('event', 'hero_ai_ask', {cw_label: q.slice(0,60)}); }catch(e){}
+  try{ if (typeof gtag === 'function') gtag('event', 'hero_ai_ask', {input_length: q.length}); }catch(e){}
   if (typeof window.cxAskFull === 'function') { window.cxAskFull(q); return; }
   if (typeof window.cxAsk === 'function') { window.cxAsk(q); return; }
   window.__cxAskQueue = window.__cxAskQueue || [];

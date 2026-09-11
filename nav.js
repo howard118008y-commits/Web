@@ -17,8 +17,8 @@
     '.cx-menu>li>button{background:none;border:0;color:rgba(242,239,232,.7);font:inherit;font-size:14.5px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:.15s}',
     '.cx-menu>li>button:hover,.cx-menu>li.open>button{color:#F2EFE8;background:rgba(242,239,232,.06)}',
     '.cx-dd{position:absolute;top:calc(100% + 6px);left:0;min-width:240px;background:#F7F5F0;border:1px solid #E2DED4;border-radius:12px;',
-    'padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.28);opacity:0;transform:translateY(-4px);pointer-events:none;transition:.15s}',
-    '.cx-menu>li.open .cx-dd{opacity:1;transform:none;pointer-events:auto}',
+    'padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(-4px);pointer-events:none;transition:.15s}',
+    '.cx-menu>li.open .cx-dd{opacity:1;visibility:visible;transform:none;pointer-events:auto}',
     '.cx-dd a{display:block;padding:10px 12px;border-radius:8px;font-size:14px;color:#1B2F4A}',
     '.cx-dd a:hover{background:rgba(200,148,90,.1)}',
     '.cx-dd a.go{font-weight:700;color:#12213A;background:#C8945A;margin-bottom:6px}',
@@ -135,7 +135,7 @@
           '<a class="cx-phone" href="tel:0222490517" aria-label="撥打 02-2249-0517">☎</a>' +
           '<a class="cx-resume" id="cxResume" href="/intake.html" hidden>回到我的評估</a>' +
           ctaHtml +
-          '<button class="cx-burger" type="button" aria-label="開啟選單" aria-expanded="false">☰</button>' +
+          '<button class="cx-burger" type="button" aria-label="開啟選單" aria-controls="cxSheet" aria-expanded="false">☰</button>' +
         '</div>' +
       '</div>' +
     '</nav>' +
@@ -170,21 +170,50 @@
     });
   });
   document.addEventListener('click', function (e) { if (!e.target.closest('.cx-menu')) closeAll(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); sheet.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var active = document.querySelector('.cx-menu>li.open>button');
+    closeAll();
+    if (sheet.classList.contains('open')) closeSheet(true);
+    else if (active) active.focus();
+  });
 
   /* 手機:漢堡開全螢幕選單 */
   var burger = document.querySelector('.cx-burger');
   var sheet = document.getElementById('cxSheet');
+  var previousOverflow = '';
+  function closeSheet(restoreFocus) {
+    var wasOpen = sheet.classList.contains('open');
+    sheet.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', '開啟選單');
+    burger.textContent = '☰';
+    if (wasOpen) document.body.style.overflow = previousOverflow;
+    if (wasOpen && restoreFocus) burger.focus();
+  }
   burger.addEventListener('click', function () {
-    var open = sheet.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(open));
-    burger.textContent = open ? '✕' : '☰';
-    document.body.style.overflow = open ? 'hidden' : '';
+    if (sheet.classList.contains('open')) { closeSheet(true); return; }
+    previousOverflow = document.body.style.overflow;
+    sheet.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', '關閉選單');
+    burger.textContent = '✕';
+    document.body.style.overflow = 'hidden';
+  });
+  sheet.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeSheet(false);
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900) closeSheet(false);
   });
 
   /* 有填過的進度才顯示「回到我的評估」(對應 Better 的 Sign in) */
   try {
     var s = JSON.parse(localStorage.getItem('cx_intake_v1') || '{}');
+    if (!Number.isFinite(s.updatedAt) || Date.now() - s.updatedAt >= 24 * 60 * 60 * 1000 || s.updatedAt > Date.now() || s.done) {
+      localStorage.removeItem('cx_intake_v1');
+      s = {};
+    }
     if (s.topic && s.stepName && s.stepName !== 'topic' && !s.done) {
       var r = document.getElementById('cxResume');
       r.hidden = false;

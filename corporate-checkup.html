@@ -592,7 +592,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       if(total()+f.size>MAX_TOTAL){errs.push(f.name+'：合計超過 50MB。');return;}
       picked.push(f);
     });
-    errEl.innerHTML=errs.join('<br>');
+    errEl.textContent=errs.join('\n');
+    errEl.style.whiteSpace='pre-line';
     render();
   }
 
@@ -603,6 +604,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    if(btn.disabled) return;
     msg.className='form-msg';msg.innerHTML='';
     if(!form.checkValidity()){
       msg.className='form-msg err';msg.innerHTML='請填寫必填欄位（標示 * 者）。';
@@ -620,7 +622,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         if(!res.ok)throw new Error(res.j.error||'upload_failed');
         form.style.display='none';
         msg.className='form-msg ok';
-        msg.innerHTML='✅ 已收到，案號 <strong>'+res.j.case_id+'</strong>（共 '+res.j.files+' 份文件）。<br>承辦人員將於上班時間與你聯繫，健檢報告完成後以 LINE 或 Email 交付。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+        msg.textContent='✅ 已收到，案號 ';
+        var caseId=document.createElement('strong');
+        caseId.textContent=String(res.j.case_id||'待確認');
+        msg.appendChild(caseId);
+        msg.appendChild(document.createTextNode('（共 '+String(res.j.files==null?picked.length:res.j.files)+' 份文件）。'));
+        msg.appendChild(document.createElement('br'));
+        msg.appendChild(document.createTextNode('承辦人員將於上班時間與你聯繫，健檢報告完成後以 LINE 或 Email 交付。'));
+        msg.appendChild(document.createElement('br'));
+        msg.appendChild(document.createTextNode('急件可直接加 LINE：'));
+        var lineLink=document.createElement('a');
+        lineLink.href='https://lin.ee/PHIfSoY'; lineLink.textContent='@0931087996';
+        msg.appendChild(lineLink);
         if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'corporate_checkup'});
         if(window.fbq)fbq('track','Lead');
       })
