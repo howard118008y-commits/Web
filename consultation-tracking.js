@@ -8,6 +8,7 @@
   window.__cxConsultationTracking = true;
   var pageNeeds = {
     '/debt-consolidation.html': 'private_debt',
+    '/article-loan-integration.html': 'private_debt',
     '/private-to-bank.html': 'private_to_bank',
     '/article-private-loan-to-bank.html': 'private_to_bank',
     '/second-mortgage.html': 'second_mortgage',
@@ -15,19 +16,22 @@
     '/corporate-loan.html': 'corporate_loan',
     '/article-self-employed-loan.html': 'corporate_loan'
   };
+  // Only confirmed company numbers. Secondary numbers await business confirmation.
+  var phoneLinks = ['tel:0222490517', 'tel:02-2249-0517', 'tel:+886222490517', 'tel:+886-2-2249-0517', 'tel:+886 2 2249 0517'];
   var needs = ['general', 'private_debt', 'private_to_bank', 'second_mortgage', 'corporate_loan'];
   var positions = ['hero', 'after_ai', 'nav', 'mobile_menu', 'sticky_bar', 'footer', 'article_bottom', 'service_bottom', 'page'];
   document.addEventListener('click', function (event) {
     var a = event.target && event.target.closest && event.target.closest('a');
     if (!a || typeof window.gtag !== 'function') return;
     var href = a.getAttribute('href') || '';
-    var isPhone = /^tel:(?:0222490517|\+886[- ]?2[- ]?2249[- ]?0517)$/.test(href);
+    var isPhone = phoneLinks.indexOf(href) !== -1;
     var isLine = /^https:\/\/lin\.ee\/PHIfSoY(?:[?#]|$)/.test(href);
     if (!isPhone && !isLine) return;
     var context = a.closest('[data-consultation-need]');
     var need = context ? context.getAttribute('data-consultation-need') : pageNeeds[location.pathname];
     if (needs.indexOf(need) === -1) need = 'general';
-    var position = a.getAttribute('data-link-location');
+    var positioned = a.closest('[data-link-location]');
+    var position = positioned && positioned.getAttribute('data-link-location');
     if (positions.indexOf(position) === -1) {
       position = a.closest('.cx-sticky-cta') ? 'sticky_bar' :
         a.closest('.cx-sheet') ? 'mobile_menu' :

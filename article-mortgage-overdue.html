@@ -181,11 +181,8 @@ body{padding-top:16px}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+
 </script>
 <!-- ─── SEO 補強：Twitter + geo + Organization ─── -->
 <meta name="author" content="鋮馨租賃有限公司">
@@ -198,7 +195,7 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <meta name="twitter:description" content="房貸逾期完整應對指南。">
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","logo":{"@type":"ImageObject","url":"https://cx468.com.tw/img/og-image.jpg"},"image":"https://cx468.com.tw/img/og-image.jpg","description":"鋮馨租賃有限公司提供不動產售後回租、貸款整合、民間轉銀行專業諮詢與媒合服務。團隊 20 年以上經驗，整合39 家以上合作銀行。","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","knowsAbout":["不動產售後回租","貸款整合","債務協商與貸款整合","民間借款轉銀行","二胎房貸","信用瑕疵房貸","房貸繳不出來因應","自營業者貸款","DBR與DSR負債比評估","房地合一稅與土地增值稅","央行選擇性信用管制","房屋淨值與增貸","包租代管","不動產融資諮詢媒合"],"address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":24.9944428,"longitude":121.4900325},"areaServed":[{"@type":"AdministrativeArea","name":"新北市中和區"},{"@type":"AdministrativeArea","name":"新北市永和區"},{"@type":"AdministrativeArea","name":"新北市板橋區"},{"@type":"AdministrativeArea","name":"新北市土城區"},{"@type":"AdministrativeArea","name":"新北市新店區"},{"@type":"AdministrativeArea","name":"新北市新莊區"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"17:00"}],"contactPoint":[{"@type":"ContactPoint","telephone":"+886-2-2249-0517","contactType":"customer service","areaServed":"TW","availableLanguage":["zh-Hant","zh-TW"]},{"@type":"ContactPoint","telephone":"+886-931-087-996","contactType":"customer service","areaServed":"TW","availableLanguage":["zh-Hant","zh-TW"]}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"],"priceRange":"免費諮詢","slogan":"你的資產，值得被銀行看見"}
+{"@context":"https://schema.org","@type":["LocalBusiness","ProfessionalService"],"@id":"https://cx468.com.tw/#organization","name":"鋮馨租賃有限公司","alternateName":"Cheng Xin Leasing","url":"https://cx468.com.tw","logo":{"@type":"ImageObject","url":"https://cx468.com.tw/img/og-image.jpg"},"image":"https://cx468.com.tw/img/og-image.jpg","description":"鋮馨租賃有限公司提供不動產售後回租、貸款整合、民間轉銀行專業諮詢與媒合服務。團隊具 20 年以上經驗，歷來曾協助客戶向 39 家以上銀行與金融機構送件，並非同時合作或簽約家數，不保證每案均可向全部機構申請。","telephone":"+886-2-2249-0517","email":"cx468468@gmail.com","knowsAbout":["不動產售後回租","貸款整合","債務協商與貸款整合","民間借款轉銀行","二胎房貸","信用瑕疵房貸","房貸繳不出來因應","自營業者貸款","DBR與DSR負債比評估","房地合一稅與土地增值稅","央行選擇性信用管制","房屋淨值與增貸","包租代管","不動產融資諮詢媒合"],"address":{"@type":"PostalAddress","streetAddress":"中正路468號","addressLocality":"中和區","addressRegion":"新北市","postalCode":"23552","addressCountry":"TW"},"geo":{"@type":"GeoCoordinates","latitude":24.9944428,"longitude":121.4900325},"areaServed":[{"@type":"AdministrativeArea","name":"新北市中和區"},{"@type":"AdministrativeArea","name":"新北市永和區"},{"@type":"AdministrativeArea","name":"新北市板橋區"},{"@type":"AdministrativeArea","name":"新北市土城區"},{"@type":"AdministrativeArea","name":"新北市新店區"},{"@type":"AdministrativeArea","name":"新北市新莊區"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"17:00"}],"contactPoint":[{"@type":"ContactPoint","telephone":"+886-2-2249-0517","contactType":"customer service","areaServed":"TW","availableLanguage":["zh-Hant","zh-TW"]},{"@type":"ContactPoint","telephone":"+886-931-087-996","contactType":"customer service","areaServed":"TW","availableLanguage":["zh-Hant","zh-TW"]}],"sameAs":["https://lin.ee/PHIfSoY","https://www.facebook.com/profile.php?id=61590175174751","https://maps.app.goo.gl/WXHqkvNp49uCaGJE7"],"priceRange":"免費諮詢","slogan":"你的資產，值得被銀行看見"}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首頁","item":"https://cx468.com.tw/"},{"@type":"ListItem","position":2,"name":"房貸繳不出來","item":"https://cx468.com.tw/article-mortgage-overdue.html"}]}
@@ -226,6 +223,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script src="consultation-tracking.js" defer></script>
 </head>
 <body>
 <div id="nav" data-theme="light"></div>
@@ -275,7 +273,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <p>原因很重要，但更重要的是：<strong>從現在開始，剩下的選項是什麼。</strong></p>
 
-  <div class="cta-box">
+  <div class="cta-box" data-link-location="page">
     <h3>房貸快繳不出來，先別自己硬撐</h3>
     <p>每拖一個月，聯徵就多一道傷、能用的選項就少一個。把你的負債結構與名下不動產狀況告訴我們，先做一次免費評估，看清楚你還有哪幾條路可以走。</p>
     <a href="https://lin.ee/PHIfSoY">免費評估我的狀況（加 LINE）</a>
@@ -431,7 +429,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <h3>Q：寬限期可以辦幾次？</h3>
   <p>首次申辦寬限期通常為 2-3 年，部分銀行可申請延長至 5 年。寬限期到期後，剩餘本金會集中在更短的年限攤還，月付會比原本還高。寬限期是「暫時喘息」工具，不是長期解方，必須搭配收入回升或其他財務重組計畫使用。</p>
 
-  <div class="cta-box">
+  <div class="cta-box" data-link-location="page">
     <h3>免費諮詢你還有哪些選項</h3>
     <p>每個案子的最佳解都不同。把你的負債結構與不動產資料告訴我們，30 分鐘內回覆初步判斷與可行方案，全程免費，不申請不收費。</p>
     <a href="https://lin.ee/PHIfSoY">加入 LINE 立即評估</a>

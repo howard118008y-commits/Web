@@ -457,6 +457,58 @@ test('Shared fragments cannot inject crawler noindex; host and standalone direct
   assert.equal(env.requests.length, 1, 'Deferred assistant and motion must not invoke external services');
 });
 
+test('Expanded contact pages sanitize GA location/referrer and emit once per independent click', () => {
+  const files = fs.readdirSync(ROOT).filter(f => f.endsWith('.html') && read(f).includes('src="consultation-tracking.js"'));
+  assert.equal(files.length, 13);
+  for (const file of files) {
+    const html = read(file), env = environment(html.replace('</body>', read('footer.html')+'</body>'), {url:'https://cx468.com.tw/'+file+'?phone=PRIVATE#PRIVATE'});
+    Object.defineProperty(env.document, 'referrer', {value:'https://example.com/source?name=PRIVATE#PRIVATE'});
+    for (const s of scripts(html)) {
+      if (!s.src && s.code.includes('function gtag()')) env.run(s.code);
+      assert.ok(s.src || !/gtag\(['"]event['"],\s*['"](?:phone_click|line_click)['"]/.test(s.code), file+' legacy contact handler');
+    }
+    const configs = env.events().filter(e => e[0] === 'config');
+    assert.equal(configs.length, 1, file);
+    assert.equal(configs[0][2].page_location, 'https://cx468.com.tw/'+file);
+    assert.equal(configs[0][2].page_referrer, 'https://example.com/source');
+    env.run(read('consultation-tracking.js')); env.run(read('consultation-tracking.js'));
+    const anchor = env.document.querySelector('a[href="tel:0222490517"]');
+    assert.ok(anchor, file);
+    env.click(anchor); env.click(anchor);
+    const events = env.events().filter(e=>e[0]==='event'&&e[1]==='phone_click');
+    assert.equal(events.length,2,file);
+    assert.ok(!JSON.stringify(env.events()).includes('PRIVATE'), file);
+  }
+});
+test('Confirmed phone allowlist rejects unrelated or decorated numbers; nested click and LINE attribution stay private', () => {
+  const allowed = ['tel:0222490517','tel:02-2249-0517','tel:+886222490517','tel:+886-2-2249-0517','tel:+886 2 2249 0517'];
+  const rejected = ['tel:165','tel:0931087996','tel:0958139786','tel:02224905170','tel:0222490517?name=PRIVATE','tel:0222490517;ext=123','tel:+886222490518'];
+  const env = environment('<html><body><section data-consultation-need="private_debt" data-link-location="article_bottom"><a id="contact"><span>PRIVATE 財務內容</span></a></section></body></html>', {url:'https://cx468.com.tw/test.html?debt=PRIVATE'});
+  env.run(read('consultation-tracking.js')); env.run(read('consultation-tracking.js'));
+  const a=q(env,'#contact');
+  for (const href of allowed.concat(rejected)) {
+    a.setAttribute('href',href); const before=env.events().length;
+    env.click(a.querySelector('span')); env.click(a.querySelector('span'));
+    assert.equal(env.events().length-before,allowed.includes(href)?2:0,href);
+  }
+  a.setAttribute('href','https://lin.ee/PHIfSoY?name=PRIVATE'); env.click(a);
+  const last=env.events().at(-1);
+  assert.equal(last[1],'line_click');
+  assert.deepEqual(JSON.parse(JSON.stringify(last[2])), {page_path:'/test.html',consultation_need:'private_debt',link_location:'article_bottom'});
+  assert.ok(!JSON.stringify(env.events()).includes('PRIVATE'));
+});
+test('Financial FAQ structured answers match visible answers', () => {
+  const normalize = text => text.replace(/\s+/g,'').replace(/[，,]/g,'，');
+  for(const file of ['article-inherited-property-loan.html','article-private-loan-to-bank.html']) {
+    const doc=parseHTML(read(file)).document;
+    const faqs=[...doc.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)).filter(s=>s['@type']==='FAQPage');
+    assert.equal(faqs.length,1,file);
+    doc.querySelectorAll('script,style').forEach(n=>n.remove());
+    const visible=normalize(doc.body.textContent);
+    for(const q of faqs[0].mainEntity) assert.ok(visible.includes(normalize(q.acceptedAnswer.text)), file+' '+q.name);
+  }
+});
+
 (async () => {
   let failed = 0;
   for (const item of cases) {
