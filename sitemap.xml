@@ -36,7 +36,7 @@
   <!-- 主頁 -->
   <url>
     <loc>https://cx468.com.tw/</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -44,7 +44,7 @@
   <!-- 核心服務頁 -->
   <url>
     <loc>https://cx468.com.tw/sale-leaseback.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/second-mortgage.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -160,7 +160,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/about.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -188,7 +188,7 @@
   <!-- 知識專欄 -->
   <url>
     <loc>https://cx468.com.tw/knowledge.html</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -678,13 +678,13 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-second-mortgage-scam.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cx468.com.tw/article-sale-leaseback.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -25,6 +25,14 @@
       .then(function (html) {
         var temp = document.createElement('div');
         temp.innerHTML = html.trim();
+        // 片段獨立開啟時可以 noindex；嵌入正式頁時不可帶入它的索引指令。
+        // 保留宿主頁自己的 robots 設定（例如 tools-lab 的 noindex）。
+        temp.querySelectorAll('meta[name]').forEach(function (meta) {
+          var name = (meta.getAttribute('name') || '').trim().toLowerCase();
+          if (['robots', 'googlebot', 'googlebot-news', 'bingbot'].indexOf(name) !== -1) {
+            meta.remove();
+          }
+        });
         temp.querySelectorAll('script').forEach(function (oldScript) {
           var newScript = document.createElement('script');
           Array.from(oldScript.attributes).forEach(function (attr) {
