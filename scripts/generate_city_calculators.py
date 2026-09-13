@@ -257,7 +257,7 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
-gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
+gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\',{{page_location:location.origin+location.pathname,page_referrer:(function(){{try{{var r=new URL(document.referrer);return r.origin+r.pathname;}}catch(e){{return \'\';}}}})()}});
 </script>
 <script src="consultation-tracking.js" defer></script>
 <script type="application/ld+json">
@@ -635,7 +635,9 @@ buildTierTable();
 </section>
 <div data-include="line-qr"></div>
 <div data-include="footer"></div>
-<div data-include="anti-fraud-modal"></div>'''
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>'''
 
     return html
 

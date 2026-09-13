@@ -459,7 +459,9 @@ test('Shared fragments cannot inject crawler noindex; host and standalone direct
 
 test('Expanded contact pages sanitize GA location/referrer and emit once per independent click', () => {
   const files = fs.readdirSync(ROOT).filter(f => f.endsWith('.html') && read(f).includes('src="consultation-tracking.js"'));
-  assert.equal(files.length, 18);
+  // Inventory guard: bump deliberately when a page gains or loses the tracker, so
+  // every page carrying it is known to meet the sanitising bar asserted below.
+  assert.equal(files.length, 54);
   for (const file of files) {
     const html = read(file), env = environment(html.replace('</body>', read('footer.html')+'</body>'), {url:'https://cx468.com.tw/'+file+'?phone=PRIVATE#PRIVATE'});
     Object.defineProperty(env.document, 'referrer', {value:'https://example.com/source?name=PRIVATE#PRIVATE'});
