@@ -65,8 +65,8 @@
 
   var MENU = [
     { label: '企業貸款', items: [
-      ['企業貸款諮詢', '/corporate-loan.html'],
       ['公司財務健檢', '/corporate-checkup.html'],
+      ['企業貸款諮詢', '/corporate-loan.html'],
       ['開始企業評估', '/intake.html?topic=corporate', 1],
       ['企業相關文章', '/knowledge.html']
     ]},
