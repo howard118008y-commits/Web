@@ -39,6 +39,11 @@
    "date": "2026-09-12",
    "file": null,
    "status": "gate_regex"
+  },
+  "threads:18048378593805125": {
+   "date": "2026-09-13",
+   "file": "article-inherited-house-sell-or-keep.html",
+   "status": "published"
   }
  },
  "published": [
@@ -48,6 +53,13 @@
    "title": "繼承的房子三人共有卡住了怎麼辦？",
    "source": "threads:17904215208329955",
    "source_url": "https://www.threads.com/@cx468468/post/DcuztU6Gye7"
+  },
+  {
+   "date": "2026-09-13",
+   "file": "article-inherited-house-sell-or-keep.html",
+   "title": "爸媽留下的房子，該賣還是留？",
+   "source": "threads:18048378593805125",
+   "source_url": "https://www.threads.com/@cx468468/post/DdLIeaBG3WP"
   }
  ]
 }
