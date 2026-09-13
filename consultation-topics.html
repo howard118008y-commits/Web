@@ -112,7 +112,7 @@ body{padding-top:16px}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
 document.addEventListener('click',function(e){var a=e.target.closest('a.ct-card');if(!a)return;
 gtag('event','consultation_topic_click',{topic:a.dataset.topic||'',page_path:location.pathname});});
 </script>
@@ -133,6 +133,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script src="consultation-tracking.js" defer></script>
 </head>
 <body>
 <div id="nav" data-theme="light"></div>

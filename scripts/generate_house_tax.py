@@ -178,7 +178,8 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\',{{page_location:location.origin+location.pathname,page_referrer:(function(){{try{{var r=new URL(document.referrer);return r.origin+r.pathname;}}catch(e){{return \'\';}}}})()}});</script>
+<script src="consultation-tracking.js" defer></script>
 </head>
 <body>
 <div data-include="nav-tool"></div>
