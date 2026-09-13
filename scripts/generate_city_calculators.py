@@ -259,6 +259,7 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
 gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\');
 </script>
+<script src="consultation-tracking.js" defer></script>
 <script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"WebApplication","name":"{name}地價稅試算","url":"https://cx468.com.tw/{cfg['file']}","description":"{name}地價稅試算，{year}年累進起點地價 {T_fmt} 元，支援自用住宅 2‰ 及一般用地六級累進稅率。","applicationCategory":"FinanceApplication","isAccessibleForFree":true,"inLanguage":"zh-TW","offers":{{"@type":"Offer","price":"0","priceCurrency":"TWD"}},"provider":{{"@type":"Organization","name":"鋮馨租賃有限公司","url":"https://cx468.com.tw"}}}}
 </script>

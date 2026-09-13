@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""最小 CI 檢查：HTML 標籤平衡 + 內部連結完整性。零依賴，只用標準庫。"""
+"""最小 CI 檢查：HTML 標籤平衡 + 內部連結完整性 + 轉換事件追蹤覆蓋率。零依賴，只用標準庫。"""
 import os
 import re
 import sys
@@ -66,6 +66,27 @@ def check_internal_links(path, html, all_files_set):
     return errors
 
 
+CONV_ENTRY_MARKERS = ('lin.ee/', 'data-include="footer"', 'data-include="line-qr"')
+CONV_TRACKERS = ('consultation-tracking.js', "'line_click'", '"line_click"')
+
+
+def check_conversion_tracking(path, html):
+    """載入 GA4 的頁面，只要有 LINE/電話轉換入口，就必須掛上點擊追蹤。
+
+    為什麼要擋：footer.html / line-qr.html 注入的 sticky CTA 與頁尾 LINE、電話連結
+    本身沒有追蹤，全靠宿主頁的監聽器（consultation-tracking.js 或頁內 line_click
+    片段）。2026-09-11 把 sticky CTA 的 inline onclick 換成 data-link-location 後，
+    36 個沒掛監聽器的頁面轉換全部變成 GA4 看不見，隔兩天日報才報出關鍵事件下滑。
+    """
+    if 'G-4FX9LNEL7R' not in html:
+        return []
+    if not any(m in html for m in CONV_ENTRY_MARKERS):
+        return []
+    if any(t in html for t in CONV_TRACKERS):
+        return []
+    return ["  有 GA4 與 LINE/電話轉換入口，卻沒有點擊追蹤（請加 <script src=\"consultation-tracking.js\" defer></script>）"]
+
+
 def main():
     files = find_html_files()
     all_files_set = set(files)
@@ -78,7 +99,7 @@ def main():
             print(f"❌ {rel}: 無法讀取 ({e})")
             total_errors += 1
             continue
-        errs = check_tag_balance(path, html) + check_internal_links(path, html, all_files_set)
+        errs = check_tag_balance(path, html) + check_internal_links(path, html, all_files_set) + check_conversion_tracking(path, html)
         if errs:
             print(f"❌ {rel}")
             for e in errs:
