@@ -122,10 +122,10 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **待辦（本批順帶發現，未動）**：
 1. 三頁行情「自行統計」口徑不一（永和／板橋用 09-09 篩法、三重用 09-14 篩法）→ 三重頁已加口徑註先上；關公用 4G 口徑重跑永和、板橋表後統一。
 2. `yonghe/banqiao/sanchong-property-finance.html` 兩兩 88–91% 同構（媽祖：真 doorway 風險是這三支舊頁，不是新頁）→ 重寫差異化，另開 session。
-3. `b386ad9` 換深藍 hero 後 `.bt-meta`（日期／作者／閱讀時間列）對比 2.2:1，26 頁含 xindian 全站模板問題 → 設計線修 `.bt-hero .bt-meta` 色。
+3. ~~`b386ad9` 換深藍 hero 後 `.bt-meta`~~ ✅ 第三批 `540c425` 已修（31 頁內聯規則）——原文：`.bt-meta`（日期／作者／閱讀時間列）對比 2.2:1，26 頁含 xindian 全站模板問題 → 設計線修 `.bt-hero .bt-meta` 色。
 4. ~~企業兩樞紐無站內連結區~~ ✅ 第二批 `07f9a42` 已加 chips。
 5. 93 頁 LocalBusiness schema geo `24.9944,121.4900` vs 65 頁 meta geo `25.0070;121.4912` 兩組座標並存 → 關公實查中正路 468 號座標後全站統一；schema areaServed 缺三重。
-6. ~~企業健檢擴 5 區~~ ✅ 第二批 `07f9a42` 已上線 → **下一批：服務軸補滿（貸款整合／民間轉銀行各擴區）→ 最後地區軸二胎複製（風險最高、Sir 排第三）**。
+6. ~~企業健檢擴 5 區~~ ✅ 第二批 `07f9a42`；~~服務軸補滿~~ ✅ 第三批 `53f50ff`（未推）→ **下一批：地區軸二胎複製（風險最高、Sir 排第三）**。
 
 **雷（本批踩到）**：研究型 agent「等工兵回報再彙整」＝零交付結束（三次），派工單尾固定加「查到多少先交多少」；平行 session 在建造中途推 `b386ad9` 換皮 138 檔，新頁抄舊 `<style>`＋`data-theme="light"` 會白 nav 壓深藍 hero——動手前 `git log -1` 看有沒有換皮 commit；建造者自驗相似度與媽祖複量差一倍（25.9% vs 48.3%），派工單數字現場量。
 
@@ -144,6 +144,25 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **驗收**：ci_check 172 檔 0；FAQ 同源 138/138；六頁兩兩 difflib 22–30%、section 零命中、FAQ 只剩隱私脊椎句（媽祖裁豁免，機掃要改「先剝脊椎句再比」）；本機 8 頁 200；桌機 hero 目檢 5 頁、手機 390 無整頁橫捲。
 **部署配方**：push 後 curl 五頁 200 → 給 Sir GSC 清單 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` → 三日健檢看 coverageState。已連同 `4c50d13`（Phase 3 配色 144 檔）一起上線。
 **順帶發現、未動**：①首篇＋09-14 六頁 FAQ「＋」雙加號（`.plus::before` 與 literal ＋並存，b386ad9 帶進）→ 一支 sed；②企業系列 6 頁都不掛 ai-bar（樞紐有）→ Sir 裁要不要全系列補；③LocalBusiness schema `areaServed` 缺三重／新莊／土城（待辦 #5 同批）；④媽祖 §7.5 地標已補登素材包 §7；⑤研究型 agent 仍會「等工兵回報」結束，一催即交（memory 已有）；⑥新 memory `feedback_template_bugs_copied_by_builders`。
+
+### 🟢 2026-09-15 矩陣第三批：服務軸補滿 6 頁＋待辦 #3／#10 三件——**已 commit、未推**（`540c425` 機械四項 → `53f50ff` 六頁；Sir 令部署才推；**推的順序：本 repo 先推，再讓 cloud-code-78 的 `pf3-rewrite`（worktree `~/cx468-pf3`，三支 property-finance 重寫＋三支 SLB 4G 換數）rebase 推——它的 chips 連到本批新頁，反過來會 404**）
+
+| 頁 | 骨架（與首篇及彼此互不同構，整頁 ≤30%／FAQ 逐題 ≤49%） | 媽祖 |
+|---|---|---|
+| `zhonghe-debt-consolidation.html` | 整合前的三張單據（信貸繳款單／卡帳單／民間借據）逐欄→整合後一張對帳單 | ✅ 深讀 5 處已修 |
+| `yonghe-debt-consolidation.html` | 兩代同住的家：房在父母名下、債在子女身上，三種家庭配置 | ✅ 6 處已修 |
+| `sanchong-debt-consolidation.html` | 月付吃掉薪水幾成：三情境（不寫百分比門檻） | ✅ 4 處已修 |
+| `banqiao-private-to-bank.html` | 四個卡關點（本金→順位→鑑價→收入） | ✅ 次分區行情全刪 |
+| `yonghe-private-to-bank.html` | 年齡與年期：人的年齡×房的年齡→三種家庭配置 | ✅ 5 處已修 |
+| `sanchong-private-to-bank.html` | 分階段時間線（理清→部分轉→全轉），全頁不寫時長 | ✅ FAQ Q6 換題 |
+
+**同批機械四項（`540c425`，目檢 14/14 過）**：`.bt-hero .bt-meta{color:rgba(242,239,232,.82)}` 31 頁對比 2.37→8.41（C 族內聯，不掛 theme.css）；FAQ 雙加號 9 頁 span 清空；LocalBusiness `areaServed` 73 頁統一 7 區（中和/永和/板橋/土城/新店/新莊/三重）；企業健檢 6 頁 hero 掛 `data-include="ai-bar"`（各頁專屬三題）。
+**行情口徑**：六頁全用 **4G**（素材包檔尾「§6 行情 4G 口徑統一表」；正本 `技術記錄/2026-09-14-行情口徑統一-4G.md`；腳本 `~/.cx468/lvr/lvr_4g_unified.py`，重跑 `cd ~/.cx468/lvr && python3 lvr_4g_unified.py`）。**舊值（三重 43.0／67.0／3.9、永和 48.9／64.1、中和 43.9／60.5、板橋 84.9／44.5／69.9／37.5）判不可重現、全站禁用**；三支 SLB 頁的換數在 pf3-rewrite。115S3 季檔 10/1 出來要九頁一起重跑。
+**媽祖報告**：`行銷產出/技術記錄/2026-09-14-服務軸補滿六頁媽祖把關.md`；兩裁決：人保「保人／連帶保人」、共同債務人「共同借款人」、物保「擔保品提供人」三詞三義各一說法；板橋次分區行情選刪。
+**驗收**：ci_check 178 檔 0；FAQ 同源 144/144；fresh 驗收（內鏈 0 404／JSON-LD 36 區塊可解析／麵包屑 3=3／手機 390 無橫捲／console 0）。
+**部署後**：curl 六頁 200 → GSC 網址審查清單 `https://cx468.com.tw/{zhonghe,yonghe,sanchong}-debt-consolidation.html`、`https://cx468.com.tw/{banqiao,yonghe,sanchong}-private-to-bank.html` → 三日健檢看 coverageState。
+**順帶發現、未動**：①整合／轉銀行系列（含兩首篇）不掛 ai-bar，企業系列現在有——要不要全系列補，Sir 裁；②`area-*.html`、`financing-data.html` 的 `areaServed` 是自己的格式（3 區／5 區）未動；③`lvr-observatory/presale/rental` 本來就有 `.bt-hero .bt-meta` 規則；④待辦 #6 下一批＝地區軸二胎複製（Sir 排第三、風險最高）。
+**雷（本批踩到）**：⚠️ 同一條交接信待辦被兩個 session 同時領走（property-finance 重寫），建造者互相覆寫一輪——派建造者前 `git status -s` 看 M 檔＋`ListAgents` 問對方在做哪條，重疊就讓（memory `feedback_parallel_session_moves_head_mid_diagnosis` 已補）；媽祖 agent 又一次「等工兵回報」零交付結束，一催即交（工兵之後自己也會回報到主對話，別重複派）。
 
 ### 🟢 Phase 3 已上線（`4c50d13`，7c45acf push，theme.css／footer／撥號 CTA 線上驗過）
 
@@ -203,7 +222,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 6. **`cx468-crawl` 一天 12 次要不要降頻**（不花 API 錢，只違「一天不超過三次」原則）。
 7. **PR#5 之外的 GA4 事件設定**：`phone_click`／`line_click` 在 GA4 是否已標關鍵事件、landing page 維度切得出來（memory `feedback_ga4_import_needs_conversion_category`）——站上發得出，後台我看不到。
 8. 名單回電 SOP、合一地政士洽談、企業貸款專案三處不一致（8/14 起未變）。
-10. **矩陣第二批順帶三件待裁**（16:3x 報過、未動）：①首篇 zhonghe＋09-14 六頁 FAQ「＋」雙加號（新 5 頁已修，舊 7 頁一支 sed：把 `<span class="plus">＋</span>` 改空 span）；②企業系列 6 頁都不掛 ai-bar（樞紐有）要不要全系列補；③LocalBusiness `areaServed` 缺三重／新莊／土城（併待辦 #5）。
+10. ~~**矩陣第二批順帶三件待裁**~~ ✅ 三件 `540c425` 全做（Sir 09-14 令「1＋2＋3＋4」）；原文：（16:3x 報過、未動）：①首篇 zhonghe＋09-14 六頁 FAQ「＋」雙加號（新 5 頁已修，舊 7 頁一支 sed：把 `<span class="plus">＋</span>` 改空 span）；②企業系列 6 頁都不掛 ai-bar（樞紐有）要不要全系列補；③LocalBusiness `areaServed` 缺三重／新莊／土城（併待辦 #5）。
 9. ~~0958 上不上官網~~ ✅ 09-14 定：上，稱「經理鄭小姐」。~~企業貸款頁留不留~~ ✅ 留，健檢在前。~~售後回租兩套定義~~ ✅ 統一 A。~~「20 年」主詞~~ ✅ 全站＋跨 repo 已改。
 
 ## 五、本 session（2026-09-14 00:48 → 02:4x）做了什麼
