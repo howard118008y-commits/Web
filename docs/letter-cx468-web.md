@@ -129,6 +129,22 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 **雷（本批踩到）**：研究型 agent「等工兵回報再彙整」＝零交付結束（三次），派工單尾固定加「查到多少先交多少」；平行 session 在建造中途推 `b386ad9` 換皮 138 檔，新頁抄舊 `<style>`＋`data-theme="light"` 會白 nav 壓深藍 hero——動手前 `git log -1` 看有沒有換皮 commit；建造者自驗相似度與媽祖複量差一倍（25.9% vs 48.3%），派工單數字現場量。
 
+### 🟡 2026-09-14 矩陣第二批：企業健檢擴 5 區＋樞紐 chips（待辦 #4、#6）——**本機 commit `07f9a42`，未 push，等 Sir 說「部署」**
+
+| 頁 | 骨架（與首篇「三份文件×三種公司」及彼此互不同構） | 媽祖 |
+|---|---|---|
+| `banqiao-corporate-checkup.html` | 一筆工程款走五站（訂金→期中／保留款→發票時點→入帳／下包→營所稅） | ✅ 2 處小改已修 |
+| `sanchong-corporate-checkup.html` | 健檢報告的五個燈號，各配「三重誰最常亮」 | ✅ 4 處已修 |
+| `xinzhuang-corporate-checkup.html` | 退件通知倒推：說法→原因→文件→送件前 30 天 | ✅ 2 處已修 |
+| `tucheng-corporate-checkup.html` | 整頁只談集中度（一家大客戶佔幾成） | ✅ 2 處已修 |
+| `yonghe-corporate-checkup.html` | 沒有 401 表的公司（小規模營業人／查定課徵軌） | ✅ 一次過 |
+
+**同 commit**：`corporate-checkup.html`／`corporate-loan.html` 加 `.bt-local` chips 區（待辦 #4）；三樞紐（含 zhonghe 首篇）chips 反向連 5 新頁；sitemap +5、llms.txt +5；`img/area/sanchong.jpg`（新北大都會公園）、`xinzhuang.jpg`（副都心）Commons 照＋credits。
+**素材**：素材包升 **v5.2 §7** 指向同夾四檔 `2026-09-14-企業健檢五區素材-{A稅籍與統計,B三重新莊工業,C板橋土城永和工業,D普查110}.md`；媽祖報告 `2026-09-14-企業健檢五區媽祖把關.md`。五頁 584 個數字媽祖全回溯。
+**驗收**：ci_check 172 檔 0；FAQ 同源 138/138；六頁兩兩 difflib 22–30%、section 零命中、FAQ 只剩隱私脊椎句（媽祖裁豁免，機掃要改「先剝脊椎句再比」）；本機 8 頁 200；桌機 hero 目檢 5 頁、手機 390 無整頁橫捲。
+**部署配方**：push 後 curl 五頁 200 → 給 Sir GSC 清單 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` → 三日健檢看 coverageState。⚠️ push 會連同 `4c50d13`（Phase 3 配色 144 檔）一起上線。
+**順帶發現、未動**：①首篇＋09-14 六頁 FAQ「＋」雙加號（`.plus::before` 與 literal ＋並存，b386ad9 帶進）→ 一支 sed；②企業系列 6 頁都不掛 ai-bar（樞紐有）→ Sir 裁要不要全系列補；③LocalBusiness schema `areaServed` 缺三重／新莊／土城（待辦 #5 同批）；④媽祖 §7.5 地標已補登素材包 §7；⑤研究型 agent 仍會「等工兵回報」結束，一催即交（memory 已有）；⑥新 memory `feedback_template_bugs_copied_by_builders`。
+
 ### 🟢 Phase 3 已做（`4c50d13` 本機，待 Sir 說「部署」才 push）
 
 做了什麼見第一節「設計」列。**push 後要驗**：`curl -s https://cx468.com.tw/theme.css | head -c 80`（200 且有內容）、`curl -s https://cx468.com.tw/about.html | grep -c theme.css` → 1、無痕開 about／article-second-mortgage／apply／bad-credit-mortgage 看 footer paper 底與金鈕；然後給 Sir GSC 清單（11 個電話 CTA 頁優先，A 族零文字頁不必送）。
