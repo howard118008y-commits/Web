@@ -33,5 +33,19 @@
     "descurl": "https://commons.wikimedia.org/wiki/File:Mahavira_Hall_of_Chengtian_Temple-02.2025-04-14.jpg",
     "landmark": "承天禪寺",
     "file": "Mahavira_Hall_of_Chengtian_Temple-02.2025-04-14.jpg"
+  },
+  "sanchong": {
+    "author": "Extremes Tim from Taiwan",
+    "license": "CC BY-SA 3.0",
+    "descurl": "https://commons.wikimedia.org/wiki/File:Taipei_Metropolitan_Park.jpg",
+    "landmark": "新北大都會公園",
+    "file": "Taipei_Metropolitan_Park.jpg"
+  },
+  "xinzhuang": {
+    "author": "原間攝影工作室",
+    "license": "Attribution",
+    "descurl": "https://commons.wikimedia.org/wiki/File:Xinzhuang_Sub-city_Center_2022.jpg",
+    "landmark": "新莊副都心",
+    "file": "Xinzhuang_Sub-city_Center_2022.jpg"
   }
 }
