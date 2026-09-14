@@ -1,0 +1,41 @@
+# GSC 網址審查待送清單
+# 建立：2026-09-09（Sir 回報當日配額已滿，順延送出）
+# 送法：GSC 網址審查 → 要求建立索引（每日約 10 條配額）
+# Sitemap 欄只放 sitemap.xml，勿逐條貼
+
+https://cx468.com.tw/sanchong-property-finance.html
+https://cx468.com.tw/xindian-second-mortgage.html
+https://cx468.com.tw/xinzhuang-second-mortgage.html
+https://cx468.com.tw/sanchong-second-mortgage.html
+https://cx468.com.tw/area-banqiao.html
+https://cx468.com.tw/area-tucheng.html
+https://cx468.com.tw/area-yonghe.html
+
+# 送出原因
+# - sanchong/xinzhuang/xindian-second-mortgage：09-09 媽祖複查後改了 title/description 與正文事實（commit 1d4586b）
+# - sanchong-property-finance：內鏈卡片改指三重二胎頁（commit c742d42）
+# - area-banqiao/tucheng/yonghe：補在地內鏈 chips（commit 1d4586b）
+#
+# 尚未列入、之後可能要補送（工程進行中）：
+# - 全站 86 檔「20 年」主詞修正（稽核中）
+# - area-zhonghe.html 補第 11 節在地融資諮詢區塊（起草中）
+
+# ── 2026-09-09 追加（20 年主詞修正 + area-zhonghe 區塊已上線，commit cfd7061）──
+# 91 檔的 meta description／og:description 有異動，理論上全部值得重抓，
+# 但每日配額約 10 條，先送影響最大的：
+https://cx468.com.tw/about.html
+https://cx468.com.tw/zhonghe-property-finance.html
+https://cx468.com.tw/zhonghe-sale-leaseback.html
+https://cx468.com.tw/area-zhonghe.html
+https://cx468.com.tw/property-management.html
+# 其餘 86 檔靠 sitemap lastmod 自然重抓即可（本次已同步更新）
+
+# ── 2026-09-14 追加（commit c919489 + PR #5 41763c8）──
+# 內容／結構有實質變動、值得優先重抓的：
+https://cx468.com.tw/contact.html
+https://cx468.com.tw/corporate-loan.html
+https://cx468.com.tw/article-sale-leaseback-guide.html
+https://cx468.com.tw/article-sale-leaseback-safety.html
+https://cx468.com.tw/about.html
+https://cx468.com.tw/article-inherited-house-sell-or-keep.html
+# 56 頁 schema contactPoint 換電話、36 頁補追蹤：內容未變，靠 sitemap lastmod 自然重抓即可
