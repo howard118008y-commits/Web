@@ -1,7 +1,7 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後更新：2026-09-14 15:1x（Phase 3 配色＋二胎頁撥號 CTA，本機 commit `4c50d13` **未 push，等 Sir 說「部署」**；第一節設計／電話兩列與第三節第一、二順位已改，其餘為 14:3x 版）
+> 最後更新：2026-09-14 15:1x（Phase 3 配色＋二胎頁撥號 CTA，commit `4c50d13`，**16:2x 已 push 上線（7c45acf），線上驗過**；第一節設計／電話兩列與第三節第一、二順位已改，其餘為 14:3x 版）
 > 前次：2026-09-14 14:3x（矩陣 session 收工：六頁線上 200 重驗、GSC 六網址 Sir 已送）
 > 前次：2026-09-14 04:xx 另一 session 的矩陣第一批（第三節 🟢，已改標為已部署）；再前次 2026-09-09。
 > 本次更新原因：Sir 09-14 四項裁示落地（電話兩支為主／售後回租統一 A／企業貸款頁留但健檢在前／文字憲法放鬆改 SEO 為主）＋ 全站配色對齊主頁 Phase 1–2 上線 ＋ 09-11～13 另一 session 153 檔改動全部審過。一、三、四、五節重寫；二節與三節 🟢 保留。
@@ -145,7 +145,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **部署配方**：push 後 curl 五頁 200 → 給 Sir GSC 清單 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` → 三日健檢看 coverageState。已連同 `4c50d13`（Phase 3 配色 144 檔）一起上線。
 **順帶發現、未動**：①首篇＋09-14 六頁 FAQ「＋」雙加號（`.plus::before` 與 literal ＋並存，b386ad9 帶進）→ 一支 sed；②企業系列 6 頁都不掛 ai-bar（樞紐有）→ Sir 裁要不要全系列補；③LocalBusiness schema `areaServed` 缺三重／新莊／土城（待辦 #5 同批）；④媽祖 §7.5 地標已補登素材包 §7；⑤研究型 agent 仍會「等工兵回報」結束，一催即交（memory 已有）；⑥新 memory `feedback_template_bugs_copied_by_builders`。
 
-### 🟢 Phase 3 已做（`4c50d13` 本機，待 Sir 說「部署」才 push）
+### 🟢 Phase 3 已上線（`4c50d13`，7c45acf push，theme.css／footer／撥號 CTA 線上驗過）
 
 做了什麼見第一節「設計」列。**push 後要驗**：`curl -s https://cx468.com.tw/theme.css | head -c 80`（200 且有內容）、`curl -s https://cx468.com.tw/about.html | grep -c theme.css` → 1、無痕開 about／article-second-mortgage／apply／bad-credit-mortgage 看 footer paper 底與金鈕；然後給 Sir GSC 清單（11 個電話 CTA 頁優先，A 族零文字頁不必送）。
 **沒做／順帶發現**：①首頁 `index.html` 自帶 footer 仍列 0931（非 0958 經理鄭小姐）——首頁是 Sir 親審版，未動，等他裁；②全站 40 頁正文仍有「0931-087-996」可見（政策是降次要不是刪，未動）；③`.art-tag` 藍色膠囊（9 頁白底文章）沒改，與主頁不衝突。
@@ -168,7 +168,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 | 段 | 09-09 | 09-14 現況 |
 |---|---|---|
 | 量得到 | 10 頁沒 `phone_click` | ✅ **PR#5 已補 36 盲頁**，真瀏覽器驗過事件進 GA4 |
-| 按撥號 | 電話被 LINE 蓋過 | ✅ `4c50d13`：12 群組加「撥打 02-2249-0517」＋3 頁 0931→02，媽祖 PASS（本機，待 push） |
+| 按撥號 | 電話被 LINE 蓋過 | ✅ `4c50d13` 已上線：12 群組加「撥打 02-2249-0517」＋3 頁 0931→02，媽祖 PASS；GSC 11 頁清單 Sir 16:2x 收到（TG） |
 | Local Pack | GMB 1 則評論 | 🔴 未動，只有 Sir 能做（第四節 #8） |
 | 量表現 | 三支新頁等 2–4 週 | 09-09 上線至今 5 天，還不能判；`~/cx468-ga4-daily/gsc.py`＋GA4 `phone_click` 依 landing page |
 | 台北 12 區 | 不建議 | 不變 |
@@ -227,7 +227,7 @@ PR#3／#4 合併內容全審：合規禁語全是闢謠語境、FAQ 同源 127/1
 
 ## 六、本 session（2026-09-14 14:3x → 15:1x）做了什麼
 
-Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完、閘門全綠、**本機 commit `4c50d13` 未 push**。
+Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完、閘門全綠、Sir 16:2x 說「部署」→ push `7c45acf`（連帶平行 session 的矩陣第二批 07f9a42 一起上線，已向 Sir 報備、他 ok）。
 - Phase 3：見第一節「設計」列。目檢：乾淨樹 staging 桌機 1280／手機 390，footer 8 頁、hero＋CTA 16 頁（截圖在 session scratchpad，已隨 session 消失；重拍照第二節 headless 管線）。
 - 撥號 CTA：偵察 agent 普查 17 頁 → 12 個 LINE-only 群組；媽祖 11/11 PASS。
 - 順手修：`gen_radar_v4.py` 在 `65b192b` 被貼進未雙寫大括號的 JS 物件 → f-string SyntaxError，隔天 `update_indicators` 排程會炸；已修並重生產物（diff 只剩 head 兩行＋時間戳）。memory `feedback_python_compat_silent_failure` 追加一段。
