@@ -1,0 +1,24 @@
+/* theme.css — 全站配色對齊主頁 Phase 3（2026-09-14）
+   對象：載 style.css 的 A 族頁（文章／hub／表單／法務／工具，67 頁）。掛在 </head> 前、各頁內聯 <style> 之後，
+   同特異性靠順序勝出；零文字變動。C 族 Better 版型頁（bt-*）不掛本檔（Phase 2 已換皮）。
+   主頁 token：森林藍 #1B2F4A、深 #12213A、hero 頂 #1E3556、金 #C8945A（hover #E0B685）、
+   cream #F2EFE8、paper #F7F5F0、線 #E2DED4；標題 Noto Serif TC 900；內文 Noto Sans TC。
+   生成頁 cx_radar_v4_demo.html 由 scripts/gen_radar_v4.py 模板掛本檔——改模板不改產物。 */
+
+/* 1. 內文字體（style.css 的 body 已同步改；這行保險各頁自訂的 body 規則） */
+body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif}
+
+/* 2. 標題：Noto Serif TC 900（主頁 h1/h2 規格）。列出各頁實際用的 h1/h2 選擇器，同特異性靠順序蓋過內聯 600/700 */
+h1,h2,.art-hero h1,.art-title,.hero-h1,.hub-h1,.policy-hero-h1,.ct-hero h1,.rv4-hero h1,.hero-title,.page-h1,.cta-h2,.art-body h2,.cta-box h3{font-family:'Noto Serif TC','Songti TC',serif;font-weight:900;letter-spacing:.01em}
+
+/* 3. hero 深底：與 Phase 2 的 .bt-hero 同一條漸層。只動 background-color/-image；A 族 hero 沒有 url() 背景（已掃）。
+      .art-hero 有兩型：42 頁自帶深底＋h1、11 頁白底＋h1.art-title（眉標／麵包屑都是深字）——後者不能上深底，用 :has() 排除；
+      不支援 :has() 的舊瀏覽器忽略整條規則，維持原本 #12213A，無害。 */
+.art-hero:not(:has(.art-title)),.hero,.hub-hero,.page-hero,.policy-hero,.ct-hero{background-color:#1B2F4A;background-image:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%)}
+.cta-box,.cta-strip,.cta-section{background-color:#1B2F4A}
+
+/* 4. CTA 按鈕：主鈕金底深藍字、圓角 10（主頁 .btn-gold）；幽靈鈕 cream 底 ink 字（Phase 2 的 .bt-btn-ghost） */
+.cta-box a,.btn-green,.btn-line,.btn-green-lg,.btn-purple,.btn-purple-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-gold,.btn-gold-lg,.btn-white,.cta-line,.cta-main-btn{background:#C8945A;color:#12213A;border-color:transparent;border-radius:10px;font-weight:700;letter-spacing:.01em}
+.cta-box a:hover,.btn-green:hover,.btn-line:hover,.btn-green-lg:hover,.btn-purple:hover,.btn-purple-lg:hover,.btn-blue:hover,.btn-blue-lg:hover,.btn-teal:hover,.btn-teal-lg:hover,.btn-gold:hover,.btn-gold-lg:hover,.btn-white:hover,.cta-line:hover,.cta-main-btn:hover{background:#E0B685;color:#12213A}
+.cta-box a.cta-secondary,.cta-box a.cta-tel,.btn-ghost-w,.btn-outline-w,.cta-tel{background:#F2EFE8;color:#1B2F4A;border:1px solid transparent;border-radius:10px;font-weight:700;letter-spacing:.01em}
+.cta-box a.cta-secondary:hover,.cta-box a.cta-tel:hover,.btn-ghost-w:hover,.btn-outline-w:hover,.cta-tel:hover{background:#fff;color:#1B2F4A}

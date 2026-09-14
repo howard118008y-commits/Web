@@ -125,13 +125,13 @@ html = f'''<!--
 </script>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{{page_location:location.origin+location.pathname,page_referrer:(function(){{try{{var r=new URL(document.referrer);return r.origin+r.pathname;}}catch(e){{return '';}}}})()}});
 </script>
 
 <style>
@@ -206,6 +206,7 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 .rv4-cta a.w{{background:#fff;color:#141414}}
 .rv4-cta a.l{{background:#06C755;color:#fff}}
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 
