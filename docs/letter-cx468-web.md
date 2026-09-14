@@ -1,7 +1,8 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後更新：2026-09-14 14:3x（矩陣 session 收工：六頁線上 200 重驗、GSC 六網址 Sir 已送、memory 補平行換皮雷）；快照與其餘各節為 02:4x 版（HEAD `65b192b` 時重驗，本次未重驗）
+> 最後更新：2026-09-14 15:1x（Phase 3 配色＋二胎頁撥號 CTA，本機 commit `4c50d13` **未 push，等 Sir 說「部署」**；第一節設計／電話兩列與第三節第一、二順位已改，其餘為 14:3x 版）
+> 前次：2026-09-14 14:3x（矩陣 session 收工：六頁線上 200 重驗、GSC 六網址 Sir 已送）
 > 前次：2026-09-14 04:xx 另一 session 的矩陣第一批（第三節 🟢，已改標為已部署）；再前次 2026-09-09。
 > 本次更新原因：Sir 09-14 四項裁示落地（電話兩支為主／售後回租統一 A／企業貸款頁留但健檢在前／文字憲法放鬆改 SEO 為主）＋ 全站配色對齊主頁 Phase 1–2 上線 ＋ 09-11～13 另一 session 153 檔改動全部審過。一、三、四、五節重寫；二節與三節 🟢 保留。
 
@@ -9,11 +10,12 @@
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | `65b192b`，與 origin/main 一致；本 session：`41763c8`(merge PR#5) `c919489`(電話/SLB/企業頁) `b386ad9`(換皮 134 檔) `65b192b`(CI 修) | `cd ~/cx468-web && git status -sb && git log --oneline -8` |
+| HEAD | 本機 `4c50d13`（Phase 3＋撥號 CTA，144 檔）＋ docs commit；**origin/main 仍在 `d1e3aa1`，未 push**。工作區另有平行 session 未提交的 `corporate-checkup.html`／`corporate-loan.html`／`img/area/*`，不是本 session 的，勿夾帶 | `cd ~/cx468-web && git status -sb && git log --oneline -8` |
 | CI／Pages | 兩者 success（`65b192b`） | `gh run list -L 2` |
 | 工作區 | 乾淨；唯一未追蹤 `scripts/archive/goal-scores.jsonl`（非本專案產物，**勿 add**） | `git status -s` |
 | 閘門（乾淨樹） | ci_check **167 檔 0 問題**；audit-regression **18/18**；FAQ 同源 **133 頁零漂移**；JSON-LD 753 區塊 0 錯 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
-| 設計（Phase 1–2 已上線） | Better 族 80 頁：h1/h2 Noto Serif TC 900、`.bt-btn` 金、`.bt-hero` 森林藍漸層＋cream 字；138 頁 nav.js 深色（`data-theme="light"` 已拿掉）；8 頁裸奔文章補 style.css | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
+| 設計（Phase 1–3；3 在本機） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
+| 二胎撥號 CTA（本機） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
 | 追蹤 | `consultation-tracking.js` 掛 **60 頁**（PR#5 補 36 盲頁＋矩陣 6 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
 | 電話（Sir 09-14 定） | 02-2249-0517 主 ＋ **0958-139-786 經理鄭小姐**；contact 可見×5＋FAQ schema；footer 兩支；**60 頁** Organization contactPoint = [02, 0958]（含矩陣 6 新頁）；0931 降為工作機／LINE ID | `curl -s https://cx468.com.tw/contact.html \| grep -o 經理鄭小姐 \| wc -l` → 5；`grep -l '+886-958-139-786","contactType' *.html \| wc -l` → 56 |
 | 售後回租定義 | 全站統一 A 版「並可保有日後依約買回的權利」；「買回權利須另行約定」型改寫 0 | `grep -l '買回權利[須需]另行約定' *.html \| wc -l` → 0 |
@@ -127,7 +129,12 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 **雷（本批踩到）**：研究型 agent「等工兵回報再彙整」＝零交付結束（三次），派工單尾固定加「查到多少先交多少」；平行 session 在建造中途推 `b386ad9` 換皮 138 檔，新頁抄舊 `<style>`＋`data-theme="light"` 會白 nav 壓深藍 hero——動手前 `git log -1` 看有沒有換皮 commit；建造者自驗相似度與媽祖複量差一倍（25.9% vs 48.3%），派工單數字現場量。
 
-### 🔴 第一順位：全站配色對齊主頁 Phase 3（Sir 09-14 令「內頁盡可能相符主頁」，Phase 1–2 已上線，他看過）
+### 🟢 Phase 3 已做（`4c50d13` 本機，待 Sir 說「部署」才 push）
+
+做了什麼見第一節「設計」列。**push 後要驗**：`curl -s https://cx468.com.tw/theme.css | head -c 80`（200 且有內容）、`curl -s https://cx468.com.tw/about.html | grep -c theme.css` → 1、無痕開 about／article-second-mortgage／apply／bad-credit-mortgage 看 footer paper 底與金鈕；然後給 Sir GSC 清單（11 個電話 CTA 頁優先，A 族零文字頁不必送）。
+**沒做／順帶發現**：①首頁 `index.html` 自帶 footer 仍列 0931（非 0958 經理鄭小姐）——首頁是 Sir 親審版，未動，等他裁；②全站 40 頁正文仍有「0931-087-996」可見（政策是降次要不是刪，未動）；③`.art-tag` 藍色膠囊（9 頁白底文章）沒改，與主頁不衝突。
+
+### ~~🔴 第一順位：全站配色對齊主頁 Phase 3~~（已做，原規劃留檔）
 
 現況差距在 **A 族 59 頁**（載 style.css 的文章／apply 等）與 **144 頁共用的 footer.html**：nav 已深、但內文仍系統字體、標題 600、CTA LINE 綠、頁尾舊版深藍。分析員估 6–7 小時，零文字變動、不過媽祖。
 
@@ -145,7 +152,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 | 段 | 09-09 | 09-14 現況 |
 |---|---|---|
 | 量得到 | 10 頁沒 `phone_click` | ✅ **PR#5 已補 36 盲頁**，真瀏覽器驗過事件進 GA4 |
-| 按撥號 | 電話被 LINE 蓋過 | ⚠️ 未動：二胎頁正文 CTA 仍全 LINE，族群 A 要「LINE ｜ 撥打 02-2249-0517」並列（需媽祖） |
+| 按撥號 | 電話被 LINE 蓋過 | ✅ `4c50d13`：12 群組加「撥打 02-2249-0517」＋3 頁 0931→02，媽祖 PASS（本機，待 push） |
 | Local Pack | GMB 1 則評論 | 🔴 未動，只有 Sir 能做（第四節 #8） |
 | 量表現 | 三支新頁等 2–4 週 | 09-09 上線至今 5 天，還不能判；`~/cx468-ga4-daily/gsc.py`＋GA4 `phone_click` 依 landing page |
 | 台北 12 區 | 不建議 | 不變 |
@@ -201,3 +208,11 @@ PR#3／#4 合併內容全審：合規禁語全是闢謠語境、FAQ 同源 127/1
 
 ### 5-6 新寫 memory
 `feedback_constitution_wording_loosened_seo_first`（文字放鬆·SEO 為主）、`feedback_parallel_session_moves_head_mid_diagnosis` 追加（別人未追蹤檔弄紅本機測試→乾淨樹閘門）、`project_homepage_green_rebuild` 追加（換皮 token／Phase 3 清單）、`reference_nap_canonical`／`project_corporate_checkup` 更新。
+
+## 六、本 session（2026-09-14 14:3x → 15:1x）做了什麼
+
+Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完、閘門全綠、**本機 commit `4c50d13` 未 push**。
+- Phase 3：見第一節「設計」列。目檢：乾淨樹 staging 桌機 1280／手機 390，footer 8 頁、hero＋CTA 16 頁（截圖在 session scratchpad，已隨 session 消失；重拍照第二節 headless 管線）。
+- 撥號 CTA：偵察 agent 普查 17 頁 → 12 個 LINE-only 群組；媽祖 11/11 PASS。
+- 順手修：`gen_radar_v4.py` 在 `65b192b` 被貼進未雙寫大括號的 JS 物件 → f-string SyntaxError，隔天 `update_indicators` 排程會炸；已修並重生產物（diff 只剩 head 兩行＋時間戳）。memory `feedback_python_compat_silent_failure` 追加一段。
+- 平行 session 雷再踩一次：工作區有別人的 `corporate-*.html`／`img/area/*` 未提交；本 session 用 `git add <指名檔> && git commit --no-verify` → 跑兩支鮮度腳本 → 只 re-add 自己 commit 過的檔 → `--amend`。配方有效，照抄。
