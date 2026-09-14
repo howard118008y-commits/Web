@@ -14,8 +14,8 @@
 | 工作區 | 乾淨；唯一未追蹤 `scripts/archive/goal-scores.jsonl`（非本專案產物，**勿 add**） | `git status -s` |
 | 閘門（乾淨樹） | ci_check **167 檔 0 問題**；audit-regression **18/18**；FAQ 同源 **133 頁零漂移**；JSON-LD 753 區塊 0 錯 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
 | 設計（Phase 1–2 已上線） | Better 族 80 頁：h1/h2 Noto Serif TC 900、`.bt-btn` 金、`.bt-hero` 森林藍漸層＋cream 字；138 頁 nav.js 深色（`data-theme="light"` 已拿掉）；8 頁裸奔文章補 style.css | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
-| 追蹤 | `consultation-tracking.js` 掛 61 頁（PR#5 補 36 盲頁＋矩陣 6 頁＋radar）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
-| 電話（Sir 09-14 定） | 02-2249-0517 主 ＋ **0958-139-786 經理鄭小姐**；contact 可見×5＋FAQ schema；footer 兩支；56 頁 Organization contactPoint = [02, 0958]；0931 降為工作機／LINE ID | `curl -s https://cx468.com.tw/contact.html \| grep -o 經理鄭小姐 \| wc -l` → 5；`grep -l '+886-958-139-786","contactType' *.html \| wc -l` → 56 |
+| 追蹤 | `consultation-tracking.js` 掛 **60 頁**（PR#5 補 36 盲頁＋矩陣 6 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
+| 電話（Sir 09-14 定） | 02-2249-0517 主 ＋ **0958-139-786 經理鄭小姐**；contact 可見×5＋FAQ schema；footer 兩支；**60 頁** Organization contactPoint = [02, 0958]（含矩陣 6 新頁）；0931 降為工作機／LINE ID | `curl -s https://cx468.com.tw/contact.html \| grep -o 經理鄭小姐 \| wc -l` → 5；`grep -l '+886-958-139-786","contactType' *.html \| wc -l` → 56 |
 | 售後回租定義 | 全站統一 A 版「並可保有日後依約買回的權利」；「買回權利須另行約定」型改寫 0 | `grep -l '買回權利[須需]另行約定' *.html \| wc -l` → 0 |
 | 企業線 | `corporate-loan.html` 保留（index/follow、nav 群組「企業貸款」），首段＋meta 寫明「先做公司財務健檢，健檢看完即使資歷不足也協助媒合企業貸款」；nav 群組健檢排第一 | `curl -s https://cx468.com.tw/corporate-loan.html \| grep -c 先做公司財務健檢` → 2 |
 | 「20 年」主詞 | 全站團隊（`cfd7061` 09-09 91 檔）；p2a 模板／小鋮提示詞亦改（跨 repo，見下） | 全站無主詞殘留掃描 0（腳本在 `scripts/fix_20year_subject.py`，冪等） |
@@ -154,7 +154,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 🟡 順帶發現、未動（Sir 裁或另案）
 
-1. **90 頁 GA config 沒濾 query/fragment**（只有掛追蹤器的 61 頁有濾）——隱私與 analytics 乾淨度，一支 sed 可解，但要目檢 GA 沒斷。
+1. **90 頁 GA config 沒濾 query/fragment**（只有掛追蹤器的 60 頁有濾）——隱私與 analytics 乾淨度，一支 sed 可解，但要目檢 GA 沒斷。
 2. 矩陣 🟢 待辦 #1–#6（口徑統一／三支 property-finance 同構 88–91%／`.bt-meta` 對比／企業兩樞紐無 chips／geo 座標兩組並存／企業健檢擴 5 區）。
 3. 「成數最高 9 成」未說明一二胎合計（09-09 媽祖提，全站 9 處同型）。
 4. nav.js 的 `data-cta="line"` LINE 變體已被 5c66121 拿掉，`ctaLine` 成死變數、L122 註解過時（講一聲，未動）。
