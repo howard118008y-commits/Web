@@ -1,7 +1,8 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`。
-> 最後更新：2026-09-09 03:0x（HEAD `1d4586b`，本 session 三筆 commit 皆已 push、線上實測 200）
+> 最後更新：2026-09-14 04:xx（矩陣擴張第一批 6 頁部署，見第三節 🟢；其餘節仍為 09-09 版）
+> 前次：2026-09-09 03:0x（HEAD `1d4586b`，本 session 三筆 commit 皆已 push、線上實測 200）
 > 本次更新原因：**Sir 09-09 定調「SEO 成敗看有沒有電話來的客戶」**——第三節優先順序整節依此重寫（產頁降級，量得到電話與 GMB 升為第一）；一節 HEAD／線上數字重驗；五節重寫。
 > ⚠️ 二節與三節🟠🟡小節為 9/5 版保留，**本次未重驗**。
 
@@ -91,6 +92,39 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 `~/.cx468/pending_reviews.json` → 三日健檢檢查4 自動倒數，逾期推 Telegram。**有硬截止又沒系統在盯的任務一律登記。**
 
 ## 三、未竟任務
+
+### 🟢 2026-09-14 矩陣擴張第一批（服務軸 6 頁）——已過媽祖，待 Sir 說「部署」
+
+**Sir 09-14 拍板**：矩陣「全做」，順序 ①服務軸 → ③企業健檢 → ②地區軸二胎複製。本批＝①的三條新系列首篇＋售後回租擴 3 支。
+
+| 頁 | 系列 | 骨架（反 doorway 各不同構） | 媽祖 |
+|---|---|---|---|
+| `yonghe-sale-leaseback.html` | 售後回租擴 | 時間軸：房老→人老→三種處境→估價限制→都更等待 | ✅ |
+| `banqiao-sale-leaseback.html` | 售後回租擴 | 三欄屋主對照：舊城老公寓／新板·江翠大樓／浮洲 | ✅ |
+| `sanchong-sale-leaseback.html` | 售後回租擴 | 兩張地圖（水／重建）→ 2×2 落格 | ✅（hero 用 `img/gen-sanchong.jpg` AI 圖＋「情境示意圖」，Sir 未裁是否換實景） |
+| `banqiao-debt-consolidation.html` | 貸款整合**首篇** | 一個月的扣款日曆 | ✅（一次過） |
+| `zhonghe-private-to-bank.html` | 民間轉銀行**首篇** | 帳本兩欄（左：付出去的／右：本金還剩） | ✅ |
+| `zhonghe-corporate-checkup.html` | 企業健檢＋媒合**首篇** | 三份文件 × 三種中和公司 | ✅ |
+
+**部署配方**（Sir 說「部署」後）：`python3 <scratchpad>/deploy_matrix_batch1.py`（sitemap 六筆、llms.txt 六行、`sale-leaseback / debt-consolidation / private-to-bank` 三樞紐 chips 反向內鏈；每步 assert，已乾跑）→ `python3 scripts/ci_check.py` → `git add` 指名 11 檔（6 新頁＋sitemap.xml＋llms.txt＋3 樞紐）→ `git fetch && git rebase origin/main` → push → curl 六頁 200 → 給 Sir GSC 清單：
+`https://cx468.com.tw/{yonghe,banqiao,sanchong}-sale-leaseback.html`、`https://cx468.com.tw/banqiao-debt-consolidation.html`、`https://cx468.com.tw/zhonghe-private-to-bank.html`、`https://cx468.com.tw/zhonghe-corporate-checkup.html`。
+
+**素材正本**：`行銷產出/技術記錄/2026-09-09-矩陣擴張素材包.md` v5.1（永和／板橋／三重／中和／板橋整合，全官方出處＋不可寫清單；後續各區擴頁只准用這裡的數字）。
+
+**本批立下的定例（已寫 memory `project_local_page_series_rules`）**：合規脊椎句豁免相似度但子段要量；同系列共用 FAQ 題只留一頁；「不是投資方」禁寫（老闆 07-06 鋮馨會自任承買方）；官方引句內「約」可留、引句外去「約」成確數＝失真；⭐示意例不代入成數／利率／核貸機率；⭐兩機關兩期別不合成一句；⭐隱私／保存期只准逐字抄主頁（企業頁「180 天自動清除」被退，正本「結案後 6 個月內刪除」）；貸款類頁「最低」零出現不開白名單；FAQ 標題禁裸詞（rich result 會摘）；通用型 FAQ 每頁上限三題。
+
+**追蹤**：六頁都掛 `consultation-tracking.js`（不用舊 inline 監聽，避免雙重上報），CTA 帶 `data-link-location`；貸款類三頁 `.bt-btns` 掛 `data-consultation-need`（private_debt／private_to_bank／corporate_loan），`pageNeeds` 表不必改。
+
+**待辦（本批順帶發現，未動）**：
+1. 三頁行情「自行統計」口徑不一（永和／板橋用 09-09 篩法、三重用 09-14 篩法）→ 三重頁已加口徑註先上；關公用 4G 口徑重跑永和、板橋表後統一。
+2. `yonghe/banqiao/sanchong-property-finance.html` 兩兩 88–91% 同構（媽祖：真 doorway 風險是這三支舊頁，不是新頁）→ 重寫差異化，另開 session。
+3. `b386ad9` 換深藍 hero 後 `.bt-meta`（日期／作者／閱讀時間列）對比 2.2:1，26 頁含 xindian 全站模板問題 → 設計線修 `.bt-hero .bt-meta` 色。
+4. 企業兩樞紐 `corporate-checkup.html`／`corporate-loan.html` 無任何站內連結區（廣告落地頁式）→ 加 chips 區才能反向連在地頁。
+5. 93 頁 LocalBusiness schema geo `24.9944,121.4900` vs 65 頁 meta geo `25.0070;121.4912` 兩組座標並存 → 關公實查中正路 468 號座標後全站統一；schema areaServed 缺三重。
+6. 下一批：企業健檢擴 5 區（板橋／三重／新莊／土城／永和；素材包 §5H/5J 方法照抄，各區工業區／工廠數要重查）→ 服務軸補滿 → 最後地區軸二胎複製（風險最高、Sir 排第三）。
+
+**雷（本批踩到）**：研究型 agent「等工兵回報再彙整」＝零交付結束（三次），派工單尾固定加「查到多少先交多少」；平行 session 在建造中途推 `b386ad9` 換皮 138 檔，新頁抄舊 `<style>`＋`data-theme="light"` 會白 nav 壓深藍 hero——動手前 `git log -1` 看有沒有換皮 commit；建造者自驗相似度與媽祖複量差一倍（25.9% vs 48.3%），派工單數字現場量。
+
 
 ### 🔴 第一順位：讓 SEO 生出「打電話進來的客戶」（Sir 2026-09-09 定調）
 
