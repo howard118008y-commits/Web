@@ -131,7 +131,7 @@ html = f'''<!--
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
 </script>
 
 <style>
@@ -269,6 +269,7 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 
 <div data-include="footer"></div>
 <script src="include.js" defer></script>
+<script src="consultation-tracking.js" defer></script>
 <script src="cx-line-modal.js" defer></script>
 <script src="cx-radar-v4.js" defer></script>
 </body>
