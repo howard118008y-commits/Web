@@ -6,17 +6,17 @@
 > 前次：2026-09-14 04:xx 另一 session 的矩陣第一批（第三節 🟢，已改標為已部署）；再前次 2026-09-09。
 > 本次更新原因：Sir 09-14 四項裁示落地（電話兩支為主／售後回租統一 A／企業貸款頁留但健檢在前／文字憲法放鬆改 SEO 為主）＋ 全站配色對齊主頁 Phase 1–2 上線 ＋ 09-11～13 另一 session 153 檔改動全部審過。一、三、四、五節重寫；二節與三節 🟢 保留。
 
-## 一、當前狀態快照（2026-09-14 02:4x 重驗，每項附指令）
+## 一、當前狀態快照（2026-09-14 16:3x 重驗，每項附指令）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | 本機 `4c50d13`（Phase 3＋撥號 CTA，144 檔）＋ docs commit；**origin/main 仍在 `d1e3aa1`，未 push**。工作區另有平行 session 未提交的 `corporate-checkup.html`／`corporate-loan.html`／`img/area/*`，不是本 session 的，勿夾帶 | `cd ~/cx468-web && git status -sb && git log --oneline -8` |
-| CI／Pages | 兩者 success（`65b192b`） | `gh run list -L 2` |
+| HEAD | `1bfd676`＝origin/main（已 push，Pages success）；今日鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批（企業健檢擴 5 區＋樞紐 chips）→ docs ×3 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
+| CI／Pages | 兩者 success（`1bfd676`） | `gh run list -L 2` |
 | 工作區 | 乾淨；唯一未追蹤 `scripts/archive/goal-scores.jsonl`（非本專案產物，**勿 add**） | `git status -s` |
-| 閘門（乾淨樹） | ci_check **167 檔 0 問題**；audit-regression **18/18**；FAQ 同源 **133 頁零漂移**；JSON-LD 753 區塊 0 錯 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
-| 設計（Phase 1–3；3 在本機） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
-| 二胎撥號 CTA（本機） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
-| 追蹤 | `consultation-tracking.js` 掛 **60 頁**（PR#5 補 36 盲頁＋矩陣 6 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
+| 閘門（乾淨樹） | ci_check **172 檔 0 問題**；audit-regression **18/18**；FAQ 同源 **138 頁零漂移**；JSON-LD 753 區塊 0 錯 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
+| 設計（Phase 1–3 全上線） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
+| 二胎撥號 CTA（已上線） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
+| 追蹤 | `consultation-tracking.js` 掛 **65 頁**（PR#5 補 36 盲頁＋矩陣 6＋5 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
 | 電話（Sir 09-14 定） | 02-2249-0517 主 ＋ **0958-139-786 經理鄭小姐**；contact 可見×5＋FAQ schema；footer 兩支；**60 頁** Organization contactPoint = [02, 0958]（含矩陣 6 新頁）；0931 降為工作機／LINE ID | `curl -s https://cx468.com.tw/contact.html \| grep -o 經理鄭小姐 \| wc -l` → 5；`grep -l '+886-958-139-786","contactType' *.html \| wc -l` → 56 |
 | 售後回租定義 | 全站統一 A 版「並可保有日後依約買回的權利」；「買回權利須另行約定」型改寫 0 | `grep -l '買回權利[須需]另行約定' *.html \| wc -l` → 0 |
 | 企業線 | `corporate-loan.html` 保留（index/follow、nav 群組「企業貸款」），首段＋meta 寫明「先做公司財務健檢，健檢看完即使資歷不足也協助媒合企業貸款」；nav 群組健檢排第一 | `curl -s https://cx468.com.tw/corporate-loan.html \| grep -c 先做公司財務健檢` → 2 |
@@ -123,9 +123,9 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 1. 三頁行情「自行統計」口徑不一（永和／板橋用 09-09 篩法、三重用 09-14 篩法）→ 三重頁已加口徑註先上；關公用 4G 口徑重跑永和、板橋表後統一。
 2. `yonghe/banqiao/sanchong-property-finance.html` 兩兩 88–91% 同構（媽祖：真 doorway 風險是這三支舊頁，不是新頁）→ 重寫差異化，另開 session。
 3. `b386ad9` 換深藍 hero 後 `.bt-meta`（日期／作者／閱讀時間列）對比 2.2:1，26 頁含 xindian 全站模板問題 → 設計線修 `.bt-hero .bt-meta` 色。
-4. 企業兩樞紐 `corporate-checkup.html`／`corporate-loan.html` 無任何站內連結區（廣告落地頁式）→ 加 chips 區才能反向連在地頁。
+4. ~~企業兩樞紐無站內連結區~~ ✅ 第二批 `07f9a42` 已加 chips。
 5. 93 頁 LocalBusiness schema geo `24.9944,121.4900` vs 65 頁 meta geo `25.0070;121.4912` 兩組座標並存 → 關公實查中正路 468 號座標後全站統一；schema areaServed 缺三重。
-6. 下一批：企業健檢擴 5 區（板橋／三重／新莊／土城／永和；素材包 §5H/5J 方法照抄，各區工業區／工廠數要重查）→ 服務軸補滿 → 最後地區軸二胎複製（風險最高、Sir 排第三）。
+6. ~~企業健檢擴 5 區~~ ✅ 第二批 `07f9a42` 已上線 → **下一批：服務軸補滿（貸款整合／民間轉銀行各擴區）→ 最後地區軸二胎複製（風險最高、Sir 排第三）**。
 
 **雷（本批踩到）**：研究型 agent「等工兵回報再彙整」＝零交付結束（三次），派工單尾固定加「查到多少先交多少」；平行 session 在建造中途推 `b386ad9` 換皮 138 檔，新頁抄舊 `<style>`＋`data-theme="light"` 會白 nav 壓深藍 hero——動手前 `git log -1` 看有沒有換皮 commit；建造者自驗相似度與媽祖複量差一倍（25.9% vs 48.3%），派工單數字現場量。
 
@@ -197,12 +197,13 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 1. 🔴 **GMB 評論 1→20**（第二順位③，只有 Sir 能做）：「新北 房屋二胎」Local Pack 第 1 名 17 則、第 2/3 名 0 則照樣上榜。⛔ 商家名不塞關鍵字、類別維持「不動產管理服務」。
 2. 🔴 **Telegram 三日健檢的 🔴 要有人接**：09-08 推播列了「Meta spend_cap 決策逾期 18 天」「行銷週報檢查失效（launchd 無 iCloud 權限）」「銀行條文存證複查」——本 session 只修了 p2a 那條。
-3. **GSC 催收**：`docs/2026-09-09-GSC待送清單-額度滿順延.txt`（12＋6 條，09-14 已追加 contact／corporate-loan／sale-leaseback-guide 等）；矩陣 6 頁清單在第三節 🟢——**Sir 09-14 14:2x 已逐一送「網址審查→要求建立索引」**，下一步是三日健檢看 coverageState＋lastCrawlTime（memory `feedback_indexed_but_stale_crawl`），別再重送。Sitemap 欄只放 sitemap.xml。
+3. **GSC 催收**：`docs/2026-09-09-GSC待送清單-額度滿順延.txt`（12＋6 條，09-14 已追加 contact／corporate-loan／sale-leaseback-guide 等）；矩陣 6 頁清單在第三節 🟢——**Sir 09-14 14:2x 已逐一送「網址審查→要求建立索引」**；**第二批 5 頁 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` 16:2x 上線，等 Sir 送**，下一步是三日健檢看 coverageState＋lastCrawlTime（memory `feedback_indexed_but_stale_crawl`），別再重送。Sitemap 欄只放 sitemap.xml。
 4. **Anthropic 帳務**：auto-reload 未開、無 Admin key、9 服務共用一把 key（09-08 起未變）。
 5. **配圖要不要換真人照片**：三重／新莊／三重售後回租用 AI 生成圖（memory `project_photo_library`：老闆偏好真人）。未擋上線。
 6. **`cx468-crawl` 一天 12 次要不要降頻**（不花 API 錢，只違「一天不超過三次」原則）。
 7. **PR#5 之外的 GA4 事件設定**：`phone_click`／`line_click` 在 GA4 是否已標關鍵事件、landing page 維度切得出來（memory `feedback_ga4_import_needs_conversion_category`）——站上發得出，後台我看不到。
 8. 名單回電 SOP、合一地政士洽談、企業貸款專案三處不一致（8/14 起未變）。
+10. **矩陣第二批順帶三件待裁**（16:3x 報過、未動）：①首篇 zhonghe＋09-14 六頁 FAQ「＋」雙加號（新 5 頁已修，舊 7 頁一支 sed：把 `<span class="plus">＋</span>` 改空 span）；②企業系列 6 頁都不掛 ai-bar（樞紐有）要不要全系列補；③LocalBusiness `areaServed` 缺三重／新莊／土城（併待辦 #5）。
 9. ~~0958 上不上官網~~ ✅ 09-14 定：上，稱「經理鄭小姐」。~~企業貸款頁留不留~~ ✅ 留，健檢在前。~~售後回租兩套定義~~ ✅ 統一 A。~~「20 年」主詞~~ ✅ 全站＋跨 repo 已改。
 
 ## 五、本 session（2026-09-14 00:48 → 02:4x）做了什麼
@@ -232,3 +233,13 @@ Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完�
 - 撥號 CTA：偵察 agent 普查 17 頁 → 12 個 LINE-only 群組；媽祖 11/11 PASS。
 - 順手修：`gen_radar_v4.py` 在 `65b192b` 被貼進未雙寫大括號的 JS 物件 → f-string SyntaxError，隔天 `update_indicators` 排程會炸；已修並重生產物（diff 只剩 head 兩行＋時間戳）。memory `feedback_python_compat_silent_failure` 追加一段。
 - 平行 session 雷再踩一次：工作區有別人的 `corporate-*.html`／`img/area/*` 未提交；本 session 用 `git add <指名檔> && git commit --no-verify` → 跑兩支鮮度腳本 → 只 re-add 自己 commit 過的檔 → `--amend`。配方有效，照抄。
+
+## 七、本 session（2026-09-14 14:3x → 16:3x）做了什麼：交接信待辦 #4＋#6
+
+- **#4** `corporate-checkup.html`／`corporate-loan.html` 加 `.bt-local` chips 區（6 鏈）。
+- **#6** 企業健檢擴 5 區：關公 ×3 路（稅籍自算／三重新莊工業／板橋土城永和工業）＋普查工兵 → 素材四檔（素材包 v5.2 §7）→ 5 個 fable 建造者並行、五種骨架 → 機掃（difflib／FAQ 同源／ci／禁語）＋ 5 頁桌機 hero・手機 390 目檢 → 媽祖 10 處小改已修（報告 `行銷產出/技術記錄/2026-09-14-企業健檢五區媽祖把關.md`）→ `07f9a42` → Sir 令部署 → 線上 5 頁 200、TG 已推。
+- 三重／新莊新配 Commons 照（`img/area/sanchong.jpg` 新北大都會公園、`xinzhuang.jpg` 副都心；credits.json 已補）。
+- 統一：五頁不掛 ai-bar（首篇無）、FAQ「＋」單一、下載清單連結文字＝「企業週轉資料清單」。
+- 雷：①研究型 agent 又「等工兵回報」結束（關公 A），一催即交；②建造者整包對拷把樣板雙加號 bug 抄進 4 頁、3 頁自加 ai-bar——memory `feedback_template_bugs_copied_by_builders`；③push 撞平行 session 同秒推同一 HEAD（remote rejected 但內容已在遠端），`git fetch` 比 hash 再判。
+- 機掃改進待做：difflib FAQ 比對前先剝主頁隱私脊椎句（媽祖 §7.1）；`scratchpad/simcheck.py` 是暫存，下次要用先落 `scripts/`。
+
