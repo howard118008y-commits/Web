@@ -164,6 +164,19 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **順帶發現、未動**：①整合／轉銀行系列（含兩首篇）不掛 ai-bar，企業系列現在有——要不要全系列補，Sir 裁；②`area-*.html`、`financing-data.html` 的 `areaServed` 是自己的格式（3 區／5 區）未動；③`lvr-observatory/presale/rental` 本來就有 `.bt-hero .bt-meta` 規則；④待辦 #6 下一批＝地區軸二胎複製（Sir 排第三、風險最高）。
 **雷（本批踩到）**：⚠️ 同一條交接信待辦被兩個 session 同時領走（property-finance 重寫），建造者互相覆寫一輪——派建造者前 `git status -s` 看 M 檔＋`ListAgents` 問對方在做哪條，重疊就讓（memory `feedback_parallel_session_moves_head_mid_diagnosis` 已補）；媽祖 agent 又一次「等工兵回報」零交付結束，一催即交（工兵之後自己也會回報到主對話，別重複派）。
 
+### 🟢 2026-09-17 pf3-rewrite 已上線（`7a03add`，Sir 23:0x 令部署；含第三批 3b7f0aa／f4c7ae2／2449dd2 一起推；12 頁 200、sitemap 含 6 新頁、TG 已推 GSC 清單）
+
+**做了什麼**（09-14 夜 cloud-code-78 施工，09-17 部署）：
+- `{yonghe,banqiao,sanchong}-property-finance.html` 反 doorway 重寫：整頁相似 0.88–0.91 → ≤0.20（逐段最高 0.464）；骨架各異（退件四關決策樹／順序題／三種資金時間表）；地標 12／20／12；素材包 v5.2 數字逐句帶期別機關、不引坪價；防詐一句＋內鏈；CTA LINE＋`tel:0222490517`；同區服務 chips（含 6 新頁）。規則全在 memory `project_local_page_series_rules`。
+- `{yonghe,banqiao,sanchong}-sale-leaseback.html` 行情統一 **4G 口徑**（115S1+S2，關公重跑，`技術記錄/2026-09-14-行情口徑統一-4G.md`）：三重「三區最低」不成立→改真實敘述（板橋 45.0＜三重 45.6＜永和 51.7）；不可重現的板橋新板／舊城數字與永和透天列已刪；口徑句三頁一致。腳本 `scripts/lvr/lvr_4g_unified.py`，資料 zip 在 `~/.cx468/lvr/`；**115S3 於 10/1 發布後，所有引用行情的頁（含第三批 6 頁）一起重跑**。素材包尾「## 6 行情 4G 口徑統一表」為四區唯一正本，舊值不得再用。
+- 媽祖報告 `技術記錄/2026-09-14-pf3重寫與4G口徑媽祖把關.md`（必修 2＋建議 8 全套用）；fresh 目檢 12 張通過。
+
+**重驗指令**：`curl -s https://cx468.com.tw/yonghe-property-finance.html | grep -c '第一關｜年齡與年限'` → 1；`curl -s https://cx468.com.tw/sanchong-sale-leaseback.html | grep -c '只高 1.3%'` → 3；`python3 scripts/ci_check.py` → 179 檔 0。
+
+**閉環待辦**：①GSC 12 網址（TG 09-17 23:1x 那則）→ 三日健檢看 coverageState；②`anti-fraud-modal.html:124` 無 utm／gclid 自然流量自動全屏彈窗——手機插頁式判罰風險，另案查；③精進會議 12:00 cron 是 session-only，09-07～09-16 零份會議＝沒 session 活著就不開，改 launchd／雲端 routine 交 Sir 裁。
+
+**雷（本批）**：平行 session 在共用樹整檔覆寫半成品＋其 pre-commit 掃走 M 檔 → 成果一律搬 `git worktree` 分支、共用樹 `checkout --` 還原、sitemap lastmod 留到 rebase 後（memory `feedback_parallel_session_moves_head_mid_diagnosis` 09-14 追加）。
+
 ### 🟢 Phase 3 已上線（`4c50d13`，7c45acf push，theme.css／footer／撥號 CTA 線上驗過）
 
 做了什麼見第一節「設計」列。**push 後要驗**：`curl -s https://cx468.com.tw/theme.css | head -c 80`（200 且有內容）、`curl -s https://cx468.com.tw/about.html | grep -c theme.css` → 1、無痕開 about／article-second-mortgage／apply／bad-credit-mortgage 看 footer paper 底與金鈕；然後給 Sir GSC 清單（11 個電話 CTA 頁優先，A 族零文字頁不必送）。
