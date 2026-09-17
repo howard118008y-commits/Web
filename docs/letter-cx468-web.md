@@ -6,14 +6,14 @@
 > 前次：2026-09-14 04:xx 另一 session 的矩陣第一批（第三節 🟢，已改標為已部署）；再前次 2026-09-09。
 > 本次更新原因：Sir 09-14 四項裁示落地（電話兩支為主／售後回租統一 A／企業貸款頁留但健檢在前／文字憲法放鬆改 SEO 為主）＋ 全站配色對齊主頁 Phase 1–2 上線 ＋ 09-11～13 另一 session 153 檔改動全部審過。一、三、四、五節重寫；二節與三節 🟢 保留。
 
-## 一、當前狀態快照（2026-09-18 00:4x 重驗，每項附指令）
+## 一、當前狀態快照（2026-09-18 05:0x 收工重驗，每項附指令）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | **`9468a93`＝origin/main（09-18 00:5x Sir 令部署，已推；CI＋Pages success；兩新頁線上 200）**：`2c97ec0` geo 77 頁＋4G 加土城 → `c5d6789` 永和／土城二胎頁＋接線 → `9468a93` docs；worktree `~/cx468-letter` 與分支 `letter-close` 已收。09-17 鏈：`b63bbd9`＝09-17 部署鏈：`3b7f0aa` 機械四項 → `f4c7ae2` 第三批 6 頁 → `2449dd2` docs → `7a03add` pf3（三支 property-finance 重寫＋SLB 4G）→ `b63bbd9` docs。09-14 鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
-| CI／Pages | 兩者 success（`9468a93` 09-18 00:5x） | `gh run list -L 2` |
-| 工作區 | 乾淨；唯一未追蹤 `scripts/archive/goal-scores.jsonl`（非本專案產物，**勿 add**）；無 worktree | `git status -s`；`git worktree list` |
-| 閘門（乾淨樹） | ci_check **181 檔 0 問題**（09-18 00:3x）；FAQ 同源 **147 頁零漂移**；audit-regression **18/18（09-18 重跑）**；新頁 JSON-LD 12 塊 json.loads 通過 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
+| HEAD | **`2315351`＝origin/main（09-18 05:0x 重驗；`7d8fa93` 之後是 cloud-code-aa／0a 的主題頁＋新聞卡鏈 `03e9d3e`→`aedd155`→`8339a2e`→`803c315`→`63b2f6f`→`2315351`，見第八節與其接手 session）**。09-18 00:5x 地區軸二胎批（Sir 令部署、CI＋Pages success、兩新頁線上 200，05:0x 複驗仍 200）：`2c97ec0` geo 77 頁＋4G 加土城 → `c5d6789` 永和／土城二胎頁＋接線 → `9468a93` docs；worktree `~/cx468-letter` 與分支 `letter-close` 已收。09-17 鏈：`b63bbd9`＝09-17 部署鏈：`3b7f0aa` 機械四項 → `f4c7ae2` 第三批 6 頁 → `2449dd2` docs → `7a03add` pf3（三支 property-finance 重寫＋SLB 4G）→ `b63bbd9` docs。09-14 鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
+| CI／Pages | `9468a93` 兩者 success（00:5x）；其後主題頁鏈的 run 由該 session 驗 | `gh run list -L 2` |
+| 工作區 | 05:0x：`M inline-form.html`、`M lead-form.html` 是**平行 session（cloud-code-0a／aa 主題頁 B2）半成品，勿 add／勿 checkout --**；未追蹤 `scripts/archive/goal-scores.jsonl` 非本專案產物勿 add；無 worktree | `git status -s`；`git worktree list` |
+| 閘門 | ci_check **182 檔 0 問題**（09-18 05:0x，含平行 session 未提交 M 檔）；FAQ 同源 **147 頁零漂移**（05:0x）；audit-regression **18/18（09-18 00:4x，9468a93 樹）**；新頁 JSON-LD 12 塊 json.loads 通過 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
 | 設計（Phase 1–3 全上線） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
 | 二胎撥號 CTA（已上線） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
 | 追蹤 | `consultation-tracking.js` 掛 **65 頁**（PR#5 補 36 盲頁＋矩陣 6＋5 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
@@ -305,3 +305,6 @@ Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完�
 4. memory 追加四處：`feedback_session_start_review_meeting`、`feedback_traffic_drop_check_ad_spend_first` 第 5 條、`feedback_eval_loop_burned_api_credit`、`feedback_parallel_session_moves_head_mid_diagnosis`。
 5. **刻意沒做**：小鋮「最低」雙護欄修改（動 `~/cx468-linebot/app.py` prompt＋regex＋跑評測＋部署，列 T0）；新聞卡換稿、Threads 補稿、週報 W37（硬期限，另開 session）。
 
+## 九、本 session（2026-09-17 23:1x → 09-18 05:0x，接手信 1263629）做了什麼
+
+「把交接信做完」：矩陣待辦 #1／#2（pf3 已結）、#5 geo 兩組座標（`2c97ec0`：77 頁 meta＋首頁＋3 支產生器）、#6 地區軸二胎複製（`c5d6789`：永和／土城二胎頁＋接線）——**矩陣「全做」三順位全部完成並上線 `9468a93`**（Sir 00:5x 令部署），細節全在第三節 🟢 09-18；交接信 `7d8fa93`。memory 追加：`reference_nap_canonical`（NAP 三處同掃）、`project_local_page_series_rules`（09-17/18 六條）、`feedback_dispatch_prompt_must_requote_from_current_file`（§6 欄位抄錯實例）、`feedback_parallel_session_moves_head_mid_diagnosis`（datemod 拉別人頁＋zsh 不分詞）。**刻意沒做**：第三節 🟡 順帶發現（GA config 濾 query／「9 成」一二胎合計／nav.js 死變數／lvr 圖表紅系／計算器過時句／linebot 兩條）與 🟢 09-18 順帶發現四條（三支二胎頁麵包屑層數／「約 8 分鐘」／llms-full 無矩陣頁／共用 include 13.3px input）皆標「Sir 裁或另批」未動；土城頁 `tucheng-property-finance.html` L340 自稱「融資租賃業者」沿用未改。
