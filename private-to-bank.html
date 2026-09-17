@@ -372,6 +372,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
     <img class="tp-hero-img" src="img/gen-home-desk.jpg" alt="台灣公寓書桌前整理借款文件，準備民間轉銀行的資料" fetchpriority="high" loading="eager">
   </div>
+  <div class="tp-in tp-cue-row"><a class="tp-cue" href="#tp-help">往下看流程<span class="tp-cue-chev" aria-hidden="true"></span></a></div>
 </section>
 
 <!-- Block 1：我們怎麼幫你 -->
@@ -465,7 +466,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- Block 5：常見問題（原區塊整區原樣搬入，與 <head> FAQPage schema 同源，一字不動） -->
+<!-- Block 5：常見問題（原區塊整區原樣搬入，與 <head> FAQPage schema 同源，一字不動；結尾另加 .tp-cue 往下看提示） -->
 <section class="bt-faq bt-sec">
   <div class="bt-narrow">
     <div class="bt-label bt-center">常見問題</div>
@@ -501,27 +502,33 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號、團隊在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
       <div class="bt-chips"><a href="banqiao-private-to-bank.html">板橋民間轉銀行 →</a><a href="yonghe-private-to-bank.html">永和民間轉銀行 →</a><a href="sanchong-private-to-bank.html">三重民間轉銀行 →</a><a href="zhonghe-private-to-bank.html">中和民間轉銀行 →</a><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="article-private-to-bank.html">民間轉銀行完整指南 →</a><a href="debt-consolidation.html">貸款整合 →</a><a href="article-private-loan-interest-trap.html">民間借款利息陷阱 →</a></div>
     </div>
+    <p class="tp-cue-row"><a class="tp-cue" href="#tp-next">下一步在下面<span class="tp-cue-chev" aria-hidden="true"></span></a></p>
   </div>
 </section>
 
-<!-- Block 6：下一步（同一份表單再出現一次） -->
-<section class="tp-sec tp-sec-cream" id="tp-next" data-consultation-need="private_to_bank" data-link-location="service_bottom">
+<!-- Block 6：下一步（滿版深色轉換區＝整頁最搶眼；同一份表單再出現一次、data-open="1" 載入即展開、data-address="1" 加房屋地址三步選擇；樣式 topic.css .tp-next*） -->
+<section class="tp-next" id="tp-next" data-consultation-need="private_to_bank" data-link-location="service_bottom">
   <div class="tp-in">
-    <h2 class="tp-h2">下一步</h2>
-    <div class="tp-next-grid">
-      <div data-include="inline-form" data-topic="private-to-bank" data-from="private-to-bank.html"></div>
-      <div class="tp-next-alt">
-        <p>想多說一點狀況？<a class="tp-link" href="intake.html?topic=private-to-bank&amp;from=private-to-bank.html">用 3 分鐘評估精靈 →</a></p>
-        <p><a class="tp-btn-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a></p>
-        <div class="tp-siblings">
-          <p class="tp-siblings-title">同一組的其他問題</p>
-          <ul class="tp-chips">
-            <li><a href="/debt-consolidation.html">民間借款整理 →</a></li>
-            <li><a href="/second-mortgage.html">二胎房貸諮詢 →</a></li>
-            <li><a href="/xinbei-debt-consolidation.html">多筆負債整合 →</a></li>
-          </ul>
-        </div>
-      </div>
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">留資料，我們幫你看。</h2>
+      <p class="tp-next-sub">留下稱呼、手機和房屋地址，我們依實價登錄與周邊行情先行初估；地址完整的話，回覆你這間房子初估的擔保空間，實際額度由銀行審核。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="private-to-bank" data-from="private-to-bank.html" data-open="1" data-address="1"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?topic=private-to-bank&amp;from=private-to-bank.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+    <div class="tp-next-sib">
+      <p class="tp-next-sib-title">同一組的其他問題</p>
+      <ul class="tp-next-sib-grid">
+        <li><a href="/debt-consolidation.html">民間借款整理</a></li>
+        <li><a href="/second-mortgage.html">二胎房貸諮詢</a></li>
+        <li><a href="/xinbei-debt-consolidation.html">多筆負債整合</a></li>
+      </ul>
     </div>
   </div>
 </section>

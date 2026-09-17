@@ -5,7 +5,10 @@
      樣式在 topic.css（.tp-form*）。提交路徑與 lead-form.html 完全相同：
      Web3Forms 主軌 → best-effort 通知 linebot /lead（失敗打 /lead-fail）；欄位名與 lead-form 一致，後台名單系統不用改。
      欄位名用英文 ASCII（Web3Forms 對中文欄位名會編碼亂碼）。
-     data-topic → Service 對映表（TOPIC_SERVICE）在下方 JS，新主題在那裡加一行。 -->
+     data-topic → Service 對映表（TOPIC_SERVICE）在下方 JS，新主題在那裡加一行。
+     data-open="1"：載入即展開欄位（第 6 塊 .tp-next-card 用）；不帶＝勾症狀／按開啟鈕才展開（第 0 塊）。
+     data-address="1"：啟用「房屋地址」三步逐步選擇（縣市 chip → 行政區 chip → 路名門牌），組成 Property_Address（lead-form 既有欄位名）且必填；
+       不帶（第 0 塊快速版）＝整塊移除、payload 不含 Property_Address。啟用時送出鈕與成功句改「先行初估」版（媽祖 2026-09-18 定稿逐字，勿改）。 -->
 <div class="tp-form-wrap">
   <form class="tp-form" novalidate>
     <input type="hidden" name="access_key" value="b2959b73-847e-4a81-bd4f-e3a9de65713a">
@@ -27,9 +30,37 @@
         <input type="tel" name="Phone" autocomplete="tel" inputmode="tel" maxlength="20" required aria-required="true" placeholder="09xx-xxx-xxx">
         <span class="tp-field-msg" hidden></span>
       </label>
+      <div class="tp-addr" role="group" aria-label="房屋地址" hidden>
+        <p class="tp-addr-legend">房屋地址 *</p>
+        <div class="tp-addr-step" data-step="1">
+          <p class="tp-addr-q"><span class="tp-addr-n">1/3</span>房子在哪個縣市？</p>
+          <div class="tp-addr-chips" role="group" aria-label="縣市">
+            <button type="button" class="tp-chip" aria-pressed="false">新北市</button>
+            <button type="button" class="tp-chip" aria-pressed="false">台北市</button>
+            <button type="button" class="tp-chip" aria-pressed="false">桃園市</button>
+            <button type="button" class="tp-chip" aria-pressed="false">基隆市</button>
+            <button type="button" class="tp-chip" aria-pressed="false" data-other="1">其他縣市</button>
+          </div>
+          <label class="tp-field tp-addr-other" hidden><span class="tp-field-label">縣市</span><input type="text" maxlength="10" autocomplete="address-level1" placeholder="例：新竹市"></label>
+        </div>
+        <div class="tp-addr-step" data-step="2" hidden>
+          <p class="tp-addr-q"><span class="tp-addr-n">2/3</span>哪一區？</p>
+          <div class="tp-addr-chips" role="group" aria-label="行政區"><button type="button" class="tp-chip tp-chip-more" hidden>更多區 ＋</button></div>
+          <label class="tp-field tp-addr-other" hidden><span class="tp-field-label">區／鄉鎮市</span><input type="text" maxlength="10" autocomplete="address-level2" placeholder="例：竹北市"></label>
+        </div>
+        <div class="tp-addr-step" data-step="3" hidden>
+          <label class="tp-field">
+            <span class="tp-field-label"><span class="tp-addr-n">3/3</span>路名與門牌 *</span>
+            <input type="text" class="tp-addr-street" maxlength="80" autocomplete="street-address" placeholder="例：中正路 468 號">
+          </label>
+          <p class="tp-addr-note">地址只用於初估，不作其他用途。</p>
+        </div>
+        <input type="hidden" name="Property_Address" value="">
+      </div>
+      <span class="tp-field-msg tp-addr-msg" role="alert" hidden></span>
       <button type="submit" class="tp-form-submit">送出，1 個工作天內回你</button>
     </div>
-    <p class="tp-form-note">不申請不收費 · 1 個工作天內回覆 · 曾被銀行拒絕仍可重新評估</p>
+    <ul class="tp-form-note"><li>不申請不收費</li><li>1 個工作天內回覆</li><li>曾被銀行拒絕仍可重新評估</li></ul>
     <p class="tp-form-consent">送出代表你同意我們依<a href="privacy-policy.html">《隱私權政策》</a>聯繫你</p>
   </form>
   <div class="tp-form-done" role="status" hidden>
@@ -61,6 +92,7 @@
   var topic=(ph&&ph.dataset.topic)||'';
   var from=(ph&&ph.dataset.from)||(location.pathname.split('/').pop()||'');
   var service=TOPIC_SERVICE[topic]||'';
+  var autoOpen=!!(ph&&ph.dataset.open==='1');
 
   var form=wrap.querySelector('form.tp-form');
   var openBtn=wrap.querySelector('.tp-form-open');
@@ -88,6 +120,76 @@
   }
   wrap.tpExpand=expand;
   openBtn.addEventListener('click',function(){ expand(true); });
+  if(autoOpen) expand(false);
+
+  /* ── 房屋地址三步選擇（data-address="1" 才啟用；未啟用整塊移除，第 0 塊 payload 不含 Property_Address） ── */
+  var addrOn=!!(ph&&ph.dataset.address==='1');
+  var addr=wrap.querySelector('.tp-addr');
+  var addrMsg=wrap.querySelector('.tp-addr-msg');
+  var addrState={city:'',district:'',street:''};
+  var hiddenAddr=form.querySelector('input[name="Property_Address"]');
+  if(!addrOn){ addr.remove(); addrMsg.remove(); }
+  else{
+    var DISTRICTS={
+      '新北市':['中和區','永和區','板橋區','土城區','新店區','三重區','新莊區','蘆洲區','樹林區','汐止區','淡水區','林口區','五股區','泰山區','鶯歌區','三峽區','八里區','深坑區','石碇區','坪林區','烏來區','瑞芳區','平溪區','雙溪區','貢寮區','金山區','萬里區','石門區','三芝區'],
+      '台北市':['中正區','大同區','中山區','松山區','大安區','萬華區','信義區','士林區','北投區','內湖區','南港區','文山區'],
+      '桃園市':['桃園區','中壢區','平鎮區','八德區','楊梅區','蘆竹區','大溪區','龍潭區','龜山區','大園區','觀音區','新屋區','復興區'],
+      '基隆市':['仁愛區','信義區','中正區','中山區','安樂區','暖暖區','七堵區']
+    };
+    var MORE_AFTER={'新北市':10};   /* 新北先列 10 區，其餘收進「更多區」 */
+    var step1=addr.querySelector('[data-step="1"]'),step2=addr.querySelector('[data-step="2"]'),step3=addr.querySelector('[data-step="3"]');
+    var cityChips=step1.querySelector('.tp-addr-chips'),otherCity=step1.querySelector('.tp-addr-other'),otherCityIn=otherCity.querySelector('input');
+    var distChips=step2.querySelector('.tp-addr-chips'),moreBtn=distChips.querySelector('.tp-chip-more'),otherDist=step2.querySelector('.tp-addr-other'),otherDistIn=otherDist.querySelector('input');
+    var streetIn=step3.querySelector('.tp-addr-street');
+    addr.hidden=false;
+    submitBtn.textContent='送出，我們先行初估';
+    done.querySelector('strong').textContent='收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的擔保空間。';
+
+    function press(group,btn){ group.querySelectorAll('.tp-chip:not(.tp-chip-more)').forEach(function(b){ b.setAttribute('aria-pressed',b===btn?'true':'false'); }); }
+    function reveal(step){ step.hidden=false; step.scrollIntoView({behavior:'smooth',block:'center'}); }
+    function compose(){ hiddenAddr.value=(addrState.city&&addrState.district&&addrState.street)?addrState.city+addrState.district+addrState.street:''; }
+    function buildDistricts(city){
+      distChips.querySelectorAll('.tp-chip:not(.tp-chip-more)').forEach(function(c){ c.remove(); });
+      addrState.district=''; otherDistIn.value='';
+      var list=DISTRICTS[city]||[]; var isOther=!list.length; var cut=MORE_AFTER[city]||list.length;
+      distChips.hidden=isOther; otherDist.hidden=!isOther; moreBtn.hidden=true;
+      list.forEach(function(d,i){
+        var b=document.createElement('button'); b.type='button'; b.className='tp-chip'; b.textContent=d; b.setAttribute('aria-pressed','false');
+        if(i>=cut){ b.hidden=true; b.dataset.more='1'; }
+        distChips.insertBefore(b,moreBtn);
+      });
+      if(list.length>cut){ moreBtn.textContent='更多區（'+(list.length-cut)+'）＋'; moreBtn.hidden=false; }
+    }
+    cityChips.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('.tp-chip'); if(!b||!cityChips.contains(b)) return;
+      press(cityChips,b);
+      var isOther=b.dataset.other==='1';
+      otherCity.hidden=!isOther; if(!isOther) otherCityIn.value='';
+      addrState.city=isOther?otherCityIn.value.trim():b.textContent.trim();
+      buildDistricts(isOther?'':addrState.city);
+      step3.hidden=true; addrMsg.hidden=true; compose();
+      if(isOther&&!addrState.city){ otherCityIn.focus({preventScroll:true}); return; }
+      reveal(step2);
+    });
+    otherCityIn.addEventListener('input',function(){ addrState.city=otherCityIn.value.trim(); compose(); if(addrState.city&&step2.hidden) reveal(step2); });
+    distChips.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('.tp-chip'); if(!b) return;
+      if(b===moreBtn){ distChips.querySelectorAll('[data-more]').forEach(function(c){ c.hidden=false; }); moreBtn.hidden=true; return; }
+      press(distChips,b); addrState.district=b.textContent.trim(); addrMsg.hidden=true; compose(); reveal(step3);
+    });
+    otherDistIn.addEventListener('input',function(){ addrState.district=otherDistIn.value.trim(); compose(); if(addrState.district&&step3.hidden) reveal(step3); });
+    streetIn.addEventListener('input',function(){ addrState.street=streetIn.value.trim(); compose(); if(addrState.street) addrMsg.hidden=true; });
+  }
+  /* 送出前檢查：稱呼、手機照舊先驗；地址啟用時三段缺一 → 鈕旁提示並捲到缺的那一步，不送 */
+  function addrOk(){
+    if(!addrOn) return true;
+    compose();
+    if(hiddenAddr.value) return true;
+    addrMsg.textContent='請填到門牌號'; addrMsg.hidden=false;
+    reveal(!addrState.city?step1:!addrState.district?step2:step3);
+    if(addrState.city&&addrState.district) streetIn.focus({preventScroll:true});
+    return false;
+  }
 
   function symptomText(){
     var picked=[];
@@ -112,6 +214,7 @@
     var name=(nameEl.value||'').trim();
     if(!name){ fieldMsg(nameEl,'請留一個稱呼，方便我們回電。'); nameEl.focus(); return; }
     if(!phoneOk(phoneEl.value)){ fieldMsg(phoneEl,'請填台灣手機（09 開頭 10 碼）或含區碼的市話，例如 02-2249-0517。'); phoneEl.focus(); return; }
+    if(!addrOk()) return;
     form.querySelector('input[name="Message"]').value='勾選狀況：'+symptomText()+'；來源頁：'+from;
     var orig=submitBtn.textContent; submitBtn.disabled=true; submitBtn.textContent='送出中…';
 
