@@ -24,8 +24,8 @@
 | 「20 年」主詞 | 全站團隊（`cfd7061` 09-09 91 檔）；p2a 模板／小鋮提示詞亦改（跨 repo，見下） | 全站無主詞殘留掃描 0（腳本在 `scripts/fix_20year_subject.py`，冪等） |
 | p2a 日更 | Render `cx468-p2a-publish` live `138ab9b`；09-13 已產 `article-inherited-house-sell-or-keep.html`；模板已改掛 nav.js、org schema 主詞團隊、contactPoint 0958 | `git -C ~/cx468-fb-news-bot log --oneline -2`；`gh api repos/howard118008y-commits/Web/commits?path=article-inherited-house-sell-or-keep.html` |
 | linebot／ga4-daily | Render live `37ed7f6`（小鋮提示詞）／`a74f06c`（09-03 卡在本機的健檢修正已推） | Render API `services/*/deploys?limit=1` |
-| 三日健檢 | **有推 🔴 到 Telegram**（09-05／08／11 三次列 p2a 停擺）——告警沒壞，是沒人接。09-09「掛 7 天沒人知道」為誤判 | `grep -n "Telegram 已推" ~/cx468-ga4-daily/logs/healthcheck.out \| tail -3` |
-| 廣告 | Meta 2 campaign ACTIVE；近 7 天 NT$3,666、11 名單；GA4 -72% 是花費由 8,540 降到 3,666，非追蹤壞 | `~/.cx468/meta_ads_cli.py`／insights `date_preset=last_7d` |
+| 三日健檢 | 09-11／09-14／09-17 三次都推 Telegram；**09-17 🔴×6**：新聞卡逾 10 天／p2a 三天 0 文／Threads 佇列剩 4（09-21 見底）／週報監控瞎（launchd 無 iCloud 權限）／銀行條文複查逾 6 天／Meta spend_cap 決策逾 27 天——**連三次沒人接**（memory `feedback_act_on_telegram_alerts`） | `grep -n "Telegram 已推" ~/cx468-ga4-daily/logs/healthcheck.out \| tail -3`；報告在 `行銷產出/技術記錄/健檢/` 最新一份 |
+| 廣告（09-17 23:xx 取） | Meta：真正 ACTIVE 4 adset 日預算合計 NT$368（上限 1,500 未超）；近 7 天（09-10～16）NT$6,137→11 名單；balance 1,618／cap 20,000 已花 11,042；被壓 adset 10 支掛 2,100（+CBO 3,400）。Google：餘額 1,811、本月 933、近 7 天 10 支全 0 轉換。**09-17 04:03 新開 `CX_V1_20260916_雙北桃園_7D` 兩平台各一支（流量型；Google 當日 2,658 曝／95 點／$150）——來源與媽祖紀錄待 Sir 說明** | `python3 ~/.cx468/meta_ads_cli.py get act_1693554028195795/campaigns --fields=name,status,daily_budget`；`~/.cx468/gads-venv/bin/python ~/.cx468/gads_accounts.py` |
 | Threads | Render token 有效、每日 12:30 準時發；**本機 `~/.cx468/threads_token.txt` 是過期舊檔**，拿它測會誤判壞掉 | Render env `THREADS_ACCESS_TOKEN` 打 `graph.threads.net/v1.0/me` |
 
 ⚠️ **三個路徑陷阱**（不變）：
@@ -240,7 +240,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 日常常態
 
-- 每天 12:00 精進會議（session 級排程，每個 session 用 CronCreate 重設）。
+- 每天 12:00 精進會議（session 級排程，每個 session 用 CronCreate 重設）——**09-08～09-16 十天零正本**（cron 沒 session 就不跑，改制交 Sir）。最新正本 `行銷產出/精進會議/2026-09-17.md`，其 §六行動清單＝下一場 Step 0 基準（硬期限：新聞卡 09-19、週報 W37 09-19、Threads 佇列 09-20、p2a 三修 09-20、小鋮「最低」雙護欄 T0 09-20）。
 - 三日健檢 `com.cx468.healthcheck` 會推 🔴 到 Telegram——**收到要有人接**（memory `feedback_act_on_telegram_alerts`）；09-08 那則還躺著「Meta spend_cap 決策逾期」「週報監控瞎了」等 4 條。
 - Threads 12:30；p2a 17:15（敏感稿要人回 GO，memory `feedback_human_go_gate_deadlocks_pipeline`）；`cx468-crawl` 每 2 小時。
 - 換新聞卡前 `git log --oneline -5 -- radar-index.html` 算服役天數。
@@ -248,6 +248,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 ## 四、等使用者的事項
 
 0. 🔴 **GSC 送 2 網址**（09-18 已上線）：`https://cx468.com.tw/yonghe-second-mortgage.html`、`https://cx468.com.tw/tucheng-second-mortgage.html`（TG 09-18 00:5x 那則）；之後三日健檢看 coverageState。原「等 Sir 五項」（GSC 12 網址／精進會議排程改制／首頁 footer 0931／三重新莊 AI 配圖／anti-fraud-modal 自然流量彈窗）不變。
+0-1. 🔴 **09-17 精進會議六件待裁**（原文在會議檔 §六）：①Meta spend_cap 逾 27 天（不回＝維持）；②精進會議觸發改 launchd `claude -p "/精進會議"` 或雲端 /schedule routine；③**CX_V1_20260916 雙北桃園_7D 兩平台廣告誰建的、過媽祖沒**（Google 餘額只夠 12 天）；④`anti-fraud-modal.html:183` 自然流量全屏彈窗（143 頁，插頁式判罰風險）三選一；⑤09-02 反詐文／EP15 分析／C-v3 判讀「棄用或做」＋「比特幣起源」private 刪或搬＋iPAS 報考＋銀行條文複查；⑥整合／轉銀行系列補不補 ai-bar。
 1. 🔴 **GMB 評論 1→20**（第二順位③，只有 Sir 能做）：「新北 房屋二胎」Local Pack 第 1 名 17 則、第 2/3 名 0 則照樣上榜。⛔ 商家名不塞關鍵字、類別維持「不動產管理服務」。
 2. 🔴 **Telegram 三日健檢的 🔴 要有人接**：09-08 推播列了「Meta spend_cap 決策逾期 18 天」「行銷週報檢查失效（launchd 無 iCloud 權限）」「銀行條文存證複查」——本 session 只修了 p2a 那條。
 3. **GSC 催收**：`docs/2026-09-09-GSC待送清單-額度滿順延.txt`（12＋6 條，09-14 已追加 contact／corporate-loan／sale-leaseback-guide 等）；矩陣 6 頁清單在第三節 🟢——**Sir 09-14 14:2x 已逐一送「網址審查→要求建立索引」**；**第二批 5 頁 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` 16:2x 上線，等 Sir 送**，下一步是三日健檢看 coverageState＋lastCrawlTime（memory `feedback_indexed_but_stale_crawl`），別再重送。Sitemap 欄只放 sitemap.xml。
@@ -295,4 +296,12 @@ Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完�
 - 統一：五頁不掛 ai-bar（首篇無）、FAQ「＋」單一、下載清單連結文字＝「企業週轉資料清單」。
 - 雷：①研究型 agent 又「等工兵回報」結束（關公 A），一催即交；②建造者整包對拷把樣板雙加號 bug 抄進 4 頁、3 頁自加 ai-bar——memory `feedback_template_bugs_copied_by_builders`；③push 撞平行 session 同秒推同一 HEAD（remote rejected 但內容已在遠端），`git fetch` 比 hash 再判。
 - 機掃改進待做：difflib FAQ 比對前先剝主頁隱私脊椎句（媽祖 §7.1）；`scratchpad/simcheck.py` 是暫存，下次要用先落 `scripts/`。
+
+## 八、本 session（2026-09-14 17:1x → 09-18 04:3x，cloud-code-aa）做了什麼
+
+1. **機械四項**（`3b7f0aa`）＋**矩陣第三批服務軸補滿 6 頁**（`f4c7ae2`）：細節在第三節 🟢 09-15 段；媽祖報告 `技術記錄/2026-09-14-服務軸補滿六頁媽祖把關.md`；六頁行情全換 4G。隨 pf3 鏈 09-17 23:07 上線。
+2. 待辦 ③ property-finance 重寫與另一 session 撞車（互覆寫一輪）→ 停自家建造者、讓出；分工與部署順序談定（memory `feedback_parallel_session_moves_head_mid_diagnosis` 兩側視角）。
+3. **09-17 精進會議主席**（正本 `行銷產出/精進會議/2026-09-17.md`）：Step 0 對 09-07 清單 13 項取證（✅5／⚠️2／❌5／🚫2）；六將取數（GSC 28 天曝光 +37%、點擊 +13%、排名 10.16→9.07；稽核 149 頁 142 滿分；健檢 🔴6；木吒沉默失敗 7 條；小鋮週抽查 15 則＝真人 5 全過、prompt 固定句「最低」1 則踩線，媽祖改法字串在會議檔第三節）。
+4. memory 追加四處：`feedback_session_start_review_meeting`、`feedback_traffic_drop_check_ad_spend_first` 第 5 條、`feedback_eval_loop_burned_api_credit`、`feedback_parallel_session_moves_head_mid_diagnosis`。
+5. **刻意沒做**：小鋮「最低」雙護欄修改（動 `~/cx468-linebot/app.py` prompt＋regex＋跑評測＋部署，列 T0）；新聞卡換稿、Threads 補稿、週報 W37（硬期限，另開 session）。
 
