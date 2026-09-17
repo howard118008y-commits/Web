@@ -10,10 +10,10 @@
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | `1bfd676`＝origin/main（已 push，Pages success）；今日鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批（企業健檢擴 5 區＋樞紐 chips）→ docs ×3 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
-| CI／Pages | 兩者 success（`1bfd676`） | `gh run list -L 2` |
+| HEAD | `b63bbd9`＝origin/main（2026-09-17 23:1x 重驗）；09-17 部署鏈：`3b7f0aa` 機械四項 → `f4c7ae2` 第三批 6 頁 → `2449dd2` docs → `7a03add` pf3（三支 property-finance 重寫＋SLB 4G）→ `b63bbd9` docs。09-14 鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
+| CI／Pages | 兩者 success（`7a03add` 23:07；docs `b63bbd9` 之後再跑一次） | `gh run list -L 2` |
 | 工作區 | 乾淨；唯一未追蹤 `scripts/archive/goal-scores.jsonl`（非本專案產物，**勿 add**） | `git status -s` |
-| 閘門（乾淨樹） | ci_check **172 檔 0 問題**；audit-regression **18/18**；FAQ 同源 **138 頁零漂移**；JSON-LD 753 區塊 0 錯 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
+| 閘門（乾淨樹） | ci_check **179 檔 0 問題**（09-17 23:1x）；FAQ 同源 **145 頁零漂移**；audit-regression 18/18（09-14 值，未重跑）；JSON-LD 753 區塊 0 錯（09-14 值） | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
 | 設計（Phase 1–3 全上線） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
 | 二胎撥號 CTA（已上線） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
 | 追蹤 | `consultation-tracking.js` 掛 **65 頁**（PR#5 補 36 盲頁＋矩陣 6＋5 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
@@ -145,7 +145,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **部署配方**：push 後 curl 五頁 200 → 給 Sir GSC 清單 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` → 三日健檢看 coverageState。已連同 `4c50d13`（Phase 3 配色 144 檔）一起上線。
 **順帶發現、未動**：①首篇＋09-14 六頁 FAQ「＋」雙加號（`.plus::before` 與 literal ＋並存，b386ad9 帶進）→ 一支 sed；②企業系列 6 頁都不掛 ai-bar（樞紐有）→ Sir 裁要不要全系列補；③LocalBusiness schema `areaServed` 缺三重／新莊／土城（待辦 #5 同批）；④媽祖 §7.5 地標已補登素材包 §7；⑤研究型 agent 仍會「等工兵回報」結束，一催即交（memory 已有）；⑥新 memory `feedback_template_bugs_copied_by_builders`。
 
-### 🟢 2026-09-15 矩陣第三批：服務軸補滿 6 頁＋待辦 #3／#10 三件——**已 commit、未推**（`540c425` 機械四項 → `53f50ff` 六頁；Sir 令部署才推；**推的順序：本 repo 先推，再讓 cloud-code-78 的 `pf3-rewrite`（worktree `~/cx468-pf3`，三支 property-finance 重寫＋三支 SLB 4G 換數）rebase 推——它的 chips 連到本批新頁，反過來會 404**）
+### 🟢 2026-09-15 矩陣第三批：服務軸補滿 6 頁＋待辦 #3／#10 三件——**已上線（09-17 23:07 隨 pf3 一起推，rebase 後 SHA 3b7f0aa／f4c7ae2；六頁線上 200）**（原文保留：`540c425` 機械四項 → `53f50ff` 六頁；Sir 令部署才推；**推的順序：本 repo 先推，再讓 cloud-code-78 的 `pf3-rewrite`（worktree `~/cx468-pf3`，三支 property-finance 重寫＋三支 SLB 4G 換數）rebase 推——它的 chips 連到本批新頁，反過來會 404**）
 
 | 頁 | 骨架（與首篇及彼此互不同構，整頁 ≤30%／FAQ 逐題 ≤49%） | 媽祖 |
 |---|---|---|
@@ -174,6 +174,8 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 **重驗指令**：`curl -s https://cx468.com.tw/yonghe-property-finance.html | grep -c '第一關｜年齡與年限'` → 1；`curl -s https://cx468.com.tw/sanchong-sale-leaseback.html | grep -c '只高 1.3%'` → 3；`python3 scripts/ci_check.py` → 179 檔 0。
 
 **閉環待辦**：①GSC 12 網址（TG 09-17 23:1x 那則）→ 三日健檢看 coverageState；②`anti-fraud-modal.html:124` 無 utm／gclid 自然流量自動全屏彈窗——手機插頁式判罰風險，另案查；③精進會議 12:00 cron 是 session-only，09-07～09-16 零份會議＝沒 session 活著就不開，改 launchd／雲端 routine 交 Sir 裁。
+
+**等 Sir**：①GSC 12 網址審查（TG 09-17 23:1x）；②精進會議排程改制（launchd／雲端 routine）裁示；③首頁 `index.html` 自帶 footer 仍列 0931 要不要改 0958；④三重／新莊 AI 配圖換不換實景；⑤`anti-fraud-modal.html:124` 自然流量全屏彈窗要不要另案查。
 
 **雷（本批）**：平行 session 在共用樹整檔覆寫半成品＋其 pre-commit 掃走 M 檔 → 成果一律搬 `git worktree` 分支、共用樹 `checkout --` 還原、sitemap lastmod 留到 rebase 後（memory `feedback_parallel_session_moves_head_mid_diagnosis` 09-14 追加）。
 
