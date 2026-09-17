@@ -1,0 +1,173 @@
+/* ============================================================
+   topic.css — 導覽列主題分頁共用樣式（2026-09-18 B0 基礎工程）
+   ⚠️ 計畫原名 theme.css，但 theme.css 已是「全站配色 Phase 3」檔（67 頁 A 族在載、含全域 body/h1/h2 規則），
+      不能混用，故主題頁樣式獨立為本檔；之後 8 頁一律掛 <link rel="stylesheet" href="topic.css">。
+   規則：class 一律 tp- 前綴；不碰 style.css、不碰各頁 inline bt- 樣式。
+   7 塊順序：0 hero＋症狀＋表單 → 1 我們怎麼幫你 → 2 流程 → 3 不用準備 →
+   4 留了資料之後 → 5 常見問題（各頁沿用既有 FAQ 區）→ 6 下一步 → 7 想了解更多
+   色：海軍藍 #1B2F4A、金 #C8945A、米 #F5EFE6
+   ============================================================ */
+:root{
+  --tp-navy:#1B2F4A;--tp-navy-deep:#12213A;--tp-gold:#C8945A;--tp-gold-soft:#E0B685;--tp-gold-deep:#9A6D3A;
+  --tp-cream:#F5EFE6;--tp-ink:#1B2F4A;--tp-ink-dim:#5A6878;--tp-line:#E2DED4;
+  --tp-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);
+}
+
+/* ── 版心與區塊 ── */
+.tp-in{max-width:1080px;margin:0 auto;padding:0 32px}
+.tp-sec{padding:64px 0;--tp-bg:#fff;background:var(--tp-bg)}
+.tp-sec-cream{--tp-bg:var(--tp-cream)}
+.tp-h2{font-family:'Noto Serif TC',serif;font-size:30px;line-height:1.25;font-weight:900;color:var(--tp-ink);margin:0 0 20px}
+.tp-lead{font-size:17px;line-height:1.75;color:var(--tp-ink);margin:0 0 16px;max-width:720px}
+.tp-lead-dim{color:var(--tp-ink-dim)}
+.tp-grid-2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.tp-figure{margin:0}
+.tp-figure img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:16px;display:block;background:var(--tp-cream)}
+.tp-cap{font-size:12px;color:var(--tp-ink-dim);margin-top:8px;text-align:right}
+
+/* ── Block 0：hero ── */
+.tp-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--tp-cream);padding:48px 0 56px}
+.tp-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:start}
+.tp-eyebrow{font-size:16px;line-height:24px;font-weight:600;color:var(--tp-gold);margin:0 0 12px}
+.tp-h1{font-family:'Noto Serif TC',serif;font-size:44px;line-height:1.2;font-weight:900;color:var(--tp-cream);margin:0 0 16px}
+.tp-h1 em{font-style:normal;color:var(--tp-gold)}
+.tp-sub{font-size:18px;line-height:1.7;color:rgba(245,239,230,.9);margin:0 0 20px;max-width:560px}
+.tp-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:12px;display:block}
+/* ai-bar 落在深色 hero 內時的顏色（與各頁 bt-hero 規則同值，讓非 bt 版型頁也能用） */
+.tp-hero .aib{margin:24px 0 0}
+.tp-hero .aib .aib-chips button{color:var(--tp-cream);border-color:rgba(242,239,232,.42);background:transparent;opacity:1}
+.tp-hero .aib .aib-chips button:hover{background:rgba(242,239,232,.12)}
+.tp-hero .aib-note{color:rgba(242,239,232,.62)}
+
+/* 症狀勾選（勾了＝表單第 1 步） */
+.tp-symptoms{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}
+.tp-symptom-item{display:flex;align-items:center;gap:12px;background:#fff;color:var(--tp-ink);border:2px solid transparent;border-radius:12px;padding:14px 16px;font-size:16px;line-height:1.5;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s}
+.tp-symptom-item:hover{border-color:var(--tp-gold-soft)}
+.tp-symptom-item:has(.tp-symptom:checked){border-color:var(--tp-gold);background:#FFF8EE}
+.tp-symptom{width:22px;height:22px;flex-shrink:0;margin:0;accent-color:var(--tp-gold);cursor:pointer}
+
+/* ── 內嵌表單（inline-form.html 載入，同頁可載兩次，全部用 class） ── */
+.tp-form-wrap{background:#fff;color:var(--tp-ink);border-radius:16px;padding:20px;box-shadow:var(--tp-shadow);margin:0 0 8px}
+.tp-form{margin:0}
+.tp-form[hidden]{display:none}
+.tp-hp{position:absolute!important;left:-9999px!important;opacity:0}
+.tp-form-open,.tp-form-submit{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;padding:0 20px;border:0;border-radius:12px;background:var(--tp-gold);color:var(--tp-navy-deep);font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;transition:background-color .25s}
+.tp-form-open:hover,.tp-form-submit:hover{background:var(--tp-gold-soft)}
+.tp-form-submit:disabled{opacity:.55;cursor:not-allowed}
+.tp-form-open[hidden]{display:none}
+.tp-form-body{margin-top:16px}
+.tp-form-body[hidden]{display:none}
+.tp-field{display:block;margin:0 0 14px}
+.tp-field-label{display:block;font-size:14px;font-weight:600;color:var(--tp-ink);margin:0 0 6px}
+.tp-field input{width:100%;box-sizing:border-box;font-family:inherit;font-size:16px;line-height:1.4;color:var(--tp-ink);background:#FBF9F5;border:1.5px solid var(--tp-line);border-radius:10px;padding:13px 14px;transition:border-color .15s,background .15s}
+.tp-field input:focus{outline:none;border-color:var(--tp-navy);background:#fff}
+.tp-field input:focus-visible{outline:2px solid var(--tp-navy);outline-offset:2px}
+.tp-field-msg{display:block;font-size:13px;line-height:1.5;color:#A23B2A;margin:6px 0 0}
+.tp-field-msg[hidden]{display:none}
+.tp-form-note{font-size:13px;line-height:1.6;color:var(--tp-ink-dim);margin:12px 0 0;text-align:center}
+.tp-form-consent{font-size:12px;line-height:1.6;color:var(--tp-ink-dim);margin:6px 0 0;text-align:center}
+.tp-form-consent a{color:var(--tp-navy);font-weight:600;text-decoration:underline}
+.tp-form-done,.tp-form-err{border-radius:12px;padding:18px 18px 14px;font-size:15px;line-height:1.65}
+.tp-form-done[hidden],.tp-form-err[hidden]{display:none}
+.tp-form-done{background:#F3F8F1;border:1px solid #BED7B4;color:var(--tp-ink)}
+.tp-form-done strong{display:block;font-size:17px;margin:0 0 10px}
+.tp-form-done ol{margin:0;padding-left:22px}
+.tp-form-done li+li{margin-top:4px}
+.tp-form-err{background:#FFF6F3;border:1px solid #E7B9AE;color:var(--tp-ink);margin-top:12px}
+.tp-form-err a{color:var(--tp-navy);font-weight:700;text-decoration:underline}
+.tp-disclaimer{font-size:12px;line-height:1.6;color:var(--tp-ink-dim);margin:10px 0 0}
+
+/* ── Block 2：流程圖 .tp-flow（桌機 4 格橫排＋金色連接線；手機直向堆疊、線改垂直） ── */
+.tp-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;list-style:none;margin:32px 0 0;padding:0}
+.tp-flow-step{position:relative;padding:0 12px;text-align:center}
+.tp-flow-step:not(:last-child)::after{content:"";position:absolute;top:23px;left:50%;width:100%;height:3px;background:var(--tp-gold);opacity:.6}
+.tp-flow-num{position:relative;z-index:1;width:48px;height:48px;border-radius:50%;background:var(--tp-gold);color:var(--tp-navy-deep);font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 0 0 5px var(--tp-bg,#fff)}
+.tp-flow-step picture{display:block}
+.tp-flow-step img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;margin:0 0 14px;background:#fff}
+.tp-flow-title{font-size:18px;line-height:1.4;font-weight:700;color:var(--tp-ink);margin:0 0 6px}
+.tp-flow-time{color:var(--tp-gold-deep);font-weight:600;font-size:15px}
+.tp-flow-text{font-size:15px;line-height:1.65;color:var(--tp-ink-dim);margin:0}
+.tp-flow-note{font-size:12px;color:var(--tp-ink-dim);margin:20px 0 0;text-align:center}
+
+/* ── Block 3：資料清單 .tp-docs（5 個圓形插圖＋標題） ── */
+.tp-docs{display:grid;grid-template-columns:repeat(5,1fr);gap:20px 16px;list-style:none;margin:8px 0 12px;padding:0}
+.tp-doc{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.tp-doc picture{display:block}
+.tp-doc img{width:104px;height:104px;border-radius:50%;object-fit:cover;display:block;background:var(--tp-cream);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--tp-gold-soft)}
+.tp-doc-title{font-size:15px;line-height:1.5;font-weight:600;color:var(--tp-ink);margin:0}
+.tp-doc-sub{display:block;font-size:13px;font-weight:400;color:var(--tp-ink-dim)}
+
+/* ── Block 4：留了資料之後 ── */
+.tp-after{list-style:none;margin:0 0 24px;padding:0;counter-reset:tp-after}
+.tp-after li{position:relative;padding:0 0 0 48px;margin:0 0 16px;font-size:17px;line-height:1.65;counter-increment:tp-after}
+.tp-after li::before{content:counter(tp-after);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--tp-gold);color:var(--tp-navy-deep);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+.tp-tels{display:flex;flex-wrap:wrap;gap:12px}
+.tp-tel{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:56px;padding:10px 18px;border-radius:12px;background:#fff;color:var(--tp-ink);border:1.5px solid var(--tp-line);text-decoration:none;transition:border-color .2s}
+.tp-tel:hover{border-color:var(--tp-gold)}
+.tp-tel strong{font-size:20px;line-height:1.2;color:var(--tp-navy);font-variant-numeric:tabular-nums}
+.tp-tel span{font-size:13px;color:var(--tp-ink-dim)}
+
+/* ── Block 6：下一步 ── */
+.tp-next-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.tp-next-alt{font-size:16px;line-height:1.7;color:var(--tp-ink)}
+.tp-next-alt p{margin:0 0 14px}
+.tp-link{color:var(--tp-navy);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.tp-btn-line{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:12px;background:#fff;color:var(--tp-ink);border:1.5px solid var(--tp-line);font-size:16px;font-weight:700;text-decoration:none;transition:border-color .2s}
+.tp-btn-line:hover{border-color:var(--tp-gold)}
+.tp-siblings{margin:24px 0 0;padding:20px 0 0;border-top:1px solid var(--tp-line)}
+.tp-siblings-title{font-size:14px;font-weight:700;color:var(--tp-gold-deep);letter-spacing:.06em;margin:0 0 10px}
+.tp-chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.tp-chips a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--tp-line);background:#fff;font-size:14px;font-weight:500;color:var(--tp-ink);text-decoration:none;transition:background-color .2s}
+.tp-chips a:hover{background:var(--tp-cream)}
+
+/* ── <details> 折疊區 .tp-more（Block 3 資料清單、Block 7 想了解更多共用） ── */
+.tp-more{border:1px solid var(--tp-line);border-radius:12px;background:#fff;margin:0 0 12px}
+.tp-more>summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px;font-size:17px;font-weight:700;color:var(--tp-ink);cursor:pointer;list-style:none}
+.tp-more>summary::-webkit-details-marker{display:none}
+.tp-more>summary::after{content:"＋";font-size:22px;font-weight:400;color:var(--tp-ink-dim);flex-shrink:0;transition:transform .3s}
+.tp-more[open]>summary::after{transform:rotate(45deg)}
+.tp-more-body{padding:0 20px 8px}
+.tp-more-body>section{padding-top:16px;padding-bottom:24px}
+
+/* ── 手機常駐底欄 .tp-bar（只在 <768px 顯示） ── */
+.tp-bar{display:none}
+@media(max-width:767px){
+  .tp-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:998;background:var(--tp-navy);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
+  .tp-bar-lead,.tp-bar-tel{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:60px;font-family:inherit;font-size:16px;font-weight:700;border:0;cursor:pointer;text-decoration:none;letter-spacing:.02em}
+  .tp-bar-lead{flex:1.35;background:var(--tp-gold);color:var(--tp-navy-deep)}
+  .tp-bar-tel{background:var(--tp-navy);color:#fff}
+  /* 底欄出現時（inline-form 的 JS 會給 body 加 tp-has-bar）：body 讓出高度免遮 footer；footer 的舊 sticky bar 讓位；小鋮浮動鈕上移 */
+  body.tp-has-bar{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
+  body.tp-has-bar .cx-sticky-cta{display:none!important}
+  body.tp-has-bar .cw-launch{bottom:calc(76px + env(safe-area-inset-bottom))}
+  body.tp-has-bar .cw-teaser{bottom:calc(88px + env(safe-area-inset-bottom))}
+  body.tp-has-bar .cw-panel{bottom:calc(148px + env(safe-area-inset-bottom))}
+}
+
+/* ── 手機版 ── */
+@media(max-width:900px){
+  .tp-hero-grid,.tp-grid-2,.tp-next-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  .tp-hero-img{aspect-ratio:4/3}
+  .tp-docs{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:767px){
+  .tp-in{padding:0 16px}
+  .tp-sec{padding:48px 0}
+  .tp-hero{padding:32px 0 40px}
+  .tp-h1{font-size:32px}
+  .tp-h2{font-size:26px}
+  .tp-sub{font-size:16px}
+  /* 流程改直向：號碼在左、內容在右、垂直金線 */
+  .tp-flow{grid-template-columns:1fr}
+  .tp-flow-step{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:16px;text-align:left;padding:0 0 28px}
+  .tp-flow-step:not(:last-child)::after{top:48px;left:23px;width:3px;height:calc(100% - 48px)}
+  .tp-flow-num{grid-row:1/span 3;margin:0}
+  .tp-flow-step picture,.tp-flow-title,.tp-flow-text{grid-column:2}
+  .tp-flow-step picture{max-width:180px}
+  .tp-docs{grid-template-columns:1fr;gap:12px}
+  .tp-doc{flex-direction:row;text-align:left;gap:14px}
+  .tp-doc img{width:64px;height:64px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tp-symptom-item,.tp-form-open,.tp-form-submit,.tp-more>summary::after{transition:none}
+}

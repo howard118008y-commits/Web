@@ -1,0 +1,175 @@
+<meta name="robots" content="noindex">
+<!-- 共用元件：主題頁內嵌 2 欄表單（稱呼＋手機）。2026-09-18 B0。
+     用 <div data-include="inline-form" data-topic="private-to-bank" data-from="private-to-bank.html"></div> 載入；
+     同一頁可載兩次（第 0 塊與第 6 塊），故全部用 class、以各自 .tp-form-wrap 為 scope，不用 id。
+     樣式在 topic.css（.tp-form*）。提交路徑與 lead-form.html 完全相同：
+     Web3Forms 主軌 → best-effort 通知 linebot /lead（失敗打 /lead-fail）；欄位名與 lead-form 一致，後台名單系統不用改。
+     欄位名用英文 ASCII（Web3Forms 對中文欄位名會編碼亂碼）。
+     data-topic → Service 對映表（TOPIC_SERVICE）在下方 JS，新主題在那裡加一行。 -->
+<div class="tp-form-wrap">
+  <form class="tp-form" novalidate>
+    <input type="hidden" name="access_key" value="b2959b73-847e-4a81-bd4f-e3a9de65713a">
+    <input type="hidden" name="subject" value="鋮馨官網｜主題頁留資料新進件">
+    <input type="hidden" name="from_name" value="鋮馨官網 主題頁">
+    <input type="hidden" name="Service" value="">
+    <input type="hidden" name="Source" value="">
+    <input type="hidden" name="Message" value="">
+    <input type="checkbox" name="botcheck" class="tp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button type="button" class="tp-form-open">留資料，我們幫你看</button>
+    <div class="tp-form-body" hidden>
+      <label class="tp-field">
+        <span class="tp-field-label">怎麼稱呼你 *</span>
+        <input type="text" name="Name" autocomplete="name" maxlength="40" required aria-required="true" placeholder="例：王先生、陳小姐">
+        <span class="tp-field-msg" hidden></span>
+      </label>
+      <label class="tp-field">
+        <span class="tp-field-label">手機 *</span>
+        <input type="tel" name="Phone" autocomplete="tel" inputmode="tel" maxlength="20" required aria-required="true" placeholder="09xx-xxx-xxx">
+        <span class="tp-field-msg" hidden></span>
+      </label>
+      <button type="submit" class="tp-form-submit">送出，1 個工作天內回你</button>
+    </div>
+    <p class="tp-form-note">不申請不收費 · 1 個工作天內回覆 · 曾被銀行拒絕仍可重新評估</p>
+    <p class="tp-form-consent">送出代表你同意我們依<a href="privacy-policy.html">《隱私權政策》</a>聯繫你</p>
+  </form>
+  <div class="tp-form-done" role="status" hidden>
+    <strong>收到了。1 個工作天內，經理鄭小姐會用 LINE 或電話聯絡你。</strong>
+    <ol>
+      <li>1 個工作天內，經理鄭小姐用 LINE 或電話聯絡你。</li>
+      <li>先聽狀況、不催辦；不申請不收費，面談不收費。</li>
+      <li>可行才提案，不可行也直接告訴你，不浪費你時間。</li>
+    </ol>
+  </div>
+  <div class="tp-form-err" role="alert" hidden>送出沒成功。請直接打 <a href="tel:02-2249-0517">02-2249-0517</a>，或加 LINE：<a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">https://lin.ee/PHIfSoY</a>，我們一樣幫你看。</div>
+  <p class="tp-disclaimer">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+</div>
+<script>
+(function(){
+  /* include.js 把片段子節點插到 placeholder 前、再移除 placeholder；本 script 執行當下：
+     previousElementSibling＝本份 .tp-form-wrap，nextElementSibling＝還在 DOM 的 placeholder（讀 data-topic / data-from）。
+     兩者都有 querySelector 備援，每份 wrap 只初始化一次（data-tp-ready）。 */
+  var s=document.currentScript;
+  var prev=s&&s.previousElementSibling;
+  var wrap=(prev&&prev.classList&&prev.classList.contains('tp-form-wrap'))?prev:document.querySelector('.tp-form-wrap:not([data-tp-ready])');
+  if(!wrap||wrap.dataset.tpReady) return;
+  wrap.dataset.tpReady='1';
+  var next=s&&s.nextElementSibling;
+  var ph=(next&&next.dataset&&next.dataset.include==='inline-form')?next:document.querySelector('[data-include="inline-form"]');
+
+  /* data-topic → Service 顯示值（與 lead-form.html ?topic= 預選用同一張表） */
+  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢'};
+  var topic=(ph&&ph.dataset.topic)||'';
+  var from=(ph&&ph.dataset.from)||(location.pathname.split('/').pop()||'');
+  var service=TOPIC_SERVICE[topic]||'';
+
+  var form=wrap.querySelector('form.tp-form');
+  var openBtn=wrap.querySelector('.tp-form-open');
+  var body=wrap.querySelector('.tp-form-body');
+  var nameEl=form.querySelector('input[name="Name"]');
+  var phoneEl=form.querySelector('input[name="Phone"]');
+  var submitBtn=wrap.querySelector('.tp-form-submit');
+  var done=wrap.querySelector('.tp-form-done');
+  var err=wrap.querySelector('.tp-form-err');
+  form.querySelector('input[name="Service"]').value=service;
+  form.querySelector('input[name="Source"]').value=from;
+  if(service) form.querySelector('input[name="subject"]').value='鋮馨官網｜主題頁留資料新進件（'+service+'）';
+
+  /* 手機／市話：去空白、連字號、括號後驗。接受 09xx-xxx-xxx／09xxxxxxxx／02-xxxx-xxxx／(02)xxxxxxxx */
+  var PHONE_RE=/^(?:09\d{8}|0[2-8]\d{7,8})$/;
+  function phoneOk(v){ return PHONE_RE.test(String(v||'').replace(/[\s\-()（）]/g,'')); }
+  function fieldMsg(input,text){
+    var m=input.parentNode.querySelector('.tp-field-msg'); if(!m) return;
+    if(text){ m.textContent=text; m.hidden=false; } else { m.textContent=''; m.hidden=true; }
+  }
+
+  function expand(focus){
+    if(body.hidden){ body.hidden=false; openBtn.hidden=true; }
+    if(focus&&nameEl) nameEl.focus({preventScroll:true});
+  }
+  wrap.tpExpand=expand;
+  openBtn.addEventListener('click',function(){ expand(true); });
+
+  function symptomText(){
+    var picked=[];
+    document.querySelectorAll('.tp-symptom:checked').forEach(function(cb){
+      var lab=cb.closest('label'); var t=(lab?lab.textContent:'').replace(/\s+/g,' ').trim(); if(t) picked.push(t);
+    });
+    return picked.length?picked.join('／'):'無';
+  }
+  /* 送出成功：頁上每一份表單都換成成功狀態（同一頁載兩次，避免重複送） */
+  function markDoneAll(){
+    document.querySelectorAll('.tp-form-wrap').forEach(function(w){
+      var f=w.querySelector('form.tp-form'), d=w.querySelector('.tp-form-done'), e=w.querySelector('.tp-form-err');
+      if(f) f.hidden=true; if(e) e.hidden=true; if(d) d.hidden=false;
+    });
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(submitBtn.disabled) return;
+    err.hidden=true; fieldMsg(nameEl,''); fieldMsg(phoneEl,'');
+    expand(false);
+    var name=(nameEl.value||'').trim();
+    if(!name){ fieldMsg(nameEl,'請留一個稱呼，方便我們回電。'); nameEl.focus(); return; }
+    if(!phoneOk(phoneEl.value)){ fieldMsg(phoneEl,'請填台灣手機（09 開頭 10 碼）或含區碼的市話，例如 02-2249-0517。'); phoneEl.focus(); return; }
+    form.querySelector('input[name="Message"]').value='勾選狀況：'+symptomText()+'；來源頁：'+from;
+    var orig=submitBtn.textContent; submitBtn.disabled=true; submitBtn.textContent='送出中…';
+
+    /* 同步通知自家後端推 LINE／Telegram（best-effort，失敗不影響主流程；與 lead-form.html 同一段）
+       通知通道獨立監測；不傳訪客資料至失敗紀錄，也不自動重送造成重複名單。 */
+    var noticeController=typeof AbortController==='function'?new AbortController():null;
+    var noticeTimer=noticeController?setTimeout(function(){ noticeController.abort(); },20000):null;
+    Promise.resolve().then(function(){
+      var options={method:'POST',body:new FormData(form)};
+      if(noticeController) options.signal=noticeController.signal;
+      return fetch('https://cx468-linebot.onrender.com/lead',options);
+    }).then(function(r){
+      if(!r.ok) throw new Error('HTTP_'+r.status);
+    }).catch(function(e){
+      var code=e&&e.name==='AbortError'?'timeout':(/^HTTP_\d{3}$/.test(e&&e.message)?e.message:'network_error');
+      return fetch('https://cx468-linebot.onrender.com/lead-fail',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({track:'inline_form_lead',err:code})
+      }).catch(function(){});
+    }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
+
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+    })
+    .then(function(r){ if(!r.ok) throw new Error('submit_failed'); return r.json(); })
+    .then(function(j){
+      if(j.success){
+        markDoneAll();
+        if(window.gtag) gtag('event','generate_lead',{page_path:location.pathname,form:'inline',topic:topic});
+        if(window.fbq) fbq('track','Lead');
+      }else{ throw new Error(j.message||'送出失敗'); }
+    })
+    .catch(function(){
+      submitBtn.disabled=false; submitBtn.textContent=orig;
+      err.hidden=false;
+    });
+  });
+
+  /* 頁級只綁一次：勾任一 .tp-symptom、按底欄 [data-tp-open] → 展開第 0 塊表單並捲過去 */
+  if(!window.__tpFormBound){
+    window.__tpFormBound=true;
+    function firstWrap(){ return document.querySelector('.tp-form-wrap'); }
+    function openFirst(focus){
+      var w=firstWrap(); if(!w||!w.tpExpand) return;
+      w.tpExpand(focus);
+      var top=w.getBoundingClientRect().top+window.pageYOffset-80;
+      window.scrollTo({top:top,behavior:'smooth'});
+    }
+    document.addEventListener('change',function(e){
+      var t=e.target; if(!t||!t.classList||!t.classList.contains('tp-symptom')||!t.checked) return;
+      var w=firstWrap(); var b=w&&w.querySelector('.tp-form-body');
+      if(b&&b.hidden) openFirst(false);   /* 第一次勾才捲動，之後繼續勾不打斷 */
+    });
+    document.addEventListener('click',function(e){
+      var b=e.target&&e.target.closest&&e.target.closest('[data-tp-open]'); if(!b) return;
+      e.preventDefault(); openFirst(true);
+    });
+    if(document.querySelector('.tp-bar')) document.body.classList.add('tp-has-bar');
+  }
+})();
+</script>

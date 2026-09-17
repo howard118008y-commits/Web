@@ -403,6 +403,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   var qs=new URLSearchParams(location.search);
   if(qs.get('restart')||st.done){ st={}; clearSaved(); }
   var qTopic=qs.get('topic');
+  /* 主題頁 ?from= 寫進 Source 欄位（2026-09-18 B0），沒帶就維持 intake */
+  var qFrom=qs.get('from')||''; var fSource=document.querySelector('input[name="Source"]');
+  if(fSource && /^[\w.-]{1,80}$/.test(qFrom)) fSource.value=qFrom;
   if(qTopic && TOPIC_LABEL[qTopic]){
     if(st.topic!==qTopic){ st={topic:qTopic}; }
     if(!st.stepName || st.stepName==='topic') st.stepName = qTopic==='financing' ? 'lead' : 'stage';

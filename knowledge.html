@@ -1074,6 +1074,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       });
     });
   });
+  /* 主題頁 ?topic= 預篩（2026-09-18 B0）：對映到既有分類鈕就觸發 click；沒對應分類（如 corporate）維持全部文章 */
+  var TOPIC_CAT = {'private-to-bank': '民間轉銀行', 'leaseback': '售後回租', 'inherited': '繼承不動產', 'debt': '貸款整合', 'second-mortgage': '二胎房貸'};
+  var want = TOPIC_CAT[new URLSearchParams(location.search).get('topic') || ''];
+  if (want) { btns.forEach(function (b) { if (b.textContent.trim() === want) b.click(); }); }
 })();
 </script>
 </body>
