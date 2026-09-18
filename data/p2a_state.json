@@ -64,6 +64,11 @@
    "date": "2026-09-17",
    "file": null,
    "status": "sensitive_no_go"
+  },
+  "threads:18115257211951422": {
+   "date": "2026-09-18",
+   "file": null,
+   "status": "gate_regex"
   }
  },
  "published": [
