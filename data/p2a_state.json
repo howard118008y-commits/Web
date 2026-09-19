@@ -69,6 +69,11 @@
    "date": "2026-09-18",
    "file": null,
    "status": "gate_regex"
+  },
+  "threads:17951434392253195": {
+   "date": "2026-09-19",
+   "file": "article-sale-leaseback-avoid-fire-sale.html",
+   "status": "published"
   }
  },
  "published": [
@@ -92,6 +97,13 @@
    "title": "房子被查封就沒救了嗎？",
    "source": "threads:18163028734486370",
    "source_url": "https://www.threads.com/@cx468468/post/DdNtQ20GzcX"
+  },
+  {
+   "date": "2026-09-19",
+   "file": "article-sale-leaseback-avoid-fire-sale.html",
+   "title": "房子非賣不可時，還有別的選擇嗎？",
+   "source": "threads:17951434392253195",
+   "source_url": "https://www.threads.com/@cx468468/post/DdalRhSG-DM"
   }
  ]
 }
