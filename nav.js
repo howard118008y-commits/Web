@@ -33,7 +33,7 @@
     '.cx-cta{background:#C8945A;color:#12213A;font-weight:700;font-size:14.5px;padding:10px 22px;border-radius:999px;white-space:nowrap}',
     '.cx-cta:hover{background:#E0B685}',
     '.cx-burger{display:none;background:none;border:0;color:#F2EFE8;font-size:24px;cursor:pointer;padding:4px 6px}',
-    '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:#12213A;overflow:auto;padding:16px 20px 40px;z-index:99}',
+    '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:#12213A;color:#F2EFE8;overflow:auto;padding:16px 20px 40px;z-index:99}',
     '.cx-sheet.open{display:block}',
     '.cx-sheet details{border-bottom:1px solid #2C4A6B}',
     '.cx-sheet summary{list-style:none;padding:16px 4px;font-size:16px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between}',
