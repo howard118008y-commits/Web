@@ -6,14 +6,14 @@
 > 前次：2026-09-14 04:xx 另一 session 的矩陣第一批（第三節 🟢，已改標為已部署）；再前次 2026-09-09。
 > 本次更新原因：Sir 09-14 四項裁示落地（電話兩支為主／售後回租統一 A／企業貸款頁留但健檢在前／文字憲法放鬆改 SEO 為主）＋ 全站配色對齊主頁 Phase 1–2 上線 ＋ 09-11～13 另一 session 153 檔改動全部審過。一、三、四、五節重寫；二節與三節 🟢 保留。
 
-## 一、當前狀態快照（2026-09-18 05:0x 收工重驗，每項附指令）
+## 一、當前狀態快照（2026-09-20 00:2x 重驗，每項附指令）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | **`2315351`＝origin/main（09-18 05:0x 重驗；`7d8fa93` 之後是 cloud-code-aa／0a 的主題頁＋新聞卡鏈 `03e9d3e`→`aedd155`→`8339a2e`→`803c315`→`63b2f6f`→`2315351`，見第八節與其接手 session）**。09-18 00:5x 地區軸二胎批（Sir 令部署、CI＋Pages success、兩新頁線上 200，05:0x 複驗仍 200）：`2c97ec0` geo 77 頁＋4G 加土城 → `c5d6789` 永和／土城二胎頁＋接線 → `9468a93` docs；worktree `~/cx468-letter` 與分支 `letter-close` 已收。09-17 鏈：`b63bbd9`＝09-17 部署鏈：`3b7f0aa` 機械四項 → `f4c7ae2` 第三批 6 頁 → `2449dd2` docs → `7a03add` pf3（三支 property-finance 重寫＋SLB 4G）→ `b63bbd9` docs。09-14 鏈：`4c50d13` Phase 3＋撥號 CTA → `07f9a42` 矩陣第二批 | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -8` |
-| CI／Pages | `9468a93` 兩者 success（00:5x）；其後主題頁鏈的 run 由該 session 驗 | `gh run list -L 2` |
-| 工作區 | 05:0x：`M inline-form.html`、`M lead-form.html` 是**平行 session（cloud-code-0a／aa 主題頁 B2）半成品，勿 add／勿 checkout --**；未追蹤 `scripts/archive/goal-scores.jsonl` 非本專案產物勿 add；無 worktree | `git status -s`；`git worktree list` |
-| 閘門 | ci_check **182 檔 0 問題**（09-18 05:0x，含平行 session 未提交 M 檔）；FAQ 同源 **147 頁零漂移**（05:0x）；audit-regression **18/18（09-18 00:4x，9468a93 樹）**；新頁 JSON-LD 12 塊 json.loads 通過 | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
+| HEAD | **`cb51af5`＝origin/main（09-20 00:2x 重驗；CI＋Pages success 台北 09-20 00:13）**。09-18～19 鏈（cloud-code-d0 主題頁改造，計畫 `行銷產出/策略簡報/2026-09-17-導覽列主題分頁改造計畫.md`）：`8339a2e` B0/B1 private-to-bank → `803c315`／`63b2f6f`／`2315351` Block 3／6／0 → `abcf5f3` B2 三頁 → `ddfbefb` B3 繼承 2＋SLB、B4 企業 2 → `be96724` B5 小工具／案例 8 頁橋接區 → `69e0bf4` p2a 09-19 文章 → `cb51af5` nav 手機選單字色修。其前 `03e9d3e` 新聞卡第 3 週換稿（央行 9/17）、`9468a93` 永和／土城二胎＋geo 77 頁（09-18 00:5x） | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -12` |
+| CI／Pages | `cb51af5` 兩者 success（2026-09-19T16:13Z＝台北 09-20 00:13） | `gh run list -L 3` |
+| 工作區 | 09-20 00:2x：**8 個 M 屬 cloud-code-d0**（footer／privacy-policy／banqiao・sanchong・tucheng・xinzhuang・yonghe・zhonghe-corporate-checkup＝媽祖 09-19 兩項全站裁示：「不經第三方表單服務」歸零＋二胎頁尾「免費」鏈改字；媽祖複核中，它自己 commit＋push）——**勿 add／勿 checkout --**；未追蹤 `scripts/archive/goal-scores.jsonl` 非本專案產物勿 add；無 worktree | `git status -s`；`git worktree list`；認領用 `ListAgents`＋`SendMessage` |
+| 閘門（乾淨樹） | ci_check **183 檔 0 問題**（09-20 00:2x，只含已追蹤檔的 rsync 樹）；FAQ 同源 **148 頁零漂移／30 頁無 FAQ**；audit-regression **本次未跑**（scratch 的 linkedom 不在；最後一次 18/18 是 09-18 00:4x 的 9468a93 樹）；主題頁 17 頁 `data-include="inline-form"` | `python3 scripts/ci_check.py`；`NODE_PATH=<scratch>/nodedeps/node_modules node scripts/audit-regression.cjs`（需 `npm i linkedom@0.18.12`）；`python3 scripts/audit_faq_samesource.py` |
 | 設計（Phase 1–3 全上線） | Phase 3（`4c50d13`）：`footer.html` paper 版（147 頁共用，選擇器掛 `.cx-site-footer` 非 `:where`）；新檔 `theme.css` 掛 A 族 67 頁 `</head>` 前（Sans 內文／Serif 900 標題／hero 漸層 `:has` 排除 `.art-title` 白底型／金鈕＋cream 幽靈鈕）；`style.css` body 字體、`.btn-green/.btn-line` 金、footer 區段移除；60 頁字型 link 補 Sans＋Serif 900、6 頁補 link；C 族 74 頁 `.bt-cta .bt-btn-ghost` 白底細邊；`gen_radar_v4.py` 模板掛 theme.css 並修 f-string 大括號 SyntaxError。Phase 1–2 同前 | 線上 `curl -s https://cx468.com.tw/second-mortgage.html \| grep -c 'bt-hero{background:linear-gradient'` → 1；`grep -l 'data-theme="light"' *.html \| wc -l` → 0 |
 | 二胎撥號 CTA（已上線） | 12 個 LINE-only 正文群組各加「撥打 02-2249-0517」（7 頁）＋ lp-zhonghe／lp-tucheng／calculator 來電鈕 0931→02；媽祖 11/11 PASS（`grep -c "tel:0222490517" second-mortgage.html` → 應 ≥4） |
 | 追蹤 | `consultation-tracking.js` 掛 **65 頁**（PR#5 補 36 盲頁＋矩陣 6＋5 頁＋radar；實數以 grep 為準）；真瀏覽器實測 glossary／中和售後回租／台北地價稅點 sticky CTA → `line_click`＋`phone_click` 進 dataLayer | `grep -l consultation-tracking.js *.html \| wc -l`；`python3 scripts/ci_check.py` 內建 check_conversion_tracking |
@@ -22,11 +22,11 @@
 | 售後回租定義 | 全站統一 A 版「並可保有日後依約買回的權利」；「買回權利須另行約定」型改寫 0 | `grep -l '買回權利[須需]另行約定' *.html \| wc -l` → 0 |
 | 企業線 | `corporate-loan.html` 保留（index/follow、nav 群組「企業貸款」），首段＋meta 寫明「先做公司財務健檢，健檢看完即使資歷不足也協助媒合企業貸款」；nav 群組健檢排第一 | `curl -s https://cx468.com.tw/corporate-loan.html \| grep -c 先做公司財務健檢` → 2 |
 | 「20 年」主詞 | 全站團隊（`cfd7061` 09-09 91 檔）；p2a 模板／小鋮提示詞亦改（跨 repo，見下） | 全站無主詞殘留掃描 0（腳本在 `scripts/fix_20year_subject.py`，冪等） |
-| p2a 日更 | Render `cx468-p2a-publish` live `138ab9b`；09-13 已產 `article-inherited-house-sell-or-keep.html`；模板已改掛 nav.js、org schema 主詞團隊、contactPoint 0958 | `git -C ~/cx468-fb-news-bot log --oneline -2`；`gh api repos/howard118008y-commits/Web/commits?path=article-inherited-house-sell-or-keep.html` |
+| p2a 日更 | Render `cx468-p2a-publish` HEAD `8c9d449`（09-18 GO 閘門拆除：敏感稿不等 GO、SKIP 仍擋）；09-19 已產 `article-sale-leaseback-avoid-fire-sale.html`（`69e0bf4`）；閘門 b FAIL 已印原因（`p2a_job.py:196`）；**排程仍是 `render.yaml:110` draft `0 0`／`:141` publish `0 2`（UTC＝台北 08:00／10:00），T8 要改 `15 9`＋註解同步** | `git -C ~/cx468-fb-news-bot log --oneline -3`；`grep -n schedule ~/cx468-fb-news-bot/render.yaml` |
 | linebot／ga4-daily | Render live `37ed7f6`（小鋮提示詞）／`a74f06c`（09-03 卡在本機的健檢修正已推） | Render API `services/*/deploys?limit=1` |
-| 三日健檢 | 09-11／09-14／09-17 三次都推 Telegram；**09-17 🔴×6**：新聞卡逾 10 天／p2a 三天 0 文／Threads 佇列剩 4（09-21 見底）／週報監控瞎（launchd 無 iCloud 權限）／銀行條文複查逾 6 天／Meta spend_cap 決策逾 27 天——**連三次沒人接**（memory `feedback_act_on_telegram_alerts`） | `grep -n "Telegram 已推" ~/cx468-ga4-daily/logs/healthcheck.out \| tail -3`；報告在 `行銷產出/技術記錄/健檢/` 最新一份 |
+| 三日健檢 | 最新報告 `行銷產出/技術記錄/健檢/2026-09-17.md`；launchd `com.cx468.healthcheck` 在列（exit 0），09-20 這輪看 `healthcheck.out` 尾段；09-17 🔴×6 中新聞卡／Threads／週報三條已解，剩 週報監控瞎（T4）／銀行條文／Meta spend_cap——**收到要有人接**（memory `feedback_act_on_telegram_alerts`） | `grep -n "Telegram 已推" ~/cx468-ga4-daily/logs/healthcheck.out \| tail -3` |
 | 廣告（09-17 23:xx 取） | Meta：真正 ACTIVE 4 adset 日預算合計 NT$368（上限 1,500 未超）；近 7 天（09-10～16）NT$6,137→11 名單；balance 1,618／cap 20,000 已花 11,042；被壓 adset 10 支掛 2,100（+CBO 3,400）。Google：餘額 1,811、本月 933、近 7 天 10 支全 0 轉換。**09-17 04:03 新開 `CX_V1_20260916_雙北桃園_7D` 兩平台各一支（流量型；Google 當日 2,658 曝／95 點／$150）——來源與媽祖紀錄待 Sir 說明** | `python3 ~/.cx468/meta_ads_cli.py get act_1693554028195795/campaigns --fields=name,status,daily_budget`；`~/.cx468/gads-venv/bin/python ~/.cx468/gads_accounts.py` |
-| Threads | Render token 有效、每日 12:30 準時發；**本機 `~/.cx468/threads_token.txt` 是過期舊檔**，拿它測會誤判壞掉 | Render env `THREADS_ACCESS_TOKEN` 打 `graph.threads.net/v1.0/me` |
+| Threads | 佇列 **剩 12 則排到 10-01**（09-20 實算，算法 memory `project_threads_autopost`）；每日 12:30；`~/.cx468/threads_token_issued`＝2026-09-18（若該日續期成功，到期約 11-17；T9 要改讀 API 真值）；本機 `threads_token.txt` 仍是死檔 | Render env `THREADS_ACCESS_TOKEN` 打 `graph.threads.net/v1.0/me` |
 
 ⚠️ **三個路徑陷阱**（不變）：
 1. 網站程式碼在 `~/cx468-web/`，**不在 iCloud 專案夾**；`行銷產出/`、`知識庫/`、`制度/` 在 iCloud 專案夾。
@@ -97,6 +97,13 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 `~/.cx468/pending_reviews.json` → 三日健檢檢查4 自動倒數，逾期推 Telegram。**有硬截止又沒系統在盯的任務一律登記。**
 
 ## 三、未竟任務
+
+### 🟢 2026-09-18～19 導覽列主題分頁改造 B0–B5——**已上線（17 頁，cloud-code-d0 建造，HEAD `cb51af5`）**
+- 計畫正本 `行銷產出/策略簡報/2026-09-17-導覽列主題分頁改造計畫.md`；模板契約 memory `project_topic_page_template`（topic.css／inline-form 契約／插圖風格常數）。
+- 上線鏈：B0/B1 `8339a2e`（private-to-bank 試點＋頁內 2 欄表單）→ Block 3／6／0 `803c315`・`63b2f6f`・`2315351`（自然人憑證一張卡、滿版轉換區＋地址三步選擇、頂部表單同步）→ B2 `abcf5f3`（debt-consolidation／second-mortgage／xinbei-debt-consolidation＋插圖）→ B3＋B4 `ddfbefb`（inherited-property／article-inherited-co-owned-house-stuck／sale-leaseback；corporate-checkup／corporate-loan）→ B5 `be96724`（小工具／案例 8 頁底部橋接區，媽祖 09-19 複核通過）。
+- 09-20 00:2x 線上驗：debt-consolidation／second-mortgage／inherited-property／corporate-checkup／private-to-bank 皆 200，`data-include="inline-form"` 命中；`grep -l 'data-include="inline-form"' *.html | wc -l` → 17。
+- **未收尾（09-19 會議 §六硬期限，09-20 00:2x 取證）**：`xinbei-debt-consolidation.html` ai-bar 0（要 2）；`llms-full.txt` 無 xinbei（llms.txt 有）；xinbei sitemap lastmod 停 09-17（debt-consolidation 已 09-19）；全站「實際成數」仍 4 頁（要改「實際價金比例」，連 linebot T0 一起）；新北在地頁 HowTo step1/2 反 doorway 改寫未驗。
+- d0 手上 8 檔（媽祖兩項全站裁示）見第一節工作區列，它自己 push。
 
 ### 🟢 2026-09-14 矩陣擴張第一批（服務軸 6 頁）——**已部署**（另一 session 推 `89d002f` 09-14 14:08，線上 200）
 
@@ -240,7 +247,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 日常常態
 
-- 每天 12:00 精進會議（session 級排程，每個 session 用 CronCreate 重設）——**09-08～09-16 十天零正本**（cron 沒 session 就不跑，改制交 Sir）。最新正本 `行銷產出/精進會議/2026-09-17.md`，其 §六行動清單＝下一場 Step 0 基準（硬期限：新聞卡 09-19、週報 W37 09-19、Threads 佇列 09-20、p2a 三修 09-20、小鋮「最低」雙護欄 T0 09-20）。
+- 每天 12:00 精進會議（session 級排程，每個 session 用 CronCreate 重設）——**最新正本 `行銷產出/精進會議/2026-09-19.md`**（含 `2026-09-19-媽祖覆核.md`），其 §六＝下一場 Step 0 基準、§八「下次先驗五件」。09-17 §六硬期限現況（09-20 00:2x 取證）：新聞卡 ✅ `03e9d3e`、Threads ≥14 ✅（現剩 12 到 10-01）、週報 W37＋W38 ✅ 09-19 補寫、p2a 三修 🟡（GO 拆除＋FAIL 印原因已做，排程 17:15 未改＝T8）、**T0 小鋮「最低」雙護欄 ❌ 未動（`~/cx468-linebot/app.py:1844/1931/1941` 三處原樣，HEAD `37ed7f6`，期限 09-20）**。09-19 §六今日／明日硬期限：B2 sitemap ✅、llms.txt 接入 ✅、xinbei ai-bar ❌、「實際成數」❌ 4 頁、EP31+／新北 HowTo 未驗、iPAS Sir 09-22。
 - 三日健檢 `com.cx468.healthcheck` 會推 🔴 到 Telegram——**收到要有人接**（memory `feedback_act_on_telegram_alerts`）；09-08 那則還躺著「Meta spend_cap 決策逾期」「週報監控瞎了」等 4 條。
 - Threads 12:30；p2a 17:15（敏感稿要人回 GO，memory `feedback_human_go_gate_deadlocks_pipeline`）；`cx468-crawl` 每 2 小時。
 - 換新聞卡前 `git log --oneline -5 -- radar-index.html` 算服役天數。
@@ -248,7 +255,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 ## 四、等使用者的事項
 
 0. 🔴 **GSC 送 2 網址**（09-18 已上線）：`https://cx468.com.tw/yonghe-second-mortgage.html`、`https://cx468.com.tw/tucheng-second-mortgage.html`（TG 09-18 00:5x 那則）；之後三日健檢看 coverageState。原「等 Sir 五項」（GSC 12 網址／精進會議排程改制／首頁 footer 0931／三重新莊 AI 配圖／anti-fraud-modal 自然流量彈窗）不變。
-0-1. 🔴 **09-17 精進會議六件待裁**（原文在會議檔 §六）：①Meta spend_cap 逾 27 天（不回＝維持）；②精進會議觸發改 launchd `claude -p "/精進會議"` 或雲端 /schedule routine；③**CX_V1_20260916 雙北桃園_7D 兩平台廣告誰建的、過媽祖沒**（Google 餘額只夠 12 天）；④`anti-fraud-modal.html:183` 自然流量全屏彈窗（143 頁，插頁式判罰風險）三選一；⑤09-02 反詐文／EP15 分析／C-v3 判讀「棄用或做」＋「比特幣起源」private 刪或搬＋iPAS 報考＋銀行條文複查；⑥整合／轉銀行系列補不補 ai-bar。
+0-1. 🔴 **待裁清單以 `精進會議/2026-09-19.md` §六「🔴 Sir 決策」九項為準**（新增：Meta 11 支 adset 自身 ACTIVE 未爆彈、Google 餘額 10/02 見底、private-to-bank-search 零曝光查或關、`Chengxin_V1_Final_4K.mp4` 誤傳翻舊帳頻道建議下架、翻舊帳 09-22 斷更、Anthropic Admin key）；09-17 六件仍未答：①Meta spend_cap（逾 29 天，不回＝維持）②精進會議觸發改 launchd／雲端 routine ③CX_V1_20260916 誰建的、過媽祖沒（09-20 滿 3 天要決定續停）④anti-fraud-modal 三選一（已擴散 145 頁）⑤反詐文／EP15／C-v3＋比特幣起源 private＋銀行條文封存否 ⑥整合／轉銀行系列補 ai-bar 否。
 1. 🔴 **GMB 評論 1→20**（第二順位③，只有 Sir 能做）：「新北 房屋二胎」Local Pack 第 1 名 17 則、第 2/3 名 0 則照樣上榜。⛔ 商家名不塞關鍵字、類別維持「不動產管理服務」。
 2. 🔴 **Telegram 三日健檢的 🔴 要有人接**：09-08 推播列了「Meta spend_cap 決策逾期 18 天」「行銷週報檢查失效（launchd 無 iCloud 權限）」「銀行條文存證複查」——本 session 只修了 p2a 那條。
 3. **GSC 催收**：`docs/2026-09-09-GSC待送清單-額度滿順延.txt`（12＋6 條，09-14 已追加 contact／corporate-loan／sale-leaseback-guide 等）；矩陣 6 頁清單在第三節 🟢——**Sir 09-14 14:2x 已逐一送「網址審查→要求建立索引」**；**第二批 5 頁 `https://cx468.com.tw/{banqiao,sanchong,xinzhuang,tucheng,yonghe}-corporate-checkup.html` 16:2x 上線，等 Sir 送**，下一步是三日健檢看 coverageState＋lastCrawlTime（memory `feedback_indexed_but_stale_crawl`），別再重送。Sitemap 欄只放 sitemap.xml。
@@ -308,3 +315,8 @@ Sir 指令「1＋2」＝Phase 3 配色＋二胎頁撥號 CTA。兩件都做完�
 ## 九、本 session（2026-09-17 23:1x → 09-18 05:0x，接手信 1263629）做了什麼
 
 「把交接信做完」：矩陣待辦 #1／#2（pf3 已結）、#5 geo 兩組座標（`2c97ec0`：77 頁 meta＋首頁＋3 支產生器）、#6 地區軸二胎複製（`c5d6789`：永和／土城二胎頁＋接線）——**矩陣「全做」三順位全部完成並上線 `9468a93`**（Sir 00:5x 令部署），細節全在第三節 🟢 09-18；交接信 `7d8fa93`。memory 追加：`reference_nap_canonical`（NAP 三處同掃）、`project_local_page_series_rules`（09-17/18 六條）、`feedback_dispatch_prompt_must_requote_from_current_file`（§6 欄位抄錯實例）、`feedback_parallel_session_moves_head_mid_diagnosis`（datemod 拉別人頁＋zsh 不分詞）。**刻意沒做**：第三節 🟡 順帶發現（GA config 濾 query／「9 成」一二胎合計／nav.js 死變數／lvr 圖表紅系／計算器過時句／linebot 兩條）與 🟢 09-18 順帶發現四條（三支二胎頁麵包屑層數／「約 8 分鐘」／llms-full 無矩陣頁／共用 include 13.3px input）皆標「Sir 裁或另批」未動；土城頁 `tucheng-property-finance.html` L340 自稱「融資租賃業者」沿用未改。
+
+
+## 十、本 session（2026-09-18 06:2x → 09-20 00:3x，cloud-code-0a）做了什麼
+
+零建造。接手信 `64dc29f` 後任務欄空白，Sir 09-20 00:1x 令跑 /handover。做的事：①09-17 §六硬期限現場取證（結果在「日常常態」）；②12:00 精進會議 cron 重設過（session-only，本 session 收工即失效——09-19 那場由另一 session 主持）；③平行 session 認領：cloud-code-97＝地區軸二胎收尾（已結）、cloud-code-d0＝主題頁 B0–B5＋媽祖兩項全站裁示 8 檔（進行中）；④memory `project_threads_autopost` 補「剩幾天」算法（曾誤報 108 則）。**刻意沒做**：T0 小鋮雙護欄（09-20 到期、要算錢跑評測、Sir 令部署才推）；xinbei ai-bar／llms-full／「實際成數」四頁——都在 d0 的主題頁範圍，避免撞車未動。
