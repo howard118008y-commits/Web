@@ -344,6 +344,9 @@ img{max-width:100%;display:block}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"DefinedTermSet","name":"不動產融資名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"貸款整合","description":"將多筆高利率債務整併為一筆以不動產擔保的貸款，目標降低每月還款壓力。"},{"@type":"DefinedTerm","name":"負債比（DBR／DSR）","description":"衡量債務相對收入的指標，過高是常見的拒貸與整合需求原因。"},{"@type":"DefinedTerm","name":"循環利率","description":"信用卡未全額繳清時對未清償餘額計收的利率，通常偏高。"},{"@type":"DefinedTerm","name":"不動產擔保","description":"以不動產作為債務擔保，通常可換取較低利率。"},{"@type":"DefinedTerm","name":"二胎","description":"在既有第一順位房貸之外再設定第二順位抵押取得資金的貸款。"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"貸款整合流程：從今天到資金到位","description":"信貸、卡循、民間借款好幾筆的屋主，先留資料，鋮馨在 1 個工作天內聯絡了解狀況，再給可行的銀行方向與清償順序；能否整合與額度由金融機構審核。","step":[{"@type":"HowToStep","position":1,"name":"你留資料｜1 分鐘","text":"勾狀況、留電話和地址，先不用準備文件。"},{"@type":"HowToStep","position":2,"name":"我們回你｜1 個工作天內","text":"經理用 LINE 或電話聽你的狀況，先看、不催辦。"},{"@type":"HowToStep","position":3,"name":"給你方向｜看完資料後","text":"可行的銀行方向、要先清哪幾筆、月付會變多少，講清楚再決定。"},{"@type":"HowToStep","position":4,"name":"送件到撥款｜依個案","text":"銀行審核、清償舊債、資金銜接一次處理；時間依各銀行與個案而定。"}]}
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -362,193 +365,126 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 <link rel="stylesheet" href="consultation.css"><script src="consultation-tracking.js" defer></script>
+<link rel="stylesheet" href="topic.css">
 <style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style></head>
 <body>
 <div id="nav"></div>
 <script src="nav.js"></script>
 
-<!-- 1. Hero 左文右圖 -->
-<section class="bt-hero bt-sec">
-  <div class="bt-in bt-hero-grid">
-    <div class="bt-hero-text">
-      <div class="bt-eyebrow">貸款整合</div>
-      <h1 class="bt-h1">貸款整合：把多筆債務<em>併成一筆</em>較低月付</h1>
-      <p class="bt-p">新北中和的貸款整合怎麼算？信貸、卡債、民間借款多筆分開繳，每個月光利息就喘不過氣？整合成一筆銀行低利房貸，月付有機會明顯下降，實際依個案核定條件而定。</p>
-      <div class="cx-call-block" data-consultation-need="private_debt"><a class="cx-call-primary" href="tel:0222490517" data-link-location="hero">電話諮詢 02-2249-0517</a><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div><div class="bt-btns">
-        <a href="evaluate.html" class="bt-btn">免費評估省多少</a>
-        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 諮詢</a>
-        <a href="apply.html" class="bt-btn bt-btn-ghost">填表申請，專員回電</a>
+<!-- ═══ 主題頁 7 塊（2026-09-18 B2；結構複製自 private-to-bank.html B1；樣式 topic.css、class 前綴 tp-）═══ -->
+
+<!-- Block 0：問題確認＝表單第 1 步（hero 沿用真人照） -->
+<section class="tp-hero" id="tp-top" data-consultation-need="private_debt">
+  <div class="tp-in tp-hero-grid">
+    <div class="tp-hero-text">
+      <div class="tp-eyebrow">貸款整合</div>
+      <h1 class="tp-h1">貸款整合：把多筆債務<em>併成一筆</em>較低月付</h1>
+      <p class="tp-sub">點進來，代表你已經在算每個月要繳多少。勾一勾你的狀況，留電話和房屋地址，我們幫你先行初估。</p>
+      <div class="tp-symptoms" role="group" aria-label="勾選你的狀況">
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>信貸、卡循、民間好幾筆，每個月繳款日排滿</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>月付加起來超過收入一半，只能繳最低</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>想併成一筆，但不知道銀行看不看得上</span></label>
       </div>
+      <div data-include="inline-form" data-topic="debt-consolidation" data-from="debt-consolidation.html" data-address="1"></div>
       <div data-include="ai-bar" data-ai-q="多筆負債怎麼整合？|月付大概能降多少？|需要準備哪些文件？"></div>
     </div>
-    <img class="bt-hero-img" src="img/gen-home-dining.jpg" alt="台灣家庭餐桌，整合多筆負債後生活多一點喘息空間" fetchpriority="high" loading="eager">
+    <img class="tp-hero-img" src="img/gen-home-dining.jpg" alt="台灣家庭餐桌，整合多筆負債後生活多一點喘息空間" fetchpriority="high" loading="eager">
   </div>
+  <div class="tp-in tp-cue-row"><a class="tp-cue" href="#tp-help">往下看流程<span class="tp-cue-chev" aria-hidden="true"></span></a></div>
 </section>
 
-<!-- 快速答案（AEO speakable，id 不動） -->
-<section class="bt-sec">
-  <div class="bt-narrow">
-    <div id="quick-answer" class="bt-card bt-qa">
-      <div class="bt-label">快速答案</div>
-      <p><strong>多筆高利債務，整併成一筆低利房貸。</strong>貸款整合是把信貸、信用卡循環、民間借款等多筆高利率債務，整併為一筆以不動產擔保的低利率貸款，目標是大幅降低每月還款、止住現金流出血。名下有房、即使信用不完美也可評估。本公司非金融機構，最終核貸由金融機構決定。</p>
-      <ul>
-        <li><strong>整合對象</strong>：信貸、信用卡循環、民間借款、二胎等。</li>
-        <li><strong>目標</strong>：多筆變一筆，月付有機會明顯下降。</li>
-        <li><strong>關鍵</strong>：以不動產擔保換取較低利率與較長年限。</li>
-        <li><strong>適合</strong>：負債比過高、月付壓垮現金流者。</li>
-        <li><strong>提醒</strong>：可整合金額與利率依個案核貸條件而定。</li>
-      </ul>
+<!-- Block 1：我們怎麼幫你 -->
+<section class="tp-sec" id="tp-help">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">我們怎麼幫你</h2>
+      <p class="tp-lead">把信貸、卡循、民間借款這幾筆，整理成一筆銀行房貸。我們先把每一筆的餘額、利率、月付攤開，算出併成一筆之後每月現金流少支出多少（過往案例月付降 30–50%，依個案而定），再排清償順序。</p>
+      <p class="tp-lead tp-lead-dim">鋮馨不是銀行、不是放款方，是不動產融資諮詢與媒合顧問；能否整合與額度由金融機構審核。</p>
     </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/dc/help.avif"><source type="image/webp" srcset="img/theme/dc/help.webp"><img src="img/theme/dc/help.jpg" width="1024" height="1024" alt="桌上好幾張信貸、卡循與民間借款的帳單，被整理成一份銀行房貸文件" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- 2. 深色帶：核可案例月付對比（左圖右文） -->
-<section class="bt-dark bt-sec-96">
-  <div class="bt-in">
-    <div class="bt-dark-grid">
-      <figure>
-        <img class="bt-dark-img" src="img/gen-home-desk.jpg" alt="家中書桌上的帳本與老花眼鏡，整理財務" loading="lazy">
-        <figcaption>多筆負債整合成一筆，月付重新算過，生活多一點喘息空間。（情境示意）</figcaption>
-      </figure>
-      <div>
-        <div class="bt-label">核可案例 · 月付對比</div>
-        <div class="bt-nums">
-          <div>
-            <div class="bt-num-label">整合前 · 多筆分開繳</div>
-            <div class="bt-num"><span class="u">月付約 </span>6<span class="u"> 萬</span></div>
-          </div>
-          <div class="bt-num-arrow">→</div>
-          <div>
-            <div class="bt-num-label">整合後 · 一筆銀行房貸</div>
-            <div class="bt-num"><span class="u">月付約 </span>2.8<span class="u"> 萬</span></div>
-          </div>
-        </div>
-        <p class="bt-small">核可案例、非通案保證；每月降幅多在 30–50% 區間、個案可能更高。實際整合效果依個案財務狀況、不動產條件及銀行核定為準，最終核貸由金融機構決定。</p>
+<!-- Block 2：流程（.tp-flow 四格；標題與 <head> HowTo schema 四步 name 同源，改一處要改兩處） -->
+<section class="tp-sec tp-sec-cream" id="tp-flow">
+  <div class="tp-in">
+    <h2 class="tp-h2">流程：從今天到資金到位</h2>
+    <ol class="tp-flow">
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">1</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-1.avif"><source type="image/webp" srcset="img/theme/p2b/flow-1.webp"><img src="img/theme/p2b/flow-1.jpg" width="1024" height="1024" alt="屋主坐在客廳沙發，用手機勾選狀況並留下電話" loading="lazy"></picture>
+        <h3 class="tp-flow-title">你留資料<span class="tp-flow-time">｜1 分鐘</span></h3>
+        <p class="tp-flow-text">勾狀況、留電話和地址，先不用準備文件。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">2</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-2.avif"><source type="image/webp" srcset="img/theme/p2b/flow-2.webp"><img src="img/theme/p2b/flow-2.jpg" width="1024" height="1024" alt="鋮馨經理在辦公室接聽電話，邊聽邊記下客戶的狀況" loading="lazy"></picture>
+        <h3 class="tp-flow-title">我們回你<span class="tp-flow-time">｜1 個工作天內</span></h3>
+        <p class="tp-flow-text">經理用 LINE 或電話聽你的狀況，先看、不催辦。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">3</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-3.avif"><source type="image/webp" srcset="img/theme/p2b/flow-3.webp"><img src="img/theme/p2b/flow-3.jpg" width="1024" height="1024" alt="顧問與屋主面對面，在桌上攤開資料說明可行方向" loading="lazy"></picture>
+        <h3 class="tp-flow-title">給你方向<span class="tp-flow-time">｜看完資料後</span></h3>
+        <p class="tp-flow-text">可行的銀行方向、要先清哪幾筆、月付會變多少，講清楚再決定。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">4</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="銀行櫃檯前完成簽署，資金與清償銜接一次處理" loading="lazy"></picture>
+        <h3 class="tp-flow-title">送件到撥款<span class="tp-flow-time">｜依個案</span></h3>
+        <p class="tp-flow-text">銀行審核、清償舊債、資金銜接一次處理；時間依各銀行與個案而定。</p>
+      </li>
+    </ol>
+    <p class="tp-flow-note">流程插圖為情境示意。</p>
+  </div>
+</section>
+
+<!-- Block 3：現在不用準備任何文件（清單折進 <details>，不擋在表單前面） -->
+<section class="tp-sec" id="tp-docs">
+  <div class="tp-in">
+    <h2 class="tp-h2">現在不用準備文件，面談只要帶一張卡</h2>
+    <p class="tp-lead">留資料時什麼都不用準備。面談當天帶<strong>自然人憑證</strong>一張卡就好：你本人用自己的憑證、自己操作查閱你的聯徵信用報告，我們在旁邊陪你一起看。你也可以先自己上聯徵中心調閱，帶報告來。其他資料我們聽完狀況再跟你要，不用先跑地政或影印一堆。</p>
+    <details class="tp-more">
+      <summary>之後送件可能會用到的資料</summary>
+      <div class="tp-more-body">
+        <ul class="tp-docs">
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-1.avif"><source type="image/webp" srcset="img/theme/p2b/docs-1.webp"><img src="img/theme/p2b/docs-1.jpg" width="1024" height="1024" alt="自然人憑證卡片放在桌上" loading="lazy"></picture><p class="tp-doc-title">自然人憑證<span class="tp-doc-sub">（面談時你自己查聯徵用，也可先自行調閱）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-2.avif"><source type="image/webp" srcset="img/theme/p2b/docs-2.webp"><img src="img/theme/p2b/docs-2.jpg" width="1024" height="1024" alt="一份房屋謄本文件" loading="lazy"></picture><p class="tp-doc-title">房屋謄本<span class="tp-doc-sub">（我們可代查）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-3.avif"><source type="image/webp" srcset="img/theme/p2b/docs-3.webp"><img src="img/theme/p2b/docs-3.jpg" width="1024" height="1024" alt="民間借款的借據與設定資料" loading="lazy"></picture><p class="tp-doc-title">民間借款的借據或設定資料</p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-4.avif"><source type="image/webp" srcset="img/theme/p2b/docs-4.webp"><img src="img/theme/p2b/docs-4.jpg" width="1024" height="1024" alt="薪資轉帳明細與所得證明" loading="lazy"></picture><p class="tp-doc-title">近期收入證明<span class="tp-doc-sub">（薪轉、所得或營業資料）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-5.avif"><source type="image/webp" srcset="img/theme/p2b/docs-5.webp"><img src="img/theme/p2b/docs-5.jpg" width="1024" height="1024" alt="每月繳款明細單據" loading="lazy"></picture><p class="tp-doc-title">目前每月繳款明細</p></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Block 4：留了資料之後（電話兩支可點，族群 A） -->
+<section class="tp-sec tp-sec-cream" id="tp-after" data-consultation-need="private_debt" data-link-location="page">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">留了資料之後</h2>
+      <ol class="tp-after">
+        <li>1 個工作天內，經理鄭小姐用 LINE 或電話聯絡你。</li>
+        <li>先聽狀況、不催辦；不申請不收費，面談不收費。</li>
+        <li>可行才提案，不可行也直接告訴你，不浪費你時間。</li>
+      </ol>
+      <div class="tp-tels">
+        <a class="tp-tel" href="tel:02-2249-0517"><strong>02-2249-0517</strong><span>公司電話</span></a>
+        <a class="tp-tel" href="tel:0958-139-786"><strong>0958-139-786</strong><span>經理鄭小姐</span></a>
       </div>
     </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/p2b/after.avif"><source type="image/webp" srcset="img/theme/p2b/after.webp"><img src="img/theme/p2b/after.jpg" width="1024" height="1024" alt="鋮馨團隊成員拿著手機，準備用 LINE 或電話回覆客戶" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- 3. 流程四步 -->
-<section class="bt-sec-80">
-  <div class="bt-in">
-    <div class="bt-label">整合流程</div>
-    <h2 class="bt-h2">貸款整合怎麼申請？<br>從諮詢到月付降低，全程專人陪同。</h2>
-    <div class="bt-steps">
-      <div class="bt-step">
-        <div class="bt-step-num">1</div>
-        <div class="bt-h4">免費評估</div>
-        <p class="bt-p">提供財務狀況，試算整合後月付與節省金額</p>
-      </div>
-      <div class="bt-step">
-        <div class="bt-step-num">2</div>
-        <div class="bt-h4">方案規劃</div>
-        <p class="bt-p">比較多家銀行條件，選擇最適合的整合方案</p>
-      </div>
-      <div class="bt-step">
-        <div class="bt-step-num gold">3</div>
-        <div class="bt-h4">送件申請</div>
-        <p class="bt-p">協助準備文件、送件，全程追蹤進度</p>
-      </div>
-      <div class="bt-step">
-        <div class="bt-step-num gold">4</div>
-        <div class="bt-h4">月付降低</div>
-        <p class="bt-p">核貸後清償高利率負債，每月呼吸空間大增</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 相關服務（卡片） -->
-<section class="bt-who bt-sec-80">
-  <div class="bt-in">
-    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關服務</h2>
-    <div class="bt-who-grid">
-      <a class="bt-card bt-rel-card" href="second-mortgage.html">
-        <div>
-          <div class="bt-label">二胎房貸</div>
-          <div class="bt-h4">名下不動產追加資金</div>
-          <p class="bt-p">需要額外資金而非整合負債？二胎房貸可以追加額度。</p>
-        </div>
-      </a>
-      <a class="bt-card bt-rel-card" href="private-to-bank.html">
-        <div>
-          <div class="bt-label">民間轉銀行</div>
-          <div class="bt-h4">高利借款轉回低利銀行</div>
-          <p class="bt-p">民間借款月息過高？轉換成銀行年利率大幅節省利息。</p>
-        </div>
-      </a>
-      <a class="bt-card bt-rel-card" href="sale-leaseback.html">
-        <div>
-          <div class="bt-label">售後回租</div>
-          <div class="bt-h4">一次取得大額資金清償負債</div>
-          <p class="bt-p">多筆負債金額龐大？售後回租可一次取得大額現金，實際金額依不動產條件核定。</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- 4. CTA 帶 -->
-<section class="bt-cta bt-sec-80">
-  <div class="bt-in">
-    <h2 class="bt-h2">每個月<em>多繳了多少</em>？<br>讓我們算給你看。</h2>
-    <p class="bt-p">免費試算整合後月付，3個工作日內回覆。不申請不收費，面談不收費。</p>
-    <div class="bt-btns">
-      <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
-      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 直接諮詢</a>
-    </div>
-    <div class="bt-promise">
-      <span>完全免費評估</span>
-      <span>不申請不收費</span>
-      <span>多家銀行方案比較</span>
-      <span>新北中和在地服務</span>
-    </div>
-    <p class="bt-small" style="margin-top:24px">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
-  </div>
-</section>
-
-<!-- 5. 相關文章 -->
-<section class="bt-related bt-sec-80">
-  <div class="bt-in">
-    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關文章</h2>
-    <div class="bt-rel-grid">
-      <a class="bt-card bt-rel-card" href="article-debt-consolidation.html"><h3>貸款整合好嗎？適合誰、不適合誰、與債務協商差在哪</h3></a>
-      <a class="bt-card bt-rel-card" href="article-loan-integration.html"><h3>多筆貸款整合完整攻略：房貸二胎信貸一次整合降月付</h3></a>
-      <a class="bt-card bt-rel-card" href="article-debt-negotiation-vs-consolidation.html"><h3>債務協商 vs 貸款整合差在哪？搞錯一個會傷信用</h3></a>
-    </div>
-  </div>
-</section>
-
-<!-- 比較：整合前後 -->
-<section class="bt-compare bt-sec">
-  <div class="bt-in">
-    <div class="bt-label">月付對比試算</div>
-    <h2 class="bt-h2" style="margin-bottom:0">整合前後，<br>每個月差多少？</h2>
-    <div class="bt-cmp-grid">
-      <div class="bt-card bt-cmp-card before">
-        <div class="bt-label">整合前</div>
-        <div class="bt-cmp-amount">多筆分開繳</div>
-        <div class="bt-cmp-row"><span>信用貸款</span><span>高年利率</span></div>
-        <div class="bt-cmp-row"><span>信用卡循環</span><span>高利吃掉現金</span></div>
-        <div class="bt-cmp-row"><span>民間借款</span><span>月息壓力大</span></div>
-        <div class="bt-cmp-row"><span>每月狀況</span><span>分開繳、壓力大</span></div>
-      </div>
-      <div class="bt-card bt-cmp-card after">
-        <div class="bt-label">整合後</div>
-        <div class="bt-cmp-amount">一筆銀行房貸</div>
-        <div class="bt-cmp-row"><span>利率結構</span><span>房貸利率較低</span></div>
-        <div class="bt-cmp-row"><span>還款方式</span><span>月付集中一筆</span></div>
-        <div class="bt-cmp-row"><span>原高利負債</span><span>一次清償</span></div>
-        <div class="bt-cmp-row"><span>月付壓力</span><span>有機會下降</span></div>
-        <div class="bt-cmp-save"><span>整體效果</span><span>每月有呼吸空間</span></div>
-      </div>
-    </div>
-    <p class="bt-small" style="margin-top:16px">※ 上述為一般情境的概念性對比，實際整合效果依個案財務狀況、不動產條件及銀行核定為準。最終核貸由金融機構決定。</p>
-  </div>
-</section>
-
-<!-- 6. FAQ -->
+<!-- Block 5：常見問題（原區塊整區原樣搬入，與 <head> FAQPage schema 同源，一字不動；結尾另加 .tp-cue 往下看提示） -->
 <section class="bt-faq bt-sec">
   <div class="bt-narrow">
     <div class="bt-label bt-center">常見問題</div>
@@ -589,12 +525,248 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號、團隊在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
       <div class="bt-chips"><a href="zhonghe-debt-consolidation.html">中和貸款整合 →</a><a href="yonghe-debt-consolidation.html">永和貸款整合 →</a><a href="sanchong-debt-consolidation.html">三重貸款整合 →</a><a href="banqiao-debt-consolidation.html">板橋貸款整合 →</a><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="article-loan-integration.html">多筆貸款整合攻略 →</a><a href="article-debt-consolidation.html">貸款整合好嗎？適合誰不適合誰 →</a><a href="private-to-bank.html">民間轉銀行 →</a><a href="article-debt-negotiation-vs-consolidation.html">債務協商 vs 貸款整合 →</a><a href="xinbei-debt-consolidation.html">新北貸款整合 →</a></div>
     </div>
+    <p class="tp-cue-row"><a class="tp-cue" href="#tp-next">下一步在下面<span class="tp-cue-chev" aria-hidden="true"></span></a></p>
   </div>
 </section>
 
+<!-- Block 6：下一步（滿版深色轉換區＝整頁最搶眼；同一份表單再出現一次、data-open="1" 載入即展開、data-address="1" 加房屋地址三步選擇；樣式 topic.css .tp-next*） -->
+<section class="tp-next" id="tp-next" data-consultation-need="private_debt" data-link-location="service_bottom">
+  <div class="tp-in">
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">留資料，我們幫你看。</h2>
+      <p class="tp-next-sub">留下稱呼、手機和房屋地址，我們依實價登錄與周邊行情先行初估；地址完整的話，回覆你這間房子初估的擔保空間，實際額度由銀行審核。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="debt-consolidation" data-from="debt-consolidation.html" data-open="1" data-address="1"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?from=debt-consolidation.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+    <div class="tp-next-sib">
+      <p class="tp-next-sib-title">同一組的其他問題</p>
+      <ul class="tp-next-sib-grid">
+        <li><a href="/private-to-bank.html">民間轉銀行怎麼運作</a></li>
+        <li><a href="/second-mortgage.html">二胎房貸諮詢</a></li>
+        <li><a href="/xinbei-debt-consolidation.html">多筆負債整合</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Block 7：想了解更多（原頁所有區塊折疊保留，不刪字；原本連到 evaluate.html／apply.html 的按鈕已移除，改用頁內表單） -->
+<section class="tp-sec" id="tp-more-sec">
+  <div class="tp-in">
+    <h2 class="tp-h2">想了解更多</h2>
+    <details class="tp-more">
+      <summary>快速答案：多筆高利債務，整併成一筆低利房貸</summary>
+      <div class="tp-more-body">
+        <section class="bt-sec">
+          <div class="bt-narrow">
+            <p class="bt-p">新北中和的貸款整合怎麼算？信貸、卡債、民間借款多筆分開繳，每個月光利息就喘不過氣？整合成一筆銀行低利房貸，月付有機會明顯下降，實際依個案核定條件而定。</p>
+            <div class="cx-call-block" data-consultation-need="private_debt"><a class="cx-call-primary" href="tel:0222490517" data-link-location="hero">電話諮詢 02-2249-0517</a><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div>
+            <div class="bt-btns">
+              <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 諮詢</a>
+            </div>
+          </div>
+        </section>
+<section class="bt-sec">
+  <div class="bt-narrow">
+    <div id="quick-answer" class="bt-card bt-qa">
+      <div class="bt-label">快速答案</div>
+      <p><strong>多筆高利債務，整併成一筆低利房貸。</strong>貸款整合是把信貸、信用卡循環、民間借款等多筆高利率債務，整併為一筆以不動產擔保的低利率貸款，目標是大幅降低每月還款、止住現金流出血。名下有房、即使信用不完美也可評估。本公司非金融機構，最終核貸由金融機構決定。</p>
+      <ul>
+        <li><strong>整合對象</strong>：信貸、信用卡循環、民間借款、二胎等。</li>
+        <li><strong>目標</strong>：多筆變一筆，月付有機會明顯下降。</li>
+        <li><strong>關鍵</strong>：以不動產擔保換取較低利率與較長年限。</li>
+        <li><strong>適合</strong>：負債比過高、月付壓垮現金流者。</li>
+        <li><strong>提醒</strong>：可整合金額與利率依個案核貸條件而定。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>核可案例 · 月付對比</summary>
+      <div class="tp-more-body">
+<section class="bt-dark bt-sec-96">
+  <div class="bt-in">
+    <div class="bt-dark-grid">
+      <figure>
+        <img class="bt-dark-img" src="img/gen-home-desk.jpg" alt="家中書桌上的帳本與老花眼鏡，整理財務" loading="lazy">
+        <figcaption>多筆負債整合成一筆，月付重新算過，生活多一點喘息空間。（情境示意）</figcaption>
+      </figure>
+      <div>
+        <div class="bt-label">核可案例 · 月付對比</div>
+        <div class="bt-nums">
+          <div>
+            <div class="bt-num-label">整合前 · 多筆分開繳</div>
+            <div class="bt-num"><span class="u">月付約 </span>6<span class="u"> 萬</span></div>
+          </div>
+          <div class="bt-num-arrow">→</div>
+          <div>
+            <div class="bt-num-label">整合後 · 一筆銀行房貸</div>
+            <div class="bt-num"><span class="u">月付約 </span>2.8<span class="u"> 萬</span></div>
+          </div>
+        </div>
+        <p class="bt-small">核可案例、非通案保證；每月降幅多在 30–50% 區間、個案可能更高。實際整合效果依個案財務狀況、不動產條件及銀行核定為準，最終核貸由金融機構決定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>貸款整合怎麼申請？從諮詢到月付降低，全程專人陪同。</summary>
+      <div class="tp-more-body">
+<section class="bt-sec-80">
+  <div class="bt-in">
+    <div class="bt-label">整合流程</div>
+    <h2 class="bt-h2">貸款整合怎麼申請？<br>從諮詢到月付降低，全程專人陪同。</h2>
+    <div class="bt-steps">
+      <div class="bt-step">
+        <div class="bt-step-num">1</div>
+        <div class="bt-h4">免費評估</div>
+        <p class="bt-p">提供財務狀況，試算整合後月付與節省金額</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num">2</div>
+        <div class="bt-h4">方案規劃</div>
+        <p class="bt-p">比較多家銀行條件，選擇最適合的整合方案</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num gold">3</div>
+        <div class="bt-h4">送件申請</div>
+        <p class="bt-p">協助準備文件、送件，全程追蹤進度</p>
+      </div>
+      <div class="bt-step">
+        <div class="bt-step-num gold">4</div>
+        <div class="bt-h4">月付降低</div>
+        <p class="bt-p">核貸後清償高利率負債，每月呼吸空間大增</p>
+      </div>
+    </div>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>相關服務</summary>
+      <div class="tp-more-body">
+<section class="bt-who bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關服務</h2>
+    <div class="bt-who-grid">
+      <a class="bt-card bt-rel-card" href="second-mortgage.html">
+        <div>
+          <div class="bt-label">二胎房貸</div>
+          <div class="bt-h4">名下不動產追加資金</div>
+          <p class="bt-p">需要額外資金而非整合負債？二胎房貸可以追加額度。</p>
+        </div>
+      </a>
+      <a class="bt-card bt-rel-card" href="private-to-bank.html">
+        <div>
+          <div class="bt-label">民間轉銀行</div>
+          <div class="bt-h4">高利借款轉回低利銀行</div>
+          <p class="bt-p">民間借款月息過高？轉換成銀行年利率大幅節省利息。</p>
+        </div>
+      </a>
+      <a class="bt-card bt-rel-card" href="sale-leaseback.html">
+        <div>
+          <div class="bt-label">售後回租</div>
+          <div class="bt-h4">一次取得大額資金清償負債</div>
+          <p class="bt-p">多筆負債金額龐大？售後回租可一次取得大額現金，實際金額依不動產條件核定。</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>每個月多繳了多少？讓我們算給你看。</summary>
+      <div class="tp-more-body">
+<section class="bt-cta bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2">每個月<em>多繳了多少</em>？<br>讓我們算給你看。</h2>
+    <p class="bt-p">免費試算整合後月付，3個工作日內回覆。不申請不收費，面談不收費。</p>
+    <div class="bt-btns">
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 直接諮詢</a>
+    </div>
+    <div class="bt-promise">
+      <span>完全免費評估</span>
+      <span>不申請不收費</span>
+      <span>多家銀行方案比較</span>
+      <span>新北中和在地服務</span>
+    </div>
+    <p class="bt-small" style="margin-top:24px">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>相關文章</summary>
+      <div class="tp-more-body">
+<section class="bt-related bt-sec-80">
+  <div class="bt-in">
+    <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關文章</h2>
+    <div class="bt-rel-grid">
+      <a class="bt-card bt-rel-card" href="article-debt-consolidation.html"><h3>貸款整合好嗎？適合誰、不適合誰、與債務協商差在哪</h3></a>
+      <a class="bt-card bt-rel-card" href="article-loan-integration.html"><h3>多筆貸款整合完整攻略：房貸二胎信貸一次整合降月付</h3></a>
+      <a class="bt-card bt-rel-card" href="article-debt-negotiation-vs-consolidation.html"><h3>債務協商 vs 貸款整合差在哪？搞錯一個會傷信用</h3></a>
+    </div>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>整合前後，每個月差多少？</summary>
+      <div class="tp-more-body">
+<section class="bt-compare bt-sec">
+  <div class="bt-in">
+    <div class="bt-label">月付對比試算</div>
+    <h2 class="bt-h2" style="margin-bottom:0">整合前後，<br>每個月差多少？</h2>
+    <div class="bt-cmp-grid">
+      <div class="bt-card bt-cmp-card before">
+        <div class="bt-label">整合前</div>
+        <div class="bt-cmp-amount">多筆分開繳</div>
+        <div class="bt-cmp-row"><span>信用貸款</span><span>高年利率</span></div>
+        <div class="bt-cmp-row"><span>信用卡循環</span><span>高利吃掉現金</span></div>
+        <div class="bt-cmp-row"><span>民間借款</span><span>月息壓力大</span></div>
+        <div class="bt-cmp-row"><span>每月狀況</span><span>分開繳、壓力大</span></div>
+      </div>
+      <div class="bt-card bt-cmp-card after">
+        <div class="bt-label">整合後</div>
+        <div class="bt-cmp-amount">一筆銀行房貸</div>
+        <div class="bt-cmp-row"><span>利率結構</span><span>房貸利率較低</span></div>
+        <div class="bt-cmp-row"><span>還款方式</span><span>月付集中一筆</span></div>
+        <div class="bt-cmp-row"><span>原高利負債</span><span>一次清償</span></div>
+        <div class="bt-cmp-row"><span>月付壓力</span><span>有機會下降</span></div>
+        <div class="bt-cmp-save"><span>整體效果</span><span>每月有呼吸空間</span></div>
+      </div>
+    </div>
+    <p class="bt-small" style="margin-top:16px">※ 上述為一般情境的概念性對比，實際整合效果依個案財務狀況、不動產條件及銀行核定為準。最終核貸由金融機構決定。</p>
+  </div>
+</section>
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>民間借款諮詢：先整理既有債務，不急著增加借款</summary>
+      <div class="tp-more-body">
 <section class="cx-prep" id="debt-prep"><h2>民間借款諮詢：先整理既有債務，不急著增加借款</h2><p>把每筆債權人、目前本金、月付、到期日、抵押設定與清償條件列出，再對照家庭或營運必要支出。只繳利息時，應核對本金是否減少；延長年期即使降低月付，也可能增加總利息。若已難以支付必要生活支出或有爭議，先尋求適當的法律或債務處理協助。</p><p><a href="private-to-bank.html#transfer-prep">有私人設定：查看轉銀行前的核對事項</a> · <a href="mortgage-calculator.html#cost-check">先比較總成本</a> · <a href="corporate-loan.html">公司或自營商週轉諮詢</a></p><small>內容核對：2026-09-12。文件與條件以受理機構及正式契約為準。</small></section>
+      </div>
+    </details>
+  </div>
+</section>
+
 <div data-include="line-qr"></div>
-<div data-include="lead-form"></div>
+<!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
+<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_debt">
+  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
+  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
+</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

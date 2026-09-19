@@ -88,7 +88,7 @@
   var ph=(next&&next.dataset&&next.dataset.include==='inline-form')?next:document.querySelector('[data-include="inline-form"]');
 
   /* data-topic → Service 顯示值（與 lead-form.html ?topic= 預選用同一張表） */
-  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢'};
+  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢','debt-consolidation':'貸款整合','second-mortgage':'二胎房貸諮詢'};
   var topic=(ph&&ph.dataset.topic)||'';
   var from=(ph&&ph.dataset.from)||(location.pathname.split('/').pop()||'');
   var service=TOPIC_SERVICE[topic]||'';
@@ -124,6 +124,12 @@
 
   /* ── 房屋地址三步選擇（data-address="1" 才啟用；未啟用整塊移除，第 0 塊 payload 不含 Property_Address） ── */
   var addrOn=!!(ph&&ph.dataset.address==='1');
+  var variant=(ph&&ph.dataset.variant)||'';
+  // SLB 頁（售後回租）零借貸語彙：成功句改「價值區間」、免責改媽祖完整版逐字句（feedback_disclaimer_four_variants）
+  if(variant==='slb'){
+    var dis=wrap.querySelector('.tp-disclaimer');
+    if(dis) dis.textContent='本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。';
+  }
   var addr=wrap.querySelector('.tp-addr');
   var addrMsg=wrap.querySelector('.tp-addr-msg');
   var addrState={city:'',district:'',street:''};
@@ -143,7 +149,9 @@
     var streetIn=step3.querySelector('.tp-addr-street');
     addr.hidden=false;
     submitBtn.textContent='送出，我們先行初估';
-    done.querySelector('strong').textContent='收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的擔保空間。';
+    done.querySelector('strong').textContent=(variant==='slb')
+      ?'收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的價值區間。'
+      :'收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的擔保空間。';
 
     function press(group,btn){ group.querySelectorAll('.tp-chip:not(.tp-chip-more)').forEach(function(b){ b.setAttribute('aria-pressed',b===btn?'true':'false'); }); }
     function reveal(step){ step.hidden=false; step.scrollIntoView({behavior:'smooth',block:'center'}); }
