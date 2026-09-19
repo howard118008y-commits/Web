@@ -469,7 +469,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  ]
 }
 </script>
-<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><script src="consultation-tracking.js" defer></script><link rel="stylesheet" href="consultation.css"></head>
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><script src="consultation-tracking.js" defer></script><link rel="stylesheet" href="consultation.css"><link rel="stylesheet" href="topic.css">
+</head>
 <body>
 <div id="nav"></div>
 <script src="nav.js"></script>
@@ -596,6 +597,31 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 
 <section class="cx-prep" id="prep-tools"><h2>免登入的諮詢準備清單與總成本比較</h2><ul><li><a href="downloads/private-bank-checklist.html">民間轉銀行資料準備清單</a></li><li><a href="downloads/second-mortgage-checklist.html">二胎諮詢文件清單</a></li><li><a href="downloads/business-checklist.html">企業週轉資料清單</a></li><li><a href="mortgage-calculator.html#cost-check">貸款總成本比較與試算假設</a></li></ul><p>先閱讀、列印或自行整理，再決定是否諮詢；不需提交表單。各工具結果為整理與估算用途，不代表機構核准。</p><small>內容核對：2026-09-12。文件與條件以受理機構及正式契約為準。</small></section>
+
+<!-- B5 底部橋接轉換區（2026-09-19）：不重排原頁，只在 footer 前補一個「理解完就留資料」出口；
+     結構照 private-to-bank.html Block 6，樣式全部在 topic.css（.tp-next* / .tp-bar），共用表單走 inline-form.html。 -->
+<section class="tp-next" id="tp-next" data-consultation-need="general" data-link-location="service_bottom">
+  <div class="tp-in">
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">工具算完還有問題？留資料，我們幫你看。</h2>
+      <p class="tp-next-sub">留下稱呼和手機，有房子也可填地址，我們先幫你看。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="general" data-from="tools.html" data-open="1" data-address="optional"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?from=tools.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+  </div>
+</section>
+<!-- 手機常駐底欄（<768px）：留資料→展開上方橋接區表單；打電話 -->
+<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="general">
+  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
+  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
+</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

@@ -270,6 +270,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 <link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="topic.css">
 </head>
 <body>
 <div id="nav"></div>
@@ -391,7 +392,31 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <div data-include="line-qr"></div>
-<div data-include="lead-form"></div>
+
+<!-- B5 底部橋接轉換區（2026-09-19）：不重排原頁，只在 footer 前補一個「理解完就留資料」出口；
+     結構照 private-to-bank.html Block 6，樣式全部在 topic.css（.tp-next* / .tp-bar），共用表單走 inline-form.html。 -->
+<section class="tp-next" id="tp-next" data-consultation-need="private_debt" data-link-location="service_bottom">
+  <div class="tp-in">
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">跟中和這位屋主的情況一樣？留資料，我們先行初估。</h2>
+      <p class="tp-next-sub">留下稱呼、手機和房屋地址，我們依實價登錄與周邊行情先行初估；地址完整的話，回覆你這間房子初估的擔保空間，實際額度由銀行審核。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="debt-consolidation" data-from="article-debt-consolidation.html" data-open="1" data-address="1"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?from=article-debt-consolidation.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+  </div>
+</section>
+<!-- 手機常駐底欄（<768px）：留資料→展開上方橋接區表單；打電話 -->
+<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_debt">
+  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
+  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
+</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

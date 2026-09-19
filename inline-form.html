@@ -89,7 +89,7 @@
   var ph=(next&&next.dataset&&next.dataset.include==='inline-form')?next:document.querySelector('[data-include="inline-form"]');
 
   /* data-topic → Service 顯示值（與 lead-form.html ?topic= 預選用同一張表） */
-  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢','debt-consolidation':'貸款整合','second-mortgage':'二胎房貸諮詢'};
+  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢','debt-consolidation':'貸款整合','second-mortgage':'二胎房貸諮詢','general':'不確定'};
   var topic=(ph&&ph.dataset.topic)||'';
   var from=(ph&&ph.dataset.from)||(location.pathname.split('/').pop()||'');
   var service=TOPIC_SERVICE[topic]||'';
@@ -159,13 +159,18 @@
       ?'收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的價值區間（初估為行情參考，非正式估價）。'
       :(variant==='corporate')
       ?'收到了。1 個工作天內，經理鄭小姐會用 LINE 或電話聯絡你，說明健檢要準備的資料。'
-      :'收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的擔保空間。';
+      :'收到了。我們會先行初估，1 個工作天內由經理鄭小姐用 LINE 或電話回覆你這間房子初估的擔保空間（初估為行情參考，非正式估價）。';
     if(addrOptional){
-      addr.querySelector('.tp-addr-legend').textContent='公司或負責人名下不動產地址（選填）';
-      addr.setAttribute('aria-label','不動產地址');
-      var q1=step1.querySelector('.tp-addr-q'); if(q1){ q1.innerHTML='<span class="tp-addr-n">1/3</span>不動產在哪個縣市？'; }
-      var noteEl=addr.querySelector('.tp-addr-note'); if(noteEl){ noteEl.textContent='地址只用於了解擔保品概況，不作其他用途。'; }
       var skipWrap=addr.querySelector('.tp-addr-skipwrap'),skipBtn=skipWrap.querySelector('.tp-addr-skip');
+      if(variant==='corporate'){
+        addr.querySelector('.tp-addr-legend').textContent='公司或負責人名下不動產地址（選填）';
+        addr.setAttribute('aria-label','不動產地址');
+        var q1=step1.querySelector('.tp-addr-q'); if(q1){ q1.innerHTML='<span class="tp-addr-n">1/3</span>不動產在哪個縣市？'; }
+        var noteEl=addr.querySelector('.tp-addr-note'); if(noteEl){ noteEl.textContent='地址只用於了解擔保品概況，不作其他用途。'; }
+      } else {
+        addr.querySelector('.tp-addr-legend').textContent='房屋地址（選填）';
+        skipBtn.textContent='沒有房子，先跳過';
+      }
       skipWrap.hidden=false;
       skipBtn.addEventListener('click',function(){
         addrState.skip=!addrState.skip; skipBtn.setAttribute('aria-pressed',addrState.skip?'true':'false');
@@ -212,6 +217,7 @@
   /* 送出前檢查：稱呼、手機照舊先驗；地址啟用時三段缺一 → 鈕旁提示並捲到缺的那一步，不送 */
   function addrOk(){
     if(!addrOn||addrState.skip) return true;
+    if(addrOptional&&!addrState.city&&!addrState.district&&!addrState.street) return true;   /* 選填：三段全空直接放行（媽祖 09-19） */
     compose();
     if(hiddenAddr.value) return true;
     addrMsg.textContent='請填到門牌號'; addrMsg.hidden=false;
@@ -271,6 +277,8 @@
     .then(function(r){ if(!r.ok) throw new Error('submit_failed'); return r.json(); })
     .then(function(j){
       if(j.success){
+        /* 沒留地址（跳過或選填留白）就不承諾初估，改通用句（媽祖 09-19） */
+        if(addrOn&&variant!=='corporate'&&(!hiddenAddr.value||hiddenAddr.value==='（無不動產）')){ done.querySelector('strong').textContent='收到了。1 個工作天內，經理鄭小姐會用 LINE 或電話聯絡你。'; }
         markDoneAll();
         if(window.gtag) gtag('event','generate_lead',{page_path:location.pathname,form:'inline',topic:topic});
         if(window.fbq) fbq('track','Lead');

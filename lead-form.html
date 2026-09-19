@@ -186,7 +186,7 @@
   var consent=document.getElementById('consent');
   /* 主題頁帶參數進來（2026-09-18 B0）：?topic= 依對映表預選服務、?from= 寫進 Source 隱藏欄位；對映表與 inline-form.html 同一張 */
   var qs=new URLSearchParams(location.search);
-  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢','debt-consolidation':'貸款整合','second-mortgage':'二胎房貸諮詢'};
+  var TOPIC_SERVICE={'private-to-bank':'民間轉銀行','leaseback':'售後回租','inherited':'繼承房貸','corporate':'企業財務健檢','debt-consolidation':'貸款整合','second-mortgage':'二胎房貸諮詢','general':'不確定'};
   var svc=TOPIC_SERVICE[qs.get('topic')||''];
   if(svc){ var radios=form.querySelectorAll('input[name="Service"]'); for(var i=0;i<radios.length;i++){ if(radios[i].value.indexOf(svc)===0){ radios[i].checked=true; break; } } }
   var from=qs.get('from')||''; var srcEl=form.querySelector('input[name="Source"]');
