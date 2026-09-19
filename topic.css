@@ -246,3 +246,7 @@
 .tp-addr-skipwrap{margin:0 0 12px}
 .tp-addr-skip{border-style:dashed;font-weight:500;color:var(--tp-ink-dim)}
 .tp-addr-skip[aria-pressed="true"]{border-style:solid}
+
+/* 09-20 全站目檢修正：選單打開時底欄與小鋮鈕退場；手機上表單在視窗內時小鋮鈕先讓位（inline-form 以 IntersectionObserver 加 body.tp-form-inview） */
+body:has(.cx-sheet.open) .tp-bar, body:has(.cx-sheet.open) .cw-launch{display:none !important}
+@media (max-width:767px){ body.tp-form-inview .cw-launch{transform:scale(0);opacity:0;pointer-events:none;transition:transform .2s,opacity .2s} }

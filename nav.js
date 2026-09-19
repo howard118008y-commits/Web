@@ -36,7 +36,7 @@
     '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:#12213A;color:#F2EFE8;overflow:auto;padding:16px 20px 40px;z-index:99}',
     '.cx-sheet.open{display:block}',
     '.cx-sheet details{border-bottom:1px solid #2C4A6B}',
-    '.cx-sheet summary{list-style:none;padding:16px 4px;font-size:16px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between}',
+    '.cx-sheet summary{list-style:none;padding:16px 4px;font-size:16px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;color:#F2EFE8}',
     '.cx-sheet summary::-webkit-details-marker{display:none}',
     '.cx-sheet summary::after{content:"+";color:#C8945A;font-size:20px}',
     '.cx-sheet details[open] summary::after{content:"−"}',

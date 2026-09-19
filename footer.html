@@ -102,3 +102,24 @@
     撥打 02-2249-0517
   </a>
 </div>
+<script>
+/* 二胎主商品場景（宿主頁 nav 掛載點標記 cta=line）禁「免費評估／免費諮詢」招攬鉤子（媽祖 2026-09-19 裁示）：
+   頁尾兩顆「免費」連結改寫；其他頁維持原樣。本片段由 include.js 注入時執行。 */
+(function () {
+  if (!document.querySelector('#nav[data-cta="line"]')) return;
+  document.querySelectorAll('a.footer-link').forEach(function (a) {
+    var t = (a.textContent || '').trim();
+    if (t === '免費工具') {
+      a.textContent = '試算工具';
+      a.setAttribute('href', 'second-mortgage-calculator.html');
+      a.setAttribute('data-link-location', 'footer');
+    } else if (t === '免費評估') {
+      a.textContent = 'LINE 線上諮詢';
+      a.setAttribute('href', 'https://lin.ee/PHIfSoY');
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.setAttribute('data-link-location', 'footer');
+    }
+  });
+})();
+</script>

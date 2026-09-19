@@ -96,6 +96,11 @@
   var autoOpen=!!(ph&&ph.dataset.open==='1');
 
   var form=wrap.querySelector('form.tp-form');
+  /* 手機：表單在視窗內時給 body 加 tp-form-inview，讓小鋮浮動鈕讓位（09-20 目檢修正） */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ var inview=es.some(function(e){return e.isIntersecting;}); document.querySelectorAll('.tp-form-wrap').forEach(function(w){ w.dataset.tpInview=w.dataset.tpInview||'0'; }); wrap.dataset.tpInview=inview?'1':'0'; var any=Array.prototype.some.call(document.querySelectorAll('.tp-form-wrap'),function(w){return w.dataset.tpInview==='1';}); document.body.classList.toggle('tp-form-inview',any); },{threshold:0.15});
+    io.observe(wrap);
+  }
   var openBtn=wrap.querySelector('.tp-form-open');
   var body=wrap.querySelector('.tp-form-body');
   var nameEl=form.querySelector('input[name="Name"]');
