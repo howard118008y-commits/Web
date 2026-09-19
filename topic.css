@@ -241,3 +241,8 @@
   .tp-next-card .tp-form-submit::after{display:none}
   .tp-next-card .tp-form-submit:hover,.tp-next-btn:hover,.tp-next-sib-grid a:hover{transform:none}
 }
+
+/* 企業頁：不動產選填的「先跳過」chip（09-19） */
+.tp-addr-skipwrap{margin:0 0 12px}
+.tp-addr-skip{border-style:dashed;font-weight:500;color:var(--tp-ink-dim)}
+.tp-addr-skip[aria-pressed="true"]{border-style:solid}

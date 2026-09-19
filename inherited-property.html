@@ -81,13 +81,14 @@ body.at-top nav .cx-burger-box span{background:#fff}
 .flow-text span{font-size:13px;color:#6e6e73;line-height:1.7;letter-spacing:.02em}
 /* FAQ */
 .faq-wrap{max-width:720px;margin:0 auto;padding:110px 24px}
-details{border-top:1px solid #ddddd8;padding:26px 0}
-details:last-child{border-bottom:1px solid #ddddd8}
-summary{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#12213A;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
-summary::-webkit-details-marker{display:none}
-.plus{font-size:22px;color:#86868b;font-weight:300;flex-shrink:0;transition:transform .2s}
-details[open] .plus{transform:rotate(45deg)}
-details p{font-size:14.5px;color:#6e6e73;line-height:1.8;margin-top:14px;letter-spacing:.02em}
+/* 2026-09-18：原為裸 details/summary 選擇器，會外溢到 topic.css 的 .tp-more 折疊區，改 scope 在 .faq-wrap 內 */
+.faq-wrap details{border-top:1px solid #ddddd8;padding:26px 0}
+.faq-wrap details:last-of-type{border-bottom:1px solid #ddddd8}
+.faq-wrap summary{font-family:"Noto Serif TC","Songti TC",serif;font-size:17px;font-weight:600;color:#12213A;letter-spacing:.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-wrap summary::-webkit-details-marker{display:none}
+.faq-wrap .plus{font-size:22px;color:#86868b;font-weight:300;flex-shrink:0;transition:transform .2s}
+.faq-wrap details[open] .plus{transform:rotate(45deg)}
+.faq-wrap details p{font-size:14.5px;color:#6e6e73;line-height:1.8;margin-top:14px;letter-spacing:.02em}
 /* CTA */
 .cta-strip{background:#12213A;padding:120px 24px;text-align:center;position:relative;overflow:hidden}
 .cta-strip>*{position:relative;z-index:1}
@@ -115,9 +116,9 @@ details p{font-size:14.5px;color:#6e6e73;line-height:1.8;margin-top:14px;letter-
   .cta-h2{font-size:26px}
 }
 
-/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
-body{padding-top:16px}
-@media(max-width:900px){body{padding-top:10px}}
+/* nav.js 固定導覽列 64/58px：2026-09-18 主題頁改造後透明疊圖 hero 已移除，body 改全額預留 */
+body{padding-top:64px}
+@media(max-width:900px){body{padding-top:58px}}
 </style>
 <script type="application/ld+json">
 {
@@ -221,6 +222,9 @@ body{padding-top:16px}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"DefinedTermSet","name":"繼承房產名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"繼承登記","description":"將被繼承人名下不動產過戶登記至繼承人名下的程序，辦理任何資金方案前必須先完成。"},{"@type":"DefinedTerm","name":"公同共有","description":"繼承人尚未分割前共同擁有遺產的狀態，處分需全體同意。"},{"@type":"DefinedTerm","name":"分別共有","description":"遺產分割後各繼承人持有各自持分比例的共有狀態。"},{"@type":"DefinedTerm","name":"持分","description":"不動產由多人共有時，各共有人所占的權利比例。"},{"@type":"DefinedTerm","name":"售後回租","description":"房子過戶給投資方、同時簽租約繼續住、並保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"繼承房子處理流程：從今天到資金到位","description":"繼承房子的屋主先留資料，鋮馨聯絡了解產權與債務狀況，再給留或賣的可行方向與資金安排；專業事項協同地政士，能否核貸與實際條件由金融機構審核。","step":[{"@type":"HowToStep","position":1,"name":"你留資料｜1 分鐘","text":"勾狀況、留電話和地址，先不用準備文件。"},{"@type":"HowToStep","position":2,"name":"我們回你｜1 個工作天內","text":"經理用 LINE 或電話聽你的狀況，先看、不催辦。"},{"@type":"HowToStep","position":3,"name":"給你方向｜看完資料後","text":"留或賣、先處理哪一段、需要哪些人一起簽，講清楚再決定。"},{"@type":"HowToStep","position":4,"name":"辦理到資金到位｜依個案","text":"登記、銀行審核、資金銜接分段處理，專業事項協同地政士；時間依個案而定。"}]}
+</script>
 <script src="include.js" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -265,32 +269,186 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 <link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="topic.css">
 </head>
 <body>
 <div id="nav"></div>
 <script src="nav.js"></script>
 
-<!-- Hero -->
-<div class="hero">
-  <img class="hero-img" src="img/gen-art-inherit.jpg" alt="老平房與新公寓大樓的世代對比，象徵繼承房產的兩個世代" fetchpriority="high" loading="eager">
-  <div class="hero-overlay"></div>
-  <div class="hero-body">
-    <div class="hero-eyebrow">繼承房產資金方案 · Inherited Property</div>
-    <h1 class="hero-h1">繼承的房子，先別急著賣——<br><em>三道關卡看清楚，兩條路擺出來。</em></h1>
-    <p class="hero-sub">繼承登記、共有人、房屋現況，三關先自我檢查；信用正常走銀行路線，曾被婉拒還有售後回租可評估。團隊 20+ 年不動產經驗、協助比較銀行與承作機構方案，新北中和鋮馨租賃免費評估，不申請不收費。</p>
-    <div class="hero-btns">
-      <a href="evaluate.html" class="btn-gold">免費評估我的狀況</a>
-      <a href="https://lin.ee/PHIfSoY" class="btn-ghost-w">加入 LINE 諮詢</a>
+<!-- ═══ 主題頁 7 塊（2026-09-18 B3；結構複製自 private-to-bank.html；樣式 topic.css、class 前綴 tp-）═══ -->
+
+<!-- Block 0：問題確認＝表單第 1 步（hero 沿用真人照） -->
+<section class="tp-hero" id="tp-top" data-consultation-need="general">
+  <div class="tp-in tp-hero-grid">
+    <div class="tp-hero-text">
+      <div class="tp-eyebrow">繼承房貸</div>
+      <h1 class="tp-h1">繼承的房子，先別急著賣——<br><em>三道關卡看清楚，兩條路擺出來。</em></h1>
+      <p class="tp-sub">點進來，代表家裡的房子剛到你手上，還沒想好怎麼辦。勾一勾你的狀況，留電話和房屋地址，我們幫你先行初估。</p>
+      <div class="tp-symptoms" role="group" aria-label="勾選你的狀況">
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>房子繼承下來，上面還有貸款要接著繳</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>兄弟姊妹好幾個人共有，賣不掉也分不了</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>想留著房子，但手上沒有現金付稅或整理債務</span></label>
+      </div>
+      <div data-include="inline-form" data-topic="inherited" data-from="inherited-property.html" data-address="1"></div>
+    </div>
+    <img class="tp-hero-img" src="img/gen-art-inherit.jpg" alt="老平房與新公寓大樓的世代對比，象徵繼承房產的兩個世代" fetchpriority="high" loading="eager">
+  </div>
+  <div class="tp-in tp-cue-row"><a class="tp-cue" href="#tp-help">往下看流程<span class="tp-cue-chev" aria-hidden="true"></span></a></div>
+</section>
+
+<!-- Block 1：我們怎麼幫你 -->
+<section class="tp-sec" id="tp-help">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">我們怎麼幫你</h2>
+      <p class="tp-lead">先把房子的狀況攤開：產權登記到誰名下、有沒有貸款或設定、幾個人共有，再看你想留或想賣，找可行的資金安排。一般規則我們講人話說給你聽；登記、稅務、持分這些專業事項，會協同地政士處理。</p>
+      <p class="tp-lead tp-lead-dim">鋮馨不是銀行、不是放款方，是不動產融資諮詢與媒合顧問；能否核貸與額度由金融機構審核。</p>
+    </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/ip/help.avif"><source type="image/webp" srcset="img/theme/ip/help.webp"><img src="img/theme/ip/help.jpg" width="1024" height="1024" alt="三位家人站在老家門前，手上一起拿著房屋權狀與鑰匙" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Block 2：流程（.tp-flow 四格；標題與 <head> HowTo schema 四步 name 同源，改一處要改兩處） -->
+<section class="tp-sec tp-sec-cream" id="tp-flow">
+  <div class="tp-in">
+    <h2 class="tp-h2">流程：從今天到資金到位</h2>
+    <ol class="tp-flow">
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">1</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-1.avif"><source type="image/webp" srcset="img/theme/p2b/flow-1.webp"><img src="img/theme/p2b/flow-1.jpg" width="1024" height="1024" alt="屋主坐在客廳沙發，用手機勾選狀況並留下電話" loading="lazy"></picture>
+        <h3 class="tp-flow-title">你留資料<span class="tp-flow-time">｜1 分鐘</span></h3>
+        <p class="tp-flow-text">勾狀況、留電話和地址，先不用準備文件。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">2</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-2.avif"><source type="image/webp" srcset="img/theme/p2b/flow-2.webp"><img src="img/theme/p2b/flow-2.jpg" width="1024" height="1024" alt="鋮馨經理在辦公室接聽電話，邊聽邊記下客戶的狀況" loading="lazy"></picture>
+        <h3 class="tp-flow-title">我們回你<span class="tp-flow-time">｜1 個工作天內</span></h3>
+        <p class="tp-flow-text">經理用 LINE 或電話聽你的狀況，先看、不催辦。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">3</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-3.avif"><source type="image/webp" srcset="img/theme/p2b/flow-3.webp"><img src="img/theme/p2b/flow-3.jpg" width="1024" height="1024" alt="顧問與屋主面對面，在桌上攤開資料說明可行方向" loading="lazy"></picture>
+        <h3 class="tp-flow-title">給你方向<span class="tp-flow-time">｜看完資料後</span></h3>
+        <p class="tp-flow-text">留或賣、先處理哪一段、需要哪些人一起簽，講清楚再決定。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">4</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="銀行櫃檯前完成簽署，登記與資金銜接一次處理" loading="lazy"></picture>
+        <h3 class="tp-flow-title">辦理到資金到位<span class="tp-flow-time">｜依個案</span></h3>
+        <p class="tp-flow-text">登記、銀行審核、資金銜接分段處理，專業事項協同地政士；時間依個案而定。</p>
+      </li>
+    </ol>
+    <p class="tp-flow-note">流程插圖為情境示意。</p>
+  </div>
+</section>
+
+<!-- Block 3：現在不用準備任何文件（清單折進 <details>，不擋在表單前面） -->
+<section class="tp-sec" id="tp-docs">
+  <div class="tp-in">
+    <h2 class="tp-h2">現在不用準備文件，面談只要帶一張卡</h2>
+    <p class="tp-lead">留資料時什麼都不用準備。面談當天帶<strong>自然人憑證</strong>一張卡就好：你本人用自己的憑證、自己操作查閱你的聯徵信用報告，我們在旁邊陪你一起看。你也可以先自己上聯徵中心調閱，帶報告來。其他資料我們聽完狀況再跟你要，不用先跑地政或影印一堆。</p>
+    <details class="tp-more">
+      <summary>之後送件可能會用到的資料</summary>
+      <div class="tp-more-body">
+        <ul class="tp-docs">
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-1.avif"><source type="image/webp" srcset="img/theme/p2b/docs-1.webp"><img src="img/theme/p2b/docs-1.jpg" width="1024" height="1024" alt="自然人憑證卡片放在桌上" loading="lazy"></picture><p class="tp-doc-title">自然人憑證<span class="tp-doc-sub">（面談時你自己查聯徵用，也可先自行調閱）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-2.avif"><source type="image/webp" srcset="img/theme/p2b/docs-2.webp"><img src="img/theme/p2b/docs-2.jpg" width="1024" height="1024" alt="一份房屋謄本文件" loading="lazy"></picture><p class="tp-doc-title">房屋謄本<span class="tp-doc-sub">（我們可代查）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-3.avif"><source type="image/webp" srcset="img/theme/p2b/docs-3.webp"><img src="img/theme/p2b/docs-3.jpg" width="1024" height="1024" alt="民間借款的借據與設定資料" loading="lazy"></picture><p class="tp-doc-title">民間借款的借據或設定資料</p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-4.avif"><source type="image/webp" srcset="img/theme/p2b/docs-4.webp"><img src="img/theme/p2b/docs-4.jpg" width="1024" height="1024" alt="薪資轉帳明細與所得證明" loading="lazy"></picture><p class="tp-doc-title">近期收入證明<span class="tp-doc-sub">（薪轉、所得或營業資料）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-5.avif"><source type="image/webp" srcset="img/theme/p2b/docs-5.webp"><img src="img/theme/p2b/docs-5.jpg" width="1024" height="1024" alt="每月繳款明細單據" loading="lazy"></picture><p class="tp-doc-title">目前每月繳款明細</p></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Block 4：留了資料之後（電話兩支可點，族群 A） -->
+<section class="tp-sec tp-sec-cream" id="tp-after" data-consultation-need="general" data-link-location="page">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">留了資料之後</h2>
+      <ol class="tp-after">
+        <li>1 個工作天內，經理鄭小姐用 LINE 或電話聯絡你。</li>
+        <li>先聽狀況、不催辦；不申請不收費，面談不收費。</li>
+        <li>可行才提案，不可行也直接告訴你，不浪費你時間。</li>
+      </ol>
+      <div class="tp-tels">
+        <a class="tp-tel" href="tel:02-2249-0517"><strong>02-2249-0517</strong><span>公司電話</span></a>
+        <a class="tp-tel" href="tel:0958-139-786"><strong>0958-139-786</strong><span>經理鄭小姐</span></a>
+      </div>
+    </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/p2b/after.avif"><source type="image/webp" srcset="img/theme/p2b/after.webp"><img src="img/theme/p2b/after.jpg" width="1024" height="1024" alt="鋮馨團隊成員拿著手機，準備用 LINE 或電話回覆客戶" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Block 5：常見問題（原區塊整區原樣搬入，與 <head> FAQPage schema 同源，一字不動；結尾另加 .tp-cue 往下看提示） -->
+<div class="faq-wrap">
+  <div class="label-tag" style="text-align:center">常見問題</div>
+  <h2 class="section-h2" style="text-align:center">繼承房產資金方案常見疑問</h2>
+
+  <details open>
+    <summary>繼承後多久可以開始辦理？<span class="plus">＋</span></summary>
+    <p>完成繼承登記後即可申請評估。繼承登記通常需要 2–4 週，若涉及多位繼承人需要協調，時間可能更長；登記前需備妥死亡證明、繼承系統表、遺產稅繳清證明或免稅證明等文件。遺產稅申報有 6 個月期限，建議及早啟動。</p>
+  </details>
+
+  <details>
+    <summary>一定要全體繼承人同意嗎？<span class="plus">＋</span></summary>
+    <p>若房屋仍處於「公同共有」（未分割遺產）狀態，處分需全體繼承人同意並共同具名或出具書面同意。若已分割為「分別共有」，理論上可以只以自己的持分申辦，但實務上銀行幾乎不接受持分擔保；最可行的方式是全體共有人共同具名，或辦理遺產分割（繼承人協議分割，無法協議時向法院請求裁判分割）、取得獨立產權後再辦理。</p>
+  </details>
+
+  <details>
+    <summary>不想賣斷房子離家，還有其他選擇嗎？<span class="plus">＋</span></summary>
+    <p>有。可評估售後回租：房子過戶給投資方、同時簽租約繼續住，並可保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。金額約市值 7–9 成（依個案），適合曾遭銀行婉拒、名下有房、又不想賣斷離家的繼承人。</p>
+  </details>
+
+  <details>
+    <summary>諮詢需要收費嗎？<span class="plus">＋</span></summary>
+    <p>不需要。免費評估、不申請不收費、面談不收費。你可以先透過 LINE 或電話說明房屋狀況與需求，由顧問協助釐清關卡與可行方向，充分了解後再決定是否申辦。</p>
+  </details>
+
+  <p class="tp-cue-row"><a class="tp-cue" href="#tp-next">下一步在下面<span class="tp-cue-chev" aria-hidden="true"></span></a></p>
+</div>
+
+<!-- Block 6：下一步（滿版深色轉換區＝整頁最搶眼；同一份表單再出現一次、data-open="1" 載入即展開、data-address="1" 加房屋地址三步選擇；樣式 topic.css .tp-next*） -->
+<section class="tp-next" id="tp-next" data-consultation-need="general" data-link-location="service_bottom">
+  <div class="tp-in">
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">留資料，我們幫你看。</h2>
+      <p class="tp-next-sub">留下稱呼、手機和房屋地址，我們依實價登錄與周邊行情先行初估；地址完整的話，回覆你這間房子初估的擔保空間，實際額度由銀行審核。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="inherited" data-from="inherited-property.html" data-open="1" data-address="1"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?topic=inherited&amp;from=inherited-property.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+    <div class="tp-next-sib">
+      <p class="tp-next-sib-title">同一組的其他問題</p>
+      <ul class="tp-next-sib-grid">
+        <li><a href="/article-inherited-co-owned-house-stuck.html">共有持分可以辦嗎</a></li>
+        <li><a href="/sale-leaseback.html">售後回租怎麼運作</a></li>
+        <li><a href="/knowledge.html?topic=inherited">繼承相關文章</a></li>
+      </ul>
     </div>
   </div>
-</div>
-<script>
-(function(){
-  function onScroll(){document.body.classList.toggle('at-top',window.scrollY<60);}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-})();
-</script>
+</section>
 
+<!-- Block 7：想了解更多（原頁所有區塊折疊保留，不刪字；原本連到 #lead-form 的按鈕已移除，改用頁內表單） -->
+<section class="tp-sec" id="tp-more-sec">
+  <div class="tp-in">
+    <h2 class="tp-h2">想了解更多</h2>
+    <details class="tp-more">
+      <summary>快速答案：繼承的房子可以貸款嗎？可以，但要先過三關</summary>
+      <div class="tp-more-body">
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
     <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:26px 28px;margin:36px auto;">
       <div style="font-size:11px;font-weight:600;color:#1B2F4A;letter-spacing:.22em;margin-bottom:10px;">快速答案</div>
@@ -304,9 +462,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </ul>
     </div>
   </div>
-
-<div data-include="trust-block"></div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>動用繼承的房子之前，先過這三關。</summary>
+      <div class="tp-more-body">
 <!-- 三關卡自我檢查 -->
 <div class="what-wrap">
   <div class="label-tag">三道關卡 · 自我檢查</div>
@@ -342,7 +502,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>三關過了之後，你的房子有兩條路。</summary>
+      <div class="tp-more-body">
 <!-- 兩條路 -->
 <div class="path-wrap">
   <div class="path-inner">
@@ -368,14 +532,20 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </div>
-
-<!-- 中段微CTA（轉換動線：兩條路讀完的行動出口） -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>還不確定自己走哪條路？</summary>
+      <div class="tp-more-body">
 <div style="background:#f7f5f2;padding:46px 24px;text-align:center">
   <p style="font-size:16px;color:#333;letter-spacing:.02em;margin:0 0 18px;line-height:1.9">還不確定自己走哪條路？<br>填表或用 LINE 說一聲，顧問幫你釐清方向。不申請不收費。</p>
-  <a href="#lead-form" style="display:inline-block;background:#12213A;color:#fff;font-size:13px;font-weight:600;padding:14px 32px;letter-spacing:.14em;text-decoration:none;margin:0 4px 8px">填表預約免費評估</a>
   <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:#fff;color:#12213A;border:1px solid #12213A;font-size:13px;font-weight:600;padding:13px 32px;letter-spacing:.14em;text-decoration:none;margin:0 4px 8px">LINE 問一句就好</a>
 </div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>四步走完，每一步都先說清楚。</summary>
+      <div class="tp-more-body">
 <!-- 流程四步 -->
 <div class="how-wrap">
   <div class="label-tag">辦理流程</div>
@@ -411,7 +581,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>這三種情況，先不用來找我們。</summary>
+      <div class="tp-more-body">
 <!-- 反淘汰（誰不適合先來）：明講界線，換信任 -->
 <div style="max-width:720px;margin:0 auto;padding:0 24px 90px">
   <div class="label-tag" style="text-align:center">先說清楚</div>
@@ -422,44 +596,21 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <li style="padding:14px 0"><strong>想聽「一定沒問題」的</strong>——我們給不了這句話。條件攤開、依個案評估、最終由金融機構或投資方決定；把話說死的，你反而要提高警覺。</li>
   </ul>
 </div>
-
-<!-- FAQ -->
-<div class="faq-wrap">
-  <div class="label-tag" style="text-align:center">常見問題</div>
-  <h2 class="section-h2" style="text-align:center">繼承房產資金方案常見疑問</h2>
-
-  <details open>
-    <summary>繼承後多久可以開始辦理？<span class="plus">＋</span></summary>
-    <p>完成繼承登記後即可申請評估。繼承登記通常需要 2–4 週，若涉及多位繼承人需要協調，時間可能更長；登記前需備妥死亡證明、繼承系統表、遺產稅繳清證明或免稅證明等文件。遺產稅申報有 6 個月期限，建議及早啟動。</p>
-  </details>
-
-  <details>
-    <summary>一定要全體繼承人同意嗎？<span class="plus">＋</span></summary>
-    <p>若房屋仍處於「公同共有」（未分割遺產）狀態，處分需全體繼承人同意並共同具名或出具書面同意。若已分割為「分別共有」，理論上可以只以自己的持分申辦，但實務上銀行幾乎不接受持分擔保；最可行的方式是全體共有人共同具名，或辦理遺產分割（繼承人協議分割，無法協議時向法院請求裁判分割）、取得獨立產權後再辦理。</p>
-  </details>
-
-  <details>
-    <summary>不想賣斷房子離家，還有其他選擇嗎？<span class="plus">＋</span></summary>
-    <p>有。可評估售後回租：房子過戶給投資方、同時簽租約繼續住，並可保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。金額約市值 7–9 成（依個案），適合曾遭銀行婉拒、名下有房、又不想賣斷離家的繼承人。</p>
-  </details>
-
-  <details>
-    <summary>諮詢需要收費嗎？<span class="plus">＋</span></summary>
-    <p>不需要。免費評估、不申請不收費、面談不收費。你可以先透過 LINE 或電話說明房屋狀況與需求，由顧問協助釐清關卡與可行方向，充分了解後再決定是否申辦。</p>
-  </details>
-
-</div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>免費評估你的狀況：聯絡方式</summary>
+      <div class="tp-more-body">
 <!-- CTA -->
 <div class="cta-strip">
   <h2 class="cta-h2">【免費評估你的狀況】</h2>
   <p class="cta-lines">LINE 加 → <a href="https://lin.ee/PHIfSoY">https://lin.ee/PHIfSoY</a><br>電話 → <a href="tel:0222490517">02-2249-0517</a> / <a href="tel:0931087996">0931-087-996</a><br>新北市中和區中正路 468 號<br>不申請不收費，面談不收費。</p>
-  <div class="cta-row">
-    <a href="#lead-form" class="btn-gold-lg">填表預約免費評估（約 1 分鐘）</a>
-    <a href="https://lin.ee/PHIfSoY" class="btn-outline-w">加入 LINE 直接諮詢</a>
-  </div>
 </div>
-
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>延伸閱讀</summary>
+      <div class="tp-more-body">
 <!-- 延伸閱讀 -->
 <div style="max-width:760px;margin:40px auto;padding:24px 26px;background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px">
   <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.12em;margin-bottom:6px">延伸閱讀</div>
@@ -467,8 +618,18 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div style="display:flex;flex-wrap:wrap;gap:8px"><a href="article-inherited-property-loan.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">繼承的房子可以貸款嗎？3 個關鍵條件完整解析 →</a><a href="article-sale-leaseback-guide.html" style="font-size:13.5px;color:#1B2F4A;background:#fff;border:1px solid #d2d2d7;padding:8px 15px;border-radius:980px;text-decoration:none;font-weight:500">售後回租完整指南 →</a></div>
   <p style="font-size:12px;color:#86868b;line-height:1.7;margin:18px 0 0;">本頁為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
 </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<div data-include="trust-block"></div>
 <div data-include="line-qr"></div>
-<div id="lead-form"><div data-include="lead-form"></div></div>
+<!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
+<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="general">
+  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
+  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
+</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

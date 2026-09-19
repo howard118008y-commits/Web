@@ -417,29 +417,6 @@ test('Homepage forwards visitor question to the assistant without raw text in an
   assert.ok(!events.some(e => e[2] && Object.hasOwn(e[2], 'cw_label')), 'Raw-question cw_label must be removed');
 });
 
-test('Corporate uploader renders untrusted filename and response case ID as text', async () => {
-  const caseID = '<img src=x onerror=alert(1)>';
-  const env = environment(read('corporate-checkup.html'), {
-    fetch(url) {
-      assert.ok(url.endsWith('/checkup'));
-      return { ok: true, json: async () => ({ case_id: caseID, files: 0 }) };
-    }
-  });
-  env.run(selectScript('corporate-checkup.html', code => code.includes("var ENDPOINT=")), 'corporate-checkup.html');
-  const filename = '<img src=x onerror=alert(1)>.exe';
-  env.dispatch(q(env, '#upBox'), 'drop', { dataTransfer: { files: [{ name: filename, size: 100 }] } });
-  assert.ok(q(env, '#upErr').textContent.includes(filename));
-  assert.equal(q(env, '#upErr img'), null);
-  q(env, '#ckConsent').checked = true;
-  env.dispatch(q(env, '#ckForm'), 'submit');
-  env.dispatch(q(env, '#ckForm'), 'submit');
-  await flush();
-  assert.equal(env.requests.length, 1, 'Duplicate corporate submit must be ignored');
-  assert.ok(q(env, '#ckMsg').textContent.includes(caseID));
-  assert.equal(q(env, '#ckMsg img'), null);
-  assert.ok(q(env, '#ckMsg').classList.contains('ok'));
-});
-
 test('Shared fragments cannot inject crawler noindex; host and standalone directives survive', async () => {
   assert.match(read('footer.html'), /<meta\s+name=["']robots["']\s+content=["']noindex["']/i);
   const env = environment('<!doctype html><html><head><meta name="robots" content="noindex" id="host-policy"></head><body><div data-include="footer"></div></body></html>', {

@@ -318,6 +318,9 @@ else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:locati
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"DefinedTermSet","name":"不動產融資名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"售後回租","description":"屋主將不動產出售取得資金、同時簽租約繼續居住並保留未來買回權利的安排。"},{"@type":"DefinedTerm","name":"買回權利","description":"售後回租契約中約定屋主可於一定期限內以約定價格買回原不動產的權利。"},{"@type":"DefinedTerm","name":"租約","description":"出售後屋主與買方簽訂、約定租金與居住條件的契約。"},{"@type":"DefinedTerm","name":"不動產移轉（過戶）","description":"將不動產所有權登記移轉給買方的程序。"},{"@type":"DefinedTerm","name":"市值成數","description":"可動用資金相對於不動產市場價值的比例，售後回租一般約 7–9 成，依個案不動產條件而定。"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"售後回租流程：從今天到資金到位","description":"名下有房的屋主先留資料，鋮馨在 1 個工作天內聯絡了解狀況，再說明過戶、租約與日後依約買回怎麼安排；是否適合與實際條件依個案不動產與財務狀況評估。","step":[{"@type":"HowToStep","position":1,"name":"你留資料｜1 分鐘","text":"勾狀況、留電話和地址，先不用準備文件。"},{"@type":"HowToStep","position":2,"name":"我們回你｜1 個工作天內","text":"經理用 LINE 或電話聽你的狀況，先看、不催辦。"},{"@type":"HowToStep","position":3,"name":"給你方案｜看完資料後","text":"房子過戶給投資方、簽租約繼續住、日後依約買回，三件事怎麼安排、金額大概多少，講清楚再決定。"},{"@type":"HowToStep","position":4,"name":"簽約到資金到位｜約 2–4 週","text":"簽約、過戶、資金到位分段處理；時間依個案而定。"}]}
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -335,28 +338,204 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<link rel="stylesheet" href="topic.css">
 <body>
 <div id="nav"></div>
 <script src="nav.js"></script>
 
-<!-- 1. Hero 左文右圖 -->
-<section class="bt-hero bt-sec">
-  <div class="bt-in bt-hero-grid">
-    <div class="bt-hero-text">
-      <div class="bt-eyebrow">房屋售後回租</div>
-      <h1 class="bt-h1">銀行說不，不代表沒有路：<br>房屋售後回租——過戶換現金，<em>租約續住、依約買回。</em></h1>
-      <p class="bt-p">3 家銀行都說不？不代表這間房子沒有價值。售後回租是：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利——因為是買賣加租約，看的是不動產本身的價值，曾被銀行婉拒仍可重新評估。資金約市值 7–9 成、2–4 週到位，是否適合依個案不動產與財務狀況評估。</p>
-      <div class="bt-btns">
-        <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
-        <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 諮詢</a>
+<!-- ═══ 主題頁 7 塊（2026-09-18 B3；結構複製自 private-to-bank.html；樣式 topic.css、class 前綴 tp-）
+     ⚠ 本頁為售後回租（SLB）：Block 0–6 新寫區採零借貸語彙；改稿前先讀 memory feedback_slb_no_lending_vocab（禁用詞清單在該檔，此處不逐字列，免機掃誤判）。═══ -->
+
+<!-- Block 0：問題確認＝表單第 1 步（hero 沿用原物件照） -->
+<section class="tp-hero" id="tp-top">
+  <div class="tp-in tp-hero-grid">
+    <div class="tp-hero-text">
+      <div class="tp-eyebrow">售後回租</div>
+      <h1 class="tp-h1">銀行說不，不代表沒有路：<br>房屋售後回租——過戶換現金，<em>租約續住、依約買回。</em></h1>
+      <p class="tp-sub">點進來，代表銀行那條路你已經走過了。勾一勾你的狀況，留電話和房屋地址，我們幫你先行初估。</p>
+      <div class="tp-symptoms" role="group" aria-label="勾選你的狀況">
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>銀行、二胎都問過了，都說不行</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>需要一筆錢，又不想把房子直接賣掉了事</span></label>
+        <label class="tp-symptom-item"><input type="checkbox" class="tp-symptom"><span>信用有狀況，房子是自己的，想找另一條路</span></label>
       </div>
+      <div data-include="inline-form" data-topic="leaseback" data-from="sale-leaseback.html" data-address="1" data-variant="slb"></div>
       <div data-include="ai-bar" data-ai-q="過戶後我還能住嗎？|買回權利怎麼約定？|價金大約幾成？"></div>
     </div>
-    <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/webp"><img class="bt-hero-img" src="img/svc-leaseback.jpg" alt="台灣獨棟透天厝與前院，售後回租常見的自住物件型態" fetchpriority="high" loading="eager"></picture>
+    <picture><source srcset="img/svc-leaseback-1600.avif 1600w, img/svc-leaseback-2560.avif 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/avif"><source srcset="img/svc-leaseback-1600.webp 1600w, img/svc-leaseback-2560.webp 2560w" sizes="(max-width:900px) 100vw, 560px" type="image/webp"><img class="tp-hero-img" src="img/svc-leaseback.jpg" alt="台灣獨棟透天厝與前院，售後回租常見的自住物件型態" fetchpriority="high" loading="eager"></picture>
+  </div>
+  <div class="tp-in tp-cue-row"><a class="tp-cue" href="#tp-help">往下看流程<span class="tp-cue-chev" aria-hidden="true"></span></a></div>
+</section>
+
+<!-- Block 1：我們怎麼幫你 -->
+<section class="tp-sec" id="tp-help">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">我們怎麼幫你</h2>
+      <p class="tp-lead">售後回租是：房子過戶給投資方、同時簽租約繼續住，並可保有日後依約買回的權利；是否適合依個案不動產與財務狀況評估。金額一般為市值 7–9 成（依個案），流程是免費評估→提案→簽約→過戶→資金到位，約 2–4 週。</p>
+      <p class="tp-lead tp-lead-dim">鋮馨不是銀行、不是金融機構，是不動產融資諮詢與媒合顧問。</p>
+    </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/slb/help.avif"><source type="image/webp" srcset="img/theme/slb/help.webp"><img src="img/theme/slb/help.jpg" width="1024" height="1024" alt="一手交出鑰匙、一手接過契約，家中燈仍亮著，屋主過戶後簽租約繼續住" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- 快速答案（AEO speakable，id 不動） -->
+<!-- Block 2：流程（.tp-flow 四格；標題與 <head> HowTo schema 四步 name 同源，改一處要改兩處） -->
+<section class="tp-sec tp-sec-cream" id="tp-flow">
+  <div class="tp-in">
+    <h2 class="tp-h2">流程：從今天到資金到位</h2>
+    <ol class="tp-flow">
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">1</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-1.avif"><source type="image/webp" srcset="img/theme/p2b/flow-1.webp"><img src="img/theme/p2b/flow-1.jpg" width="1024" height="1024" alt="屋主坐在客廳沙發，用手機勾選狀況並留下電話" loading="lazy"></picture>
+        <h3 class="tp-flow-title">你留資料<span class="tp-flow-time">｜1 分鐘</span></h3>
+        <p class="tp-flow-text">勾狀況、留電話和地址，先不用準備文件。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">2</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-2.avif"><source type="image/webp" srcset="img/theme/p2b/flow-2.webp"><img src="img/theme/p2b/flow-2.jpg" width="1024" height="1024" alt="鋮馨經理在辦公室接聽電話，邊聽邊記下客戶的狀況" loading="lazy"></picture>
+        <h3 class="tp-flow-title">我們回你<span class="tp-flow-time">｜1 個工作天內</span></h3>
+        <p class="tp-flow-text">經理用 LINE 或電話聽你的狀況，先看、不催辦。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">3</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-3.avif"><source type="image/webp" srcset="img/theme/p2b/flow-3.webp"><img src="img/theme/p2b/flow-3.jpg" width="1024" height="1024" alt="顧問與屋主在桌前攤開資料，逐項說明方案怎麼安排" loading="lazy"></picture>
+        <h3 class="tp-flow-title">給你方案<span class="tp-flow-time">｜看完資料後</span></h3>
+        <p class="tp-flow-text">房子過戶給投資方、簽租約繼續住、日後依約買回，三件事怎麼安排、金額大概多少，講清楚再決定。</p>
+      </li>
+      <li class="tp-flow-step">
+        <span class="tp-flow-num" aria-hidden="true">4</span>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="文件匯整成一份用印完成的契約，屋主一家仍站在自己的門前" loading="lazy"></picture>
+        <h3 class="tp-flow-title">簽約到資金到位<span class="tp-flow-time">｜約 2–4 週</span></h3>
+        <p class="tp-flow-text">簽約、過戶、資金到位分段處理；時間依個案而定。</p>
+      </li>
+    </ol>
+    <p class="tp-flow-note">流程插圖為情境示意。</p>
+  </div>
+</section>
+
+<!-- Block 3：現在不用準備任何文件（清單折進 <details>，不擋在表單前面） -->
+<section class="tp-sec" id="tp-docs">
+  <div class="tp-in">
+    <h2 class="tp-h2">現在不用準備文件，面談只要帶一張卡</h2>
+    <p class="tp-lead">留資料時什麼都不用準備。面談當天帶<strong>自然人憑證</strong>一張卡就好：你本人用自己的憑證查閱房屋謄本與相關資料，我們在旁邊陪你一起看。其他資料我們聽完狀況再跟你要，不用先跑地政或影印一堆。</p>
+    <details class="tp-more">
+      <summary>之後可能會用到的資料</summary>
+      <div class="tp-more-body">
+        <ul class="tp-docs">
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-1.avif"><source type="image/webp" srcset="img/theme/p2b/docs-1.webp"><img src="img/theme/p2b/docs-1.jpg" width="1024" height="1024" alt="自然人憑證卡片放在桌上" loading="lazy"></picture><p class="tp-doc-title">自然人憑證<span class="tp-doc-sub">（面談時你自己查資料用）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-2.avif"><source type="image/webp" srcset="img/theme/p2b/docs-2.webp"><img src="img/theme/p2b/docs-2.jpg" width="1024" height="1024" alt="一份房屋謄本文件" loading="lazy"></picture><p class="tp-doc-title">房屋謄本<span class="tp-doc-sub">（我們可代查）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-3.avif"><source type="image/webp" srcset="img/theme/p2b/docs-3.webp"><img src="img/theme/p2b/docs-3.jpg" width="1024" height="1024" alt="蓋有印章的房屋登記設定文件" loading="lazy"></picture><p class="tp-doc-title">房屋目前的設定資料</p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-4.avif"><source type="image/webp" srcset="img/theme/p2b/docs-4.webp"><img src="img/theme/p2b/docs-4.jpg" width="1024" height="1024" alt="薪資轉帳明細與所得證明" loading="lazy"></picture><p class="tp-doc-title">近期收入證明<span class="tp-doc-sub">（評估租金負擔）</span></p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-5.avif"><source type="image/webp" srcset="img/theme/p2b/docs-5.webp"><img src="img/theme/p2b/docs-5.jpg" width="1024" height="1024" alt="附房屋圖示的明細本，逐項記下每月固定支出" loading="lazy"></picture><p class="tp-doc-title">目前每月固定支出明細</p></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Block 4：留了資料之後（電話兩支可點，族群 A） -->
+<section class="tp-sec tp-sec-cream" id="tp-after">
+  <div class="tp-in tp-grid-2">
+    <div>
+      <h2 class="tp-h2">留了資料之後</h2>
+      <ol class="tp-after">
+        <li>1 個工作天內，經理鄭小姐用 LINE 或電話聯絡你。</li>
+        <li>先聽狀況、不催辦；不申請不收費，面談不收費。</li>
+        <li>可行才提案，不可行也直接告訴你，不浪費你時間。</li>
+      </ol>
+      <div class="tp-tels">
+        <a class="tp-tel" href="tel:02-2249-0517"><strong>02-2249-0517</strong><span>公司電話</span></a>
+        <a class="tp-tel" href="tel:0958-139-786"><strong>0958-139-786</strong><span>經理鄭小姐</span></a>
+      </div>
+    </div>
+    <figure class="tp-figure">
+      <picture><source type="image/avif" srcset="img/theme/p2b/after.avif"><source type="image/webp" srcset="img/theme/p2b/after.webp"><img src="img/theme/p2b/after.jpg" width="1024" height="1024" alt="鋮馨團隊成員拿著手機，準備用 LINE 或電話回覆客戶" loading="lazy"></picture>
+      <figcaption class="tp-cap">情境示意</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Block 5：常見問題（原區塊整區原樣搬入，與 <head> FAQPage schema 同源，一字不動；結尾另加 .tp-cue 往下看提示） -->
+<section class="bt-faq bt-sec">
+  <div class="bt-narrow">
+    <div class="bt-label bt-center">常見問題</div>
+    <h2 class="bt-h2 bt-center">售後回租常見疑問</h2>
+
+    <details open>
+      <summary>辦理售後回租之後，我還是房子的主人嗎？<span class="plus">＋</span></summary>
+      <p>辦理後，不動產過戶（所有權移轉）至投資方，你成為租客。但合約中保有買回選擇權，你可以在約定期間內按原定條件買回房屋，重新成為所有人。在此期間，你的居住權受租約完整保障。</p>
+    </details>
+
+    <details>
+      <summary>售後回租能拿到多少錢？<span class="plus">＋</span></summary>
+      <p>可取得的資金金額依物件條件、地段、屋況、屋齡及市場行情而定，個案差異可能很大。鋮馨租賃提供免費評估，加入 LINE 說明物件基本資料即可取得初步試算。</p>
+    </details>
+
+    <details>
+      <summary>信用不好、被銀行拒貸，可以申請售後回租嗎？<span class="plus">＋</span></summary>
+      <p>可以。售後回租以不動產市值為主要評估依據，信用分數並非唯一條件。即使曾遭銀行拒貸、有信用瑕疵、或有多筆負債，只要名下有不動產，均可申請免費評估。</p>
+    </details>
+
+    <details>
+      <summary>售後回租之後一定要買回嗎？<span class="plus">＋</span></summary>
+      <p>買回為屋主的「選擇權」，並非強制義務。若屆期選擇不行使買回權，依合約條款協議處理。所有細節在簽約前會逐條說明，你充分了解後再做決定，沒有任何強迫。</p>
+    </details>
+
+    <details>
+      <summary>租金怎麼算？會比外面的行情貴嗎？<span class="plus">＋</span></summary>
+      <p>租金依據市場行情及物件條件議定，並在簽約前明確載入租約。整體財務安排在提案說明時會完整試算給你看，確保方案對你有利才進入簽約階段。</p>
+    </details>
+
+    <div class="bt-card bt-local">
+      <div class="bt-label">中和在地・相關方案</div>
+      <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號、團隊在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
+      <div class="bt-chips"><a href="yonghe-sale-leaseback.html">永和售後回租 →</a><a href="banqiao-sale-leaseback.html">板橋售後回租 →</a><a href="sanchong-sale-leaseback.html">三重售後回租 →</a><a href="zhonghe-sale-leaseback.html">中和售後回租 →</a><a href="xinbei-sale-leaseback.html">新北售後回租 →</a><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="compare-options.html">售後回租 vs 二胎 vs 民間轉銀行 →</a><a href="article-sale-leaseback-guide.html">售後回租完整指南 →</a><a href="debt-consolidation.html">貸款整合 →</a><a href="second-mortgage.html">二胎房貸 →</a></div>
+    </div>
+    <p class="tp-cue-row"><a class="tp-cue" href="#tp-next">下一步在下面<span class="tp-cue-chev" aria-hidden="true"></span></a></p>
+  </div>
+</section>
+
+<!-- Block 6：下一步（滿版深色轉換區＝整頁最搶眼；同一份表單再出現一次、data-open="1" 載入即展開、data-address="1" 加房屋地址三步選擇；樣式 topic.css .tp-next*） -->
+<section class="tp-next" id="tp-next">
+  <div class="tp-in">
+    <div class="tp-next-head">
+      <p class="tp-next-eyebrow">下一步</p>
+      <h2 class="tp-next-h2">留資料，我們幫你看。</h2>
+      <p class="tp-next-sub">留下稱呼、手機和房屋地址，我們依實價登錄與周邊行情先行初估；地址完整的話，回覆你這間房子初估的價值區間，實際條件依個案評估；初估為市場行情參考，非不動產估價師之正式估價，實際成交條件依個案議定。</p>
+    </div>
+    <div class="tp-next-card">
+      <div data-include="inline-form" data-topic="leaseback" data-from="sale-leaseback.html" data-open="1" data-address="1" data-variant="slb"></div>
+    </div>
+    <div class="tp-next-links">
+      <a class="tp-next-btn" href="intake.html?topic=leaseback&amp;from=sale-leaseback.html">用 3 分鐘評估精靈 →</a>
+      <a class="tp-next-btn" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">LINE 線上諮詢</a>
+      <a class="tp-next-btn" href="tel:02-2249-0517">打電話 02-2249-0517</a>
+    </div>
+    <div class="tp-next-sib">
+      <p class="tp-next-sib-title">同一組的其他問題</p>
+      <ul class="tp-next-sib-grid">
+        <li><a href="/inherited-property.html">繼承的房子怎麼處理</a></li>
+        <li><a href="/private-to-bank.html">民間轉銀行怎麼運作</a></li>
+        <li><a href="/knowledge.html?topic=leaseback">回租相關文章</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Block 7：想了解更多（原頁所有區塊折疊保留，不刪字；原本連到 evaluate.html 的按鈕已移除，改用頁內表單） -->
+<section class="tp-sec" id="tp-more-sec">
+  <div class="tp-in">
+    <h2 class="tp-h2">想了解更多</h2>
+    <details class="tp-more">
+      <summary>快速答案：賣掉房子，還能繼續住，並保留買回權利</summary>
+      <div class="tp-more-body">
+<section class="bt-sec">
+  <div class="bt-narrow">
+      <p class="bt-p">3 家銀行都說不？不代表這間房子沒有價值。售後回租是：房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利——因為是買賣加租約，看的是不動產本身的價值，曾被銀行婉拒仍可重新評估。資金約市值 7–9 成、2–4 週到位，是否適合依個案不動產與財務狀況評估。</p>
+  </div>
+</section>
 <section class="bt-sec">
   <div class="bt-narrow">
     <div id="quick-answer" class="bt-card bt-qa">
@@ -372,8 +551,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 2. 深色帶：什麼是售後回租＋三要件 -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>什麼是售後回租：魚與熊掌，可以兼得。</summary>
+      <div class="tp-more-body">
 <section class="bt-dark bt-sec-96">
   <div class="bt-in">
     <div class="bt-dark-grid">
@@ -404,8 +586,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 3. 特色格：流程四步＋三要點（純文字） -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>從諮詢到資金到位，全程專人陪同。</summary>
+      <div class="tp-more-body">
 <section class="bt-sec-80">
   <div class="bt-in">
     <div class="bt-label">辦理流程</div>
@@ -448,8 +633,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 適合對象（卡片） -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>你適合售後回租嗎？</summary>
+      <div class="tp-more-body">
 <section class="bt-who bt-sec-80">
   <div class="bt-in">
     <div class="bt-label bt-center">適合對象</div>
@@ -485,14 +673,16 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 4. CTA 帶 -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>準備好了解你的房子值多少嗎？</summary>
+      <div class="tp-more-body">
 <section class="bt-cta bt-sec-80">
   <div class="bt-in">
     <h2 class="bt-h2">準備好了解<br><em>你的房子值多少</em>嗎？</h2>
     <p class="bt-p">免費評估，1–2 個工作日內回覆初步結果。不申請不收費，充分了解後再決定。</p>
     <div class="bt-btns">
-      <a href="evaluate.html" class="bt-btn">免費評估我的狀況</a>
       <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost">加入 LINE 直接諮詢</a>
     </div>
     <div class="bt-promise">
@@ -503,8 +693,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 5. 相關文章 -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>相關文章</summary>
+      <div class="tp-more-body">
 <section class="bt-related bt-sec-80">
   <div class="bt-in">
     <h2 class="bt-h2 bt-center" style="margin-bottom:0">相關文章</h2>
@@ -515,8 +708,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 去識別化案例情境 -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>銀行都說不之後，他沒有搬家。</summary>
+      <div class="tp-more-body">
 <section class="bt-sec">
   <div class="bt-in">
     <div class="bt-label">案例情境 · 去識別化示意</div>
@@ -539,8 +735,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <p class="bt-small" style="margin-top:24px">以上為去識別化情境示意，非個別承諾。售後回租＝房屋過戶給投資方＋簽租約繼續居住＋保有依約買回權利，三者一組；是否適合與實際條件、時程依個案不動產與財務狀況評估，本公司非金融機構。</p>
   </div>
 </section>
-
-<!-- 比較表 -->
+      </div>
+    </details>
+    <details class="tp-more">
+      <summary>售後回租 vs 其他選擇</summary>
+      <div class="tp-more-body">
 <section class="bt-compare bt-sec">
   <div class="bt-in">
     <div class="bt-label">方案比較</div>
@@ -598,49 +797,19 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
-
-<!-- 6. FAQ -->
-<section class="bt-faq bt-sec">
-  <div class="bt-narrow">
-    <div class="bt-label bt-center">常見問題</div>
-    <h2 class="bt-h2 bt-center">售後回租常見疑問</h2>
-
-    <details open>
-      <summary>辦理售後回租之後，我還是房子的主人嗎？<span class="plus">＋</span></summary>
-      <p>辦理後，不動產過戶（所有權移轉）至投資方，你成為租客。但合約中保有買回選擇權，你可以在約定期間內按原定條件買回房屋，重新成為所有人。在此期間，你的居住權受租約完整保障。</p>
+      </div>
     </details>
-
-    <details>
-      <summary>售後回租能拿到多少錢？<span class="plus">＋</span></summary>
-      <p>可取得的資金金額依物件條件、地段、屋況、屋齡及市場行情而定，個案差異可能很大。鋮馨租賃提供免費評估，加入 LINE 說明物件基本資料即可取得初步試算。</p>
-    </details>
-
-    <details>
-      <summary>信用不好、被銀行拒貸，可以申請售後回租嗎？<span class="plus">＋</span></summary>
-      <p>可以。售後回租以不動產市值為主要評估依據，信用分數並非唯一條件。即使曾遭銀行拒貸、有信用瑕疵、或有多筆負債，只要名下有不動產，均可申請免費評估。</p>
-    </details>
-
-    <details>
-      <summary>售後回租之後一定要買回嗎？<span class="plus">＋</span></summary>
-      <p>買回為屋主的「選擇權」，並非強制義務。若屆期選擇不行使買回權，依合約條款協議處理。所有細節在簽約前會逐條說明，你充分了解後再做決定，沒有任何強迫。</p>
-    </details>
-
-    <details>
-      <summary>租金怎麼算？會比外面的行情貴嗎？<span class="plus">＋</span></summary>
-      <p>租金依據市場行情及物件條件議定，並在簽約前明確載入租約。整體財務安排在提案說明時會完整試算給你看，確保方案對你有利才進入簽約階段。</p>
-    </details>
-
-    <div class="bt-card bt-local">
-      <div class="bt-label">中和在地・相關方案</div>
-      <p class="bt-p">鋮馨租賃位於新北市中和區中正路 468 號、團隊在地深耕 20 年，協助名下有房的屋主評估合法的資金規劃方向；本公司非金融機構。延伸閱讀：</p>
-      <div class="bt-chips"><a href="yonghe-sale-leaseback.html">永和售後回租 →</a><a href="banqiao-sale-leaseback.html">板橋售後回租 →</a><a href="sanchong-sale-leaseback.html">三重售後回租 →</a><a href="zhonghe-sale-leaseback.html">中和售後回租 →</a><a href="xinbei-sale-leaseback.html">新北售後回租 →</a><a href="zhonghe-property-finance.html">中和不動產融資諮詢 →</a><a href="compare-options.html">售後回租 vs 二胎 vs 民間轉銀行 →</a><a href="article-sale-leaseback-guide.html">售後回租完整指南 →</a><a href="debt-consolidation.html">貸款整合 →</a><a href="second-mortgage.html">二胎房貸 →</a></div>
-    </div>
   </div>
 </section>
 
 <div data-include="trust-block"></div>
+<p class="bt-small tp-static-disclaimer" style="max-width:920px;margin:12px auto 24px;padding:0 20px;font-size:.85rem;line-height:1.7;color:#5a6270">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
 <div data-include="line-qr"></div>
-<div data-include="lead-form"></div>
+<!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
+<div class="tp-bar" role="navigation" aria-label="快速行動">
+  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
+  <a href="tel:02-2249-0517" class="tp-bar-tel">打電話</a>
+</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>
