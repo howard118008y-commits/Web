@@ -242,13 +242,20 @@
   function markDoneAll(){
     document.querySelectorAll('.tp-form-wrap').forEach(function(w){
       var f=w.querySelector('form.tp-form'), d=w.querySelector('.tp-form-done'), e=w.querySelector('.tp-form-err');
+      if(w.tpClear) w.tpClear();
       if(f) f.hidden=true; if(e) e.hidden=true; if(d) d.hidden=false;
     });
   }
 
+  wrap.tpClear=function(){
+    form.reset();
+    form.querySelectorAll('[name="Property_Address"],[name="Message"]').forEach(function(el){el.value='';});
+    addrState={city:'',district:'',street:'',skip:false};
+  };
+
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(submitBtn.disabled) return;
+    if(submitBtn.disabled||window.__cxInlineSubmitting) return;
     err.hidden=true; fieldMsg(nameEl,''); fieldMsg(phoneEl,'');
     expand(false);
     var name=(nameEl.value||'').trim();
@@ -256,6 +263,7 @@
     if(!phoneOk(phoneEl.value)){ fieldMsg(phoneEl,'請填台灣手機（09 開頭 10 碼）或含區碼的市話，例如 02-2249-0517。'); phoneEl.focus(); return; }
     if(!addrOk()) return;
     form.querySelector('input[name="Message"]').value='勾選狀況：'+symptomText()+'；來源頁：'+from;
+    window.__cxInlineSubmitting=true;
     var orig=submitBtn.textContent; submitBtn.disabled=true; submitBtn.textContent='送出中…';
 
     /* 同步通知自家後端推 LINE／Telegram（best-effort，失敗不影響主流程；與 lead-form.html 同一段）
@@ -276,21 +284,30 @@
       }).catch(function(){});
     }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
 
-    fetch('https://api.web3forms.com/submit',{
-      method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
-    })
-    .then(function(r){ if(!r.ok) throw new Error('submit_failed'); return r.json(); })
+    var submitController=typeof AbortController==='function'?new AbortController():null;
+    var submitTimer;
+    var submitDeadline=new Promise(function(resolve,reject){
+      submitTimer=setTimeout(function(){reject(new Error('delivery_unknown'));if(submitController) submitController.abort();},20000);
+    });
+    Promise.race([fetch('https://api.web3forms.com/submit',{
+      signal:submitController?submitController.signal:undefined,method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+    }).then(function(r){ if(!r.ok) throw new Error('submit_failed'); return r.json(); }),submitDeadline])
     .then(function(j){
+      clearTimeout(submitTimer);
       if(j.success){
         /* 沒留地址（跳過或選填留白）就不承諾初估，改通用句（媽祖 09-19） */
         if(addrOn&&variant!=='corporate'&&(!hiddenAddr.value||hiddenAddr.value==='（無不動產）')){ done.querySelector('strong').textContent='收到了。1 個工作天內，經理鄭小姐會用 LINE 或電話聯絡你。'; }
         markDoneAll();
-        if(window.gtag) gtag('event','generate_lead',{page_path:location.pathname,form:'inline',topic:topic});
-        if(window.fbq) fbq('track','Lead');
-      }else{ throw new Error(j.message||'送出失敗'); }
+        try { if(window.gtag) gtag('event','generate_lead',{page_path:location.pathname,form:'inline',topic:topic}); } catch(analyticsError) {}
+        try { if(window.fbq) fbq('track','Lead'); } catch(analyticsError) {}
+      }else{ throw new Error('submit_failed'); }
     })
-    .catch(function(){
-      submitBtn.disabled=false; submitBtn.textContent=orig;
+    .catch(function(error){
+      clearTimeout(submitTimer);
+      var uncertain=error.message!=='submit_failed';
+      window.__cxInlineSubmitting=uncertain;
+      submitBtn.disabled=uncertain; submitBtn.textContent=orig;
+      if(uncertain) err.innerHTML='無法確認是否送達。請先以 LINE 或電話查詢，避免重複送件：<a href="https://lin.ee/PHIfSoY">LINE 留言</a>／<a href="tel:02-2249-0517">02-2249-0517</a>。';
       err.hidden=false;
     });
   });

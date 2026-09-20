@@ -190,10 +190,11 @@ img{max-width:100%;display:block}
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <script src="consultation-tracking.js" defer></script>
 <!-- Google Analytics 4 -->
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -217,7 +218,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw/contact.html",
- "dateModified": "2026-09-14",
+ "dateModified": "2026-09-20",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",

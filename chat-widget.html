@@ -81,7 +81,7 @@
     <button class="cw-send" id="cwSend">送出</button>
   </div>
   <div class="cw-foot">
-    <a class="cw-cta cw-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-cw-cta="line">加 LINE 諮詢</a>
+    <a class="cw-cta cw-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-cw-cta="line" data-link-location="ai_assistant">加 LINE 諮詢</a>
     <a class="cw-cta cw-form" href="apply.html" data-cw-cta="form">填表申請，專員回電</a>
   </div>
 </div>
@@ -108,9 +108,10 @@
   }
 
   function isOfficeHours(){
-    var d = new Date();
-    var day = d.getDay(), h = d.getHours();
-    return day >= 1 && day <= 5 && h >= 9 && h < 18;
+    // Taiwan business hours do not depend on the visitor device time zone.
+    var d = new Date(Date.now()+8*60*60*1000);
+    var day = d.getUTCDay(), h = d.getUTCHours();
+    return day >= 1 && day <= 5 && h >= 10 && h < 17;
   }
 
   var HUMAN_MSG_OPEN = '現在是辦公時間（週一至五 10:00–17:00），加 LINE 或來電 02-2249-0517，專員直接為您服務。';
@@ -220,7 +221,7 @@
     (list || []).forEach(function(spec){
       var parts = spec.split(':');
       var kind = parts[0];
-      var chip = document.createElement('button');
+      var chip = document.createElement(kind==='line'||kind==='tel'?'a':'button');
       chip.className = 'cw-chip';
       if (kind === 'flow') {
         var f = FLOWS[parts[1]];
@@ -231,10 +232,12 @@
         chip.onclick = function(){ track('cw_cta', parts[1]); location.href = parts[1]; };
       } else if (kind === 'line') {
         chip.textContent = parts[1];
-        chip.onclick = function(){ track('cw_cta', 'line'); window.open('https://lin.ee/PHIfSoY', '_blank'); };
+        chip.href='https://lin.ee/PHIfSoY'; chip.target='_blank'; chip.rel='noopener'; chip.dataset.linkLocation='ai_assistant';
+        chip.onclick = function(){ track('cw_cta', 'line'); };
       } else if (kind === 'tel') {
         chip.textContent = parts[1];
-        chip.onclick = function(){ track('cw_cta', 'tel'); location.href = 'tel:+886222490517'; };
+        chip.href='tel:+886222490517'; chip.dataset.linkLocation='ai_assistant';
+        chip.onclick = function(){ track('cw_cta', 'tel'); };
       }
       chipsEl.appendChild(chip);
     });

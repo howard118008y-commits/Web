@@ -105,14 +105,13 @@ main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
 </style>
 
 <!-- Google Analytics 4 -->
+<script src="consultation-tracking.js" defer></script>
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
-if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)});}
-else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname,phone_number:a.href.replace('tel:','')});}
-});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
+
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -140,7 +139,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <a class="brand" href="/"><span class="brand-mark">鋮</span>鋮馨租賃有限公司</a>
   <a class="call" href="tel:0222490517" aria-label="撥打 02-2249-0517">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/><path d="M15 3h6v6"/><path d="M21 3l-7 7"/></svg>
-    <span class="lbl">隨時來電 02-2249-0517</span>
+    <span class="lbl">來電 02-2249-0517</span>
   </a>
 </header>
 
@@ -150,6 +149,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <main>
+  <p class="hint">接聽時間：週一至週五 10:00–17:00。未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">LINE 留言</a>，告知方便聯絡時段。</p>
 
   <!-- Step 0:哪一件事(nav 帶 ?topic= 時跳過) -->
   <section class="pane" id="s0">
@@ -477,7 +477,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     if(name==='lead') renderLead();
     var u=new URL(location.href); if(st.topic) u.searchParams.set('topic',st.topic); u.searchParams.set('step',name); u.searchParams.delete('restart'); history.replaceState(null,'',u);
     window.scrollTo(0,0);
-    if(window.gtag) gtag('event','intake_step',{step:name,topic:st.topic||''});
+    try { if(window.gtag) gtag('event','intake_step',{step:name,topic:st.topic||''}); } catch(analyticsError) {}
   }
   function goNext(){
     if(cur==='topic' && !TOPIC_LABEL[st.topic]) return;
@@ -520,7 +520,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     if(cur!=='address'||next.disabled) return;
     var ar=addrCheck(inp.value, st.topic==='corporate'); if(!ar.ok){ addrTouched=true; check(); return; }
     st.address=ar.value; save();
-    if(window.gtag) gtag('event','intake_address',{topic:st.topic});
+    try { if(window.gtag) gtag('event','intake_address',{topic:st.topic}); } catch(analyticsError) {}
     goNext();
   });
   /* 通用單選題 */
@@ -592,22 +592,30 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         body:JSON.stringify({track:'intake_lead',err:code})
       }).catch(function(){});
     }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
-    .then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();})
+    var submitController=typeof AbortController==='function'?new AbortController():null;
+    var submitTimer;
+    var submitDeadline=new Promise(function(resolve,reject){
+      submitTimer=setTimeout(function(){reject(new Error('delivery_unknown'));if(submitController) submitController.abort();},20000);
+    });
+    Promise.race([fetch('https://api.web3forms.com/submit',{signal:submitController?submitController.signal:undefined,method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)}).then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();}),submitDeadline])
     .then(function(j){
-      if(!j.success) throw new Error(j.message||'送出失敗');
-      if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'intake',topic:st.topic});
-      if(window.fbq)fbq('track','Lead');
+      clearTimeout(submitTimer);
+      if(!j.success) throw new Error('submit_failed');
+      try { if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'intake',topic:st.topic}); } catch(analyticsError) {}
+      try { if(window.fbq)fbq('track','Lead'); } catch(analyticsError) {}
       submitPending=false;
       st={done:true};
       form.reset(); inp.value='';
+      document.getElementById('fAddress').value=''; document.getElementById('fStage').value='';
       show('done');
     })
-    .catch(function(){
+    .catch(function(error){
+      clearTimeout(submitTimer);
+      var uncertain=error.message!=='submit_failed';
       submitPending=false;
-      sbtn.disabled=false; sbtn.textContent=orig;
+      sbtn.disabled=uncertain; sbtn.textContent=orig;
       fmsg.className='form-msg err';
-      fmsg.innerHTML='送出失敗,請稍後再試,或直接加 LINE:<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">@0931087996</a>';
+      fmsg.innerHTML=uncertain?'無法確認是否送達。請先以 LINE 或電話查詢，避免重複送件：<a href="https://lin.ee/PHIfSoY">LINE 留言</a>／<a href="tel:02-2249-0517">02-2249-0517</a>。':'送出失敗,請稍後再試,或直接加 LINE:<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">@0931087996</a>';
     });
   });
 
@@ -622,6 +630,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     cancelAdvance(); clearSaved();
     st=qTopic&&TOPIC_LABEL[qTopic]?{topic:qTopic}:{};
     form.reset(); inp.value=''; addrTouched=false;
+    document.getElementById('fAddress').value=''; document.getElementById('fStage').value='';
     sbtn.disabled=false; sbtn.textContent=submitLabel;
     phoneWrap.classList.remove('err'); phoneMsg.textContent=''; phoneEl.setAttribute('aria-invalid','false');
     fmsg.className='form-msg'; fmsg.textContent='';

@@ -353,6 +353,7 @@ test('Pending intake submission blocks Back, clear and resubmit until the same r
 
 test('Shared lead form isolates notification HTTP failure and prevents duplicate submissions', async () => {
   const env = environment('<!doctype html><html><head></head><body>' + read('lead-form.html') + '</body></html>', { fetch: webFormFetch });
+  q(env, '[name="Phone"]').value='0900000000';
   env.run(selectScript('lead-form.html', code => code.includes('evalForm')), 'lead-form.html');
   q(env, '#consent').checked = true;
   env.dispatch(q(env, '#evalForm'), 'submit');
@@ -386,6 +387,7 @@ test('Consultation tracking uses one event with fixed attribution and no visitor
     const env = environment(read(file), { url: 'https://cx468.com.tw/' + file + '?phone=PRIVATE&debt=PRIVATE' });
     // Execute the real GA bootstrap as well as all contact tracking scripts.
     for (const s of scripts(read(file))) {
+      if (s.src==='analytics-config.js') env.run(read(s.src));
       if (!s.src && s.code.includes('function gtag()')) env.run(s.code);
     }
     env.run(read('consultation-tracking.js'));
@@ -445,6 +447,7 @@ test('Expanded contact pages sanitize GA location/referrer and emit once per ind
     const html = read(file), env = environment(html.replace('</body>', read('footer.html')+'</body>'), {url:'https://cx468.com.tw/'+file+'?phone=PRIVATE#PRIVATE'});
     Object.defineProperty(env.document, 'referrer', {value:'https://example.com/source?name=PRIVATE#PRIVATE'});
     for (const s of scripts(html)) {
+      if (s.src==='analytics-config.js') env.run(read(s.src));
       if (!s.src && s.code.includes('function gtag()')) env.run(s.code);
       assert.ok(s.src || !/gtag\(['"]event['"],\s*['"](?:phone_click|line_click)['"]/.test(s.code), file+' legacy contact handler');
     }
@@ -507,6 +510,124 @@ test('Mortgage estimates amortize principal, handle zero interest, and do not cl
  env.run("mode='private';calculate()");
  assert.ok(!q(env,'#savingYearLabel').textContent.includes('每年可省'));
  assert.equal(env.requests.length,0);assert.equal(env.events().length,0);
+});
+
+function initInline(options = {}, count = 1) {
+  const fragment = read('inline-form.html');
+  const html = '<html><body>' + Array.from({length:count}, () => fragment + '<div data-include="inline-form" data-topic="corporate" data-address="optional" data-variant="corporate"></div>').join('') + '</body></html>';
+  const env = environment(html, options);
+  const nodes = [...env.document.querySelectorAll('script')];
+  nodes.forEach(node => {
+    Object.defineProperty(env.document, 'currentScript', {configurable:true, value:node});
+    env.run(node.textContent, 'inline-form.html');
+  });
+  return env;
+}
+function fillLead(form) {
+  form.querySelector('[name="Name"]').value = '隔離測試';
+  form.querySelector('[name="Phone"]').value = form.id==='leadForm'?'0937051846':'0900000000';
+  const consent = form.querySelector('#consent'); if (consent) consent.checked = true;
+}
+test('Phase 2: concurrent inline forms send one request per channel and clear every form after success', async () => {
+  let finish;
+  const env = initInline({fetch(url) {
+    if (url.endsWith('/lead')) return {ok:true,status:200};
+    return new Promise(resolve => {finish=resolve;});
+  }},2);
+  const forms = [...env.document.querySelectorAll('form')]; forms.forEach(fillLead);
+  forms.forEach(form => env.dispatch(form,'submit'));
+  await flush();
+  assert.equal(env.requests.filter(r=>r.url.includes('web3forms')).length,1);
+  assert.equal(env.requests.filter(r=>r.url.endsWith('/lead')).length,1);
+  finish({ok:true,json:async()=>({success:true})}); await flush();
+  forms.forEach(form => {
+    assert.equal(form.querySelector('[name="Name"]').value,'');
+    assert.equal(form.querySelector('[name="Phone"]').value,'');
+    assert.equal(form.hidden,true);
+  });
+  assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,1);
+});
+test('Phase 2: all shared lead variants reject invalid phone, clear sensitive values and tolerate missing analytics', async () => {
+  for (const file of ['lead-form.html','lead-form-neutral.html','lead-form-nofree.html']) {
+    const env=environment('<html><body>'+read(file)+'</body></html>',{fetch:webFormFetch});
+    env.sandbox.gtag=undefined; env.sandbox.fbq=undefined;
+    env.run(selectScript(file,code=>code.includes('evalForm')));
+    const form=q(env,'form'); fillLead(form);
+    form.querySelector('[name="Phone"]').value='x'; env.dispatch(form,'submit'); await flush();
+    assert.equal(env.requests.length,0,file+' invalid phone reached backend');
+    fillLead(form); env.dispatch(form,'submit'); await flush();
+    assert.equal(form.style.display,'none',file);
+    for(const name of ['Name','Phone','LINE_ID','Property_Address','Message']) {
+      const input=form.querySelector('[name="'+name+'"]'); if(input) assert.equal(input.value,'',file+' retained '+name);
+    }
+  }
+});
+test('Phase 2: Web3Forms timeout tells users delivery is unknown and cannot emit success', async () => {
+  for (const file of ['inline-form.html','lead-form.html','lead-form-neutral.html','lead-form-nofree.html','intake.html']) {
+    const options={fetch(url){return url.includes('web3forms') ? new Promise(()=>{}) : {ok:true,status:200};}};
+    let env;
+    if(file==='inline-form.html') env=initInline(options);
+    else if(file==='intake.html') env=initIntake({...options,url:'https://cx468.com.tw/intake.html?topic=financing'});
+    else {env=environment('<html><body>'+read(file)+'</body></html>',options);env.run(selectScript(file,c=>c.includes('evalForm')));}
+    const form=q(env,'form');fillLead(form);env.dispatch(form,'submit');await flush();env.tick(20001);await flush();
+    assert.equal(env.requests.filter(r=>r.url.includes('web3forms')).length,1,file+' must submit before testing timeout');
+    const error=q(env,file==='inline-form.html'?'.tp-form-err':'#formMsg');
+    assert.ok(error.textContent.includes('無法確認是否送達'),file+' missing visible uncertain delivery message');
+    assert.equal(q(env,file==='inline-form.html'?'.tp-form-submit':file==='intake.html'?'#submit':'#submitBtn').disabled,true,file);
+    assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,0,file);
+  }
+});
+test('Phase 2: safe campaign attribution retains documented UTM values without arbitrary URL data', () => {
+  const env=environment('<html></html>',{url:'https://cx468.com.tw/apply.html?utm_source=facebook&utm_medium=paid_social&utm_campaign=private_to_bank&utm_content=profile&phone=PRIVATE#PRIVATE'});
+  Object.defineProperty(env.document,'referrer',{value:'https://facebook.com/?name=PRIVATE'});
+  env.run(read('analytics-config.js'));
+  const cfg=env.sandbox.cxAnalyticsConfig;
+  assert.equal(cfg.page_location,'https://cx468.com.tw/apply.html');
+  assert.equal(cfg.page_referrer,'https://facebook.com/');
+  assert.equal(cfg.campaign_source,'facebook');assert.equal(cfg.campaign_medium,'paid_social');
+  assert.equal(cfg.campaign_name,'private_to_bank');assert.equal(cfg.campaign_content,'profile');
+  assert.ok(!JSON.stringify(cfg).includes('PRIVATE'));
+  for(const campaign of ['property-management-fees','corp-checkup-202609','home-equity','p2a','meta_one_202609']) {
+    const historic=environment('<html></html>',{url:'https://cx468.com.tw/?utm_source=facebook&utm_medium=organic_social&utm_campaign='+campaign+'&utm_content=profile'});
+    historic.run(read('analytics-config.js'));assert.equal(historic.sandbox.cxAnalyticsConfig.campaign_name,campaign);assert.equal(historic.sandbox.cxAnalyticsConfig.campaign_medium,'organic_social');
+  }
+  for(const [source,medium,campaign,expected] of [['youtube','channel','fanjiuzhang',true],['threads','social','260920',true],['threads','social','260919',true],['threads','social','260231',false],['facebook','social','260920',false]]) {
+    const channel=environment('<html></html>',{url:'https://cx468.com.tw/?utm_source='+source+'&utm_medium='+medium+'&utm_campaign='+campaign});
+    channel.run(read('analytics-config.js'));assert.equal(channel.sandbox.cxAnalyticsConfig.campaign_name,expected?campaign:undefined);
+  }
+  const bad=environment('<html></html>',{url:'https://cx468.com.tw/?utm_source=PRIVATE&utm_medium=0900000000&utm_campaign=PRIVATE'});
+  bad.run(read('analytics-config.js'));assert.ok(!JSON.stringify(bad.sandbox.cxAnalyticsConfig).includes('PRIVATE'));
+});
+
+
+test('Phase 2: assistant dynamic LINE/phone anchors emit one click each and use Taiwan office hours', () => {
+  const times=[['2026-09-21T01:59:00Z',false],['2026-09-21T02:00:00Z',true],['2026-09-21T08:59:00Z',true],['2026-09-21T09:00:00Z',false],['2026-09-20T04:00:00Z',false]];
+  for (const [iso,open] of times) {
+    const env=environment('<html><body>'+read('chat-widget.html')+'</body></html>');
+    const timestamp=Date.parse(iso);env.sandbox.Date=class extends Date {constructor(...args){super(...(args.length?args:[timestamp]));}static now(){return timestamp;}};
+    env.run(selectScript('chat-widget.html',c=>c.includes('START_CHIPS')));
+    env.run(read('consultation-tracking.js'));env.sandbox.cxAsk('');
+    const human=[...env.document.querySelectorAll('.cw-chip')].find(el=>el.textContent==='找真人服務');
+    human.onclick();
+    assert.ok(q(env,'#cwMsgs').textContent.includes(open?'現在是辦公時間':'現在是非辦公時間'),iso);
+    const line=q(env,'#cwChips a[href="https://lin.ee/PHIfSoY"]'),phone=q(env,'#cwChips a[href="tel:+886222490517"]');
+    assert.ok(line&&phone,'assistant actions must expose their actual destination');
+    env.click(line);env.click(phone);
+    for(const event of ['line_click','phone_click']) {
+      const matches=env.events().filter(e=>e[1]===event);assert.equal(matches.length,1);assert.equal(matches[0][2].link_location,'ai_assistant');
+    }
+    assert.equal(env.requests.length,0,'static help must not call AI or notify');
+  }
+});
+test('Phase 2: body download timeout ignores a late success and tracking exceptions do not break submission', async () => {
+  let completeBody;
+  const env=initInline({fetch(url){return url.includes('web3forms')?{ok:true,json:()=>new Promise(resolve=>{completeBody=resolve;})}:{ok:true};}});
+  fillLead(q(env,'form'));env.dispatch(q(env,'form'),'submit');await flush();env.tick(20001);await flush();
+  assert.equal(q(env,'.tp-form-err').hidden,false);assert.equal(q(env,'.tp-form-done').hidden,true);
+  completeBody({success:true});await flush();assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,0);
+  const success=initInline({fetch:webFormFetch});success.sandbox.gtag=()=>{throw new Error('blocked');};success.sandbox.fbq=()=>{throw new Error('blocked');};
+  fillLead(q(success,'form'));success.dispatch(q(success,'form'),'submit');await flush();
+  assert.equal(q(success,'.tp-form-done').hidden,false);assert.equal(q(success,'.tp-form-err').hidden,true);
 });
 
 (async () => {

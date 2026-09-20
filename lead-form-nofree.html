@@ -115,6 +115,12 @@
       msg.innerHTML=consent.checked?'請填寫必填欄位（標示 * 者）。':'請先勾選同意隱私權政策。';
       return;
     }
+    var phone=form.querySelector('[name="Phone"]');
+    var digits=phone.value.replace(/[\s\-()（）]/g,'');
+    if(!/^(?:09\d{8}|0[2-8]\d{7,8})$/.test(digits)){
+      msg.className='form-msg err';msg.textContent='請填台灣手機（09 開頭 10 碼）或含區碼的市話。';phone.focus();return;
+    }
+    phone.value=digits;
     var orig=btn.textContent;btn.disabled=true;btn.textContent='送出中…';
     // 同步通知自家後端推 LINE 給工作機（best-effort，失敗不影響主流程）
     // 通知通道獨立監測；不傳訪客資料至失敗紀錄，也不自動重送造成重複名單。
@@ -133,23 +139,31 @@
         body:JSON.stringify({track:'web_form_lead',err:code})
       }).catch(function(){});
     }).then(function(){ if(noticeTimer!==null) clearTimeout(noticeTimer); });
-    fetch('https://api.web3forms.com/submit',{
-      method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
-    })
-    .then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();})
+    var submitController=typeof AbortController==='function'?new AbortController():null;
+    var submitTimer;
+    var submitDeadline=new Promise(function(resolve,reject){
+      submitTimer=setTimeout(function(){reject(new Error('delivery_unknown'));if(submitController) submitController.abort();},20000);
+    });
+    Promise.race([fetch('https://api.web3forms.com/submit',{
+      signal:submitController?submitController.signal:undefined,method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+    }).then(function(r){if(!r.ok) throw new Error('submit_failed'); return r.json();}),submitDeadline])
     .then(function(j){
+      clearTimeout(submitTimer);
       if(j.success){
+        form.reset();
         form.style.display='none';
         msg.className='form-msg ok';
         msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
-        if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'nofree'});
-        if(window.fbq)fbq('track','Lead');
-      }else{throw new Error(j.message||'送出失敗');}
+        try { if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'nofree'}); } catch(analyticsError) {}
+        try { if(window.fbq)fbq('track','Lead'); } catch(analyticsError) {}
+      }else{throw new Error('submit_failed');}
     })
-    .catch(function(){
-      btn.disabled=false;btn.textContent=orig;
+    .catch(function(error){
+      clearTimeout(submitTimer);
+      var uncertain=error.message!=='submit_failed';
+      btn.disabled=uncertain;btn.textContent=orig;
       msg.className='form-msg err';
-      msg.innerHTML='送出失敗，請稍後再試，或直接加 LINE 與我們聯繫：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+      msg.innerHTML=uncertain?'無法確認是否送達。請先以 LINE 或電話查詢，避免重複送件：<a href="https://lin.ee/PHIfSoY">LINE 留言</a>／<a href="tel:02-2249-0517">02-2249-0517</a>。':'送出失敗，請稍後再試，或直接加 LINE 與我們聯繫：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
     });
   });
 })();

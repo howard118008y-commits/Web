@@ -22,7 +22,7 @@
     'tel:0931087996', 'tel:0931-087-996', 'tel:+886931087996', 'tel:+886-931-087-996', 'tel:+886 931 087 996',
     'tel:0958139786', 'tel:0958-139-786', 'tel:+886958139786', 'tel:+886-958-139-786', 'tel:+886 958 139 786'];
   var needs = ['general', 'private_debt', 'private_to_bank', 'second_mortgage', 'corporate_loan'];
-  var positions = ['hero', 'after_ai', 'nav', 'mobile_menu', 'sticky_bar', 'footer', 'article_bottom', 'service_bottom', 'page'];
+  var positions = ['hero', 'after_ai', 'nav', 'mobile_menu', 'sticky_bar', 'footer', 'article_bottom', 'service_bottom', 'page', 'ai_assistant'];
   document.addEventListener('click', function (event) {
     var a = event.target && event.target.closest && event.target.closest('a');
     if (!a || typeof window.gtag !== 'function') return;
