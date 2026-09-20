@@ -37,7 +37,7 @@
     '.cx-sheet.open{display:block}',
     '.cx-sheet details{border-bottom:1px solid #2C4A6B}',
     '.cx-sheet summary{list-style:none;padding:16px 4px;font-size:16px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;color:#F2EFE8}',
-    '.cx-sheet summary::-webkit-details-marker{display:none}',
+    '.cx-sheet.cx-light summary{color:#1B2F4A}.cx-sheet summary::-webkit-details-marker{display:none}',
     '.cx-sheet summary::after{content:"+";color:#C8945A;font-size:20px}',
     '.cx-sheet details[open] summary::after{content:"−"}',
     '.cx-sheet a{display:block;padding:11px 4px 11px 14px;font-size:15px;color:rgba(242,239,232,.8)}',
