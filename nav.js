@@ -35,6 +35,7 @@
     '.cx-burger{display:none;background:none;border:0;color:#F2EFE8;font-size:24px;cursor:pointer;padding:4px 6px}',
     '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:#12213A;color:#F2EFE8;overflow:auto;padding:16px 20px 40px;z-index:99}',
     '.cx-sheet.open{display:block}',
+    'body:has(.cx-sheet.open) :is(.cx-sticky-cta,.tp-bar,.cw-launch,.cw-teaser,.cw-panel,.cw-full-backdrop,#float){display:none!important}',
     '.cx-sheet details{border-bottom:1px solid #2C4A6B}',
     '.cx-sheet summary{list-style:none;padding:16px 4px;font-size:16px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;color:#F2EFE8}',
     '.cx-sheet.cx-light summary{color:#1B2F4A}.cx-sheet summary::-webkit-details-marker{display:none}',
