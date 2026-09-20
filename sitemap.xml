@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/private-to-bank.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/second-mortgage.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -128,7 +128,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/debt-consolidation.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -148,7 +148,7 @@
   <!-- 評估與聯絡 -->
   <url>
     <loc>https://cx468.com.tw/evaluate.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -248,7 +248,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-self-employed-loan.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -516,7 +516,7 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-property-loan.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -574,6 +574,12 @@
   </url>
   <url>
     <loc>https://cx468.com.tw/topic-a.html</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cx468.com.tw/topic-b.html</loc>
     <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -785,7 +791,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url><loc>https://cx468.com.tw/corporate-loan.html</loc><lastmod>2026-09-19</lastmod></url>
+  <url><loc>https://cx468.com.tw/corporate-loan.html</loc><lastmod>2026-09-21</lastmod></url>
   <url>
     <loc>https://cx468.com.tw/article-inherited-house-sell-or-keep.html</loc>
     <lastmod>2026-09-20</lastmod>
