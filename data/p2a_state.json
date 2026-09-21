@@ -84,6 +84,11 @@
    "date": "2026-09-21",
    "file": null,
    "status": "gate_regex: 一定能"
+  },
+  "threads:17898509217604940": {
+   "date": "2026-09-21",
+   "file": "article-inheritance-tax-deadline-house.html",
+   "status": "published"
   }
  },
  "published": [
@@ -114,6 +119,13 @@
    "title": "房子非賣不可時，還有別的選擇嗎？",
    "source": "threads:17951434392253195",
    "source_url": "https://www.threads.com/@cx468468/post/DdalRhSG-DM"
+  },
+  {
+   "date": "2026-09-21",
+   "file": "article-inheritance-tax-deadline-house.html",
+   "title": "爸媽走後房子多久要處理？遺產稅六個月時限該注意什麼？",
+   "source": "threads:17898509217604940",
+   "source_url": "https://www.threads.com/@cx468468/post/Dc7rrVDG34a"
   }
  ]
 }
