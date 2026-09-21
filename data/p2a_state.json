@@ -79,6 +79,11 @@
    "date": "2026-09-21",
    "file": null,
    "status": "gate_regex"
+  },
+  "threads:18094918178370485": {
+   "date": "2026-09-21",
+   "file": null,
+   "status": "gate_regex: 一定能"
   }
  },
  "published": [
