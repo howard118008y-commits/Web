@@ -119,7 +119,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ### 🟡 順帶發現、未動（Sir 裁或另案）
 
-1. ~~**90 頁 GA config 沒濾 query/fragment**~~ ✅ `9eb1b80`（09-23 05:4x）全站 173 頁統一走 `analytics-config.js`（含 3 支生成模板）；順帶把 63 頁「inline 濾版」也換掉——那版有濾但**丟 UTM**（Threads/FB 帶 utm 進來記成 direct/referral）。**新頁一律抄 apply.html 的三行 GA 區塊**（`<script src="analytics-config.js">`＋gtag config 吃 `window.cxAnalyticsConfig`），驗法：真瀏覽器帶 `?utm_source=threads&utm_medium=social&utm_campaign=250923&secret=PRIVATE#frag` 看 collect 的 dl／cs／cm／cn（腳本思路：playwright 抓 `/g/collect` 請求）。
+1. ~~**90 頁 GA config 沒濾 query/fragment**~~ ✅ `ab50002`（09-23 05:4x）全站 173 頁統一走 `analytics-config.js`（含 3 支生成模板）；順帶把 63 頁「inline 濾版」也換掉——那版有濾但**丟 UTM**（Threads/FB 帶 utm 進來記成 direct/referral）。**新頁一律抄 apply.html 的三行 GA 區塊**（`<script src="analytics-config.js">`＋gtag config 吃 `window.cxAnalyticsConfig`），驗法：真瀏覽器帶 `?utm_source=threads&utm_medium=social&utm_campaign=250923&secret=PRIVATE#frag` 看 collect 的 dl／cs／cm／cn（腳本思路：playwright 抓 `/g/collect` 請求）。
 2. 矩陣 🟢 待辦 #1–#6（口徑統一／三支 property-finance 同構 88–91%／`.bt-meta` 對比／企業兩樞紐無 chips／geo 座標兩組並存／企業健檢擴 5 區）。
 3. 「成數最高 9 成」未說明一二胎合計（09-09 媽祖提，全站 9 處同型）。
 4. ~~nav.js `ctaLine` 死變數／L122 過時註解~~ ✅ `c4ff7c5` 清掉（09-23 05:0x）；`data-cta="line"` 屬性仍由 footer.html 讀，頁面上不要拿掉。
