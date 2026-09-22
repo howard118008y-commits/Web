@@ -269,10 +269,11 @@ img{max-width:100%;display:block}
 <meta name="twitter:description" content="全台縣市地價稅試算，台北市、新北市支援行政區・地段・地號即時查詢，自用住宅 2‰ 及一般用地六級累進稅率。">
 <meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
 <link rel="preconnect" href="https://www.googletagmanager.com">
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
 </script>
 <script type="application/ld+json">
 {

@@ -320,10 +320,11 @@ img{max-width:100%;display:block}
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <!-- Google Analytics 4 -->
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
 </script>
 <!-- ─── SEO 補強：Twitter + geo + Organization ─── -->
 <meta name="author" content="鋮馨租賃有限公司">

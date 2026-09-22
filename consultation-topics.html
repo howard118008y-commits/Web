@@ -109,10 +109,11 @@ body{padding-top:16px}
 {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "諮詢項目名詞解釋", "hasDefinedTerm": [{"@type": "DefinedTerm", "name": "售後回租", "description": "房子過戶給投資方、同時簽租約繼續住，並保有日後依約買回的權利，這三件事是一組安排；是否適合依個案不動產與財務狀況評估。"}, {"@type": "DefinedTerm", "name": "貸款整合", "description": "將信貸、卡循、民間借款等多筆債務整合為一筆房貸，每月現金流有機會少支出；銀行月付含本金攤還，不等於利息總額減少。實際依個案財務狀況與市場情況而定。"}, {"@type": "DefinedTerm", "name": "民間轉銀行", "description": "將既有民間借款分階段轉回銀行體系，目標是讓本金開始下降；能否轉入與條件依個案不動產與財務狀況評估，最終核貸由金融機構決定。"}, {"@type": "DefinedTerm", "name": "公同共有", "description": "繼承人共同擁有整筆不動產、未劃分應有部分的共有型態，處分原則上需全體同意。"}, {"@type": "DefinedTerm", "name": "分別共有", "description": "各共有人各自持有可特定比例（應有部分）的共有型態。"}, {"@type": "DefinedTerm", "name": "遺產稅申報期限", "description": "依《遺產及贈與稅法》規定，自被繼承人死亡之日起六個月內應辦理遺產稅申報，必要時可依規定申請延期；實際申報事項以國稅局規定為準。"}]}
 </script>
 <script src="include.js" defer></script>
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',{page_location:location.origin+location.pathname,page_referrer:(function(){try{var r=new URL(document.referrer);return r.origin+r.pathname;}catch(e){return '';}})()});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
 document.addEventListener('click',function(e){var a=e.target.closest('a.ct-card');if(!a)return;
 gtag('event','consultation_topic_click',{topic:a.dataset.topic||'',page_path:location.pathname});});
 </script>

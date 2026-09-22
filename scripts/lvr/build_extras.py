@@ -278,10 +278,11 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:14px;color:var(--
 
 def ga_block() -> str:
     return """<!-- Google Analytics 4 -->
+<script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R');
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
 document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a||!a.href)return;
 if(a.href.indexOf('lin.ee')>-1){gtag('event','line_click',{page_path:location.pathname});}
 else if(a.href.indexOf('tel:')===0){gtag('event','phone_click',{page_path:location.pathname});}
