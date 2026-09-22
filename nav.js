@@ -98,10 +98,10 @@
     ]},
     { label: '案例分享', items: [
       ['X 先生的民間換約(四天走完)', '/case-private-refinance.html'],
-      ['中和屋主的貸款整合(匿名)', '/article-debt-consolidation.html'],
-      ['核可案例:民間轉銀行(新北中和,匿名)', '/lp-loan-integration.html'],
-      ['被朋友拖下水,三個月走出來', '/article-private-loan-credit-damage.html'],
-      ['月收入 6 萬、多筆負債怎麼整理', '/article-loan-integration.html']
+      ['中和屋主的貸款整合(匿名)', '/case-zhonghe-consolidation.html'],
+      ['核可案例:自營業者民間轉銀行(匿名)', '/case-private-to-bank.html'],
+      ['被朋友拖下水,三個月走出來', '/case-friend-debt.html'],
+      ['月收入 6 萬、多筆負債怎麼整理(情境試算)', '/case-income-60k.html']
     ]}
   ];
 
