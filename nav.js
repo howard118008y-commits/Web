@@ -97,6 +97,7 @@
       ['全部小工具', '/tools.html']
     ]},
     { label: '案例分享', items: [
+      ['X 先生的民間換約(四天走完)', '/case-private-refinance.html'],
       ['中和屋主的貸款整合(匿名)', '/article-debt-consolidation.html'],
       ['核可案例:民間轉銀行(新北中和,匿名)', '/lp-loan-integration.html'],
       ['被朋友拖下水,三個月走出來', '/article-private-loan-credit-damage.html'],
