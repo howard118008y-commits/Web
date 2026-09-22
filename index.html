@@ -36,7 +36,7 @@
   --paper:#F7F5F0;--paper-line:#E2DED4;
   --maxw:1180px;
   --spring:cubic-bezier(.22,1,.36,1);
-  --spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 0.997);
+  --spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -379,6 +379,18 @@ h1 em{font-style:normal;color:var(--gold)}
 @media (prefers-contrast:more){
   body .cx-sticky-cta{border-color:rgba(242,239,232,.6)}
 }
+
+/* ============ 精簡 hero 對照版（apple-design §16 克制：一屏一件事）============ */
+.hero{min-height:auto;padding-bottom:72px}
+.hero-sub{margin-bottom:30px}
+.hero-in>.cx-call-block{margin:0 0 34px}
+.hero-more{background:var(--forest-deep);color:var(--cream);padding:64px 24px 80px;border-top:1px solid rgba(242,239,232,.06)}
+.hero-more .sec-in{max-width:var(--maxw);margin:0 auto;text-align:center}
+.hero-more .cx-needs{margin:0 auto 44px}
+.hero-more .stats{margin:0 auto 36px}
+.hero-more .quick{margin-top:0}
+.hero-more .hero-fine{margin-top:26px}
+@media(max-width:860px){.hero{padding-bottom:56px}.hero-more{padding:48px 20px 64px}.hero-more .cx-needs{margin-bottom:32px}}
 </style>
 <script type="application/ld+json">
 {
@@ -538,13 +550,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
     <p class="eyebrow">鋮馨租賃 · 新北中和 · 諮詢與媒合</p>
     <h1>借款壓力與資金需求，<br><em>先打電話，把下一步說清楚。</em></h1>
-    <p class="hero-sub">民間借款想整理、轉回銀行，或需要二胎房貸、企業貸款？先由顧問了解需求，協助盤點條件與申貸方向。你也可以用下方小鋮 AI、試算與財務健檢先整理問題。</p><div class="cx-call-block" data-consultation-need="general"><a class="cx-call-primary" href="tel:0222490517" data-link-location="hero">電話諮詢 02-2249-0517</a><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div><nav class="cx-needs" aria-label="四類諮詢需求"><a href="debt-consolidation.html" data-consultation-need="private_debt"><strong>民間借款整理</strong><span>先盤點多筆借款、月付與清償條件 →</span></a><a href="private-to-bank.html" data-consultation-need="private_to_bank"><strong>民間轉貸銀行</strong><span>了解轉貸條件、文件與清償銜接 →</span></a><a href="second-mortgage.html" data-consultation-need="second_mortgage"><strong>二胎房貸</strong><span>評估房屋擔保空間與還款能力 →</span></a><a href="corporate-loan.html" data-consultation-need="corporate_loan"><strong>企業貸款</strong><span>整理營運週轉需求與申貸資料 →</span></a></nav>
+    <p class="hero-sub">民間借款想整理、轉回銀行，或需要二胎房貸、企業貸款？先由顧問了解需求，協助盤點條件與申貸方向。你也可以用下方小鋮 AI、試算與財務健檢先整理問題。</p><div class="cx-call-block" data-consultation-need="general"><a class="cx-call-primary" href="tel:0222490517" data-link-location="hero">電話諮詢 02-2249-0517</a><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div>
 
-    <div class="stats">
-      <div><div class="stat-n">39+<sup>1</sup></div><div class="stat-l">歷來送件機構經驗</div></div>
-      <div><div class="stat-n">20+ 年<sup>2</sup></div><div class="stat-l">團隊不動產租賃經驗</div></div>
-      <div><div class="stat-n">468<sup>3</sup></div><div class="stat-l">中和中正路 · 可到店面談</div></div>
-    </div>
 
     <div class="panel">
       <div class="mode-box">
@@ -610,18 +617,29 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </div>
 
-    <div class="quick">
+
+  </div>
+</header>
+
+<section class="hero-more" aria-label="諮詢需求與聯絡方式">
+  <div class="sec-in">
+    <nav class="cx-needs" aria-label="四類諮詢需求"><a href="debt-consolidation.html" data-consultation-need="private_debt"><strong>民間借款整理</strong><span>先盤點多筆借款、月付與清償條件 →</span></a><a href="private-to-bank.html" data-consultation-need="private_to_bank"><strong>民間轉貸銀行</strong><span>了解轉貸條件、文件與清償銜接 →</span></a><a href="second-mortgage.html" data-consultation-need="second_mortgage"><strong>二胎房貸</strong><span>評估房屋擔保空間與還款能力 →</span></a><a href="corporate-loan.html" data-consultation-need="corporate_loan"><strong>企業貸款</strong><span>整理營運週轉需求與申貸資料 →</span></a></nav>
+        <div class="stats">
+      <div><div class="stat-n">39+<sup>1</sup></div><div class="stat-l">歷來送件機構經驗</div></div>
+      <div><div class="stat-n">20+ 年<sup>2</sup></div><div class="stat-l">團隊不動產租賃經驗</div></div>
+      <div><div class="stat-n">468<sup>3</sup></div><div class="stat-l">中和中正路 · 可到店面談</div></div>
+    </div>
+        <div class="quick">
       <a class="primary" href="tel:0222490517" data-link-location="after_ai">電話諮詢 02-2249-0517</a>
       <a href="https://lin.ee/PHIfSoY">未接通？LINE 留言</a>
       <a href="apply.html">填表試算</a>
     </div>
-
-    <p class="hero-fine">
+        <p class="hero-fine">
       本頁資訊僅供參考,實際結果依個案不動產條件、財務狀況與市場情況而定。
       鋮馨租賃有限公司為融資租賃業者,非金融機構、不放貸,核貸結果最終由金融機構依個案決定。
     </p>
   </div>
-</header>
+</section>
 
 <section class="group">
   <div class="group-in">
