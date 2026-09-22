@@ -166,7 +166,7 @@
     <div class="cxm-name">鋮馨租賃有限公司</div>
     <div class="cxm-id">LINE 官方帳號</div>
     <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" class="cxm-btn">點此加入 LINE</a>
-    <div class="cxm-phone">或來電 <a href="tel:0222490517">02-2249-0517</a> ／ <a href="tel:0931087996">0931-087-996</a></div>
+    <div class="cxm-phone">或來電 <a href="tel:0222490517">02-2249-0517</a> ／ <a href="tel:0958139786">0958-139-786</a></div>
   </div>
 </div>
 `;
