@@ -23,6 +23,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORT = "/tmp/datemod_report.txt"
 SYNC_MARKER = "datemod-sync"  # commit 訊息含 [datemod-sync] 者不算實質 commit
+NOFRESH_MARKER = r"\[nofresh\]"  # 純版型／CSS 改動（2026-09-23 老闆定）：不算實質修改，日期不動、不送 indexing
 
 LDJSON_RE = re.compile(
     r'(<script[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -35,7 +36,7 @@ def git_last_real_commit_date(relpath):
     """該檔最後「實質」commit 日（YYYY-MM-DD），排除 [datemod-sync] commit。"""
     out = subprocess.run(
         ["git", "log", "-1", "--format=%cs",
-         "--invert-grep", "--grep", SYNC_MARKER, "--", relpath],
+         "--invert-grep", "--grep", SYNC_MARKER, "--grep", NOFRESH_MARKER, "--", relpath],
         cwd=ROOT, capture_output=True, text=True,
     ).stdout.strip()
     return out or None

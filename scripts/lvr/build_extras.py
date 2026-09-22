@@ -374,8 +374,9 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
 {ga_block()}
 <style>{common_styles()}</style>
 <script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
+<link rel="stylesheet" href="fluid.css">
 </head>
-<body>
+<body ontouchstart="">
 <div id="nav" data-theme="light"></div>
 <script src="nav.js"></script>
 
@@ -590,8 +591,9 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
 {ga_block()}
 <style>{common_styles()}</style>
 <script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
+<link rel="stylesheet" href="fluid.css">
 </head>
-<body>
+<body ontouchstart="">
 <div id="nav" data-theme="light"></div>
 <script src="nav.js"></script>
 

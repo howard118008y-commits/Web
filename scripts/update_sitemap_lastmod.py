@@ -26,7 +26,9 @@ BASE = "https://cx468.com.tw/"
 
 def git_date(rel_path: Path) -> str | None:
     try:
-        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(rel_path)],
+        out = subprocess.run(["git", "log", "-1", "--format=%cs",
+                              "--invert-grep", "--grep", r"\[nofresh\]",  # 純版型／CSS commit 不算修改（同 update_schema_datemod.py）
+                              "--", str(rel_path)],
                              cwd=ROOT, capture_output=True, text=True, check=True)
         return out.stdout.strip() or None
     except subprocess.CalledProcessError:
