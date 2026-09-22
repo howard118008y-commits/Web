@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""主戰場五頁 FAQ 補題（媽祖 2026-08-19 已核）——同源生成器。
+"""主戰場五頁 FAQ 補題（媽祖 2026-08-19 已核）——同源生成器 ＋ 全站同源閘門。
 
 草稿正本：行銷產出/官網文章草稿/2026-08-19-主戰場FAQ補題草稿-FINAL.md
 鐵則（memory feedback_faq_schema_same_source）：可見 FAQ DOM 與 FAQPage JSON-LD
-必須由 NEW_FAQS 這同一份資料結構渲染，禁止手寫兩份。
+必須由同一份資料結構渲染，禁止手寫兩份。
 
 用法：
-  python3 scripts/add_faq_items.py            # 插入（冪等：已含新題的頁跳過）
-  python3 scripts/add_faq_items.py --verify   # 逐頁比對 JSON-LD Q/A == 可見 DOM Q/A
+  python3 scripts/add_faq_items.py                 # 插入（冪等：已含新題的頁跳過）
+  python3 scripts/add_faq_items.py --verify        # 驗 NEW_FAQS 那幾頁
+  python3 scripts/add_faq_items.py --verify --all  # 驗全站每一個含 FAQPage 的頁
+
+--verify 的沿革（2026-09-23）：原本用寫死的 DOM 選擇器抓可見 Q/A
+（`<div class="sec-text">常見問題 · FAQ</div>` 等），Better 版型改版後選擇器
+全部落空 → 閘門直接 IndexError 拋出，等於零把關。改成版型無關的做法：
+把整頁去標籤後的可見文字正規化（去空白、還原 HTML entity），逐題檢查
+schema 的 Q 與 A 是否逐字出現在可見文字裡。不改任何頁面內容，只回報。
 """
 import datetime
+import html as html_mod
 import json
 import pathlib
 import re
@@ -99,6 +107,9 @@ TOPIC_ANCHOR = '  </div>\n  <div class="sec-head"><div class="sec-line"></div><d
 RADAR_ANCHOR = '  </div>\n  <!-- ════════════ 常見問題 END ════════════ -->'
 
 JSONLD_RE = re.compile(r'(<script type="application/ld\+json">\n)(\{.*?\})(\n</script>)', re.S)
+# 插入用的 JSONLD_RE 綁死「換行＋縮排」那種寫法；驗證要掃全站，多數頁的 JSON-LD 是單行，
+# 用嚴格版會整頁抓不到、被誤判成「JSON-LD 壞了」，所以驗證另用寬鬆版。
+LD_ANY_RE = re.compile(r'(?is)<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>')
 
 
 DATEMOD_RE = re.compile(r'("dateModified"\s*:\s*")(\d{4}-\d{2}-\d{2})(")')
@@ -194,40 +205,89 @@ def extract_schema(html: str):
     raise SystemExit("找不到 FAQPage JSON-LD")
 
 
-def extract_visible(fname: str, html: str):
-    if fname == "radar-index.html":
-        seg = html.split("常見問題（AEO FAQPage）START")[1].split("常見問題 END")[0]
-        qs = re.findall(r'margin:0 0 8px">(.*?)</h3>', seg, re.S)
-        ans = re.findall(r'margin:0">(.*?)</p>', seg, re.S)
-    else:
-        seg = html.split('<div class="sec-text">常見問題 · FAQ</div>')[1].split(
-            '<div class="sec-text">名詞解釋 · GLOSSARY</div>')[0]
-        qs = re.findall(r'margin-bottom:10px">(.*?)</div>', seg, re.S)
-        ans = re.findall(r'color:#5a5750">(.*?)</div>', seg, re.S)
-    assert len(qs) == len(ans), f"{fname} 可見 Q/A 數不對稱 {len(qs)}/{len(ans)}"
-    return list(zip(qs, ans))
+def visible_text(html: str) -> str:
+    """整頁可見文字（去 script/style/註解/標籤、還原 entity、去掉所有空白）。
+    中文沒有詞間空白，兩邊都去空白比對最穩，也讓 en/ 頁的排版換行不會造成假不一致。"""
+    h = re.sub(r"(?is)<script.*?</script>", " ", html)
+    h = re.sub(r"(?is)<style.*?</style>", " ", h)
+    h = re.sub(r"(?s)<!--.*?-->", " ", h)
+    h = re.sub(r"<[^>]+>", " ", h)
+    return _norm(h)
 
 
-def verify() -> bool:
+def _norm(s: str) -> str:
+    return re.sub(r"\s+", "", html_mod.unescape(s))
+
+
+def all_faq_schemas(html: str):
+    """回傳頁內所有 FAQPage 的 (Q, A) 清單（含包在 @graph 裡的）。"""
+    faqs = []
+    for m in LD_ANY_RE.finditer(html):
+        try:
+            data = json.loads(m.group(1))
+        except Exception:
+            continue                      # 壞 JSON 由 --verify 另行報，不讓整批中斷
+        nodes = data if isinstance(data, list) else [data]          # 頂層陣列型也要吃
+        flat = []
+        for n in nodes:
+            flat += (n.get("@graph", []) if isinstance(n, dict) else []) + [n]
+        for node in flat:
+            if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                for q in node.get("mainEntity", []):
+                    faqs.append((q.get("name", ""), q.get("acceptedAnswer", {}).get("text", "")))
+    return faqs
+
+
+def verify(files=None) -> bool:
     ok = True
-    for fname in NEW_FAQS:
+    files = list(files or NEW_FAQS)
+    bad = []
+    for fname in files:
         html = (ROOT / fname).read_text(encoding="utf-8")
-        sch = extract_schema(html)
-        vis = extract_visible(fname, html)
-        match = sch == vis
-        ok &= match
-        print(f"{fname}: schema {len(sch)} 題｜可見 {len(vis)} 題｜sch==vis {'PASS' if match else 'FAIL'}")
-        if not match:
-            for i, (s, v) in enumerate(zip(sch, vis)):
-                if s != v:
-                    print(f"  第 {i+1} 題不一致:\n   sch={s}\n   vis={v}")
-            if len(sch) != len(vis):
-                print(f"  題數不同: schema={len(sch)} vis={len(vis)}")
+        if "FAQPage" not in html:
+            continue
+        sch = all_faq_schemas(html)
+        if not sch:
+            # 「FAQPage」出現在註解或內文、但 JSON-LD 裡根本沒有 → 不是不同源，是這頁沒 schema
+            in_ld = any("FAQPage" in m.group(1) for m in LD_ANY_RE.finditer(html))
+            if in_ld:
+                print(f"FAIL {fname}: JSON-LD 裡有 FAQPage 但解不出 Q/A（JSON 壞了或結構非預期）")
+                ok = False
+                bad.append(fname)
+            else:
+                print(f"SKIP {fname}: 全頁無 FAQPage schema（只在註解／內文出現字樣）")
+            continue
+        vis = visible_text(html)
+        miss = []
+        for i, (q, a) in enumerate(sch, 1):
+            if _norm(q) not in vis:
+                miss.append(f"第 {i} 題問題未出現在可見內容：{q[:40]}")
+            if _norm(a) not in vis:
+                miss.append(f"第 {i} 題答案未出現在可見內容：{a[:40]}")
+        if miss:
+            ok = False
+            bad.append(fname)
+            print(f"FAIL {fname}: schema {len(sch)} 題，{len(miss)} 處不同源")
+            for line in miss:
+                print(f"    - {line}")
+        else:
+            print(f"PASS {fname}: schema {len(sch)} 題，Q/A 逐字都在可見內容裡")
+    print(f"\n=== 共驗 {len(files)} 頁｜不同源 {len(bad)} 頁 ===")
+    if bad:
+        print("不一致清單：" + ", ".join(bad))
     return ok
+
+
+def all_faq_pages():
+    pages = sorted(p.relative_to(ROOT).as_posix()
+                   for p in list(ROOT.glob("*.html")) + list(ROOT.glob("en/*.html"))
+                   if "FAQPage" in p.read_text(encoding="utf-8"))
+    return pages
 
 
 if __name__ == "__main__":
     if "--verify" in sys.argv:
-        sys.exit(0 if verify() else 1)
+        files = all_faq_pages() if "--all" in sys.argv else None
+        sys.exit(0 if verify(files) else 1)
     for fname in NEW_FAQS:
         print(f"{fname}: {insert_page(fname)}")
