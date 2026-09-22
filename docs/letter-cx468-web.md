@@ -1,19 +1,21 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`；本檔上一版（09-20，含 09-14～09-20 六段 session 日誌）在 `git show e1c4b7b:docs/letter-cx468-web.md`。
-> 最後更新：2026-09-23 01:0x（Apple 流體層 fluid.css＋首頁精簡 hero 上線，HEAD `3762746`；一、三節重寫，二節保留＋新增 fluid 段，四節加一行）
+> 最後更新：2026-09-23 02:5x（fluid.css 補掛全站 146 頁＋生成頁模板＋鮮度腳本 [nofresh] 標記，HEAD `d1d7d3a`；一節 HEAD／CI／設計三列改寫、二節 fluid 段加標記一行、三節 #9 結案）
+> 前次：2026-09-23 01:0x（Apple 流體層 fluid.css＋首頁精簡 hero 上線，HEAD `3762746`；一、三節重寫，二節保留＋新增 fluid 段，四節加一行）
 > 前次：2026-09-20 00:2x（主題分頁改造 B0–B5 上線 `cb51af5`）。
-> 本次更新原因：Sir 09-22 令「用 apple-design skill 改首頁」→ 看過隔離版精簡 hero 說「很好、幾個網頁都改」→ 09-23 令「部署」。另 09-22 平行 session 做了電話 NAP（`bede5bb` CTA 0931→0958 全站、`f3b88a2` 反詐／聯絡四處三號並列）與媽祖 T0-c（`19d0a5b` 4 頁「實際價金比例」），本 session 只從 git log 看到、未重驗其內容。
+> 本次更新原因：Sir 09-23 02:0x 選「全站＋生成頁模板一起做」＋「不跳鮮度，加 [nofresh]」＋「部署」。平行 session 同時段推了案例分享 01–05（`381d865`／`d154ef1`／`1df8999`／`a7c67cc`），本 session rebase 過、未重驗其內容。
+> 前次原因：Sir 09-22 令「用 apple-design skill 改首頁」→ 看過隔離版精簡 hero 說「很好、幾個網頁都改」→ 09-23 令「部署」。另 09-22 平行 session 做了電話 NAP（`bede5bb` CTA 0931→0958 全站、`f3b88a2` 反詐／聯絡四處三號並列）與媽祖 T0-c（`19d0a5b` 4 頁「實際價金比例」），本 session 只從 git log 看到、未重驗其內容。
 
 ## 一、當前狀態快照（2026-09-23 01:0x 重驗，每項附指令）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | **`3762746`＝origin/main**。09-22～23 鏈：`f3b88a2` NAP 三號並列 → `19d0a5b` 4 頁實際價金比例 → `80b34a6`／`c04b130`／`1bd1259` 自動資料 → `ad8fd75` p2a 09-22 文章 → `e9270e7` 首頁精簡 hero → `3762746` fluid.css 掛 15 頁。其前 `cb51af5` 主題頁改造（09-20） | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -10` |
-| CI／Pages | `3762746` CI success＋pages build success（2026-09-22T17:42Z＝台北 09-23 01:42）；線上 `fluid.css` 200、首頁 `hero-more` 命中 8、corporate-checkup／article-loan-integration 各掛 1 | `gh run list -L 3`；`curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/fluid.css`；`curl -s https://cx468.com.tw/ \| grep -c hero-more` |
+| HEAD | **`d1d7d3a`＝origin/main**（fluid.css 全站 146 頁＋3 支生成模板＋2 支鮮度腳本，151 檔；訊息帶 `[nofresh]`）。其前 `a7c67cc`／`1df8999`／`d154ef1`／`381d865`／`22317e8`／`f2e4cf8` 案例分享 01–05 故事頁（平行 session）。09-22～23 鏈：`f3b88a2` NAP 三號並列 → `19d0a5b` 4 頁實際價金比例 → `80b34a6`／`c04b130`／`1bd1259` 自動資料 → `ad8fd75` p2a 09-22 文章 → `e9270e7` 首頁精簡 hero → `3762746` fluid.css 掛 15 頁。其前 `cb51af5` 主題頁改造（09-20） | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -10` |
+| CI／Pages | `d1d7d3a` push 於台北 09-23 02:5x（線上驗證見四節 -1 與 memory `project_apple_design_branch`）；前一版 `3762746` CI＋pages 皆 success | `gh run list -L 3`；`curl -s -o /dev/null -w '%{http_code}' https://cx468.com.tw/fluid.css`；`curl -s https://cx468.com.tw/ \| grep -c hero-more` |
 | 工作區 | 乾淨（只剩未追蹤 `scripts/archive/goal-scores.jsonl`，非本專案產物勿 add）。`git worktree list` 另有兩個別的 session 的 audit/phase2 worktree（`/private/tmp/cx468-phase2-20260921`、`~/Documents/Codex/.../site-phase2`），不是本 session 的，勿動 | `git status -s`；`git worktree list` |
 | 閘門 | ci_check **184 檔 0 問題**（09-22 在 apple-design 樹跑）；`check_text_integrity.py` **14 頁零漂移**＋首頁可見文字 184 節點多重集相等（腳本比順序會對首頁報漂移＝預期，見二節 fluid 段）；FAQ 同源／audit-regression **本 session 未跑**（最後數字見 09-20 版：148 頁零漂移／18/18） | `python3 scripts/ci_check.py`；`python3 scripts/check_text_integrity.py . <檔>`；`python3 scripts/audit_faq_samesource.py` |
-| 設計（Apple 流體層，09-23 上線） | 新檔 **`fluid.css`**（75 行）掛 **15 頁**＝首頁＋企業貸款／民間轉銀行／繼承房貸／案例分享四個下拉裡的 14 頁：按壓回饋（pointer-down 縮 .97、臨界阻尼 spring `linear()` 彈回）、nav 下拉從按鈕長出（blur→清晰）、FAQ `::details-content` 連續展開、tp-h1／art h1／bt-h1 負字距＋小字正字距、hero 進場微升（主圖零延遲）、手機底部條（footer `.cx-sticky-cta`＋topic.css `.tp-bar`）改懸浮玻璃 dock、reduced-motion／transparency／contrast。首頁另有內聯專屬段（AI 卡 View Transition、開關 transform）；**首頁 hero 精簡為眉標／h1／副標／電話鈕／AI 卡，四需求卡／信任列／快捷列／免責搬到 `.hero-more` 第二屏**，文字零增刪。Phase 1–3 配色同 09-20 版 | `grep -l 'fluid.css' *.html \| wc -l` → 15；`curl -s https://cx468.com.tw/ \| grep -c 'class="hero-more"'` → 1；截圖 `行銷產出/視覺風格/apple-design-2026-09-22/` |
+| 設計（Apple 流體層，09-23 全站） | 新檔 **`fluid.css`**（75 行）**掛全站 165 頁**（`d1d7d3a` 補 146：139 靜態＋en/index＋lvr×3／radar×2 生成頁；生成模板 `scripts/lvr/build_observatory.py`／`build_extras.py`／`gen_radar_v4.py` 同步改，之後重生成不會掉）。**未掛 20**＝include 片段 11、cx_batch 草稿 4、topic-a~d 模板 4，另 downloads/×4、world/（無 nav 無按壓元件）。sale-leaseback.html 原本沒有 `</head>`，link 放 `<body>` 前。首批 15 頁（`3762746`）＝首頁＋四個下拉裡的 14 頁：按壓回饋（pointer-down 縮 .97、臨界阻尼 spring `linear()` 彈回）、nav 下拉從按鈕長出（blur→清晰）、FAQ `::details-content` 連續展開、tp-h1／art h1／bt-h1 負字距＋小字正字距、hero 進場微升（主圖零延遲）、手機底部條（footer `.cx-sticky-cta`＋topic.css `.tp-bar`）改懸浮玻璃 dock、reduced-motion／transparency／contrast。首頁另有內聯專屬段（AI 卡 View Transition、開關 transform）；**首頁 hero 精簡為眉標／h1／副標／電話鈕／AI 卡，四需求卡／信任列／快捷列／免責搬到 `.hero-more` 第二屏**，文字零增刪。Phase 1–3 配色同 09-20 版 | `grep -l 'fluid.css' *.html \| wc -l` → 164（＋en/index）；`grep -L fluid.css *.html \| wc -l` → 20；`curl -s https://cx468.com.tw/ \| grep -c 'class="hero-more"'` → 1；截圖 `行銷產出/視覺風格/apple-design-2026-09-22/` |
 | 電話（09-22 平行 session 改，未重驗） | 憲法第十一節 09-22 改：CTA 兩支 02-2249-0517＋0958-139-786（`bede5bb` 全站 0931→0958）；反詐彈窗／聯絡四處恢復「市話／鄭經理／業務人員 0931」三號並列（`f3b88a2`）。09-20 版的 contactPoint 60 頁等數字未重驗 | `git show f3b88a2 --stat`；`grep -c 0931-087-996 anti-fraud-modal.html contact.html` |
 | 追蹤／NAP geo／售後回租定義／企業線／「20 年」主詞 | 同 09-20 版（本 session 未動、未重驗）：`consultation-tracking.js` 65 頁；geo `24.9944428,121.4900325` 77 頁；SLB 統一 A 版；corporate-loan 健檢在前；20 年主詞＝團隊 | 見 `git show e1c4b7b:docs/letter-cx468-web.md` 第一節各列指令 |
 | p2a／linebot／三日健檢／廣告／Threads | 同 09-20 版，本 session 未碰；p2a 09-22 有產 `article-profitable-company-loan-rejected.html`（`ad8fd75`）＝管線活著 | `git -C ~/cx468-fb-news-bot log --oneline -3`；`grep -n "Telegram 已推" ~/cx468-ga4-daily/logs/healthcheck.out \| tail -3` |
@@ -92,6 +94,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 - **改版型**：新增按壓元件＝改 fluid.css 頂部 PRESS 名單（三處同步：transition 規則、`:active`、reduced-motion 的 `transform:none`）；新增 hero 進場＝改 REVEAL 名單（bt-hero／art-hero／tp-hero-text 三版型各有 nth 延遲）。
 - **spring 曲線**：`--spring` 是臨界阻尼（damping 1.0、response .4s）採樣成 `linear()` 21 點，末點必須是 `1`（曾寫 0.997 讓 `animation-fill-mode:both` 停在 99.7% 透明度）；前面一行 `cubic-bezier(.22,1,.36,1)` 是不支援 linear() 的 fallback。
 - **驗收**：文字守恆用 `scripts/check_text_integrity.py`（比順序；首頁這種搬位置的改動要另用 Counter 多重集比，腳本在 session 對話裡、10 行可重寫）；視覺用 playwright MCP：**navigate 之後才 resize**（navigate 會重設 viewport）、截圖只能存專案根下、fullPage 會把 fixed nav 印在頁中（memory `feedback_playwright_mcp_viewport_and_paths`）；本機預覽 `python3 -m http.server 8766 --bind 127.0.0.1`（背景 task）＋ `open http://127.0.0.1:8766/index.html` 給 Sir 摸。
+- **純版型 commit 加 `[nofresh]`**（09-23 老闆定）：`update_schema_datemod.py`／`update_sitemap_lastmod.py` 都用 `git log --invert-grep --grep '\[nofresh\]'` 取日期，訊息帶這個標記的 commit 不算實質修改→dateModified／lastmod 不動、indexing cron 不送。驗法：`python3 scripts/update_schema_datemod.py --dry-run`＋`update_sitemap_lastmod.py --check` 應 0 頁。⚠️ pre-commit hook 在 commit 建立前跑，**`--amend` 補標記時要 `--no-verify`**，否則 hook 會先按未標記的舊 commit 把日期全推上去。
 - **隔離配方（已驗證可行）**：`git worktree add <scratch>/cx-wt-hero HEAD && git -C <wt> checkout -b apple-design` → 改＋驗＋commit → `git -C <wt> rebase origin/main && git merge --ff-only apple-design && git push` → `git worktree remove --force <wt> && git branch -d apple-design`。
 
 ## 三、未竟任務
@@ -124,7 +127,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 6. lvr 圖表 PNG 與社群圖卡仍紅系（`scripts/lvr/make_charts.py`／`make_social_cards.py`）。
 7. `land-value-tax-calculator.html`「其他縣市陸續建置中」已過時（需媽祖）；`affordability-calculator` 無免責尾注。
 8. linebot：隱藏號碼來電逐通建新 person 灌漏斗（`crm_calls.py:119-125`）；`privacy-policy.html §6` 沒提電話管道。
-9. **fluid.css 未掛的頁**：售後回租／小工具兩個下拉的目標頁（sale-leaseback、tools-lab/deed-reader、zhonghe-second-mortgage、new-taipei-house-tax、tools 等）＋其餘 ~170 頁——掛法一行 link＋`<body ontouchstart="">`（memory `project_apple_design_branch`）；nav.js 本體未動，下拉 materialize 只在掛了的頁生效。
+9. ~~**fluid.css 未掛的頁**~~ ✅ `d1d7d3a` 全站掛齊（09-23）。原文：售後回租／小工具兩個下拉的目標頁（sale-leaseback、tools-lab/deed-reader、zhonghe-second-mortgage、new-taipei-house-tax、tools 等）＋其餘 ~170 頁——掛法一行 link＋`<body ontouchstart="">`（memory `project_apple_design_branch`）；nav.js 本體未動，下拉 materialize 只在掛了的頁生效。
 10. 首頁內聯 `<style>` 的按壓名單（.chip/.quick a/.three a/.float 等）與 fluid.css 的 PRESS 名單各管各的，`.cx-needs a/.cx-call-primary/.cx-sticky-cta a` 兩邊都列（值相同、無害）；反詐彈窗 `.afm-btn` 自帶 CSS 蓋掉按壓回饋，未硬打。
 
 ### 日常常態
@@ -136,7 +139,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ## 四、等使用者的事項
 
--1. 🟡 **GSC（非必送）**：09-23 上線的是版型／CSS，內容未變；要送就送首頁 `https://cx468.com.tw/` 一條即可，其餘 14 頁清單在 TG 09-23 00:5x 那則。
+-1. 🟡 **GSC（非必送）**：09-23 兩批（15 頁 `3762746`＋146 頁 `d1d7d3a`）都是版型／CSS，內容未變，且第二批帶 `[nofresh]` 日期不動；要送就送首頁 `https://cx468.com.tw/` 一條即可。
 0. 🔴 **GSC 送 2 網址**（09-18 已上線）：`https://cx468.com.tw/yonghe-second-mortgage.html`、`https://cx468.com.tw/tucheng-second-mortgage.html`（TG 09-18 00:5x 那則）；之後三日健檢看 coverageState。原「等 Sir 五項」（GSC 12 網址／精進會議排程改制／首頁 footer 0931／三重新莊 AI 配圖／anti-fraud-modal 自然流量彈窗）不變。
 0-1. 🔴 **待裁清單以 `精進會議/2026-09-19.md` §六「🔴 Sir 決策」九項為準**（新增：Meta 11 支 adset 自身 ACTIVE 未爆彈、Google 餘額 10/02 見底、private-to-bank-search 零曝光查或關、`Chengxin_V1_Final_4K.mp4` 誤傳翻舊帳頻道建議下架、翻舊帳 09-22 斷更、Anthropic Admin key）；09-17 六件仍未答：①Meta spend_cap（逾 29 天，不回＝維持）②精進會議觸發改 launchd／雲端 routine ③CX_V1_20260916 誰建的、過媽祖沒（09-20 滿 3 天要決定續停）④anti-fraud-modal 三選一（已擴散 145 頁）⑤反詐文／EP15／C-v3＋比特幣起源 private＋銀行條文封存否 ⑥整合／轉銀行系列補 ai-bar 否。
 1. 🔴 **GMB 評論 1→20**（第二順位③，只有 Sir 能做）：「新北 房屋二胎」Local Pack 第 1 名 17 則、第 2/3 名 0 則照樣上榜。⛔ 商家名不塞關鍵字、類別維持「不動產管理服務」。
