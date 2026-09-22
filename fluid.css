@@ -1,0 +1,75 @@
+/* fluid.css — Apple 流體介面共用層（依 apple-design skill，2026-09-22）
+   掛法：<link rel="stylesheet" href="fluid.css"> 放 </head> 前、各頁自有 CSS 之後（同特異性靠順序蓋過）；
+   <body ontouchstart=""> 讓 iOS Safari 觸控時套 :active。零文字變動。
+   內容：§1 按壓回饋（按下 90ms 縮 .97、放開臨界阻尼 spring 彈回）；§7/§12 nav 下拉 materialize（模糊＋縮放從按鈕長出）；
+   §12 手機底部聯絡條改懸浮玻璃 dock；§15 字距依尺寸（大字負、小字正）；§14 reduced-motion／transparency／contrast；hero 進場微升。
+   首頁 AI 卡 View Transition 等頁內專屬規則留在 index.html 內聯。 */
+:root{--spring:cubic-bezier(.22,1,.36,1);--spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 1)}
+body{font-optical-sizing:auto;font-kerning:normal}
+
+/* §1 回應 */
+.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn{
+  -webkit-tap-highlight-color:transparent;
+  transition-property:transform,background-color,border-color,color,box-shadow,opacity;
+  transition-duration:.5s,.18s,.18s,.18s,.25s,.18s;
+  transition-timing-function:var(--spring),ease,ease,ease,ease,ease}
+:is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn):active{transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
+
+/* §7 §12 nav 下拉：從觸發鈕左上長出，模糊→清晰，關閉走同一條路 */
+.cx-menu>li .cx-dd{transform-origin:12px 0;transform:translateY(-6px) scale(.97);filter:blur(6px);
+  transition:opacity .2s ease,visibility 0s linear .2s,transform .45s var(--spring),filter .25s ease}
+.cx-menu>li.open .cx-dd{filter:none;transition:opacity .16s ease,visibility 0s,transform .45s var(--spring),filter .22s ease}
+
+/* §7 FAQ 手風琴：內容高度連續展開（支援 ::details-content 的瀏覽器；其餘維持瞬開） */
+.bt-faq details{interpolate-size:allow-keywords}
+.bt-faq details::details-content{height:0;overflow:clip;transition:height .35s var(--spring),content-visibility .35s allow-discrete}
+.bt-faq details[open]::details-content{height:auto}
+
+/* §15 字體 */
+.bt-h1{letter-spacing:-.012em;line-height:1.18}
+.bt-h2{letter-spacing:-.008em;line-height:1.25}
+.art-hero h1,.tp-h1,.art-title{letter-spacing:-.01em}
+.bt-small,.bt-note,.bt-disclaimer,.bt-label,.bt-terms,.legal,.hint,.cx-call-note,.footer-link-sm,.copyright,.art-hero-meta{letter-spacing:.015em}
+
+/* 進場：hero 各段微升 10px、錯開 45ms；主圖零延遲（不拖 LCP） */
+@keyframes fl-rise{from{opacity:0;transform:translateY(10px)}}
+@keyframes fl-fade{from{opacity:0}}
+.bt-hero :is(.bt-eyebrow,.bt-h1,.bt-p,.bt-btns,.bt-note,.bt-hero-img,.cx-call-block,.cx-needs,.bt-chips,.bt-check),.art-hero>*,.tp-hero-text>:is(.tp-eyebrow,.tp-h1,.tp-sub,.tp-symptoms,.tp-form-wrap),.tp-hero-img{animation:fl-rise .6s var(--spring) both}
+.bt-hero .bt-h1,.art-hero>:nth-child(2),.tp-hero-text>.tp-h1{animation-delay:.045s}
+.bt-hero .bt-p,.art-hero>:nth-child(3),.tp-hero-text>.tp-sub{animation-delay:.09s}
+.bt-hero :is(.bt-btns,.cx-call-block,.bt-chips,.bt-check),.art-hero>:nth-child(n+4),.tp-hero-text>:is(.tp-symptoms,.tp-form-wrap){animation-delay:.135s}
+.bt-hero :is(.cx-needs,.bt-note){animation-delay:.2s}
+.bt-hero .bt-hero-img,.tp-hero-img{animation-delay:0s;animation-duration:.7s}
+
+/* §12 手機：底部聯絡條改懸浮玻璃 dock（footer.html 的 :where() 零特異性；consultation.css 的 !important 靠同特異性後載蓋過） */
+@media(max-width:860px){
+  .cx-sticky-cta{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));height:auto!important;padding:6px!important;gap:6px;
+    border-radius:18px;border:1px solid rgba(242,239,232,.14);background:rgba(18,33,58,.74);
+    -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(242,239,232,.08),0 14px 36px -10px rgba(0,0,0,.55)}
+  .cx-sticky-cta a{height:50px;min-height:50px;border-radius:13px;font-size:14.5px}
+  .tp-bar{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;gap:6px;
+    border-radius:18px;border:1px solid rgba(242,239,232,.14);background:rgba(18,33,58,.74);
+    -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(242,239,232,.08),0 14px 36px -10px rgba(0,0,0,.55)}
+  .tp-bar-lead,.tp-bar-tel{height:50px;border-radius:13px;font-size:14.5px}
+  body.tp-has-bar{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .bt-h1{letter-spacing:0;line-height:1.25}
+  .bt-h2{letter-spacing:0}
+  .art-hero h1,.tp-h1,.art-title{letter-spacing:0}
+}
+
+/* §14 三個獨立訊號 */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition-duration:.15s!important;transition-timing-function:ease!important}
+  .bt-hero :is(.bt-eyebrow,.bt-h1,.bt-p,.bt-btns,.bt-note,.bt-hero-img,.cx-call-block,.cx-needs,.bt-chips,.bt-check),.art-hero>*,.tp-hero-text>:is(.tp-eyebrow,.tp-h1,.tp-sub,.tp-symptoms,.tp-form-wrap),.tp-hero-img{animation:fl-fade .25s ease both!important;animation-delay:0s!important}
+  :is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn):active,.cx-menu>li .cx-dd{transform:none}
+  .cx-menu>li .cx-dd{filter:none}
+}
+@media (prefers-reduced-transparency:reduce){
+  .cx-sticky-cta,.tp-bar{background:#12213A;-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-contrast:more){
+  .cx-sticky-cta,.tp-bar{border-color:rgba(242,239,232,.6)}
+}
