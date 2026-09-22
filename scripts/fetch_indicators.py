@@ -128,6 +128,11 @@ def get(url, **kwargs):
         print(f"  GET {url[:60]}... : {e}")
         return None
 
+def _fail(code, reason):
+    """失敗路徑統一出口：先把死因印進 log 再回 None（沉默 return None 會讓排程看不到原因）"""
+    print(f"    ✗ {code} 失敗：{reason}")
+    return None
+
 # ── 個別指標抓取函數 ────────────────────────────────────────────────────────
 
 def fetch_A01():
@@ -650,17 +655,16 @@ def fetch_B02():
                 break
             print(f"  B02 第 {attempt + 1} 次渲染未取得表格，重試")
         if not qm:
-            return None
+            return _fail('B02', '信義頁面渲染 2 次都找不到「20XX年第X季」季別標題（JS 未渲染完或來源改版）')
         q = {'一': 1, '二': 2, '三': 3, '四': 4}[qm.group(2)]
         updated = f'{qm.group(1)}-Q{q}'
 
         rm = re.search(r'台灣\s+([\d.]+)\s+[\d.]+\s+(-?[\d.]+)%\s+[\d.]+\s+(-?[\d.]+)%', txt)
         if not rm:
-            print("  B02 找不到「台灣」全國列")
-            return None
+            return _fail('B02', '表格中找不到「台灣」全國列（來源表格結構可能改版）')
         idx, qoq, yoy = float(rm.group(1)), float(rm.group(2)), float(rm.group(3))
         if not (50 < idx < 500):
-            return None
+            return _fail('B02', f'解析出的指數 {idx} 不在合理區間 50–500，判定解析錯位')
         if yoy <= -5:
             status = 'red'
         elif yoy < 0:
@@ -670,8 +674,7 @@ def fetch_B02():
         note = f'{updated.replace("-", "")}全台{idx:.2f}，季{qoq:+.2f}%、年{yoy:+.2f}%'
         return dict(value=f'{idx:.2f}', status=status, note=note, updated=updated)
     except Exception as e:
-        print(f"  B02 sinyi: {e}")
-    return None
+        return _fail('B02', f'sinyi 例外 {type(e).__name__}: {e}')
 
 
 def fetch_B03():
@@ -699,7 +702,7 @@ def fetch_B03():
             if q == 0:
                 y, q = y - 1, 4
         if not content:
-            return None
+            return _fail('B03', f'國泰季報 PDF 往回試 4 季都抓不到（最後試到 {y}-Q{q}；網址規律或發布時程可能改變）')
 
         rd = PdfReader(io.BytesIO(content))
         page_text = None
@@ -715,16 +718,14 @@ def fetch_B03():
                     page_text = t
                     break
         if not page_text:
-            print("  B03 PDF 找不到綜合評估頁")
-            return None
+            return _fail('B03', 'PDF 全掃仍找不到「綜合評估－全國／可能成交價格」頁')
 
         pm = re.search(r'可能成交價格\s+([\d.]+)\s+[\d.]+\s*萬元/坪\s*(-?[\d.]+)%[^-\d]*(-?[\d.]+)%', page_text)
         if not pm:
-            print("  B03 可能成交價格列解析失敗")
-            return None
+            return _fail('B03', '找到綜合評估頁但「可能成交價格」那列的數字解析失敗（版面可能改版）')
         idx, qoq, yoy = float(pm.group(1)), float(pm.group(2)), float(pm.group(3))
         if not (50 < idx < 500):
-            return None
+            return _fail('B03', f'解析出的指數 {idx} 不在合理區間 50–500，判定解析錯位')
         sm = re.search(r'全國綜合表現分數為\s*(-?\d+)\s*分', "".join((p.extract_text() or '') for p in rd.pages[70:90]))
         score_note = f'、綜合分數{sm.group(1)}' if sm else ''
         if yoy <= -3 or qoq <= -2:
@@ -736,8 +737,7 @@ def fetch_B03():
         note = f'{updated.replace("-", "")}全國{idx:.2f}，季{qoq:+.2f}%、年{yoy:+.2f}%{score_note}'
         return dict(value=f'{idx:.2f}', status=status, note=note, updated=updated)
     except Exception as e:
-        print(f"  B03 cathay: {e}")
-    return None
+        return _fail('B03', f'cathay 例外 {type(e).__name__}: {e}')
 
 
 def fetch_B04():
@@ -861,7 +861,7 @@ def fetch_B05():
     try:
         d = _fetch_pip_housing()
         if not d or not d.get('cities'):
-            return None
+            return _fail('B05', 'pip.moi 房價負擔能力指標取不到六都資料（見上方 GET／解析錯誤；CI 可能被地理封鎖）')
         cities = d['cities']
         period = d['period']
         worst_city = max(cities, key=cities.get)
@@ -876,30 +876,31 @@ def fetch_B05():
             status = 'green'
         return dict(value=f'{worst_val:.2f}倍', status=status, note=note, updated=period)
     except Exception as e:
-        print(f"  B05 pip: {e}")
-    return None
+        return _fail('B05', f'pip 例外 {type(e).__name__}: {e}')
 
 
 def fetch_C01():
     """房貸逾放比 — 金管會月報（HTML 解析）"""
     try:
         r = get('https://www.banking.gov.tw/ch/home.jsp?id=296&parentpath=0,4,132')
-        if r and HAS_BS4:
-            from bs4 import BeautifulSoup
-            for m in re.finditer(r'(\d+\.\d{2})%', r.text):
-                v = float(m.group(1))
-                if 0.01 < v < 5.0:
-                    if v > 0.5:
-                        status, note = 'red',    f'逾放比 {v:.2f}%，不良貸款擴散'
-                    elif v > 0.2:
-                        status, note = 'yellow', f'逾放比 {v:.2f}%，件數快速攀升'
-                    else:
-                        status, note = 'yellow', f'逾放比 {v:.2f}%，隱性風險擴散'
-                    return dict(value=f'{v:.2f}%', status=status, note=note,
-                                updated=THIS_MONTH)
+        if not r:
+            return _fail('C01', '金管會銀行局頁面取不到（見上一行 GET 錯誤；CI 可能被地理封鎖）')
+        if not HAS_BS4:
+            return _fail('C01', 'beautifulsoup4 未安裝')
+        for m in re.finditer(r'(\d+\.\d{2})%', r.text):
+            v = float(m.group(1))
+            if 0.01 < v < 5.0:
+                if v > 0.5:
+                    status, note = 'red',    f'逾放比 {v:.2f}%，不良貸款擴散'
+                elif v > 0.2:
+                    status, note = 'yellow', f'逾放比 {v:.2f}%，件數快速攀升'
+                else:
+                    status, note = 'yellow', f'逾放比 {v:.2f}%，隱性風險擴散'
+                return dict(value=f'{v:.2f}%', status=status, note=note,
+                            updated=THIS_MONTH)
+        return _fail('C01', f'頁面取到 {len(r.text)} 字元，但找不到 0.01–5.00% 區間的逾放比數字（來源版型可能改版）')
     except Exception as e:
-        print(f"  C01 FSC: {e}")
-    return None
+        return _fail('C01', f'FSC 例外 {type(e).__name__}: {e}')
 
 
 def fetch_C02():
@@ -907,7 +908,7 @@ def fetch_C02():
     try:
         d = _fetch_pip_housing()
         if not d or d.get('national') is None:
-            return None
+            return _fail('C02', 'pip.moi 房價負擔能力指標取不到全國值（見上方 GET／解析錯誤；CI 可能被地理封鎖）')
         v = d['national']
         period = d['period']
         if v > 12:
@@ -918,8 +919,7 @@ def fetch_C02():
             status, note = 'green',  f'全國{v:.2f}倍'
         return dict(value=f'{v:.2f}倍', status=status, note=note, updated=period)
     except Exception as e:
-        print(f"  C02 pip: {e}")
-    return None
+        return _fail('C02', f'pip 例外 {type(e).__name__}: {e}')
 
 
 def _parse_statis_building(rptid):
@@ -1272,6 +1272,7 @@ def main():
     print(f"=== CX468 指標更新 {TODAY}{'（only=' + ','.join(sorted(only)) + '）' if only else ''} ===\n")
     data = load_data()
     ok = fail = skip = 0
+    failed_codes = []
 
     for ind in data['indicators']:
         code    = ind['code']
@@ -1285,7 +1286,11 @@ def main():
             continue
 
         print(f"  [{code}] 抓取中...")
-        result = fetcher()
+        try:
+            result = fetcher()
+        except Exception as e:                      # 抓取函數自己沒接住的例外，不能整批靜默
+            result = None
+            print(f"    ✗ {code} 例外（未被抓取函數接住）{type(e).__name__}: {e}")
         if result:
             ind.update(result)
             ok += 1
@@ -1293,6 +1298,7 @@ def main():
                   f" — {result.get('note','')[:40]}")
         else:
             fail += 1
+            failed_codes.append(code)
             print(f"    – 抓取失敗，保留上次數值: {ind.get('value','?')}")
         time.sleep(0.8)  # 避免連續請求過快
 
@@ -1300,6 +1306,11 @@ def main():
     save_data(data)
     print(f"\n=== 完成 | 成功 {ok} | 失敗 {fail} | 跳過 {skip} | "
           f"生成日期 {data['generated']} ===")
+    if fail:
+        # 成功項已寫入 cx_data.json；非 0 結束讓 run.sh／GitHub Actions 看得到，死因印在上方各項 ✗ 行
+        print(f"!!! 本次有 {fail} 項取不到新值（{', '.join(failed_codes)}），已沿用上次數值＝儀表板顯示舊值",
+              file=sys.stderr)
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

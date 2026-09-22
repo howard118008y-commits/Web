@@ -25,6 +25,10 @@ jobs:
         run: pip install requests yfinance beautifulsoup4 lxml xlrd openpyxl pypdf
 
       - name: Fetch indicator data
+        id: fetch
+        # 有指標抓不到時腳本 exit 1（死因印在 log），但成功項已寫進 cx_data.json，
+        # 後續步驟仍要跑完把成功項推上去；最後一步再把整個 run 標成失敗。
+        continue-on-error: true
         run: python scripts/fetch_indicators.py
 
       - name: Build history series (deep + accumulate)
@@ -53,4 +57,10 @@ jobs:
             sleep 10
           done
           echo "✗ Push 重試 5 次仍失敗"
+          exit 1
+
+      - name: 有指標抓取失敗就讓本次 run 顯示失敗
+        if: steps.fetch.outcome == 'failure'
+        run: |
+          echo "::error::有指標抓取失敗（死因見 Fetch indicator data 步驟 log 的 ✗ 行），成功項已推送"
           exit 1
