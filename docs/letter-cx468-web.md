@@ -1,7 +1,7 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`；本檔上一版（09-20，含 09-14～09-20 六段 session 日誌）在 `git show e1c4b7b:docs/letter-cx468-web.md`。
-> 最後更新：2026-09-23 03:1x（閘門列補三道數字）｜02:5x（fluid.css 補掛全站 146 頁＋生成頁模板＋鮮度腳本 [nofresh] 標記，HEAD `d1d7d3a`；一節 HEAD／CI／設計三列改寫、二節 fluid 段加標記一行、三節 #9 結案）
+> 最後更新：2026-09-23 05:0x（三節 🟡#4 nav.js 死碼結案）｜03:1x（閘門列補三道數字）｜02:5x（fluid.css 補掛全站 146 頁＋生成頁模板＋鮮度腳本 [nofresh] 標記，HEAD `d1d7d3a`；一節 HEAD／CI／設計三列改寫、二節 fluid 段加標記一行、三節 #9 結案）
 > 前次：2026-09-23 01:0x（Apple 流體層 fluid.css＋首頁精簡 hero 上線，HEAD `3762746`；一、三節重寫，二節保留＋新增 fluid 段，四節加一行）
 > 前次：2026-09-20 00:2x（主題分頁改造 B0–B5 上線 `cb51af5`）。
 > 本次更新原因：Sir 09-23 02:0x 選「全站＋生成頁模板一起做」＋「不跳鮮度，加 [nofresh]」＋「部署」。平行 session 同時段推了案例分享 01–05（`381d865`／`d154ef1`／`1df8999`／`a7c67cc`），本 session rebase 過、未重驗其內容。
@@ -122,7 +122,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 1. **90 頁 GA config 沒濾 query/fragment**（只有掛追蹤器的 60 頁有濾）——隱私與 analytics 乾淨度，一支 sed 可解，但要目檢 GA 沒斷。
 2. 矩陣 🟢 待辦 #1–#6（口徑統一／三支 property-finance 同構 88–91%／`.bt-meta` 對比／企業兩樞紐無 chips／geo 座標兩組並存／企業健檢擴 5 區）。
 3. 「成數最高 9 成」未說明一二胎合計（09-09 媽祖提，全站 9 處同型）。
-4. nav.js 的 `data-cta="line"` LINE 變體已被 5c66121 拿掉，`ctaLine` 成死變數、L122 註解過時（講一聲，未動）。
+4. ~~nav.js `ctaLine` 死變數／L122 過時註解~~ ✅ `c4ff7c5` 清掉（09-23 05:0x）；`data-cta="line"` 屬性仍由 footer.html 讀，頁面上不要拿掉。
 5. `codex/verify-live-20260911` 分支殘留 1 個 commit（純驗證腳本），可刪。
 6. lvr 圖表 PNG 與社群圖卡仍紅系（`scripts/lvr/make_charts.py`／`make_social_cards.py`）。
 7. `land-value-tax-calculator.html`「其他縣市陸續建置中」已過時（需媽祖）；`affordability-calculator` 無免責尾注。
