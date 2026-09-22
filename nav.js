@@ -121,9 +121,9 @@
     return '<details><summary>' + m.label + '</summary>' + links(m.items, 'go') + '</details>';
   }).join('');
 
-  /* 二胎等場景合規:<div id="nav" data-cta="line"></div> 時,兩顆「免費評估」鈕改為「LINE 線上諮詢」 */
+  /* data-cta="line"（二胎等合規場景）自 5c66121 起不再改 nav 的兩顆鈕（一律電話諮詢）；
+     該屬性仍由 footer.html 讀取（#nav[data-cta="line"] → 底部條改 LINE 版），頁面上不要拿掉 */
   var mount = document.getElementById('nav');
-  var ctaLine = !!(mount && mount.getAttribute('data-cta') === 'line');
   var ctaHtml = '<a class="cx-cta" href="tel:0222490517" data-link-location="nav">電話諮詢</a>';
   var sheetCtaHtml = '<a class="cta" href="tel:0222490517" data-link-location="mobile_menu">電話諮詢 02-2249-0517</a><a href="https://lin.ee/PHIfSoY" data-link-location="mobile_menu">未接通？LINE 留言</a><p>接聽：週一至週五 10:00–17:00</p>';
 
