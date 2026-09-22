@@ -35,14 +35,16 @@
   --ink:#1B2F4A;--ink-dim:#5A6878;--ink-faint:#8C97A5;
   --paper:#F7F5F0;--paper-line:#E2DED4;
   --maxw:1180px;
+  --spring:cubic-bezier(.22,1,.36,1);
+  --spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 0.997);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;
-  background:var(--forest);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased}
+  background:var(--forest);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;font-kerning:normal}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition-duration:.15s!important;transition-timing-function:ease!important}}
 
 
 /* ============ 共用按鈕／標誌（nav 由 nav.js 提供） ============ */
@@ -67,7 +69,7 @@ a{color:inherit;text-decoration:none}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.18em;
   color:var(--gold);text-transform:uppercase;margin-bottom:18px}
 h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(31px,5.2vw,58px);
-  line-height:1.28;letter-spacing:.01em;margin-bottom:16px}
+  line-height:1.24;letter-spacing:-.012em;margin-bottom:16px}
 h1 em{font-style:normal;color:var(--gold)}
 .hero-sub{font-size:clamp(14.5px,1.6vw,17px);color:var(--cream-dim);max-width:600px;margin:0 auto 26px}
 
@@ -134,10 +136,10 @@ h1 em{font-style:normal;color:var(--gold)}
 .mode-sw{display:flex;align-items:center;gap:9px}
 .switch{width:40px;height:22px;border-radius:999px;background:var(--gold);border:0;
   cursor:pointer;position:relative;transition:.2s;flex:none}
-.switch::after{content:'';position:absolute;top:3px;left:21px;width:16px;height:16px;
-  border-radius:50%;background:var(--forest-deep);transition:.2s}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;
+  border-radius:50%;background:var(--forest-deep);transform:translateX(18px);transition:transform .5s var(--spring),background-color .2s}
 .switch[aria-checked="false"]{background:var(--forest-line)}
-.switch[aria-checked="false"]::after{left:3px;background:var(--cream-faint)}
+.switch[aria-checked="false"]::after{transform:none;background:var(--cream-faint)}
 .mode-on{color:var(--cream);font-weight:500}
 
 .quick{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
@@ -311,6 +313,72 @@ h1 em{font-style:normal;color:var(--gold)}
 }
 /* 本頁用草稿版浮動小鋮鈕當入口，隱藏 chat-widget 自帶的啟動鈕與提示泡泡（避免右下角兩顆重疊） */
 .cw-launch,.cw-teaser{display:none!important}
+
+/* ============ Apple 流體介面補強（apple-design skill，2026-09-22）============ */
+/* §1 回應：按下即回饋（pointer-down 縮 .97、90ms），放開用臨界阻尼 spring 彈回（response .4s、零過衝） */
+.btn,.chip,.quick a,.three a,.cx-needs a,.cx-call-primary,.float,.ask-send,.icon-btn,.social a,.cx-sticky-cta a,.switch{
+  -webkit-tap-highlight-color:transparent;
+  transition-property:transform,background-color,border-color,color,box-shadow,opacity;
+  transition-duration:.5s,.18s,.18s,.18s,.25s,.18s;
+  transition-timing-function:var(--spring),ease,ease,ease,ease,ease}
+:is(.btn,.chip,.quick a,.three a,.cx-needs a,.cx-call-primary,.ask-send,.icon-btn,.social a,.cx-sticky-cta a):active{
+  transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
+.float:active{transform:scale(.92);transition-duration:.09s;transition-timing-function:ease-out}
+/* §8 暗示方向：chip 箭頭在 hover 往前 3px（只在有 hover 的裝置） */
+.chip i{transition:transform .5s var(--spring)}
+@media(hover:hover){.chip:hover i{transform:translateX(3px)}}
+/* §16 狀態回饋：輸入框聚焦時卡片亮金邊；有字時送出鈕放大 */
+.ask-card{transition:box-shadow .25s ease;
+  box-shadow:0 1px 1px rgba(0,0,0,.08),0 8px 20px -6px rgba(0,0,0,.22),0 26px 56px -14px rgba(0,0,0,.4)}
+.ask-card:has(.ask-input:focus){box-shadow:0 0 0 3px rgba(200,148,90,.38),0 1px 1px rgba(0,0,0,.08),0 8px 20px -6px rgba(0,0,0,.22),0 26px 56px -14px rgba(0,0,0,.4)}
+.ask-send.on{transform:scale(1.06)}
+/* §12 材質：半透明面板上緣一道亮邊（光打在材質上），大面積＝厚一點的陰影 */
+.mode-box,.qa{box-shadow:inset 0 1px 0 rgba(242,239,232,.07)}
+.float{box-shadow:0 2px 4px rgba(0,0,0,.22),0 14px 30px -6px rgba(0,0,0,.48)}
+/* §7 模式切換：白卡與註腳用 View Transition 原地變形（高度連續、內容交叉淡出），非瞬間跳換 */
+.ask-card{view-transition-name:askcard}
+.mode-foot{view-transition-name:modefoot}
+::view-transition-group(askcard),::view-transition-group(modefoot){animation-duration:.45s;animation-timing-function:var(--spring)}
+::view-transition-old(root),::view-transition-new(root){animation:none}
+/* §15 字體：大字負字距＋緊行距，小字正字距；標題依尺寸分別設定，不共用一個值 */
+.group-head h2,.sec h2{line-height:1.3;letter-spacing:-.008em}
+.tool-feature .tf-t{letter-spacing:-.008em}
+.hero-fine,.legal,.mode-foot,.cx-call-note,.three .s,.tool-row .d,.foot-meta,.stat-l{letter-spacing:.015em}
+.hero-sub,.group-head p,.sec-lead,.about-block p,.qa p{text-wrap:pretty}
+/* 進場：hero 各段以臨界阻尼 spring 微升 10px，錯開 45ms；只在載入時跑一次，不綁捲動 */
+@keyframes cx-rise{from{opacity:0;transform:translateY(10px)}}
+@keyframes cx-fade{from{opacity:0}}
+.hero-in>*{animation:cx-rise .6s var(--spring) both}
+.hero-in>:nth-child(2){animation-delay:.045s}
+.hero-in>:nth-child(3){animation-delay:.09s}
+.hero-in>:nth-child(4){animation-delay:.135s}
+.hero-in>:nth-child(5){animation-delay:.18s}
+.hero-in>:nth-child(6){animation-delay:.225s}
+.hero-in>:nth-child(n+7){animation-delay:.27s}
+/* 手機：底部聯絡條改成懸浮玻璃 dock（內容從下方捲過去），兩顆圓角鈕放在材質上 */
+@media(max-width:860px){
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  body .cx-sticky-cta{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));height:auto!important;
+    padding:6px!important;gap:6px;border-radius:18px;border:1px solid rgba(242,239,232,.14);
+    background:rgba(18,33,58,.74);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(242,239,232,.08),0 14px 36px -10px rgba(0,0,0,.55)}
+  body .cx-sticky-cta a{min-height:50px;border-radius:13px;font-size:14.5px}
+  .float{bottom:calc(86px + env(safe-area-inset-bottom))}
+  h1{line-height:1.3;letter-spacing:.01em}  /* 31px 仍留正字距：歸零會讓「清楚」拆行 */
+  .group-head h2,.sec h2{line-height:1.35;letter-spacing:0}
+}
+/* §14 三個獨立訊號：減少動態＝改淡入、不縮放；減少透明＝玻璃改實心；高對比＝邊線加深 */
+@media (prefers-reduced-motion:reduce){
+  .hero-in>*{animation:cx-fade .25s ease both!important;animation-delay:0s!important}
+  :is(.btn,.chip,.quick a,.three a,.cx-needs a,.cx-call-primary,.float,.ask-send,.icon-btn,.social a,.cx-sticky-cta a):active,
+  .float:hover,.ask-send.on,.chip:hover i{transform:none}
+}
+@media (prefers-reduced-transparency:reduce){
+  body .cx-sticky-cta{background:#12213A;-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-contrast:more){
+  body .cx-sticky-cta{border-color:rgba(242,239,232,.6)}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -441,7 +509,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
  "@context": "https://schema.org",
  "@type": "WebPage",
  "url": "https://cx468.com.tw",
- "dateModified": "2026-09-21",
+ "dateModified": "2026-09-22",
  "datePublished": "2026-04-29",
  "speakable": {
   "@type": "SpeakableSpecification",
@@ -725,7 +793,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
       <p><b>防詐提醒　</b>鋮馨不會以任何名義要求你先支付「代辦費」「保證金」「解凍金」「驗資費」後才撥款,
       不會要求你交付存摺、印章、提款卡或網銀密碼,亦不會以簡訊附連結要求你點擊。
-      本公司對外聯絡電話為 02-2249-0517（公司主電話）與 0958-139-786（經理鄭小姐）。來電顯示可能遭冒用，請自行撥打官網所列主電話核對身分。收到可疑要求請立即撥打 165 反詐騙專線。</p>
+      本公司對外聯絡電話為 02-2249-0517（公司市話）、0958-139-786（鄭經理）及 0931-087-996（業務人員）。來電顯示可能遭冒用，請自行撥打官網所列主電話核對身分。收到可疑要求請立即撥打 165 反詐騙專線。</p>
 
       <p class="copy">© 2026 鋮馨租賃有限公司 CHENG XIN LEASING CO., LTD. 版權所有。本頁最後更新:2026 年 9 月。</p>
     </div>
@@ -857,21 +925,28 @@ const note = document.getElementById('modeNote');
 const lblAI = document.getElementById('lblAI');
 const lblClassic = document.getElementById('lblClassic');
 
-function setMode(ai){
-  sw.setAttribute('aria-checked', String(ai));
-  paneAI.hidden = !ai;
-  paneClassic.hidden = ai;
-  lblAI.classList.toggle('mode-on', ai);
-  lblClassic.classList.toggle('mode-on', !ai);
-  note.textContent = ai
-    ? '小鋮是 AI 線上助理,回答僅供參考,不代表核貸結果。'
-    : '不確定要問什麼,就從這四個開始。免費評估,不申請不收費。';
+function setMode(ai, instant){
+  const apply = ()=>{
+    sw.setAttribute('aria-checked', String(ai));
+    paneAI.hidden = !ai;
+    paneClassic.hidden = ai;
+    lblAI.classList.toggle('mode-on', ai);
+    lblClassic.classList.toggle('mode-on', !ai);
+    note.textContent = ai
+      ? '小鋮是 AI 線上助理,回答僅供參考,不代表核貸結果。'
+      : '不確定要問什麼,就從這四個開始。免費評估,不申請不收費。';
+  };
+  // 白卡原地變形（View Transition）；不支援、減少動態、或載入時還原記憶模式 → 直接切
+  if(!instant && !reduceMotion && document.startViewTransition) document.startViewTransition(apply);
+  else apply();
   ai ? resumeType() : pauseType();
   try{ localStorage.setItem('cx_mode', ai ? 'ai' : 'classic') }catch(e){}
   if(window.gtag) gtag('event','hero_mode',{mode: ai ? 'ai' : 'classic'});
 }
 sw.addEventListener('click', ()=> setMode(sw.getAttribute('aria-checked') !== 'true'));
-try{ if(localStorage.getItem('cx_mode') === 'classic') setMode(false) }catch(e){}
+try{ if(localStorage.getItem('cx_mode') === 'classic') setMode(false, true) }catch(e){}
+// iOS Safari 要有 touchstart 監聽 :active 才會在觸控時生效（按下即回饋）
+document.addEventListener('touchstart', ()=>{}, {passive:true});
 </script>
 </body>
 </html>
