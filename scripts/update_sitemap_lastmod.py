@@ -47,6 +47,8 @@ def main() -> int:
             return block
         url = loc_m.group(1)
         rel = url.replace(BASE, "").split("?")[0] or "index.html"
+        if rel.endswith("/"):
+            rel += "index.html"   # 目錄型 URL（/en/）對應 en/index.html，否則永遠 missing_file
         f = ROOT / rel
         if not f.is_file():
             missing_file.append(rel)
