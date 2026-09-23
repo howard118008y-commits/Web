@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def has(s, pat): return re.search(pat, s, re.I|re.S) is not None
 
 # --- 新鮮度：JSON-LD dateModified vs git 最後實質 commit 日 ---
-# 實質 commit＝排除 [datemod-sync]（update_schema_datemod.py 的同步 commit），
+# 實質 commit＝排除 [datemod-sync]（update_schema_datemod.py 的同步 commit）與 [nofresh]（純版型／analytics 批次，pre-commit 同標記免 bump；2026-09-23 加，否則 146 頁掛 fluid.css 那天 27 頁被判假腐爛），
 # 否則同步一跑，git 日期永遠是同步日，比對失去意義。偏差 > 容差天數記 flag。
 # 2026-08-19 晚審：容差 30→7 天。30 天太寬，改內容卻沒 bump dateModified 的頁
 # 可以躺整整一個月才被抓到（4b09011 五頁補 FAQ 未 bump 就是被 30 天容差蓋過去的）。
@@ -21,7 +21,7 @@ DATEMOD_RE = re.compile(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})')
 
 def git_real_date(relpath):
     out = subprocess.run(
-        ["git","log","-1","--format=%cs","--invert-grep","--grep","datemod-sync","--",relpath],
+        ["git","log","-1","--format=%cs","--invert-grep","--grep","datemod-sync","--grep","nofresh","--",relpath],
         cwd=ROOT, capture_output=True, text=True).stdout.strip()
     return out or None
 
