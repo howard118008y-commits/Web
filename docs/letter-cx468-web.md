@@ -1,7 +1,7 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`；本檔上一版（09-20，含 09-14～09-20 六段 session 日誌）在 `git show e1c4b7b:docs/letter-cx468-web.md`。
-> 最後更新：2026-09-23 05:4x（🟡#1 GA config 全站結案）｜05:0x（三節 🟡#4 nav.js 死碼結案）｜03:1x（閘門列補三道數字）｜02:5x（fluid.css 補掛全站 146 頁＋生成頁模板＋鮮度腳本 [nofresh] 標記，HEAD `d1d7d3a`；一節 HEAD／CI／設計三列改寫、二節 fluid 段加標記一行、三節 #9 結案）
+> 最後更新：2026-09-23 13:0x（首頁 3 題 FAQ 上線）｜05:4x（🟡#1 GA config 全站結案）｜05:0x（三節 🟡#4 nav.js 死碼結案）｜03:1x（閘門列補三道數字）｜02:5x（fluid.css 補掛全站 146 頁＋生成頁模板＋鮮度腳本 [nofresh] 標記，HEAD `d1d7d3a`；一節 HEAD／CI／設計三列改寫、二節 fluid 段加標記一行、三節 #9 結案）
 > 前次：2026-09-23 01:0x（Apple 流體層 fluid.css＋首頁精簡 hero 上線，HEAD `3762746`；一、三節重寫，二節保留＋新增 fluid 段，四節加一行）
 > 前次：2026-09-20 00:2x（主題分頁改造 B0–B5 上線 `cb51af5`）。
 > 本次更新原因：Sir 09-23 02:0x 選「全站＋生成頁模板一起做」＋「不跳鮮度，加 [nofresh]」＋「部署」。平行 session 同時段推了案例分享 01–05（`381d865`／`d154ef1`／`1df8999`／`a7c67cc`），本 session rebase 過、未重驗其內容。
@@ -100,6 +100,7 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 ## 三、未竟任務
 
 ### 🟢 近期已上線（對照用，細節見 git log 與 09-20 版信）
+- 09-23 `7dd996e` 首頁恢復精簡 3 題 FAQ（Sir 12:4x 裁；媽祖條件 PASS 補 0958；同源 151/0；index 15/17→16/17，definedterm 仍留白）；`ab50002` GA config 全站 173 頁；`c4ff7c5` nav.js 死碼；`d1d7d3a` fluid.css 全站（本 session）
 - 09-23 `3762746`／`e9270e7` Apple 流體層 15 頁＋首頁精簡 hero（本 session）
 - 09-22 `f3b88a2` NAP 三號並列、`bede5bb` CTA 0931→0958、`19d0a5b` 4 頁實際價金比例（平行 session）
 - 09-20 `cb51af5` 導覽列主題分頁改造 B0–B5（17 頁）；09-18 `9468a93` 永和／土城二胎＋geo 77 頁；09-17 `7a03add` pf3-rewrite＋第三批 6 頁（`3b7f0aa`／`f4c7ae2`）
