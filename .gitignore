@@ -28,3 +28,6 @@ _preview_*.html
 
 # goal 評分迴圈輸出（機器產出流水，本地保留即可）
 scripts/goal-scores.jsonl
+
+# SEO 體檢明細（機器產出流水，2026-09-24 從 iCloud 搬進 repo，本地保留即可）
+scripts/seo-audit-latest.json

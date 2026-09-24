@@ -131,14 +131,11 @@ for tot,mx,n,s1,s2,s3 in scored[:15]:
 
 # 存 JSON 供後續比對
 # 2026-07-31 repo 遷出 iCloud 後，ROOT/.. 不再是專案夾，寫檔會 FileNotFoundError。
-# 改為絕對路徑（可用 CX468_MARKETING_DIR 覆寫），並自動建目錄。
-MARKETING_DIR = os.environ.get(
-    "CX468_MARKETING_DIR",
-    os.path.expanduser(
-        "~/Library/Mobile Documents/com~apple~CloudDocs/鋮馨cloud code/行銷產出"
-    ),
-)
-out = os.path.join(MARKETING_DIR, "週報", "seo-audit-latest.json")
+# 2026-09-24 再搬：原本寫進 iCloud 的「行銷產出/週報」，檔案被 iCloud 逐出未下載時
+# 會丟 Resource deadlock avoided（09-22 實際發生，統計跑完但 JSON 沒落地），
+# 且 launchd 起的程序列不到 iCloud 目錄。改寫進 repo 內 scripts/（機器產出流水，
+# 比照 scripts/goal-scores.jsonl 由 .gitignore 排除，不進版控）。
+out = os.path.join(ROOT, "scripts", "seo-audit-latest.json")
 os.makedirs(os.path.dirname(out), exist_ok=True)
 json.dump({"pages":pages,"summary":{"total_pages":len(pages)}}, open(out,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
 print(f"\n明細存：{out}")
