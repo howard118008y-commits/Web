@@ -61,6 +61,31 @@
     });
   }
 
+  /* 畫面顯示「本頁最後更新」（2026-09-27 加）：日期只讀 JSON-LD 的 dateModified，
+     不在 HTML 寫死——dateModified 由 pre-commit 的 update_schema_datemod.py 依實質改動同步，
+     寫死的日期會變成假斷更（memory feedback_no_hardcoded_freshness_stamp）。
+     頁面已自帶「最後更新／更新日期／更新於」字樣的（條款、隱私、實登觀測站）不重複加。 */
+  function showPageUpdated() {
+    if (document.querySelector('[data-page-updated]')) return;
+    if (/最後更新|更新日期|更新於/.test(document.body.innerText || '')) return;
+    var latest = '';
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function (s) {
+      (s.textContent.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/g) || []).forEach(function (m) {
+        var d = m.slice(-10);
+        if (d > latest) latest = d;
+      });
+    });
+    if (!latest) return;
+    var p = document.createElement('p');
+    p.setAttribute('data-page-updated', '');
+    p.style.cssText = 'max-width:1100px;margin:32px auto 12px;padding:0 20px;font-size:13px;line-height:1.6;text-align:center;color:inherit;opacity:.6';
+    var t = latest.split('-');
+    p.innerHTML = '本頁最後更新：<time datetime="' + latest + '">' + t[0] + ' 年 ' + (+t[1]) + ' 月 ' + (+t[2]) + ' 日</time>';
+    var footer = document.querySelector('footer');
+    if (footer) footer.parentNode.insertBefore(p, footer);
+    else document.body.appendChild(p);
+  }
+
   function loadDeferred(deferredEls) {
     if (!deferredEls.length) return;
     var run = function () {
@@ -113,7 +138,10 @@
       }
     });
 
-    Promise.all(immediate.map(loadInclude)).then(markActiveNavLink);
+    Promise.all(immediate.map(loadInclude)).then(function () {
+      markActiveNavLink();
+      showPageUpdated();
+    });
 
     if (document.readyState === 'complete') {
       loadDeferred(deferred);
