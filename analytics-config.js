@@ -7,7 +7,7 @@
   var allowed={
     source:['google','google_business_profile','facebook','instagram','threads','youtube','line','embed'],
     medium:['organic','social','paid_social','cpc','referral','email','qr','iframe','paid','leadform','organic_social','channel'],
-    campaign:['general','private_debt','private_to_bank','second_mortgage','corporate_loan','inherited','tool-embed','property-management-fees','corp-checkup-202609','home-equity','p2a','meta_one_202609','fanjiuzhang'],
+    campaign:['general','private_debt','private_to_bank','second_mortgage','corporate_loan','inherited','tool-embed','property-management-fees','corp-checkup-202609','home-equity','p2a','meta_one_202609','fanjiuzhang','cx_v1_v2'],
     content:['profile','bio','post','video','menu','website','hero','footer','sticky_bar','article_bottom']
   };
   Object.keys(allowed).forEach(function(key){
