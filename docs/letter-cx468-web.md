@@ -1,17 +1,17 @@
 # 交接信｜cx468-web（官網 repo）＋ CX468 雲端維運
 
 > 現況快照，不是 changelog。歷史在 `git log`；本檔上一版（09-20，含 09-14～09-20 六段 session 日誌）在 `git show e1c4b7b:docs/letter-cx468-web.md`。
-> 最後更新：2026-09-27 12:4x（SEO 全流程 session 交接：一節 HEAD／CI／工作區／SEO 列重驗；三節新增「第一順位：09-27 SEO 未竟」；四節 GSC 三條舊項改為 09-27 API 實查清單）
-> 前次：2026-09-23 13:3x（fluid.css 全站／GA config 全站／首頁 3 題 FAQ，`4ac412a`）。
-> 本次更新原因：Sir 說「交接 把所有還沒做的交接」。本 session 做 SEO 六階段（健檢→E-E-A-T→GEO→競品→行動計畫→內容），兩批上線 `90de4f3`／`783fbb0`＋`9a800c9`。**一節「設計／電話／追蹤／p2a」四列仍是 09-23 版，本 session 未重驗**；平行 session 的 `fca94a7`（UTM 米米三活動）與主 repo 未提交的 `scripts/audit_seo.py`（09-27 12:25 答案卡判準收緊，精進會議主席在改）都不是本 session 的東西。
+> 最後更新：2026-09-27 14:0x（SEO 第一順位執行 session：三節第一順位改寫為「已上線／還沒做」；一節 HEAD／工作區兩列重寫）
+> 前次：2026-09-27 12:4x（SEO 全流程 session 交接，`f6f0837`）。
+> 本次更新原因：Sir 09-27 13 時「全部開始做照順序」＋「部署」。本 session 把第一順位 1→9 照順序做，7 批上線 `22805e9`→`3a6895a`，全部線上 curl 驗過。**一節「設計／電話／追蹤／p2a」與 CI／閘門列仍是舊版，本 session 未重驗**；主 repo 未提交的 `scripts/audit_seo.py` 仍是平行 session 的（含第一順位 #3 的樁頁排除邏輯），別替它 commit。
 
 ## 一、當前狀態快照（HEAD／CI／工作區／SEO 四列 2026-09-27 12:4x 重驗；其餘列 09-23 版，每項附指令）
 
 | 項目 | 值 | 重驗指令 |
 |---|---|---|
-| HEAD | **origin/main＝`fca94a7`**（平行 session UTM 米米三活動）。本 session：`90de4f3` SEO 行動計畫前 10 項內容面（21 檔）→ `783fbb0` org 節點補 taxID＋重複頁內鏈改指主頁 [nofresh]（124 檔）→ `9a800c9` 二胎利率／債務協商兩頁改寫＋新增反詐總整理頁。主 repo 本機 `main...origin/main` **同步、不分岔**；只有平行 session 未提交的 `M scripts/audit_seo.py`（別替它 commit）＋未追蹤 `scripts/archive/goal-scores.jsonl` | `cd ~/cx468-web && git fetch && git status -sb && git log --oneline -6 origin/main` |
+| HEAD | **origin/main＝`3a6895a`**。本 session 7 批（皆 `git push origin HEAD:main`）：`22805e9` 反詐頁 4 條反向內鏈 → `3282471` 首頁 title 加售後回租 → `980b76f` 兩頁 CTA 看不見 [nofresh] → `8a5212a` 二胎利率 DefinedTerm（媽祖定版）→ `abd79b1` 20 地價稅頁輸入框 16px [nofresh] → `9521542` /en/ title＋description [nofresh] → `07230de` 全站「本頁最後更新」[nofresh] → `e661f3b` 33 頁 description ≤100 [nofresh] → `3a6895a` 二胎利率頁第二張表（8 筆銀行官網公告）。中間 `525939b` 是 CI 指標自動更新 | `cd ~/cx468-web && git fetch -q && git log --oneline -12 origin/main` |
 | CI／Pages | `fca94a7` CI success＋pages build success；`9a800c9` CI success。線上 09-27 12:4x：sale-leaseback／article-loan-fraud-check 200；sale-leaseback「依租約條款保障」2 處；article-sale-leaseback-guide 為 meta refresh stub | `gh run list -L 3`；`curl -s https://cx468.com.tw/sale-leaseback.html \| grep -c 依租約條款保障` → 2；`curl -s https://cx468.com.tw/article-sale-leaseback-guide.html \| grep -c 'http-equiv="refresh"'` → 1 |
-| 工作區 | 本 session worktree `~/cx468-web-seo0927` 已 `git worktree remove`；**遺留本機分支 `seo-0927-fixes`、`seo-0927-articles`**（內容已進 origin/main，`git branch -D` 被 hook 擋，等 Sir 手刪）。其他 worktree（ga-allow／radar-w4／phase2）是別的 session 的，勿動。改頁仍一律 `git worktree add ../<name> origin/main` 隔離施工，push 用 `git push origin HEAD:main` | `git worktree list`；`git branch --list 'seo-0927*'` |
+| 工作區 | 本 session 施工 worktree `~/cx468-fraudlinks`（detached，已全部 push，可 `git worktree remove ../cx468-fraudlinks`）；`~/cx468-desc` 已移除。**遺留本機分支 `seo-desc-0927`、`seo-0927-fixes`、`seo-0927-articles`**（內容都已進 origin/main，`git branch -D` 被 hook 擋，等 Sir 手刪）。其他 worktree（ga-allow／radar-w4／phase2）是別的 session 的，勿動。改頁仍一律 `git worktree add ../<name> origin/main` 隔離施工，push 用 `git push origin HEAD:main` | `git worktree list`；`git branch --list "seo-*"` |
 | SEO（09-27 上線） | 6 核心頁 h1 下首段＝40–80 字答案段；FAQ 補核定數字（SLB 市值 7–9 成、整合月付降 30–50%＋「月付降低不等於總利息減少」）；整合頁 FAQ 改題「每月月付可以降多少」；SLB 風險段；收費統一句（貸款版＋SLB 版「簽約過戶、資金到位後才收」Sir 確認屬實）；「債務整合」同義詞；about schema 刪 0931；**taxID 60602537 共 120 頁**；FAQ 同源 **155/0**；llms.txt 二胎與「免費」拆段＋補 0958。規格正本＝`行銷產出/策略簡報/2026-09-27-SEO全流程行動計畫.md`（媽祖把關版） | `grep -l '"taxID"' *.html \| wc -l` → 120；`python3 scripts/audit_faq_samesource.py` → 同源 155／漂移 0 |
 | 閘門（乾淨樹 `git archive origin/main`） | 09-23 03:1x 於 `8237856`：ci_check **190 檔 0**；FAQ 同源 **150/0**；audit-regression **23/23**。之後每個 commit 前各自重跑：`ab50002` ci 190/0＋text 159 零漂移＋regression 23/23＋真瀏覽器 GA 探針 9 頁；`7dd996e` ci 190/0＋FAQ 同源 151/0＋schema==visible True。**regression 需 linkedom**：主 repo 已無，`npm i --prefix <scratch> linkedom && ln -s <scratch>/node_modules node_modules`（跑完 `rm node_modules`） | `python3 scripts/ci_check.py`；`python3 scripts/audit_faq_samesource.py`；`node scripts/audit-regression.cjs` |
 | 設計（Apple 流體層，09-23 全站） | 新檔 **`fluid.css`**（75 行）**掛全站 165 頁**（`d1d7d3a` 補 146：139 靜態＋en/index＋lvr×3／radar×2 生成頁；生成模板 `scripts/lvr/build_observatory.py`／`build_extras.py`／`gen_radar_v4.py` 同步改，之後重生成不會掉）。**未掛 20**＝include 片段 11、cx_batch 草稿 4、topic-a~d 模板 4，另 downloads/×4、world/（無 nav 無按壓元件）。sale-leaseback.html 原本沒有 `</head>`，link 放 `<body>` 前。首批 15 頁（`3762746`）＝首頁＋四個下拉裡的 14 頁：按壓回饋（pointer-down 縮 .97、臨界阻尼 spring `linear()` 彈回）、nav 下拉從按鈕長出（blur→清晰）、FAQ `::details-content` 連續展開、tp-h1／art h1／bt-h1 負字距＋小字正字距、hero 進場微升（主圖零延遲）、手機底部條（footer `.cx-sticky-cta`＋topic.css `.tp-bar`）改懸浮玻璃 dock、reduced-motion／transparency／contrast。首頁另有內聯專屬段（AI 卡 View Transition、開關 transform）；**首頁 hero 精簡為眉標／h1／副標／電話鈕／AI 卡，四需求卡／信任列／快捷列／免責搬到 `.hero-more` 第二屏**，文字零增刪。Phase 1–3 配色同 09-20 版 | `grep -l 'fluid.css' *.html \| wc -l` → 164（＋en/index）；`grep -L fluid.css *.html \| wc -l` → 20；`curl -s https://cx468.com.tw/ \| grep -c 'class="hero-more"'` → 1；截圖 `行銷產出/視覺風格/apple-design-2026-09-22/` |
@@ -98,22 +98,25 @@ curl -sG "https://graph.facebook.com/v21.0/act_1693554028195795/insights" --data
 
 ## 三、未竟任務
 
-### 🔴 第一順位：09-27 SEO 全流程未竟（Sir 09-27「把所有還沒做的交接」）
+### 🔴 第一順位：09-27 SEO 全流程——剩下的（09-27 下午 session 已照順序做完大半）
 
-報告與規格入口：行動計畫總表 23 列＝`行銷產出/策略簡報/2026-09-27-SEO全流程行動計畫.md`（已做＝二-1～二-8、二-10；其餘未做）；三篇內容 FINAL＝`行銷產出/官網文章草稿/2026-09-27-*-FINAL.md`；競品三家＝台灣理財通 imoney.com.tw／好事貸 houseloan.tw／OK忠訓 okbank.com（Sir 說的「鋮馨租賃工作台」本機／Artifacts／Notion 都找不到，要 Sir 給連結）。
+報告與規格入口：行動計畫總表 23 列＝`行銷產出/策略簡報/2026-09-27-SEO全流程行動計畫.md`；三篇內容 FINAL＝`行銷產出/官網文章草稿/2026-09-27-*-FINAL.md`；競品三家＝台灣理財通 imoney.com.tw／好事貸 houseloan.tw／OK忠訓 okbank.com（Sir 說的「鋮馨租賃工作台」本機／Artifacts／Notion 都找不到，要 Sir 給連結）。
+
+**09-27 下午已上線（見一節 HEAD 列）**：反詐頁 4 條反向內鏈；首頁 title 插「售後回租」（接二胎後，保留 09-11 電話先行排序；site-index.json 每週 workflow 自動更新，沒手改）；兩頁 CTA 看不見（全站 63 頁 `.cta-box` 實渲染量對比度，只有 article-private-loan-to-bank 金字壓金底、article-private-loan-credit-damage 藍字壓藍底 <2:1）；二胎利率頁 DefinedTerm「可動用額度」改扣一胎剩餘本金（媽祖逐字句）＋第二張表 8 筆銀行官網公告（凱基次順位／台新／玉山／遠東／王道／陽信×2／新光，逐家複驗原文；台中銀行連不上、三信基準日 110/9/1 剔除）；/en/ title 57、description 151 字元；20 地價稅頁「公告地價」輸入框 16px；33 頁 description ≤100 字（媽祖修改後 PASS，og／twitter／schema 同源）；全站「本頁最後更新」（`include.js` 讀 JSON-LD 最大 dateModified，159 頁顯示、7 頁已有字樣跳過、15 頁無 dateModified 不顯示）。
 
 **硬期限**
-1. **二胎利率頁每季複驗，首次 2026-12-27**：`article-second-mortgage-rates.html` 引國泰世華、凱基官網公告區間（3.4%～15.88%，查詢日 09-27）。媽祖限制五條：只引機構自行公告數字＋來源＋查詢日；區間句同段帶「非鋮馨報價、利率因人而異、非承諾」；民法 16% 上限句不與具名銀行同句；「起／最低」不作招攬語；銀行改公告即改＋dateModified 同步，數字改動仍過媽祖。
+1. **二胎利率頁每季複驗，首次 2026-12-27**：已登記 `~/.cx468/pending_reviews.json`（三日健檢到期前 7 天推）。範圍＝兩張表共 10 筆，網址在該頁「資料來源」清單；玉山活動 2026-12-31 到期必查；陽信在 Cloudflare Turnstile 後面、新光是 JS 頁，要 headless。媽祖限制五條：只引機構自行公告數字＋來源＋查詢日；區間句同段帶「非鋮馨報價、利率因人而異、非承諾」；民法 16% 上限句不與具名銀行同句；「起／最低」不作招攬語；銀行改公告即改＋dateModified 同步，數字改動仍過媽祖。09-27 追加：**這兩張表只能活在本頁，不得搬進廣告或社群**。
 
-**可做、不急（按 CP 值）**
-2. **反詐頁反向內鏈**：在 `second-mortgage.html`、`article-second-mortgage.html`、`article-second-mortgage-scam.html`、`knowledge.html` 加連結指向 `article-loan-fraud-check.html`（新頁目前 GSC「URL is unknown」，內鏈能加速發現）。
-3. **`audit_seo.py` 排除 meta refresh stub**：兩個 stub 各 17→5 分造成總分 2749→2725 假降。⚠️ 主 repo 目前有平行 session 未提交的 audit_seo.py 修改，先等它 commit 再改（memory `project_seo_aeo_structured_data`）。
-4. **首頁 title 加「售後回租」**：媽祖不反對，hero 核定逐字句不動；Sir 09-27 未勾選，動前再問一次。
-5. **審稿人具名 Person／reviewedBy**：三家競品都沒有＝差異點；Sir 09-27 選「先不掛」，範本在行動計畫二-9（人名 {待Sir指定}，資歷只寫團隊 20 年）。
-6. **全站 `.cta-box a` 金字壓金底**：theme.css 把 CTA 段內網址／電話變金底按鈕；09-27 三頁已修，其他同寫法頁未掃（memory `feedback_template_bugs_copied_by_builders`）。
-7. **二胎頁 DefinedTerm「扣除一胎房貸設定金額」vs 內文「一胎剩餘本金」說法不一**，待媽祖定一版。
-8. 行動計畫總表其餘：/en/ title 98 字＋description 250 字過長；20 個地價稅計算頁輸入框 13px（改 `scripts/generate_city_calculators.py:344` 模板重生）；35 頁 description >100 字；ai-bar.html 不能加 noindex（innerHTML 注入會擴散）；首頁 Lighthouse 見 `fh-…ecs.us-west-2.on.aws` 第三方請求來源不明；Core Web Vitals 無可信數字（PSI 免 key 額度滿、本機 Lighthouse 失真，Sir 手動跑 PSI 網頁版）；cx_radar_v4_demo 是每日生成正式頁非重複頁，canonical 處置待 Sir。
-9. 競品缺口可做題：二胎利率比較表（公開區間＋來源日期＋媽祖）、每服務獨立 FAQ 頁、債務協商專頁（已由改寫頁部分承接）、案例庫擴充（只用真實匿名案例）、畫面顯示更新日期（綁 dateModified 不寫死）。**不跟進**：AggregateRating 自評、LoanOrCredit schema、全台縣市頁量產。
+**還沒做**
+2. **`audit_seo.py` 排除 meta refresh stub**：平行 session 未提交的 diff（09-27 12:25）已含這段邏輯，等它 commit；別替它 commit。
+3. **審稿人具名 Person／reviewedBy**：要 Sir 指定人名（建議鄭經理或 Sir），範本在行動計畫二-9；沒名字不上。
+4. **等 Sir 裁**：ai-bar.html 要不要 robots Disallow（Jarvis 建議維持現狀）；cx_radar_v4_demo canonical；Core Web Vitals（Sir 手動跑 PSI 網頁版）；每服務獨立 FAQ 頁（Jarvis 異議：faq.html＋各服務頁已有同源 FAQ，再開獨立頁＝重複內容，建議不做）；案例庫擴充（要 Sir 給新的真實匿名案例，不虛構）；18 頁 CTA 白字金底按鈕對比 2.68:1（未達 AA，品牌設計，改不改色）。
+5. **媽祖備註下一輪**：xinzhuang-second-mortgage 的 twitter／JSON-LD「近 180 天…每坪 47.9 萬」無日期錨，同型病掃一次各 `*-second-mortgage` 的 og／twitter／schema；financing-data「售後回租成數」可改「金額佔市值比例」。
+6. `second-mortgage.html` 收合區 `.bt-p` 內鏈 5 條與內文同色無底線（看不出是連結）；全站同寫法頁未掃。
+7. `scripts/generate_city_calculators.py` **模板落後產物**（缺 fluid.css／analytics-config.js／dateModified）：重生前先補模板，否則洗掉 GA 設定。
+8. 行動計畫總表 23 列：除上面 2–7 與 Sir 待裁項，其餘已全部上線。
+
+**已確認不用做**：首頁 Lighthouse `fh-…ecs.us-west-2.on.aws`——乾淨瀏覽器開線上首頁無此請求、repo 零引用，來自當時 Lighthouse 環境（瀏覽器擴充）；about schema 0931 早已刪；債務協商專頁由 article-debt-negotiation-vs-consolidation 承接。**不跟進**：AggregateRating 自評、LoanOrCredit schema、全台縣市頁量產。
 
 ### 🟢 近期已上線（對照用，細節見 git log 與 09-20 版信）
 - 09-27 `9a800c9` 反詐總整理新頁＋二胎利率／債務協商改寫；`783fbb0`／`90de4f3` SEO 行動計畫 9 項（本 session，媽祖把關版）
