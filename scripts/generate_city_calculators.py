@@ -198,7 +198,7 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 @media(max-width:540px){{.g3{{grid-template-columns:1fr 1fr}}}}
 .field{{display:flex;flex-direction:column;gap:5px}}
 .field label{{font-size:12px;font-weight:600;color:#6e6e73}}
-.field input,.field select{{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:14px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}}
+.field input,.field select{{height:42px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:16px;color:#1d1d1f;outline:none;background:#fff;transition:border-color .2s}}
 .field input:focus,.field select:focus{{border-color:#c17f24}}
 .field input::placeholder{{color:#b0b0b0}}
 .price-result{{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}}
@@ -214,7 +214,7 @@ img.nav-logo{{height:44px;width:44px;object-fit:cover;border-radius:8px;border:1
 .tax-table th:last-child{{border-radius:0 6px 6px 0}}
 .tax-table td{{padding:10px 8px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:13px}}
 .tax-table td:first-child{{text-align:left;padding-left:12px;font-weight:600;color:#6e6e73;font-size:12px}}
-.tax-table .area-input{{width:100%;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;text-align:center;outline:none;font-family:inherit}}
+.tax-table .area-input{{width:100%;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:16px;text-align:center;outline:none;font-family:inherit}}
 .tax-table .area-input:focus{{border-color:#c17f24}}
 .tax-table .course-price{{font-size:13px;color:#1d1d1f;font-weight:500}}
 .tax-table .rate-cell{{font-size:12px;color:#2563eb;font-weight:600}}
@@ -341,7 +341,7 @@ gtag(\'js\',new Date());gtag(\'config\',\'G-4FX9LNEL7R\',{{page_location:locatio
       <div style="flex:1;min-width:180px">
         <div style="font-size:12px;color:#6e6e73;margin-bottom:4px">或從公告地價換算（×80%）</div>
         <div style="display:flex;gap:6px;align-items:center">
-          <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:13px;outline:none;font-family:inherit">
+          <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:16px;outline:none;font-family:inherit">
           <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
           <span id="convertedVal" style="font-size:13px;font-weight:700;color:#c17f24;white-space:nowrap">—</span>
         </div>
