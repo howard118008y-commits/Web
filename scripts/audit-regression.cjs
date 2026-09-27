@@ -587,7 +587,7 @@ test('Phase 2: safe campaign attribution retains documented UTM values without a
   assert.equal(cfg.campaign_source,'facebook');assert.equal(cfg.campaign_medium,'paid_social');
   assert.equal(cfg.campaign_name,'private_to_bank');assert.equal(cfg.campaign_content,'profile');
   assert.ok(!JSON.stringify(cfg).includes('PRIVATE'));
-  for(const campaign of ['property-management-fees','corp-checkup-202609','home-equity','p2a','meta_one_202609','cx_v1_v2']) {
+  for(const campaign of ['property-management-fees','corp-checkup-202609','home-equity','p2a','meta_one_202609','cx_v1_v2','mimi_checkup_202609','mimi_ptb_202609','mimi_equity_202609']) {
     const historic=environment('<html></html>',{url:'https://cx468.com.tw/?utm_source=facebook&utm_medium=organic_social&utm_campaign='+campaign+'&utm_content=profile'});
     historic.run(read('analytics-config.js'));assert.equal(historic.sandbox.cxAnalyticsConfig.campaign_name,campaign);assert.equal(historic.sandbox.cxAnalyticsConfig.campaign_medium,'organic_social');
   }
