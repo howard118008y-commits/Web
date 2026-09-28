@@ -27,6 +27,53 @@ def git_real_date(relpath):
 
 stale_detail = {}  # relpath -> (dateModified, git_date, 偏差天數)
 
+# --- speakable／dateModified：只認 JSON-LD 結構，不再純字串 grep（2026-09-28 收緊，C10）---
+# 舊判準 has(s, r'[Ss]peakable') 與 has(s, r'dateModified|datePublished') 都是不驗結構的字串命中：
+# 前者 CSS／JS 註解、空 cssSelector 都放行；後者未帶引號（JS 的 d.dateModified 也中）、datePublished 也算過、值不是日期也算過。
+# 新判準：speakable＝任一 JSON-LD 物件有 speakable 鍵，且其 cssSelector 或 xpath 有非空內容；
+#         datemod＝任一 JSON-LD 區塊含帶引號的 "dateModified" 且值為合法 ISO 日期（沿用 DATEMOD_RE，與 check_fresh 同源）。
+# 2026-09-28 實測全站 163 頁：兩項收緊前後缺口都是 0→0（現況無假陽性），改的是量尺不是分數。
+
+def ldjson_objects(s):
+    """攤平頁內所有 JSON-LD 區塊裡的 dict（含 @graph／巢狀）；解析失敗的區塊跳過（Google 也讀不了）。"""
+    out = []
+    def walk(o):
+        if isinstance(o, dict):
+            out.append(o)
+            for v in o.values(): walk(v)
+        elif isinstance(o, list):
+            for v in o: walk(v)
+    for block in LDJSON_RE.findall(s):
+        try: walk(json.loads(block))
+        except ValueError: pass
+    return out
+
+def check_speakable(s):
+    """JSON-LD 內真的有 speakable 結構，且 cssSelector 或 xpath 有內容才算過。"""
+    for o in ldjson_objects(s):
+        sp = o.get('speakable')
+        for spec in (sp if isinstance(sp, list) else [sp]):
+            if not isinstance(spec, dict):
+                continue
+            for key in ('cssSelector', 'xpath'):
+                v = spec.get(key)
+                if isinstance(v, str) and v.strip():
+                    return True
+                if isinstance(v, list) and any(isinstance(x, str) and x.strip() for x in v):
+                    return True
+    return False
+
+def check_datemod(s):
+    """JSON-LD 內有帶引號的 "dateModified" 且值是合法日期才算過（datePublished 不算）。"""
+    for block in LDJSON_RE.findall(s):
+        for d in DATEMOD_RE.findall(block):
+            try:
+                date.fromisoformat(d)
+                return True
+            except ValueError:
+                pass
+    return False
+
 def check_fresh(s, relpath):
     """有 dateModified 且與 git 實質 commit 日偏差 ≤ FRESH_TOLERANCE_DAYS（7 天）才算新鮮。"""
     dates = []
@@ -44,6 +91,32 @@ def check_fresh(s, relpath):
         return False
     return True
 
+# --- AEO 答案卡：要「有容器元素」且「在頁面前段」才算能被 AI 直接擷取 ---
+# 2026-09-27 收緊。舊判準 has(s, r'快速答案|一句話|answer-card|tldr|quick-answer') 是純字串 grep，
+# 不驗結構也不驗版位，三種假陽性全放行：①<style> 裡的 CSS 註解 /* 快速答案 */（corporate-loan 唯一命中點就是它）、
+# ②JSON-LD speakable cssSelector 寫了 "#quick-answer" 但頁面上沒有這個元素、③正文中段的散句（「不是一句話能說死」）。
+# 新判準兩條都要過：①剝掉 script/style/註解後，body 內有 id/class 帶 answer-card/quick-answer/tldr/bt-qa 的元素
+#（bt-qa 是站上 Better 版型的答案卡 class，漏掉會誤殺 realestate-tax-calculator 這種只有 class 沒有 id 的卡）；
+# ②該元素落在可見文字的前 CARD_MAX_DEPTH（實測：沒被埋的卡最深 27%，被埋在正文中後段的最淺 36%，門檻取在空隙中間）。
+CARD_EL_RE = re.compile(r'<[^>]+(?:id|class)=["\'][^"\']*(?:answer-card|quick-answer|tldr|bt-qa)', re.I)
+CARD_NOISE_RE = re.compile(r'<script[\s\S]*?</script>|<style[\s\S]*?</style>|<!--[\s\S]*?-->', re.I)
+CARD_MAX_DEPTH = 0.30
+
+def visible_len(s):
+    """可見文字長度（去標籤、去空白），當作頁面深度的分母。"""
+    return len(re.sub(r'\s+', '', re.sub(r'<[^>]+>', ' ', s)))
+
+def check_answercard(s):
+    """有答案卡容器元素，且該元素在可見文字前 30% 內才算過。"""
+    i = s.lower().find('<body')
+    body = CARD_NOISE_RE.sub(' ', s[i:] if i >= 0 else s)
+    m = CARD_EL_RE.search(body)
+    if not m:
+        return False
+    total = visible_len(body)
+    return total == 0 or visible_len(body[:m.start()]) / total <= CARD_MAX_DEPTH
+
+
 def audit(path):
     s = open(path, encoding="utf-8", errors="ignore").read()
     # 判斷是否真實頁面（有完整 doc 結構），排除 include 片段
@@ -53,6 +126,12 @@ def audit(path):
     # 排除 noindex 頁（demo/封存頁不是 SEO/GEO/AEO 目標，不應計入信號覆蓋率）
     head = s[:s.lower().find('</head>')] if '</head>' in s.lower() else s
     if has(head, r'name=["\']robots["\'][^>]*noindex'):
+        return None
+    # 排除 meta-refresh 轉址樁頁（舊網址留的空殼：未進 sitemap、非索引內容頁，只有 title/canonical/轉址一行）
+    # 2026-09-27：90de4f3 新增 article-loan-integration / article-sale-leaseback-guide 兩支樁頁被算進真實頁面，
+    # 母體 162→164 且兩頁 AEO 全缺，把 SEO 100%→99.39%、AEO 98.06%→96.86% 拖成「像內容退步」，其實是分母髒了。
+    refresh = re.findall(r'<meta[^>]*http-equiv=["\']refresh["\'][^>]*>', head, re.I)
+    if any('url=' in t.lower() for t in refresh):
         return None
     r = {}
     # --- SEO ---
@@ -67,11 +146,11 @@ def audit(path):
     r['lang']        = has(s, r'<html[^>]*lang=')
     # --- AEO ---
     r['faq']         = has(s, r'"FAQPage"')
-    r['speakable']   = has(s, r'[Ss]peakable')
+    r['speakable']   = check_speakable(s)  # JSON-LD 內有 speakable 結構且 cssSelector/xpath 有內容（判準見上方註解）
     r['definedterm'] = has(s, r'"DefinedTerm"')
     r['breadcrumb']  = has(s, r'"BreadcrumbList"')
-    r['answercard']  = has(s, r'快速答案|一句話|answer-card|tldr|quick-answer')  # 快速答案卡
-    r['datemod']     = has(s, r'dateModified|datePublished')  # 鮮度
+    r['answercard']  = check_answercard(s)  # 快速答案卡（容器元素＋版位，判準見上方 CARD_* 註解）
+    r['datemod']     = check_datemod(s)  # 鮮度：JSON-LD 內帶引號 "dateModified" 且值為合法日期（datePublished 不算）
     r['fresh30']     = check_fresh(s, os.path.relpath(path, ROOT))  # 鮮度真實性（vs git）
     # --- GEO ---
     r['org_schema']  = has(s, r'"Organization"|"RealEstateAgent"|"LocalBusiness"')
