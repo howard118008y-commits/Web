@@ -11,6 +11,9 @@ import glob, re, json, html as H, os, sys
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def norm(s):
+    # 2026-09-28：先剝 script/style/註解整段內文再剝標籤。原本只剝標籤，JSON-LD 的題目本身留在「可見文字」裡，
+    # schema 有題、頁面沒有也判同源（合成「幽靈問題」實測 True）→ 閘門空轉。
+    s = re.sub(r'<script[\s\S]*?</script>|<style[\s\S]*?</style>|<!--[\s\S]*?-->', ' ', s, flags=re.I)
     s = re.sub(r'<br\s*/?>', '\n', s)
     s = re.sub(r'<[^>]+>', '', s)
     s = H.unescape(s)
