@@ -155,7 +155,7 @@
         form.reset();
         form.style.display='none';
         msg.className='form-msg ok';
-        msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+        msg.innerHTML='✅ 已收到你的資料，謝謝！專人將於 1–2 個工作日內與你聯繫。<br>急件可直接加 LINE：<a href="https://lin.ee/PHIfSoY">lin.ee/PHIfSoY</a>';
         try { if(window.gtag)gtag('event','generate_lead',{page_path:location.pathname,form:'nofree'}); } catch(analyticsError) {}
         try { if(window.fbq)fbq('track','Lead'); } catch(analyticsError) {}
       }else{throw new Error('submit_failed');}
@@ -165,7 +165,7 @@
       var uncertain=error.message!=='submit_failed';
       btn.disabled=uncertain;btn.textContent=orig;
       msg.className='form-msg err';
-      msg.innerHTML=uncertain?'無法確認是否送達。請先以 LINE 或電話查詢，避免重複送件：<a href="https://lin.ee/PHIfSoY">LINE 留言</a>／<a href="tel:02-2249-0517">02-2249-0517</a>。':'送出失敗，請稍後再試，或直接加 LINE 與我們聯繫：<a href="https://lin.ee/PHIfSoY">@0931087996</a>';
+      msg.innerHTML=uncertain?'無法確認是否送達。請先以 LINE 或電話查詢，避免重複送件：<a href="https://lin.ee/PHIfSoY">LINE 留言</a>／<a href="tel:02-2249-0517">02-2249-0517</a>。':'送出失敗，請稍後再試，或直接加 LINE 與我們聯繫：<a href="https://lin.ee/PHIfSoY">lin.ee/PHIfSoY</a>';
     });
   });
 })();
