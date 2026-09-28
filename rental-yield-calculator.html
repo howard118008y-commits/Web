@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -56,7 +56,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -250,7 +250,7 @@ input,select{font-size:16px!important}
 
 .rc.blu{background:var(--gold);border-color:var(--gold)}
 
-.rc.blu .rc-lbl,.rc.blu .rc-sub{color:rgba(18,33,58,.7)}
+.rc.blu .rc-lbl,.rc.blu .rc-sub{color:var(--cx-ink)}
 
 .rc.blu .rc-val{color:var(--forest-deep)}
 
@@ -282,9 +282,9 @@ input,select{font-size:16px!important}
 .sp-chart{position:relative;height:66px;margin:4px 0 8px}
 .sp-chart svg{width:100%;height:100%;overflow:visible}
 .sp-chart path.ln{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;animation:sp-draw 1.4s cubic-bezier(.22,.61,.36,1) .2s forwards}
-.sp-chart path.fl{fill:rgba(27,47,74,.07);stroke:none}
+.sp-chart path.fl{fill:var(--cx-ink);fill-opacity:.07;stroke:none}
 .sp-chart .gl{stroke:var(--line);stroke-width:1}
-.sp-dot{position:absolute;left:calc(100% - 3px);top:0;width:7px;height:7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px rgba(27,47,74,.16);transition:top .4s}
+.sp-dot{position:absolute;left:calc(100% - 3px);top:0;width:7px;height:7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--cx-line);transition:top .4s}
 .sp-mm{display:flex;justify-content:space-between;font-size:9.5px;color:var(--ink-dim);letter-spacing:.04em}
 @keyframes sp-draw{to{stroke-dashoffset:0}}
 
@@ -293,7 +293,7 @@ input,select{font-size:16px!important}
 
 /* CTA 帶：次鈕（淺底上的深色外框鈕） */
 .bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
-.bt-btn-outline-dark:hover{background:rgba(27,47,74,.06)}
+.bt-btn-outline-dark:hover{background:var(--cx-cream-2)}
 
 /* 延伸閱讀（獨立段，不在 FAQ 內） */
 .bt-reads .bt-local{margin-top:0}
@@ -458,8 +458,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-label">Rental Yield Calculator</p>
       <h1 class="bt-h1">租金報酬試算</h1>
       <p class="bt-p">輸入購入成本與租金收益，立即計算毛/淨報酬率與回本年數。</p>
+      <a class="bt-btn cx-tool-go" href="#tool-start">開始試算</a>
     </div>
-    <img class="bt-hero-img" src="img/article-rental-management.jpg" alt="租金報酬試算" width="800" height="533" fetchpriority="high" loading="eager">
+    <img class="bt-hero-img" src="img/uiux/O06/hero-calculator-960.webp" srcset="img/uiux/O06/hero-calculator-640.webp 640w, img/uiux/O06/hero-calculator-960.webp 960w, img/uiux/O06/hero-calculator-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 48px), 660px" width="960" height="960" alt="吉祥物米米雙手拿著計算機，準備幫忙試算" fetchpriority="high" loading="eager">
   </div>
 </section>
 
@@ -477,7 +478,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <li><strong>提醒</strong>：實際報酬依租金、空租與成本而定。</li>
   </ul>
 </div>
-<div class="card">
+<div class="card" id="tool-start">
   <div class="card-title">輸入資料</div>
 
   <div class="sec">購入成本</div>
@@ -567,7 +568,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <span id="gaugeHint">—</span>
     </div>
     <div class="gauge-track"><div class="gauge-fill" id="gaugeFill" style="width:0%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:#5A6878;margin-top:6px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--cx-ink-2);margin-top:6px">
       <span>0%</span><span>2%</span><span>4%</span><span>6%+</span>
     </div>
   </div>
@@ -591,7 +592,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="dr plus"><span>年租金收入（含空置調整）</span><span id="d-income">—</span></div>
     <div class="dr minus"><span>每年持有成本</span><span id="d-cost">—</span></div>
     <div class="dr"><span>淨租金收益/年</span><span id="d-net">—</span></div>
-    <div class="dr" style="border-bottom:.5px solid #E2DED4;font-size:13px;color:#1B2F4A;font-weight:400"><span>購入總成本（含裝修）</span><span id="d-total">—</span></div>
+    <div class="dr" style="border-bottom:.5px solid #E2DED4;font-size:13px;color:var(--cx-ink);font-weight:400"><span>購入總成本（含裝修）</span><span id="d-total">—</span></div>
     <div class="dr"><span>淨報酬率</span><span id="d-yield">—</span></div>
   </div>
 
@@ -599,7 +600,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div id="warnBox" class="warn-box" style="display:none"></div>
 
   <p class="disclaimer">* 本試算僅供參考，未含房地合一稅、所得稅及資本利得。實際報酬以財務規劃為準。</p>
-  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#2F5B8F;color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
+  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:var(--cx-ink);color:var(--cx-cream);border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
   </div>
@@ -738,12 +739,12 @@ calc();
   function init(){
     var bar = document.createElement('div');
     bar.setAttribute('role','note');
-    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:#12213A;color:#fff;'
+    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:var(--cx-ink);color:#fff;'
       + 'padding:10px 14px;font-size:14px;line-height:1.5;text-align:center;font-family:"Noto Sans TC",sans-serif;';
     bar.innerHTML = '🔧 本工具由 <a href="https://cx468.com.tw/?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
       + 'target="_blank" rel="noopener" style="color:#ffd166;text-decoration:underline;font-weight:700">鋮馨租賃 cx468.com.tw</a> 提供｜'
       + '<a href="https://cx468.com.tw/apply.html?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
-      + 'target="_blank" rel="noopener" style="color:#fff;background:#1B2F4A;padding:2px 10px;border-radius:99px;'
+      + 'target="_blank" rel="noopener" style="color:var(--cx-ink);background:var(--cx-orange);padding:2px 10px;border-radius:99px;'
       + 'text-decoration:none;font-weight:700;margin-left:4px">免費評估 →</a>';
     document.body.insertBefore(bar, document.body.firstChild);
     function patchLinks(){

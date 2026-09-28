@@ -32,7 +32,7 @@ EXCLUDE_EXACT = {
     "nav.html", "nav-tool.html", "footer.html", "trust-block.html",
     "chat-widget.html", "anti-fraud-modal.html", "line-qr.html",
     "lead-form.html", "lead-form-neutral.html", "lead-form-nofree.html",
-    "cx_radar_v4_demo.html",
+    "cx_radar_v4_demo.html", "404.html",
 }
 EXCLUDE_PREFIX = ("lp-", "cx_batch")
 

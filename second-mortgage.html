@@ -154,8 +154,8 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{pa
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -200,7 +200,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -384,7 +384,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <link rel="stylesheet" href="consultation.css">
 <script src="consultation-tracking.js" defer></script>
 <link rel="stylesheet" href="topic.css">
-<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><link rel="stylesheet" href="fluid.css">
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:var(--cx-ink);line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:var(--cx-orange-deep);text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid var(--cx-line);text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><link rel="stylesheet" href="fluid.css">
 </head>
 <body ontouchstart="">
 <div id="nav" data-cta="line"></div>
@@ -453,7 +453,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </li>
       <li class="tp-flow-step">
         <span class="tp-flow-num" aria-hidden="true">4</span>
-        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="銀行櫃檯前完成簽署，設定與資金銜接一次處理" loading="lazy"></picture>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="多份文件匯整成一份，屋主一家站在自家門前，一旁是銀行" loading="lazy"></picture>
         <h3 class="tp-flow-title">送件到二胎撥款<span class="tp-flow-time">｜依個案</span></h3>
         <p class="tp-flow-text">銀行審核、二順位抵押設定、資金銜接一次處理；核貸與撥款時間依各銀行與個案而定，不保證核准與天數。</p>
       </li>
@@ -975,10 +975,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div data-include="trust-block"></div>
 <div data-include="line-qr"></div>
 <!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="second_mortgage">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

@@ -18,7 +18,7 @@ P={
    ("貸款整合","將多筆高利率債務整併為一筆銀行貸款，目標降低每月還款。"),
    ("民間轉銀行","將高利率民間借款分階段轉回銀行體系以降低利息負擔。"),
    ("包租代管","將房屋出租與管理委外，穩定收租並減少自行管理負擔。")]),
-"market-insight.html":dict(accent="#1a3a6b",
+"market-insight.html":dict(accent="var(--cx-orange-deep)",
  lead="想看懂台北新北房市與銀行放貸鬆緊？看這幾個指標。",
  body="房市走勢與銀行授信受央行政策利率、選擇性信用管制（限貸令）、不動產放款集中度與 DBR／DSR 規範影響。本頁整理公開市場資訊供研判，非投資或貸款建議；實際貸款條件依個案與各銀行核定。",
  faqs=[("現在銀行房貸放得鬆還是緊？","受央行選擇性信用管制與不動產放款集中度上限影響，銀行對房貸成數與條件時有調整。實際鬆緊依各銀行政策與個案而定，本頁僅供市場研判參考。"),
@@ -65,13 +65,13 @@ P={
 def card(accent,lead,body):
     return (f'<div id="quick-answer" style="max-width:760px;margin:18px auto 0;padding:20px 22px;background:#f6f5f3;border:1px solid #e3e3e6;border-left:3px solid {accent};border-radius:8px">\n'
      f'  <div style="font-size:12px;font-weight:700;color:{accent};letter-spacing:.18em;margin-bottom:8px">快速答案</div>\n'
-     f'  <p style="font-size:15.5px;line-height:1.8;color:#1d1d1f;margin:0">{"<strong>"+esc(lead)+"</strong>"+esc(body)}</p>\n</div>\n')
+     f'  <p style="font-size:15.5px;line-height:1.8;color:var(--cx-ink);margin:0">{"<strong>"+esc(lead)+"</strong>"+esc(body)}</p>\n</div>\n')
 def faq_block(faqs):
-    its="".join(f'  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:#1d1d1f;margin:0 0 8px">{esc(q)}</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">{esc(a)}</p></div>\n' for q,a in faqs)
-    return f'<section style="max-width:760px;margin:28px auto 0;padding:0 16px"><h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">常見問題</h2>\n{its}</section>\n'
+    its="".join(f'  <div style="border:1px solid #e7e0d3;border-radius:8px;padding:16px 20px;margin-bottom:10px;background:#fff"><h3 style="font-size:15.5px;font-weight:700;color:var(--cx-ink);margin:0 0 8px">{esc(q)}</h3><p style="font-size:14px;line-height:1.85;color:#515154;margin:0">{esc(a)}</p></div>\n' for q,a in faqs)
+    return f'<section style="max-width:760px;margin:28px auto 0;padding:0 16px"><h2 style="font-size:20px;font-weight:700;color:var(--cx-ink);margin:0 0 14px">常見問題</h2>\n{its}</section>\n'
 def gloss_block(terms):
-    its="".join(f'    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:#1d1d1f;font-size:14.5px">{esc(t)}</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — {esc(d)}</span></div>\n' for t,d in terms)
-    return f'<section style="max-width:760px;margin:28px auto 0;padding:0 16px"><h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">名詞解釋</h2>\n{its}</section>\n'
+    its="".join(f'    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px"><strong style="color:var(--cx-ink);font-size:14.5px">{esc(t)}</strong><span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — {esc(d)}</span></div>\n' for t,d in terms)
+    return f'<section style="max-width:760px;margin:28px auto 0;padding:0 16px"><h2 style="font-size:20px;font-weight:700;color:var(--cx-ink);margin:0 0 14px">名詞解釋</h2>\n{its}</section>\n'
 
 for fn,c in P.items():
     s=open(fn,encoding="utf-8").read()

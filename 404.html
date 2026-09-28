@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- GitHub Pages 對任何找不到的網址都回本檔（HTTP 404，網址列不變，例如 /old/page.html）。
+     base 讓相對路徑（include.js 抓 footer.html、頁尾與小鋮的 services.html／apply.html 連結）一律從網站根目錄算，
+     深層網址也不會連到另一個 404。本頁不放 canonical：404 狀態頁 Google 本來就不收錄，
+     指向首頁反而是「錯誤頁＝首頁」的矛盾訊號；直接開 /404.html 會是 200，所以另加 noindex。 -->
+<base href="/">
+<title>找不到這一頁｜鋮馨租賃有限公司</title>
+<meta name="description" content="網址可能打錯了，或這一頁已經移到別處。可以回首頁、看服務總覽，或直接電話、LINE 詢問顧問。">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="stylesheet" href="fluid.css">
+<!-- 接聽狀態在首次繪製前就標在 <html>（聯絡區主次不跳動）；頁尾注入的 /cx-hours.js 有防重複載入 -->
+<script src="cx-hours.js"></script>
+<style>
+/* 404（2026-09-28 步驟 11 區塊 3）：色票只引用 nav.js 注入的 --cx-*；動效只有 hover 變色 ≤150ms */
+body{margin:0;background:var(--cx-cream);color:var(--cx-ink);font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
+.nf{max-width:1180px;box-sizing:border-box;margin:0 auto;padding:136px 24px 104px}
+.nf-top{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:64px;align-items:center}
+.nf-h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:700;font-size:56px;line-height:1.2;letter-spacing:.02em;margin:0 0 20px}
+.nf-lead{font-size:18px;line-height:1.85;color:var(--cx-ink-2);margin:0 0 32px;max-width:34em}
+.nf-act{display:flex;flex-wrap:wrap;gap:12px}
+.nf-mimi{display:block;width:100%;height:auto}
+.nf-btn,.nf .cx-hours-actions a{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 26px;box-sizing:border-box;
+  border-radius:12px;font-size:17px;font-weight:700;line-height:1.3;text-decoration:none;color:var(--cx-ink);transition:background-color .15s ease}
+.nf-btn-primary{background:var(--cx-orange)}
+.nf-btn-primary:hover{background:var(--cx-orange-soft)}
+.nf-btn-ghost{background:transparent;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+.nf-btn-ghost:hover{background:color-mix(in srgb,var(--cx-ink) 7%,transparent)}
+.nf-sec{margin-top:96px}
+.nf-h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:700;font-size:26px;line-height:1.4;margin:0 0 18px}
+.nf-links{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:48px;border-top:1px solid var(--cx-line)}
+.nf-links li{border-bottom:1px solid var(--cx-line)}
+.nf-links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:8px 4px;font-size:18px;font-weight:500;color:var(--cx-ink);text-decoration:none;transition:color .15s ease}
+.nf-links a:hover{color:var(--cx-orange-deep)}
+.nf-links svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--cx-gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* 聯絡區：主次沿用 cx-hours（接聽中電話為主；非接聽 LINE 升主鈕），和首頁 hero、手機固定條同一套 */
+.nf-contact{margin-top:72px;padding:32px 36px;border-radius:16px;background:var(--cx-cream-2);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:center}
+.nf-contact .nf-h2{margin:0 0 6px}
+.nf-hours{margin:0;font-size:16px;line-height:1.7;color:var(--cx-ink-2)}
+.nf .cx-hours-status{display:none;align-items:baseline;gap:10px;margin:10px 0 0;font-size:16px;line-height:1.6;color:var(--cx-ink)}
+[data-cx-open="0"] .nf .cx-hours-status{display:flex}
+.nf .cx-hours-status::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--cx-gold);transform:translateY(-2px)}
+.nf .cx-hours-actions{display:flex;flex-wrap:wrap;gap:12px}
+.nf .cx-h-tel{background:var(--cx-orange)}
+.nf .cx-h-tel:hover{background:var(--cx-orange-soft)}
+.nf .cx-h-line{background:transparent;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+.nf .cx-h-line:hover{background:color-mix(in srgb,var(--cx-ink) 7%,transparent)}
+[data-cx-open="0"] .nf .cx-h-line{order:-1;background:var(--cx-orange);box-shadow:none}
+[data-cx-open="0"] .nf .cx-h-line:hover{background:var(--cx-orange-soft)}
+[data-cx-open="0"] .nf .cx-h-tel{background:transparent;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+[data-cx-open="0"] .nf .cx-h-tel:hover{background:color-mix(in srgb,var(--cx-ink) 7%,transparent)}
+.nf .cx-h-lbl{font-weight:500}
+.nf .cx-h-num{font-size:20px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.nf a:focus-visible{outline:3px solid var(--cx-orange-deep);outline-offset:3px;border-radius:12px}
+@media (max-width:900px){
+  .nf{padding:112px 24px 88px}
+  .nf-top{grid-template-columns:minmax(0,1fr) 220px;column-gap:40px}
+  .nf-h1{font-size:46px}
+}
+@media (max-width:640px){
+  .nf{padding:86px 20px 72px}
+  .nf-top{grid-template-columns:minmax(0,1fr) 112px;column-gap:8px;grid-template-areas:"h m" "p p" "a a"}
+  .nf-copy{display:contents}
+  .nf-h1{grid-area:h;font-size:34px;margin:0}
+  .nf-mimi{grid-area:m}
+  .nf-lead{grid-area:p;font-size:17px;margin:16px 0 24px}
+  .nf-act{grid-area:a;flex-direction:column}
+  .nf-act a,.nf .cx-hours-actions a{width:100%}
+  .nf-sec{margin-top:56px}
+  .nf-h2{font-size:22px}
+  .nf-links{grid-template-columns:1fr}
+  .nf-contact{margin-top:48px;padding:24px 20px;grid-template-columns:1fr}
+  .nf .cx-hours-actions{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){.nf a{transition:none}}
+</style>
+<script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫：跳過 include.js 的 GSAP 載入 */</script>
+<script src="include.js" defer></script>
+<!-- Preconnect for Google Analytics -->
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<!-- Google Analytics 4（同全站；page_location 是訪客打開的那個失效網址，GA4 以頁面標題「找不到這一頁｜鋮馨租賃有限公司」篩出 404 流量） -->
+<script src="consultation-tracking.js" defer></script>
+<script src="analytics-config.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
+</script>
+</head>
+<body>
+<div id="nav"></div>
+<script src="nav.js"></script>
+
+<main class="nf">
+  <!-- 米米（去背單獨）區塊：不放電話號碼與電話／LINE 鈕（媽祖 09-28 定例一第 1 層，隔一個區塊） -->
+  <section class="nf-top" aria-labelledby="nf-title">
+    <div class="nf-copy">
+      <h1 class="nf-h1" id="nf-title">找不到這一頁</h1>
+      <p class="nf-lead">網址可能打錯了，或這一頁已經移到別處。<br>這裡仍是鋮馨租賃的官方網站 cx468.com.tw，您可以從下面繼續找。</p>
+      <div class="nf-act">
+        <a class="nf-btn nf-btn-primary" href="/">回首頁</a>
+        <a class="nf-btn nf-btn-ghost" href="/services.html">服務總覽</a>
+      </div>
+    </div>
+    <img class="nf-mimi" src="img/uiux/O02/mimi-404-480.webp" srcset="img/uiux/O02/mimi-404-480.webp 480w, img/uiux/O02/mimi-404-960.webp 960w" sizes="(max-width:640px) 112px, (max-width:900px) 220px, 300px" width="480" height="676" alt="吉祥物米米拿著放大鏡四處找找看" decoding="async">
+  </section>
+
+  <section class="nf-sec" aria-labelledby="nf-more">
+    <h2 class="nf-h2" id="nf-more">您可能在找這些服務</h2>
+    <ul class="nf-links">
+      <li><a href="/corporate-checkup.html">公司財務健檢<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/private-to-bank.html">民間轉銀行怎麼運作<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/inherited-property.html">繼承的房子怎麼處理<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/sale-leaseback.html">售後回租怎麼運作<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+    </ul>
+  </section>
+
+  <section class="nf-contact" data-consultation-need="general" data-cx-hours aria-labelledby="nf-ask">
+    <div>
+      <h2 class="nf-h2" id="nf-ask">直接問顧問</h2>
+      <p class="nf-hours">接聽時間：週一至週五 10:00–17:00</p>
+      <p class="cx-hours-status">現在是非接聽時間。先用 LINE 留言，我們上班後回覆您。</p>
+    </div>
+    <div class="cx-hours-actions">
+      <a class="cx-h-tel" href="tel:0222490517" data-link-location="404"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span class="cx-h-lbl">電話諮詢</span> <span class="cx-h-num">02-2249-0517</span></a>
+      <a class="cx-h-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-link-location="404"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>LINE 留言</a>
+    </div>
+  </section>
+</main>
+
+<div data-include="footer"></div>
+<div data-include="anti-fraud-modal"></div>
+</body>
+</html>

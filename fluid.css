@@ -1,37 +1,26 @@
-/* fluid.css — Apple 流體介面共用層（依 apple-design skill，2026-09-22）
-   掛法：<link rel="stylesheet" href="fluid.css"> 放 </head> 前、各頁自有 CSS 之後（同特異性靠順序蓋過）；
-   <body ontouchstart=""> 讓 iOS Safari 觸控時套 :active。零文字變動。
-   內容：§1 按壓回饋（按下 90ms 縮 .97、放開臨界阻尼 spring 彈回）；§7/§12 nav 下拉 materialize（模糊＋縮放從按鈕長出）；
-   §12 手機底部聯絡條改懸浮玻璃 dock；§15 字距依尺寸（大字負、小字正）；§14 reduced-motion／transparency／contrast；hero 進場微升。
-   首頁 AI 卡 View Transition 等頁內專屬規則留在 index.html 內聯。 */
+
 :root{--spring:cubic-bezier(.22,1,.36,1);--spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 1)}
 body{font-optical-sizing:auto;font-kerning:normal}
-
-/* §1 回應 */
-.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn{
+/*§1*/
+.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn{
   -webkit-tap-highlight-color:transparent;
   transition-property:transform,background-color,border-color,color,box-shadow,opacity;
   transition-duration:.5s,.18s,.18s,.18s,.25s,.18s;
   transition-timing-function:var(--spring),ease,ease,ease,ease,ease}
-:is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn):active{transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
-
-/* §7 §12 nav 下拉：從觸發鈕左上長出，模糊→清晰，關閉走同一條路 */
+:is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn):active{transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
+/*§7*/
 .cx-menu>li .cx-dd{transform-origin:12px 0;transform:translateY(-6px) scale(.97);filter:blur(6px);
   transition:opacity .2s ease,visibility 0s linear .2s,transform .45s var(--spring),filter .25s ease}
 .cx-menu>li.open .cx-dd{filter:none;transition:opacity .16s ease,visibility 0s,transform .45s var(--spring),filter .22s ease}
-
-/* §7 FAQ 手風琴：內容高度連續展開（支援 ::details-content 的瀏覽器；其餘維持瞬開） */
+/*§7*/
 .bt-faq details{interpolate-size:allow-keywords}
 .bt-faq details::details-content{height:0;overflow:clip;transition:height .35s var(--spring),content-visibility .35s allow-discrete}
 .bt-faq details[open]::details-content{height:auto}
-
-/* §15 字體 */
+/*§15*/
 .bt-h1{letter-spacing:-.012em;line-height:1.18}
 .bt-h2{letter-spacing:-.008em;line-height:1.25}
 .art-hero h1,.tp-h1,.art-title{letter-spacing:-.01em}
 .bt-small,.bt-note,.bt-disclaimer,.bt-label,.bt-terms,.legal,.hint,.cx-call-note,.footer-link-sm,.copyright,.art-hero-meta{letter-spacing:.015em}
-
-/* 進場：hero 各段微升 10px、錯開 45ms；主圖零延遲（不拖 LCP） */
 @keyframes fl-rise{from{opacity:0;transform:translateY(10px)}}
 @keyframes fl-fade{from{opacity:0}}
 .bt-hero :is(.bt-eyebrow,.bt-h1,.bt-p,.bt-btns,.bt-note,.bt-hero-img,.cx-call-block,.cx-needs,.bt-chips,.bt-check),.art-hero>*,.tp-hero-text>:is(.tp-eyebrow,.tp-h1,.tp-sub,.tp-symptoms,.tp-form-wrap),.tp-hero-img{animation:fl-rise .6s var(--spring) both}
@@ -40,36 +29,78 @@ body{font-optical-sizing:auto;font-kerning:normal}
 .bt-hero :is(.bt-btns,.cx-call-block,.bt-chips,.bt-check),.art-hero>:nth-child(n+4),.tp-hero-text>:is(.tp-symptoms,.tp-form-wrap){animation-delay:.135s}
 .bt-hero :is(.cx-needs,.bt-note){animation-delay:.2s}
 .bt-hero .bt-hero-img,.tp-hero-img{animation-delay:0s;animation-duration:.7s}
-
-/* §12 手機：底部聯絡條改懸浮玻璃 dock（footer.html 的 :where() 零特異性；consultation.css 的 !important 靠同特異性後載蓋過） */
+/*§12*/
 @media(max-width:860px){
   .cx-sticky-cta{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));height:auto!important;padding:6px!important;gap:6px;
-    border-radius:18px;border:1px solid rgba(242,239,232,.14);background:rgba(18,33,58,.74);
+    border-radius:18px;border:1px solid var(--cx-line);background:var(--cx-cream-glass);
     -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
-    box-shadow:inset 0 1px 0 rgba(242,239,232,.08),0 14px 36px -10px rgba(0,0,0,.55)}
+    box-shadow:0 12px 32px -12px var(--cx-ink-shadow)}
   .cx-sticky-cta a{height:50px;min-height:50px;border-radius:13px;font-size:14.5px}
-  .tp-bar{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;gap:6px;
-    border-radius:18px;border:1px solid rgba(242,239,232,.14);background:rgba(18,33,58,.74);
-    -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
-    box-shadow:inset 0 1px 0 rgba(242,239,232,.08),0 14px 36px -10px rgba(0,0,0,.55)}
-  .tp-bar-lead,.tp-bar-tel{height:50px;border-radius:13px;font-size:14.5px}
-  body.tp-has-bar{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
   .bt-h1{letter-spacing:0;line-height:1.25}
   .bt-h2{letter-spacing:0}
   .art-hero h1,.tp-h1,.art-title{letter-spacing:0}
 }
-
-/* §14 三個獨立訊號 */
+/*§14*/
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{animation:none!important;transition-duration:.15s!important;transition-timing-function:ease!important}
   .bt-hero :is(.bt-eyebrow,.bt-h1,.bt-p,.bt-btns,.bt-note,.bt-hero-img,.cx-call-block,.cx-needs,.bt-chips,.bt-check),.art-hero>*,.tp-hero-text>:is(.tp-eyebrow,.tp-h1,.tp-sub,.tp-symptoms,.tp-form-wrap),.tp-hero-img{animation:fl-fade .25s ease both!important;animation-delay:0s!important}
-  :is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.tp-bar-lead,.tp-bar-tel,.afm-btn):active,.cx-menu>li .cx-dd{transform:none}
+  :is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn):active,.cx-menu>li .cx-dd{transform:none}
   .cx-menu>li .cx-dd{filter:none}
 }
 @media (prefers-reduced-transparency:reduce){
-  .cx-sticky-cta,.tp-bar{background:#12213A;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .cx-sticky-cta{background:var(--cx-cream);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 @media (prefers-contrast:more){
-  .cx-sticky-cta,.tp-bar{border-color:rgba(242,239,232,.6)}
+  .cx-sticky-cta{border-color:var(--cx-ink)}
 }
+/*§16*/
+.bt-dark .bt-label,:where(:root:not(:has(.family-nav))) .bt-hero :is(.bt-label,.bt-eyebrow){color:var(--cx-cream-dim)}
+:where(:root:has(.bt-sec)) .bt-hub-go{color:var(--cx-cream)}
+:where(:root:has(.bt-sec)) .formula{color:var(--cx-orange-deep)}
+:where(:root:has(.bt-sec)) :focus-visible{outline-color:var(--cx-orange-deep)}
+:where(:root:has(.bt-sec)) :is(.bt-dark,.bt-dark-card) :focus-visible,:where(:root:has(.bt-sec):not(:has(.family-nav))) .bt-hero :focus-visible{outline-color:var(--cx-orange)}
+/*§17*/
+:where(.bt-hero){background-color:var(--cx-ink);background-image:linear-gradient(180deg,var(--cx-ink-hero) 0%,var(--cx-ink) 62%);color:var(--cx-cream)}
+:where(:root:not(:has(.family-nav))) .bt-hero{background-color:var(--cx-ink);background-image:linear-gradient(180deg,var(--cx-ink-hero) 0%,var(--cx-ink) 62%)}
+/*§18*/
+.cx-tbox{position:relative;min-width:0;max-width:100%}
+.cx-tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.cx-tbox::after{content:"";position:absolute;top:0;right:0;bottom:0;width:32px;pointer-events:none;background:linear-gradient(to left,var(--cx-ink-shadow),transparent);opacity:0;transition:opacity .18s ease}
+.cx-tbox[data-cx-more]::after{opacity:.5}
+.cx-thint{position:absolute;bottom:calc(100% + 3px);right:0;z-index:2;display:none;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--cx-card);color:var(--cx-ink);border:1px solid var(--cx-ink-3);font:600 14px/1.25 "Noto Sans TC",-apple-system,"PingFang TC",sans-serif;pointer-events:none;white-space:nowrap}
+.cx-thint::after{content:"";width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg)}
+.cx-tbox[data-cx-more]:not([data-cx-scrolled])>.cx-thint{display:inline-flex}
+:is(.cx-tscroll,[class*="table-wrap"],.tier-wrap)>table:not(:has(input,select,textarea)) :is(th,td){min-width:4em}
+:is(.cx-tscroll,[class*="table-wrap"],.tier-wrap)>table:not(:has(input,select,textarea)) :is(th,td):first-child{min-width:5.5em}
+@media(max-width:480px){
+  :is(.cx-tscroll,[class*="table-wrap"],.tier-wrap)>table:not(:has(input,select,textarea)) :is(th,td){min-width:6em;font-size:max(14px,1em)}
+  :is(.cx-tscroll,[class*="table-wrap"],.tier-wrap)>table:not(:has(input,select,textarea)) :is(th,td):first-child{min-width:7em}
+  .cx-tbox[data-cx-freeze] table{overflow:clip}
+  .cx-tbox[data-cx-freeze] table :is(th,td):first-child{position:sticky;left:0;z-index:1;box-shadow:inset -1px 0 0 var(--cx-line)}
+  :where(.cx-tbox[data-cx-freeze] table :is(th,td):first-child){background-color:var(--cx-card)}
+}
+/*§19*/
+.bt-hero.bt-sec:is(:has(+ .bt-tool),:has(.cx-tool-go)){padding:32px 0}
+.bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-img{aspect-ratio:5/2}
+.bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-img[src*="/O06/"]{aspect-ratio:2/1;object-position:50% 28%}
+.bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-h1{margin-bottom:16px}
+.bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-text .bt-p{margin-bottom:20px}
+.bt-hero+.bt-tool.bt-sec{padding-top:32px}
+#tool-start{scroll-margin-top:80px}
+@media(max-width:900px){
+  .bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-grid{gap:20px}
+  .bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-img{aspect-ratio:21/9}
+  .bt-hero:is(:has(+ .bt-tool),:has(.cx-tool-go)) .bt-hero-img[src*="/O06/"]{aspect-ratio:16/9}
+}
+/*§20*/
+:where(p,li,td,dd)>a:where(:not([class]):not(:is(nav,footer,.cx-sheet,.afm-overlay,.afm-bar,.aib,[class^="cw-"],[class*=" cw-"]) a)){color:var(--cx-orange-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+:where(p,li,td,dd)>a:where(:not([class]):not(:is(nav,footer,.cx-sheet,.afm-overlay,.afm-bar,.aib,[class^="cw-"],[class*=" cw-"]) a)):hover{text-decoration-thickness:2px}
+:where(.bt-dark,.bt-dark-card,.art-hero:not(:has(.art-title)),.art-cta,.cta-box,.cta-section,.cta-strip,.tp-hero,.hub-hero,.page-hero,.policy-hero,.ct-hero,.sec-forest) :where(p,li,td,dd)>a:where(:not([class]):not(:is(nav,footer,.cx-sheet,.afm-overlay,.afm-bar,.aib,[class^="cw-"],[class*=" cw-"],.tp-form-wrap,.bt-card) a)){color:var(--cx-cream)}
+/*§21*/
+a[style*="background:#C8945A;color:#fff"]{background:var(--cx-orange)!important;color:var(--cx-ink)!important}
+a[style*="background:#C8945A;color:#fff"]:hover{background:var(--cx-orange-soft)!important}
+:is(.art-cta,.cta-box) a[href^="tel:"][style*="background:#C8945A;color:#fff"]{background:var(--cx-cream)!important;color:var(--cx-ink)!important}
+.cta-box a[style*="background:var(--cx-orange)"]:hover{background:var(--cx-orange-soft)!important}
+/*§22*/
+:is(.res-main-val,.strip-big,.gauge-val,.result-value,.tc-ov,.hold-years,.month-big){line-height:1.15}

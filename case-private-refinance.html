@@ -28,23 +28,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
 <style>
-.art-hero{background:#12213A;padding:120px 2rem 80px;text-align:center}
-.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:rgba(37,99,235,.3);color:#93c5fd;margin-bottom:1rem;letter-spacing:.05em}
+.art-hero{background:var(--cx-ink);padding:120px 2rem 80px;text-align:center}
+.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:var(--cx-ink-line);color:var(--cx-cream);margin-bottom:1rem;letter-spacing:.05em}
 .art-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.4;max-width:760px;margin:0 auto 1rem}
 .art-hero-meta{font-size:13px;color:rgba(255,255,255,.45)}
 .art-body{max-width:720px;margin:0 auto;padding:4rem 2rem 5rem}
-.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:#12213A}
-.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:#1B2F4A}
+.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:var(--cx-ink)}
+.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:var(--cx-ink)}
 .art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.25rem}
 .art-body ul,.art-body ol{margin:.5rem 0 1.25rem 1.5rem}
 .art-body li{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:.5rem}
-.art-body strong{color:#1B2F4A}
+.art-body strong{color:var(--cx-ink)}
 .highlight-box{background:#f6f5f3;border:1px solid #e3e3e6;border-radius:0;padding:1.5rem 2rem;margin:2rem 0}
 .highlight-box p{margin-bottom:0;color:#3d3d3f}
 .warn-box{background:#fff7ed;border-left:4px solid #f59e0b;border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:2rem 0}
 .warn-box p{margin-bottom:0;color:#9A6D3A;font-size:15px}
-.case-card{background:#1B2F4A;border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
-.case-card .label{font-size:12px;font-weight:600;color:#93c5fd;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.case-card{background:var(--cx-ink);border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
+.case-card .label{font-size:12px;font-weight:600;color:var(--cx-cream);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
 .case-card blockquote{font-size:21px;font-weight:700;line-height:1.4;margin:0 0 1.25rem;color:#fff}
 .case-card p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:1rem}
 .case-nums{display:flex;gap:16px;flex-wrap:wrap;margin-top:1.5rem}
@@ -62,8 +62,8 @@
 .step-list{display:flex;flex-direction:column;gap:0;margin:1.5rem 0}
 .step-item{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:.5px solid #f0f0f0}
 .step-item:last-child{border-bottom:none}
-.step-dot{width:36px;height:36px;border-radius:50%;background:#1B2F4A;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-content strong{display:block;font-size:15px;font-weight:700;color:#1B2F4A;margin-bottom:4px}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--cx-ink);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-content strong{display:block;font-size:15px;font-weight:700;color:var(--cx-ink);margin-bottom:4px}
 .step-content span{font-size:14px;color:#6e6e73;line-height:1.6}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:2rem;text-decoration:none}
 .disclaimer{font-size:12px;color:#aeaeb2;line-height:1.7;padding-top:2rem;border-top:1px solid #f0f0f0;margin-top:2rem}
@@ -82,8 +82,8 @@ body{padding-top:16px}
 .cs-step{position:relative;text-align:left}
 .cs-step picture{display:block}
 .cs-step img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;background:#F5EFE6;margin:0 0 12px}
-.cs-num{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:#C8945A;color:#1B2F4A;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
-.cs-step h3{font-size:17px;font-weight:700;color:#1B2F4A;margin:0 0 6px;line-height:1.4}
+.cs-num{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:#C8945A;color:var(--cx-ink);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.cs-step h3{font-size:17px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;line-height:1.4}
 .cs-step p{font-size:15px;line-height:1.7;color:#4b5563;margin:0}
 .cs-result{margin:1.25rem 0 1.5rem}
 .cs-result img{width:100%;max-width:520px;height:auto;display:block;margin:0 auto;border-radius:14px;background:#F5EFE6}
@@ -91,7 +91,7 @@ body{padding-top:16px}
 @media (max-width:640px){.cs-flow{grid-template-columns:1fr;gap:22px}}
 .art-hero h1{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
 .case-card{padding:1.1rem 1.5rem}
-.case-card .label{font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:0;color:#cfe0f7}
+.case-card .label{font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:0;color:var(--cx-cream)}
 .disclaimer{color:#6e6e73}
 </style>
 <script type="application/ld+json">
@@ -193,9 +193,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="label">真實案例，已去識別化。只寫數字與流程。</div>
   </div>
 
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-    <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0;">民間高利借款要安全換約：塗銷舊設定與登記新設定同批送件、資金以銀行本行支票交付、全程在地政與銀行辦理，不私下交付現金。案例月息三分（年化 36%）換約後降到月息一分（年化 12%），4 天完成；額度、利率與時程均依個案由民間資金方核定。</p>
+  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-gold);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+    <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
+    <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0;">民間高利借款要安全換約：塗銷舊設定與登記新設定同批送件、資金以銀行本行支票交付、全程在地政與銀行辦理，不私下交付現金。案例月息三分（年化 36%）換約後降到月息一分（年化 12%），4 天完成；額度、利率與時程均依個案由民間資金方核定。</p>
   </div>
 
   <h2>月息三分</h2>
@@ -222,13 +222,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p>三樣都過，才聯繫合作的民間資金方送件。第一天資料審過，當天聯繫原設定人談清償。</p>
     </li>
     <li class="cs-step">
-      <picture><source type="image/avif" srcset="img/theme/case01/flow-4.avif"><source type="image/webp" srcset="img/theme/case01/flow-4.webp"><img src="img/theme/case01/flow-4.jpg" width="1024" height="1024" alt="地政事務所櫃檯，顧問與屋主遞交兩份文件，櫃檯上放著一張支票" loading="lazy"></picture>
+      <picture><source type="image/avif" srcset="img/theme/case01/flow-4.avif"><source type="image/webp" srcset="img/theme/case01/flow-4.webp"><img src="img/theme/case01/flow-4.jpg" width="1024" height="1024" alt="地政事務所櫃檯，顧問與屋主遞交文件" loading="lazy"></picture>
       <span class="cs-num" aria-hidden="true">4</span>
       <h3>第二天，地政事務所</h3>
       <p>新資金方在銀行開好本行支票（銀行自己簽發，不是個人開的票），原設定人打電話到開票銀行照會。塗銷舊抵押權、設定新抵押權連件送進地政。三十分鐘後塗銷完成。</p>
     </li>
     <li class="cs-step">
-      <picture><source type="image/avif" srcset="img/theme/case01/flow-5.avif"><source type="image/webp" srcset="img/theme/case01/flow-5.webp"><img src="img/theme/case01/flow-5.jpg" width="1024" height="1024" alt="一份帶房屋圖示與金色印記的登記文件" loading="lazy"></picture>
+      <picture><source type="image/avif" srcset="img/theme/case01/flow-5.avif"><source type="image/webp" srcset="img/theme/case01/flow-5.webp"><img src="img/theme/case01/flow-5.jpg" width="1024" height="1024" alt="一份帶房屋圖示的登記文件" loading="lazy"></picture>
       <span class="cs-num" aria-hidden="true">5</span>
       <h3>第四天，新設定上謄本</h3>
       <p>三十分鐘、兩天，都是地政作業時間，不是誰特別快。</p>
@@ -242,7 +242,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </ol>
 
   <h2>三分變一分</h2>
-  <figure class="cs-result"><picture><source type="image/avif" srcset="img/theme/case01/result.avif"><source type="image/webp" srcset="img/theme/case01/result.webp"><img src="img/theme/case01/result.jpg" width="1024" height="1024" alt="兩疊硬幣，高的灰色一疊降到矮的金色一疊，後方是公寓輪廓" loading="lazy"></picture><figcaption>示意圖：月息三分到一分。</figcaption></figure>
+  <figure class="cs-result"><picture><source type="image/avif" srcset="img/theme/case01/result.avif"><source type="image/webp" srcset="img/theme/case01/result.webp"><img src="img/theme/case01/result.jpg" width="1024" height="1024" alt="兩道長條一高一低，後方是公寓輪廓" loading="lazy"></picture><figcaption>示意圖：月息三分到一分。</figcaption></figure>
   <p>年化從 36% 降到 12%（月息一分）。以 100 萬本金、同樣只繳利息試算：一年利息 36 萬變 12 萬，差 24 萬。額度依房價與收入重估，比原本多。民法第 205 條規定，約定利率超過週年 16% 的部分，約定無效（2021 年 7 月 20 日施行）；月息三分年化 36%，早就超過了。利息先降、繳款正常之後，下一步再評估轉銀行。</p>
 
   <h2>這個案子為什麼安全</h2>
@@ -291,10 +291,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 <!-- 手機常駐底欄（<768px）：留資料→展開上方橋接區表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_to_bank">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

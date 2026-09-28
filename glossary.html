@@ -21,8 +21,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -67,7 +67,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -207,6 +207,9 @@ img{max-width:100%;display:block}
 .bt-faq summary::after{content:"＋";font-size:24px;color:var(--ink-dim);font-weight:400;flex-shrink:0;transition:transform .3s ease-in-out}
 .bt-faq details[open] summary::after{transform:rotate(45deg)}
 @media(max-width:768px){.bt-grid{grid-template-columns:1fr}.bt-term{padding:24px}}
+/* 分類跳轉：放在快速答案下方；跳到分類時讓出固定導覽列 */
+.gloss-toc{margin-top:24px}
+.bt-h2[id^="g"]{scroll-margin-top:84px}
 </style>
 <script src="analytics-config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
@@ -290,7 +293,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-small">鋮馨融資顧問團隊 · 2026年6月更新</p>
       <a href="knowledge.html" class="bt-link">← 返回知識專欄</a>
     </div>
-    <img class="bt-hero-img" src="img/gen-home-entry.jpg" alt="不動產融資名詞百科" fetchpriority="high" loading="eager">
+    <img class="bt-hero-img" src="img/uiux/O05/hero-glossary-960.webp" srcset="img/uiux/O05/hero-glossary-640.webp 640w, img/uiux/O05/hero-glossary-960.webp 960w, img/uiux/O05/hero-glossary-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 48px), 660px" width="960" height="960" alt="吉祥物米米站在一本攤開的大書後面，指著書頁幫忙查名詞" fetchpriority="high" loading="eager">
   </div>
 </section>
 
@@ -301,13 +304,15 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div class="bt-label">⚡ 一次看懂</div>
       <p>被銀行拒絕、想動用房子的價值，常會撞到一堆名詞：<strong>聯徵、DBR、DSR、二胎、售後回租、民間轉銀行、法拍、限貸令</strong>……這頁把不動產融資與房產危機最常見的名詞，用白話一次解釋清楚。看不懂的詞，先在這裡查。</p>
     </div>
+    <!-- 分類跳轉（2026-09-28 步驟 11 第二段 medium #25）：字沿用下方 7 個分類標題，不新增文案 -->
+    <div class="bt-chips gloss-toc" role="navigation" aria-label="名詞分類"><a href="#g1">信用與審核</a><a href="#g2">貸款型態</a><a href="#g3">解決方案</a><a href="#g4">借款來源與評估</a><a href="#g5">房產危機</a><a href="#g6">繼承</a><a href="#g7">政策與包租代管</a></div>
   </div>
 </section>
 
 <!-- 名詞群組：7 段交替白底／次底，dl/dt/dd 語意保留、視覺 2 欄卡片 -->
 <section class="bt-sec bt-alt">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">信用與審核</h2>
+    <h2 class="bt-h2" id="g1" style="margin-bottom:0">信用與審核</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-1">信用瑕疵</dt><dd>在聯徵中心留有遲繳、催收、債務協商、退票或信用評分偏低等紀錄，使銀行核貸意願下降的情形。</dd></div>
       <div class="bt-card bt-term"><dt id="term-2">聯徵中心（JCIC）</dt><dd>金融聯合徵信中心，保存個人金融往來與繳款紀錄（一般約 5 年），是銀行審核貸款的主要依據。</dd></div>
@@ -321,7 +326,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">貸款型態</h2>
+    <h2 class="bt-h2" id="g2" style="margin-bottom:0">貸款型態</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-8">二胎房貸</dt><dd>在既有第一順位房貸之外，於同一不動產再設定第二順位抵押取得資金的貸款。</dd></div>
       <div class="bt-card bt-term"><dt id="term-9">第一順位／第二順位</dt><dd>抵押權受償的先後順序，第一順位優先於第二順位（即二胎）。</dd></div>
@@ -337,7 +342,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec bt-alt">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">解決方案</h2>
+    <h2 class="bt-h2" id="g3" style="margin-bottom:0">解決方案</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-17">售後回租</dt><dd>屋主將不動產過戶（出售）給投資方取得資金，同時簽租約繼續居住、並可保有日後依約買回的權利；過戶＋租約＋買回三者一組，本質為交易而非貸款，是否適合依個案不動產與財務狀況評估。</dd></div>
       <div class="bt-card bt-term"><dt id="term-18">買回權利</dt><dd>售後回租契約中約定屋主可於一定期限內以約定價格買回原不動產的權利。</dd></div>
@@ -349,7 +354,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">借款來源與評估</h2>
+    <h2 class="bt-h2" id="g4" style="margin-bottom:0">借款來源與評估</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-22">民間借款</dt><dd>非銀行管道（如代書、融資公司、個人）提供的借款，利率通常遠高於銀行。</dd></div>
       <div class="bt-card bt-term"><dt id="term-23">年化利率</dt><dd>將月息換算為年利率的數字，民間月息 1–2% 約等於年化 12–24%。</dd></div>
@@ -359,7 +364,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec bt-alt">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">房產危機</h2>
+    <h2 class="bt-h2" id="g5" style="margin-bottom:0">房產危機</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-25">法拍（強制執行拍賣）</dt><dd>債務人未依約清償，債權人取得執行名義後聲請法院將不動產強制拍賣以受償的程序。</dd></div>
       <div class="bt-card bt-term"><dt id="term-26">查封</dt><dd>法院為保全執行對不動產禁止處分的程序；查封後屋主不得自行移轉，但拍定前仍可能透過清償處理。</dd></div>
@@ -371,7 +376,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">繼承</h2>
+    <h2 class="bt-h2" id="g6" style="margin-bottom:0">繼承</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-30">繼承登記</dt><dd>將被繼承人名下不動產過戶登記至繼承人名下的程序，貸款前須先完成。</dd></div>
       <div class="bt-card bt-term"><dt id="term-31">持分</dt><dd>不動產由多人共有時，各共有人所占的權利比例。</dd></div>
@@ -382,7 +387,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 <section class="bt-sec bt-alt">
   <div class="bt-in">
-    <h2 class="bt-h2" style="margin-bottom:0">政策與包租代管</h2>
+    <h2 class="bt-h2" id="g7" style="margin-bottom:0">政策與包租代管</h2>
     <dl class="gloss bt-grid">
       <div class="bt-card bt-term"><dt id="term-34">選擇性信用管制（限貸令）</dt><dd>央行針對特定對象或地區限制購屋貸款成數、寬限期等的政策工具。</dd></div>
       <div class="bt-card bt-term"><dt id="term-35">貸款成數</dt><dd>可貸金額相對於不動產價值的比例，限貸令常調降此比例。</dd></div>

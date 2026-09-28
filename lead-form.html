@@ -2,77 +2,80 @@
 <!-- 共用元件：免費評估表單。用 <div data-include="lead-form"></div> 載入。
      欄位名用英文 ASCII（Web3Forms 對中文欄位名會編碼亂碼）。 -->
 <style>
-.form-wrap{background:#f5f5f7;max-width:none;margin:0;padding:80px 24px}
+.form-wrap{background:var(--cx-cream-2);max-width:none;margin:0;padding:80px 24px}
 .form-inner{max-width:640px;margin:0 auto}
-.form-wrap .section-label{font-size:12px;color:#1B2F4A;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
-.form-wrap .section-title{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:#1B2F4A;margin-bottom:40px;text-align:center}
-.form-card{background:#fff;border:.5px solid #d2d2d7;border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
-.form-privacy{display:flex;gap:12px;align-items:flex-start;background:#f0faf3;border:1px solid rgba(6,199,85,.25);border-radius:14px;padding:16px 18px;margin-bottom:28px}
+.form-wrap .section-label{font-size:12px;color:var(--cx-orange-deep);letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.form-wrap .section-title{font-size:32px;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:var(--cx-ink);margin-bottom:40px;text-align:center}
+.form-card{background:var(--cx-card);border:.5px solid var(--cx-line);border-radius:24px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.form-privacy{display:flex;gap:12px;align-items:flex-start;background:var(--cx-cream);border:1px solid var(--cx-line);border-radius:14px;padding:16px 18px;margin-bottom:28px}
 .form-privacy .lock{font-size:20px;line-height:1.4;flex-shrink:0}
-.form-privacy p{font-size:13px;color:#1B2F4A;line-height:1.65;margin:0}
-.form-privacy a{color:#0F7A4F;font-weight:600}
+.form-privacy p{font-size:13px;color:var(--cx-ink);line-height:1.65;margin:0}
+.form-privacy a{color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .field{margin-bottom:20px}
-.field label{display:block;font-size:14px;font-weight:600;color:#1B2F4A;margin-bottom:8px}
-.field label .opt{font-weight:400;color:#86868b;font-size:12px}
-.field label .req{color:#1B2F4A;margin-left:2px}
-.field input,.field select,.field textarea{width:100%;font-size:16px;color:#1B2F4A;background:#f5f5f7;border:1px solid transparent;border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#048456;background:#fff}
+.field label{display:block;font-size:14px;font-weight:600;color:var(--cx-ink);margin-bottom:8px}
+.field label .opt{font-weight:400;color:var(--cx-ink-2);font-size:12px}
+.field label .req{color:var(--cx-orange-deep);margin-left:2px}
+.field input,.field select,.field textarea{width:100%;font-size:16px;color:var(--cx-ink);background:var(--cx-cream-2);border:1px solid var(--cx-line);border-radius:12px;padding:14px 16px;box-sizing:border-box;font-family:inherit;transition:border-color .15s,background .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--cx-orange-deep);background:var(--cx-card)}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,
-.consent input:focus-visible,.form-submit:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
+.consent input:focus-visible,.form-submit:focus-visible{outline:2px solid var(--cx-orange-deep);outline-offset:2px}
 .field textarea{resize:vertical;min-height:96px}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:8px 0 24px}
-.consent input{width:24px;height:24px;margin-top:0;flex-shrink:0;accent-color:#048456;cursor:pointer}
-.consent label{font-size:13px;color:#6e6e73;line-height:1.6;cursor:pointer;padding:3px 0}
-.consent a{color:#0F7A4F;font-weight:600}
-.form-submit{width:100%;background:#048456;color:#fff;font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
-.form-submit:hover{opacity:.9}
+.consent input{width:24px;height:24px;margin-top:0;flex-shrink:0;accent-color:var(--cx-orange-deep);cursor:pointer}
+.consent label{font-size:13px;color:var(--cx-ink-2);line-height:1.6;cursor:pointer;padding:3px 0}
+.consent a{color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.form-submit{width:100%;background:var(--cx-orange);color:var(--cx-ink);font-size:16px;font-weight:700;border:none;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:.01em;transition:background-color .15s}
+.form-submit:hover{background:var(--cx-orange-soft)}
 .form-submit:disabled{opacity:.5;cursor:not-allowed}
-.form-foot{font-size:12px;color:#86868b;text-align:center;margin-top:16px;line-height:1.6}
+.form-foot{font-size:12px;color:var(--cx-ink-2);text-align:center;margin-top:16px;line-height:1.6}
 .form-msg{display:none;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.65}
 .form-msg.ok{display:block;background:#f0faf3;color:#157347;border:1px solid rgba(6,199,85,.3)}
 .form-msg.ok a,.form-msg.err a{color:#0F7A4F;font-weight:600}
-.form-msg.err{display:block;background:#fdf0f1;color:#1B2F4A;border:1px solid rgba(27,47,74,.3);margin-top:18px}
+.form-msg.err{display:block;background:#fdf0f1;color:var(--cx-ink);border:1px solid #E7B9AE;margin-top:18px}
 .hp{position:absolute!important;left:-9999px!important;opacity:0}
 
 /* === 浮動標籤輸入（改自 Uiverse AbanoubMagdy1 / afraid-yak-99，MIT，focus 色改品牌紅） ===
    標籤逐字上浮，省掉獨立 label 行高。判斷用 :not(:placeholder-shown) 而非 :valid——
    :valid 對「選填且留空」的欄位為真，標籤會沒填就自己浮上去。故每個 input 都帶 placeholder=" "。 */
 .wave-group{position:relative;margin-bottom:30px}
-.wave-group .input{font-size:16px;padding:10px 4px 10px 2px;display:block;width:100%;border:none;border-bottom:1px solid #d2d2d7;background:transparent;font-family:inherit;color:#1B2F4A;border-radius:0}
+.wave-group .input{font-size:16px;padding:10px 4px 10px 2px;display:block;width:100%;border:none;border-bottom:1px solid var(--cx-ink-3);background:transparent;font-family:inherit;color:var(--cx-ink);border-radius:0}
 .wave-group .input:focus{outline:none}
-.wave-group .input:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-.wave-group .label{color:#86868b;font-size:16px;font-weight:400;position:absolute;pointer-events:none;left:2px;top:12px;display:flex}
+.wave-group .input:focus-visible{outline:2px solid var(--cx-orange-deep);outline-offset:2px}
+.wave-group .label{color:var(--cx-ink-2);font-size:16px;font-weight:400;position:absolute;pointer-events:none;left:2px;top:12px;display:flex}
 .wave-group .label-char{transition:.2s ease all;transition-delay:calc(var(--index)*.04s)}
 .wave-group .input:focus~label .label-char,
-.wave-group .input:not(:placeholder-shown)~label .label-char{transform:translateY(-22px);font-size:12.5px;color:#1B2F4A}
+.wave-group .input:not(:placeholder-shown)~label .label-char{transform:translateY(-22px);font-size:12.5px;color:var(--cx-ink)}
+/* 必填星號與「（選填）」跟著標題一起浮上去（原本只有字浮上去、星號留在輸入框裡，看起來像壞掉）2026-09-28 */
+.wave-group .label :is(.req,.opt){transition:.2s ease all;transition-delay:.16s}
+.wave-group .input:focus~label :is(.req,.opt),.wave-group .input:not(:placeholder-shown)~label :is(.req,.opt){transform:translateY(-22px);font-size:12.5px}
 .wave-group .bar{position:relative;display:block;width:100%}
-.wave-group .bar:before,.wave-group .bar:after{content:'';height:2px;width:0;bottom:0;position:absolute;background:#1B2F4A;transition:.2s ease all}
+.wave-group .bar:before,.wave-group .bar:after{content:'';height:2px;width:0;bottom:0;position:absolute;background:var(--cx-orange-deep);transition:.2s ease all}
 .wave-group .bar:before{left:50%}
 .wave-group .bar:after{right:50%}
 .wave-group .input:focus~.bar:before,.wave-group .input:focus~.bar:after{width:50%}
-.wave-group .req{color:#1B2F4A;margin-left:2px}
-.wave-group .opt{color:#86868b;font-size:12px;margin-left:4px}
+.wave-group .req{color:var(--cx-orange-deep);margin-left:2px}
+.wave-group .opt{color:var(--cx-ink-2);font-size:12px;margin-left:4px}
 
 /* === 服務選項卡（改自 Uiverse Yaya12085 / silent-liger-85，MIT，選中色改品牌紅） === */
-.svc-label{display:block;font-size:14px;font-weight:600;color:#1B2F4A;margin-bottom:10px}
-.svc-label .req{color:#1B2F4A;margin-left:2px}
+.svc-label{display:block;font-size:14px;font-weight:600;color:var(--cx-ink);margin-bottom:10px}
+.svc-label .req{color:var(--cx-orange-deep);margin-left:2px}
 .svc-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;user-select:none}
 /* 選擇器要比 `.field input{width:100%}` 強，否則隱藏 radio 被撐成滿版寬、整頁橫向溢出 */
 .svc-tiles .svc-input{clip:rect(0 0 0 0);clip-path:inset(100%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;padding:0;margin:0;border:0;background:transparent}
-.svc-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:104px;padding:14px 8px;border-radius:14px;border:1.5px solid #d2d2d7;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:.15s ease;cursor:pointer;position:relative;height:100%}
-.svc-tile:before{content:"";position:absolute;width:.75rem;height:.75rem;border:2px solid #d2d2d7;background:#fff;border-radius:50%;top:.5rem;right:.5rem;opacity:0;transform:scale(0);transition:.25s ease}
-.svc-tile:hover{border-color:#1B2F4A}
+.svc-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:104px;padding:14px 8px;border-radius:14px;border:1.5px solid var(--cx-line);background:var(--cx-card);box-shadow:0 2px 10px rgba(0,0,0,.05);transition:.15s ease;cursor:pointer;position:relative;height:100%}
+.svc-tile:before{content:"";position:absolute;width:.75rem;height:.75rem;border:2px solid var(--cx-line);background:var(--cx-card);border-radius:50%;top:.5rem;right:.5rem;opacity:0;transform:scale(0);transition:.25s ease}
+.svc-tile:hover{border-color:var(--cx-ink-3)}
 .svc-tile:hover:before{transform:scale(1);opacity:1}
-.svc-input:checked+.svc-tile{border-color:#1B2F4A;box-shadow:0 6px 18px rgba(27,47,74,.14)}
-.svc-input:checked+.svc-tile:before{transform:scale(1);opacity:1;background:#1B2F4A;border-color:#1B2F4A}
-.svc-input:checked+.svc-tile .svc-icon svg{fill:#1B2F4A}
-.svc-input:checked+.svc-tile .svc-name{color:#1B2F4A;font-weight:700}
-.svc-input:checked+.svc-tile .svc-sub{color:rgba(27,47,74,.7)}
-.svc-input:focus-visible+.svc-tile{outline:2px solid #1B2F4A;outline-offset:2px}
-.svc-icon svg{width:24px;height:24px;fill:#5a5a5f}
-.svc-name{display:block;color:#6e6e73;font-size:14px;font-weight:600;transition:.3s ease;text-align:center;line-height:1.35}
-.svc-sub{display:block;margin-top:3px;font-size:11.5px;color:#86868b;font-weight:400}
+.svc-input:checked+.svc-tile{border-color:var(--cx-orange-deep);background:var(--cx-cream);box-shadow:0 0 0 1px var(--cx-orange-deep)}
+.svc-input:checked+.svc-tile:before{transform:scale(1);opacity:1;background:var(--cx-orange-deep);border-color:var(--cx-orange-deep)}
+.svc-input:checked+.svc-tile .svc-icon svg{fill:var(--cx-orange-deep)}
+.svc-input:checked+.svc-tile .svc-name{color:var(--cx-ink);font-weight:700}
+.svc-input:checked+.svc-tile .svc-sub{color:var(--cx-ink-2)}
+.svc-input:focus-visible+.svc-tile{outline:2px solid var(--cx-orange-deep);outline-offset:2px}
+.svc-icon svg{width:24px;height:24px;fill:var(--cx-ink-2)}
+.svc-name{display:block;color:var(--cx-ink-2);font-size:14px;font-weight:600;transition:.3s ease;text-align:center;line-height:1.35}
+.svc-sub{display:block;margin-top:3px;font-size:11.5px;color:var(--cx-ink-2);font-weight:400}
 
 @media(max-width:768px){
   .form-wrap{padding:56px 16px}
@@ -102,12 +105,12 @@
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
 
       <div class="wave-group">
-        <input type="text" id="lf-name" class="input" aria-required="true" name="Name" required placeholder=" ">
+        <input type="text" id="lf-name" autocomplete="name" class="input" aria-required="true" name="Name" required placeholder=" ">
         <span class="bar"></span>
         <label for="lf-name" class="label"><span class="label-char" style="--index:0">怎</span><span class="label-char" style="--index:1">麼</span><span class="label-char" style="--index:2">稱</span><span class="label-char" style="--index:3">呼</span><span class="label-char" style="--index:4">您</span><span class="req">*</span></label>
       </div>
       <div class="wave-group">
-        <input type="tel" id="lf-phone" class="input" aria-required="true" name="Phone" required inputmode="tel" placeholder=" ">
+        <input type="tel" id="lf-phone" autocomplete="tel" class="input" aria-required="true" name="Phone" required inputmode="tel" placeholder=" ">
         <span class="bar"></span>
         <label for="lf-phone" class="label"><span class="label-char" style="--index:0">聯</span><span class="label-char" style="--index:1">絡</span><span class="label-char" style="--index:2">電</span><span class="label-char" style="--index:3">話</span><span class="req">*</span></label>
       </div>
@@ -172,7 +175,7 @@
       <button type="submit" class="form-submit" id="submitBtn">送出，預約免費評估</button>
       <p class="form-foot">送出後專人將於 1–2 個工作日內與你聯繫｜不申請不收費</p>
     </form>
-    <div class="form-msg" id="formMsg"></div>
+    <div class="form-msg" id="formMsg" aria-live="polite"></div>
   </div>
  </div>
 </div>
@@ -198,6 +201,8 @@
     if(!form.checkValidity()||!consent.checked){
       msg.className='form-msg err';
       msg.innerHTML=consent.checked?'請填寫必填欄位（標示 * 者）。':'請先勾選同意隱私權政策。';
+      var bad=consent.checked?form.querySelector('input:invalid:not(.hp),select:invalid,textarea:invalid'):consent;
+      if(bad) bad.focus();
       return;
     }
     var phone=form.querySelector('[name="Phone"]');

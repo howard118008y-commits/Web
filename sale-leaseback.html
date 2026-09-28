@@ -18,8 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -64,7 +64,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -378,7 +378,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="tp-lead tp-lead-dim">鋮馨不是銀行、不是金融機構，是不動產融資諮詢與媒合顧問。</p>
     </div>
     <figure class="tp-figure">
-      <picture><source type="image/avif" srcset="img/theme/slb/help.avif"><source type="image/webp" srcset="img/theme/slb/help.webp"><img src="img/theme/slb/help.jpg" width="1024" height="1024" alt="一手交出鑰匙、一手接過契約，家中燈仍亮著，屋主過戶後簽租約繼續住" loading="lazy"></picture>
+      <picture><source type="image/avif" srcset="img/theme/slb/help.avif"><source type="image/webp" srcset="img/theme/slb/help.webp"><img src="img/theme/slb/help.jpg" width="1024" height="1024" alt="桌上平放一把鑰匙和一份租約，家中燈仍亮著——房子過戶給投資方、簽租約續住，並保有日後依約買回的權利" loading="lazy"></picture>
       <figcaption class="tp-cap">情境示意</figcaption>
     </figure>
   </div>
@@ -403,13 +403,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </li>
       <li class="tp-flow-step">
         <span class="tp-flow-num" aria-hidden="true">3</span>
-        <picture><source type="image/avif" srcset="img/theme/p2b/flow-3.avif"><source type="image/webp" srcset="img/theme/p2b/flow-3.webp"><img src="img/theme/p2b/flow-3.jpg" width="1024" height="1024" alt="顧問與屋主在桌前攤開資料，逐項說明方案怎麼安排" loading="lazy"></picture>
+        <picture><source type="image/avif" srcset="img/theme/slb/flow-3.avif"><source type="image/webp" srcset="img/theme/slb/flow-3.webp"><img src="img/theme/slb/flow-3.jpg" width="1024" height="1024" alt="一男一女隔桌對談，桌上的紙畫著房子，箭頭指向一份租約和一把鑰匙" loading="lazy"></picture>
         <h3 class="tp-flow-title">給你方案<span class="tp-flow-time">｜看完資料後</span></h3>
         <p class="tp-flow-text">房子過戶給投資方、簽租約繼續住、日後依約買回，三件事怎麼安排、金額大概多少，講清楚再決定。</p>
       </li>
       <li class="tp-flow-step">
         <span class="tp-flow-num" aria-hidden="true">4</span>
-        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="文件匯整成一份用印完成的契約，屋主一家仍站在自己的門前" loading="lazy"></picture>
+        <picture><source type="image/avif" srcset="img/theme/slb/flow-4.avif"><source type="image/webp" srcset="img/theme/slb/flow-4.webp"><img src="img/theme/slb/flow-4.jpg" width="1024" height="1024" alt="一對夫妻站在自家透天厝前，旁邊是一份租約和一把鑰匙" loading="lazy"></picture>
         <h3 class="tp-flow-title">簽約到資金到位<span class="tp-flow-time">｜約 2–4 週</span></h3>
         <p class="tp-flow-text">簽約、過戶、資金到位分段處理；時間依個案而定。</p>
       </li>
@@ -429,7 +429,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <ul class="tp-docs">
           <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-1.avif"><source type="image/webp" srcset="img/theme/p2b/docs-1.webp"><img src="img/theme/p2b/docs-1.jpg" width="1024" height="1024" alt="自然人憑證卡片放在桌上" loading="lazy"></picture><p class="tp-doc-title">自然人憑證<span class="tp-doc-sub">（面談時你自己查資料用）</span></p></li>
           <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-2.avif"><source type="image/webp" srcset="img/theme/p2b/docs-2.webp"><img src="img/theme/p2b/docs-2.jpg" width="1024" height="1024" alt="一份房屋謄本文件" loading="lazy"></picture><p class="tp-doc-title">房屋謄本<span class="tp-doc-sub">（我們可代查）</span></p></li>
-          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-3.avif"><source type="image/webp" srcset="img/theme/p2b/docs-3.webp"><img src="img/theme/p2b/docs-3.jpg" width="1024" height="1024" alt="蓋有印章的房屋登記設定文件" loading="lazy"></picture><p class="tp-doc-title">房屋目前的設定資料</p></li>
+          <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-3.avif"><source type="image/webp" srcset="img/theme/p2b/docs-3.webp"><img src="img/theme/p2b/docs-3.jpg" width="1024" height="1024" alt="一份素面的房屋設定資料文件" loading="lazy"></picture><p class="tp-doc-title">房屋目前的設定資料</p></li>
           <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-4.avif"><source type="image/webp" srcset="img/theme/p2b/docs-4.webp"><img src="img/theme/p2b/docs-4.jpg" width="1024" height="1024" alt="薪資轉帳明細與所得證明" loading="lazy"></picture><p class="tp-doc-title">近期收入證明<span class="tp-doc-sub">（評估租金負擔）</span></p></li>
           <li class="tp-doc"><picture><source type="image/avif" srcset="img/theme/p2b/docs-5.avif"><source type="image/webp" srcset="img/theme/p2b/docs-5.webp"><img src="img/theme/p2b/docs-5.jpg" width="1024" height="1024" alt="附房屋圖示的明細本，逐項記下每月固定支出" loading="lazy"></picture><p class="tp-doc-title">目前每月固定支出明細</p></li>
         </ul>
@@ -820,13 +820,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </section>
 
 <div data-include="trust-block"></div>
-<p class="bt-small tp-static-disclaimer" style="max-width:920px;margin:12px auto 24px;padding:0 20px;font-size:.85rem;line-height:1.7;color:#5a6270">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
+<p class="bt-small tp-static-disclaimer" style="max-width:920px;margin:12px auto 24px;padding:0 20px;font-size:.85rem;line-height:1.7;color:var(--cx-ink-2)">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
 <div data-include="line-qr"></div>
 <!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

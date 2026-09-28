@@ -171,8 +171,8 @@ else if(a.closest('.cta-strip')){{gtag('event','cta_click',{{page_path:location.
 
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}}
 *{{box-sizing:border-box;margin:0;padding:0}}
 html{{scroll-behavior:smooth}}
@@ -661,7 +661,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
     <ul>
       <li>本頁資料整理自政府公開資料，僅作為市場觀察參考，<b>非投資建議</b>。</li>
       <li>實價登錄數字反映歷史成交，不代表未來市場走勢。</li>
-      <li>實際房屋估值、可貸金額、利率等，依個案不動產條件、財務狀況與市場情況而定；本公司為融資租賃業者，非金融機構，最終核貸由金融機構決定。</li>
+      <li>實際房屋估值、可貸金額、利率等，依個案不動產條件、財務狀況與市場情況而定；本公司依法登記為租賃業，非金融機構，最終核貸由金融機構決定。</li>
     </ul>
   </div>
   </div>

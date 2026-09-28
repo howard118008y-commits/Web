@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -56,7 +56,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -249,7 +249,7 @@ input,select{font-size:16px!important}
 .tk::before{left:-1px;border-left:none;border-radius:0 999px 999px 0}
 .tk::after{right:-1px;border-right:none;border-radius:999px 0 0 999px}
 .tk-perf{border-top:1.5px dashed var(--line);margin:16px -24px 14px}
-.tk-stamp{position:absolute;right:20px;top:22px;width:52px;height:52px;border:1.5px solid rgba(27,47,74,.34);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-13deg);font-size:8.5px;font-weight:600;color:var(--ink);letter-spacing:.08em;line-height:1.35}
+.tk-stamp{position:absolute;right:20px;top:22px;width:52px;height:52px;border:1.5px solid var(--cx-gold);border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-13deg);font-size:8.5px;font-weight:600;color:var(--ink);letter-spacing:.08em;line-height:1.35}
 .info-box{background:var(--tint);border:1.5px solid var(--action);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--ink);line-height:1.75}
 .warn-box{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--gold-deep);line-height:1.75}
 
@@ -475,6 +475,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-label">Land Value Increment Tax</p>
       <h1 class="bt-h1">土地增值稅試算</h1>
       <p class="bt-p">依財政部官方公式，內建民國48–115年物價指數表，自動帶入計算。</p>
+      <a class="bt-btn cx-tool-go" href="#tool-start">開始試算</a>
     </div>
     <img class="bt-hero-img" src="img/gen-landscape-taiwan.jpg" alt="土地增值稅試算" width="1600" height="893" fetchpriority="high" loading="eager">
   </div>
@@ -491,7 +492,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="bt-btns"><a href="tel:0222490517" class="bt-btn bt-btn-sm bt-btn-ghost">☎ 電話諮詢</a><a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-sm">加 LINE 免費諮詢</a></div>
 </div>
 
-<div class="card">
+<div class="card" id="tool-start">
   <div class="card-title">輸入資料</div>
 
   <!-- 1. 土地公告現值 -->
@@ -509,7 +510,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <!-- 3. 前次移轉年期 + 消費者物價總指數 (可選擇模式) -->
   <div class="cpi-lookup">
     <div class="cpi-lookup-title">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2F5B8F" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#2F5B8F" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       前次移轉年期 ・ 消費者物價總指數（民國 115年3月為基準）
     </div>
     <div class="row3">
@@ -529,8 +530,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </div>
       </div>
       <div style="display:flex;flex-direction:column;justify-content:flex-end">
-        <label style="font-size:13px;font-weight:600;color:#1B2F4A;margin-bottom:6px;display:block">查詢結果</label>
-        <div id="cpiTag" style="height:46px;background:#EEF2F7;border:1.5px solid #2F5B8F;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#2F5B8F">—</div>
+        <label style="font-size:13px;font-weight:600;color:var(--cx-ink);margin-bottom:6px;display:block">查詢結果</label>
+        <div id="cpiTag" style="height:46px;background:var(--cx-cream);border:1.5px solid var(--cx-orange-deep);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--cx-orange-deep)">—</div>
       </div>
     </div>
     <div class="cpi-note" id="cpiNote">選擇前次移轉年月自動帶入物價總指數，亦可下方手動覆寫</div>
@@ -559,11 +560,11 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="field">
     <label>移轉或設典範圍 <span id="fracDisplay">1／1 = 100%</span></label>
     <div class="input-row" style="gap:8px">
-      <span style="font-size:13px;color:#5A6878;flex-shrink:0;font-weight:600">分子</span>
-      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:#1B2F4A;font-family:inherit" oninput="updateFrac()">
-      <span style="font-size:18px;color:#5A6878;flex-shrink:0">／</span>
-      <span style="font-size:13px;color:#5A6878;flex-shrink:0;font-weight:600">分母</span>
-      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:#1B2F4A;font-family:inherit" oninput="updateFrac()">
+      <span style="font-size:13px;color:var(--cx-ink-2);flex-shrink:0;font-weight:600">分子</span>
+      <input type="number" id="fracNum" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:var(--cx-ink);font-family:inherit" oninput="updateFrac()">
+      <span style="font-size:18px;color:var(--cx-ink-2);flex-shrink:0">／</span>
+      <span style="font-size:13px;color:var(--cx-ink-2);flex-shrink:0;font-weight:600">分母</span>
+      <input type="number" id="fracDen" value="1" min="1" max="9999" step="1" style="flex:1;height:46px;border:1.5px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:16px;text-align:center;background:#fff;color:var(--cx-ink);font-family:inherit" oninput="updateFrac()">
     </div>
   </div>
 
@@ -606,15 +607,15 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 
   <!-- 申報現值總額（自動算） -->
-  <div style="margin-top:18px;padding:14px 18px;background:#EEF2F7;border-radius:8px;border:1px solid #2F5B8F;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-    <span style="font-size:13px;font-weight:600;color:#1B2F4A">申報現值總額（系統自動計算）</span>
-    <span style="font-size:18px;font-weight:700;color:#2F5B8F" id="sellTotalDisplay">—</span>
+  <div style="margin-top:18px;padding:14px 18px;background:var(--cx-cream);border-radius:8px;border:1px solid var(--cx-orange-deep);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <span style="font-size:13px;font-weight:600;color:var(--cx-ink)">申報現值總額（系統自動計算）</span>
+    <span style="font-size:18px;font-weight:700;color:var(--cx-orange-deep)" id="sellTotalDisplay">—</span>
   </div>
 
   <!-- 估算 / 清除 按鈕 -->
   <div style="display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap">
-    <button onclick="calc()" style="background:#2F5B8F;color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">增值稅估算</button>
-    <button onclick="clearAll()" style="background:#fff;color:#5A6878;font-size:16px;font-weight:700;padding:14px 36px;border:1.5px solid #E2DED4;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">清除資料</button>
+    <button onclick="calc()" style="background:var(--cx-orange-deep);color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border:0;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">增值稅估算</button>
+    <button onclick="clearAll()" style="background:#fff;color:var(--cx-ink-2);font-size:16px;font-weight:700;padding:14px 36px;border:1.5px solid #E2DED4;border-radius:8px;cursor:pointer;letter-spacing:.05em;font-family:inherit;min-width:160px">清除資料</button>
   </div>
 
   <!-- 貼心提醒 -->
@@ -660,7 +661,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <div id="infoBox" class="info-box" style="display:none"></div>
   <div id="warnBox" class="warn-box" style="display:none"></div>
-  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#2F5B8F;color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
+  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:var(--cx-orange-deep);color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
 <!-- 速算稅率表 -->
@@ -677,7 +678,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </tbody>
   </table>
   </div>
-  <div style="font-size:12px;color:#5A6878;margin-top:12px;line-height:1.8">
+  <div style="font-size:12px;color:var(--cx-ink-2);margin-top:12px;line-height:1.8">
     A = 調整後原地價 ｜ 自用住宅：一律10% ｜ 重劃後首次移轉：查定稅額再減40%
   </div>
 </div>
@@ -685,7 +686,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- 物價指數完整表 -->
 <div class="card">
   <div class="card-title">民國115年3月消費者物價總指數表（稅務專用）</div>
-  <p style="font-size:12px;color:#5A6878;margin-bottom:10px">以各年(月)為基期=100，115年3月所屬指數。點選年月可自動帶入上方試算。</p>
+  <p style="font-size:12px;color:var(--cx-ink-2);margin-bottom:10px">以各年(月)為基期=100，115年3月所屬指數。點選年月可自動帶入上方試算。</p>
   <div class="cpi-table-wrap">
     <table class="cpi-full-table" id="cpiFullTable">
       <thead><tr><th>民國年</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr></thead>
@@ -1051,12 +1052,12 @@ lookupCPI();
   function init(){
     var bar = document.createElement('div');
     bar.setAttribute('role','note');
-    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:#12213A;color:#fff;'
+    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:var(--cx-ink);color:#fff;'
       + 'padding:10px 14px;font-size:14px;line-height:1.5;text-align:center;font-family:"Noto Sans TC",sans-serif;';
     bar.innerHTML = '🔧 本工具由 <a href="https://cx468.com.tw/?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
       + 'target="_blank" rel="noopener" style="color:#ffd166;text-decoration:underline;font-weight:700">鋮馨租賃 cx468.com.tw</a> 提供｜'
       + '<a href="https://cx468.com.tw/apply.html?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
-      + 'target="_blank" rel="noopener" style="color:#fff;background:#1B2F4A;padding:2px 10px;border-radius:99px;'
+      + 'target="_blank" rel="noopener" style="color:#fff;background:var(--cx-ink-hero);padding:2px 10px;border-radius:99px;'
       + 'text-decoration:none;font-weight:700;margin-left:4px">免費評估 →</a>';
     document.body.insertBefore(bar, document.body.firstChild);
     function patchLinks(){

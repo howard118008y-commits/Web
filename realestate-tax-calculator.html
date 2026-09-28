@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -56,7 +56,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -437,8 +437,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div class="bt-label">Real Estate Transaction Tax</div>
       <h1 class="bt-h1">房地合一稅試算</h1>
       <p class="bt-p">自動判斷適用 1.0 或 2.0 版本，含自用住宅400萬免稅額、重購退稅。</p>
+      <a class="bt-btn cx-tool-go" href="#tool-start">開始試算</a>
     </div>
-    <img class="bt-hero-img" src="img/gen-findata.jpg" alt="房地合一稅試算" width="1344" height="768" fetchpriority="high" loading="eager">
+    <img class="bt-hero-img" src="img/uiux/O06/hero-calculator-960.webp" srcset="img/uiux/O06/hero-calculator-640.webp 640w, img/uiux/O06/hero-calculator-960.webp 960w, img/uiux/O06/hero-calculator-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 48px), 660px" width="960" height="960" alt="吉祥物米米雙手拿著計算機，準備幫忙試算" fetchpriority="high" loading="eager">
   </div>
 </section>
 
@@ -448,12 +449,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div class="card bt-qa">
   <div class="card-title">快速答案</div>
-  <p style="font-size:15px;line-height:1.9;color:#1B2F4A;margin:0">
+  <p style="font-size:15px;line-height:1.9;color:var(--cx-ink);margin:0">
     <strong>一句話：</strong>這是房地合一稅（房屋土地交易所得稅）線上試算工具。輸入取得與出售的年月、成交售價與取得成本，工具會自動判斷適用 1.0 或 2.0 版本、依持有年限套用對應稅率（境內個人 45%／35%／30%／20%／15%），並可加計自用住宅 400 萬免稅額與重購退稅估算。
-    <br><span style="color:#5A6878;font-size:13.5px">結果為概算，實際稅額以申報並經國稅局核定為準。本工具不上傳您的資料，計算在瀏覽器端完成。</span>
+    <br><span style="color:var(--cx-ink-2);font-size:13.5px">結果為概算，實際稅額以申報並經國稅局核定為準。本工具不上傳您的資料，計算在瀏覽器端完成。</span>
   </p>
 </div>
-<div class="card">
+<div class="card" id="tool-start">
   <div class="card-title">輸入資料</div>
 
   <!-- 身份 + 日期 -->
@@ -665,7 +666,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </div>
   </div>
-  <div id="selfCondBox" style="display:none;background:#EEF2F7;border-radius:8px;padding:14px 18px;font-size:12px;color:#1B2F4A;line-height:1.8;margin-top:-8px;margin-bottom:16px">
+  <div id="selfCondBox" style="display:none;background:var(--cx-cream);border-radius:8px;padding:14px 18px;font-size:12px;color:var(--cx-ink);line-height:1.8;margin-top:-8px;margin-bottom:16px">
     ✅ 自用條件：①本人/配偶/未成年子女設籍 ②持有並居住連續滿6年 ③交易前6年無出租、無營業 ④每10年僅能申請一次
   </div>
   <div id="repurchaseBox" style="display:none;background:#F2EFE8;border-radius:8px;padding:14px 18px;font-size:12px;color:#9A6D3A;line-height:1.8;margin-top:-8px;margin-bottom:16px">
@@ -700,7 +701,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div id="warnBox" class="warn-box" style="display:none"></div>
   <div id="saveBox" class="save-box" style="display:none"></div>
   <div class="disclaimer">⚠️ 本試算依財政部公告公式估算，費用3%概算為簡化處理，實際可扣費用依憑證為準。課稅所得為負數時不需繳稅。實際稅額以申報為準，建議諮詢地政士或稅務專業人員。</div>
-  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:#2F5B8F;color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none;transition:background-color .3s ease-in-out">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
+  <a class="tool-apply-cta" href="apply.html" style="display:block;margin:16px 0 0;padding:14px 18px;background:var(--cx-orange-deep);color:#fff;border-radius:8px;text-align:center;font-size:15px;font-weight:700;text-decoration:none;transition:background-color .3s ease-in-out">算完想確認實際條件？填表免費評估，專員主動回電 →</a>
 </div>
 
 <!-- 稅率表 -->
@@ -708,7 +709,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="card-title">房地合一稅率速查表</div>
   <div class="rate-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
     <div>
-      <div style="font-size:13px;font-weight:700;color:#1B2F4A;margin-bottom:10px">1.0版（105/1/1–110/6/30取得）</div>
+      <div style="font-size:13px;font-weight:700;color:var(--cx-ink);margin-bottom:10px">1.0版（105/1/1–110/6/30取得）</div>
       <table class="rt" id="table10">
         <thead><tr><th>持有期間</th><th>個人境內</th><th>境外/法人</th></tr></thead>
         <tbody>
@@ -721,7 +722,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </table>
     </div>
     <div>
-      <div style="font-size:13px;font-weight:700;color:#1B2F4A;margin-bottom:10px">2.0版（110/7/1後取得）</div>
+      <div style="font-size:13px;font-weight:700;color:var(--cx-ink);margin-bottom:10px">2.0版（110/7/1後取得）</div>
       <table class="rt" id="table20">
         <thead><tr><th>持有期間</th><th>個人境內</th><th>境外/法人</th></tr></thead>
         <tbody>
@@ -824,9 +825,9 @@ function calc(){
   const buyDateObj=new Date(buyDate+'-01');
   const ver=(buyDateObj<new Date('2021-07-01'))?10:20;
   document.getElementById('verText').textContent='適用房地合一稅 '+ver/10+'.0 版（'+( ver===10?'105年1月1日–110年6月30日':'110年7月1日後')+' 取得)';
-  document.getElementById('verBadge').style.background=ver===10?'#f3f0ff':'#eff6ff';
-  document.getElementById('verBadge').style.borderColor=ver===10?'#1B2F4A':'#1a1a1a';
-  document.getElementById('verBadge').querySelector('.dot').style.background=ver===10?'#1B2F4A':'#1a1a1a';
+  document.getElementById('verBadge').style.background=ver===10?'#f3f0ff':'var(--cx-cream-2)';
+  document.getElementById('verBadge').style.borderColor=ver===10?'var(--cx-ink)':'#1a1a1a';
+  document.getElementById('verBadge').querySelector('.dot').style.background=ver===10?'var(--cx-ink)':'#1a1a1a';
 
   // holding
   const yrsLabel=yrs>=1?yrs.toFixed(1)+'年':(months+'個月');
@@ -1010,12 +1011,12 @@ calc();
   function init(){
     var bar = document.createElement('div');
     bar.setAttribute('role','note');
-    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:#12213A;color:#fff;'
+    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:var(--cx-ink);color:#fff;'
       + 'padding:10px 14px;font-size:14px;line-height:1.5;text-align:center;font-family:"Noto Sans TC",sans-serif;';
     bar.innerHTML = '🔧 本工具由 <a href="https://cx468.com.tw/?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
       + 'target="_blank" rel="noopener" style="color:#ffd166;text-decoration:underline;font-weight:700">鋮馨租賃 cx468.com.tw</a> 提供｜'
       + '<a href="https://cx468.com.tw/apply.html?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
-      + 'target="_blank" rel="noopener" style="color:#fff;background:#1B2F4A;padding:2px 10px;border-radius:99px;'
+      + 'target="_blank" rel="noopener" style="color:#fff;background:var(--cx-ink-hero);padding:2px 10px;border-radius:99px;'
       + 'text-decoration:none;font-weight:700;margin-left:4px">免費評估 →</a>';
     document.body.insertBefore(bar, document.body.firstChild);
     function patchLinks(){

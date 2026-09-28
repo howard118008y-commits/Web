@@ -130,8 +130,8 @@ gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{pa
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -176,7 +176,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -296,7 +296,7 @@ img{max-width:100%;display:block}
 .bt-cmp-card.after .bt-cmp-row span:last-child{color:#fff}
 .bt-cmp-save{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,.08)}
 .bt-cmp-save span:first-child{font-size:14px;font-weight:700;color:rgba(255,255,255,.85)}
-.bt-cmp-save span:last-child{font-size:18px;font-weight:700;color:var(--gold-soft)}
+.bt-cmp-save span:last-child{font-size:18px;font-weight:700;color:var(--cx-cream)}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
@@ -327,6 +327,13 @@ img{max-width:100%;display:block}
   /* 手機：ai-bar 右側讓出小鋮浮動鈕（chat-widget .cw-launch 固定 right 24px + 58px）的欄位，送出鈕不被蓋住 */
   .bt-hero .aib{padding-right:70px}
 }
+/* 情境示意角標（image-style-guide 第 8 節第 7 條；hero 與「過往案例月付降 30–50%」同屏） */
+.scene-wrap{position:relative}
+.scene-badge{position:absolute;top:8px;left:8px;padding:4px 8px;font-size:13px;line-height:1.4;color:var(--paper);background:var(--ink);border-radius:4px;pointer-events:none}
+/* 進場動畫改掛在外框（圖與角標一起上浮），圖本身不再重複動畫 */
+.scene-wrap{animation:fl-rise .7s var(--spring) both}
+.scene-wrap .tp-hero-img{animation:none}
+@media(prefers-reduced-motion:reduce){.scene-wrap{animation:fl-fade .25s ease both}}
 </style>
 <script type="application/ld+json">
 {
@@ -375,7 +382,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 <link rel="stylesheet" href="consultation.css"><script src="consultation-tracking.js" defer></script>
 <link rel="stylesheet" href="topic.css">
-<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:#1b2f4a;line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:#26497a;text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid #cbd2dc;text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><link rel="stylesheet" href="fluid.css">
+<style>.cx-prep{max-width:920px;margin:36px auto;padding:28px 24px;background:#f7f5f0;color:var(--cx-ink);line-height:1.85;overflow-wrap:anywhere}.cx-prep h2{font-size:26px;line-height:1.45;margin:0 0 18px}.cx-prep h3{font-size:20px;margin:22px 0 10px}.cx-prep p,.cx-prep ul,.cx-prep ol{margin:12px 0}.cx-prep ul,.cx-prep ol{padding-left:24px}.cx-prep a{color:var(--cx-orange-deep);text-decoration:underline}.cx-prep .cx-call-primary{color:#fff}.cx-table-wrap{overflow-x:auto}.cx-prep table{border-collapse:collapse;width:100%;min-width:540px}.cx-prep th,.cx-prep td{padding:12px;border:1px solid var(--cx-line);text-align:left;vertical-align:top}.cx-prep small{display:block;margin-top:16px}@media(max-width:600px){.cx-prep{margin:24px 12px;padding:22px 18px}.cx-prep h2{font-size:23px}}</style><link rel="stylesheet" href="fluid.css">
 </head>
 <body ontouchstart="">
 <div id="nav"></div>
@@ -399,7 +406,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div data-include="inline-form" data-topic="debt-consolidation" data-from="debt-consolidation.html" data-address="1"></div>
       <div data-include="ai-bar" data-ai-q="多筆負債怎麼整合？|月付大概能降多少？|需要準備哪些文件？"></div>
     </div>
-    <img class="tp-hero-img" src="img/gen-home-dining.jpg" alt="台灣家庭餐桌，整合多筆負債後生活多一點喘息空間" fetchpriority="high" loading="eager">
+    <div class="scene-wrap"><img class="tp-hero-img" src="img/uiux/S01/hero-debt-consolidation-960.webp" srcset="img/uiux/S01/hero-debt-consolidation-640.webp 640w, img/uiux/S01/hero-debt-consolidation-960.webp 960w, img/uiux/S01/hero-debt-consolidation-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 32px), 514px" width="960" height="960" alt="示意情境：屋主在餐桌前攤開好幾張帳單，米米站在桌上拿著計算機幫忙整理" fetchpriority="high" loading="eager"><span class="scene-badge" aria-hidden="true">情境示意</span></div>
   </div>
   <div class="tp-in tp-cue-row"><a class="tp-cue" href="#tp-help">往下看流程<span class="tp-cue-chev" aria-hidden="true"></span></a></div>
 </section>
@@ -444,7 +451,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </li>
       <li class="tp-flow-step">
         <span class="tp-flow-num" aria-hidden="true">4</span>
-        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="銀行櫃檯前完成簽署，資金與清償銜接一次處理" loading="lazy"></picture>
+        <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="多份文件匯整成一份，屋主一家站在自家門前，一旁是銀行" loading="lazy"></picture>
         <h3 class="tp-flow-title">銀行送件到清償撥款<span class="tp-flow-time">｜依個案</span></h3>
         <p class="tp-flow-text">銀行審核、逐筆清償信用卡與信貸舊債、資金銜接一次處理；各銀行審核天數不同，實際時間依個案而定。</p>
       </li>
@@ -778,10 +785,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div data-include="line-qr"></div>
 <!-- 手機常駐底欄（<768px）：留資料→展開第 0 塊表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_debt">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

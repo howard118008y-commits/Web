@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -58,7 +58,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -548,7 +548,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-inheritance-tax-deadline-house.html" class="bt-card art-card">
-      <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="爸媽走後房子多久要處理？遺產稅六個月時限該注意什麼？" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A12/hero-article-inherited-ancestral-house-960.webp" width="960" height="549" alt="大榕樹下亮著燈的紅磚平房老家，後方是高樓" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-red">繼承不動產</span>
         <h2 class="art-title">爸媽走後房子多久要處理？遺產稅六個月時限該注意什麼？</h2>
         <p class="art-excerpt">親人過世後，遺產稅原則上六個月內要申報，稅繳清前房子不能過戶、不能賣。本文解析遺產稅時間表、現金卡在房子裡的困境，以及提早盤點缺口的處理思路，幫家屬在時限內從容安排。</p>
@@ -575,7 +575,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-inherited-house-sell-or-keep.html" class="bt-card art-card">
-      <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="爸媽留下的房子，該賣還是留？" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A12/hero-article-inherited-ancestral-house-960.webp" width="960" height="549" alt="大榕樹下亮著燈的紅磚平房老家，後方是高樓" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-red">繼承不動產</span>
         <h2 class="art-title">爸媽留下的房子，該賣還是留？</h2>
         <p class="art-excerpt">繼承老家常被當成負擔：要繳稅、兄弟姊妹意見不合、自己也不住。本文從一位客戶的心路出發，整理繼承房產前該看清楚的幾件事——產權、稅務、家人想法與房子的可能性，讓你在吵「賣不賣」之前先把選項攤開，減少家庭爭執。</p>
@@ -597,7 +597,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="sale-leaseback.html" class="bt-card art-card">
-      <img loading="lazy" src="img/article-sale-leaseback.jpg" alt="售後回租完整指南" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A09/card-article-sale-leaseback-safety-1200.webp" width="1200" height="900" alt="木桌上一份對折的文件，上面放著一串家門鑰匙" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">售後回租</span>
         <h2 class="art-title">售後回租完整指南：名下有房但缺現金？這樣解決</h2>
@@ -610,7 +610,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-inherited-co-owned-house-stuck.html" class="bt-card art-card">
-      <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="繼承的房子三人共有卡住了怎麼辦？" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A12/hero-article-inherited-ancestral-house-960.webp" width="960" height="549" alt="大榕樹下亮著燈的紅磚平房老家，後方是高樓" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-red">繼承不動產</span>
         <h2 class="art-title">繼承的房子三人共有卡住了怎麼辦？</h2>
         <p class="art-excerpt">爸媽留下的房子登記在兄弟姊妹名下，一人想賣、一人想留、一人失聯，房子就這樣卡住。本文解析共有不動產為什麼難處理、第一步該做什麼：先攤開持分、設定與稅務狀況，把感情問題還原成產權問題，選項才會浮現。</p>
@@ -634,7 +634,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="art-meta"><span class="art-date">2026年6月</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
     <a href="glossary.html" class="bt-card art-card">
-      <picture><source srcset="img/proof-bg.avif" type="image/avif"><source srcset="img/proof-bg.webp" type="image/webp"><img loading="lazy" src="img/proof-bg.jpg" alt="不動產融資名詞百科" class="art-card-img"></picture>
+      <img loading="lazy" decoding="async" src="img/uiux/O05/card-glossary-1200.webp" width="1200" height="900" alt="不動產融資名詞百科" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-green">名詞百科</span>
         <h2 class="art-title">不動產融資名詞百科：信用、二胎、售後回租一次看懂</h2>
         <p class="art-excerpt">聯徵、DBR、DSR、二胎、售後回租、法拍、限貸令…38 個不動產融資與房產危機名詞一次解釋清楚。</p>
@@ -648,7 +648,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="art-meta"><span class="art-date">2026年</span><span class="art-read">閱讀全文 →</span></div></div>
     </a>
     <a href="financing-data.html" class="bt-card art-card">
-      <img loading="lazy" src="img/knw-arch.jpg" alt="不動產融資數據速查表" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A14/card-financing-data-1200.webp" width="1200" height="900" alt="明亮書桌上，一張印著長條圖的資料、一支筆和一張便條紙，字跡模糊" class="art-card-img">
       <div class="art-card-body"><span class="art-tag tag-green">數據速查</span>
         <h2 class="art-title">不動產融資數據速查表：稅率、利率、DBR／DSR 一次查</h2>
         <p class="art-excerpt">房地合一稅與土增稅級距、契稅、DBR22 與 DSR、民間月息與銀行年息結構、售後回租成數、信用瑕疵留存時間，一張表查清楚（皆依個案與主管機關核定）。</p>
@@ -680,7 +680,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-inherited-sale-leaseback.html" class="bt-card art-card">
-      <img loading="lazy" src="img/inherit-slb-hero.jpg" alt="繼承的房子不想賣——售後回租完整解析" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A12/hero-article-inherited-ancestral-house-960.webp" width="960" height="549" alt="大榕樹下亮著燈的紅磚平房老家，後方是高樓" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">售後回租</span>
         <h2 class="art-title">繼承的房子不想賣——售後回租完整解析</h2>
@@ -719,7 +719,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-rental-management.html" class="bt-card art-card">
-      <img loading="lazy" src="img/article-rental-management.jpg" alt="包租代管vs自管" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A10/card-article-property-management-fees-1200.webp" width="1200" height="900" alt="出租公寓客廳裡，房東把鑰匙交給管理人員的手部特寫" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">包租代管</span>
         <h2 class="art-title">包租代管 vs 自己管：中和屋主的真實比較</h2>
@@ -784,7 +784,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-inherited-property-loan.html" class="bt-card art-card">
-      <img loading="lazy" src="img/knw-temple.jpg" alt="繼承的房子可以貸款嗎" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A08/card-article-inherited-shared-ownership-1200.webp" width="1200" height="900" alt="台灣老透天厝的門口，紅色鐵門旁擺著幾盆植物" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">繼承不動產</span>
         <h2 class="art-title">繼承的房子可以貸款嗎？3 個關鍵條件完整解析</h2>
@@ -849,7 +849,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-retirement-property.html" class="bt-card art-card">
-      <img loading="lazy" src="img/knw-guanshan.jpg" alt="退休族房產活化" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A01/card-private-loan-to-bank-1200.webp" width="1200" height="900" alt="示意情境：退休長輩在餐桌前翻看手寫的記帳本，一旁放著茶杯" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">退休規劃</span>
         <h2 class="art-title">退休族房產活化 3 種方法：月息繳了 10 年本金還在那裡</h2>
@@ -926,7 +926,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-property-management-fees.html" class="bt-card art-card">
-      <img loading="lazy" src="img/article-rental-management.jpg" alt="包租代管費用怎麼算：包租、代管與政府方案一次看懂" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A10/card-article-property-management-fees-1200.webp" width="1200" height="900" alt="出租公寓客廳裡，房東把鑰匙交給管理人員的手部特寫" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag">包租代管</span>
         <h2 class="art-title">包租代管費用怎麼算？包租、代管與政府方案一次看懂</h2>
@@ -952,7 +952,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-second-mortgage-rates.html" class="bt-card art-card">
-      <picture><source srcset="img/second-mortgage-rates-hero.avif" type="image/avif"><source srcset="img/second-mortgage-rates-hero.webp" type="image/webp"><img loading="lazy" src="img/second-mortgage-rates-hero.jpg" alt="二胎房貸利率怎麼看：銀行、融資公司與民間的實際差別" class="art-card-img"></picture>
+      <img loading="lazy" decoding="async" src="img/uiux/A13/card-article-second-mortgage-rates-1200.webp" width="1200" height="900" alt="晴天下的新北中高樓層住宅大樓，陽台擺著盆栽" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-green">二胎房貸</span>
         <h2 class="art-title">二胎房貸利率怎麼看？銀行、融資公司與民間的實際差別</h2>
@@ -1073,7 +1073,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-loan-rejected-first-step.html" class="bt-card art-card">
-      <img loading="lazy" src="img/service-loan.jpg" alt="被銀行拒貸後第一步" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/K01/card-article-loan-rejected-first-step-1200.webp" width="1200" height="900" alt="示意情境：屋主坐在餐桌前，把文件一份份整理進資料夾" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">信用修復</span>
         <h2 class="art-title">被銀行拒貸後該怎麼辦？名下有房第一步這樣做</h2>
@@ -1083,7 +1083,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-bad-credit-loan.html" class="bt-card art-card">
-      <img loading="lazy" src="img/audience-credit.jpg" alt="信用瑕疵還能貸款嗎" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A03/card-bad-credit-loan-1200.webp" width="1200" height="900" alt="店面木櫃檯上，一副老花眼鏡放在一疊文件上" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">信用修復</span>
         <h2 class="art-title">信用瑕疵還能貸款嗎？名下有房 vs 沒房的兩條路</h2>
@@ -1093,7 +1093,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-self-employed-loan.html" class="bt-card art-card">
-      <img loading="lazy" src="img/knw-guanshan.jpg" alt="自營業者貸款攻略" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A04/card-business-loan-401-bankbook-1200.webp" width="1200" height="900" alt="示意情境：店老闆在自家店面櫃檯前，對照手上的冊子核對報表" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-blue">貸款整合</span>
         <h2 class="art-title">自營業者貸款攻略：銀行為何特別嚴？送件前 5 個關鍵準備</h2>
@@ -1103,7 +1103,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-mortgage-overdue.html" class="bt-card art-card">
-      <img loading="lazy" src="img/knw-temple.jpg" alt="房貸繳不出來怎麼辦" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A07/card-article-debt-consolidation-multiple-due-dates-1200.webp" width="1200" height="900" alt="月曆特寫，好幾個日期被橘色筆圈起來，數字模糊" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-red">房產危機</span>
         <h2 class="art-title">房貸繳不出來怎麼辦？5 個替代方案完整比較</h2>
@@ -1113,7 +1113,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </a>
 
     <a href="article-private-loan-credit-damage.html" class="bt-card art-card">
-      <img loading="lazy" src="img/audience-loan.jpg" alt="民間借款太多信用已損" class="art-card-img">
+      <img loading="lazy" decoding="async" src="img/uiux/A01/card-private-loan-to-bank-1200.webp" width="1200" height="900" alt="示意情境：退休長輩在餐桌前翻看手寫的記帳本，一旁放著茶杯" class="art-card-img">
       <div class="art-card-body">
         <span class="art-tag tag-orange">民間轉銀行</span>
         <h2 class="art-title">民間借款太多、信用已損，名下還有房，還有出路嗎？</h2>

@@ -28,33 +28,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
 <style>
-.art-hero{background:#12213A;padding:120px 2rem 80px;text-align:center}
-.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:rgba(37,99,235,.3);color:#93c5fd;margin-bottom:1rem;letter-spacing:.05em}
+.art-hero{background:var(--cx-ink);padding:120px 2rem 80px;text-align:center}
+.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:var(--cx-ink-line);color:var(--cx-cream);margin-bottom:1rem;letter-spacing:.05em}
 .art-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.4;max-width:760px;margin:0 auto 1rem}
 .art-hero-meta{font-size:13px;color:rgba(255,255,255,.45)}
 .art-body{max-width:720px;margin:0 auto;padding:4rem 2rem 5rem}
-.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:#12213A}
-.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:#1B2F4A}
+.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:var(--cx-ink)}
+.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:var(--cx-ink)}
 .art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.25rem}
 .art-body ul,.art-body ol{margin:.5rem 0 1.25rem 1.5rem}
 .art-body li{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:.5rem}
-.art-body strong{color:#1B2F4A}
+.art-body strong{color:var(--cx-ink)}
 .highlight-box{background:#f6f5f3;border:1px solid #e3e3e6;border-radius:0;padding:1.5rem 2rem;margin:2rem 0}
 .highlight-box p{margin-bottom:0;color:#3d3d3f}
 .warn-box{background:#fff7ed;border-left:4px solid #f59e0b;border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:2rem 0}
 .warn-box p{margin-bottom:0;color:#9A6D3A;font-size:15px}
-.case-card{background:#1B2F4A;border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
-.case-card .label{font-size:12px;font-weight:600;color:#93c5fd;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.case-card{background:var(--cx-ink);border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
+.case-card .label{font-size:12px;font-weight:600;color:var(--cx-cream);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
 .case-card blockquote{font-size:21px;font-weight:700;line-height:1.4;margin:0 0 1.25rem;color:#fff}
 .case-card p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:1rem}
+.case-card strong{color:var(--cx-cream)}
 .case-nums{display:flex;gap:16px;flex-wrap:wrap;margin-top:1.5rem}
 .case-num-box{background:rgba(255,255,255,.08);border-radius:14px;padding:16px 20px;flex:1;min-width:120px}
-.case-num-box .num-label{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px}
+.case-num-box .num-label{font-size:12px;color:var(--cx-cream-dim);margin-bottom:6px}
 .case-num-box .num-val{font-size:26px;font-weight:700;letter-spacing:-.02em}
 .case-num-box .num-val.red{color:#f87171}
 .case-num-box .num-val.green{color:#E0B685}
 .case-num-box .num-val.blue{color:#E0B685}
-.case-num-box .num-sub{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px}
+.case-num-box .num-sub{font-size:12px;color:var(--cx-cream-dim);margin-top:2px}
 .cta-box{background:#f5f5f7;border-radius:0;padding:2.5rem;text-align:center;margin:3rem 0}
 .cta-box h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:.75rem}
 .cta-box p{font-size:16px;line-height:1.9;color:rgba(255,255,255,.88);margin-bottom:1.5rem}
@@ -62,8 +63,8 @@
 .step-list{display:flex;flex-direction:column;gap:0;margin:1.5rem 0}
 .step-item{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:.5px solid #f0f0f0}
 .step-item:last-child{border-bottom:none}
-.step-dot{width:36px;height:36px;border-radius:50%;background:#1B2F4A;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-content strong{display:block;font-size:15px;font-weight:700;color:#1B2F4A;margin-bottom:4px}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--cx-ink);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-content strong{display:block;font-size:15px;font-weight:700;color:var(--cx-ink);margin-bottom:4px}
 .step-content span{font-size:14px;color:#6e6e73;line-height:1.6}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:2rem;text-decoration:none}
 .disclaimer{font-size:12px;color:#aeaeb2;line-height:1.7;padding-top:2rem;border-top:1px solid #f0f0f0;margin-top:2rem}
@@ -199,9 +200,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="art-body">
   <a href="knowledge.html" class="back-link">← 返回知識專欄</a>
 
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-    <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0 0 14px;"><strong>信用已毀，但房子還在，就還有出路。</strong>多筆民間借款會快速拉壞聯徵與負債結構，讓銀行全面說不。但只要名下不動產還在（未遭法拍或查封），仍可用售後回租、或分階段民間轉銀行的方式，先止血、再慢慢把債權與利率理回正軌。本公司非金融機構，最終核貸由金融機構決定。</p>
+  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+    <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
+    <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0 0 14px;"><strong>信用已毀，但房子還在，就還有出路。</strong>多筆民間借款會快速拉壞聯徵與負債結構，讓銀行全面說不。但只要名下不動產還在（未遭法拍或查封），仍可用售後回租、或分階段民間轉銀行的方式，先止血、再慢慢把債權與利率理回正軌。本公司非金融機構，最終核貸由金融機構決定。</p>
     <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
       <li><strong>困境</strong>：多筆民間借款 → 聯徵與負債結構崩壞、銀行全拒。</li>
       <li><strong>前提</strong>：名下不動產還在、未遭法拍或查封。</li>
@@ -277,7 +278,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
     </div>
   </div>
-  <p class="case-story-link" style="margin:1.25rem 0 0"><a href="case-friend-debt.html" style="display:inline-block;padding:11px 18px;border:1.5px solid #1B2F4A;border-radius:10px;color:#1B2F4A;font-weight:700;text-decoration:none;font-size:15px;line-height:1.4">看完整故事：被朋友拖下水，南港屋主的三個月 →</a></p>
+  <p class="case-story-link" style="margin:1.25rem 0 0"><a href="case-friend-debt.html" style="display:inline-block;padding:11px 18px;border:1.5px solid var(--cx-ink);border-radius:10px;color:var(--cx-ink);font-weight:700;text-decoration:none;font-size:15px;line-height:1.4">看完整故事：被朋友拖下水，南港屋主的三個月 →</a></p>
 
   <h2>這個案子是怎麼解的？</h2>
   <p>問題的核心有兩個：謄本不乾淨、信用損毀。要解開這個結，需要按照順序處理。</p>
@@ -351,12 +352,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <h2>相關文章</h2>
   <ul>
-    <li><a href="sale-leaseback.html" style="color:#2F5B8F;">售後回租完整指南：名下有房但缺現金怎麼辦 →</a></li>
-    <li><a href="article-bad-credit-loan.html" style="color:#2F5B8F;">信用瑕疵還能貸款嗎？名下有房 vs 沒房的兩條路 →</a></li>
-    <li><a href="debt-consolidation.html" style="color:#2F5B8F;">多筆貸款壓著喘不過氣？整合一次的完整攻略 →</a></li>
-    <li><a href="article-private-to-bank.html" style="color:#2F5B8F;">民間借貸轉銀行的完整流程 →</a></li>
-    <li><a href="article-mortgage-overdue.html" style="color:#2F5B8F;">房貸繳不出來怎麼辦？5 個替代方案完整比較 →</a></li>
-    <li><a href="mortgage-calculator.html" style="color:#2F5B8F;">房貸試算表：計算每月應繳金額 →</a></li>
+    <li><a href="sale-leaseback.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">售後回租完整指南：名下有房但缺現金怎麼辦 →</a></li>
+    <li><a href="article-bad-credit-loan.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">信用瑕疵還能貸款嗎？名下有房 vs 沒房的兩條路 →</a></li>
+    <li><a href="debt-consolidation.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">多筆貸款壓著喘不過氣？整合一次的完整攻略 →</a></li>
+    <li><a href="article-private-to-bank.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">民間借貸轉銀行的完整流程 →</a></li>
+    <li><a href="article-mortgage-overdue.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">房貸繳不出來怎麼辦？5 個替代方案完整比較 →</a></li>
+    <li><a href="mortgage-calculator.html" style="color:var(--cx-orange-deep);text-decoration:underline;text-underline-offset:2px;">房貸試算表：計算每月應繳金額 →</a></li>
   </ul>
 
   <div class="disclaimer">
@@ -386,10 +387,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 <!-- 手機常駐底欄（<768px）：留資料→展開上方橋接區表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_to_bank">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

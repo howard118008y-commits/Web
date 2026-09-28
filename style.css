@@ -1,56 +1,37 @@
-/* ============================================
-   鋮馨租賃 — 全站共用樣式
-   涵蓋：reset / nav / 通用按鈕 / mobile FAB（footer 樣式 2026-09-14 起全在 footer.html）
-   各頁特殊樣式仍寫在頁面內 <style> 中
-   ============================================ */
 
-/* === Design Tokens（2026-07-31 建立，逐步取代各頁散落的內聯色碼） ===
-   新頁面／新改版一律用這組變數，不要再手打色碼。
-   舊頁尚未轉換前，內聯色碼仍是實際生效值，變數只在已採用的地方生效。 */
 :root{
-  --red:#1B2F4A;         /* 品牌主色：CTA、連結、強調、深色面板底 */
-  --red-dark:#12213A;    /* 深紅：漸層/hover 加深 */
-  --ink:#12213A;         /* 主要內文黑 */
-  --ink-soft:#1B2F4A;    /* 次要內文黑（略淺） */
+  --red:var(--cx-ink);
+  --red-dark:var(--cx-ink);
+  --ink:var(--cx-ink);
+  --ink-soft:var(--cx-ink);
   --text-secondary:#6e6e73;
   --text-tertiary:#86868b;
   --text-quaternary:#a1a1a6;
-  --bg-warm:#f4f0ea;     /* Neumorphism 底色 */
+  --bg-warm:#f4f0ea;
   --bg-light:#f6f5f3;
   --bg-off:#fafafa;
   --border-hairline:#e3e3e6;
   --border-input:#d2d2d7;
-  --dark-bg:#12213A;     /* 深色面板（hero/CTA band） */
-  --dark-bg-soft:#12213A;
-  --line-green:#048456;  /* LINE 品牌綠 */
+  --dark-bg:var(--cx-ink);
+  --dark-bg-soft:var(--cx-ink);
+  --line-green:#048456;
   --font-serif:"Noto Serif TC","Songti TC",serif;
 }
-
-/* === Reset === */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#fff;color:#1B2F4A;overflow-x:hidden}
+body{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#fff;color:var(--cx-ink);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-
-/* === Navigation === */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
 .nav-logo{font-size:15px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;min-height:44px}
 .nav-logo span{color:var(--red);font-weight:700}
 .nav-links{display:flex;gap:1.75rem}
-.nav-links a{font-size:12px;color:#1B2F4A;opacity:.8}
+.nav-links a{font-size:12px;color:var(--cx-ink);opacity:.8}
 .nav-links a:hover{opacity:1}
-.nav-links a.active{opacity:1;font-weight:600;color:var(--red)}
-.nav-cta{font-size:12px;font-weight:500;background:#1B2F4A;color:#fff;padding:6px 16px;border-radius:20px}
-
-/* === Common Buttons === */
-.btn-line{display:inline-block;background:#C8945A;color:#12213A;font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px}
-.btn-green{background:#C8945A;color:#12213A;font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;display:inline-block}
-
-/* === 漣漪效果（改自 Uiverse iZOXVL / wise-goat-75，MIT） ===
-   直接長進既有的 .btn-green/.btn-line，22 頁不用改一行 HTML。
-   底色／圓角／字級全部維持各頁原樣，只加 hover 時的 radial-gradient 擴散。
-   漣漪色綁 currentColor：白字深底按鈕得到白漣漪，contact/services/bad-credit 那幾頁
-   覆寫成白底黑字的精品款則自動變深色漣漪，不會「白漣漪打在白底上等於沒效果」。 */
+.nav-links a.active{opacity:1;font-weight:600;color:var(--cx-orange-deep)}
+.nav-cta{font-size:12px;font-weight:500;background:var(--cx-ink);color:var(--cx-cream);padding:6px 16px;border-radius:20px}
+.btn-line{display:inline-block;background:var(--cx-orange);color:var(--cx-ink);font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px}
+.btn-green{background:var(--cx-orange);color:var(--cx-ink);font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;display:inline-block}
+/* 改自 Uiverse iZOXVL / wise-goat-75（MIT） */
 .btn-green,.btn-line{position:relative;overflow:hidden;--ripple:rgba(255,255,255,.25)}
 @supports (color:color-mix(in srgb,red 50%,transparent)){
   .btn-green,.btn-line{--ripple:color-mix(in srgb,currentColor 20%,transparent)}
@@ -63,17 +44,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
 .btn-green:hover::after,.btn-line:hover::after{transform:scale(4)}
 @media(prefers-reduced-motion:reduce){.btn-green::after,.btn-line::after{display:none}}
 .btn-outline{background:transparent;color:#fff;font-size:14px;font-weight:500;padding:12px 28px;border-radius:24px;border:1.5px solid rgba(255,255,255,.4);display:inline-block}
-.btn-white{background:#fff;color:#1B2F4A;padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
+.btn-white{background:#fff;color:var(--cx-ink);padding:11px 24px;border-radius:20px;font-size:14px;font-weight:500;display:inline-block}
 .btn-ghost{background:transparent;color:#fff;padding:11px 24px;border-radius:20px;font-size:14px;border:1.5px solid rgba(255,255,255,.6);display:inline-block}
 .btn-row,.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-
-/* === 漣漪按鈕（改自 Uiverse iZOXVL / wise-goat-75，MIT） ===
-   原作是暗底＋白色 radial-gradient 漣漪；這裡只換色不換機制，三個變體對齊站上既有按鈕色：
-   預設＝品牌紅（主 CTA）／.is-line＝LINE 綠（表單送出、加 LINE）／.is-dark＝墨黑（次要）。
-   尺寸也壓到站上按鈕的級距（14px/12px 28px），不用原作的 1.2rem/15px 30px。 */
+/* 改自 Uiverse iZOXVL / wise-goat-75（MIT） */
 .btn-ripple{
   display:inline-block;padding:12px 30px;font-size:14px;font-weight:700;line-height:1.4;
-  color:#fff;background-color:#1B2F4A;border:2px solid #2F5B8F;border-radius:24px;
+  color:var(--cx-ink);background-color:var(--cx-orange);border:2px solid var(--cx-orange);border-radius:24px;
   cursor:pointer;outline:none;position:relative;overflow:hidden;font-family:inherit;
   transition:background-color .4s ease,border-color .4s ease;
 }
@@ -83,46 +60,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(
   transform:scale(0);transition:transform .5s ease;pointer-events:none;
 }
 .btn-ripple:hover::after{transform:scale(4)}
-.btn-ripple:hover{background-color:#2F5B8F;border-color:#2F5B8F}
-.btn-ripple:focus-visible{outline:2px solid #1B2F4A;outline-offset:3px}
-.btn-ripple.is-line{background-color:#048456;border-color:#0AA06C}
+.btn-ripple:hover{background-color:var(--cx-orange-soft);border-color:var(--cx-orange-soft)}
+.btn-ripple:focus-visible{outline:2px solid var(--cx-orange-deep);outline-offset:3px}
+.btn-ripple.is-line{background-color:#048456;border-color:#0AA06C;color:#fff}
 .btn-ripple.is-line:hover{background-color:#059A64;border-color:#3FC79A}
-.btn-ripple.is-dark{background-color:#1B2F4A;border-color:#3a3a3c}
-.btn-ripple.is-dark:hover{background-color:#292929;border-color:#666}
-/* 動效偏好：關閉漣漪，保留底色變化 */
+.btn-ripple.is-dark{background-color:var(--cx-ink);border-color:var(--cx-ink);color:var(--cx-cream)}
+.btn-ripple.is-dark:hover{background-color:var(--cx-ink-2);border-color:var(--cx-ink-2)}
 @media(prefers-reduced-motion:reduce){
   .btn-ripple::after{display:none}
   .btn-ripple{transition:background-color .01s}
 }
-
-/* === CTA Strip (黑底大型 CTA 區塊) === */
-/* 點陣底紋改自 Uiverse kennyotsu / short-warthog-33（MIT）。只加疊圖，底色 #1B2F4A 不動。
-   點色帶品牌紅（rgba(198,27,28)）而非中性白，底紋才算品牌資產不是通用材質。 */
-.cta-strip{background-color:#1B2F4A;background-image:radial-gradient(rgba(27,47,74,.34) 1.7px,transparent 0);background-size:26px 26px;background-position:-4px -4px;padding:80px 24px;text-align:center}
+/* 改自 Uiverse kennyotsu / short-warthog-33（MIT） */
+.cta-strip{background-color:var(--cx-ink);background-image:radial-gradient(color-mix(in srgb,var(--cx-ink) 34%,transparent) 1.7px,transparent 0);background-size:26px 26px;background-position:-4px -4px;padding:80px 24px;text-align:center}
 .cta-strip h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;margin-bottom:16px}
 .cta-strip p{font-size:17px;color:rgba(255,255,255,.65);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
-
-/* === Page Hero (子頁通用標題區) === */
 .page-hero{margin-top:48px;background:#000;padding:80px 2rem 72px;text-align:center;position:relative;overflow:hidden}
 .page-hero>*{position:relative;z-index:1}
 .page-eyebrow{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
 .page-h1{font-size:52px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:16px}
 .page-sub{font-size:18px;color:rgba(255,255,255,.7);max-width:540px;margin:0 auto 32px;line-height:1.6}
-
-/* === Footer === 頁尾樣式（paper 版）全在 footer.html 的 <style>，選擇器掛 .cx-site-footer，本檔不再定義。 */
-
-/* === Mobile Sticky CTA Bar（值與 footer.html 的 fallback 區段相同，改動時同步） === */
 .cx-sticky-cta{display:none}
-
-/* === Mobile Breakpoint === */
 @media(max-width:768px){
   nav{padding:0 1rem}
   .nav-links{display:none}
   .page-h1{font-size:30px}
   .page-sub{font-size:15px}
   .cta-strip h2{font-size:28px}
-  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1B2F4A;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
-  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
-  .cx-sticky-cta .cx-sticky-line{background:#1B2F4A;color:#fff}
-  .cx-sticky-cta .cx-sticky-tel{order:-1;background:#C8945A;color:#12213A;flex:1.35}
+  .cx-sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:var(--cx-cream-glass);border:1px solid var(--cx-line);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 12px 32px -12px var(--cx-ink-shadow)}
+  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:var(--cx-ink);text-decoration:none;letter-spacing:.02em}
+  .cx-sticky-cta .cx-sticky-line{background:transparent;color:var(--cx-ink);box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+  .cx-sticky-cta .cx-sticky-tel{order:-1;background:var(--cx-orange);color:var(--cx-ink);flex:1.35}
 }

@@ -28,23 +28,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap" rel="stylesheet">
 <style>
-.art-hero{background:#12213A;padding:120px 2rem 80px;text-align:center}
-.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:rgba(37,99,235,.3);color:#93c5fd;margin-bottom:1rem;letter-spacing:.05em}
+.art-hero{background:var(--cx-ink);padding:120px 2rem 80px;text-align:center}
+.art-tag{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:10px;background:var(--cx-ink-line);color:var(--cx-cream);margin-bottom:1rem;letter-spacing:.05em}
 .art-hero h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.4;max-width:760px;margin:0 auto 1rem}
 .art-hero-meta{font-size:13px;color:rgba(255,255,255,.45)}
 .art-body{max-width:720px;margin:0 auto;padding:4rem 2rem 5rem}
-.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:#12213A}
-.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:#1B2F4A}
+.art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem;padding-top:1.2rem;border-top:1px solid #e3e3e6;color:var(--cx-ink)}
+.art-body h3{font-size:20px;font-weight:600;margin:1.75rem 0 .75rem;color:var(--cx-ink)}
 .art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.25rem}
 .art-body ul,.art-body ol{margin:.5rem 0 1.25rem 1.5rem}
 .art-body li{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:.5rem}
-.art-body strong{color:#1B2F4A}
+.art-body strong{color:var(--cx-ink)}
 .highlight-box{background:#f6f5f3;border:1px solid #e3e3e6;border-radius:0;padding:1.5rem 2rem;margin:2rem 0}
 .highlight-box p{margin-bottom:0;color:#3d3d3f}
 .warn-box{background:#fff7ed;border-left:4px solid #f59e0b;border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:2rem 0}
 .warn-box p{margin-bottom:0;color:#9A6D3A;font-size:15px}
-.case-card{background:#1B2F4A;border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
-.case-card .label{font-size:12px;font-weight:600;color:#93c5fd;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.case-card{background:var(--cx-ink);border-radius:0;padding:2rem 2.5rem;margin:2.5rem 0;color:#fff}
+.case-card .label{font-size:12px;font-weight:600;color:var(--cx-cream);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
 .case-card blockquote{font-size:21px;font-weight:700;line-height:1.4;margin:0 0 1.25rem;color:#fff}
 .case-card p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:1rem}
 .case-nums{display:flex;gap:16px;flex-wrap:wrap;margin-top:1.5rem}
@@ -62,8 +62,8 @@
 .step-list{display:flex;flex-direction:column;gap:0;margin:1.5rem 0}
 .step-item{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:.5px solid #f0f0f0}
 .step-item:last-child{border-bottom:none}
-.step-dot{width:36px;height:36px;border-radius:50%;background:#1B2F4A;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-content strong{display:block;font-size:15px;font-weight:700;color:#1B2F4A;margin-bottom:4px}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--cx-ink);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-content strong{display:block;font-size:15px;font-weight:700;color:var(--cx-ink);margin-bottom:4px}
 .step-content span{font-size:14px;color:#6e6e73;line-height:1.6}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:2rem;text-decoration:none}
 .disclaimer{font-size:12px;color:#aeaeb2;line-height:1.7;padding-top:2rem;border-top:1px solid #f0f0f0;margin-top:2rem}
@@ -82,8 +82,8 @@ body{padding-top:16px}
 .cs-step{position:relative;text-align:left}
 .cs-step picture{display:block}
 .cs-step img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;background:#F5EFE6;margin:0 0 12px}
-.cs-num{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:#C8945A;color:#1B2F4A;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
-.cs-step h3{font-size:17px;font-weight:700;color:#1B2F4A;margin:0 0 6px;line-height:1.4}
+.cs-num{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:#C8945A;color:var(--cx-ink);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.cs-step h3{font-size:17px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;line-height:1.4}
 .cs-step p{font-size:15px;line-height:1.7;color:#4b5563;margin:0}
 .cs-result{margin:1.25rem 0 1.5rem}
 .cs-result img{width:100%;max-width:520px;height:auto;display:block;margin:0 auto;border-radius:14px;background:#F5EFE6}
@@ -91,7 +91,7 @@ body{padding-top:16px}
 @media (max-width:640px){.cs-flow{grid-template-columns:1fr;gap:22px}}
 .art-hero h1{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
 .case-card{padding:1.1rem 1.5rem}
-.case-card .label{font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:0;color:#cfe0f7}
+.case-card .label{font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:0;color:var(--cx-cream)}
 .disclaimer{color:#6e6e73}
 </style>
 <script type="application/ld+json">
@@ -193,9 +193,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="label">真實核可案例，已匿名。只寫數字與流程。</div>
   </div>
 
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid #1B2F4A;border-radius:0;padding:22px 24px;margin:18px 0 30px;">
-    <div style="font-size:13px;font-weight:700;color:#1B2F4A;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
-    <p style="font-size:16px;line-height:1.75;color:#1B2F4A;margin:0;">中和屋主多筆民間借款，年利率 15% 到 24%，每月合計繳約 14.5 萬。核可案例：攤開每一筆、換算年化統一比較、看房子擔保空間，整合成一筆銀行房貸後月付降到約 4.5 萬，每月現金流少支出約 10 萬；實際降幅依個案評估而定。</p>
+  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-gold);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+    <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
+    <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0;">中和屋主多筆民間借款，年利率 15% 到 24%，每月合計繳約 14.5 萬。核可案例：攤開每一筆、換算年化統一比較、看房子擔保空間，整合成一筆銀行房貸後月付降到約 4.5 萬，每月現金流少支出約 10 萬；實際降幅依個案評估而定。</p>
   </div>
 
   <h2>每個月十四萬五</h2>
@@ -229,7 +229,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p>月付降，通常是年限拉長，總利息可能反而增加；代書費、開辦費是實際成本；申辦期每次信用查詢都會留紀錄，所以只鎖定一到兩家送件，不海投。</p>
     </li>
     <li class="cs-step">
-      <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="多張單據匯向蓋章的文件與鑰匙，後方是銀行建築與站在自家門前的夫妻" loading="lazy"></picture>
+      <picture><source type="image/avif" srcset="img/theme/p2b/flow-4.avif"><source type="image/webp" srcset="img/theme/p2b/flow-4.webp"><img src="img/theme/p2b/flow-4.jpg" width="1024" height="1024" alt="多份文件匯整成一份，屋主一家站在自家門前，一旁是銀行" loading="lazy"></picture>
       <span class="cs-num" aria-hidden="true">5</span>
       <h3>送件、核貸、代償</h3>
       <p>銀行審文件與負債結構。核可後撥款，直接清償每一筆民間借款，逐筆拿到結清證明。</p>
@@ -243,7 +243,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </ol>
 
   <h2>十四萬五變四萬五</h2>
-  <figure class="cs-result"><picture><source type="image/avif" srcset="img/theme/case02/merge-one.avif"><source type="image/webp" srcset="img/theme/case02/merge-one.webp"><img src="img/theme/case02/merge-one.jpg" width="1024" height="1024" alt="多張零散單據被金色箭頭匯成一份蓋著金印的文件" loading="lazy"></picture><figcaption>示意圖：多筆變一筆。</figcaption></figure>
+  <figure class="cs-result"><picture><source type="image/avif" srcset="img/theme/case02/merge-one.avif"><source type="image/webp" srcset="img/theme/case02/merge-one.webp"><img src="img/theme/case02/merge-one.jpg" width="1024" height="1024" alt="多張零散單據被箭頭匯成一份文件" loading="lazy"></picture><figcaption>示意圖：多筆變一筆。</figcaption></figure>
   <p>多筆民間借款，變成一筆銀行房貸，年利率 3% 區間。月付從約 14.5 萬變成約 4.5 萬，每月現金流少支出約 10 萬。</p>
   <p>這是單一實際核可案例，已匿名，不是通案、也不是承諾。降幅取決於負債結構、不動產條件與銀行審核結果，過往案例多在 30% 到 50% 區間；月付降低通常伴隨年限拉長，總利息支出可能增加。是否適合整合、能整合到什麼程度依個案評估，最終核貸由金融機構決定。</p>
   <p>以前繳的大多是利息，本金在原地。現在每一期都有一部分在還本金。</p>
@@ -293,10 +293,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </div>
 </section>
 <!-- 手機常駐底欄（<768px）：留資料→展開上方橋接區表單；打電話 -->
-<div class="tp-bar" role="navigation" aria-label="快速行動" data-consultation-need="private_debt">
-  <button type="button" class="tp-bar-lead" data-tp-open>留資料 1 分鐘</button>
-  <a href="tel:02-2249-0517" class="tp-bar-tel" data-link-location="sticky_bar">打電話</a>
-</div>
 <div data-include="footer"></div>
 <div data-include="anti-fraud-modal"></div>
 </body>

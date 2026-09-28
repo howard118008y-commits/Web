@@ -312,7 +312,7 @@
     });
   });
 
-  /* 頁級只綁一次：勾任一 .tp-symptom、按底欄 [data-tp-open] → 展開第 0 塊表單並捲過去 */
+  /* 頁級只綁一次：勾任一 .tp-symptom → 展開第 0 塊表單並捲過去（底欄 [data-tp-open] 已隨 .tp-bar 退場，2026-09-28） */
   if(!window.__tpFormBound){
     window.__tpFormBound=true;
     function firstWrap(){ return document.querySelector('.tp-form-wrap'); }
@@ -327,11 +327,6 @@
       var w=firstWrap(); var b=w&&w.querySelector('.tp-form-body');
       if(b&&b.hidden) openFirst(false);   /* 第一次勾才捲動，之後繼續勾不打斷 */
     });
-    document.addEventListener('click',function(e){
-      var b=e.target&&e.target.closest&&e.target.closest('[data-tp-open]'); if(!b) return;
-      e.preventDefault(); openFirst(true);
-    });
-    if(document.querySelector('.tp-bar')) document.body.classList.add('tp-has-bar');
   }
 })();
 </script>

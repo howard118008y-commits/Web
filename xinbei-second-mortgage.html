@@ -102,8 +102,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -149,7 +149,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -410,7 +410,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="bt-narrow">
     <div id="quick-answer" class="bt-card bt-qa">
       <div class="bt-label">快速答案</div>
-      <p><strong>先說結論：在新北評估二胎，先看懂一個背景——銀行端正在變嚴，「殘值活用」因此從備案變成顯學。</strong>二胎房貸是什麼？一句話：不動一胎，以同一間房再設定第二順位抵押權取得資金；完整知識與流程見<a href="/zhonghe-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈中和二胎房貸全解析〉</a>，本篇不重講，只做新北級的判斷與分流。</p>
+      <p><strong>先說結論：在新北評估二胎，先看懂一個背景——銀行端正在變嚴，「殘值活用」因此從備案變成顯學。</strong>二胎房貸是什麼？一句話：不動一胎，以同一間房再設定第二順位抵押權取得資金；完整知識與流程見<a href="/zhonghe-second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈中和二胎房貸全解析〉</a>，本篇不重講，只做新北級的判斷與分流。</p>
     </div>
   </div>
 </section>
@@ -441,13 +441,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <p class="bt-p"><strong>老公寓帶（中和、永和、三重蘆洲、板橋府中）——解「低餘額」的題</strong>：一胎多已繳十多年甚至清償，殘值來自低餘額而非高估值。示意：三重市值 1,100 萬的公寓、一胎餘 150 萬，殘值空間約 1,100 萬 × 7 成 − 150 萬 ≈ 620 萬元（示意，依個案審核）。二胎直接取用這塊空間，產權不動、一胎照舊。</p>
       </div>
       <div class="bt-card bt-who-card">
-        <p class="bt-p"><strong>高總價帶（新板特區、新店央北）——解「漲幅變現」的題</strong>：殘值取決於房價漲幅有沒有被一胎吃掉；空間在，二胎能以可控的利率成本取用，新板的估值邏輯與示意，板橋專頁已逐圈拆解（見下方分流）。空間見底、資金需求又大，那是二胎走不通的岔路——由<a href="/xinbei-sale-leaseback.html" style="color:#1B2F4A;font-weight:600;">〈新北售後回租〉</a>承載，判斷順序不變：二胎先評估。</p>
+        <p class="bt-p"><strong>高總價帶（新板特區、新店央北）——解「漲幅變現」的題</strong>：殘值取決於房價漲幅有沒有被一胎吃掉；空間在，二胎能以可控的利率成本取用，新板的估值邏輯與示意，板橋專頁已逐圈拆解（見下方分流）。空間見底、資金需求又大，那是二胎走不通的岔路——由<a href="/xinbei-sale-leaseback.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈新北售後回租〉</a>承載，判斷順序不變：二胎先評估。</p>
       </div>
       <div class="bt-card bt-who-card">
-        <p class="bt-p"><strong>自營業者（雙和街邊店、板橋府中商圈、三重工商帶）——解「週轉期程」的題</strong>：進貨與裝修金額明確、現金流看得到，二胎不動一胎、期程可預期，適合有清償終點的週轉。前提只有一個：兩筆月付加總後負擔得起，再辦。多筆債務想收攏成一筆，另見<a href="/xinbei-debt-consolidation.html" style="color:#1B2F4A;font-weight:600;">〈新北貸款整合〉</a>。</p>
+        <p class="bt-p"><strong>自營業者（雙和街邊店、板橋府中商圈、三重工商帶）——解「週轉期程」的題</strong>：進貨與裝修金額明確、現金流看得到，二胎不動一胎、期程可預期，適合有清償終點的週轉。前提只有一個：兩筆月付加總後負擔得起，再辦。多筆債務想收攏成一筆，另見<a href="/xinbei-debt-consolidation.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈新北貸款整合〉</a>。</p>
       </div>
     </div>
-    <p class="bt-p" style="margin:40px auto 0;max-width:800px">新北各區的判斷順序一致：先用<a href="/second-mortgage-calculator.html" style="color:#1B2F4A;font-weight:600;">二胎房貸試算器</a>抓數字——<span class="formula">殘值 ＝ 估值 × 成數 − 一胎餘額</span>——數字出來，再談路徑與機構選擇。利率不分行政區：銀行二順位約 3.4%–10%、融資公司約 7%–16%，依個案審核為準，比較請看總費用年百分率（APR）。</p>
+    <p class="bt-p" style="margin:40px auto 0;max-width:800px">新北各區的判斷順序一致：先用<a href="/second-mortgage-calculator.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">二胎房貸試算器</a>抓數字——<span class="formula">殘值 ＝ 估值 × 成數 − 一胎餘額</span>——數字出來，再談路徑與機構選擇。利率不分行政區：銀行二順位約 3.4%–10%、融資公司約 7%–16%，依個案審核為準，比較請看總費用年百分率（APR）。</p>
   </div>
 </section>
 
@@ -455,13 +455,13 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <section class="bt-sec-80">
   <div class="bt-narrow bt-prose">
     <h2 class="bt-h2">挑選與防詐：新北通用的一句標準</h2>
-    <p class="bt-p">核貸前不付費、不交權狀存摺正本、不簽空白文件；業者查經濟部商工登記、有實體店面且當面簽約。完整辨識方法見<a href="/article-second-mortgage-scam.html" style="color:#1B2F4A;font-weight:600;">〈二胎房貸詐騙怎麼分辨〉</a>，有疑慮撥 165——新北各區同一把尺，不影射任何特定業者。</p>
+    <p class="bt-p">核貸前不付費、不交權狀存摺正本、不簽空白文件；業者查經濟部商工登記、有實體店面且當面簽約。完整辨識方法見<a href="/article-second-mortgage-scam.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈二胎房貸詐騙怎麼分辨〉</a>，有疑慮撥 165——新北各區同一把尺，不影射任何特定業者。</p>
     <h2 class="bt-h2">各區屋主，走各區的門</h2>
-    <p class="bt-p">板橋屋主看雙軌殘值的逐圈拆解：<a href="/banqiao-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈板橋二胎房貸〉</a>。永和屋主先看五條路的全圖再定位二胎：<a href="/yonghe-home-loan.html" style="color:#1B2F4A;font-weight:600;">〈永和房屋貸款決策地圖〉</a>。土城與鄰近屋主的組合評估：<a href="/tucheng-property-finance.html" style="color:#1B2F4A;font-weight:600;">〈土城不動產融資諮詢〉</a>。新店屋主因地形造成的估值落差，另見<a href="/xindian-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈新店二胎房貸〉</a>。三重屋主看跨區對照與總價印象的落差：<a href="/sanchong-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈三重二胎房貸〉</a>；新莊屋主先確認使用分區：<a href="/xinzhuang-second-mortgage.html" style="color:#1B2F4A;font-weight:600;">〈新莊二胎房貸〉</a>。</p>
+    <p class="bt-p">板橋屋主看雙軌殘值的逐圈拆解：<a href="/banqiao-second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈板橋二胎房貸〉</a>。永和屋主先看五條路的全圖再定位二胎：<a href="/yonghe-home-loan.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈永和房屋貸款決策地圖〉</a>。土城與鄰近屋主的組合評估：<a href="/tucheng-property-finance.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈土城不動產融資諮詢〉</a>。新店屋主因地形造成的估值落差，另見<a href="/xindian-second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈新店二胎房貸〉</a>。三重屋主看跨區對照與總價印象的落差：<a href="/sanchong-second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈三重二胎房貸〉</a>；新莊屋主先確認使用分區：<a href="/xinzhuang-second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">〈新莊二胎房貸〉</a>。</p>
     <p class="bt-p">中和屋主逕讀開頭的全解析即可（第一篇即中和專頁，含條件、流程與雙和在地情境）；三重、蘆洲、新店等其他區，比照同一套判斷順序與流程辦理。</p>
     <h2 class="bt-h2">想當面談？新北案件怎麼約</h2>
     <p class="bt-p">先透過官網表單或 LINE 預約，帶權狀影本與一胎最近餘額資料，到鋮馨總部——中和區中正路 468 號，環狀線與台 64 線可達；板橋、三重、土城、新店案件同一套流程當面對保。</p>
-    <p class="bt-p">新北案件的方案框架可先看<a href="/second-mortgage.html" style="color:#1B2F4A;font-weight:600;">二胎房貸服務頁</a>。數字並排後若二胎不是最適解，鋮馨會直接說，不催促您做決定。</p>
+    <p class="bt-p">新北案件的方案框架可先看<a href="/second-mortgage.html" style="color:var(--cx-orange-deep);font-weight:600;text-decoration:underline;">二胎房貸服務頁</a>。數字並排後若二胎不是最適解，鋮馨會直接說，不催促您做決定。</p>
   </div>
 </section>
 

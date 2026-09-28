@@ -118,9 +118,9 @@ a{text-decoration:none}
 
 .art-breadcrumb{font-size:12px;color:#86868b;margin-bottom:1.5rem}
 
-.art-breadcrumb a{color:#2F5B8F}
+.art-breadcrumb a{color:var(--cx-orange-deep)}
 
-.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:rgba(0,122,255,.1);color:#2F5B8F}
+.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:var(--cx-cream-2);color:var(--cx-orange-deep)}
 
 .art-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.4;margin-bottom:1rem}
 
@@ -143,6 +143,8 @@ a{text-decoration:none}
 .art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
 
 .info-box{background:#f5f5f7;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+/* 本文目錄用 <nav>：重設 style.css 全站 nav{position:fixed;height:48px;display:flex;…}，否則目錄框只剩 48px 高、連結溢出疊到上下文 */
+nav.info-box{position:static;display:block;height:auto;z-index:auto;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0}
 
 .info-box h3{font-size:16px;font-weight:600;margin-bottom:.75rem}
 
@@ -150,33 +152,33 @@ a{text-decoration:none}
 .art-body a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 .art-meta-row{flex-wrap:wrap;font-size:14px}
 .art-body [id]{scroll-margin-top:90px}
-.compare-table caption{text-align:left;font-size:14px;line-height:1.6;padding:0 0 12px;color:#5A6878}
-.compare-table th[scope="row"]{background:#f2f4f7;color:#1B2F4A;min-width:88px}
+.compare-table caption{text-align:left;font-size:14px;line-height:1.6;padding:0 0 12px;color:var(--cx-ink-2)}
+.compare-table th[scope="row"]{background:var(--cx-cream-2);color:var(--cx-ink);min-width:88px}
 .compare-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
 
-.compare-table th{background:#1B2F4A;color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+.compare-table th{background:var(--cx-ink);color:#fff;padding:10px 14px;text-align:left;font-weight:600}
 
 .compare-table td{padding:10px 14px;border-bottom:.5px solid #e5e5e7;vertical-align:top}
 
 .compare-table tr:nth-child(even) td{background:#f9f9fb}
 
-.highlight{color:#1B2F4A;font-weight:600}
+.highlight{color:var(--cx-ink);font-weight:600}
 
 .step-list{list-style:none;margin-left:0;counter-reset:steps}
 
 .step-list li{counter-increment:steps;display:flex;gap:1rem;margin-bottom:1.25rem}
 
-.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:#1B2F4A;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
+.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:var(--cx-ink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
 
 
 /* CTA */
-.art-cta{background:#1B2F4A;padding:3.5rem 2rem;text-align:center;margin-top:3rem}
+.art-cta{background:var(--cx-ink);padding:3.5rem 2rem;text-align:center;margin-top:3rem}
 
 .art-cta h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:.75rem}
 
 .art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
 
-.art-cta a{display:inline-block;background:#fff;color:#1B2F4A;padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
+.art-cta a{display:inline-block;background:#fff;color:var(--cx-ink);padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
 
 
 
@@ -385,7 +387,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <p>本文由鋮馨租賃有限公司整理，更新於 2026 年 9 月 11 日；官方資料來源已附於相關段落。內容為一般風險辨識資訊，不是個案法律意見，也不代表主管機關對本公司或任何方案的背書。</p>
 </div>
 
-<div class="art-cta" data-link-location="article_bottom" style="background:#1B2F4A;">
+<div class="art-cta" data-link-location="article_bottom" style="background:var(--cx-ink);">
   <h2>有疑慮？先查證，別急著簽</h2>
   <p>詐騙疑慮撥 165；緊急危險撥 110。請先保留證據，必要時由警方、地政事務所與律師協助。</p>
   <a href="tel:165" style="background:#C8945A;color:#fff;">撥 165 反詐騙專線</a>

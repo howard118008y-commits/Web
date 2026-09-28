@@ -29,11 +29,12 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{
-  --forest:#1B2F4A;--forest-deep:#12213A;--forest-line:#2C4A6B;
-  --gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --cream:#F2EFE8;--cream-dim:rgba(242,239,232,.66);--cream-faint:rgba(242,239,232,.4);
-  --ink:#1B2F4A;--ink-dim:#5A6878;--ink-faint:#8C97A5;
-  --paper:#F7F5F0;--paper-line:#E2DED4;
+  /* 新品牌色：色碼只在 nav.js（--cx-*）。舊變數名保留、依角色指向新色：forest＝墨（深底／橘鈕上的字）、*-line＝分隔線、cream／ink＝淺底上的字、gold＝橘主鈕（soft＝hover）、gold-deep＝深橘小字與焦點框、paper＝卡片面；深色區塊內重新指派 */
+  --forest:var(--cx-ink);--forest-deep:var(--cx-ink);--forest-line:var(--cx-line);
+  --gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --cream:var(--cx-ink);--cream-dim:var(--cx-ink-2);--cream-faint:var(--cx-ink-3);
+  --ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--ink-faint:var(--cx-ink-3);
+  --paper:var(--cx-card);--paper-line:var(--cx-line);
   --maxw:1180px;
   --spring:cubic-bezier(.22,1,.36,1);
   --spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 1);
@@ -41,14 +42,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;
-  background:var(--forest);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;font-kerning:normal}
+  background:var(--cx-cream);color:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;font-kerning:normal}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition-duration:.15s!important;transition-timing-function:ease!important}}
 
 
 /* ============ 共用按鈕／標誌（nav 由 nav.js 提供） ============ */
-.logo-mark{width:31px;height:31px;border-radius:7px;background:var(--gold);color:var(--forest-deep);
+.logo-mark{width:31px;height:31px;border-radius:7px;background:var(--cx-ink);color:var(--cx-orange);box-shadow:0 0 0 1px var(--cx-cream-dim);
   display:grid;place-items:center;font-size:17px;font-weight:900;flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;
   border-radius:999px;font-size:14.5px;font-weight:500;border:1px solid transparent;
@@ -59,18 +60,17 @@ a{color:inherit;text-decoration:none}
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:112px 24px 52px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;
-  background:radial-gradient(120% 90% at 78% 12%,rgba(200,148,90,.16),transparent 58%),
-             linear-gradient(180deg,#1E3556 0%,#1B2F4A 45%,#12213A 100%)}
+  background:radial-gradient(120% 90% at 78% 12%,color-mix(in srgb,var(--cx-gold) 18%,transparent),transparent 58%),var(--cx-cream)}
 .hero-bg::after{content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(242,239,232,.028) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(242,239,232,.028) 1px,transparent 1px);
+  background-image:linear-gradient(color-mix(in srgb,var(--cx-ink) 5%,transparent) 1px,transparent 1px),
+                   linear-gradient(90deg,color-mix(in srgb,var(--cx-ink) 5%,transparent) 1px,transparent 1px);
   background-size:52px 52px;mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent)}
 .hero-in{position:relative;max-width:var(--maxw);margin:0 auto;width:100%;text-align:center}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.18em;
-  color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+  color:var(--gold-deep);text-transform:uppercase;margin-bottom:18px}
 h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(31px,5.2vw,58px);
   line-height:1.24;letter-spacing:-.012em;margin-bottom:16px}
-h1 em{font-style:normal;color:var(--gold)}
+h1 em{font-style:normal;color:inherit}
 .hero-sub{font-size:clamp(14.5px,1.6vw,17px);color:var(--cream-dim);max-width:600px;margin:0 auto 26px}
 
 /* ---- 信任列(緊湊,永遠三欄) ---- */
@@ -79,7 +79,7 @@ h1 em{font-style:normal;color:var(--gold)}
 .stats > div{padding:12px 8px;border-right:1px solid var(--forest-line)}
 .stats > div:last-child{border-right:0}
 .stat-n{font-family:'JetBrains Mono',monospace;font-size:clamp(15px,2vw,19px);
-  color:var(--gold);line-height:1.3;margin-bottom:2px}
+  color:var(--ink);line-height:1.3;margin-bottom:2px}
 .stat-n sup{font-size:.5em;color:var(--cream-faint);margin-left:2px;vertical-align:super}
 .stat-l{font-size:10.5px;color:var(--cream-faint);letter-spacing:.02em;line-height:1.45}
 
@@ -144,10 +144,8 @@ h1 em{font-style:normal;color:var(--gold)}
 
 .quick{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
 .quick a{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:500;
-  border:1px solid var(--forest-line);color:var(--cream);transition:.18s}
+  border:1px solid var(--cream);color:var(--cream);transition:.18s}
 .quick a:hover{border-color:var(--gold)}
-.quick a.primary{background:#06C755;border-color:#06C755;color:#fff;font-weight:700}
-.quick a.primary:hover{background:#05b34c}
 .hero-fine{margin-top:22px;font-size:11px;color:var(--cream-faint);max-width:660px;
   margin-left:auto;margin-right:auto;line-height:1.75}
 
@@ -249,14 +247,17 @@ h1 em{font-style:normal;color:var(--gold)}
 .sec h2{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(24px,3.4vw,36px);line-height:1.4;margin-bottom:14px}
 .sec-lead{font-size:15px;margin-bottom:40px}
 .sec-forest{background:var(--forest);color:var(--cream)}
-.sec-forest .kicker{color:var(--gold)}
+.sec-forest .kicker{color:var(--cream-dim)}
 .sec-forest .sec-lead{color:var(--cream-dim)}
 .sec-paper{background:var(--paper);color:var(--ink)}
 .sec-paper .kicker{color:var(--gold-deep)}
 .sec-paper .sec-lead{color:var(--ink-dim)}
+/* 深色區塊（2026-09-28）：墨底＋米白字。同一組舊變數名在區塊內重新指派，區塊裡的規則不用逐條改 */
+.sec-forest,.foot{--forest-line:var(--cx-ink-line);--cream:var(--cx-cream);--cream-dim:var(--cx-cream-dim);--cream-faint:var(--cx-cream-dim);
+  --paper:var(--cx-ink);--paper-line:var(--cx-ink-line);--ink:var(--cx-cream);--ink-dim:var(--cx-cream-dim);--ink-faint:var(--cx-cream-dim);--gold-deep:var(--cx-cream)}
 /* 關於鋮馨（快速答案＋三段） */
 .qa{border:1px solid var(--forest-line);border-radius:14px;padding:22px 24px;margin-bottom:44px;background:rgba(242,239,232,.03)}
-.qa-t{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.qa-t{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:10px}
 .qa p{font-size:15px;color:var(--cream-dim);line-height:1.85}
 .qa strong,.about-block strong{color:var(--cream);font-weight:600}
 .about-block{padding:0 0 36px;margin-bottom:36px;border-bottom:1px solid var(--forest-line)}
@@ -301,9 +302,9 @@ h1 em{font-style:normal;color:var(--gold)}
 @media(max-width:860px){
   body{padding-bottom:64px}
   .cx-sticky-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:95;height:60px;
-    background:var(--forest-deep);border-top:1px solid var(--forest-line)}
-  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14.5px;font-weight:700;color:#fff}
-  .cx-sticky-line{background:#06C755}
+    background:var(--cx-cream-glass);border-top:1px solid var(--forest-line)}
+  .cx-sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14.5px;font-weight:700;color:var(--cx-ink)}
+  .cx-sticky-line{background:transparent}
   .cx-sticky-tel{background:var(--gold);color:var(--forest-deep)!important}
   .float{bottom:78px;right:16px;width:54px;height:54px}
   .tools-grid{grid-template-columns:1fr}
@@ -373,13 +374,120 @@ h1 em{font-style:normal;color:var(--gold)}
 .hero{min-height:auto;padding-bottom:72px}
 .hero-sub{margin-bottom:30px}
 .hero-in>.cx-call-block{margin:0 0 34px}
-.hero-more{background:var(--forest-deep);color:var(--cream);padding:64px 24px 80px;border-top:1px solid rgba(242,239,232,.06)}
+.hero-more{background:var(--cx-cream-2);color:var(--cream);padding:64px 24px 80px;border-top:1px solid var(--forest-line)}
 .hero-more .sec-in{max-width:var(--maxw);margin:0 auto;text-align:center}
 .hero-more .cx-needs{margin:0 auto 44px}
 .hero-more .stats{margin:0 auto 36px}
 .hero-more .quick{margin-top:0}
 .hero-more .hero-fine{margin-top:26px}
 @media(max-width:860px){.hero{padding-bottom:56px}.hero-more{padding:48px 20px 64px}.hero-more .cx-needs{margin-bottom:32px}}
+
+/* ===== UIUX 預覽：電話／LINE 優先 ===== */
+/* Hero：桌機左文右圖、小鋮橫跨下方；手機依 DOM 順序 文案→電話/LINE→圖→小鋮 */
+.hero-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);column-gap:56px;row-gap:48px;align-items:center;text-align:left}
+.hero-copy{min-width:0}
+.hero-in>.panel{grid-column:1/-1;width:100%}
+.hero .hero-sub{margin-left:0;margin-right:0;max-width:none}
+.hero-media{display:block;margin:0;min-width:0}
+.hero-media img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid var(--forest-line)}
+.hero-in>.hero-media{animation:none}
+@media(min-width:861px){.hero h1{font-size:clamp(34px,3.4vw,48px)}}
+
+/* 接聽狀態聯絡區（cx-hours.js 標 data-cx-open；沒跑 JS 時維持電話為主） */
+.hero-call{margin:0}
+.hero .hero-call p{font-size:15px;color:var(--cream-dim)}
+.hero .hero-call p a{color:var(--cream)}
+.cx-hours-status{display:none}
+[data-cx-open="0"] .cx-hours-status{display:flex}
+.hero .hero-call .cx-hours-status,.needs-help .cx-hours-status{align-items:baseline;gap:10px;font-size:16px;line-height:1.6;color:var(--cream);margin:0 0 14px}
+.cx-hours-status::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--gold);transform:translateY(-2px)}
+.cx-hours-actions{display:flex;flex-wrap:wrap;gap:12px}
+.cx-hours-actions a{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 22px;
+  border-radius:12px;border:1.5px solid transparent;font-size:17px;font-weight:700;line-height:1.3;text-decoration:none}
+.cx-hours-actions a:not(.cx-call-primary){transition:background-color .18s ease,border-color .18s ease,color .18s ease}
+.cx-hours-actions a:focus-visible{outline:3px solid var(--gold-deep);outline-offset:3px}
+/* 主鈕橘底墨字（4.80:1）；墨字要 !important 才蓋得過 consultation.css 的 .cx-call-primary{color:…!important} */
+.cx-hours-actions .cx-h-tel{background:var(--gold);color:var(--forest-deep)!important;border-color:var(--gold)}
+.cx-hours-actions .cx-h-tel:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+.cx-hours-actions .cx-h-line{background:transparent;color:var(--cream);border-color:var(--cream)}
+.cx-hours-actions .cx-h-line:hover{background:var(--cx-cream-2)}
+.cx-h-lbl{font-weight:500}
+.cx-h-num{font-size:21px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+[data-cx-open="0"] .cx-hours-actions .cx-h-line{order:-1;background:var(--gold);color:var(--forest-deep);border-color:var(--gold)}
+[data-cx-open="0"] .cx-hours-actions .cx-h-line:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+[data-cx-open="0"] .cx-hours-actions .cx-h-tel{background:transparent;color:var(--cream)!important;border-color:var(--cream)}
+[data-cx-open="0"] .cx-hours-actions .cx-h-tel:hover{background:var(--cx-cream-2);border-color:var(--cream)}
+
+/* 服務入口：1 主卡（民間轉貸銀行）＋3 小卡＋求助帶 */
+.needs-title,.needs-bento,.needs-help{text-align:left}
+.needs-title{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(22px,2.6vw,28px);line-height:1.35;color:var(--cream);margin:0 0 20px}
+.hero-more .needs-bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:none;margin:0 0 12px}
+.hero-more .needs-bento a{justify-content:center;gap:4px;padding:20px 24px;border-radius:14px;background:var(--paper);border:1px solid var(--forest-line);color:var(--cream);
+  transition:border-color .18s ease}
+.hero-more .needs-bento a:hover{background:var(--paper);border-color:var(--gold-deep)}
+.hero-more .needs-bento a:focus-visible{outline:3px solid var(--gold-deep);outline-offset:3px}
+.hero-more .needs-bento strong{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:700;line-height:1.4}
+.hero-more .needs-bento span{font-size:16px;line-height:1.6;color:var(--cream-dim)}
+/* 主卡＝墨色深底＋米白字（淺色帶上的反白面）；hover 用咖啡金框線 */
+.hero-more .needs-bento .need-main{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px;
+  padding:28px 32px;background:var(--cx-ink);border-color:var(--cx-ink);color:var(--cx-cream)}
+.hero-more .needs-bento .need-main:hover{background:var(--cx-ink);border-color:var(--cx-gold)}
+.hero-more .needs-bento .need-main strong{font-size:clamp(28px,3vw,38px);font-weight:900;line-height:1.25;letter-spacing:-.01em}
+.hero-more .needs-bento .need-main span{font-size:18px;color:var(--cx-cream-dim)}
+.needs-help{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 32px;
+  padding:24px 28px;margin:0 0 44px;background:var(--paper);border:1px solid var(--cx-gold);border-radius:14px}
+.needs-help-text{flex:1 1 320px;min-width:0}
+.needs-help h3{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;line-height:1.4;color:var(--cream);margin:0 0 4px}
+.needs-help p{font-size:16px;line-height:1.6;color:var(--cream-dim);margin:0}
+.needs-help .cx-hours-status{margin:10px 0 0}
+.needs-help .cx-hours-actions{flex:none}
+
+/* FAQ：單欄手風琴＋桌機米米小插圖 */
+#faq .faq-wrap{max-width:1000px;display:grid;grid-template-columns:minmax(0,1fr) 180px;column-gap:56px;align-items:start}
+.faq-main{min-width:0}
+.faq-mimi{display:block;width:180px;height:auto;margin-top:96px}
+#faq .acc summary{font-size:17px;min-height:56px}
+#faq .acc .body{font-size:16px}
+
+/* 手機固定條（同 footer.html）；body 前綴＋!important 為蓋過 fluid.css／consultation.css */
+@media(max-width:860px){
+  body .cx-sticky-cta{background:var(--cx-cream-glass);border-color:var(--cx-line);box-shadow:0 12px 32px -12px var(--cx-ink-shadow)}
+  body .cx-sticky-cta .cx-sticky-tel{background:var(--cx-orange)!important;color:var(--cx-ink)!important}
+  body .cx-sticky-cta .cx-sticky-line{background:transparent!important;color:var(--cx-ink)!important;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+  body .cx-sticky-cta a svg{fill:currentColor}
+}
+@media(max-width:860px) and (prefers-reduced-transparency:reduce){body .cx-sticky-cta{background:var(--cx-cream)}}
+@media(max-width:860px) and (prefers-contrast:more){body .cx-sticky-cta{border-color:var(--cx-ink)}}
+/* 非接聽：LINE 升主鈕、電話降次鈕（只留號碼）；看 <html> 上 inline 先標的狀態，避免鈕位對調算進 CLS */
+[data-cx-open="0"] .cx-sticky-cta .cx-sticky-line{order:-2;flex:1.35;background:var(--cx-orange)!important;color:var(--cx-ink)!important;box-shadow:none}
+[data-cx-open="0"] .cx-sticky-cta .cx-sticky-tel{flex:1;background:transparent!important;color:var(--cx-ink)!important;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+[data-cx-open="0"] .cx-sticky-cta .cx-sticky-verb{display:none}
+/* 號碼不折行（同 footer.html） */
+.cx-sticky-cta a{container-type:inline-size;white-space:nowrap}
+@container (max-width:12em){.cx-sticky-verb{display:none}}
+@container (max-width:9.5em){.cx-sticky-tel svg{display:none}}
+@container (max-width:7.5em){.cx-sticky-line svg{display:none}.cx-sticky-num{font-size:.86em;letter-spacing:0}}
+@container (max-width:6.2em){.cx-sticky-num{font-size:.76em}}
+/* 浮動小鋮鈕：規則不動，只在元素上重新指派變數 → 墨底米白字；橘色只留給電話／LINE */
+.float{--gold:var(--cx-ink);--forest-deep:var(--cx-cream)}
+/* 固定條讓位（老闆拍板）：hero／求助卡主鈕在畫面內就收起；cx-hours.js 標 data-cx-cta-inview；只動 transform／opacity／visibility，無 CLS */
+.cx-sticky-cta{transition:transform .18s ease,opacity .18s ease,visibility 0s linear 0s}
+[data-cx-cta-inview="1"] .cx-sticky-cta{transform:translateY(calc(100% + 16px));opacity:0;visibility:hidden;pointer-events:none;
+  transition:transform .18s ease,opacity .18s ease,visibility 0s linear .18s}
+
+@media(max-width:860px){
+  .hero-in{grid-template-columns:minmax(0,1fr);row-gap:32px}
+  .cx-hours-actions{flex-direction:column}
+  .cx-hours-actions a{width:100%}
+  .hero .hero-call p{font-size:16px}
+  .hero-more .needs-bento{grid-template-columns:minmax(0,1fr)}
+  .hero-more .needs-bento a:not(.need-main){padding:18px 20px}
+  .hero-more .needs-bento .need-main{flex-direction:column;align-items:flex-start;padding:24px 20px;gap:12px}
+  .needs-help{padding:22px 20px;margin-bottom:36px}
+  .needs-help .cx-hours-actions{flex:1 1 100%}
+  #faq .faq-wrap{display:block;max-width:760px}
+  .faq-mimi{display:none}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -536,14 +644,28 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div id="nav"></div>
 <script src="nav.js"></script>
+<script>/* 首屏接聽狀態先標在 <html>（規則同 cx-hours.js，改時段兩處一起改）；放 inline＝免 CLS、不多擋首屏的請求 */
+(function(){var h=location.hostname,f=window.__CX_NOW,d,m,t;
+if((h==='localhost'||h==='127.0.0.1')&&typeof f==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(f)){f=f.split(/[-T:]/).map(Number);d=new Date(Date.UTC(f[0],f[1]-1,f[2])).getUTCDay();m=f[3]*60+f[4];}
+else{t=new Date(Date.now()+288e5);d=t.getUTCDay();m=t.getUTCHours()*60+t.getUTCMinutes();}
+document.documentElement.setAttribute('data-cx-open',d>=1&&d<=5&&m>=600&&m<1020?'1':'0');
+/* 固定條讓位：hero 主鈕在首屏，先當作看得到（固定條收起），cx-hours.js 的 IntersectionObserver 載入後校正 */
+document.documentElement.setAttribute('data-cx-cta-inview','1');})();</script>
+<script src="cx-hours.js" defer></script>
 
 <header class="hero">
   <div class="hero-bg"></div>
   <div class="hero-in">
 
+    <div class="hero-copy">
     <p class="eyebrow">鋮馨租賃 · 新北中和 · 諮詢與媒合</p>
     <h1>借款壓力與資金需求，<br><em>先打電話，把下一步說清楚。</em></h1>
-    <p class="hero-sub">民間借款想整理、轉回銀行，或需要二胎房貸、企業貸款？先由顧問了解需求，協助盤點條件與申貸方向。你也可以用下方小鋮 AI、試算與財務健檢先整理問題。</p><div class="cx-call-block" data-consultation-need="general"><a class="cx-call-primary" href="tel:0222490517" data-link-location="hero">電話諮詢 02-2249-0517</a><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div>
+    <p class="hero-sub">民間借款想整理、轉回銀行，或需要二胎房貸、企業貸款？先由顧問了解需求，協助盤點條件與申貸方向。你也可以用下方小鋮 AI、試算與財務健檢先整理問題。</p><div class="cx-call-block hero-call" data-consultation-need="general" data-cx-hours><p class="cx-hours-status">現在是非接聽時間。先用 LINE 留言，我們上班後回覆您。</p><div class="cx-hours-actions"><a class="cx-call-primary cx-h-tel" href="tel:0222490517" data-link-location="hero"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span class="cx-h-lbl">電話諮詢</span> <span class="cx-h-num">02-2249-0517</span></a><a class="cx-h-line" href="https://lin.ee/PHIfSoY" data-link-location="hero"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>LINE 留言</a></div><p>接聽時間：週一至週五 10:00–17:00<br>未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" data-link-location="hero">LINE 留言</a>，留下方便聯絡的時段。</p><p class="cx-call-note">鋮馨提供諮詢與媒合，不自行放貸；核貸條件與結果由承作機構審核決定。</p></div>
+    </div>
+
+    <picture class="hero-media">
+      <img src="img/uiux/hero-mimi-V1-960.webp" srcset="img/uiux/hero-mimi-V1-640.webp 640w, img/uiux/hero-mimi-V1-960.webp 960w, img/uiux/hero-mimi-V1-1920.webp 1920w" sizes="(min-width: 861px) min(40vw, 480px), calc(100vw - 48px)" width="960" height="720" alt="鋮馨租賃有限公司標誌與吉祥物米米，米米站在木桌上揮手打招呼">
+    </picture>
 
 
     <div class="panel">
@@ -616,15 +738,22 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <section class="hero-more" aria-label="諮詢需求與聯絡方式">
   <div class="sec-in">
-    <nav class="cx-needs" aria-label="四類諮詢需求"><a href="debt-consolidation.html" data-consultation-need="private_debt"><strong>民間借款整理</strong><span>先盤點多筆借款、月付與清償條件 →</span></a><a href="private-to-bank.html" data-consultation-need="private_to_bank"><strong>民間轉貸銀行</strong><span>了解轉貸條件、文件與清償銜接 →</span></a><a href="second-mortgage.html" data-consultation-need="second_mortgage"><strong>二胎房貸</strong><span>評估房屋擔保空間與還款能力 →</span></a><a href="corporate-loan.html" data-consultation-need="corporate_loan"><strong>企業貸款</strong><span>整理營運週轉需求與申貸資料 →</span></a></nav>
+    <h2 class="needs-title">您的需求比較接近哪一項？</h2>
+    <nav class="cx-needs needs-bento" aria-label="四類諮詢需求"><a class="need-main" href="private-to-bank.html" data-consultation-need="private_to_bank"><strong>民間轉貸銀行</strong><span>了解轉貸條件、文件與清償銜接 →</span></a><a href="debt-consolidation.html" data-consultation-need="private_debt"><strong>民間借款整理</strong><span>先盤點多筆借款、月付與清償條件 →</span></a><a href="second-mortgage.html" data-consultation-need="second_mortgage"><strong>二胎房貸</strong><span>評估房屋擔保空間與還款能力 →</span></a><a href="corporate-loan.html" data-consultation-need="corporate_loan"><strong>企業貸款</strong><span>整理營運週轉需求與申貸資料 →</span></a></nav>
+    <div class="needs-help" data-consultation-need="general" data-cx-hours>
+      <div class="needs-help-text">
+        <h3>不確定選哪個？直接打電話</h3>
+        <p>先說說您的狀況，顧問協助判斷從哪一項開始。</p>
+        <p class="cx-hours-status">現在是非接聽時間。先用 LINE 留言，我們上班後回覆您。</p>
+      </div>
+      <div class="cx-hours-actions"><a class="cx-h-tel" href="tel:0222490517" data-link-location="after_ai"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span class="cx-h-lbl">電話諮詢</span> <span class="cx-h-num">02-2249-0517</span></a><a class="cx-h-line" href="https://lin.ee/PHIfSoY" data-link-location="after_ai"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M24 10.32C24 4.627 18.627 0 12 0S0 4.627 0 10.32c0 5.114 4.535 9.395 10.655 10.207.415.09.98.274 1.122.629.13.323.085.828.042 1.155l-.181 1.086c-.055.323-.256 1.263 1.107.689 1.362-.575 7.35-4.327 10.03-7.41C23.367 14.803 24 12.631 24 10.32z"/></svg>LINE 留言</a></div>
+    </div>
         <div class="stats">
       <div><div class="stat-n">39+<sup>1</sup></div><div class="stat-l">歷來送件機構經驗</div></div>
       <div><div class="stat-n">20+ 年<sup>2</sup></div><div class="stat-l">團隊不動產租賃經驗</div></div>
       <div><div class="stat-n">468<sup>3</sup></div><div class="stat-l">中和中正路 · 可到店面談</div></div>
     </div>
         <div class="quick">
-      <a class="primary" href="tel:0222490517" data-link-location="after_ai">電話諮詢 02-2249-0517</a>
-      <a href="https://lin.ee/PHIfSoY">未接通？LINE 留言</a>
       <a href="apply.html">填表試算</a>
     </div>
         <p class="hero-fine">
@@ -707,7 +836,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <!-- 常見問題（FAQPage；可見文字與 JSON-LD 由同一份字串生成，2026-09-23 恢復精簡 3 題） -->
 <section id="faq" class="sec sec-paper">
-  <div class="sec-narrow">
+  <div class="sec-narrow faq-wrap">
+    <div class="faq-main">
     <p class="kicker">常見問題</p>
     <h2>常見問題</h2>
     <div class="acc-grid">
@@ -724,6 +854,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <p class="body">鋮馨租賃有限公司位於新北市中和區中正路468號，服務範圍涵蓋全台灣，包含新北市板橋、中和、永和、新莊、三重、土城，以及台北市、桃園市等縣市。可加入官方LINE（https://lin.ee/PHIfSoY）或致電 02-2249-0517 / 0958-139-786 預約免費評估。</p>
       </details>
     </div>
+    </div>
+    <img class="faq-mimi" src="img/uiux/mimi-faq-480.webp" width="480" height="892" loading="lazy" decoding="async" alt="鋮馨吉祥物米米拿著放大鏡，仔細看手上的文件">
   </div>
 </section>
 
@@ -840,7 +972,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   </a>
   <a href="tel:+886-2-2249-0517" class="cx-sticky-tel" data-link-location="sticky_bar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-    撥打 02-2249-0517
+    <span class="cx-sticky-verb">撥打</span> <span class="cx-sticky-num">02-2249-0517</span>
   </a>
 </div>
 

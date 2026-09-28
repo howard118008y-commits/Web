@@ -1,31 +1,22 @@
 <meta name="robots" content="noindex">
 <style>
-/* 全站頁尾——paper 版，對齊 index.html 自帶的 .foot（paper 底 #F7F5F0、ink 字 #1B2F4A、
-   欄標題 Noto Serif TC、hover 金 #9A6D3A、細線 #E2DED4）。2026-09-14 Phase 3 換皮，文字零變動。
-   為什麼不再用 :where()：舊版是「fallback」（讓各頁自己的 footer 規則蓋過去），現在要的是
-   「全站同一份頁尾」——選擇器全掛在 .cx-site-footer 底下（特異性 0,2,0），蓋過 style.css 的
-   footer{}／.footer-cols{} 與各頁 <head> 內聯的 footer 規則。index.html 不載本檔（自帶 .foot）；
-   land-value-tax-calculator／tools-lab 的卡片 <footer> 沒有 .cx-site-footer，不受影響。
-   欄標題字型靠各頁 <link> 已載的 Noto Serif TC；沒載的頁退回系統 serif。
-   sticky CTA 區段值與 style.css 的 Mobile Sticky CTA Bar 區段相同，改動時同步。 */
-.cx-site-footer{background:#F7F5F0;color:#1B2F4A;padding:0 24px 60px;font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.cx-site-footer{background:var(--cx-ink);color:var(--cx-cream);padding:0 24px 60px;font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
 .cx-site-footer .footer-in{max-width:1180px;margin:0 auto}
-.cx-site-footer .footer-cols{display:grid;grid-template-columns:1.1fr 1fr 1.4fr;gap:40px;padding:56px 0 40px;margin:0;border-top:1px solid #E2DED4}
-.cx-site-footer .footer-col-title{font-family:'Noto Serif TC',serif;font-size:15.5px;font-weight:700;color:#1B2F4A;margin-bottom:8px}
-/* 觸控目標：連結本體 21px 高 → padding 撐到 41px、彼此間距 ≥12px（WCAG 2.5.8） */
-.cx-site-footer .footer-link{display:block;font-size:14px;line-height:1.5;color:#5A6878;margin:0;padding:10px 0;text-decoration:none;transition:color .18s}
-.cx-site-footer .footer-link:hover{color:#9A6D3A}
-.cx-site-footer .contact-label{display:block;font-size:13.5px;font-weight:500;color:#1B2F4A;margin-bottom:2px}
-.cx-site-footer .contact-value{font-size:13.5px;color:#5A6878;line-height:2;text-decoration:none}
+.cx-site-footer .footer-cols{display:grid;grid-template-columns:1.1fr 1fr 1.4fr;gap:40px;padding:56px 0 40px;margin:0;border-top:1px solid var(--cx-ink-line)}
+.cx-site-footer .footer-col-title{font-family:'Noto Serif TC',serif;font-size:15.5px;font-weight:700;color:var(--cx-cream);margin-bottom:8px}
+.cx-site-footer .footer-link{display:block;font-size:14px;line-height:1.5;color:var(--cx-cream-dim);margin:0;padding:10px 0;text-decoration:none;text-underline-offset:4px;transition:color .18s}
+.cx-site-footer .footer-link:hover{color:var(--cx-cream);text-decoration:underline;text-decoration-color:var(--cx-gold)}
+.cx-site-footer .contact-label{display:block;font-size:13.5px;font-weight:500;color:var(--cx-cream);margin-bottom:2px}
+.cx-site-footer .contact-value{font-size:13.5px;color:var(--cx-cream-dim);line-height:2;text-decoration:none}
 .cx-site-footer p.contact-value{margin:0 0 4px;max-width:420px}
-.cx-site-footer a.contact-value{color:#1B2F4A}
-.cx-site-footer .contact-value a{color:#1B2F4A;text-decoration:underline;text-underline-offset:3px}
-.cx-site-footer a.contact-value:hover,.cx-site-footer .contact-value a:hover{color:#9A6D3A}
-.cx-site-footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;border-top:1px solid #E2DED4;padding-top:22px;margin-top:0}
-.cx-site-footer .copyright{font-size:12px;color:#8C97A5}
+.cx-site-footer a.contact-value{color:var(--cx-cream);text-underline-offset:3px}
+.cx-site-footer .contact-value a{color:var(--cx-cream);text-decoration:underline;text-underline-offset:3px}
+.cx-site-footer a.contact-value:hover,.cx-site-footer .contact-value a:hover{text-decoration:underline;text-decoration-color:var(--cx-gold)}
+.cx-site-footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;border-top:1px solid var(--cx-ink-line);padding-top:22px;margin-top:0}
+.cx-site-footer .copyright{font-size:12px;color:var(--cx-cream-dim)}
 .cx-site-footer .footer-links-row{display:flex;gap:10px;flex-wrap:wrap}
-.cx-site-footer .footer-link-sm{display:inline-flex;align-items:center;height:40px;min-height:40px;padding:0 14px;border:1px solid #E2DED4;border-radius:9px;font-size:13px;color:#5A6878;text-decoration:none;transition:.18s}
-.cx-site-footer .footer-link-sm:hover{border-color:#9A6D3A;color:#9A6D3A}
+.cx-site-footer .footer-link-sm{display:inline-flex;align-items:center;height:40px;min-height:40px;padding:0 14px;border:1px solid var(--cx-ink-line);border-radius:9px;font-size:13px;color:var(--cx-cream-dim);text-decoration:none;transition:.18s}
+.cx-site-footer .footer-link-sm:hover{border-color:var(--cx-gold);color:var(--cx-cream)}
 :where(.cx-sticky-cta){display:none}
 @media(max-width:900px){
   .cx-site-footer .footer-cols{grid-template-columns:1fr 1fr;gap:34px}
@@ -34,11 +25,30 @@
   .cx-site-footer{padding:0 20px 6rem}
   .cx-site-footer .footer-cols{grid-template-columns:1fr;gap:28px;padding:40px 0 28px}
   .cx-site-footer .footer-bottom{flex-direction:column;align-items:flex-start}
-  :where(.cx-sticky-cta){position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;background:#1B2F4A;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.3)}
-  :where(.cx-sticky-cta a){flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em}
-  .cx-sticky-cta .cx-sticky-line{background:#1B2F4A;color:#fff}
-  :where(.cx-sticky-cta .cx-sticky-tel){order:-1;background:#C8945A;color:#12213A;flex:1.35}
+  :where(.cx-sticky-cta){position:fixed;left:0;right:0;bottom:0;z-index:998;display:flex;padding-bottom:env(safe-area-inset-bottom)}
+  :where(.cx-sticky-cta a){flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  :where(.cx-sticky-cta .cx-sticky-tel){order:-1;flex:1.35}
+  .cx-sticky-cta{background:var(--cx-cream-glass);border:1px solid var(--cx-line);box-shadow:0 12px 32px -12px var(--cx-ink-shadow)}
+  .cx-sticky-cta .cx-sticky-tel{background:var(--cx-orange)!important;color:var(--cx-ink)!important;box-shadow:none}
+  .cx-sticky-cta .cx-sticky-line{background:transparent!important;color:var(--cx-ink)!important;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+  .cx-sticky-cta a svg{fill:currentColor}
 }
+@media(max-width:768px) and (prefers-reduced-transparency:reduce){.cx-sticky-cta{background:var(--cx-cream)}}
+@media(max-width:768px) and (prefers-contrast:more){.cx-sticky-cta{border-color:var(--cx-ink)}}
+.cx-sticky-cta[data-cx-open="0"] .cx-sticky-line{order:-2;flex:1.35;background:var(--cx-orange)!important;color:var(--cx-ink)!important;box-shadow:none}
+.cx-sticky-cta[data-cx-open="0"] .cx-sticky-tel{flex:1;background:transparent!important;color:var(--cx-ink)!important;box-shadow:inset 0 0 0 1.5px var(--cx-ink)}
+.cx-sticky-cta[data-cx-open="0"] .cx-sticky-verb{display:none}
+.cx-sticky-cta{transition:transform .18s ease,opacity .18s ease,visibility 0s linear 0s}
+[data-cx-cta-inview="1"] .cx-sticky-cta{transform:translateY(calc(100% + 16px));opacity:0;visibility:hidden;pointer-events:none;
+  transition:transform .18s ease,opacity .18s ease,visibility 0s linear .18s}
+.cx-sticky-cta:not([data-cx-open]){visibility:hidden;opacity:0;animation:cx-sticky-wait 0s linear .6s forwards!important}
+@keyframes cx-sticky-wait{to{visibility:visible;opacity:1}}
+.cx-sticky-cta a{container-type:inline-size;white-space:nowrap}
+@container (max-width:12em){.cx-sticky-cta .cx-sticky-verb{display:none}}
+@container (max-width:9.5em){.cx-sticky-cta .cx-sticky-tel svg{display:none}}
+@container (max-width:7.5em){.cx-sticky-cta .cx-sticky-line svg{display:none}}
+@container (max-width:7.5em){.cx-sticky-cta .cx-sticky-num{font-size:.86em;letter-spacing:0}}
+@container (max-width:6.2em){.cx-sticky-cta .cx-sticky-num{font-size:.76em}}
 </style>
 <footer class="cx-site-footer">
  <div class="footer-in">
@@ -99,12 +109,43 @@
   </a>
   <a href="tel:+886-2-2249-0517" class="cx-sticky-tel" data-link-location="sticky_bar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-    撥打 02-2249-0517
+    <span class="cx-sticky-verb">撥打</span> <span class="cx-sticky-num">02-2249-0517</span>
   </a>
 </div>
 <script>
-/* 二胎主商品場景（宿主頁 nav 掛載點標記 cta=line）禁「免費評估／免費諮詢」招攬鉤子（媽祖 2026-09-19 裁示）：
-   頁尾兩顆「免費」連結改寫；其他頁維持原樣。本片段由 include.js 注入時執行。 */
+(function () {
+  if (window.__cxHours) { window.__cxHours.apply(); return; }
+  if (document.querySelector('script[src$="cx-hours.js"]')) return;
+  var s = document.createElement('script');
+  s.src = '/cx-hours.js';
+  document.head.appendChild(s);
+})();
+</script>
+<script>
+(function () {
+  var mq = window.matchMedia && window.matchMedia('(min-width:1024px)');
+  if (!mq) return;
+  function go() {
+    if (document.querySelector('script[src$="cx-dcard.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/cx-dcard.js';
+    document.body.appendChild(s);
+  }
+  if (mq.matches) go();
+  else if (mq.addEventListener) mq.addEventListener('change', function h(e) { if (e.matches) { mq.removeEventListener('change', h); go(); } });
+})();
+</script>
+<script>
+(function () {
+  if (document.getElementById('cx-brand') || document.querySelector('script[src$="nav.js"]')) return;
+  var s = document.createElement('script');
+  s.src = '/nav.js';
+  s.setAttribute('data-cx-tokens-only', '');
+  document.head.appendChild(s);
+})();
+</script>
+<script>
+/* 二胎主商品場景禁「免費」招攬鉤子（媽祖 2026-09-19） */
 (function () {
   if (!document.querySelector('#nav[data-cta="line"]')) return;
   document.querySelectorAll('a.footer-link').forEach(function (a) {

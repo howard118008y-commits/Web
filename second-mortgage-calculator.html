@@ -22,8 +22,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 /* === Better 對拷版型（2026-09-04 原型：對標 better.com/mortgage；色票依老闆定案 token） === */
-:root{--forest:#1B2F4A;--forest-deep:#12213A;--action:#2F5B8F;--action-hover:#26497A;--gold:#C8945A;--gold-soft:#E0B685;--gold-deep:#9A6D3A;
-  --paper:#F7F5F0;--cream:#F2EFE8;--tint:#EEF2F7;--ink:#1B2F4A;--ink-dim:#5A6878;--line:#E2DED4;
+:root{/* 米米配色：色碼只在 nav.js（--cx-*），舊變數名保留、依角色指向新色 */--forest:var(--cx-ink);--forest-deep:var(--cx-ink);--action:var(--cx-orange-deep);--action-hover:var(--cx-orange-deep-hover);--gold:var(--cx-orange);--gold-soft:var(--cx-orange-soft);--gold-deep:var(--cx-orange-deep);
+  --paper:var(--cx-cream);--cream:var(--cx-cream-2);--tint:var(--cx-cream);--ink:var(--cx-ink);--ink-dim:var(--cx-ink-2);--line:var(--cx-line);
   --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -68,7 +68,7 @@ img{max-width:100%;display:block}
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
 
 /* 1. Hero 左文右圖 */
-.bt-hero{background:linear-gradient(180deg,#1E3556 0%,#1B2F4A 62%,#12213A 100%);color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
+.bt-hero{color:var(--cream)}.bt-hero .bt-h1,.bt-hero .bt-p,.bt-hero p,.bt-hero li{color:var(--cream)}.bt-hero .bt-h1 em{color:var(--gold);font-style:normal}.bt-hero .bt-label{color:var(--gold)}.bt-hero .bt-btn-outline-dark{color:var(--cream);border-color:rgba(242,239,232,.45)}.bt-hero .bt-btn-outline-dark:hover{background:rgba(242,239,232,.08)}.bt-hero a:not(.bt-btn){color:var(--cream)}.bt-hero .aib .aib-chips button,.bt-hero .aib .aib-chips a,.bt-hero .aib .aib-chips span{color:var(--cream)!important;border-color:rgba(242,239,232,.42)!important;background:transparent!important;opacity:1}.bt-hero .aib .aib-chips button:hover,.bt-hero .aib .aib-chips a:hover{background:rgba(242,239,232,.12)!important}.bt-hero .aib .aib-note,.bt-hero .aib-note{color:rgba(242,239,232,.62)!important}
 .bt-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;align-items:center}
 .bt-hero-text .bt-p{margin-bottom:32px;max-width:560px}
 .bt-hero-img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 60%;border-radius:8px}
@@ -250,6 +250,9 @@ input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(
 .result-label{font-size:12px;font-weight:500;letter-spacing:.05em;opacity:.85;margin-bottom:6px}
 .result-value{font-size:24px;font-weight:700;letter-spacing:-.02em}
 .result-sub{font-size:11px;opacity:.7;margin-top:4px}
+/* 橘／深橘底上的小字不用半透明（12px 對比要 ≥4.5）：深橘底配米白 5.04、橘底配墨 4.80 */
+.result-card.hl-purple :is(.result-label,.result-sub){color:var(--cx-cream);opacity:1}
+.result-card.hl-green :is(.result-label,.result-sub){color:var(--cx-ink);opacity:1}
 
 .calc-note{font-size:12px;color:var(--ink-dim);line-height:1.6;padding:14px 16px;background:var(--paper);border:.5px solid var(--line);border-radius:8px;margin-top:8px}
 
@@ -346,8 +349,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-label">Second Mortgage Calculator</p>
       <h1 class="bt-h1">二胎試算</h1>
       <p class="bt-p">輸入房屋市價與一胎本金，立即試算二胎可貸金額與每月本利攤還。</p>
+      <a class="bt-btn cx-tool-go" href="#tool-start">開始試算</a>
     </div>
-    <img class="bt-hero-img" src="img/article-second-mortgage.jpg" alt="二胎試算" width="800" height="459" fetchpriority="high" loading="eager">
+    <img class="bt-hero-img" src="img/uiux/O06/hero-calculator-960.webp" srcset="img/uiux/O06/hero-calculator-640.webp 640w, img/uiux/O06/hero-calculator-960.webp 960w, img/uiux/O06/hero-calculator-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 48px), 660px" width="960" height="960" alt="吉祥物米米雙手拿著計算機，準備幫忙試算" fetchpriority="high" loading="eager">
   </div>
 </section>
 
@@ -367,7 +371,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     </div>
 
 <div class="calc-wrap">
-  <div class="card">
+  <div class="card" id="tool-start">
     <div class="card-title">輸入條件</div>
 
     <div class="field">
@@ -436,8 +440,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <span id="stCapLabel" style="left:0;width:0%">LTV 上限 —</span>
       </div>
       <div class="st-key">
-        <div><b style="background:#12213A"></b>一胎剩餘本金</div>
-        <div><b style="background:#2F5B8F"></b>可貸二胎金額</div>
+        <div><b style="background:var(--cx-ink)"></b>一胎剩餘本金</div>
+        <div><b style="background:var(--cx-orange-deep)"></b>可貸二胎金額</div>
         <div><b style="background:#F2EFE8;border:1px solid #E2DED4"></b>剩餘房屋淨值</div>
       </div>
     </div>
@@ -581,12 +585,12 @@ calculate();
   function init(){
     var bar = document.createElement('div');
     bar.setAttribute('role','note');
-    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:#12213A;color:#fff;'
+    bar.style.cssText = 'position:sticky;top:0;z-index:2147483647;background:var(--cx-ink);color:#fff;'
       + 'padding:10px 14px;font-size:14px;line-height:1.5;text-align:center;font-family:"Noto Sans TC",sans-serif;';
     bar.innerHTML = '🔧 本工具由 <a href="https://cx468.com.tw/?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
       + 'target="_blank" rel="noopener" style="color:#ffd166;text-decoration:underline;font-weight:700">鋮馨租賃 cx468.com.tw</a> 提供｜'
       + '<a href="https://cx468.com.tw/apply.html?utm_source=embed&utm_medium=iframe&utm_campaign=tool-embed" '
-      + 'target="_blank" rel="noopener" style="color:#fff;background:#1B2F4A;padding:2px 10px;border-radius:99px;'
+      + 'target="_blank" rel="noopener" style="color:var(--cx-ink);background:var(--cx-orange);padding:2px 10px;border-radius:99px;'
       + 'text-decoration:none;font-weight:700;margin-left:4px">填表洽詢 →</a>';
     document.body.insertBefore(bar, document.body.firstChild);
     function patchLinks(){

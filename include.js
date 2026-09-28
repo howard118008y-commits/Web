@@ -1,18 +1,7 @@
-/**
- * 鋮馨網站共用模組載入器
- * 把每頁 <div data-include="nav"></div> 替換為 nav.html 內容
- * 自動標記目前頁面對應的 menu 項目為 active
- *
- * 載入策略（為了 LCP）：
- * - nav / footer / line-qr：DOMContentLoaded 立即載入（影響首屏 layout）
- * - anti-fraud-modal / chat-widget：延遲到 idle / window load 後才載入（避免阻擋 hero LCP）
- * - chat-widget（小鋮 AI 助理）不必每頁加 div，由本檔自動注入全站生效
- */
+
 (function () {
   'use strict';
-
   var DEFERRED = ['anti-fraud-modal', 'chat-widget'];
-
   function loadInclude(el) {
     var src = el.dataset.include;
     if (!src) return Promise.resolve();
@@ -25,8 +14,6 @@
       .then(function (html) {
         var temp = document.createElement('div');
         temp.innerHTML = html.trim();
-        // 片段獨立開啟時可以 noindex；嵌入正式頁時不可帶入它的索引指令。
-        // 保留宿主頁自己的 robots 設定（例如 tools-lab 的 noindex）。
         temp.querySelectorAll('meta[name]').forEach(function (meta) {
           var name = (meta.getAttribute('name') || '').trim().toLowerCase();
           if (['robots', 'googlebot', 'googlebot-news', 'bingbot'].indexOf(name) !== -1) {
@@ -50,7 +37,6 @@
         console.error('include.js:', err);
       });
   }
-
   function markActiveNavLink() {
     var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var pageKey = path.replace('.html', '');
@@ -60,11 +46,6 @@
       }
     });
   }
-
-  /* 畫面顯示「本頁最後更新」（2026-09-27 加）：日期只讀 JSON-LD 的 dateModified，
-     不在 HTML 寫死——dateModified 由 pre-commit 的 update_schema_datemod.py 依實質改動同步，
-     寫死的日期會變成假斷更（memory feedback_no_hardcoded_freshness_stamp）。
-     頁面已自帶「最後更新／更新日期／更新於」字樣的（條款、隱私、實登觀測站）不重複加。 */
   function showPageUpdated() {
     if (document.querySelector('[data-page-updated]')) return;
     if (/最後更新|更新日期|更新於/.test(document.body.innerText || '')) return;
@@ -85,7 +66,93 @@
     if (footer) footer.parentNode.insertBefore(p, footer);
     else document.body.appendChild(p);
   }
-
+  function enhanceTables() {
+    var mq = window.matchMedia ? window.matchMedia('(max-width:480px)') : null;
+    var boxes = [];
+    function opaqueBg(el) {
+      while (el && el.nodeType === 1) {
+        var c = getComputedStyle(el).backgroundColor;
+        var m = c && c.match(/[\d.]+/g);
+        if (m && (m.length < 4 || +m[3] > 0.9)) return c;
+        el = el.parentElement;
+      }
+      return 'rgb(255, 255, 255)';
+    }
+    function update(box) {
+      var sc = box.__cxScroller;
+      var more = sc.scrollWidth - sc.clientWidth - sc.scrollLeft > 2;
+      if (more) box.setAttribute('data-cx-more', ''); else box.removeAttribute('data-cx-more');
+      if (sc.scrollLeft > 24) box.setAttribute('data-cx-scrolled', '');
+      if (more && !box.__cxRoom) {
+        box.__cxRoom = true;
+        var prev = box.previousElementSibling;
+        var gap = prev ? sc.getBoundingClientRect().top - prev.getBoundingClientRect().bottom : parseFloat(getComputedStyle(sc).marginTop) || 0;
+        if (gap < 28) box.style.marginTop = '28px';
+      }
+    }
+    function freeze(box) {
+      var t = box.__cxTable, sc = box.__cxScroller;
+      var ok = mq && mq.matches && !box.__cxSpan && !box.hasAttribute('data-cx-form') && box.__cxCols >= 3 && sc.scrollWidth > sc.clientWidth + 2;
+      if (ok) {
+        var first = t.rows[0] && t.rows[0].cells[0];
+        ok = !!first && first.getBoundingClientRect().width <= sc.clientWidth * 0.45;
+      }
+      if (!ok) { box.removeAttribute('data-cx-freeze'); return; }
+      box.setAttribute('data-cx-freeze', '');
+      if (!box.__cxMo && 'MutationObserver' in window) {
+        box.__cxMo = new MutationObserver(function () { if (box.hasAttribute('data-cx-freeze')) freeze(box); });
+        box.__cxMo.observe(t, { childList: true, subtree: true });
+      }
+      Array.prototype.forEach.call(t.rows, function (r) {
+        var c = r.cells[0];
+        if (!c || c.getAttribute('data-cx-bg')) return;
+        c.setAttribute('data-cx-bg', '1');
+        var bg = getComputedStyle(c).backgroundColor;
+        if (/rgba\(.*,\s*0(\.\d+)?\)$|transparent/.test(bg)) c.style.backgroundColor = opaqueBg(c.parentElement);
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('table'), function (t) {
+      if (t.closest('.cx-tbox') || t.closest('[class^="cw-"],[class*=" cw-"]')) return;
+      var sc = null;
+      [t.parentElement, t.parentElement && t.parentElement.parentElement].some(function (el) {
+        if (el && el !== document.body && /(auto|scroll)/.test(getComputedStyle(el).overflowX)) { sc = el; return true; }
+        return false;
+      });
+      if (!sc) {
+        sc = document.createElement('div');
+        sc.className = 'cx-tscroll';
+        t.parentNode.insertBefore(sc, t);
+        sc.appendChild(t);
+      }
+      var box = document.createElement('div');
+      box.className = 'cx-tbox';
+      sc.parentNode.insertBefore(box, sc);
+      box.appendChild(sc);
+      var hint = document.createElement('span');
+      hint.className = 'cx-thint';
+      hint.setAttribute('aria-hidden', 'true');
+      hint.textContent = '左右滑動看更多';
+      box.appendChild(hint);
+      box.__cxScroller = sc;
+      box.__cxTable = t;
+      box.__cxSpan = !!t.querySelector('[rowspan]:not([rowspan="1"]),[colspan]:not([colspan="1"])');
+      if (t.querySelector('input,select,textarea')) box.setAttribute('data-cx-form', '');
+      box.__cxCols = Math.max.apply(null, Array.prototype.map.call(t.rows, function (r) { return r.cells.length; }).concat(0));
+      sc.addEventListener('scroll', function () { update(box); }, { passive: true });
+      boxes.push(box);
+    });
+    if (!boxes.length) return;
+    function all() { boxes.forEach(function (b) { freeze(b); update(b); }); }
+    all();
+    if ('ResizeObserver' in window) {
+      var ro = new ResizeObserver(function (entries) {
+        entries.forEach(function (e) { var b = e.target.closest('.cx-tbox'); if (b) { freeze(b); update(b); } });
+      });
+      boxes.forEach(function (b) { ro.observe(b.__cxScroller); ro.observe(b.__cxTable); });
+    } else {
+      window.addEventListener('resize', all);
+    }
+  }
   function loadDeferred(deferredEls) {
     if (!deferredEls.length) return;
     var run = function () {
@@ -97,13 +164,6 @@
       setTimeout(run, 300);
     }
   }
-
-  /**
-   * 動態增強（GSAP 卡片 scroll-reveal）全站延遲載入。
-   * 與 chat-widget 同策略：window load 後才載，絕不阻擋首屏 LCP。
-   * onload 鏈保證順序 gsap → ScrollTrigger → cx-motion；用絕對路徑 /js/ 兼容 /en/ 等子目錄。
-   * 任一環節失敗只是沒有動畫，內容照常顯示（cx-motion 內另有 gsap 存在性守衛）。
-   */
   function loadMotion() {
     if (window.__cxMotionLoaded) return;
     window.__cxMotionLoaded = true;
@@ -119,9 +179,9 @@
       });
     });
   }
-
   document.addEventListener('DOMContentLoaded', function () {
-    // 小鋮 AI 助理全站自動注入（延遲載入，不影響 LCP）
+    var runTables = function () { try { enhanceTables(); } catch (e) {  } };
+    if ('requestIdleCallback' in window) requestIdleCallback(runTables, { timeout: 1500 }); else setTimeout(runTables, 300);
     if (!document.querySelector('[data-include="chat-widget"]')) {
       var cw = document.createElement('div');
       cw.dataset.include = 'chat-widget';
@@ -137,12 +197,21 @@
         immediate.push(el);
       }
     });
-
+    if (immediate.some(function (el) { return el.dataset.include === 'footer'; })) {
+      var early = function (src, tokensOnly) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.fetchPriority = 'high';
+        if (tokensOnly) s.setAttribute('data-cx-tokens-only', '');
+        document.head.appendChild(s);
+      };
+      if (!window.__cxHours && !document.querySelector('script[src$="cx-hours.js"]')) early('/cx-hours.js');
+      if (!document.getElementById('cx-brand') && !document.querySelector('script[src$="nav.js"]')) early('/nav.js', true);
+    }
     Promise.all(immediate.map(loadInclude)).then(function () {
       markActiveNavLink();
       showPageUpdated();
     });
-
     if (document.readyState === 'complete') {
       loadDeferred(deferred);
       loadMotion();
@@ -153,19 +222,8 @@
       }, { once: true });
     }
   });
-
-  /* ── Meta Pixel 中間層轉換訊號（2026-08-01 加）──────────────────
-     背景：Pixel 原本只有 PageView(每週約 4,000) 與 Lead(每週約 4)，中間全空，
-     Lead 量遠低於 Meta 轉換優化所需的每週 50 次門檻，無法用來做轉換投放。
-     這裡補兩個中間訊號，讓 Meta 有足夠密度的意圖訊號可學習：
-
-       ViewContent — 深度瀏覽（捲動 ≥50% 或停留 ≥30 秒），代表真的在看內容
-       Contact     — 點 LINE 或撥電話，高意圖但量少，供日後往下切用
-
-     兩者皆每頁只送一次；無 fbq（未載入 Pixel 的頁）時整段靜默跳過。 */
   (function trackIntentSignals() {
     if (typeof window === 'undefined') return;
-
     var sentViewContent = false;
     function fireViewContent(reason) {
       if (sentViewContent || typeof window.fbq !== 'function') return;
@@ -176,20 +234,16 @@
           content_category: location.pathname,
           trigger: reason
         });
-      } catch (e) { /* Pixel 未就緒，忽略 */ }
+      } catch (e) {  }
     }
-
-    // 觸發條件一：捲動達 50%
     var scrollBound = function () {
       if (sentViewContent) { window.removeEventListener('scroll', scrollBound); return; }
       var doc = document.documentElement;
       var scrollable = doc.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;               // 頁面不可捲動，交給停留時間判定
+      if (scrollable <= 0) return;
       if ((window.scrollY || doc.scrollTop) / scrollable >= 0.5) fireViewContent('scroll50');
     };
     window.addEventListener('scroll', scrollBound, { passive: true });
-
-    // 觸發條件二：停留滿 30 秒（分頁在背景時不計）
     var stayed = 0;
     var timer = setInterval(function () {
       if (document.visibilityState === 'visible') stayed += 1;
@@ -198,8 +252,6 @@
         fireViewContent('dwell30s');
       }
     }, 1000);
-
-    // Contact：點 LINE / 電話（高意圖，量少，供日後切換用）
     var sentContact = false;
     document.addEventListener('click', function (e) {
       if (sentContact || typeof window.fbq !== 'function') return;
@@ -214,7 +266,7 @@
           content_category: location.pathname,
           method: isLine ? 'line' : 'phone'
         });
-      } catch (err) { /* 忽略 */ }
+      } catch (err) {  }
     }, true);
   })();
 })();
