@@ -137,6 +137,10 @@
       box.__cxTable = t;
       box.__cxSpan = !!t.querySelector('[rowspan]:not([rowspan="1"]),[colspan]:not([colspan="1"])');
       if (t.querySelector('input,select,textarea')) box.setAttribute('data-cx-form', '');
+      else Array.prototype.forEach.call(t.querySelectorAll('th,td'), function (c) {
+        var s = c.textContent.replace(/\s+/g, ''), d = (s.match(/[\d.,%~～–−+\-]/g) || []).length;
+        if (/\d/.test(s) && ((s.length <= 10 && d * 2 >= s.length) || (s.length <= 14 && d >= s.length * 0.6) || (/^\d/.test(s) && s.length <= 6))) c.setAttribute('data-cx-num', '');
+      });
       box.__cxCols = Math.max.apply(null, Array.prototype.map.call(t.rows, function (r) { return r.cells.length; }).concat(0));
       sc.addEventListener('scroll', function () { update(box); }, { passive: true });
       boxes.push(box);

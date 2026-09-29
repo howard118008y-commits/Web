@@ -149,3 +149,19 @@ table.tax-table th{white-space:nowrap}
 .cta-box>:not(a),.art-cta>:not(a){flex:0 0 100%;min-width:0}
 .cta-box>a,.art-cta>a{margin:5px 0;border-radius:10px!important}
 @media(max-width:480px){.cta-box>a,.art-cta>a{flex:1 1 100%}}
+/*§26 表格手機（2026-09-29 視覺目檢 medium 第 10、13 列）：bt-table 首欄 6.5em（原 30%＝168px 大於容器 45%，include.js 永不凍結）、格內距收窄；數字格（include.js 標 data-cx-num）不在數字中間斷行；文章 ≤3 欄比較表不橫捲；來源表與長文字矩陣（table.cx-stack）改一列一張卡，欄名取 td[data-label]*/
+@media(max-width:480px){
+  .cx-tbox .bt-table:not(.cx-stack) :is(th,td):first-child{width:6.5em;min-width:6.5em}
+  .cx-tbox .bt-table:not(.cx-stack) :is(th,td){padding-left:12px;padding-right:12px}
+  .cx-tbox [data-cx-num]{white-space:nowrap}
+  .table-wrap>.compare-table:not(.src-table):not(.cx-stack):not(:has(:is(th,td):nth-child(4))){min-width:0}
+  :is(table.cx-stack,.compare-table.src-table){display:block;width:100%;min-width:0;background:none;box-shadow:none;border-radius:0}
+  :is(table.cx-stack,.compare-table.src-table) :is(tbody,tr,th,td,caption){display:block}
+  :is(table.cx-stack,.compare-table.src-table) :is(thead,tr:has(>th:nth-child(2))){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  :is(table.cx-stack,.compare-table.src-table) tr{margin:0 0 12px;border:1px solid var(--cx-line);border-radius:10px;overflow:hidden;background:var(--cx-card)}
+  .cx-tbox :is(table.cx-stack,.compare-table.src-table) :is(th,td){width:auto;min-width:0;padding:10px 14px;border:0;text-align:left}
+  .cx-tbox :is(table.cx-stack,.compare-table.src-table) :is(th,td)+:is(th,td){border-top:1px solid var(--cx-line)}
+  table.cx-stack :is(th,td):first-child{font-weight:700;color:var(--cx-ink);background:var(--cx-cream-2)}
+  :is(table.cx-stack,.compare-table.src-table) [data-label]::before{content:attr(data-label);display:block;margin-bottom:2px;font-size:13px;font-weight:600;line-height:1.5;color:var(--cx-ink-2);white-space:pre-line}
+  :is(.cx-tscroll,[class*="table-wrap"]):has(>table.cx-stack),.table-wrap:has(>.compare-table.src-table){overflow:visible;background:none;box-shadow:none;border-radius:0}
+}

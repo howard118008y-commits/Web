@@ -309,7 +309,7 @@ img{max-width:100%;display:block}
 .bt-hero figcaption{font-size:12px;line-height:18px;color:rgba(242,239,232,.62);margin-top:8px}
 .bt-table.left th,.bt-table.left td{text-align:left;vertical-align:top}
 .bt-table.left td:first-child{width:22%}
-.bt-table caption{caption-side:bottom;text-align:left;padding:12px 20px;font-size:14px;line-height:20px;color:var(--ink-dim)}
+.bt-table-cap{text-align:left;padding:12px 20px 0;font-size:14px;line-height:20px;color:var(--ink-dim)}
 </style>
 <script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
   <script src="include.js" defer></script>
@@ -480,7 +480,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <p class="bt-p" style="max-width:760px">屋齡看內政部不動產資訊平台 115 年第 2 季的房屋稅籍住宅類統計：土城 97,362 宅、平均屋齡 31.66 年，比新北的 33.13 年、全國的 34.46 年都年輕。30 年以上占 69.5%，乍看很老；往上拆，40 年以上只有 29.6%、50 年以上 3.6%。同一張表、同一期別，中和 40 年以上 45.9%、板橋 50.6%、三重 47.9%、永和 56.8%——土城的 40 年以上與 50 年以上占比，在五區裡數字最小。也就是說，土城的老房子不是老到 50 年的那種，而是集中在 30 到 40 年這一層：38,862 宅，占存量 39.9%（占比為自算）。</p>
     <div class="bt-table-wrap">
       <table class="bt-table">
-        <caption>資料：內政部不動產資訊平台「房屋稅籍住宅類數量依屋齡區分」，115 年第 2 季（平台註記由財政部賦稅署提供、住宅使用面積 5 坪以上 500 坪以下）。屋齡分布為年度重算，本頁只用單一期別、不做季間比較。</caption>
         <thead><tr><th>區</th><th>住宅數</th><th>平均屋齡</th><th>30 年以上</th><th>40 年以上</th><th>50 年以上</th></tr></thead>
         <tbody>
           <tr><td>土城</td><td class="highlight">97,362</td><td class="highlight">31.66 年</td><td>69.5%</td><td class="highlight">29.6%</td><td class="highlight">3.6%</td></tr>
@@ -492,6 +491,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </tbody>
       </table>
     </div>
+    <p class="bt-table-cap">資料：內政部不動產資訊平台「房屋稅籍住宅類數量依屋齡區分」，115 年第 2 季（平台註記由財政部賦稅署提供、住宅使用面積 5 坪以上 500 坪以下）。屋齡分布為年度重算，本頁只用單一期別、不做季間比較。</p>
     <p class="bt-p" style="max-width:760px;margin-top:24px">樓層結構也跟新北整體不同：土城 11 層以上的住宅 43,040 宅、占 44.2%，高於新北的 38.4% 與全國的 24.3%；5 層以下 39.8%（同表，115 年第 2 季）。而依內政部實價登錄開放資料 115 年第 1、2 季自行統計，土城成交華廈的屋齡中位 31.6 年、逾 30 年占 69%，住宅大樓逾 30 年也占 39%——在土城，「30 多年的房子」不全是無電梯公寓，這件事會直接改變下一段的殘值拆法。</p>
   </div>
 </section>
@@ -504,7 +504,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <p class="bt-p" style="max-width:760px">二胎的定義、條件與流程，<a href="zhonghe-second-mortgage.html">中和二胎房貸</a>一頁已經寫完：一胎不動、同一間房子再設定第二順位抵押權，條件看不動產殘值與還款來源，流程是評估、送件、鑑價、對保、設定。本頁只講土城的算法。依內政部實價登錄開放資料 115 年第 1、2 季自行統計（房地、扣車位、住家用、排除特殊備註、依編號去重、交易日 114 年 9 月 1 日至 115 年 5 月 31 日），土城三種主力型態的中位數如下；透天因樣本不足不列。統計為市場參考值，非個案鑑價結果。</p>
     <div class="bt-table-wrap">
       <table class="bt-table">
-        <caption>依內政部實價登錄開放資料 115 年第 1、2 季自行統計（腳本 scripts/lvr/lvr_4g_unified.py，2026-09-17 重跑）。市場參考值，非個案鑑價結果；型態別中位數為全區數字，不對應任何次分區。</caption>
         <thead><tr><th>型態</th><th>件數</th><th>每坪中位</th><th>總價中位</th><th>屋齡中位</th><th>逾 30 年</th></tr></thead>
         <tbody>
           <tr><td>公寓</td><td>121</td><td>38.9 萬</td><td>1,000 萬</td><td>43.1 年</td><td>97%</td></tr>
@@ -513,18 +512,19 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </tbody>
       </table>
     </div>
+    <p class="bt-table-cap">依內政部實價登錄開放資料 115 年第 1、2 季自行統計（腳本 scripts/lvr/lvr_4g_unified.py，2026-09-17 重跑）。市場參考值，非個案鑑價結果；型態別中位數為全區數字，不對應任何次分區。</p>
     <p class="bt-p" style="max-width:760px;margin-top:24px">算式只有一條：<span class="formula">殘值空間 ＝ 鑑估值 × 可貸成數 − 第一順位剩餘本金</span>。三種型態的差別不在算式，在「哪一個變數還在動」。不論房子在員林里、永寧里、日和里這幾個人口最多的里，還是面積最大的大安里（113 年底，土城區公所），算式都一樣，差的只是三個變數的狀態。</p>
     <div class="bt-table-wrap">
-      <table class="bt-table left">
-        <caption>示意：只演示算式裡各變數的狀態，不代入任何成數、利率或核貸機率；每一格都依銀行鑑價與個案審核為準。</caption>
+      <table class="bt-table left cx-stack">
         <thead><tr><th>變數</th><th>公寓（屋齡中位 43.1 年）</th><th>華廈（屋齡中位 31.6 年）</th><th>住宅大樓（屋齡中位 27.0 年）</th></tr></thead>
         <tbody>
-          <tr><td>鑑估值</td><td>每坪中位 38.9 萬只是量級參考；鑑估值由承作機構鑑價認定，本頁不代入。</td><td>每坪中位 43.1 萬為量級參考；鑑估值由承作機構認定，本頁不代入。</td><td>每坪中位 55.3 萬為量級參考；鑑估值由承作機構認定，本頁不代入。</td></tr>
-          <tr><td>可貸成數</td><td>依銀行鑑價與個案審核，本頁不代入。</td><td>依銀行鑑價與個案審核，本頁不代入。</td><td>依銀行鑑價與個案審核，本頁不代入。</td></tr>
-          <tr><td>第一順位剩餘本金</td><td>逾 30 年占 97%；若購入已久、一胎已繳清，這一項是零，殘值由前兩項決定——但屋齡逾 40 年，年期要先問。</td><td>屋齡正落在 30 到 40 年這一層；若一胎還在繳，三個變數都在動，是三型裡最需要逐案算的一型，年期也要跟著問。</td><td>若近年購入、貸款成數高，這一項就是算式裡最大的減項，扣完未必比一胎已繳清的公寓寬裕。</td></tr>
+          <tr><td>鑑估值</td><td data-label="公寓（屋齡中位 43.1 年）">每坪中位 38.9 萬只是量級參考；鑑估值由承作機構鑑價認定，本頁不代入。</td><td data-label="華廈（屋齡中位 31.6 年）">每坪中位 43.1 萬為量級參考；鑑估值由承作機構認定，本頁不代入。</td><td data-label="住宅大樓（屋齡中位 27.0 年）">每坪中位 55.3 萬為量級參考；鑑估值由承作機構認定，本頁不代入。</td></tr>
+          <tr><td>可貸成數</td><td data-label="公寓（屋齡中位 43.1 年）">依銀行鑑價與個案審核，本頁不代入。</td><td data-label="華廈（屋齡中位 31.6 年）">依銀行鑑價與個案審核，本頁不代入。</td><td data-label="住宅大樓（屋齡中位 27.0 年）">依銀行鑑價與個案審核，本頁不代入。</td></tr>
+          <tr><td>第一順位剩餘本金</td><td data-label="公寓（屋齡中位 43.1 年）">逾 30 年占 97%；若購入已久、一胎已繳清，這一項是零，殘值由前兩項決定——但屋齡逾 40 年，年期要先問。</td><td data-label="華廈（屋齡中位 31.6 年）">屋齡正落在 30 到 40 年這一層；若一胎還在繳，三個變數都在動，是三型裡最需要逐案算的一型，年期也要跟著問。</td><td data-label="住宅大樓（屋齡中位 27.0 年）">若近年購入、貸款成數高，這一項就是算式裡最大的減項，扣完未必比一胎已繳清的公寓寬裕。</td></tr>
         </tbody>
       </table>
     </div>
+    <p class="bt-table-cap">示意：只演示算式裡各變數的狀態，不代入任何成數、利率或核貸機率；每一格都依銀行鑑價與個案審核為準。</p>
     <p class="bt-p" style="max-width:760px;margin-top:24px"><strong>示意例 A（土城華廈，只演示算式）</strong>：鑑估值 ＝ 承作機構鑑價的每坪單價 × 建物坪數；可貸成數 ＝ ＿＿（依銀行鑑價與個案審核，本頁不代入）；第一順位剩餘本金 ＝ 最近一期繳款明細上的餘額；殘值空間 ＝ 前兩項相乘，再減第三項。<strong>示意例 B（土城公寓，同一條算式）</strong>：若一胎已繳清，第三項為零，殘值空間就是前兩項相乘；這時候該先問的不是額度，是可承作年期——年期依各機構標準與個案審核，本頁同樣不代入。</p>
     <p class="bt-p" style="max-width:760px;margin-top:16px">一件事要講在前面：土城公寓每坪中位 38.9 萬（121 件），用同一支腳本、同一口徑跑出來的中和 44.6 萬（346 件）、板橋 45.0 萬（411 件）、三重 45.6 萬（315 件）、永和 51.7 萬（197 件）都比它高——「土城公寓在五區裡數字最小」只在這個口徑下成立，不能拿其他來源的行情混比。單價低不等於殘值一定少，因為算式減的是自己房子的一胎餘額，不是別區的單價。要抓自己的量級，可用<a href="second-mortgage-calculator.html">二胎額度試算工具</a>，或加 LINE 線上諮詢由顧問協助。</p>
   </div>
