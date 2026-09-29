@@ -499,7 +499,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div style="display:flex;gap:6px;align-items:center">
           <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:16px;font-family:inherit">
           <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
-          <span id="convertedVal" style="font-size:13px;font-weight:700;color:#C8945A;white-space:nowrap">—</span>
+          <span id="convertedVal" style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);white-space:nowrap">—</span>
         </div>
       </div>
     </div>
@@ -706,7 +706,7 @@ async function queryPrice() {
       pd.textContent = fmt(price) + ' 元/㎡';
       pd.className = 'val';
       pd.style.fontSize = '20px';
-      pd.style.color = '#C8945A';
+      pd.style.color = 'var(--cx-orange-deep)';
       document.getElementById('pricenote').textContent = '申報地價 ＝ 公告地價 × 80%';
       calcAll();
       const distName = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
@@ -735,7 +735,7 @@ function onManualInput() {
     pd.textContent = fmt(v) + ' 元/㎡';
     pd.className = 'val';
     pd.style.fontSize = '18px';
-    pd.style.color = '#C8945A';
+    pd.style.color = 'var(--cx-orange-deep)';
     document.getElementById('pricenote').textContent = '(手動輸入)';
   } else { resetPrice(); }
   calcAll();

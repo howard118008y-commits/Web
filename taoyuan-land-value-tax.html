@@ -497,7 +497,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div style="display:flex;gap:6px;align-items:center">
           <input type="number" id="announcedInput" placeholder="公告地價" min="0" step="100" oninput="convertAnnounced()" style="flex:1;height:38px;border:1.5px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:16px;font-family:inherit">
           <span style="font-size:12px;color:#6e6e73;white-space:nowrap">× 80% =</span>
-          <span id="convertedVal" style="font-size:13px;font-weight:700;color:#C8945A;white-space:nowrap">—</span>
+          <span id="convertedVal" style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);white-space:nowrap">—</span>
         </div>
       </div>
     </div>
@@ -676,7 +676,7 @@ function onManualInput() {
     pd.textContent = fmt(v) + ' 元/㎡';
     pd.classList.remove('pending');
     pd.style.fontSize = '18px';
-    pd.style.color = '#C8945A';
+    pd.style.color = 'var(--cx-orange-deep)';
   } else { resetPrice(); }
   calcAll();
 }
