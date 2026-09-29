@@ -105,23 +105,23 @@
 /* 本頁未載入共用 style.css，補上全站的去底線規則（否則按鈕與內文連結都帶瀏覽器預設底線） */
 a{text-decoration:none}
 /* Hero */
-.art-hero{padding-top:48px}
+.art-hero{padding-top:0}
 
 .art-hero-img{width:100%;height:420px;object-fit:cover;display:block}
 
 .art-hero-body{max-width:760px;margin:0 auto;padding:2.5rem 2rem 0}
 
-.art-breadcrumb{font-size:12px;color:#86868b;margin-bottom:1.5rem}
+.art-breadcrumb{font-size:12px;color:var(--cx-ink-3);margin-bottom:1.5rem}
 
 .art-breadcrumb a{color:var(--cx-orange-deep)}
 
-.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:rgba(0,122,255,.1);color:var(--cx-orange-deep)}
+.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:transparent;color:var(--cx-orange-deep)}
 
 .art-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.4;margin-bottom:1rem}
 
-.art-sub{font-size:18px;color:#6e6e73;line-height:1.65;margin-bottom:1.5rem}
+.art-sub{font-size:18px;color:var(--cx-ink-2);line-height:1.65;margin-bottom:1.5rem}
 
-.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:#86868b;padding-bottom:2rem;border-bottom:.5px solid #e5e5e7}
+.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:var(--cx-ink-3);padding-bottom:2rem;border-bottom:.5px solid var(--cx-line)}
 
 
 /* Body */
@@ -131,23 +131,23 @@ a{text-decoration:none}
 
 .art-body h3{font-size:20px;font-weight:600;margin:2rem 0 .75rem}
 
-.art-body p{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:1.25rem}
+.art-body p{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:1.25rem}
 
 .art-body ul,.art-body ol{margin:0 0 1.25rem 1.5rem}
 
-.art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
+.art-body li{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:.4rem}
 
-.info-box{background:#f5f5f7;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.info-box{background:var(--cx-cream-2);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
 
 .info-box h3{font-size:16px;font-weight:600;margin-bottom:.75rem}
 
 .compare-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
 
-.compare-table th{background:var(--cx-ink);color:#fff;padding:10px 14px;text-align:left;font-weight:600}
+.compare-table th{background:var(--cx-ink);color:var(--cx-cream);padding:10px 14px;text-align:left;font-weight:600}
 
-.compare-table td{padding:10px 14px;border-bottom:.5px solid #e5e5e7;vertical-align:top}
+.compare-table td{padding:10px 14px;border-bottom:.5px solid var(--cx-line);vertical-align:top}
 
-.compare-table tr:nth-child(even) td{background:#f9f9fb}
+.compare-table tr:nth-child(even) td{background:var(--cx-cream-2)}
 
 .highlight{color:var(--cx-ink);font-weight:600}
 
@@ -155,17 +155,17 @@ a{text-decoration:none}
 
 .step-list li{counter-increment:steps;display:flex;gap:1rem;margin-bottom:1.25rem}
 
-.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:var(--cx-ink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
+.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:var(--cx-ink);color:var(--cx-cream);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
 
 
 /* CTA */
 .art-cta{background:var(--cx-ink);padding:3.5rem 2rem;text-align:center;margin-top:3rem}
 
-.art-cta h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:.75rem}
+.art-cta h2{font-size:30px;font-weight:700;color:var(--cx-cream);margin-bottom:.75rem}
 
-.art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
+.art-cta p{font-size:16px;color:var(--cx-cream-dim);margin-bottom:1.75rem}
 
-.art-cta a{display:inline-block;background:#fff;color:var(--cx-ink);padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
+.art-cta a{display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:12px 32px;border-radius:10px;font-size:15px;font-weight:600}
 
 
 
@@ -174,9 +174,12 @@ a{text-decoration:none}
   .art-hero-img{height:240px}
 }
 
-/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
-body{padding-top:16px}
-@media(max-width:900px){body{padding-top:10px}}
+/* nav.js 固定導覽列 64/58px：body 讓出整條導覽列（hero 上內距 48→0，版面位置不變）；米白主底 */
+body{padding-top:64px;background:var(--cx-cream)}
+@media(max-width:900px){body{padding-top:58px}}
+/* 文末 CTA 鈕：全站按鈕圓角＋主鈕 hover（行內底色已改變數，fluid.css 的咖啡金行內屬性補丁不再命中） */
+.art-cta a{border-radius:10px;font-weight:700}
+.art-cta a[style*="--cx-orange"]:hover{background:var(--cx-orange-soft)!important}
 </style>
   <script src="include.js" defer></script>
 
@@ -252,7 +255,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="art-breadcrumb">
       <a href="/">首頁</a> › <a href="knowledge.html">知識專欄</a> › 中和二胎房貸
     </div>
-    <span class="art-tag" style="background:rgba(27,59,54,.1);color:var(--cx-orange-deep);">二胎房貸</span>
+    <span class="art-tag" style="background:transparent;color:var(--cx-orange-deep);">二胎房貸</span>
     <h1 class="art-title">中和二胎房貸怎麼辦？<br>條件、利率、流程與防詐全解析</h1>
     <p class="art-sub">在中和辦二胎，成敗取決於三件事：算清殘值空間、比總費用而非月付金、選登記可查且能當面對保的合法業者。</p>
     <div class="art-meta-row">
@@ -265,7 +268,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div class="art-body">
 
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+  <div id="quick-answer" style="background:var(--cx-cream-2);border:1px solid var(--cx-line);border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
     <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
     <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0 0 14px;"><strong>在中和辦二胎房貸，成敗取決於三件事</strong>——算清房屋扣除一胎後的殘值空間、比較「總費用」而非只看月付金、選擇登記可查且能當面對保的合法業者。鋮馨的實體店面就在中和區中正路 468 號，深耕雙和在地市場。本公司非金融機構，最終核貸由金融機構決定。</p>
   </div>
@@ -325,12 +328,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <p>第三，理性建議不硬推：若評估後二胎不是最適合您的方案，鋮馨會直接說明，並提供<a href="article-sale-leaseback.html" style="color:var(--cx-orange-deep);text-decoration:underline;">售後回租</a>、貸款整合等其他方向供您比較。</p>
 
   <div class="cta-box" style="background:var(--cx-ink);border-radius:12px;padding:2rem 1.75rem;margin:2.5rem 0;text-align:center;">
-    <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 .6rem;">想先算算你的二胎殘值空間？</h3>
-    <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 1.4rem;">想先自行評估，歡迎使用二胎房貸試算器；想進一步了解，可透過官網表單或 LINE 官方帳號線上諮詢——不申請不收費，也不催促您做決定。</p>
-    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:var(--cx-orange);color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 線上諮詢</a>
-    <a href="/second-mortgage-calculator.html" style="display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">二胎房貸試算器 →</a>
-    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
-    <p style="font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，貸款條件依個案審核為準，申辦前請詳閱契約並衡量自身還款能力。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+    <h3 style="font-size:20px;font-weight:700;color:var(--cx-cream);margin:0 0 .6rem;">想先算算你的二胎殘值空間？</h3>
+    <p style="font-size:15px;color:var(--cx-cream-dim);line-height:1.7;margin:0 0 1.4rem;">想先自行評估，歡迎使用二胎房貸試算器；想進一步了解，可透過官網表單或 LINE 官方帳號線上諮詢——不申請不收費，也不催促您做決定。</p>
+    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:var(--cx-orange);color:var(--cx-ink);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 線上諮詢</a>
+    <a href="/second-mortgage-calculator.html" style="display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">二胎房貸試算器 →</a>
+    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:var(--cx-cream);border:1px solid var(--cx-cream-dim);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
+    <p style="font-size:12px;color:var(--cx-cream-dim);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，貸款條件依個案審核為準，申辦前請詳閱契約並衡量自身還款能力。實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
   </div>
 
   <h2>中和二胎房貸常見問題（FAQ）</h2>
@@ -345,7 +348,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
   <h3>Q4：二胎房貸詐騙怎麼分辨？</h3>
   <p>記住三不：不預先付費、不交存摺權狀正本、不簽空白本票契約。再查公司登記與實體店面，有疑慮撥 165 反詐騙專線求證。</p>
-  <p style="font-size:14px;color:#6e6e73;">延伸閱讀：<a href="article-second-mortgage-scam.html" style="color:var(--cx-orange-deep);text-decoration:underline;">〈二胎房貸詐騙怎麼分辨？五大手法、話術特徵與查證五步〉</a></p>
+  <p style="font-size:14px;color:var(--cx-ink-2);">延伸閱讀：<a href="article-second-mortgage-scam.html" style="color:var(--cx-orange-deep);text-decoration:underline;">〈二胎房貸詐騙怎麼分辨？五大手法、話術特徵與查證五步〉</a></p>
 
   <h3>Q5：售後回租是什麼？</h3>
   <p>售後回租是把房屋過戶給投資方取得資金，同時以租約續住原屋，並約定日後依約買回。所有權會先移轉，簽約前務必確認買回價金、買回期限與租金條件。</p>
@@ -363,7 +366,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="art-cta" style="background:var(--cx-ink);">
   <h2>想知道你的二胎能借多少？</h2>
   <p>先用試算器抓殘值空間，或 LINE 線上諮詢——不申請不收費。</p>
-  <a href="/second-mortgage-calculator.html" style="background:#C8945A;color:#fff;">二胎房貸試算器</a>
+  <a href="/second-mortgage-calculator.html" style="background:var(--cx-orange);color:var(--cx-ink);">二胎房貸試算器</a>
 </div>
 
 

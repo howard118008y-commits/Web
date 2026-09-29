@@ -105,23 +105,23 @@
 /* 本頁未載入共用 style.css，補上全站的去底線規則（否則按鈕與內文連結都帶瀏覽器預設底線） */
 a{text-decoration:none}
 /* Hero */
-.art-hero{padding-top:48px}
+.art-hero{padding-top:0}
 
 .art-hero-img{width:100%;height:420px;object-fit:cover;display:block}
 
 .art-hero-body{max-width:760px;margin:0 auto;padding:2.5rem 2rem 0}
 
-.art-breadcrumb{font-size:12px;color:#86868b;margin-bottom:1.5rem}
+.art-breadcrumb{font-size:12px;color:var(--cx-ink-3);margin-bottom:1.5rem}
 
 .art-breadcrumb a{color:var(--cx-orange-deep)}
 
-.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:rgba(0,122,255,.1);color:var(--cx-orange-deep)}
+.art-tag{display:inline-block;font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;margin-bottom:1rem;letter-spacing:.04em;background:transparent;color:var(--cx-orange-deep)}
 
 .art-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.4;margin-bottom:1rem}
 
-.art-sub{font-size:18px;color:#6e6e73;line-height:1.65;margin-bottom:1.5rem}
+.art-sub{font-size:18px;color:var(--cx-ink-2);line-height:1.65;margin-bottom:1.5rem}
 
-.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:#86868b;padding-bottom:2rem;border-bottom:.5px solid #e5e5e7}
+.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:var(--cx-ink-3);padding-bottom:2rem;border-bottom:.5px solid var(--cx-line)}
 
 
 /* Body */
@@ -131,27 +131,27 @@ a{text-decoration:none}
 
 .art-body h3{font-size:20px;font-weight:600;margin:2rem 0 .75rem}
 
-.art-body p{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:1.25rem}
+.art-body p{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:1.25rem}
 
 .art-body ul,.art-body ol{margin:0 0 1.25rem 1.5rem}
 
-.art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
+.art-body li{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:.4rem}
 
 .step-list{list-style:none;margin-left:0;counter-reset:steps}
 
 .step-list li{counter-increment:steps;display:flex;gap:1rem;margin-bottom:1.25rem}
 
-.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:#C8945A;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
+.step-list li::before{content:counter(steps);min-width:32px;height:32px;background:var(--cx-ink);color:var(--cx-cream);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:.25rem}
 
 
 /* CTA */
 .art-cta{background:var(--cx-ink);padding:3.5rem 2rem;text-align:center;margin-top:3rem}
 
-.art-cta h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:.75rem}
+.art-cta h2{font-size:30px;font-weight:700;color:var(--cx-cream);margin-bottom:.75rem}
 
-.art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
+.art-cta p{font-size:16px;color:var(--cx-cream-dim);margin-bottom:1.75rem}
 
-.art-cta a{display:inline-block;background:#fff;color:var(--cx-ink);padding:12px 32px;border-radius:0;font-size:15px;font-weight:600;margin:6px}
+.art-cta a{display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:12px 32px;border-radius:10px;font-size:15px;font-weight:600;margin:6px}
 
 
 
@@ -160,9 +160,12 @@ a{text-decoration:none}
   .art-hero-img{height:240px}
 }
 
-/* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
-body{padding-top:16px}
-@media(max-width:900px){body{padding-top:10px}}
+/* nav.js 固定導覽列 64/58px：body 讓出整條導覽列（hero 上內距 48→0，版面位置不變）；米白主底 */
+body{padding-top:64px;background:var(--cx-cream)}
+@media(max-width:900px){body{padding-top:58px}}
+/* 文末 CTA 鈕：全站按鈕圓角＋主鈕 hover（行內底色已改變數，fluid.css 的咖啡金行內屬性補丁不再命中） */
+.art-cta a{border-radius:10px;font-weight:700}
+.art-cta a[style*="--cx-orange"]:hover{background:var(--cx-orange-soft)!important}
 </style>
   <script src="include.js" defer></script>
 
@@ -273,7 +276,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="art-breadcrumb">
       <a href="/">首頁</a> › <a href="knowledge.html">知識專欄</a> › 永和房屋貸款
     </div>
-    <span class="art-tag" style="background:rgba(27,59,54,.1);color:var(--cx-orange-deep);">房屋貸款・永和在地</span>
+    <span class="art-tag" style="background:transparent;color:var(--cx-orange-deep);">房屋貸款・永和在地</span>
     <h1 class="art-title">永和房屋貸款怎麼選？<br>增貸、二胎到售後回租的決策地圖</h1>
     <p class="art-sub">永和的地圖長得特別，因為它有兩個全台之最：最擠、也最老。這兩個特徵，決定了下面每一段。</p>
     <div class="art-meta-row">
@@ -286,7 +289,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div class="art-body">
 
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
+  <div id="quick-answer" style="background:var(--cx-cream-2);border:1px solid var(--cx-line);border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:18px 0 30px;">
     <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
     <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0 0 6px;"><strong>先說結論：永和屋主問「房屋貸款怎麼辦」，答案通常不是單一產品，而是一張決策地圖</strong>——先看房子與需求，再決定走增貸、轉貸、二胎、貸款整合，還是售後回租。</p>
   </div>
@@ -318,12 +321,12 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <p>想把五條路的數字並排看，帶著永和物件的權狀影本與最近一期房貸繳款明細，透過官網表單或 LINE 預約到店。哪條都不適合，鋮馨會直接說，不催促您做決定。</p>
 
   <div class="cta-box" style="background:var(--cx-ink);border-radius:12px;padding:2rem 1.75rem;margin:2.5rem 0;text-align:center;">
-    <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 .6rem;">想把五條路的數字並排看？</h3>
-    <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 1.4rem;">帶著權狀影本與最近一期房貸繳款明細，透過官網表單或 LINE 預約到店——哪條都不適合，鋮馨會直接說，不催促您做決定。</p>
-    <a href="/apply.html" style="display:inline-block;background:#C8945A;color:#fff;padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">官網表單預約 →</a>
-    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:#fff;color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 預約</a>
-    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
-    <p style="font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
+    <h3 style="font-size:20px;font-weight:700;color:var(--cx-cream);margin:0 0 .6rem;">想把五條路的數字並排看？</h3>
+    <p style="font-size:15px;color:var(--cx-cream-dim);line-height:1.7;margin:0 0 1.4rem;">帶著權狀影本與最近一期房貸繳款明細，透過官網表單或 LINE 預約到店——哪條都不適合，鋮馨會直接說，不催促您做決定。</p>
+    <a href="/apply.html" style="display:inline-block;background:var(--cx-orange);color:var(--cx-ink);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">官網表單預約 →</a>
+    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 預約</a>
+    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:var(--cx-cream);border:1px solid var(--cx-cream-dim);padding:11px 28px;border-radius:10px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
+    <p style="font-size:12px;color:var(--cx-cream-dim);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，非要約或個案承諾。售後回租與貸款方案條件均依個案不動產條件、財務狀況與市場情況而定；本公司非金融機構，提供諮詢與媒合協助、非資金提供方，貸款類方案之最終核貸由金融機構決定。簽約前請詳閱契約條款，並衡量自身租金負擔與買回能力；如評估貸款方案，請一併衡量還款能力。</p>
   </div>
 
   <h2>永和房屋貸款常見問題（FAQ）</h2>
@@ -352,8 +355,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="art-cta" style="background:var(--cx-ink);">
   <h2>五條路，當面把數字並排比</h2>
   <p>中正橋、福和橋過來車程十分鐘內；先 LINE 預約，帶資料到中和店面當面談。</p>
-  <a href="https://lin.ee/PHIfSoY" style="background:#C8945A;color:#fff;">LINE 預約</a>
-  <a href="tel:0222490517" style="background:#C8945A;color:#fff;">撥打 02-2249-0517</a>
+  <a href="https://lin.ee/PHIfSoY" style="background:var(--cx-orange);color:var(--cx-ink);">LINE 預約</a>
+  <a href="tel:0222490517" style="background:var(--cx-cream);color:var(--cx-ink);">撥打 02-2249-0517</a>
 </div>
 
 <div data-include="footer"></div>
