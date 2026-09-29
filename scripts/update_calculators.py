@@ -88,25 +88,28 @@ def update_year_in_text(content, old_year, new_year, city_name):
     )
     count += n
     content = new_content
+    # Replace spaced year in schema DefinedTerm / glossary（「宜蘭縣 107-108 年累進起點地價」）
+    new_content, n = re.subn(
+        rf'({re.escape(city_name)} ){re.escape(old_year)}( 年)',
+        rf'\g<1>{new_year}\2',
+        content
+    )
+    count += n
+    content = new_content
     return content, count
 
 
 def update_T_display(content, new_T):
     """更新頁面中顯示的 T 格式數字（累進起點地價顯示）"""
     T_fmt = f"{new_T:,}"
-    # Update tier table title display value
-    new_content, count = re.subn(
-        r'（累進起點地價 [\d,]+ 元）',
-        f'（累進起點地價 {T_fmt} 元）',
+    # 頁面上所有「累進起點地價 X 元」一起換：級距表標題、disclaimer／FAQ／schema 的「累進起點地價為 X 元」、
+    # meta/og 的「年累進起點地價 X 元」、答案卡的「「累進起點地價」X 元」（2026-09-29：原本只換前兩種，
+    # 宜蘭／台東／嘉義市改值時 meta、答案卡、級距表標題會留舊數字）
+    return re.subn(
+        r'(累進起點地價(?:」|為)? ?)[\d,]+( ?元)',
+        rf'\g<1>{T_fmt}\2',
         content
     )
-    # Update disclaimer T display
-    new_content2, count2 = re.subn(
-        r'累進起點地價為 [\d,]+ 元',
-        f'累進起點地價為 {T_fmt} 元',
-        new_content
-    )
-    return new_content2, count + count2
 
 
 def get_current_T(content):

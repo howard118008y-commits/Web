@@ -87,19 +87,19 @@
     "yilan": {
       "name": "宜蘭縣",
       "file": "yilan-land-value-tax.html",
-      "T": 1241000,
-      "year": "107-108",
-      "est": true,
-      "source": "宜蘭縣政府財政稅務局（115年待更新）",
+      "T": 1311000,
+      "year": "115-116",
+      "est": false,
+      "source": "宜蘭縣政府財政稅務局（115-09-03 新聞 https://www.iltb.gov.tw/News_Content.aspx?n=17585&sms=16203&s=407770）",
       "official_calc_url": "https://www.iltb.gov.tw/"
     },
     "chiayi_city": {
       "name": "嘉義市",
       "file": "chiayi-city-land-value-tax.html",
-      "T": 3957000,
+      "T": 4027000,
       "year": "115-116",
       "est": false,
-      "source": "嘉義市政府財政稅務局",
+      "source": "嘉義市政府財政稅務局（115-04-09 財政部稅務入口網發佈 https://www.etax.nat.gov.tw/etwmain/announcement/news/ZbogDx）",
       "official_calc_url": "https://www.citax.gov.tw/TaxCalculation/LandTax"
     },
     "miaoli": {
@@ -168,10 +168,10 @@
     "taitung": {
       "name": "台東縣",
       "file": "taitung-land-value-tax.html",
-      "T": 463000,
-      "year": "113-114",
-      "est": true,
-      "source": "台東縣稅務局（115年待更新）",
+      "T": 441000,
+      "year": "115-116",
+      "est": false,
+      "source": "台東縣稅務局（地價稅稅額試算頁「115年至116年地價稅稅額計算公式」https://ihouv.tttb.gov.tw/ilCalV/，2026-09-29 查）",
       "official_calc_url": "https://ihouv.tttb.gov.tw/ilCalV/"
     },
     "penghu": {
