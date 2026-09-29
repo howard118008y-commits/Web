@@ -25,41 +25,42 @@
 
 .hero>*{position:relative;z-index:1}
 
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.72);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.4);padding:0 0 8px;border-radius:0;margin-bottom:26px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--cx-cream-dim);background:transparent;border:none;border-bottom:1px solid var(--cx-ink-line);padding:0 0 8px;border-radius:0;margin-bottom:26px}
 
-.hero-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:44px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.3;margin-bottom:20px}
+.hero-h1{font-family:"Noto Serif TC","Songti TC",serif;font-size:44px;font-weight:600;color:var(--cx-cream);letter-spacing:.01em;line-height:1.3;margin-bottom:20px}
 
-.hero-h1 em{color:#fff;font-style:normal;border-bottom:2px solid var(--cx-gold)}
+.hero-h1 em{color:var(--cx-cream);font-style:normal;border-bottom:2px solid var(--cx-gold)}
 
-.hero-sub{font-size:18px;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
+.hero-sub{font-size:18px;color:var(--cx-cream-dim);line-height:1.65;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
 
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-.btn-purple{display:inline-block;background:#fff;color:var(--cx-ink);font-size:13px;font-weight:600;padding:14px 30px;border-radius:0;letter-spacing:.14em}
+.btn-purple{display:inline-block;background:var(--cx-orange);color:var(--cx-ink);font-size:13px;font-weight:600;padding:14px 30px;border-radius:10px;letter-spacing:.14em}
 
-.btn-ghost-w{display:inline-block;background:transparent;color:#fff;font-size:13px;font-weight:500;padding:14px 30px;border-radius:0;border:1px solid rgba(255,255,255,.55);letter-spacing:.14em}
+.btn-ghost-w{display:inline-block;background:var(--cx-cream);color:var(--cx-ink);font-size:13px;font-weight:500;padding:14px 30px;border-radius:10px;border:1px solid transparent;letter-spacing:.14em}
 
 
 /* Pain Section */
-.pain-wrap{background:#fafafa;padding:80px 24px}
+.pain-wrap{background:var(--cx-cream);padding:80px 24px}
 
 .pain-inner{max-width:900px;margin:0 auto}
 
-.label-tag{font-size:11px;color:#8a8a8e;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
+.label-tag{font-size:11px;color:var(--cx-orange-deep);letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-bottom:16px}
 
 .section-h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:var(--cx-ink);margin-bottom:16px}
 
-.section-sub{font-size:16px;color:#6e6e73;line-height:1.75;max-width:600px;margin-bottom:40px}
+.section-sub{font-size:16px;color:var(--cx-ink-2);line-height:1.75;max-width:600px;margin-bottom:40px}
 
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-.pain-card{background:#fff;border-radius:18px;padding:28px 24px;border:.5px solid #e5e5e5}
+.pain-card{background:var(--cx-card);border-radius:18px;padding:28px 24px;border:.5px solid var(--cx-line)}
 
-.pain-icon{font-size:32px;margin-bottom:14px}
+.pain-icon{width:32px;height:32px;margin-bottom:14px;color:var(--cx-orange-deep)}
+.pain-icon svg{width:100%;height:100%;display:block}
 
 .pain-title{font-size:16px;font-weight:700;color:var(--cx-ink);margin-bottom:8px}
 
-.pain-desc{font-size:14px;color:#6e6e73;line-height:1.65}
+.pain-desc{font-size:14px;color:var(--cx-ink-2);line-height:1.65}
 
 
 /* Process - Main */
@@ -67,57 +68,59 @@
 
 .process-list{display:flex;flex-direction:column;gap:0;margin-top:56px;position:relative}
 
-.process-list::before{content:'';position:absolute;left:27px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cx-ink),#8a8a8e,#e5e5e5);z-index:0}
+.process-list::before{content:'';position:absolute;left:27px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cx-ink),var(--cx-ink-3),var(--cx-line));z-index:0}
 
 .process-item{display:grid;grid-template-columns:56px 1fr;gap:28px;padding-bottom:48px;position:relative;z-index:1}
 
 .process-item:last-child{padding-bottom:0}
 
-.p-circle{width:56px;height:56px;border-radius:50%;background:var(--cx-ink);color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
+.p-circle{width:56px;height:56px;border-radius:50%;background:var(--cx-ink);color:var(--cx-cream);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2;box-shadow:0 0 0 4px #fff}
 
-.p-circle.done{background:#048456}
+.p-circle.done{background:var(--cx-orange);color:var(--cx-ink)}
 
 .p-body{padding-top:12px}
 
-.p-step-label{font-size:11px;font-weight:600;color:#8a8a8e;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.p-step-label{font-size:11px;font-weight:600;color:var(--cx-orange-deep);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
 
 .p-title{font-size:22px;font-weight:700;color:var(--cx-ink);letter-spacing:-.015em;margin-bottom:10px}
 
-.p-desc{font-size:15px;color:#6e6e73;line-height:1.75;margin-bottom:14px}
+.p-desc{font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin-bottom:14px}
 
 .p-tags{display:flex;flex-wrap:wrap;gap:8px}
 
-.p-tag{font-size:12px;font-weight:500;background:#f5f5f7;color:var(--cx-ink);padding:4px 12px;border-radius:20px;border:.5px solid #d2d2d7}
+.p-tag{font-size:12px;font-weight:500;background:var(--cx-cream-2);color:var(--cx-ink);padding:4px 12px;border-radius:20px;border:.5px solid var(--cx-line)}
+.p-tag svg{width:13px;height:13px;vertical-align:-2px;margin-right:4px;color:var(--cx-orange-deep)}
 
-.p-tag.doc{background:#fff;color:var(--cx-ink);border-color:#d2d2d7}
+.p-tag.doc{background:var(--cx-card);color:var(--cx-ink);border-color:var(--cx-line)}
 
-.p-tag.time{background:#f5f5f5;color:#6e6e73;border-color:#d2d2d7}
+.p-tag.time{background:var(--cx-cream-2);color:var(--cx-ink-2);border-color:var(--cx-line)}
 
-.p-note{margin-top:12px;background:#f9f9f9;border-left:3px solid var(--cx-gold);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:#6e6e73;line-height:1.65}
+.p-note{margin-top:12px;background:var(--cx-cream-2);border-left:3px solid var(--cx-orange-deep);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;color:var(--cx-ink-2);line-height:1.65}
 
 .p-note strong{color:var(--cx-ink)}
 
 
 /* Docs Section */
-.docs-wrap{background:#f5f5f7;padding:80px 24px}
+.docs-wrap{background:var(--cx-cream-2);padding:80px 24px}
 
 .docs-inner{max-width:900px;margin:0 auto}
 
 .docs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
 
-.doc-card{background:#fff;border-radius:18px;padding:28px 24px;border:.5px solid #e5e5e5}
+.doc-card{background:var(--cx-card);border-radius:18px;padding:28px 24px;border:.5px solid var(--cx-line)}
 
 .doc-card-title{font-size:15px;font-weight:700;color:var(--cx-ink);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 
-.doc-card-icon{width:32px;height:32px;border-radius:8px;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-size:16px}
+.doc-card-icon{width:32px;height:32px;border-radius:8px;background:var(--cx-cream-2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--cx-orange-deep)}
+.doc-card-icon svg{width:18px;height:18px}
 
 .doc-list{display:flex;flex-direction:column;gap:6px}
 
-.doc-item{font-size:13px;color:#6e6e73;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.doc-item{font-size:13px;color:var(--cx-ink-2);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
 
 .doc-item::before{content:'·';color:var(--cx-ink);font-weight:700;flex-shrink:0}
 
-.doc-note{margin-top:16px;font-size:12px;color:#86868b;background:#fafafa;border-radius:10px;padding:10px 14px;line-height:1.6}
+.doc-note{margin-top:16px;font-size:12px;color:var(--cx-ink-2);background:var(--cx-cream-2);border-radius:10px;padding:10px 14px;line-height:1.6}
 
 
 /* Timeline Visual */
@@ -127,27 +130,29 @@
 
 .t-seg{padding:20px 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 
-.t-seg:nth-child(1){background:#f5f5f7;flex:1.2}
+.t-seg:nth-child(1){background:var(--cx-cream);flex:1.2}
 
-.t-seg:nth-child(2){background:#e8e8ed;flex:0.8}
+.t-seg:nth-child(2){background:var(--cx-cream-2);flex:0.8}
 
-.t-seg:nth-child(3){background:#d2d2d7;flex:1}
+.t-seg:nth-child(3){background:var(--cx-line);flex:1}
 
-.t-seg:nth-child(4){background:#86868b;flex:0.6}
+.t-seg:nth-child(4){background:var(--cx-ink-3);flex:0.6}
 
 .t-seg:nth-child(5){background:var(--cx-ink);flex:0.6}
 
-.t-seg:nth-child(6){background:#048456;flex:0.8}
+.t-seg:nth-child(6){background:var(--cx-orange);flex:0.8}
 
-.t-label{font-size:12px;font-weight:700;color:#fff}
+.t-label{font-size:12px;font-weight:700;color:var(--cx-cream)}
 
 .t-seg:nth-child(1) .t-label,.t-seg:nth-child(2) .t-label,.t-seg:nth-child(3) .t-label{color:var(--cx-ink)}
 
-.t-days{font-size:11px;color:rgba(255,255,255,.75)}
+.t-days{font-size:11px;color:var(--cx-cream)}
 
 .t-seg:nth-child(1) .t-days,.t-seg:nth-child(2) .t-days,.t-seg:nth-child(3) .t-days{color:var(--cx-ink-2)}
 
-.timeline-note{text-align:center;font-size:13px;color:#86868b;margin-top:16px}
+.t-seg:nth-child(3) .t-days,.t-seg:nth-child(6) .t-label,.t-seg:nth-child(6) .t-days{color:var(--cx-ink)}
+
+.timeline-note{text-align:center;font-size:13px;color:var(--cx-ink-3);margin-top:16px}
 
 
 /* FAQ */
@@ -155,19 +160,19 @@
 
 .faq-inner{max-width:720px;margin:0 auto}
 
-details{border-top:1px solid #d2d2d7;padding:20px 0}
+details{border-top:1px solid var(--cx-line);padding:20px 0}
 
-details:last-child{border-bottom:1px solid #d2d2d7}
+details:last-child{border-bottom:1px solid var(--cx-line)}
 
 summary{font-size:16px;font-weight:600;color:var(--cx-ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
 
 summary::-webkit-details-marker{display:none}
 
-.plus{font-size:22px;color:#86868b;font-weight:300;flex-shrink:0;transition:transform .2s}
+.plus{font-size:22px;color:var(--cx-ink-3);font-weight:300;flex-shrink:0;transition:transform .2s}
 
 details[open] .plus{transform:rotate(45deg)}
 
-details p{font-size:15px;color:#6e6e73;line-height:1.75;margin-top:14px}
+details p{font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin-top:14px}
 
 
 /* CTA */
@@ -177,18 +182,18 @@ details p{font-size:15px;color:#6e6e73;line-height:1.75;margin-top:14px}
 
 .cta-strip>*{position:relative;z-index:1}
 
-.cta-h2{font-size:44px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
+.cta-h2{font-size:44px;font-weight:700;color:var(--cx-cream);letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
 
-.cta-sub{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
+.cta-sub{font-size:16px;color:var(--cx-cream-dim);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
 
 
-.btn-purple-lg{display:inline-block;background:var(--cx-ink);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:28px}
+.btn-purple-lg{display:inline-block;background:var(--cx-orange);color:var(--cx-ink);font-size:15px;font-weight:700;padding:14px 32px;border-radius:10px}
 
-.btn-outline-w{display:inline-block;background:transparent;color:#fff;font-size:14px;padding:14px 28px;border-radius:28px;border:1.5px solid rgba(255,255,255,.3)}
+.btn-outline-w{display:inline-block;background:var(--cx-cream);color:var(--cx-ink);font-size:14px;padding:14px 28px;border-radius:10px;border:1.5px solid transparent}
 
 .promise-row{display:flex;gap:24px;justify-content:center;margin-top:36px;flex-wrap:wrap}
 
-.promise-item{font-size:13px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px}
+.promise-item{font-size:13px;color:var(--cx-cream-dim);display:flex;align-items:center;gap:8px}
 
 .promise-item::before{content:'✓';color:var(--cx-gold);font-weight:700}
 
@@ -430,10 +435,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
   <div style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-gold);border-radius:0;padding:22px 24px;margin:30px auto;">
+    <div id="quick-answer" style="background:var(--cx-cream-2);border:1px solid var(--cx-line);border-left:2px solid var(--cx-gold);border-radius:0;padding:22px 24px;margin:30px auto;">
       <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
       <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0 0 14px;"><strong>多筆貸款整合，分四步走完銀行申辦。</strong>把房貸、二胎、信貸、卡循整合成一筆低利房貸，流程大致是：初步諮詢與評估 → 提案與試算 → 銀行送件審核 → 對保撥款清償舊債。重點是先理清負債結構、選對銀行管道，讓月付一次降下來。本公司非金融機構，最終核貸由金融機構決定。</p>
-      <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
+      <ul style="margin:0;padding-left:20px;font-size:14px;color:var(--cx-ink);line-height:1.95;">
         <li><strong>整合對象</strong>：房貸、二胎、信貸、信用卡循環。</li>
         <li><strong>四步流程</strong>：諮詢評估 → 提案試算 → 送件審核 → 對保撥款。</li>
         <li><strong>關鍵</strong>：理清負債結構、選對銀行管道。</li>
@@ -451,17 +456,17 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <p class="section-sub">很多人不是「不想還」，而是「每個月要還太多筆」，光是整理就搞不清楚，更別說每月都在想辦法湊錢。</p>
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="pain-icon">🏦</div>
+        <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M4 10h16M12 3l8 4H4l8-4zM6 10v8M10 10v8M14 10v8M18 10v8"/></svg></div>
         <div class="pain-title">房貸＋信貸同時繳</div>
         <div class="pain-desc">一筆房貸還沒還完，又多了信用貸款，每月固定支出超過薪水的一半。</div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">📈</div>
+        <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></div>
         <div class="pain-title">民間借款利率高</div>
         <div class="pain-desc">月息 1–2% 看起來不多，但一年下來利息比本金還高，越還越多。</div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">😰</div>
+        <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
         <div class="pain-title">曾被銀行拒貸</div>
         <div class="pain-desc">想整合卻被銀行拒絕，不知道原因，也不知道下一步該怎麼辦。</div>
       </div>
@@ -484,7 +489,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-desc">告訴我們你目前有哪些貸款、大約金額多少、名下是否有不動產。顧問會依你的情況試算整合後的月付金額，以及預估可省下多少利息。</div>
         <div class="p-tags">
           <span class="p-tag">加入 LINE 或來電</span>
-          <span class="p-tag time">⏱ 1–2 個工作日</span>
+          <span class="p-tag time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>1–2 個工作日</span>
         </div>
         <div class="p-note"><strong>完全免費</strong>，不申請不收費，試算結果僅供參考，實際核貸依銀行審核為準。</div>
       </div>
@@ -499,7 +504,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-tags">
           <span class="p-tag">銀行與承作機構方案</span>
           <span class="p-tag">量身規劃</span>
-          <span class="p-tag time">⏱ 2–3 個工作日</span>
+          <span class="p-tag time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>2–3 個工作日</span>
         </div>
       </div>
     </div>
@@ -511,10 +516,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-title">備齊申請文件</div>
         <div class="p-desc">依選定的銀行要求，備齊申請所需文件。鋮馨顧問會提供詳細清單，並協助確認文件是否齊全，避免因文件不足導致申請延誤。</div>
         <div class="p-tags">
-          <span class="p-tag doc">📄 身分證明文件</span>
-          <span class="p-tag doc">📄 不動產謄本</span>
-          <span class="p-tag doc">📄 收入證明</span>
-          <span class="p-tag doc">📄 現有貸款餘額明細</span>
+          <span class="p-tag doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>身分證明文件</span>
+          <span class="p-tag doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>不動產謄本</span>
+          <span class="p-tag doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>收入證明</span>
+          <span class="p-tag doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>現有貸款餘額明細</span>
         </div>
       </div>
     </div>
@@ -528,7 +533,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-tags">
           <span class="p-tag">銀行估價</span>
           <span class="p-tag">聯徵查詢</span>
-          <span class="p-tag time">⏱ 5–10 個工作日</span>
+          <span class="p-tag time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>5–10 個工作日</span>
         </div>
         <div class="p-note">若首家銀行未通過，鋮馨會協助評估其他銀行的可行性，不輕易放棄。</div>
       </div>
@@ -543,7 +548,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-tags">
           <span class="p-tag">確認利率條件</span>
           <span class="p-tag">簽署貸款合約</span>
-          <span class="p-tag doc">📄 抵押設定</span>
+          <span class="p-tag doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>抵押設定</span>
         </div>
       </div>
     </div>
@@ -557,7 +562,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         <div class="p-tags">
           <span class="p-tag">一次清償多筆負債</span>
           <span class="p-tag">每月只還一筆</span>
-          <span class="p-tag time">⏱ 撥款 3–7 個工作日</span>
+          <span class="p-tag time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>撥款 3–7 個工作日</span>
         </div>
         <div class="p-note"><strong>完成！</strong>從多筆高利率貸款，變成一筆低利率銀行房貸，每個月終於可以喘口氣。</div>
       </div>
@@ -574,7 +579,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="docs-grid">
       <div class="doc-card">
         <div class="doc-card-title">
-          <div class="doc-card-icon">🪪</div>
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.5-1.3 1.6-2 3-2s2.5.7 3 2M14 10h5M14 14h4"/></svg></div>
           身分證明文件
         </div>
         <div class="doc-list">
@@ -585,7 +590,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
       <div class="doc-card">
         <div class="doc-card-title">
-          <div class="doc-card-icon">🏠</div>
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
           不動產相關文件
         </div>
         <div class="doc-list">
@@ -597,7 +602,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
       <div class="doc-card">
         <div class="doc-card-title">
-          <div class="doc-card-icon">💰</div>
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></div>
           收入證明文件
         </div>
         <div class="doc-list">
@@ -609,7 +614,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       </div>
       <div class="doc-card">
         <div class="doc-card-title">
-          <div class="doc-card-icon">📋</div>
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h6"/></svg></div>
           現有負債資料
         </div>
         <div class="doc-list">
