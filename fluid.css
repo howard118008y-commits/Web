@@ -2,12 +2,12 @@
 :root{--spring:cubic-bezier(.22,1,.36,1);--spring:linear(0.000, 0.060 5%, 0.186 10%, 0.329 15%, 0.466 20%, 0.584 25%, 0.682 30%, 0.760 35%, 0.821 40%, 0.868 45%, 0.903 50%, 0.929 55%, 0.949 60%, 0.963 65%, 0.973 70%, 0.981 75%, 0.986 80%, 0.990 85%, 0.993 90%, 0.995 95%, 1)}
 body{font-optical-sizing:auto;font-kerning:normal}
 /*§1*/
-.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn{
+.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.afm-btn{
   -webkit-tap-highlight-color:transparent;
   transition-property:transform,background-color,border-color,color,box-shadow,opacity;
   transition-duration:.5s,.18s,.18s,.18s,.25s,.18s;
   transition-timing-function:var(--spring),ease,ease,ease,ease,ease}
-:is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn):active{transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
+:is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.afm-btn):active{transform:scale(.97);transition-duration:.09s;transition-timing-function:ease-out}
 /*§7*/
 .cx-menu>li .cx-dd{transform-origin:12px 0;transform:translateY(-6px) scale(.97);filter:blur(6px);
   transition:opacity .2s ease,visibility 0s linear .2s,transform .45s var(--spring),filter .25s ease}
@@ -45,7 +45,7 @@ body{font-optical-sizing:auto;font-kerning:normal}
   html{scroll-behavior:auto}
   *{animation:none!important;transition-duration:.15s!important;transition-timing-function:ease!important}
   .bt-hero :is(.bt-eyebrow,.bt-h1,.bt-p,.bt-btns,.bt-note,.bt-hero-img,.cx-call-block,.cx-needs,.bt-chips,.bt-check),.art-hero>*,.tp-hero-text>:is(.tp-eyebrow,.tp-h1,.tp-sub,.tp-symptoms,.tp-form-wrap),.tp-hero-img{animation:fl-fade .25s ease both!important;animation-delay:0s!important}
-  :is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.cx-phone,.afm-btn):active,.cx-menu>li .cx-dd{transform:none}
+  :is(.bt-btn,.bt-chips a,.bt-rel-card,.bt-case-card a,.btn-green,.btn-line,.btn-outline,.btn-white,.btn-ghost,.btn-gold,.btn-gold-lg,.btn-green-lg,.btn-blue,.btn-blue-lg,.btn-teal,.btn-teal-lg,.btn-purple,.btn-purple-lg,.btn-ghost-w,.btn-outline-w,.cta-box a,.cta-tel,.cta-line,.cta-main-btn,.cx-call-primary,.cx-needs a,.opt,.next,.footer-link-sm,.cx-sticky-cta a,.cx-cta,.cx-dd a.go,.afm-btn):active,.cx-menu>li .cx-dd{transform:none}
   .cx-menu>li .cx-dd{filter:none}
 }
 @media (prefers-reduced-transparency:reduce){
