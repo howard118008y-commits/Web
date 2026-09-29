@@ -93,6 +93,10 @@ body{padding-top:16px}
 .case-card{padding:1.1rem 1.5rem}
 .case-card .label{font-size:14px;letter-spacing:.04em;text-transform:none;margin-bottom:0;color:var(--cx-cream)}
 .disclaimer{color:#6e6e73}
+/* 案例情境圖（stage5 米米；image-style-guide 第 8 節第 7 條「情境示意」角標，寫法同 debt-consolidation.html .scene-wrap） */
+.case-scene{position:relative;margin:0 0 2rem}
+.case-scene img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:14px}
+.scene-badge{position:absolute;top:8px;left:8px;padding:4px 8px;font-size:13px;line-height:1.4;color:var(--cx-cream);background:var(--cx-ink);border-radius:4px;pointer-events:none}
 </style>
 <script type="application/ld+json">
 {
@@ -188,6 +192,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <div class="art-body">
   <a href="knowledge.html" class="back-link">← 返回知識專欄</a>
+
+  <figure class="case-scene"><img src="img/uiux/C01/case-mimi-private-refinance-960.webp" srcset="img/uiux/C01/case-mimi-private-refinance-640.webp 640w, img/uiux/C01/case-mimi-private-refinance-960.webp 960w, img/uiux/C01/case-mimi-private-refinance-1600.webp 1600w" sizes="(max-width: 768px) calc(100vw - 40px), 656px" width="960" height="720" alt="示意情境：屋主雙手放在餐桌上，米米拿著放大鏡看平板上的房子周邊地圖" loading="lazy" decoding="async"><span class="scene-badge" aria-hidden="true">情境示意</span></figure>
 
   <div class="case-card">
     <div class="label">真實案例，已去識別化。只寫數字與流程。</div>
