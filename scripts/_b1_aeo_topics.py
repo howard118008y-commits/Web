@@ -168,6 +168,10 @@ for fn,c in CONTENT.items():
     s=s[:k]+sch+s[k:]
     # 4) speakable 改指 #quick-answer（topic 模板的 cssSelector 是換行的 "h1"）
     s=s.replace('"cssSelector": [\n   "h1"\n  ]','"cssSelector": [\n   "#quick-answer",\n   "h1"\n  ]')
+    # 5) fluid.css（全站流體層：手機固定條等）——位置照全站慣例，</head> 前最後一行
+    if 'href="fluid.css"' not in s:
+        k=s.rfind('</head>')
+        s=s[:k]+'<link rel="stylesheet" href="fluid.css">\n'+s[k:]
     open(fn,"w",encoding="utf-8").write(s)
     print(f"✅ {fn}: 答案卡+{len(c['faqs'])}FAQ+{len(c['terms'])}名詞+schema+speakable")
 print("done")
