@@ -16,7 +16,7 @@
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="style.css"></noscript>
 <style>
 /* Hero */
-.hero{margin-top:48px;background:var(--cx-ink);padding:72px 24px 56px;border-bottom:.5px solid #e5e5e5}
+.hero{margin-top:48px;background:var(--cx-ink);padding:72px 24px 56px;border-bottom:.5px solid var(--cx-ink-line)}
 
 .hero-inner{max-width:860px;margin:0 auto}
 
@@ -40,7 +40,7 @@
 
 .growth-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cx-cream-dim);margin-bottom:12px;text-align:center}
 
-.growth-h2{font-size:40px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.1;text-align:center;margin-bottom:56px}
+.growth-h2{font-size:40px;font-weight:700;color:var(--cx-cream);letter-spacing:-.025em;line-height:1.1;text-align:center;margin-bottom:56px}
 
 .growth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--cx-ink-line);border-radius:20px;overflow:hidden}
 
@@ -50,13 +50,16 @@
 
 .growth-unit{font-size:13px;margin-bottom:12px;font-weight:500}
 
+/* 小字單位不吃大數字的橘（橘不當小字）：一律米白 */
+.growth-card .growth-unit{color:var(--cx-cream)}
+
 .growth-label-sm{font-size:12px;color:var(--cx-cream-dim);line-height:1.55}
 
 .g-blue{color:var(--cx-orange)}
 
-.g-green{color:#34d399}
+.g-green{color:var(--cx-cream)}
 
-.g-gold{color:#fbbf24}
+.g-gold{color:var(--cx-orange)}
 
 .g-purple{color:var(--cx-cream)}
 
@@ -64,17 +67,17 @@
 /* Trend Chart (CSS-based) */
 .chart-wrap{max-width:860px;margin:40px auto 0;padding:0 24px}
 
-.chart-title{font-size:16px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:24px;text-align:center}
+.chart-title{font-size:16px;font-weight:600;color:var(--cx-cream-dim);margin-bottom:24px;text-align:center}
 
-.bar-chart{display:flex;align-items:flex-end;gap:12px;height:160px;padding:0 8px}
+.bar-chart{display:flex;align-items:stretch;gap:12px;height:160px;padding:0 8px;margin-bottom:44px}
 
-.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;position:relative}
 
 .bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(to top,var(--cx-gold),var(--cx-orange));position:relative;transition:height .3s}
 
-.bar-val{font-size:12px;font-weight:700;color:#fff;position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.bar-val{font-size:12px;font-weight:700;color:var(--cx-cream);position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap}
 
-.bar-year{font-size:12px;color:var(--cx-cream-dim);margin-top:8px}
+.bar-year{font-size:12px;color:var(--cx-cream-dim);margin-top:8px;position:absolute;top:100%;left:0;right:0;text-align:center}
 
 
 /* News Section */
@@ -86,31 +89,31 @@
 
 .news-list{display:flex;flex-direction:column;gap:0}
 
-.news-item{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:28px 0;border-bottom:.5px solid #e5e5e5;align-items:flex-start}
+.news-item{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:28px 0;border-bottom:.5px solid var(--cx-line);align-items:flex-start}
 
 .news-item:last-child{border-bottom:none}
 
-.news-date{font-size:12px;color:#86868b;font-weight:500;padding-top:4px}
+.news-date{font-size:12px;color:var(--cx-ink-3);font-weight:500;padding-top:4px}
 
 .news-tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;margin-bottom:10px}
 
 .tag-policy{background:var(--cx-cream-2);color:var(--cx-orange-deep)}
 
-.tag-market{background:#f0fff4;color:#1a7a1a}
+.tag-market{background:var(--cx-cream-2);color:var(--cx-ink)}
 
-.tag-demand{background:#fff7e6;color:#b8860b}
+.tag-demand{background:var(--cx-line);color:var(--cx-ink)}
 
-.tag-law{background:#faf8f4;color:var(--cx-ink)}
+.tag-law{background:var(--cx-cream);color:var(--cx-ink)}
 
 .news-title{font-size:18px;font-weight:700;color:var(--cx-ink);letter-spacing:-.01em;line-height:1.3;margin-bottom:10px}
 
-.news-body{font-size:14px;color:#6e6e73;line-height:1.75}
+.news-body{font-size:14px;color:var(--cx-ink-2);line-height:1.75}
 
-.news-source{font-size:12px;color:#86868b;margin-top:8px}
+.news-source{font-size:12px;color:var(--cx-ink-3);margin-top:8px}
 
 
 /* Why Now */
-.why-wrap{background:#f5f5f7;padding:80px 24px}
+.why-wrap{background:var(--cx-cream-2);padding:80px 24px}
 
 .why-inner{max-width:860px;margin:0 auto}
 
@@ -120,13 +123,13 @@
 
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 
-.why-card{background:#fff;border-radius:20px;padding:32px 28px;border:.5px solid #e5e5e5}
+.why-card{background:var(--cx-card);border-radius:20px;padding:32px 28px;border:.5px solid var(--cx-line)}
 
 .why-num{font-size:44px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:-.03em;margin-bottom:8px}
 
 .why-title{font-size:17px;font-weight:700;color:var(--cx-ink);margin-bottom:10px}
 
-.why-desc{font-size:14px;color:#6e6e73;line-height:1.7}
+.why-desc{font-size:14px;color:var(--cx-ink-2);line-height:1.7}
 
 
 /* CX Compare */
@@ -136,23 +139,23 @@
 
 .cx-h2{font-size:38px;font-weight:700;color:var(--cx-ink);letter-spacing:-.025em;line-height:1.1;margin-bottom:40px}
 
-.cx-table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;border:.5px solid #d2d2d7}
+.cx-table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;border:.5px solid var(--cx-line)}
 
 .cx-table th{padding:14px 20px;font-size:12px;font-weight:700;text-align:center}
 
-.cx-table th:first-child{text-align:left;background:#f5f5f7;color:#86868b}
+.cx-table th:first-child{text-align:left;background:var(--cx-cream-2);color:var(--cx-ink-3)}
 
-.cx-table th.col-self{background:#e5e5e5;color:#6e6e73}
+.cx-table th.col-self{background:var(--cx-line);color:var(--cx-ink)}
 
-.cx-table th.col-cx{background:var(--cx-orange-deep);color:#fff}
+.cx-table th.col-cx{background:var(--cx-orange-deep);color:var(--cx-cream)}
 
-.cx-table td{padding:14px 20px;font-size:14px;border-top:.5px solid #f0f0f0;text-align:center;color:#6e6e73}
+.cx-table td{padding:14px 20px;font-size:14px;border-top:.5px solid var(--cx-line);text-align:center;color:var(--cx-ink-2)}
 
-.cx-table td:first-child{text-align:left;font-weight:600;color:var(--cx-ink);background:#fafafa}
+.cx-table td:first-child{text-align:left;font-weight:600;color:var(--cx-ink);background:var(--cx-cream)}
 
-.cx-table tr:nth-child(even) td:first-child{background:#f5f5f5}
+.cx-table tr:nth-child(even) td:first-child{background:var(--cx-cream-2)}
 
-.yes{color:#0F7A4F;font-weight:700}
+.yes{color:var(--cx-orange-deep);font-weight:700}
 
 .no{color:var(--cx-ink)}
 
@@ -162,11 +165,9 @@
 /* CTA */
 .cta-strip{background:var(--cx-ink);padding:88px 24px;text-align:center}
 
-.cta-h2{font-size:42px;font-weight:700;color:#fff;letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
+.cta-h2{font-size:42px;font-weight:700;color:var(--cx-cream);letter-spacing:-.025em;line-height:1.08;margin-bottom:14px}
 
-.cta-sub{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
-
-
+.cta-sub{font-size:16px;color:var(--cx-cream-dim);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.65}
 
 
 
@@ -176,7 +177,9 @@
 
 
 
-.disclaimer{font-size:11px;color:#86868b;max-width:700px;margin:16px auto 0;line-height:1.6;text-align:center}
+
+
+.disclaimer{font-size:11px;color:var(--cx-cream-dim);max-width:700px;margin:16px auto 0;line-height:1.6;text-align:center}
 
 
 
@@ -315,10 +318,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 
 <!-- Quick Answer -->
 <div style="max-width:860px;margin:0 auto;padding:36px 24px 0;">
-  <div id="quick-answer" style="background:#f6f5f3;border:1px solid #e3e3e6;border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:0 0 8px;">
+  <div id="quick-answer" style="background:var(--cx-cream-2);border:1px solid var(--cx-line);border-left:2px solid var(--cx-orange-deep);border-radius:0;padding:22px 24px;margin:0 0 8px;">
     <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
     <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0 0 14px;"><strong>包租代管是屋主把出租事務委託專業業者代為處理的整合服務。</strong>涵蓋招租刊登、帶看、租客審核、合約簽訂、租金代收、修繕協調與退租驗屋，讓屋主省下自行管理的時間與精力。費用通常以租金一定比例協議約定，服務範圍與收費依委託合約與物件狀況而定。包租代管無法保證一定出租或固定收益，出租結果仍受租屋市場供需與物件條件影響，委託前建議確認業者為合法登記的租賃住宅服務業。</p>
-    <ul style="margin:0;padding-left:20px;font-size:14px;color:#3a3a3c;line-height:1.95;">
+    <ul style="margin:0;padding-left:20px;font-size:14px;color:var(--cx-ink);line-height:1.95;">
       <li><strong>是什麼</strong>：屋主把招租、簽約、租金代收、修繕、退租等事務委託業者處理。</li>
       <li><strong>費用</strong>：常見按月租金一定比例收管理服務費，計費方式載明於合約。</li>
       <li><strong>注意</strong>：確認業者合法登記、合約透明、押金與修繕責任劃分清楚。</li>
@@ -368,7 +371,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
           <div class="bar-year">2026.07</div>
         </div>
         <div class="bar-group">
-          <div class="bar" style="height:100%;background:linear-gradient(to top,#34d399,#06C755)"><span class="bar-val">目標 25</span></div>
+          <div class="bar" style="height:100%;background:var(--cx-ink-hero);box-shadow:inset 0 0 0 1.5px var(--cx-cream-dim)"><span class="bar-val">目標 25</span></div>
           <div class="bar-year">2032（政策目標）</div>
         </div>
       </div>
@@ -527,41 +530,41 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cx-orange-deep);margin-bottom:12px;">常見問題</div>
   <h2 style="font-size:38px;font-weight:700;color:var(--cx-ink);letter-spacing:-.025em;line-height:1.1;margin:0 0 36px;">包租代管，常見問題。</h2>
   <div style="display:flex;flex-direction:column;gap:0;">
-    <div style="padding:24px 0;border-bottom:.5px solid #e5e5e5;">
+    <div style="padding:24px 0;border-bottom:.5px solid var(--cx-line);">
       <h3 style="font-size:18px;font-weight:700;color:var(--cx-ink);margin:0 0 10px;">包租代管是什麼？</h3>
-      <p style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">包租代管是屋主把出租事務委託給專業業者代為處理，涵蓋招租刊登、帶看、租客審核、合約簽訂、租金代收、修繕協調與退租驗屋，讓屋主省下自行管理的時間與精力。實際服務範圍與收費依委託合約與物件狀況而定。</p>
+      <p style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0;">包租代管是屋主把出租事務委託給專業業者代為處理，涵蓋招租刊登、帶看、租客審核、合約簽訂、租金代收、修繕協調與退租驗屋，讓屋主省下自行管理的時間與精力。實際服務範圍與收費依委託合約與物件狀況而定。</p>
     </div>
-    <div style="padding:24px 0;border-bottom:.5px solid #e5e5e5;">
+    <div style="padding:24px 0;border-bottom:.5px solid var(--cx-line);">
       <h3 style="font-size:18px;font-weight:700;color:var(--cx-ink);margin:0 0 10px;">包租代管的費用怎麼算？</h3>
-      <p style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">包租代管費用通常以服務內容與物件條件協議約定，常見為按月租金一定比例收取管理服務費，並在委託合約中載明計費方式與服務範圍。實際費率依物件、委託項目與市場情況而定，建議先免費評估再確認。</p>
+      <p style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0;">包租代管費用通常以服務內容與物件條件協議約定，常見為按月租金一定比例收取管理服務費，並在委託合約中載明計費方式與服務範圍。實際費率依物件、委託項目與市場情況而定，建議先免費評估再確認。</p>
     </div>
-    <div style="padding:24px 0;border-bottom:.5px solid #e5e5e5;">
+    <div style="padding:24px 0;border-bottom:.5px solid var(--cx-line);">
       <h3 style="font-size:18px;font-weight:700;color:var(--cx-ink);margin:0 0 10px;">屋主委託包租代管有哪些風險或注意事項？</h3>
-      <p style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">委託前建議確認業者是否為合法登記的租賃住宅服務業、合約條款是否透明、押金與修繕責任如何劃分，以及租金撥付與糾紛處理機制。包租代管無法保證一定出租或固定收益，出租結果仍受租屋市場供需與物件條件影響。</p>
+      <p style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0;">委託前建議確認業者是否為合法登記的租賃住宅服務業、合約條款是否透明、押金與修繕責任如何劃分，以及租金撥付與糾紛處理機制。包租代管無法保證一定出租或固定收益，出租結果仍受租屋市場供需與物件條件影響。</p>
     </div>
     <div style="padding:24px 0;">
       <h3 style="font-size:18px;font-weight:700;color:var(--cx-ink);margin:0 0 10px;">包租代管和自己出租差在哪？</h3>
-      <p style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">自行出租需自己處理刊登、帶看、審核、催收與修繕，耗時且法律風險較高；委託包租代管則由業者代為處理這些流程，屋主投入時間大幅降低。是否划算依物件狀況、租金行情與屋主可投入的時間而定。</p>
+      <p style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0;">自行出租需自己處理刊登、帶看、審核、催收與修繕，耗時且法律風險較高；委託包租代管則由業者代為處理這些流程，屋主投入時間大幅降低。是否划算依物件狀況、租金行情與屋主可投入的時間而定。</p>
     </div>
   </div>
 </div>
 
 <!-- 名詞解釋 -->
-<div style="background:#f5f5f7;padding:72px 24px;">
+<div style="background:var(--cx-cream-2);padding:72px 24px;">
   <div style="max-width:860px;margin:0 auto;">
     <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cx-orange-deep);margin-bottom:12px;">名詞解釋</div>
     <h2 style="font-size:38px;font-weight:700;color:var(--cx-ink);letter-spacing:-.025em;line-height:1.1;margin:0 0 36px;">包租代管，名詞解釋。</h2>
     <dl style="margin:0;">
       <dt style="font-size:16px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;">包租代管</dt>
-      <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0 0 22px;">屋主把房屋出租的招租、簽約、租金代收、修繕與退租等事務委託專業業者處理的整合服務；服務範圍與收費依委託合約而定。</dd>
+      <dd style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0 0 22px;">屋主把房屋出租的招租、簽約、租金代收、修繕與退租等事務委託專業業者處理的整合服務；服務範圍與收費依委託合約而定。</dd>
       <dt style="font-size:16px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;">代租代管</dt>
-      <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0 0 22px;">業者僅代為招租與日常管理，租金收益與空租風險仍由屋主承擔，與由業者先承租再轉租的「包租」模式不同。</dd>
+      <dd style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0 0 22px;">業者僅代為招租與日常管理，租金收益與空租風險仍由屋主承擔，與由業者先承租再轉租的「包租」模式不同。</dd>
       <dt style="font-size:16px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;">空租期</dt>
-      <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0 0 22px;">物件從空置到成功招租入住之間的閒置天數，空租期越短代表閒置損失越低。</dd>
+      <dd style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0 0 22px;">物件從空置到成功招租入住之間的閒置天數，空租期越短代表閒置損失越低。</dd>
       <dt style="font-size:16px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;">租賃住宅管理條例</dt>
-      <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0 0 22px;">規範租賃住宅代管與包租業者、保障委託屋主與承租人權益的專法，委託合法登記業者較有法律依據。</dd>
+      <dd style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0 0 22px;">規範租賃住宅代管與包租業者、保障委託屋主與承租人權益的專法，委託合法登記業者較有法律依據。</dd>
       <dt style="font-size:16px;font-weight:700;color:var(--cx-ink);margin:0 0 6px;">租金補貼</dt>
-      <dd style="font-size:15px;color:#6e6e73;line-height:1.75;margin:0;">政府對符合資格的租屋族提供的租金補助方案，會影響租屋需求與市場行情。</dd>
+      <dd style="font-size:15px;color:var(--cx-ink-2);line-height:1.75;margin:0;">政府對符合資格的租屋族提供的租金補助方案，會影響租屋需求與市場行情。</dd>
     </dl>
   </div>
 </div>
