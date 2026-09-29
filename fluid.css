@@ -141,3 +141,6 @@ table.tax-table th{white-space:nowrap}
   .tk .tc-ov{margin-left:auto}
   .tk .rc-line{gap:12px}
 }
+/*§24 文章 meta 列（2026-09-29 視覺目檢 medium 第 18 列）：三格整格換行，格內不在詞中間斷*/
+.art-meta-row{flex-wrap:wrap;row-gap:4px}
+.art-meta-row>*{white-space:nowrap}
