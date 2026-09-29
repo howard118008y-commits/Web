@@ -572,38 +572,38 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <tbody>
       <tr>
         <td>課稅面積<br><span style="font-size:10px;font-weight:400">（平方公尺）</span></td>
-        <td><input class="area-input" type="number" id="areaGeneral" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
-        <td><input class="area-input" type="number" id="areaSelf" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
-        <td><input class="area-input" type="number" id="areaIndustrial" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
-        <td><input class="area-input" type="number" id="areaPublic" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td data-label="課稅面積（平方公尺）"><input class="area-input" type="number" id="areaGeneral" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td data-label="課稅面積（平方公尺）"><input class="area-input" type="number" id="areaSelf" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td data-label="課稅面積（平方公尺）"><input class="area-input" type="number" id="areaIndustrial" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
+        <td data-label="課稅面積（平方公尺）"><input class="area-input" type="number" id="areaPublic" placeholder="輸入面積" min="0" step="0.01" oninput="calcAll()"></td>
       </tr>
       <tr>
         <td>課稅地價<br><span style="font-size:10px;font-weight:400">（元）</span></td>
-        <td class="course-price" id="cpGeneral">0</td>
-        <td class="course-price" id="cpSelf">0</td>
-        <td class="course-price" id="cpIndustrial">0</td>
-        <td class="course-price" id="cpPublic">0</td>
+        <td data-label="課稅地價（元）" class="course-price" id="cpGeneral">0</td>
+        <td data-label="課稅地價（元）" class="course-price" id="cpSelf">0</td>
+        <td data-label="課稅地價（元）" class="course-price" id="cpIndustrial">0</td>
+        <td data-label="課稅地價（元）" class="course-price" id="cpPublic">0</td>
       </tr>
       <tr>
         <td>適用稅率</td>
-        <td class="rate-cell" id="rateGeneral"><span style="color:var(--cx-orange-deep)">10‰至55‰</span></td>
-        <td class="rate-cell">2‰</td>
-        <td class="rate-cell">10‰</td>
-        <td class="rate-cell">6‰</td>
+        <td data-label="適用稅率" class="rate-cell" id="rateGeneral"><span style="color:var(--cx-orange-deep)">10‰至55‰</span></td>
+        <td data-label="適用稅率" class="rate-cell">2‰</td>
+        <td data-label="適用稅率" class="rate-cell">10‰</td>
+        <td data-label="適用稅率" class="rate-cell">6‰</td>
       </tr>
       <tr>
         <td>累進差額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
-        <td class="course-price" id="deductGeneral">—</td>
-        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
-        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
-        <td class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td data-label="累進差額（元）" class="course-price" id="deductGeneral">—</td>
+        <td data-label="累進差額（元）" class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td data-label="累進差額（元）" class="rate-cell" style="color:#b0b0b0">不適用</td>
+        <td data-label="累進差額（元）" class="rate-cell" style="color:#b0b0b0">不適用</td>
       </tr>
       <tr class="result-row">
         <td>預估稅額<br><span style="font-size:10px;font-weight:400">（元）</span></td>
-        <td class="tax-cell" id="taxGeneral">0</td>
-        <td class="tax-cell" id="taxSelf">0</td>
-        <td class="tax-cell" id="taxIndustrial">0</td>
-        <td class="tax-cell" id="taxPublic">0</td>
+        <td data-label="預估稅額（元）" class="tax-cell" id="taxGeneral">0</td>
+        <td data-label="預估稅額（元）" class="tax-cell" id="taxSelf">0</td>
+        <td data-label="預估稅額（元）" class="tax-cell" id="taxIndustrial">0</td>
+        <td data-label="預估稅額（元）" class="tax-cell" id="taxPublic">0</td>
       </tr>
     </tbody>
   </table>

@@ -168,9 +168,12 @@ a{text-decoration:none}
 .art-body{max-width:760px;margin:0 auto;padding:2rem 2rem 4rem}
 .art-body h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:26px;font-weight:600;letter-spacing:.01em;line-height:1.45;margin:2.8rem 0 1rem}
 .art-body h3{font-size:20px;font-weight:600;margin:2rem 0 .75rem}
-.art-body p{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:1.25rem}
+.art-body p{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:1.25rem}
 .art-body ul,.art-body ol{margin:0 0 1.25rem 1.5rem}
-.art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
+.art-body li{font-size:16px;line-height:1.8;color:var(--cx-ink);margin-bottom:.4rem}
+.cta-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.cta-btns a{flex:1 1 180px;max-width:240px;padding:11px 20px;border-radius:10px;font-size:15px;font-weight:700;white-space:nowrap;background:var(--cx-orange);color:var(--cx-ink)}
+.cta-btns a.cta-tel{background:var(--cx-cream);color:var(--cx-ink)}
 .art-cta{background:var(--cx-ink);padding:3.5rem 2rem;text-align:center;margin-top:3rem}
 .art-cta h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:.75rem}
 .art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
@@ -383,8 +386,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <summary>快速答案：共有的房子卡住，多半不是感情問題，而是產權問題</summary>
       <div class="tp-more-body">
         <section class="art-body">
-          <div id="quick-answer" style="background:#fbf7f1;border:1px solid #ecdcc4;border-left:2px solid #C8945A;padding:22px 24px;margin:18px 0 30px;">
-            <div style="font-size:13px;font-weight:700;color:#a86a2e;letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
+          <div id="quick-answer" style="background:var(--cx-cream);border:1px solid var(--cx-line);border-left:2px solid var(--cx-orange-deep);padding:22px 24px;margin:18px 0 30px;">
+            <div style="font-size:13px;font-weight:700;color:var(--cx-orange-deep);letter-spacing:.22em;margin-bottom:9px;">快速答案</div>
             <p style="font-size:16px;line-height:1.75;color:var(--cx-ink);margin:0;">共有的房子卡住，多半不是感情問題，而是產權問題。第一步不是說服家人，而是把產權狀況攤開：每個人持分多少、有沒有設定抵押、稅繳到哪了。狀況看清楚之後，出售、保留、分割或活化等選項才會真正浮現，再依個案條件評估怎麼走。</p>
           </div>
         </section>
@@ -445,11 +448,14 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <div class="tp-more-body">
         <section class="art-body">
           <div class="cta-box" style="background:var(--cx-ink);border-radius:12px;padding:2rem 1.75rem;margin:2.5rem 0;text-align:center;">
-            <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 .6rem;">【免費評估你的狀況】</h3>
-            <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 1.4rem;">不申請不收費，面談不收費。<br>新北市中和區中正路 468 號</p>
-            <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" style="display:inline-block;background:#C8945A;color:#fff;padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 加 →</a>
-            <a href="tel:0222490517" style="display:inline-block;background:#fff;color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話 02-2249-0517 / 0958-139-786</a>
-            <p style="font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0;line-height:1.7">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+            <h3 style="font-size:20px;font-weight:700;color:var(--cx-cream);margin:0 0 .6rem;">【免費評估你的狀況】</h3>
+            <p style="font-size:15px;color:var(--cx-cream-dim);line-height:1.7;margin:0 0 1.4rem;">不申請不收費，面談不收費。<br>新北市中和區中正路 468 號</p>
+            <div class="cta-btns">
+              <a href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" class="cta-line">LINE 加 →</a>
+              <a href="tel:0222490517" class="cta-tel">電話 02-2249-0517</a>
+              <a href="tel:0958139786" class="cta-tel">電話 0958-139-786</a>
+            </div>
+            <p style="font-size:12px;color:var(--cx-cream-dim);margin:14px 0 0;line-height:1.7">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
           </div>
         </section>
       </div>
@@ -467,8 +473,8 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         </section>
       </div>
     </details>
-    <p style="font-size:13px;color:#86868b;margin-top:20px;">本文整理自鋮馨社群貼文（<a href="https://www.threads.com/@cx468468/post/DcuztU6Gye7" rel="noopener" target="_blank" style="color:var(--cx-ink);">原文</a>），內容為觀點與解析，非新聞報導。</p>
-    <p style="font-size:12px;color:#86868b;line-height:1.7;margin-top:12px;">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
+    <p style="font-size:13px;color:var(--cx-ink-2);margin-top:20px;">本文整理自鋮馨社群貼文（<a href="https://www.threads.com/@cx468468/post/DcuztU6Gye7" rel="noopener" target="_blank" style="color:var(--cx-ink);">原文</a>），內容為觀點與解析，非新聞報導。</p>
+    <p style="font-size:12px;color:var(--cx-ink-2);line-height:1.7;margin-top:12px;">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。</p>
   </div>
 </section>
 

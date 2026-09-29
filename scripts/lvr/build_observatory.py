@@ -15,6 +15,7 @@ from html import escape as html_escape
 import json
 import os
 import re
+import struct
 import aeo_blocks
 
 import pandas as pd
@@ -65,6 +66,34 @@ def load_ai_report() -> str:
         text = AI_REPORT_PATH.read_text(encoding="utf-8").strip()
         return text
     return ""
+
+
+def _png_size(path: Path):
+    """讀 PNG 檔頭的寬高（給 width/height 先留版面，CLS 0）；檔案不在就回 None。"""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(24)
+    except OSError:
+        return None
+    if head[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return struct.unpack(">II", head[16:24])
+
+
+def chart_html(name: str, alt: str) -> str:
+    """圖表：手機（≤640px）換 make_charts.py 產的直式大字版 *_m.png，外包連到桌機原圖供放大。
+    2026-09-29 視覺目檢 G10-01：桌機圖在手機縮成 292px、字只剩 3–5px。
+    尺寸讀 CHART_SRC_DIR（make_charts.py 產圖處，main() 之後才複製到 lvr-charts/）；
+    手機版不存在就只出桌機圖，不會出破圖。"""
+    src = f"lvr-charts/{name}.png"
+    size = _png_size(CHART_SRC_DIR / f"{name}.png")
+    wh = f' width="{size[0]}" height="{size[1]}"' if size else ""
+    m_size = _png_size(CHART_SRC_DIR / f"{name}_m.png")
+    source = (f'<source media="(max-width: 640px)" srcset="lvr-charts/{name}_m.png" '
+              f'width="{m_size[0]}" height="{m_size[1]}">' if m_size else "")
+    return (f'<a class="chart-zoom" href="{src}"><picture>{source}'
+            f'<img src="{src}" alt="{alt}"{wh} loading="lazy" decoding="async"></picture></a>\n'
+            f'    <p class="chart-zoom-hint">點圖看大圖</p>')
 
 
 def build_html(generated_at: str, season_label: str,
@@ -160,7 +189,7 @@ def build_html(generated_at: str, season_label: str,
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FX9LNEL7R"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
-gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{page_location:location.origin+location.pathname,page_referrer:''});
+gtag('js',new Date());gtag('config','G-4FX9LNEL7R',window.cxAnalyticsConfig||{{page_location:location.origin+location.pathname,page_referrer:''}});
 document.addEventListener('click',function(e){{var a=e.target.closest('a');if(!a||!a.href)return;
 if(a.href.indexOf('lin.ee')>-1){{gtag('event','line_click',{{page_path:location.pathname,link_text:(a.innerText||'').trim().substring(0,50)}});}}
 else if(a.href.indexOf('tel:')===0){{gtag('event','phone_click',{{page_path:location.pathname,phone_number:a.href.replace('tel:','')}});}}
@@ -392,6 +421,10 @@ img{{max-width:100%;display:block}}
 .chart-row{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}}
 @media(max-width:780px){{.chart-row{{grid-template-columns:1fr}}}}
 .chart-row .chart-card{{margin-bottom:0}}
+/* 圖表放大：整張圖連到桌機原圖（手機由 <picture> 換直式大字版） */
+.chart-card a.chart-zoom{{display:block;border-radius:8px;cursor:zoom-in}}
+.chart-card a.chart-zoom:focus-visible{{outline:2px solid var(--cx-orange-deep);outline-offset:3px}}
+.chart-card p.chart-zoom-hint{{font-size:14px;line-height:20px;color:var(--cx-ink-2);margin:8px 0 0;text-align:right}}
 
 /* spotlight（新店深度） */
 .spotlight{{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow)}}
@@ -418,6 +451,10 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
 .rank-table td.num{{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}}
 .rank-table tr.low-sample td{{color:var(--ink-dim)}}
 .rank-table tr:hover{{background:var(--paper)}}
+/* 名次併進區名格：手機凍結首欄時留在畫面的是「名次＋區名」（2026-09-29 G10-05） */
+.rank-table .rk{{display:inline-block;min-width:1.4em;margin-right:4px;color:var(--cx-ink-2);font-weight:400;font-variant-numeric:tabular-nums}}
+/* 首欄收窄到內容寬（include.js 只在首欄 ≤ 捲動區 45% 時才凍結；360 寬手機上限約 136px） */
+.rank-table :is(th,td):first-child{{width:1%;padding-left:8px;padding-right:8px}}
 .badge-low{{display:inline-block;font-size:10px;color:var(--ink-dim);background:var(--cream);padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500}}
 .empty-row td{{text-align:center;color:var(--ink-dim);padding:30px 0;font-style:italic}}
 
@@ -510,22 +547,22 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
   </div>
   <div class="chart-card">
     <h3>113Q1 vs 115Q1 結構對比</h3>
-    <p class="chart-note">屋齡分布（左上）：新成屋（0–5 年）佔比從 36% 降到 23%、老屋（45+ 年）從 5% 升到 9%。建物型態（左下）：大樓佔比下降、公寓佔比上升。</p>
-    <img src="lvr-charts/chart_shindian_deep.png" alt="新店區 113Q1 vs 115Q1 深度解析">
+    <p class="chart-note">屋齡分布：新成屋（0–5 年）佔比從 36% 降到 23%、老屋（45+ 年）從 5% 升到 9%。建物型態：大樓佔比下降、公寓佔比上升。</p>
+    {chart_html('chart_shindian_deep', '新店區 113Q1 vs 115Q1 深度解析')}
   </div>
 
   <div class="section-title">近 1 年單價變化（年增率 YoY）</div>
   <div class="chart-card">
     <h3>115Q1 vs 114Q1 單價中位數年增率</h3>
     <p class="chart-note">綠 = 上漲、紅 = 下跌。新店 -14.9% 看數字大但需結合上方深度解析看（屋齡結構變化所致）。</p>
-    <img src="lvr-charts/chart_yoy_change.png" alt="5 精選區與雙北平均年增率 YoY">
+    {chart_html('chart_yoy_change', '5 精選區與雙北平均年增率 YoY')}
   </div>
 
   <div class="section-title">4 縣市平均跨季趨勢</div>
   <div class="chart-card">
     <h3>台北 / 新北 / 台中 / 桃園 9 季均價</h3>
     <p class="chart-note">每點為該季全市正常住宅單價中位數，已排除特殊交易與極端值。</p>
-    <img src="lvr-charts/chart_city_trend.png" alt="4 縣市全市平均跨季趨勢">
+    {chart_html('chart_city_trend', '4 縣市全市平均跨季趨勢')}
   </div>
 
   <div class="section-title">5 精選區比較（近 180 天）</div>
@@ -533,12 +570,12 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
     <div class="chart-card">
       <h3>單價中位數</h3>
       <p class="chart-note">中位數抗極端值，比平均數更能代表「典型成交」。</p>
-      <img src="lvr-charts/chart_district_compare.png" alt="5 區單價中位數比較">
+      {chart_html('chart_district_compare', '5 區單價中位數比較')}
     </div>
     <div class="chart-card">
       <h3>單價分布（箱形圖）</h3>
       <p class="chart-note">盒子=中間 50% 區間；線=中位數；點=極端值。</p>
-      <img src="lvr-charts/chart_price_boxplot.png" alt="5 區單價分布箱形圖">
+      {chart_html('chart_price_boxplot', '5 區單價分布箱形圖')}
     </div>
   </div>
 
@@ -546,19 +583,19 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
   <div class="chart-card">
     <h3>屋齡 vs 單價（每點為一筆成交）</h3>
     <p class="chart-note">屋齡 0 年附近為新成屋／預售移轉。台北市（深色）整體價位高於新北市（紫色），但新北市新成屋與台北市老公寓部分價位帶有重疊。</p>
-    <img src="lvr-charts/chart_age_price_scatter.png" alt="屋齡與單價散布圖">
+    {chart_html('chart_age_price_scatter', '屋齡與單價散布圖')}
   </div>
 
   <div class="section-title">交易量與結構（5 精選區）</div>
   <div class="chart-card">
     <h3>近 12 個月月成交量（5 區堆疊）</h3>
     <p class="chart-note">堆疊長條反映整體市場活躍度。最近 1~2 個月筆數會因資料延遲偏低。</p>
-    <img src="lvr-charts/chart_monthly_volume.png" alt="近 12 個月月成交量">
+    {chart_html('chart_monthly_volume', '近 12 個月月成交量')}
   </div>
   <div class="chart-card">
     <h3>5 區建物型態組成（近 180 天）</h3>
     <p class="chart-note">公寓比例高 = 老舊社區為主；大樓比例高 = 重劃區為主。</p>
-    <img src="lvr-charts/chart_building_types.png" alt="5 區建物型態組成">
+    {chart_html('chart_building_types', '5 區建物型態組成')}
   </div>
 
   <div class="section-title">
@@ -586,8 +623,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
       <table class="rank-table" id="rankTable">
         <thead>
           <tr>
-            <th data-key="__rank" data-type="num">排名<span class="arrow">▲▼</span></th>
-            <th data-key="鄉鎮市區" data-type="str">區別<span class="arrow">▲▼</span></th>
+            <th data-key="__rank" data-type="num">排名／區別<span class="arrow">▲▼</span></th>
             <th data-key="縣市" data-type="str">縣市<span class="arrow">▲▼</span></th>
             <th data-key="n" data-type="num">樣本<span class="arrow">▲▼</span></th>
             <th data-key="單價中位" data-type="num" class="sorted">單價中位<span class="arrow">▼</span></th>
@@ -761,7 +797,7 @@ function renderRank() {{
   }}
   const tbody = document.getElementById('rankBody');
   if (rows.length === 0) {{
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="9">本時間窗 / 縣市無資料（30 天窗常因資料延遲為空）</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">本時間窗 / 縣市無資料（30 天窗常因資料延遲為空）</td></tr>';
     return;
   }}
   tbody.innerHTML = rows.map((r, i) => {{
@@ -776,8 +812,7 @@ function renderRank() {{
     }}
     const age = (r['屋齡中位'] === null || r['屋齡中位'] === undefined) ? '—' : r['屋齡中位'].toFixed(1);
     return `<tr${{rowCls}}>
-      <td class="num">${{i+1}}</td>
-      <td><b>${{r['鄉鎮市區']}}</b>${{badge}}</td>
+      <td><span class="rk">${{i+1}}</span><b>${{r['鄉鎮市區']}}</b>${{badge}}</td>
       <td>${{r['縣市']}}</td>
       <td class="num">${{r.n}}</td>
       <td class="num">${{r['單價中位'].toFixed(1)}}</td>

@@ -249,6 +249,10 @@ table.rank-table{width:100%;border-collapse:collapse;font-size:14px;color:var(--
 .rank-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-size:13px}
 .rank-table tr.low-sample td{color:var(--ink-dim)}
 .rank-table tr:hover{background:var(--paper)}
+/* 名次併進區名格：手機凍結首欄時留在畫面的是「名次＋區名」（2026-09-29 G10-05） */
+.rank-table .rk{display:inline-block;min-width:1.4em;margin-right:4px;color:var(--cx-ink-2);font-weight:400;font-variant-numeric:tabular-nums}
+/* 首欄收窄到內容寬（include.js 只在首欄 ≤ 捲動區 45% 時才凍結；360 寬手機上限約 136px） */
+.rank-table :is(th,td):first-child{width:1%;padding-left:8px;padding-right:8px}
 .badge-low{display:inline-block;font-size:10px;color:var(--ink-dim);background:var(--cream);padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500}
 
 /* 原始資料下載 */
@@ -338,8 +342,7 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
         badge = ' <span class="badge-low">樣本少</span>' if low else ""
         rows_html += (
             f'<tr{cls} data-city="{r["縣市"]}">'
-            f'<td class="num">{i}</td>'
-            f'<td><b>{r["鄉鎮市區"]}</b>{badge}</td>'
+            f'<td data-sort="{i}"><span class="rk">{i}</span><b>{r["鄉鎮市區"]}</b>{badge}</td>'
             f'<td>{r["縣市"]}</td>'
             f'<td class="num" data-sort="{r["n"]}">{int(r["n"])}</td>'
             f'<td class="num" data-sort="{r["單價中位"]}">{r["單價中位"]:.1f}</td>'
@@ -421,8 +424,7 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
     <div class="rank-table-wrap">
       <table class="rank-table" id="presaleTable">
         <thead><tr>
-          <th data-type="num">排名<span class="arrow">▲▼</span></th>
-          <th data-type="str">區別<span class="arrow">▲▼</span></th>
+          <th data-type="num">排名／區別<span class="arrow">▲▼</span></th>
           <th data-type="str">縣市<span class="arrow">▲▼</span></th>
           <th data-type="num">樣本<span class="arrow">▲▼</span></th>
           <th data-type="num" class="sorted">單價中位<span class="arrow">▼</span></th>
@@ -553,8 +555,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
             shop_html = f'<td class="num" data-sort="{shop}">{shop:,.0f}{shop_badge}</td>'
         rows_html += (
             f'<tr{cls} data-city="{r["縣市"]}">'
-            f'<td class="num">{i}</td>'
-            f'<td><b>{r["鄉鎮市區"]}</b>{badge}</td>'
+            f'<td data-sort="{i}"><span class="rk">{i}</span><b>{r["鄉鎮市區"]}</b>{badge}</td>'
             f'<td>{r["縣市"]}</td>'
             f'<td class="num" data-sort="{r["n"]}">{int(r["n"])}</td>'
             f'<td class="num" data-sort="{r["月租中位"]}">{r["月租中位"]:,.0f}</td>'
@@ -638,8 +639,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
     <div class="rank-table-wrap">
       <table class="rank-table" id="rentalTable">
         <thead><tr>
-          <th data-type="num">排名<span class="arrow">▲▼</span></th>
-          <th data-type="str">區別<span class="arrow">▲▼</span></th>
+          <th data-type="num">排名／區別<span class="arrow">▲▼</span></th>
           <th data-type="str">縣市<span class="arrow">▲▼</span></th>
           <th data-type="num">樣本<span class="arrow">▲▼</span></th>
           <th data-type="num">住家月租中位<span class="arrow">▲▼</span></th>

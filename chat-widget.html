@@ -389,8 +389,45 @@
   });
 
   // 輕量主動邀請：停留 25 秒且未開過才出現，一次性
-  var teaser = null;
-  function removeTeaser(){ if (teaser) { teaser.remove(); teaser = null; } }
+  // 避讓（老闆 2026-09-29 解禁，只動位置與出現條件）：泡泡矩形壓到電話／LINE／送出鈕／CTA 區就改放浮鈕正上方；
+  // 兩處都壓到、或浮鈕正在讓位，就先不出現，捲動後再試；顯示中捲動也重算
+  var teaser = null, teaserShown = false, teaserRaf = 0;
+  var TEASER_AVOID = 'a[href^="tel:"],a[href*="lin.ee/"],a[href*="line.me/"],button[type=submit],input[type=submit],.tp-form-open,.tp-form-wrap,form,a[class*="btn"],a[href*="privacy"],.cx-hours-actions,.cx-tool-go,.cx-sticky-cta,.cx-dcard,.cx-dpill';
+  function removeTeaser(){
+    if (teaser) { teaser.remove(); teaser = null; }
+    window.removeEventListener('scroll', onTeaserMove); window.removeEventListener('resize', onTeaserMove);
+  }
+  function teaserBlocked(){
+    var r = teaser.getBoundingClientRect(), hit = false;
+    document.querySelectorAll(TEASER_AVOID).forEach(function(el){
+      if (hit || el.closest('[class^="cw-"],[class*=" cw-"]')) return;
+      var b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2 || b.right <= r.left - 6 || b.left >= r.right + 6 || b.bottom <= r.top - 6 || b.top >= r.bottom + 6) return;
+      var cs = getComputedStyle(el);
+      if (cs.visibility !== 'hidden' && +cs.opacity > 0.05) hit = true;
+    });
+    return hit;
+  }
+  function placeTeaser(){
+    var st = teaser.style, lc = getComputedStyle(launch);
+    st.bottom = st.right = ''; st.visibility = 'hidden';
+    if (launch.getBoundingClientRect().width < 10) return false;
+    if (!teaserBlocked()) { st.visibility = ''; return true; }
+    st.bottom = (parseFloat(lc.bottom) + launch.offsetHeight + 10) + 'px'; st.right = lc.right;
+    if (!teaserBlocked()) { st.visibility = ''; return true; }
+    return false;
+  }
+  function tryTeaser(){
+    teaserRaf = 0;
+    if (!teaser) return;
+    if (panel.classList.contains('cw-open')) { removeTeaser(); return; }
+    if (placeTeaser() && !teaserShown) {
+      teaserShown = true;
+      try { sessionStorage.setItem('cwTeaserShown', '1'); } catch(e) {}
+      setTimeout(removeTeaser, 12000);
+    }
+  }
+  function onTeaserMove(){ if (!teaserRaf) teaserRaf = requestAnimationFrame(tryTeaser); }
   try {
     if (!sessionStorage.getItem('cwTeaserShown')) {
       setTimeout(function(){
@@ -399,9 +436,11 @@
         teaser.className = 'cw-teaser';
         teaser.textContent = '操作有問題？點我問小鋮';
         teaser.onclick = openPanel;
+        teaser.style.visibility = 'hidden';
         document.body.appendChild(teaser);
-        sessionStorage.setItem('cwTeaserShown', '1');
-        setTimeout(removeTeaser, 12000);
+        window.addEventListener('scroll', onTeaserMove, { passive: true });
+        window.addEventListener('resize', onTeaserMove);
+        tryTeaser();
       }, 25000);
     }
   } catch(e) {}

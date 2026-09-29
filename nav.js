@@ -6,6 +6,15 @@
     '--cx-orange-soft:#F6783B;--cx-orange-deep-hover:#A53E0C;--cx-ink-shadow:rgba(60,30,14,.4);--cx-ink-hero:#4B2F20}';
   if (!document.getElementById('cx-brand')) document.head.insertAdjacentHTML('beforeend', '<style id="cx-brand">' + TOKENS + '</style>');
   if (document.currentScript && document.currentScript.hasAttribute('data-cx-tokens-only')) return;
+  /* 接聽狀態首繪前先標在 <html>（規則同 cx-hours.js，改時段要一起改）：導覽電話鈕一出現就是正確主次，不閃舊樣式 */
+  (function () {
+    var de = document.documentElement, h = location.hostname, f = window.__CX_NOW, d, m, t;
+    if (de.hasAttribute('data-cx-open')) return;
+    if ((h === 'localhost' || h === '127.0.0.1') && typeof f === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(f)) {
+      f = f.split(/[-T:]/).map(Number); d = new Date(Date.UTC(f[0], f[1] - 1, f[2])).getUTCDay(); m = f[3] * 60 + f[4];
+    } else { t = new Date(Date.now() + 288e5); d = t.getUTCDay(); m = t.getUTCHours() * 60 + t.getUTCMinutes(); }
+    de.setAttribute('data-cx-open', d >= 1 && d <= 5 && m >= 600 && m < 1020 ? '1' : '0');
+  })();
   var css = [
     '.cx-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:block;height:auto;padding:0;background:var(--cx-cream-glass);',
     'backdrop-filter:blur(14px);border-bottom:1px solid var(--cx-line);font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;color:var(--cx-ink)}',
@@ -36,6 +45,9 @@
     '.cx-cta{display:inline-flex;align-items:center;min-height:44px;background:var(--cx-orange);color:var(--cx-ink);font-weight:700;font-size:14.5px;padding:10px 22px;border-radius:999px;white-space:nowrap}',
     '.cx-cta:hover{background:var(--cx-orange-soft)}',
     '.cx-cta-n{font-variant-numeric:tabular-nums;letter-spacing:.02em}.cx-cta-s{display:none}',
+    /* 非接聽時段電話鈕降成次鈕（老闆 2026-09-29 拍板）：米白底＋墨框＋墨字，不換 LINE、不改字；框用 inset 陰影，尺寸不變 */
+    'html[data-cx-open="0"] .cx-cta{background:var(--cx-cream);box-shadow:inset 0 0 0 1.5px var(--cx-ink)}',
+    'html[data-cx-open="0"] .cx-cta:hover{background:var(--cx-cream-2)}',
     '.cx-burger{display:none;background:none;border:0;color:var(--cx-ink);font-size:24px;cursor:pointer;padding:4px 6px}',
     '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:var(--cx-cream);color:var(--cx-ink);overflow:auto;padding:16px 20px 40px;z-index:99}',
     '.cx-sheet.open{display:block}',
@@ -50,6 +62,7 @@
     '.cx-sheet .cx-sheet-foot{display:flex;flex-direction:column;gap:10px;margin-top:20px}',
     '.cx-sheet .cx-sheet-foot a{padding:14px;border-radius:10px;border:1px solid var(--cx-ink);color:var(--cx-ink);text-align:center;font-size:15px}',
     '.cx-sheet .cx-sheet-foot a.cta{background:var(--cx-orange);color:var(--cx-ink);border-color:var(--cx-orange);font-weight:700}',
+    'html[data-cx-open="0"] .cx-sheet .cx-sheet-foot a.cta{background:var(--cx-cream);border-color:var(--cx-ink)}',
     '@media(max-width:900px){.cx-in{height:58px;gap:14px}.cx-menu,.cx-resume,.cx-phone{display:none}.cx-burger{display:block}.cx-cta{padding:9px 16px;font-size:14px}.cx-cta-n{display:none}.cx-cta-s{display:inline}}',
     '@media(max-width:400px){.cx-in{padding:0 14px;gap:8px}.cx-logo{font-size:15px;gap:7px}.cx-right{gap:6px}.cx-cta{padding:8px 12px;font-size:13.5px}}',
     '.cx-nav.cx-light{background:var(--cx-card);backdrop-filter:none;color:var(--cx-ink)}',

@@ -104,3 +104,40 @@ a[style*="background:#C8945A;color:#fff"]:hover{background:var(--cx-orange-soft)
 .cta-box a[style*="background:var(--cx-orange)"]:hover{background:var(--cx-orange-soft)!important}
 /*§22*/
 :is(.res-main-val,.strip-big,.gauge-val,.result-value,.tc-ov,.hold-years,.month-big){line-height:1.15}
+/*§23 稅務試算（2026-09-29 視覺目檢 high）：地價稅 20 頁 table.tax-table ≤640px（481–620 實測輸入框仍截字）改「每種稅地一張卡」＝欄名在上、面積輸入在下、同卡緊接課稅地價／稅率／稅額（標籤取 td[data-label]）；謄本持分列改直式算式（× 分子、/ 分母各領一行，運算子不掛行尾）；land-tax-calculator 結果卡圓章不壓標題（桌機放標題列右欄、手機移到應繳總額下方）、字 ≥12px、金額不斷行*/
+table.tax-table td[style*="#b0b0b0"]{color:var(--cx-ink-3)!important}
+.tk:has(>#tkStamp){display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:start}
+.tk:has(>#tkStamp)>*{grid-column:1/-1}
+.tk>#tkStamp{position:static;grid-row:1;grid-column:2;width:66px;height:66px;font-size:12px;letter-spacing:.04em}
+.tk:has(>#tkStamp)>.tc-hd{grid-row:1;grid-column:1}
+table.tax-table th{white-space:nowrap}
+@media(max-width:640px){
+  .step-card table.tax-table{display:flex;flex-direction:column}
+  .step-card table.tax-table :is(thead,tbody,tr){display:contents}
+  .step-card table.tax-table :is(th,td){display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-width:0;padding:10px 16px;text-align:right;font-size:16px;line-height:1.4;background:var(--cx-card);border:solid var(--cx-line);border-width:0 1px 1px;border-radius:0}
+  .step-card table.tax-table :is(th,td):first-child{display:none}
+  .step-card table.tax-table :is(th,td):nth-child(2){order:2}
+  .step-card table.tax-table :is(th,td):nth-child(3){order:3}
+  .step-card table.tax-table :is(th,td):nth-child(4){order:4}
+  .step-card table.tax-table :is(th,td):nth-child(5){order:5}
+  .step-card table.tax-table th{justify-content:flex-start;margin-top:16px;padding:12px 16px;text-align:left;font-size:17px;color:var(--cx-ink);background:var(--cx-cream-2);border-width:1px 1px 0;border-radius:10px 10px 0 0}
+  .step-card table.tax-table th:nth-child(2){margin-top:0}
+  .step-card table.tax-table td::before{content:attr(data-label);flex:none;text-align:left;font-size:14px;font-weight:600;color:var(--cx-ink-2)}
+  .step-card table.tax-table tbody>tr:first-child>td{flex-direction:column;align-items:stretch;gap:6px}
+  .step-card table.tax-table .area-input{width:100%;min-width:120px;height:48px;font-size:16px}
+  .step-card table.tax-table .tax-cell{font-size:18px}
+  .step-card table.tax-table .result-row>td{padding:12px 16px;background:var(--cx-cream-2);border-bottom-width:1px;border-radius:0 0 10px 10px}
+  div:has(>.field>#shareNumer){display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:end}
+  div:has(>.field>#shareNumer)>.field:first-child{grid-column:1/-1}
+  div:has(>.field>#shareNumer)>span{display:flex;align-items:center;justify-content:center;min-width:1.25em;height:42px;padding:0!important}
+  .tk>#tkStamp{grid-row:auto;grid-column:1/-1;justify-self:end;order:1;margin-top:10px}
+  .tk:has(>#tkStamp)>.tc-hd{grid-row:auto;grid-column:1/-1}
+  .tk:has(>#tkStamp)>.tc-note{order:2}
+  .tk .tc-sub{font-size:12px}
+  .tk .tc-ol{font-size:13px}
+  .tk .tc-note{font-size:12px}
+  .tk .tc-out{flex-wrap:wrap}
+  .tk :is(.tc-ov,.rc-line b){white-space:nowrap}
+  .tk .tc-ov{margin-left:auto}
+  .tk .rc-line{gap:12px}
+}
