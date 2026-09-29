@@ -57,7 +57,10 @@ def _save(fig, name: str) -> Path:
 MOBILE_W = 4.0
 MOBILE_DPI = 200
 MFS = 13
-YOY_UP, YOY_DOWN = "#16A34A", "#EF4444"  # 與頁面 KPI／排名表的漲跌色一致
+# 漲跌柱色（米米系，2026-09-29 視覺目檢第 23 列）：不用紅綠對撞，改靠明度差區分（橘 × 墨 對比 4.8，色盲也分得開）。
+# 圖檔不能用 CSS 變數，同值寫死：YOY_UP＝--cx-orange、YOY_DOWN＝--cx-ink；數字標籤上漲用 --cx-orange-deep（橘不當小字）、下跌用 --cx-ink。
+YOY_UP, YOY_DOWN = "#F5621C", "#3C1E0E"
+YOY_UP_LABEL, YOY_DOWN_LABEL = "#B8440C", "#3C1E0E"
 
 
 def _save_m(fig, name: str) -> Path:
@@ -98,7 +101,7 @@ def chart_yoy_change(df: pd.DataFrame, mobile: bool = False) -> Path:
     rows.sort(key=lambda x: x[1])
     labels = [r[0] for r in rows]
     values = [r[1] for r in rows]
-    # 柱色依正負：頁面說明「綠 = 上漲、紅 = 下跌」讀者看的是柱子。原本用區域識別色，
+    # 柱色依正負：頁面說明「橘 = 上漲、深棕 = 下跌」讀者看的是柱子。原本用區域識別色，
     # 土城 +25.6% 是紅柱、手機上會讀成下跌（2026-09-29 視覺目檢 G10-08）
     colors = [YOY_UP if v >= 0 else YOY_DOWN for v in values]
 
@@ -113,7 +116,7 @@ def chart_yoy_change(df: pd.DataFrame, mobile: bool = False) -> Path:
             ax.text(val + span * (0.02 if val >= 0 else -0.02), i, f"{val:+.1f}%",
                     ha="left" if val >= 0 else "right", va="center",
                     fontsize=MFS, fontweight="bold",
-                    color="#1B5E20" if val >= 0 else "#B71C1C")
+                    color=YOY_UP_LABEL if val >= 0 else YOY_DOWN_LABEL)
         ax.set_xlim(lo - (span * 0.55 if lo < 0 else 0), hi + (span * 0.6 if hi > 0 else 0))
         ax.axvline(0, color="#3a3a3c", linewidth=1)
         ax.set_title("單價中位數年增率 YoY\n（115Q1 vs 114Q1）",
@@ -129,7 +132,7 @@ def chart_yoy_change(df: pd.DataFrame, mobile: bool = False) -> Path:
         y = val + 0.4 if val >= 0 else val - 0.4
         ax.text(bar.get_x() + bar.get_width() / 2, y, f"{val:+.1f}%",
                 ha="center", va="baseline" if val >= 0 else "top", fontsize=10, fontweight="bold",
-                color="#1B5E20" if val >= 0 else "#B71C1C")
+                color=YOY_UP_LABEL if val >= 0 else YOY_DOWN_LABEL)
     ax.axhline(0, color="#3a3a3c", linewidth=1)
     ax.set_title("單價中位數年增率 YoY（115Q1 vs 114Q1）",
                  fontsize=15, fontweight="bold", pad=14)

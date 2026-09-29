@@ -554,7 +554,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
   <div class="section-title">近 1 年單價變化（年增率 YoY）</div>
   <div class="chart-card">
     <h3>115Q1 vs 114Q1 單價中位數年增率</h3>
-    <p class="chart-note">綠 = 上漲、紅 = 下跌。新店 -14.9% 看數字大但需結合上方深度解析看（屋齡結構變化所致）。</p>
+    <p class="chart-note">橘 = 上漲、深棕 = 下跌。新店 -14.9% 看數字大但需結合上方深度解析看（屋齡結構變化所致）。</p>
     {chart_html('chart_yoy_change', '5 精選區與雙北平均年增率 YoY')}
   </div>
 
