@@ -388,7 +388,7 @@
     a.addEventListener('click', function(){ track('cw_cta', a.dataset.cwCta); });
   });
 
-  // 輕量主動邀請：停留 25 秒且未開過才出現，一次性
+  // 輕量主動邀請：捲過 hero 且未開過才出現，一次性
   // 避讓（老闆 2026-09-29 解禁，只動位置與出現條件）：泡泡矩形壓到電話／LINE／送出鈕／CTA 區就改放浮鈕正上方；
   // 兩處都壓到、或浮鈕正在讓位，就先不出現，捲動後再試；顯示中捲動也重算
   var teaser = null, teaserShown = false, teaserRaf = 0;
@@ -428,20 +428,27 @@
     }
   }
   function onTeaserMove(){ if (!teaserRaf) teaserRaf = requestAnimationFrame(tryTeaser); }
+  // 出現時機（老闆 2026-09-29 解禁，取代停留 25 秒）：捲過 hero 才出現（沒有 hero 就捲超過一個畫面高），不再蓋住 hero 主鈕；每分頁一次照舊
+  var TEASER_HERO = '.bt-hero,.tp-hero,.art-hero,.hub-hero,.page-hero,.policy-hero,.ct-hero,.rv4-hero,.hero'; // 同 cx-dcard.js 的 HERO
+  function armTeaser(){
+    var h = document.querySelector(TEASER_HERO);
+    if (teaser || window.scrollY <= (h ? h.getBoundingClientRect().bottom + window.scrollY - 64 : window.innerHeight)) return;
+    window.removeEventListener('scroll', armTeaser);
+    if (panel.classList.contains('cw-open')) return;
+    teaser = document.createElement('div');
+    teaser.className = 'cw-teaser';
+    teaser.textContent = '操作有問題？點我問小鋮';
+    teaser.onclick = openPanel;
+    teaser.style.visibility = 'hidden';
+    document.body.appendChild(teaser);
+    window.addEventListener('scroll', onTeaserMove, { passive: true });
+    window.addEventListener('resize', onTeaserMove);
+    tryTeaser();
+  }
   try {
     if (!sessionStorage.getItem('cwTeaserShown')) {
-      setTimeout(function(){
-        if (panel.classList.contains('cw-open')) return;
-        teaser = document.createElement('div');
-        teaser.className = 'cw-teaser';
-        teaser.textContent = '操作有問題？點我問小鋮';
-        teaser.onclick = openPanel;
-        teaser.style.visibility = 'hidden';
-        document.body.appendChild(teaser);
-        window.addEventListener('scroll', onTeaserMove, { passive: true });
-        window.addEventListener('resize', onTeaserMove);
-        tryTeaser();
-      }, 25000);
+      window.addEventListener('scroll', armTeaser, { passive: true });
+      armTeaser();
     }
   } catch(e) {}
 })();
