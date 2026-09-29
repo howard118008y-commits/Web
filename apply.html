@@ -24,8 +24,9 @@
 .apply-alt{margin-top:40px;padding:28px 24px;border:1px solid #e3e3e6;background:#f6f5f3;text-align:center}
 .apply-alt-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:18px;font-weight:600;color:var(--cx-ink);margin-bottom:8px}
 .apply-alt p{font-size:13px;color:#6e6e73;line-height:1.8;margin-bottom:16px}
-.apply-alt .btn-line{display:inline-block;background:var(--cx-ink);color:#fff;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
-.apply-alt .btn-tel{display:inline-block;background:transparent;color:var(--cx-ink);border:1px solid #d9d6d1;font-size:12px;font-weight:600;padding:12px 26px;letter-spacing:.14em;margin:4px 6px;text-decoration:none}
+.apply-alt .btn-line,.apply-alt .cta-tel{margin:5px;vertical-align:middle}
+.apply-alt .cta-tel{display:inline-block;font-size:14px;padding:12px 28px;border-color:var(--cx-line)}
+@media(max-width:480px){.apply-alt :is(.btn-line,.cta-tel){display:block;margin:0}.apply-alt .cta-tel{margin-top:10px}}
 .apply-disclaimer{font-size:11.5px;color:#a1a1a6;line-height:1.8;margin-top:36px;text-align:center}
 @media (max-width:640px){.page-h1{font-size:26px;margin-bottom:10px}.page-hero{padding:72px 1.25rem 28px}.page-sub{font-size:14px;line-height:1.7}.apply-wrap{padding:24px 16px 130px}.apply-frame iframe{height:1800px}}
 
@@ -92,7 +93,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     <div class="apply-alt-title">不想填表單？直接聊也可以。</div>
     <p>LINE 訊息通常 24 小時內回覆；急件請於上班時間來電。</p>
     <a class="btn-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener">加入官方 LINE 諮詢</a>
-    <a class="btn-tel" href="tel:+886-2-2249-0517">來電 02-2249-0517</a>
+    <a class="cta-tel" href="tel:+886-2-2249-0517">來電 02-2249-0517</a>
   </div>
 
   <p class="apply-disclaimer">實際結果依個案不動產條件、財務狀況與市場情況而定，本公司非金融機構，最終核貸由金融機構決定。<br>您填寫的資料僅用於本次諮詢聯繫，不作其他用途。</p>

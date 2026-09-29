@@ -144,3 +144,8 @@ table.tax-table th{white-space:nowrap}
 /*§24 文章 meta 列（2026-09-29 視覺目檢 medium 第 18 列）：三格整格換行，格內不在詞中間斷*/
 .art-meta-row{flex-wrap:wrap;row-gap:4px}
 .art-meta-row>*{white-space:nowrap}
+/*§25 文中 CTA 按鈕（2026-09-29 視覺目檢 medium 第 7 列）：按鈕列改 flex、按鈕間距 10px、圓角 10px（壓過各頁 inline 直角／8px），手機整排全寬；標題與說明各佔一整行、原有上下間距不變*/
+.cta-box,.art-cta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:10px}
+.cta-box>:not(a),.art-cta>:not(a){flex:0 0 100%;min-width:0}
+.cta-box>a,.art-cta>a{margin:5px 0;border-radius:10px!important}
+@media(max-width:480px){.cta-box>a,.art-cta>a{flex:1 1 100%}}
