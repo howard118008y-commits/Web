@@ -195,7 +195,9 @@ input,select{font-size:16px!important}
 
 .dr.minus span:last-child{color:var(--gold-deep)}
 
-.month-strip{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.month-strip{background:var(--cream);border:1.5px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.month-strip>div:last-child{margin-left:auto}
+#totalLoss,#dailyCost{white-space:nowrap}
 
 .month-big{font-size:36px;font-weight:700;color:var(--action)}
 
