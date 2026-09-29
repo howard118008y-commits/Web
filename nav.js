@@ -6,15 +6,21 @@
     '--cx-orange-soft:#F6783B;--cx-orange-deep-hover:#A53E0C;--cx-ink-shadow:rgba(60,30,14,.4);--cx-ink-hero:#4B2F20}';
   if (!document.getElementById('cx-brand')) document.head.insertAdjacentHTML('beforeend', '<style id="cx-brand">' + TOKENS + '</style>');
   if (document.currentScript && document.currentScript.hasAttribute('data-cx-tokens-only')) return;
-  /* 接聽狀態首繪前先標在 <html>（規則同 cx-hours.js，改時段要一起改）：導覽電話鈕一出現就是正確主次，不閃舊樣式 */
-  (function () {
-    var de = document.documentElement, h = location.hostname, f = window.__CX_NOW, d, m, t;
-    if (de.hasAttribute('data-cx-open')) return;
+  /* 接聽狀態首繪前先標在 <html>（規則同 cx-hours.js 的 isOpen，改時段要一起改）：導覽電話鈕一出現就是正確主次，不閃舊樣式。
+     cx-hours.js 只在掛 footer 的頁載入，所以下方另以每分鐘＋回到分頁時重算（有 window.__cxHours 就交給它的 apply） */
+  function cxOpenNow() {
+    var h = location.hostname, f = window.__CX_NOW, d, m, t;
     if ((h === 'localhost' || h === '127.0.0.1') && typeof f === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(f)) {
       f = f.split(/[-T:]/).map(Number); d = new Date(Date.UTC(f[0], f[1] - 1, f[2])).getUTCDay(); m = f[3] * 60 + f[4];
     } else { t = new Date(Date.now() + 288e5); d = t.getUTCDay(); m = t.getUTCHours() * 60 + t.getUTCMinutes(); }
-    de.setAttribute('data-cx-open', d >= 1 && d <= 5 && m >= 600 && m < 1020 ? '1' : '0');
-  })();
+    return d >= 1 && d <= 5 && m >= 600 && m < 1020 ? '1' : '0';
+  }
+  function cxMarkOpen() {
+    if (window.__cxHours) { window.__cxHours.apply(); return; }
+    var v = cxOpenNow();
+    if (document.documentElement.getAttribute('data-cx-open') !== v) document.documentElement.setAttribute('data-cx-open', v);
+  }
+  if (!document.documentElement.hasAttribute('data-cx-open')) document.documentElement.setAttribute('data-cx-open', cxOpenNow());
   var css = [
     '.cx-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:block;height:auto;padding:0;background:var(--cx-cream-glass);',
     'backdrop-filter:blur(14px);border-bottom:1px solid var(--cx-line);font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;color:var(--cx-ink)}',
@@ -38,8 +44,6 @@
     '.cx-dd a.go::after{content:" →"}',
     '.cx-badge{display:inline-block;background:#FAC775;color:#633806;font-size:11px;font-weight:500;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:1px}',
     '.cx-right{margin-left:auto;display:flex;align-items:center;gap:10px}',
-    '.cx-phone{width:44px;height:44px;border-radius:50%;border:1px solid var(--cx-line);display:grid;place-items:center;font-size:15px;color:var(--cx-ink-2)}',
-    '.cx-phone:hover{border-color:var(--cx-orange-deep);color:var(--cx-ink)}',
     '.cx-resume{font-size:14px;color:var(--cx-ink-2);padding:8px 12px;border-radius:999px;border:1px solid transparent}',
     '.cx-resume:hover{color:var(--cx-ink);border-color:var(--cx-line)}',
     '.cx-cta{display:inline-flex;align-items:center;min-height:44px;background:var(--cx-orange);color:var(--cx-ink);font-weight:700;font-size:14.5px;padding:10px 22px;border-radius:999px;white-space:nowrap}',
@@ -48,6 +52,12 @@
     /* 非接聽時段電話鈕降成次鈕（老闆 2026-09-29 拍板）：米白底＋墨框＋墨字，不換 LINE、不改字；框用 inset 陰影，尺寸不變 */
     'html[data-cx-open="0"] .cx-cta{background:var(--cx-cream);box-shadow:inset 0 0 0 1.5px var(--cx-ink)}',
     'html[data-cx-open="0"] .cx-cta:hover{background:var(--cx-cream-2)}',
+    /* 非接聽時段桌機多一顆 LINE 留言主鈕（老闆 2026-09-29「全做」）；手機不加，讓底部固定條當唯一主鈕 */
+    '.cx-line-cta{display:none;align-items:center;min-height:44px;background:var(--cx-orange);color:var(--cx-ink);font-weight:700;font-size:14.5px;padding:10px 22px;border-radius:999px;white-space:nowrap;transition:background-color .15s}',
+    '.cx-line-cta:hover{background:var(--cx-orange-soft)}',
+    'html[data-cx-open="0"] .cx-line-cta{display:inline-flex}',
+    /* 窄桌機多一顆鈕會把選單擠成多行：這段寬度非接聽時電話鈕改顯示短字「電話諮詢」（號碼仍在 aria-label），兩鈕總寬不超過原本 ☎＋號碼 */
+    '@media(min-width:901px) and (max-width:1179px){html[data-cx-open="0"] :is(.cx-cta,.cx-line-cta){padding:10px 16px}html[data-cx-open="0"] .cx-cta-n{display:none}html[data-cx-open="0"] .cx-cta-s{display:inline}}',
     '.cx-burger{display:none;background:none;border:0;color:var(--cx-ink);font-size:24px;cursor:pointer;padding:4px 6px}',
     '.cx-sheet{display:none;position:fixed;top:58px;left:0;right:0;bottom:0;background:var(--cx-cream);color:var(--cx-ink);overflow:auto;padding:16px 20px 40px;z-index:99}',
     '.cx-sheet.open{display:block}',
@@ -57,17 +67,18 @@
     '.cx-sheet summary::-webkit-details-marker{display:none}',
     '.cx-sheet summary::after{content:"+";color:var(--cx-orange-deep);font-size:20px}',
     '.cx-sheet details[open] summary::after{content:"−"}',
-    '.cx-sheet a{display:block;padding:11px 4px 11px 14px;font-size:15px;color:var(--cx-ink-2)}',
+    '.cx-sheet a{display:block;padding:11px 4px 11px 14px;font-size:15px;color:var(--cx-ink-2);text-decoration:none}',
     '.cx-sheet a.go{color:var(--cx-orange-deep);font-weight:700}',
     '.cx-sheet .cx-sheet-foot{display:flex;flex-direction:column;gap:10px;margin-top:20px}',
     '.cx-sheet .cx-sheet-foot a{padding:14px;border-radius:10px;border:1px solid var(--cx-ink);color:var(--cx-ink);text-align:center;font-size:15px}',
     '.cx-sheet .cx-sheet-foot a.cta{background:var(--cx-orange);color:var(--cx-ink);border-color:var(--cx-orange);font-weight:700}',
     'html[data-cx-open="0"] .cx-sheet .cx-sheet-foot a.cta{background:var(--cx-cream);border-color:var(--cx-ink)}',
-    '@media(max-width:900px){.cx-in{height:58px;gap:14px}.cx-menu,.cx-resume,.cx-phone{display:none}.cx-burger{display:block}.cx-cta{padding:9px 16px;font-size:14px}.cx-cta-n{display:none}.cx-cta-s{display:inline}}',
+    'html[data-cx-open="0"] .cx-sheet .cx-sheet-foot a.cx-sf-line{order:-1;background:var(--cx-orange);border-color:var(--cx-orange);font-weight:700}',
+    'html[data-cx-open="0"] .cx-sf-pre{display:none}',
+    '@media(max-width:900px){.cx-in{height:58px;gap:14px}.cx-menu,.cx-resume,html[data-cx-open] .cx-line-cta{display:none}.cx-burger{display:block}.cx-cta{padding:9px 16px;font-size:14px}.cx-cta-n{display:none}.cx-cta-s{display:inline}}',
     '@media(max-width:400px){.cx-in{padding:0 14px;gap:8px}.cx-logo{font-size:15px;gap:7px}.cx-right{gap:6px}.cx-cta{padding:8px 12px;font-size:13.5px}}',
     '.cx-nav.cx-light{background:var(--cx-card);backdrop-filter:none;color:var(--cx-ink)}',
     '.cx-light .cx-menu>li>button{color:var(--cx-ink);border-radius:999px}',
-    '.cx-light .cx-phone{color:var(--cx-ink)}',
     '.cx-sheet.cx-light{background:var(--cx-card)}',
     '.cx-sheet.cx-light a{color:var(--cx-ink)}',
     '.cx-sheet.cx-light a.go{color:var(--cx-orange-deep)}',
@@ -152,16 +163,16 @@
     '<a class="cx-nc-tel" href="tel:0222490517" data-link-location="nav_contact">02-2249-0517</a>' +
     '<p class="cx-nc-open">接聽時間：週一至週五 10:00–17:00</p><p class="cx-nc-closed">現在是非接聽時間。<br>先用 LINE 留言，我們上班後回覆您。</p>' +
     '<a class="cx-nc-line" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-link-location="nav_contact">LINE 留言</a></div></div>';
-  var sheetCtaHtml = '<a class="cta" href="tel:0222490517" data-link-location="mobile_menu">電話諮詢 02-2249-0517</a><a href="https://lin.ee/PHIfSoY" data-link-location="mobile_menu">未接通？LINE 留言</a><p>接聽：週一至週五 10:00–17:00</p>';
+  var lineCtaHtml = '<a class="cx-line-cta" href="https://lin.ee/PHIfSoY" target="_blank" rel="noopener" data-link-location="nav">LINE 留言</a>';
+  var sheetCtaHtml = '<a class="cta" href="tel:0222490517" data-link-location="mobile_menu">電話諮詢 02-2249-0517</a><a class="cx-sf-line" href="https://lin.ee/PHIfSoY" data-link-location="mobile_menu"><span class="cx-sf-pre">未接通？</span>LINE 留言</a><p>接聽：週一至週五 10:00–17:00</p>';
   var html =
     '<nav class="cx-nav" aria-label="主導覽">' +
       '<div class="cx-in">' +
         '<a class="cx-logo" href="/"><span class="cx-mark">鋮</span>鋮馨租賃有限公司</a>' +
         '<ul class="cx-menu">' + desktop + '</ul>' +
         '<div class="cx-right">' + ncHtml +
-          '<a class="cx-phone" href="tel:0222490517" aria-label="撥打 02-2249-0517">☎</a>' +
           '<a class="cx-resume" id="cxResume" href="/intake.html" hidden>回到我的評估</a>' +
-          ctaHtml +
+          ctaHtml + lineCtaHtml +
           '<button class="cx-burger" type="button" aria-label="開啟選單" aria-controls="cxSheet" aria-expanded="false">☰</button>' +
         '</div>' +
       '</div>' +
@@ -169,7 +180,6 @@
     '<div class="cx-sheet" id="cxSheet">' + mobile +
       '<div class="cx-sheet-foot">' +
         sheetCtaHtml +
-        '<a href="tel:0222490517">撥打 02-2249-0517</a>' +
       '</div>' +
     '</div>';
   document.head.insertAdjacentHTML('beforeend', '<style>' + css + '</style>');
@@ -208,6 +218,8 @@
   document.addEventListener('click', function (e) { if (!e.target.closest('.cx-nc')) closeNc(false); });
   document.querySelector('.cx-menu').addEventListener('mouseenter', function () { closeNc(false); });
   if (window.__cxHours) window.__cxHours.apply();
+  setInterval(cxMarkOpen, 60 * 1000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) cxMarkOpen(); });
   function noCard() {
     if (!document.documentElement.hasAttribute('data-cx-dcard') && !document.querySelector('[data-include="footer"],.cx-site-footer')) document.documentElement.setAttribute('data-cx-dcard', 'none');
   }
