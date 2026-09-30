@@ -569,7 +569,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   function num(n){return (n===null||n===undefined||isNaN(n))?null:Number(n);}
   function fmt(n){return n===null?'—':n.toLocaleString('zh-TW');}
   function chg(v){v=num(v);if(v===null)return '—';
-    var up=v>0,c=up?'#16A34A':(v<0?'#EF4444':'#6e6e73'),a=up?'▲':(v<0?'▼':'—');
+    var up=v>0,c=up?'#16A34A':(v<0?'#EF4444':'var(--cx-ink-3,#796354)'),a=up?'▲':(v<0?'▼':'—');
     return '<span style="color:'+c+';font-weight:700">'+a+' '+Math.abs(v).toFixed(1)+'%</span>';}
   function pick(arr){for(var i=0;i<arr.length;i++){if(arr[i]&&arr[i]['鄉鎮市區']===town)return arr[i];}return null;}
   function getJSON(u){return fetch(u).then(function(r){return r.ok?r.json():[];}).catch(function(){return [];});}
@@ -585,7 +585,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         '<div class="live-row"><span>屋齡中位</span><b>'+(num(buy['屋齡中位'])===null?'—':num(buy['屋齡中位']).toFixed(1))+' 年</b></div>'+
         '<div class="live-row"><span>樣本</span><b>'+fmt(num(buy['n']))+' 筆</b></div>'+
         '<div class="live-row"><span>2 年漲幅</span><b>'+chg(buy['2年漲幅'])+'</b></div>';
-    }else{bc.innerHTML='<h4>買賣行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:#86868b">本區暫無資料</div>';}
+    }else{bc.innerHTML='<h4>買賣行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:var(--cx-ink-3)">本區暫無資料</div>';}
     if(rent){
       var rp=num(rent['月租每坪中位']);
       rc.innerHTML='<h4>租金行情（近 180 天）</h4>'+
@@ -594,7 +594,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
         '<div class="live-row"><span>店面月租中位</span><b>'+(num(rent['店面月租中位'])===null?'—':fmt(num(rent['店面月租中位']))+' 元')+'</b></div>'+
         '<div class="live-row"><span>年化報酬率</span><b>'+(num(rent['年化報酬率'])===null?'—':num(rent['年化報酬率']).toFixed(2)+'%')+'</b></div>'+
         '<div class="live-row"><span>樣本</span><b>'+fmt(num(rent['n']))+' 筆</b></div>';
-    }else{rc.innerHTML='<h4>租金行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:#86868b">本區暫無資料</div>';}
+    }else{rc.innerHTML='<h4>租金行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:var(--cx-ink-3)">本區暫無資料</div>';}
 
     // ---- 鄰近精選區租金比較長條圖 ----
     var rentArr=res[1]||[];

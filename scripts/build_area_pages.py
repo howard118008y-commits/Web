@@ -378,17 +378,17 @@ PAGE = Template("""<!DOCTYPE html>
 .art-body p{font-size:16px;line-height:1.85;color:#3d3d3f;margin-bottom:1.1rem}
 .art-body ul{margin:.5rem 0 1.25rem 1.4rem}
 .art-body li{font-size:16px;line-height:1.8;color:#3d3d3f;margin-bottom:.4rem}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#86868b;margin-bottom:1.5rem}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--cx-ink-3);margin-bottom:1.5rem}
 .faq-item{border-bottom:1px solid #f0f0f0;padding-bottom:.5rem;margin-bottom:1rem}
 .live-stats{margin:1.5rem 0 .5rem}
 .live-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .live-card{background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px;padding:18px 18px 16px}
-.live-card h4{font-size:13px;color:#6e6e73;font-weight:600;margin:0 0 10px}
+.live-card h4{font-size:13px;color:var(--cx-ink-2);font-weight:600;margin:0 0 10px}
 .live-big{font-size:30px;font-weight:700;color:#0F172A;letter-spacing:-.02em}
-.live-big .u{font-size:14px;font-weight:600;color:#86868b;margin-left:4px}
+.live-big .u{font-size:14px;font-weight:600;color:var(--cx-ink-3);margin-left:4px}
 .live-row{display:flex;justify-content:space-between;font-size:13px;color:#3d3d3f;padding:5px 0;border-top:1px dashed #e6e9ec}
 .live-row b{color:#1d1d1f}
-.live-note{font-size:12px;color:#86868b;margin-top:10px;line-height:1.6}
+.live-note{font-size:12px;color:var(--cx-ink-3);margin-top:10px;line-height:1.6}
 .live-note a{color:#0071e3;text-decoration:none}
 .cta-box{background:#0a2a1a;border-radius:20px;padding:2.25rem;text-align:center;margin:3rem 0 1rem}
 .cta-box h3{font-size:22px;font-weight:700;color:#fff;margin-bottom:.6rem}
@@ -397,7 +397,7 @@ PAGE = Template("""<!DOCTYPE html>
 .disclaimer{font-size:12px;color:#9b9b9f;line-height:1.7;margin-top:1.5rem}
 .loc-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:14px;align-items:stretch;margin:1.25rem 0 .5rem}
 .loc-card{background:#f7f9fb;border:1px solid #eef1f4;border-radius:14px;padding:16px;display:flex;flex-direction:column}
-.loc-card h4{font-size:13px;color:#6e6e73;font-weight:600;margin:0 0 10px}
+.loc-card h4{font-size:13px;color:var(--cx-ink-2);font-weight:600;margin:0 0 10px}
 .tw-wrap{flex:1;display:flex;align-items:center;justify-content:center}
 .tw-wrap svg{width:auto;height:200px;max-width:100%}
 .tw-island{fill:#e3e9ef;stroke:#cfd8e1;stroke-width:1.5}
@@ -408,17 +408,17 @@ PAGE = Template("""<!DOCTYPE html>
 .map-embed{flex:1;min-height:240px;border:0;width:100%;border-radius:10px}
 .area-photo{margin:1.25rem 0 .5rem}
 .area-photo img{width:100%;border-radius:14px;display:block}
-.area-photo figcaption{font-size:12px;color:#86868b;text-align:center;margin-top:8px}
+.area-photo figcaption{font-size:12px;color:var(--cx-ink-3);text-align:center;margin-top:8px}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.25rem 0 .5rem}
 .chart-card{background:#fff;border:1px solid #eef1f4;border-radius:14px;padding:16px}
 .chart-card h4{font-size:13px;color:#1d1d1f;font-weight:700;margin:0 0 4px}
-.chart-card .sub{font-size:11px;color:#86868b;margin:0 0 10px}
+.chart-card .sub{font-size:11px;color:var(--cx-ink-3);margin:0 0 10px}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:12px}
 .bar-name{width:84px;color:#3d3d3f;flex:none;white-space:nowrap}
 .bar-track{flex:1;background:#f0f2f5;border-radius:6px;height:18px;overflow:hidden}
 .bar-fill{height:100%;border-radius:6px;transition:width .5s ease}
 .bar-val{width:74px;text-align:right;color:#1d1d1f;font-weight:600;flex:none}
-.chart-empty{font-size:12px;color:#86868b;padding:14px 0;text-align:center}
+.chart-empty{font-size:12px;color:var(--cx-ink-3);padding:14px 0;text-align:center}
 .bar-dot{width:9px;height:9px;border-radius:50%;flex:none;margin-right:2px}
 .bar-tag{font-size:10px;font-weight:700;color:#fff;background:#1d1d1f;border-radius:6px;padding:1px 5px;margin-left:6px}
 .live-card:nth-child(1){border-top:3px solid #2563EB}
@@ -555,7 +555,7 @@ $neighbors
   function num(n){return (n===null||n===undefined||isNaN(n))?null:Number(n);}
   function fmt(n){return n===null?'—':n.toLocaleString('zh-TW');}
   function chg(v){v=num(v);if(v===null)return '—';
-    var up=v>0,c=up?'#16A34A':(v<0?'#EF4444':'#6e6e73'),a=up?'▲':(v<0?'▼':'—');
+    var up=v>0,c=up?'#16A34A':(v<0?'#EF4444':'var(--cx-ink-3,#796354)'),a=up?'▲':(v<0?'▼':'—');
     return '<span style="color:'+c+';font-weight:700">'+a+' '+Math.abs(v).toFixed(1)+'%</span>';}
   function pick(arr){for(var i=0;i<arr.length;i++){if(arr[i]&&arr[i]['鄉鎮市區']===town)return arr[i];}return null;}
   function getJSON(u){return fetch(u).then(function(r){return r.ok?r.json():[];}).catch(function(){return [];});}
@@ -571,7 +571,7 @@ $neighbors
         '<div class="live-row"><span>屋齡中位</span><b>'+(num(buy['屋齡中位'])===null?'—':num(buy['屋齡中位']).toFixed(1))+' 年</b></div>'+
         '<div class="live-row"><span>樣本</span><b>'+fmt(num(buy['n']))+' 筆</b></div>'+
         '<div class="live-row"><span>2 年漲幅</span><b>'+chg(buy['2年漲幅'])+'</b></div>';
-    }else{bc.innerHTML='<h4>買賣行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:#86868b">本區暫無資料</div>';}
+    }else{bc.innerHTML='<h4>買賣行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:var(--cx-ink-3)">本區暫無資料</div>';}
     if(rent){
       var rp=num(rent['月租每坪中位']);
       rc.innerHTML='<h4>租金行情（近 180 天）</h4>'+
@@ -580,7 +580,7 @@ $neighbors
         '<div class="live-row"><span>店面月租中位</span><b>'+(num(rent['店面月租中位'])===null?'—':fmt(num(rent['店面月租中位']))+' 元')+'</b></div>'+
         '<div class="live-row"><span>年化報酬率</span><b>'+(num(rent['年化報酬率'])===null?'—':num(rent['年化報酬率']).toFixed(2)+'%')+'</b></div>'+
         '<div class="live-row"><span>樣本</span><b>'+fmt(num(rent['n']))+' 筆</b></div>';
-    }else{rc.innerHTML='<h4>租金行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:#86868b">本區暫無資料</div>';}
+    }else{rc.innerHTML='<h4>租金行情（近 180 天）</h4><div class="live-big" style="font-size:18px;color:var(--cx-ink-3)">本區暫無資料</div>';}
 
     // ---- 鄰近精選區租金比較長條圖 ----
     var rentArr=res[1]||[];

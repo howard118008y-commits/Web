@@ -72,7 +72,7 @@ TERMS = [
 _terms_items = "".join(
     f'    <div style="border-left:2px solid #d2d2d7;padding:7px 0 7px 16px;margin-bottom:8px">'
     f'<strong style="color:#1d1d1f;font-size:14.5px">{_html.escape(t, quote=True)}是什麼？</strong>'
-    f'<span style="color:#6e6e73;font-size:13.5px;line-height:1.85"> — {_html.escape(d, quote=True)}</span></div>\n'
+    f'<span style="color:var(--cx-ink-2,#6C5445);font-size:13.5px;line-height:1.85"> — {_html.escape(d, quote=True)}</span></div>\n'
     for t, d in TERMS)
 terms_section = ('<section style="max-width:760px;margin:28px auto 0;padding:0 16px">\n'
                  '  <h2 style="font-size:20px;font-weight:700;color:#1d1d1f;margin:0 0 14px">名詞解釋</h2>\n'
@@ -158,7 +158,7 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 .rv4-wrap{{max-width:1160px;margin:34px auto;padding:0 20px 60px}}
 .section-title{{display:flex;align-items:baseline;gap:9px;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.12em;text-transform:uppercase;margin:44px 0 14px 2px;font-family:var(--mono)}}
 .section-title::before{{content:'';width:8px;height:8px;background:var(--red);flex:none;align-self:center}}
-.rv4-secsub{{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:#6e6e73;font-weight:400;letter-spacing:.02em;text-transform:none}}
+.rv4-secsub{{font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--cx-ink-2,#6C5445);font-weight:400;letter-spacing:.02em;text-transform:none}}
 .section-title:first-of-type{{margin-top:8px}}
 
 .rv4-guide{{background:var(--paper);border:1px solid #e7e0d3;border-left:4px solid var(--gold);border-radius:16px;padding:22px 24px;margin-bottom:8px}}
@@ -170,7 +170,7 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 .rv4-step:nth-child(1) .s{{color:var(--red)}}.rv4-step:nth-child(2) .s{{color:#2563EB}}.rv4-step:nth-child(3) .s{{color:#8a6d1a}}
 .rv4-step b{{display:block;font-size:14px;color:var(--ink);margin-bottom:5px}}
 .rv4-step p{{font-size:12px;color:#57575b;line-height:1.7;margin:0}}
-.rv4-legend{{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#6e6e73}}
+.rv4-legend{{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--cx-ink-2,#6C5445)}}
 .rv4-pill{{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:4px 12px;border:1px solid}}
 .rv4-pill i{{width:7px;height:7px;border-radius:50%;flex:none}}
 .rv4-pill.g{{color:#1d7a3e;border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.07)}}.rv4-pill.g i{{background:#34c759}}
@@ -186,18 +186,18 @@ nav img.nav-logo{{height:40px;width:40px;object-fit:cover;border-radius:8px;bord
 .rv4-dot.green{{background:#34c759}}.rv4-dot.yellow{{background:#D4AF37}}.rv4-dot.red{{background:#ff453a}}
 .rv4-name{{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);letter-spacing:.04em;margin-bottom:6px}}
 .rv4-value{{font-family:var(--mono);font-size:30px;font-weight:600;color:var(--ink);letter-spacing:-.02em;margin-bottom:6px}}
-.rv4-changes{{display:flex;gap:14px;font-family:var(--mono);font-size:12px;color:#6e6e73;margin-bottom:12px;min-height:18px}}
+.rv4-changes{{display:flex;gap:14px;font-family:var(--mono);font-size:12px;color:var(--cx-ink-2,#6C5445);margin-bottom:12px;min-height:18px}}
 .rv4-chg b{{font-weight:600}}
 .rv4-chg .up{{color:#1d7a3e}}.rv4-chg .down{{color:var(--red)}}
 .rv4-chart{{margin:0 -4px 10px}}
-.rv4-nochart{{font-size:11.5px;color:#a1a1a6;background:var(--paper);border:1px dashed #e0d9c8;border-radius:10px;padding:26px 0;text-align:center}}
+.rv4-nochart{{font-size:11.5px;color:var(--cx-ink-3,#796354);background:var(--paper);border:1px dashed #e0d9c8;border-radius:10px;padding:26px 0;text-align:center}}
 .rv4-stats{{display:flex;gap:0;border-top:1px solid #f0f0f3;border-bottom:1px solid #f0f0f3;margin-bottom:12px}}
 .rv4-stat{{flex:1;padding:9px 4px;text-align:center}}
 .rv4-stat+.rv4-stat{{border-left:1px solid #f0f0f3}}
-.rv4-stat .k{{font-size:10px;color:#a1a1a6;letter-spacing:.08em;margin-bottom:3px;font-family:var(--mono)}}
+.rv4-stat .k{{font-size:10px;color:var(--cx-ink-3,#796354);letter-spacing:.08em;margin-bottom:3px;font-family:var(--mono)}}
 .rv4-stat .v{{font-family:var(--mono);font-size:13px;color:var(--ink)}}
 .rv4-note{{font-size:12.5px;color:#57575b;line-height:1.7;min-height:36px}}
-.rv4-upd{{font-family:var(--mono);font-size:10.5px;color:#a1a1a6;margin-top:10px}}
+.rv4-upd{{font-family:var(--mono);font-size:10.5px;color:var(--cx-ink-3,#796354);margin-top:10px}}
 
 .rv4-disc{{background:var(--paper);border:1px solid #e7e0d3;border-radius:16px;padding:20px 24px;font-size:12px;color:#57575b;line-height:1.85;margin-top:36px}}
 .rv4-cta{{background:#141414;color:#fff;padding:46px 24px;border-radius:20px;text-align:center;margin-top:28px}}

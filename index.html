@@ -488,6 +488,13 @@ h1 em{font-style:normal;color:inherit}
   #faq .faq-wrap{display:block;max-width:760px}
   .faq-mimi{display:none}
 }
+/* 求助卡電話鈕：≤480px 右下小鋮鈕（.float）會壓到號碼右端 → 號碼改第二行置中；鈕寬不變、小鋮不動 */
+@media(max-width:480px){
+  .needs-help .cx-h-tel{display:grid;grid-template-columns:auto auto;justify-content:center;align-items:center;column-gap:10px;row-gap:2px}
+  .needs-help .cx-h-tel svg{justify-self:end}
+  .needs-help .cx-h-lbl{justify-self:start}
+  .needs-help .cx-h-num{grid-column:1/-1;justify-self:center}
+}
 </style>
 <script type="application/ld+json">
 {
