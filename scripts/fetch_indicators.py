@@ -4,7 +4,7 @@ CX468 房貸儀表板 — 18 項指標自動抓取腳本
 GitHub Actions 每日 08:30 台灣時間自動執行
 """
 
-import json, requests, csv, io, time, re, sys
+import json, requests, csv, io, os, time, re, sys
 import xml.etree.ElementTree as ET
 from datetime import date, datetime
 from pathlib import Path
@@ -1257,6 +1257,10 @@ FETCHERS = {
     'D04': fetch_D04,
 }
 
+# pip.moi（內政部房價負擔能力）前有 F5 防火牆：本機台灣 IP 抓得到，GitHub 機房每天拿不到資料表。
+# CI 跑到這些代碼記「跳過」不算失敗，交給 ~/cx468-indicators-local/run.sh（每月 5、25 日）補抓。
+CI_SKIP = {'B05', 'C02'}
+
 # ── 主程式 ─────────────────────────────────────────────────────────────────
 
 def main():
@@ -1273,6 +1277,10 @@ def main():
     for ind in data['indicators']:
         code    = ind['code']
         if only and code not in only:
+            skip += 1
+            continue
+        if code in CI_SKIP and os.environ.get('GITHUB_ACTIONS') == 'true':
+            print(f"  · {code}: CI 跳過（來源擋 GitHub 機房 IP，由本機排程器負責）")
             skip += 1
             continue
         fetcher = FETCHERS.get(code)
