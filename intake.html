@@ -108,6 +108,14 @@ main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
 .ik-hero{margin:0 0 28px}
 .ik-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;max-height:36vh;object-fit:cover;object-position:center 60%;border-radius:8px}
 .ik-slb .ik-hero,.ik-done .ik-hero{display:none}
+/* 手機（≤900px）：圖放在該步選項之後、護欄文字之前——放題目上方會把選項推進右下「問小鋮」浮鈕區（390／360 首屏壓到 1–2 個選項）。
+   .ik-form 攤平（display:contents）讓圖能用 order 插在作答區與 .trust／.legal 之間；DOM 與表單 JS 不動 */
+@media(max-width:900px){
+  main{display:flex;flex-direction:column}
+  .ik-form{display:contents}
+  .ik-form>.trust,.ik-form>.legal{order:2}
+  .ik-hero{order:1;margin:28px 0 0}
+}
 @media(min-width:901px){
   main{max-width:1000px;display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,5vw,64px)}
   .ik-form{flex:0 0 488px;min-width:0}
