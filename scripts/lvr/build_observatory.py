@@ -759,7 +759,7 @@ function renderKPI() {{
     let chgHtml = '—';
     if (chg !== null && chg !== undefined) {{
       const arrow = chg > 0 ? '▲' : (chg < 0 ? '▼' : '—');
-      const c = chg > 0 ? 'var(--cx-orange-deep,#B8440C)' : (chg < 0 ? 'var(--cx-ink,#3C1E0E)' : '#6e6e73');
+      const c = chg > 0 ? 'var(--cx-orange-deep,#B8440C)' : (chg < 0 ? 'var(--cx-ink,#3C1E0E)' : 'var(--cx-ink-3,#796354)');
       chgHtml = '<span style="color:'+c+';font-weight:700">'+arrow+' '+Math.abs(chg).toFixed(1)+'%</span>';
     }}
     return `
@@ -809,7 +809,7 @@ function renderRank() {{
     function pctCell(v) {{
       if (v === null || v === undefined) return '<td class="num">—</td>';
       const arrow = v > 0 ? '▲' : (v < 0 ? '▼' : '—');
-      const c = v > 0 ? 'var(--cx-orange-deep,#B8440C)' : (v < 0 ? 'var(--cx-ink,#3C1E0E)' : '#6e6e73');
+      const c = v > 0 ? 'var(--cx-orange-deep,#B8440C)' : (v < 0 ? 'var(--cx-ink,#3C1E0E)' : 'var(--cx-ink-3,#796354)');
       return `<td class="num" style="color:${{c}};font-weight:600">${{arrow}} ${{Math.abs(v).toFixed(1)}}%</td>`;
     }}
     const age = (r['屋齡中位'] === null || r['屋齡中位'] === undefined) ? '—' : r['屋齡中位'].toFixed(1);
