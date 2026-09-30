@@ -4,9 +4,9 @@
   --red-dark:var(--cx-ink);
   --ink:var(--cx-ink);
   --ink-soft:var(--cx-ink);
-  --text-secondary:#6e6e73;
-  --text-tertiary:#86868b;
-  --text-quaternary:#a1a1a6;
+  --text-secondary:var(--cx-ink-2);
+  --text-tertiary:var(--cx-ink-3);
+  --text-quaternary:var(--cx-ink-3);
   --bg-warm:#f4f0ea;
   --bg-light:#f6f5f3;
   --bg-off:#fafafa;

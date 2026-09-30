@@ -59,7 +59,7 @@
     if (!latest) return;
     var p = document.createElement('p');
     p.setAttribute('data-page-updated', '');
-    p.style.cssText = 'max-width:1100px;margin:32px auto 12px;padding:0 20px;font-size:13px;line-height:1.6;text-align:center;color:inherit;opacity:.6';
+    p.style.cssText = 'max-width:1100px;margin:32px auto 12px;padding:0 20px;font-size:13px;line-height:1.6;text-align:center;color:var(--cx-ink-3,#796354)';
     var t = latest.split('-');
     p.innerHTML = '本頁最後更新：<time datetime="' + latest + '">' + t[0] + ' 年 ' + (+t[1]) + ' 月 ' + (+t[2]) + ' 日</time>';
     var footer = document.querySelector('footer');

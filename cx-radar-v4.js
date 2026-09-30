@@ -31,7 +31,7 @@
       + '<path d="' + area + '" fill="url(#rvA)"/>'
       + '<path d="' + d + '" fill="none" stroke="#1B2F4A" stroke-width="2" vector-effect="non-scaling-stroke"/>'
       + '<circle cx="' + X(n - 1) + '" cy="' + Y(last[1]) + '" r="3.5" fill="#1B2F4A"/>'
-      + '<g font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#a1a1a6">'
+      + '<g font-family="IBM Plex Mono,monospace" font-size="10.5" style="fill:var(--cx-ink-3,#796354)">'
       + '<text x="' + pad + '" y="' + (h - 7) + '">' + first[0] + '</text>'
       + '<text x="' + (w - pad) + '" y="' + (h - 7) + '" text-anchor="end">' + last[0] + '</text>'
       + '<text x="' + (w - pad) + '" y="' + (pad + 4) + '" text-anchor="end" fill="#8a6d1a">高 ' + fmt(maxY) + unit + '</text>'
