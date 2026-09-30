@@ -880,27 +880,23 @@ def fetch_B05():
 
 
 def fetch_C01():
-    """房貸逾放比 — 金管會月報（HTML 解析）"""
-    try:
-        r = get('https://www.banking.gov.tw/ch/home.jsp?id=296&parentpath=0,4,132')
-        if not r:
-            return _fail('C01', '金管會銀行局頁面取不到（見上一行 GET 錯誤；CI 可能被地理封鎖）')
-        if not HAS_BS4:
-            return _fail('C01', 'beautifulsoup4 未安裝')
-        for m in re.finditer(r'(\d+\.\d{2})%', r.text):
-            v = float(m.group(1))
-            if 0.01 < v < 5.0:
-                if v > 0.5:
-                    status, note = 'red',    f'逾放比 {v:.2f}%，不良貸款擴散'
-                elif v > 0.2:
-                    status, note = 'yellow', f'逾放比 {v:.2f}%，件數快速攀升'
-                else:
-                    status, note = 'yellow', f'逾放比 {v:.2f}%，隱性風險擴散'
-                return dict(value=f'{v:.2f}%', status=status, note=note,
-                            updated=THIS_MONTH)
-        return _fail('C01', f'頁面取到 {len(r.text)} 字元，但找不到 0.01–5.00% 區間的逾放比數字（來源版型可能改版）')
-    except Exception as e:
-        return _fail('C01', f'FSC 例外 {type(e).__name__}: {e}')
+    """房貸逾放比 — 人工指標，官方無機器可讀來源（2026-09-26 全面查證）
+
+    分母（購置住宅貸款餘額）可自動抓；分子（購置住宅貸款逾放金額）不行：
+      · 舊來源 banking.gov.tw id=296 已改成「不動產證券化－新聞稿」列表頁，
+        全頁 0 個「逾放」0 個「%」（原本的 regex 是全頁撈第一個 0.01–5.00% 的
+        數字，撈到什麼都算逾放比，且 updated 寫 THIS_MONTH＝假鮮度，不可留）。
+      · 金管會每月只提供媒體「本國銀行建築貸款及購置住宅貸款餘額情形」，該表
+        未列入行政院預告統計資料發布時間表（金管會 37 項裡只有全體口徑的
+        「本國銀行逾期放款」），官網新聞稿搜尋與統計資料庫皆查無此表。
+      · 官方公開的逾放統計全是錯誤口徑：金融統計指標 index-15（全體放款
+        0.14%）、index-10/11（按機構別）、輯要 10-3（按銀行別）、統計資料庫
+        自選統計項（放款類只有餘額、無逾放維度）、BB 放款品質分類（無用途別）。
+      · 聯徵中心住宅貸款統計查詢網需會員機構登入。
+    要改回自動化＝先解決分子來源，勿再寫網頁爬取。填法見
+    行銷產出/技術記錄/房貸儀表板-季更指標手動更新指南.md
+    """
+    return _fail('C01', '人工指標：官方未公開「購置住宅貸款逾放金額」機器可讀來源（見函式 docstring 查證清單）')
 
 
 def fetch_C02():
@@ -1251,7 +1247,7 @@ FETCHERS = {
     'B03': fetch_B03,
     'B04': fetch_B04,
     'B05': fetch_B05,
-    'C01': fetch_C01,
+    # C01 不註冊：人工指標（理由見 fetch_C01 docstring），跑到記「跳過」不算失敗，免得 CI 每天紅燈
     'C02': fetch_C02,
     'C03': fetch_C03,
     'C04': fetch_C04,
