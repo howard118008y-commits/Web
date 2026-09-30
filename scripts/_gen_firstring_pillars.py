@@ -40,7 +40,7 @@ def build(d):
     WP={"@context":"https://schema.org","@type":"WebPage","@id":"https://cx468.com.tw/%s.html#webpage"%slug,"url":"https://cx468.com.tw/%s.html"%slug,"name":"%s不動產融資諮詢"%name,"speakable":{"@type":"SpeakableSpecification","cssSelector":["#quick-answer"]},"inLanguage":"zh-TW","datePublished":"2026-06-25","dateModified":"2026-06-25"}
     TS={"@context":"https://schema.org","@type":"DefinedTermSet","name":"不動產融資名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"二胎房貸","description":"在既有第一順位房貸之外，以同一不動產再設定第二順位抵押取得資金的貸款；產權不移轉。"},{"@type":"DefinedTerm","name":"貸款整合","description":"將多筆債務整併為一筆銀行貸款，目標降低每月還款。"}]}
     # 售後回租獨立成集合，不與貸款類定義同包（媽祖 2026-09-30 裁定）
-    TS_SLB={"@context":"https://schema.org","@type":"DefinedTermSet","@id":"https://cx468.com.tw/%s.html#slb-terms"%slug,"name":"售後回租名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"售後回租","description":"屋主將不動產過戶給投資方、同時簽租約繼續居住，並保有日後依約買回權利的資金規劃方式。"}]}
+    TS_SLB={"@context":"https://schema.org","@type":"DefinedTermSet","@id":"https://cx468.com.tw/%s.html#slb-terms"%slug,"name":"售後回租名詞解釋","hasDefinedTerm":[{"@type":"DefinedTerm","name":"售後回租","description":"屋主將不動產過戶給投資方取得資金，同時簽租約繼續住，並保有日後依約買回權利的安排；是否適合依個案不動產與財務狀況評估。"}]}
     area_li=f'<li><strong>{name}區房市參考</strong>：見<a href="{area}">{name}區房市與生活機能總覽</a>。</li>' if area else ''
     sch="\n".join(f'<script type="application/ld+json">{json.dumps(x,ensure_ascii=False)}</script>' for x in [ORG,BC,WP,faq_sch,TS,TS_SLB])
     return f"""<!DOCTYPE html>
