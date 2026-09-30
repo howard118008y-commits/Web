@@ -90,6 +90,11 @@ schema = json.dumps([
      "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#quick-answer"]},
      "publisher": {"@type": ["LocalBusiness", "RealEstateAgent"], "name": "鋮馨租賃有限公司",
                    "url": "https://cx468.com.tw", "telephone": "+886-2-2249-0517",
+                   "contactPoint": [
+                       {"@type": "ContactPoint", "telephone": "+886-2-2249-0517", "contactType": "customer service",
+                        "areaServed": "TW", "availableLanguage": ["zh-Hant", "zh-TW"]},
+                       {"@type": "ContactPoint", "telephone": "+886-958-139-786", "contactType": "customer service",
+                        "areaServed": "TW", "availableLanguage": ["zh-Hant", "zh-TW"]}],
                    "address": {"@type": "PostalAddress", "streetAddress": "中正路468號",
                                "addressLocality": "中和區", "addressRegion": "新北市",
                                "postalCode": "23552", "addressCountry": "TW"}}},
