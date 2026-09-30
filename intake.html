@@ -104,6 +104,16 @@ main{max-width:528px;margin:0 auto;padding:56px 20px 120px}
    浮鈕屬小鋮不動；讓 LINE 鈕疊在浮鈕上面（.ask z-index 90），點整顆鈕都是 LINE。 */
 .done-line{position:relative;z-index:91}
 .pane[hidden]{display:none}
+/* ---- 米米情境圖（stage5 M07）：s0–s3 顯示；s4 成功頁已有自己的米米、售後回租線依 MCS:128（SLB 真人情境照零文件）都隱藏 ---- */
+.ik-hero{margin:0 0 28px}
+.ik-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;max-height:36vh;object-fit:cover;object-position:center 60%;border-radius:8px}
+.ik-slb .ik-hero,.ik-done .ik-hero{display:none}
+@media(min-width:901px){
+  main{max-width:1000px;display:flex;justify-content:center;align-items:flex-start;gap:clamp(32px,5vw,64px)}
+  .ik-form{flex:0 0 488px;min-width:0}
+  .ik-hero{order:2;flex:0 1 400px;min-width:0;position:sticky;top:24px;margin:0}
+  .ik-hero img{aspect-ratio:4/5;max-height:none}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
@@ -154,6 +164,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 </div>
 
 <main>
+  <script>try{if(new URLSearchParams(location.search).get('topic')==='leaseback')document.documentElement.classList.add('ik-slb')}catch(e){}</script>
+  <figure class="ik-hero"><img src="img/uiux/M07/hero-mimi-intake-960.webp" srcset="img/uiux/M07/hero-mimi-intake-640.webp 640w, img/uiux/M07/hero-mimi-intake-960.webp 960w, img/uiux/M07/hero-mimi-intake-1920.webp 1920w" sizes="(max-width: 900px) calc(100vw - 40px), 400px" width="960" height="960" alt="示意情境：屋主坐在家中餐桌前用平板填寫資料，米米站在桌上拿著放大鏡幫忙細看" fetchpriority="high" loading="eager"></figure>
+  <div class="ik-form">
   <p class="hint">接聽時間：週一至週五 10:00–17:00。未接通或非接聽時間，請<a href="https://lin.ee/PHIfSoY" style="text-decoration:underline">LINE 留言</a>，告知方便聯絡時段。</p>
 
   <!-- Step 0:哪一件事(nav 帶 ?topic= 時跳過) -->
@@ -251,6 +264,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <p class="trust"><b>不申請不收費,面談不收費。</b><br>最終核貸由金融機構依個案決定,本公司非金融機構。</p>
   <p class="legal">你提供的資料用於本次評估與後續聯繫，保存期間及完整告知見<a href="privacy-policy.html" style="text-decoration:underline">隱私權政策</a>。</p>
   <p class="legal">尚未送出的進度暫存在此裝置，超過 24 小時未更新會在再次開啟時清除；送出成功後也會清除。<button type="button" id="clearProgress" style="font:inherit;color:inherit;border:0;background:none;text-decoration:underline;cursor:pointer">清除進度並重新填寫</button></p>
+  </div>
 </main>
 
 <button class="ask" id="ask" aria-label="問小鋮"><span class="dot">鋮</span>問小鋮</button>
@@ -643,6 +657,17 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
     clearSaved();
   });
   show(cur);
+})();
+</script>
+<script>
+/* 米米情境圖顯示判斷（不動上方表單 JS）：show() 每次切步驟都寫 localStorage 與網址 topic，這裡只讀；
+   成功頁 s4 → 隱藏；已選售後回租且不在 s0 選題頁 → 隱藏（MCS:128）。 */
+(function(){
+  var root=document.documentElement, s0=document.getElementById('s0'), s4=document.getElementById('s4'), main=document.querySelector('main');
+  function topic(){ var t=''; try{ t=(JSON.parse(localStorage.getItem('cx_intake_v1')||'{}').topic)||''; }catch(e){} return t||new URLSearchParams(location.search).get('topic')||''; }
+  function upd(){ root.classList.toggle('ik-slb', s0.hidden && topic()==='leaseback'); root.classList.toggle('ik-done', !s4.hidden); }
+  upd();
+  if(window.MutationObserver) new MutationObserver(upd).observe(main,{subtree:true,attributes:true,attributeFilter:['hidden']});
 })();
 </script>
 </body>
