@@ -111,7 +111,7 @@ a{text-decoration:none}
 
 .art-hero-body{max-width:760px;margin:0 auto;padding:2.5rem 2rem 0}
 
-.art-breadcrumb{font-size:12px;color:#86868b;margin-bottom:1.5rem}
+.art-breadcrumb{font-size:12px;color:var(--cx-ink-3);margin-bottom:1.5rem}
 
 .art-breadcrumb a{color:var(--cx-orange-deep)}
 
@@ -119,9 +119,9 @@ a{text-decoration:none}
 
 .art-title{font-family:"Noto Serif TC","Songti TC",serif;font-size:36px;font-weight:600;letter-spacing:.01em;line-height:1.4;margin-bottom:1rem}
 
-.art-sub{font-size:18px;color:#6e6e73;line-height:1.65;margin-bottom:1.5rem}
+.art-sub{font-size:18px;color:var(--cx-ink-2);line-height:1.65;margin-bottom:1.5rem}
 
-.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:#86868b;padding-bottom:2rem;border-bottom:.5px solid #e5e5e7}
+.art-meta-row{display:flex;gap:1.5rem;font-size:12px;color:var(--cx-ink-3);padding-bottom:2rem;border-bottom:.5px solid #e5e5e7}
 
 
 /* Body */
@@ -131,11 +131,11 @@ a{text-decoration:none}
 
 .art-body h3{font-size:20px;font-weight:600;margin:2rem 0 .75rem}
 
-.art-body p{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:1.25rem}
+.art-body p{font-size:16px;line-height:1.8;color:var(--cx-ink-2);margin-bottom:1.25rem}
 
 .art-body ul,.art-body ol{margin:0 0 1.25rem 1.5rem}
 
-.art-body li{font-size:16px;line-height:1.8;color:#3a3a3c;margin-bottom:.4rem}
+.art-body li{font-size:16px;line-height:1.8;color:var(--cx-ink-2);margin-bottom:.4rem}
 
 .info-box{background:#f5f5f7;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
 
@@ -167,6 +167,7 @@ a{text-decoration:none}
 .art-cta p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:1.75rem}
 
 .art-cta a{display:inline-block;background:#fff;color:var(--cx-ink);padding:12px 32px;border-radius:0;font-size:15px;font-weight:600}
+.cta-box>a{display:inline-block;padding:11px 28px;font-size:15px}
 
 
 
@@ -347,10 +348,10 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <div class="cta-box" style="background:var(--cx-ink);border-radius:12px;padding:2rem 1.75rem;margin:2.5rem 0;text-align:center;">
     <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 .6rem;">想知道委託後每月實拿多少？</h3>
     <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 0 1.4rem;">歡迎透過官網表單或 LINE 官方帳號線上諮詢，或帶租金行情與屋況資料到中和區中正路 468 號當面試算；若評估後自行出租更划算，鋮馨會直接說——不申請不收費。</p>
-    <a href="https://lin.ee/PHIfSoY" style="display:inline-block;background:var(--cx-orange);color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">LINE 線上諮詢</a>
-    <a href="/rental-yield-calculator.html" style="display:inline-block;background:var(--cx-cream);color:var(--cx-ink);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">租金報酬率試算 →</a>
-    <a href="apply.html" style="display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">線上填表申請</a>
-    <a href="tel:0222490517" style="display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);padding:11px 28px;border-radius:8px;font-size:15px;font-weight:600;margin:0 6px 8px;">電話諮詢</a>
+    <a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>
+    <a href="/rental-yield-calculator.html" class="cta-secondary">租金報酬率試算 →</a>
+    <a href="apply.html" class="cta-secondary">線上填表申請</a>
+    <a href="tel:0222490517" class="cta-secondary">電話諮詢</a>
     <p style="font-size:12px;color:rgba(255,255,255,.55);margin:14px 0 0;line-height:1.7">本文為一般資訊分享，非要約或個案承諾。包租代管之費用、服務內容與政府方案補助，均依個案房屋條件、契約約定及主管機關當期公告為準；如比較售後回租等資產活化方案，相關條件依個案不動產條件、財務狀況與市場情況而定。本公司非金融機構，提供諮詢與媒合協助。簽約前請詳閱契約條款，並確認委託期間與終止條件。</p>
   </div>
 
@@ -382,7 +383,7 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="art-cta" style="background:var(--cx-ink);">
   <h2>委託前，先把費用攤在桌上算</h2>
   <p>帶租金行情與屋況，LINE 線上諮詢或到中和店面當面試算——自行出租更划算，我們會直接說。</p>
-  <a href="https://lin.ee/PHIfSoY" style="background:#C8945A;color:#fff;">LINE 線上諮詢</a>
+  <a href="https://lin.ee/PHIfSoY">LINE 線上諮詢</a>
   <a href="apply.html" class="cta-secondary">線上填表申請</a>
 </div>
 
