@@ -1,26 +1,126 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""B1：topic-a/b/c/d 加 快速答案卡 + 可見FAQ + 可見名詞解釋 + FAQPage/DefinedTermSet schema + speakable改指#quick-answer。
-   數值引 cx_data.json 既有值；市場意涵框架、帶免責、無我方業務口吻；可見文字與 schema 文字同源保證一致。"""
-import re, json, html
+"""topic-a/b/c/d 快速答案卡＋FAQ（前 3 題）＋名詞解釋 的同源產生器——冪等、數字建置時讀 cx_data.json。
 
+怎麼重跑（repo 根目錄）：
+  python3 scripts/_b1_aeo_topics.py                  # 讀 ./cx_data.json，原地更新 topic-a～d
+  python3 scripts/_b1_aeo_topics.py --data PATH      # 改讀指定資料檔（測試中止用暫存複本）
+  跑完 git diff 檢查；commit 前跑 update_schema_datemod.py＋update_sitemap_lastmod.py。
+
+冪等：只原地替換既有區塊，不插入。區塊定位——
+  答案卡＝#quick-answer 內的 <p>＋<ul>；FAQ＝題目符合下方樣板的那一個 <details> 與 FAQPage JSON-LD 同一題
+  （數字位置當萬用字元比對，所以舊值、新值都認得）；名詞解釋＝.bt-terms 內容＋DefinedTermSet JSON-LD。
+  add_faq_items.py 加的第 4 題以後不歸本檔管、不會被動到。可見文字與 schema 由同一份字串生成。
+
+讀哪些欄位：cx_data.json → indicators[] 以 code 查，取 value／updated／note：
+  A01–A04、B01、B04、B05、C01–C04、D01–D04（value 當數字，updated 當日期錨；
+  累計型 B01/B04/C03/C04 另驗 note 含「前N月」、B05 驗 note 以「台北市」開頭、C02 以「全國」開頭）。
+  非數字敘述（A05「下滑中」、B02「量縮價穩」、B03「預售趨緩」）cx_data 無對應欄位，維持原句與原日期。
+
+讀不到會中止：檔案讀不到、指標缺、欄位空、數值格式／單位不符、敘述前提不成立（見 PINS）、
+  頁面區塊定位不到或不唯一 → 印原因、exit 1，四頁一律不寫入（不退回寫死值、不留空）。
+"""
+import argparse, html, json, re, string, sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+class Abort(Exception):
+    pass
+
+
+# ── 資料讀取：缺一律中止 ────────────────────────────────────────────────
+def load_values(path):
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        inds = {i["code"]: i for i in data["indicators"]}
+    except Exception as e:
+        raise Abort(f"讀不到 {path}：{e!r}")
+
+    def ind(code):
+        i = inds.get(code)
+        if not i:
+            raise Abort(f"cx_data 缺指標 {code}")
+        for k in ("value", "updated", "note"):
+            if not str(i.get(k) or "").strip():
+                raise Abort(f"cx_data {code}.{k} 缺值")
+        return i
+
+    def num(code, pat):  # value 必須完全符合格式（含單位），回傳數字部分
+        m = re.fullmatch(pat, ind(code)["value"])
+        if not m:
+            raise Abort(f"cx_data {code}.value={ind(code)['value']!r} 不符格式 {pat}")
+        return m.group(1)
+
+    def per(code):  # 期別原樣：2026-08 / 2026-Q2
+        u = ind(code)["updated"]
+        if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2]|Q[1-4])", u):
+            raise Abort(f"cx_data {code}.updated={u!r} 不是 YYYY-MM 或 YYYY-Qn")
+        return u
+
+    def ym(code):  # 2026 年 8 月
+        u = per(code)
+        if "Q" in u:
+            raise Abort(f"cx_data {code}.updated={u!r} 預期為月資料")
+        return f"{u[:4]} 年 {int(u[5:])} 月"
+
+    def ytd(code):  # 累計值：2026 年前 8 月（note 必須寫明前N月）
+        u = per(code)
+        if "Q" in u or f"前{int(u[5:])}月" not in ind(code)["note"]:
+            raise Abort(f"cx_data {code} 不是前{u[5:]}月累計（note={ind(code)['note']!r}）")
+        return f"{u[:4]} 年前 {int(u[5:])} 月"
+
+    PCT, CNT = r"(\d+\.\d+%)", r"(\d{1,3}(?:,\d{3})+|\d+)"
+    v = dict(
+        a01=num("A01", PCT), a01_ym=ym("A01"),
+        a02=num("A02", PCT), a02_p=per("A02"),
+        a03=num("A03", CNT + r"億/月"), a03_p=per("A03"),
+        a04=num("A04", PCT), a04_p=per("A04"), a04_ym=ym("A04"),
+        b01=num("B01", CNT + "棟"), b01_ytd=ytd("B01"),
+        b04=num("B04", CNT + "棟"), b04_ytd=ytd("B04"),
+        b05=num("B05", r"(\d+\.\d+)倍"), b05_p=per("B05"),
+        c01=num("C01", PCT), c01_p=per("C01"),
+        c02=num("C02", r"(\d+\.\d+)倍"), c02_p=per("C02"),
+        c03=num("C03", CNT + "戶"), c03_ytd=ytd("C03"),
+        c04=num("C04", CNT + "戶"), c04_ytd=ytd("C04"),
+        d01=num("D01", PCT), d01_p=per("D01"), d01_ym=ym("D01"),
+        d02=num("D02", r"(\d+\.\d+)"), d02_p=per("D02"),
+        d03=num("D03", CNT + "點"), d03_p=per("D03"),
+        d04=num("D04", PCT), d04_p=per("D04"), d04_ym=ym("D04"),
+    )
+    # 敘述前提（PINS）：句子裡寫死的判斷只在核定當時的資料狀態下成立，資料一變就中止、請人改句，不自動編
+    pins = [
+        (per("A01") == "2024-03", "A01 答案卡「2024-03 升到此後凍漲」：央行已再調整，句子要人工改寫"),
+        (float(v["a02"][:-1]) >= 2, "A02 答案卡「已站上 2%」：房貸利率已跌破 2%"),
+        (float(v["c01"][:-1]) <= 0.08, "C01「目前極低／偏低」係 0.08% 時核定：逾放比升破 0.08% 要媽祖重審"),
+        (ind("B05")["note"].startswith(f"台北市{v['b05']}倍"), "B05 value 已不是台北市數字（note 開頭不符）"),
+        (ind("C02")["note"].startswith(f"全國{v['c02']}倍"), "C02 value 已不是全國數字（note 開頭不符）"),
+    ]
+    for ok, why in pins:
+        if not ok:
+            raise Abort(f"敘述前提不成立——{why}")
+    return v
+
+
+# ── 內容樣板：{欄位} 由 load_values() 填入；其餘字句為已核定原句 ──────────────────
 CONTENT = {
 "topic-a.html": {
   "termset_name": "房貸金融指標名詞解釋",
   "qa_lead": "想知道「銀行願不願意放款、利率往哪走」，先看這 5 個房貸金融面指標。",
   "qa_body": "A 系列追蹤央行政策利率、實際房貸利率、新增房貸量、不動產放款集中度與新青安占比，是研判台灣房貸授信環境鬆緊的第一道訊號。",
   "qa_bullets": [
-    ("央行重貼現率 2.00%", "政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。"),
-    ("房貸利率 2.322%（2026-05）", "銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。"),
-    ("新增房貸 469 億/月（2026-05）", "反映市場購屋需求與信用擴張的強度。"),
-    ("不動產放款集中度 35.17%（2026-05）", "銀行對房市的曝險程度，金管會設有警戒上限。"),
+    ("央行重貼現率 {a01}", "政策基準利率，2024-03 升到此後凍漲，定錨整體利率走向。"),
+    ("房貸利率 {a02}（{a02_p}）", "銀行實際核貸的加權平均，已站上 2%，直接影響每月月付。"),
+    ("新增房貸 {a03} 億/月（{a03_p}）", "反映市場購屋需求與信用擴張的強度。"),
+    ("不動產放款集中度 {a04}（{a04_p}）", "銀行對房市的曝險程度，金管會設有警戒上限。"),
     ("新青安占比 下滑中（2026-01）", "政策補貼房貸。舊方案（青安 2.0）申辦期間已於 2026-07-31 屆期，青安 3.0 自 2026-08-01 起受理申貸、至 2029-07-31 止，新增年齡、借款人本人年所得與購屋總價三項資格條件（財政部國庫署民國 115 年 7 月公告）。"),
   ],
   "faqs": [
     ("央行重貼現率跟我的房貸利率有什麼關係？",
-     "央行重貼現率是政策基準利率（2026 年 5 月為 2.00%），決定銀行資金成本，房貸利率通常隨它連動。央行升降息會牽動未來月付，但實際房貸利率仍由各銀行依個案核定。"),
+     "央行重貼現率是政策基準利率（{a01_ym}起為 {a01}），決定銀行資金成本，房貸利率通常隨它連動。央行升降息會牽動未來月付，但實際房貸利率仍由各銀行依個案核定。"),
     ("「不動產放款集中度」過高代表什麼？",
-     "它是銀行總放款中不動產貸款的占比（2026 年 5 月約 35.17%）。比率過高代表銀行體系對房市曝險偏高，金管會設有警戒上限，可能促使銀行收緊房貸條件或降低成數。"),
+     "它是銀行總放款中不動產貸款的占比（{a04_ym}約 {a04}）。比率過高代表銀行體系對房市曝險偏高，金管會設有警戒上限，可能促使銀行收緊房貸條件或降低成數。"),
     ("新青安占比下滑，對首購族有什麼影響？",
      "新青安（青安 2.0）申辦期間已於 2026 年 7 月 31 日屆期，占比下滑反映舊方案進入尾聲；青安 3.0 自 2026 年 8 月 1 日起受理申貸，申辦期間至 2029 年 7 月 31 日止（民國 115 年 8 月 1 日至 118 年 7 月 31 日），撥款日至遲不得逾 2029 年 10 月 31 日（民國 118 年 10 月 31 日）。依財政部國庫署民國 115 年 7 月公告之貸款原則，新制新增三項申貸資格條件：申貸時未滿 50 歲（以向銀行申請日為準）、借款人本人年所得總額不逾 200 萬元（以借款人本人所得計）、購屋鑑價或買賣總價取高者不逾臺北市 3,500 萬元／新北市及新竹縣（市）2,500 萬元／其他縣（市）2,000 萬元；利息補貼自撥貸日起 3 年內最高，滿 3 年後逐年遞減，補貼期滿後第 4 年（撥貸滿 6 年後）起回復原貸款利率。以上為當年度（民國 115 年）公告內容，日後容有修正，實際資格與條件以財政部國庫署當期公告及承辦公股銀行審核為準。對首購族而言，能否申請、額度與補貼幅度都與舊制不同，建議依自身年齡、所得與購屋總價重新試算負擔，並比較其他可行方案。本公司非金融機構、非本項政策貸款之承辦單位，實際貸款條件依個案與銀行而定，最終核貸由金融機構決定。"),
   ],
@@ -36,19 +136,19 @@ CONTENT = {
   "qa_lead": "想知道「現在房市是熱還是冷、價格撐不撐得住」，看這組量價指標。",
   "qa_body": "B 系列追蹤買賣移轉棟數、信義與國泰房價指數、六都移轉與房價所得比，量（成交）與價（房價）一起看，才不會被單一數字誤導。",
   "qa_bullets": [
-    ("買賣移轉 80,476 棟（2026-04）", "全國成交量，量縮通常領先價格鬆動。"),
-    ("六都移轉 62,687 棟（2026-04）", "六大都會成交量，占全國多數。"),
+    ("買賣移轉 {b01} 棟（{b01_ytd}）", "全國成交量，量縮通常領先價格鬆動。"),
+    ("六都移轉 {b04} 棟（{b04_ytd}）", "六大都會成交量，占全國多數。"),
     ("信義房價指數 量縮價穩（2026-Q1）", "以純住中古屋為主，目前量縮但價格緩穩。"),
     ("國泰房價指數 預售趨緩（2026-Q1）", "含預售與新成屋，預售市場轉趨保守。"),
-    ("六都房價所得比 14.62 倍（2025-Q4）", "房價約等於 14.62 年家庭可支配所得，負擔概略指標。"),
+    ("台北市房價所得比 {b05} 倍（{b05_p}）", "房價約等於 {b05} 年家庭可支配所得，負擔概略指標。"),
   ],
   "faqs": [
     ("買賣移轉棟數下降，代表房價要跌嗎？",
-     "不必然。移轉棟數（2026 年前 4 月共 80,476 棟）是成交量，量縮通常領先價格鬆動，但價格還受利率、供給與政策影響。量與價要一起看，不宜用單一數字判斷。"),
+     "不必然。移轉棟數（{b01_ytd}共 {b01} 棟）是成交量，量縮通常領先價格鬆動，但價格還受利率、供給與政策影響。量與價要一起看，不宜用單一數字判斷。"),
     ("信義和國泰房價指數有什麼不同？",
      "信義指數以純住宅中古屋為主（2026 年第 1 季量縮價穩）；國泰指數涵蓋預售與新成屋（2026 年第 1 季預售趨緩）。兩者編製口徑不同，分別反映成屋與預售市場。"),
-    ("房價所得比 14.62 倍是什麼意思？",
-     "指房價約等於家庭 14.62 年的可支配所得（六都，2025-Q4）。數字越高代表購屋負擔越重，是衡量房市可負擔性的常用指標之一。"),
+    ("房價所得比 {b05} 倍是什麼意思？",
+     "指房價約等於家庭 {b05} 年的可支配所得（台北市，{b05_p}）。數字越高代表購屋負擔越重，是衡量房市可負擔性的常用指標之一。"),
   ],
   "terms": [
     ("買賣移轉棟數", "一定期間內完成所有權移轉登記的不動產棟數，反映市場成交量。"),
@@ -62,18 +162,18 @@ CONTENT = {
   "qa_lead": "想提前看出「房市風險在累積還是緩解」，看這組風險預警指標。",
   "qa_body": "C 系列追蹤房貸逾放比、房價所得比與建照核發，從「還款違約、買房負擔、未來供給」三個角度提前示警。",
   "qa_bullets": [
-    ("房貸逾放比 0.08%（2026-Q1）", "房貸違約比率，目前極低，銀行資產品質良好。"),
-    ("房價所得比 9.32 倍（2025-Q4）", "全國買房負擔倍數，偏高代表可負擔性吃緊。"),
-    ("建照核發 31,573 戶（2026-04）", "未來新增供給的領先指標。"),
-    ("建照 vs 使照 42,905 戶（2026-04）", "開工與完工落差，反映建商推案節奏。"),
+    ("房貸逾放比 {c01}（{c01_p}）", "房貸違約比率，目前極低，銀行資產品質良好。"),
+    ("房價所得比 {c02} 倍（{c02_p}）", "全國買房負擔倍數，偏高代表可負擔性吃緊。"),
+    ("建照核發 {c03} 戶（{c03_ytd}）", "未來新增供給的領先指標。"),
+    ("建照 vs 使照 {c04} 戶（{c04_ytd}）", "開工與完工落差，反映建商推案節奏。"),
   ],
   "faqs": [
-    ("房貸逾放比 0.08% 算高還是低？",
-     "偏低。逾放比是房貸逾期放款金額占房貸餘額的比率，0.08%（2026-Q1）代表整體房貸違約極少、銀行資產品質良好。這個數字往上走，才是風險升高的訊號。"),
-    ("房價所得比 9.32 倍代表什麼？",
-     "全國房價約等於 9.32 年的家庭可支配所得（2025-Q4）。比率偏高代表購屋負擔吃緊，是觀察房市可負擔性與泡沫風險的指標之一。"),
+    ("房貸逾放比 {c01} 算高還是低？",
+     "偏低。逾放比是房貸逾期放款金額占房貸餘額的比率，{c01}（{c01_p}）代表整體房貸違約極少、銀行資產品質良好。這個數字往上走，才是風險升高的訊號。"),
+    ("房價所得比 {c02} 倍代表什麼？",
+     "全國房價約等於 {c02} 年的家庭可支配所得（{c02_p}）。比率偏高代表購屋負擔吃緊，是觀察房市可負擔性與泡沫風險的指標之一。"),
     ("建照核發數量能預測房市嗎？",
-     "建照是未來房屋供給的領先指標（2026 年前 4 月核發 31,573 戶）。核發大增預示未來推案量上升，可能影響供需與價格，但從核發到完工有時間落差，需搭配其他指標一起看。"),
+     "建照是未來房屋供給的領先指標（{c03_ytd}核發 {c03} 戶）。核發大增預示未來推案量上升，可能影響供需與價格，但從核發到完工有時間落差，需搭配其他指標一起看。"),
   ],
   "terms": [
     ("房貸逾放比", "房貸逾期放款金額占房貸總餘額的比率，衡量銀行房貸資產品質。"),
@@ -87,16 +187,16 @@ CONTENT = {
   "qa_lead": "想知道「國際資金與物價怎麼牽動台灣房貸」，看這組總體環境指標。",
   "qa_body": "D 系列追蹤美十年期公債殖利率、美元台幣匯率、台股與台灣 CPI；外部資金與通膨會透過利率與資金流，間接影響台灣房市與房貸條件。",
   "qa_bullets": [
-    ("美十年期公債殖利率 4.493%（2026-06）", "全球利率定錨，牽動台灣資金成本與長天期利率。"),
-    ("美元台幣匯率 31.71（2026-06）", "影響資金流向與輸入性通膨。"),
-    ("台股加權指數 47,101 點（2026-06）", "資產與財富效果，間接影響購屋力。"),
-    ("台灣 CPI 2.20%（2026-05）", "通膨水準，是央行升降息的關鍵依據。"),
+    ("美十年期公債殖利率 {d01}（{d01_p}）", "全球利率定錨，牽動台灣資金成本與長天期利率。"),
+    ("美元台幣匯率 {d02}（{d02_p}）", "影響資金流向與輸入性通膨。"),
+    ("台股加權指數 {d03} 點（{d03_p}）", "資產與財富效果，間接影響購屋力。"),
+    ("台灣 CPI {d04}（{d04_p}）", "通膨水準，是央行升降息的關鍵依據。"),
   ],
   "faqs": [
     ("美國公債殖利率，關台灣房貸什麼事？",
-     "美十年期公債殖利率（2026 年 6 月約 4.493%）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。"),
+     "美十年期公債殖利率（{d01_ym}約 {d01}）被視為全球利率定錨，會牽動台灣的資金成本與長天期利率，間接影響房貸利率走向與央行的政策空間。"),
     ("CPI（消費者物價指數）和房貸利率有關係嗎？",
-     "有。CPI 反映通膨（2026 年 5 月為 2.20%），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。"),
+     "有。CPI 反映通膨（{d04_ym}為 {d04}），是央行決定升降息的關鍵依據；通膨升溫常使央行傾向升息，進而牽動房貸利率與每月月付。"),
     ("看這些國際指標，對買房有什麼用？",
      "它們是房市的「外部環境」訊號：利率、匯率、股市與通膨會透過資金面影響購屋力與房貸條件。僅供研判大方向，實際貸款條件仍依個案與銀行決定。"),
   ],
@@ -109,69 +209,97 @@ CONTENT = {
 },
 }
 
-DISCLAIMER = "本頁資訊僅供市場參考，非投資或貸款建議；本公司非金融機構，最終核貸由金融機構決定。"
-
 def esc(s): return html.escape(s, quote=True)
 
-def build_answer_card(c):
-    bullets = "".join(
-        f'<li><strong style="color:#E8E3D5">{esc(t)}</strong>：{esc(d)}</li>' for t,d in c["qa_bullets"])
-    return (
-'<div id="quick-answer" style="background:var(--bg-panel);border:1px solid rgba(255,255,255,0.12);border-left:2px solid #C61B1C;padding:24px 26px;margin-bottom:48px">\n'
-'  <div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;font-weight:500;color:#ff6b6b;letter-spacing:0.35em;margin-bottom:12px">快速答案 · QUICK ANSWER</div>\n'
-f'  <p style="font-size:16px;line-height:1.85;color:#E8E3D5;margin:0 0 14px"><strong style="color:#fff">{esc(c["qa_lead"])}</strong>{esc(c["qa_body"])}</p>\n'
-f'  <ul style="margin:0 0 12px;padding-left:20px;font-size:13.5px;color:#B0AB9A;line-height:2">{bullets}</ul>\n'
-f'  <div style="font-size:11.5px;color:#7A7565;line-height:1.7">{esc(DISCLAIMER)}</div>\n'
-'</div>\n')
+def pattern(tpl):
+    """樣板 → 比對用 regex：{欄位} 當萬用字元，舊值新值都認得（冪等定位的關鍵）。"""
+    return "".join(re.escape(lit) + (".+?" if f else "") for lit, f, _, _ in string.Formatter().parse(tpl))
 
-def build_faq_visible(c):
-    items = "".join(
-'  <div style="border:1px solid rgba(255,255,255,0.12);background:var(--bg-panel);padding:22px 24px;margin-bottom:12px">\n'
-f'    <div style="font-family:\'Noto Serif TC\',serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:10px">{esc(q)}</div>\n'
-f'    <div style="font-size:14px;line-height:1.9;color:#B0AB9A">{esc(a)}</div>\n'
-'  </div>\n' for q,a in c["faqs"])
-    return (
-'  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">常見問題 · FAQ</div><div class="sec-line"></div></div>\n'
-f'  <div style="margin-bottom:56px">\n{items}  </div>\n')
+def one(regex, s, what):
+    ms = list(re.finditer(regex, s, re.S))
+    if len(ms) != 1:
+        raise Abort(f"{what} 命中 {len(ms)} 次（預期 1）")
+    return ms[0]
 
-def build_glossary_visible(c):
-    items = "".join(
-f'    <div style="border-left:2px solid rgba(255,255,255,0.22);padding:7px 0 7px 16px"><strong style="color:#E8E3D5;font-size:14px">{esc(t)}</strong><span style="color:#7A7565;font-size:13.5px;line-height:1.85"> — {esc(d)}</span></div>\n'
-        for t,d in c["terms"])
-    return (
-'  <div class="sec-head"><div class="sec-line"></div><div class="sec-text">名詞解釋 · GLOSSARY</div><div class="sec-line"></div></div>\n'
-f'  <div style="margin-bottom:56px;display:grid;gap:10px">\n{items}  </div>\n')
+JSONLD = r'(<script type="application/ld\+json">\n)(.*?)(\n</script>)'
+DETAILS = r'(<details(?: open)?>\n      <summary><h3>)(.*?)(</h3></summary>\n      <p>)(.*?)(</p>\n    </details>)'
 
-def build_faq_schema(c):
-    return {"@context":"https://schema.org","@type":"FAQPage",
-        "mainEntity":[{"@type":"Question","name":q,
-            "acceptedAnswer":{"@type":"Answer","text":a}} for q,a in c["faqs"]]}
+def jsonld_block(s, typ, fn):
+    hits = [m for m in re.finditer(JSONLD, s, re.S) if f'"@type": "{typ}"' in m.group(2)]
+    if len(hits) != 1:
+        raise Abort(f"{fn} {typ} JSON-LD 命中 {len(hits)} 次（預期 1）")
+    m = hits[0]
+    data = json.loads(m.group(2))
+    if json.dumps(data, ensure_ascii=False, indent=1) != m.group(2):
+        raise Abort(f"{fn} {typ} JSON-LD 重新序列化會變動格式，拒絕改寫")
+    return m, data
 
-def build_termset_schema(c):
-    return {"@context":"https://schema.org","@type":"DefinedTermSet","name":c["termset_name"],
-        "hasDefinedTerm":[{"@type":"DefinedTerm","name":t,"description":d} for t,d in c["terms"]]}
+def render(fn, c, v, log):
+    s = (ROOT / fn).read_text(encoding="utf-8")
+    fill = lambda t: t.format(**v)
 
-for fn,c in CONTENT.items():
-    s=open(fn,encoding="utf-8").read()
-    # 1) 答案卡 插在 sec-head(監測指標) 前
-    anchor='  <div class="sec-head">'
-    i=s.find(anchor)
-    s=s[:i]+build_answer_card(c)+s[i:]
-    # 2) 可見 FAQ + 名詞解釋 插在 cta-box 前
-    anchor2='  <div class="cta-box">'
-    j=s.find(anchor2)
-    s=s[:j]+build_faq_visible(c)+build_glossary_visible(c)+s[j:]
-    # 3) schema：FAQPage + DefinedTermSet 插在 </head> 前
-    sch=('<script type="application/ld+json">\n'+json.dumps(build_faq_schema(c),ensure_ascii=False,indent=1)+'\n</script>\n'
-         '<script type="application/ld+json">\n'+json.dumps(build_termset_schema(c),ensure_ascii=False,indent=1)+'\n</script>\n')
-    k=s.rfind('</head>')
-    s=s[:k]+sch+s[k:]
-    # 4) speakable 改指 #quick-answer（topic 模板的 cssSelector 是換行的 "h1"）
-    s=s.replace('"cssSelector": [\n   "h1"\n  ]','"cssSelector": [\n   "#quick-answer",\n   "h1"\n  ]')
-    # 5) fluid.css（全站流體層：手機固定條等）——位置照全站慣例，</head> 前最後一行
-    if 'href="fluid.css"' not in s:
-        k=s.rfind('</head>')
-        s=s[:k]+'<link rel="stylesheet" href="fluid.css">\n'+s[k:]
-    open(fn,"w",encoding="utf-8").write(s)
-    print(f"✅ {fn}: 答案卡+{len(c['faqs'])}FAQ+{len(c['terms'])}名詞+schema+speakable")
-print("done")
+    # 1) 答案卡：#quick-answer 內 <p> 與 <ul>
+    bullets = [(fill(t), fill(d)) for t, d in c["qa_bullets"]]
+    m = one(r'(<div id="quick-answer" class="bt-card bt-qa">\n      <div class="bt-label">快速答案 · QUICK ANSWER</div>\n      )'
+            r'<p>.*?</p>\n      <ul>(.*?)</ul>', s, f"{fn} #quick-answer")
+    old = re.findall(r"<li><strong>(.*?)</strong>：(.*?)</li>", m.group(2))
+    if len(old) != len(bullets):
+        raise Abort(f"{fn} 答案卡條目 {len(old)} ≠ 樣板 {len(bullets)}")
+    for (ot, od), (nt, nd) in zip(old, bullets):
+        if (html.unescape(ot), html.unescape(od)) != (nt, nd):
+            log.append((fn, f"{html.unescape(ot)}：{html.unescape(od)}", f"{nt}：{nd}"))
+    new = (f'<p><strong>{esc(c["qa_lead"])}</strong>{esc(c["qa_body"])}</p>\n      <ul>'
+           + "".join(f"<li><strong>{esc(t)}</strong>：{esc(d)}</li>" for t, d in bullets) + "</ul>")
+    s = s[:m.start()] + m.group(1) + new + s[m.end():]
+
+    # 2) FAQ：可見 <details> 與 FAQPage schema 同一題、同一份字串
+    sm, faq = jsonld_block(s, "FAQPage", fn)
+    for qt, at in c["faqs"]:
+        q, a, pat = fill(qt), fill(at), pattern(qt)
+        vis = [d for d in re.finditer(DETAILS, s, re.S) if re.fullmatch(pat, html.unescape(d.group(2)))]
+        sch = [e for e in faq["mainEntity"] if re.fullmatch(pat, e["name"])]
+        if len(vis) != 1 or len(sch) != 1:
+            raise Abort(f"{fn} FAQ「{q}」可見 {len(vis)}／schema {len(sch)} 題（預期各 1）")
+        d, e = vis[0], sch[0]
+        if (html.unescape(d.group(2)), html.unescape(d.group(4))) != (e["name"], e["acceptedAnswer"]["text"]):
+            raise Abort(f"{fn} FAQ「{q}」改寫前可見與 schema 已不同源，先人工對齊")
+        if (e["name"], e["acceptedAnswer"]["text"]) != (q, a):
+            log.append((fn, f"Q {e['name']}｜A {e['acceptedAnswer']['text']}", f"Q {q}｜A {a}"))
+        e["name"], e["acceptedAnswer"]["text"] = q, a
+        s = s[:d.start()] + d.group(1) + esc(q) + d.group(3) + esc(a) + d.group(5) + s[d.end():]
+    sm, _ = jsonld_block(s, "FAQPage", fn)  # 位置可能因可見區改動而位移，重抓
+    s = s[:sm.start(2)] + json.dumps(faq, ensure_ascii=False, indent=1) + s[sm.end(2):]
+
+    # 3) 名詞解釋：.bt-terms 與 DefinedTermSet schema
+    m = one(r'(<div class="bt-terms">\n)(.*?)(    </div>)', s, f"{fn} .bt-terms")
+    items = "".join(f'      <div class="bt-term"><strong>{esc(t)}</strong><span> — {esc(d)}</span></div>\n' for t, d in c["terms"])
+    s = s[:m.start(2)] + items + s[m.end(2):]
+    tm, ts = jsonld_block(s, "DefinedTermSet", fn)
+    ts["name"] = c["termset_name"]
+    ts["hasDefinedTerm"] = [{"@type": "DefinedTerm", "name": t, "description": d} for t, d in c["terms"]]
+    s = s[:tm.start(2)] + json.dumps(ts, ensure_ascii=False, indent=1) + s[tm.end(2):]
+    return s
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--data", default=str(ROOT / "cx_data.json"))
+    args = ap.parse_args()
+    log, out = [], {}
+    try:
+        v = load_values(args.data)
+        for fn, c in CONTENT.items():
+            out[fn] = render(fn, c, v, log)
+    except Abort as e:
+        sys.exit(f"❌ 中止：{e}（四頁皆未寫入）")
+    for fn, s in out.items():  # 全部算完才寫，任何一頁失敗都不會半套落地
+        p = ROOT / fn
+        changed = p.read_text(encoding="utf-8") != s
+        if changed:
+            p.write_text(s, encoding="utf-8")
+        print(f"{'✏️ ' if changed else '＝ '}{fn}")
+    for fn, o, n in log:
+        print(f"  {fn}｜{o}\n    → {n}")
+    print(f"done：{len(log)} 處更動")
+
+if __name__ == "__main__":
+    main()
