@@ -222,15 +222,19 @@ def card_4_top_gain(ranking: pd.DataFrame) -> Path:
 
 
 def card_5_shindian(deep: dict) -> Path:
+    # 起訖季與行政區取自資料（deep 內除 delta／district 外的兩個季別 key，字串序＝時間序）
+    q0, q1 = sorted(k for k in deep if k not in ("delta", "district"))
+    s113, s115, delta = deep[q0], deep[q1], deep["delta"]
+    town = deep.get("district", "新店區")
+    town_short = town[:-1] if town.endswith("區") else town
+    q0l, q1l = q0.replace("S", "Q"), q1.replace("S", "Q")
     fig = _new_card(LIGHT_BG)  # 深一階米色代表 spotlight
     fig.text(0.5, 0.93, "本期 Spotlight", ha="center", fontsize=20,
              color=DEEP, weight="600")
-    fig.text(0.5, 0.86, "新店單價降，是房市衰退嗎？", ha="center", fontsize=30,
+    fig.text(0.5, 0.86, f"{town_short}單價降，是房市衰退嗎？", ha="center", fontsize=30,
              color=DARK, weight="bold")
     fig.text(0.5, 0.79, "不是。是成交品結構改變。", ha="center", fontsize=22,
              color=DEEP, weight="bold")
-
-    s113, s115, delta = deep["113S1"], deep["115S1"], deep["delta"]
 
     # 三組數據對比
     rows = [
@@ -253,7 +257,7 @@ def card_5_shindian(deep: dict) -> Path:
         fig.text(0.88, y, delta_str, fontsize=18, color=color,
                  weight="bold", ha="right", va="center")
 
-    fig.text(0.5, 0.16, "→ 113Q1 新成屋帶量、115Q1 新成屋移轉停止",
+    fig.text(0.5, 0.16, f"→ {q0l} 新成屋帶量、{q1l} 新成屋移轉停止",
              ha="center", fontsize=14, color=DARK)
     fig.text(0.5, 0.12, "→ 成交品從「新屋為主」轉「老屋為主」",
              ha="center", fontsize=14, color=DARK)
@@ -265,7 +269,7 @@ def card_5_shindian(deep: dict) -> Path:
     return _save(fig, "card_5_shindian.png")
 
 
-def card_6_cta() -> Path:
+def card_6_cta(n_districts: int) -> Path:
     fig = _new_card()
     ax = fig.add_axes([0, 0, 1, 1])
     ax.axis("off")
@@ -274,7 +278,7 @@ def card_6_cta() -> Path:
 
     fig.text(0.5, 0.78, "想看完整報告？", ha="center", fontsize=32,
              color=CREAM, weight="bold")
-    fig.text(0.5, 0.71, "75 行政區 · 4 縣市 · 4 時間窗", ha="center",
+    fig.text(0.5, 0.71, f"{n_districts} 行政區 · 4 縣市 · 4 時間窗", ha="center",
              fontsize=18, color=CREAM)
 
     # 中央大按鈕區
@@ -304,7 +308,13 @@ def main() -> None:
     deep = pd.read_pickle(OUT_DIR / "shindian_deep.pkl")
     season_label = df["__season"].max().replace("S", "Q")
     generated_at = datetime.now().strftime("%Y-%m-%d")
-    n_districts = len(ranking_180)
+    # 行政區數＝買賣 180／365 天＋預售＋租屋四份排名的聯集（與 tools.html 同口徑）；缺檔就略過
+    towns = set(ranking_180["鄉鎮市區"])
+    for name in ("ranking_w365.pkl", "presale_ranking_w180.pkl", "rental_ranking_w180.pkl"):
+        f = OUT_DIR / name
+        if f.exists():
+            towns |= set(pd.read_pickle(f)["鄉鎮市區"])
+    n_districts = len(towns)
 
     print("→ 生成 6 張社群圖卡（1080×1350）：")
     jobs = [
@@ -313,7 +323,7 @@ def main() -> None:
         (card_3_city_trend, (df,)),
         (card_4_top_gain, (ranking_180,)),
         (card_5_shindian, (deep,)),
-        (card_6_cta, ()),
+        (card_6_cta, (n_districts,)),
     ]
     for fn, args in jobs:
         path = fn(*args)
