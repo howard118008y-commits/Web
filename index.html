@@ -495,6 +495,15 @@ h1 em{font-style:normal;color:inherit}
   .needs-help .cx-h-lbl{justify-self:start}
   .needs-help .cx-h-num{grid-column:1/-1;justify-self:center}
 }
+/* hero 矮螢幕（2026-10-01 實測 320×640、360×640 首屏）：右下小鋮鈕（.float，左緣＝視窗寬−70px）壓到 hero 兩顆聯絡鈕右端
+   → 鈕列右側讓出 58px、電話號碼改第二行置中（同求助卡）；小鋮不動 */
+@media(max-width:480px) and (max-height:740px){
+  .hero .hero-call .cx-hours-actions{padding-right:58px}
+  .hero .hero-call .cx-h-tel{display:grid;grid-template-columns:auto auto;justify-content:center;align-items:center;column-gap:10px;row-gap:2px}
+  .hero .hero-call .cx-h-tel svg{justify-self:end}
+  .hero .hero-call .cx-h-lbl{justify-self:start}
+  .hero .hero-call .cx-h-num{grid-column:1/-1;justify-self:center}
+}
 </style>
 <script type="application/ld+json">
 {

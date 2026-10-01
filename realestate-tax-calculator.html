@@ -825,9 +825,9 @@ function calc(){
   const buyDateObj=new Date(buyDate+'-01');
   const ver=(buyDateObj<new Date('2021-07-01'))?10:20;
   document.getElementById('verText').textContent='適用房地合一稅 '+ver/10+'.0 版（'+( ver===10?'105年1月1日–110年6月30日':'110年7月1日後')+' 取得)';
-  document.getElementById('verBadge').style.background=ver===10?'#f3f0ff':'var(--cx-cream-2)';
-  document.getElementById('verBadge').style.borderColor=ver===10?'var(--cx-ink)':'#1a1a1a';
-  document.getElementById('verBadge').querySelector('.dot').style.background=ver===10?'var(--cx-ink)':'#1a1a1a';
+  document.getElementById('verBadge').style.background='var(--cx-cream-2)';
+  document.getElementById('verBadge').style.borderColor=ver===10?'var(--cx-orange-deep)':'var(--cx-ink)';
+  document.getElementById('verBadge').querySelector('.dot').style.background=ver===10?'var(--cx-orange-deep)':'var(--cx-ink)';
 
   // holding
   const yrsLabel=yrs>=1?yrs.toFixed(1)+'年':(months+'個月');

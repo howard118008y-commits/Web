@@ -3,7 +3,9 @@
   var TOKENS = ':root{--cx-cream:#FCF6EA;--cx-orange:#F5621C;--cx-orange-deep:#B8440C;--cx-gold:#C8945A;--cx-ink:#3C1E0E;' +
     '--cx-cream-2:#F7ECDC;--cx-card:#FEFBF6;--cx-cream-glass:rgba(252,246,234,.9);--cx-line:#E5CAA9;' +
     '--cx-ink-2:#6C5445;--cx-ink-3:#796354;--cx-cream-dim:#CCC0B3;--cx-ink-line:#5B4131;' +
-    '--cx-orange-soft:#F6783B;--cx-orange-deep-hover:#A53E0C;--cx-ink-shadow:rgba(60,30,14,.4);--cx-ink-hero:#4B2F20}';
+    '--cx-orange-soft:#F6783B;--cx-orange-deep-hover:#A53E0C;--cx-ink-shadow:rgba(60,30,14,.4);--cx-ink-hero:#4B2F20;' +
+    /* 漲跌語意色（2026-10-01）：上漲＝深橘、下跌＝墨，同 lvr 年增率圖「橘＝上漲、深棕＝下跌」；米白底字 5.04／14.09 */
+    '--cx-up:#B8440C;--cx-down:#3C1E0E}';
   if (!document.getElementById('cx-brand')) document.head.insertAdjacentHTML('beforeend', '<style id="cx-brand">' + TOKENS + '</style>');
   if (document.currentScript && document.currentScript.hasAttribute('data-cx-tokens-only')) return;
   /* 接聽狀態首繪前先標在 <html>（規則同 cx-hours.js 的 isOpen，改時段要一起改）：導覽電話鈕一出現就是正確主次，不閃舊樣式。

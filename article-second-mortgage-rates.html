@@ -257,7 +257,7 @@ a{text-decoration:none}
 
 .art-body li{font-size:16px;line-height:1.8;color:var(--cx-ink-2);margin-bottom:.4rem}
 
-.info-box{background:#f5f5f7;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.info-box{background:var(--cx-cream-2);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
 
 .info-box h3{font-size:16px;font-weight:600;margin-bottom:.75rem}
 
@@ -285,6 +285,8 @@ a{text-decoration:none}
 .art-body p a:not([style]),.art-body li a:not([style]),.art-body td a:not([style]){text-decoration:underline;text-underline-offset:2px}
 
 .compare-table thead th{white-space:nowrap}
+/* 5 欄表的「產品」欄：表頭不換行把它擠到每行 3.8 字、6 行（2026-10-01 量尺 v3 T1）→ 最小 8em */
+.compare-table:has(th:nth-child(5)) td:nth-child(2){min-width:8em}
 
 
 /* CTA */

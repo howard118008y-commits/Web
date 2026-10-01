@@ -195,6 +195,11 @@
   .cx-table th,.cx-table td{padding:10px 12px;font-size:12px}
   .cta-h2{font-size:26px}
 }
+/* ≤480px：48px 大數字塞不進 2 欄格（「19縣／市」斷行）→ 34px＋不換行，格內左右距收窄（目檢 low 第 48 列） */
+@media(max-width:480px){
+  .growth-card{padding:28px 10px}
+  .growth-num{font-size:34px;white-space:nowrap}
+}
 
 /* nav.js 固定導覽列 64/58px（舊 nav 48px）：body 補差 16/10px，頁內既有預留不動 */
 body{padding-top:16px}

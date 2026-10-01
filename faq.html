@@ -416,12 +416,19 @@ img{max-width:100%;display:block}
 .bt-btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .bt-btn-outline-dark:hover{background:var(--cx-cream-2)}
 .bt-eyebrow .bt-kicker{margin-left:10px;font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--ink-dim)}
+.bt-hero .bt-eyebrow .bt-kicker{color:var(--cx-cream-dim)}  /* hero 墨底上原 --ink-dim 對比 1.73 */
 .faq-search{display:flex;align-items:center;gap:8px;max-width:520px;padding:8px 8px 8px 20px;background:#fff;border-radius:8px;box-shadow:var(--shadow)}
 .faq-search input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-family:inherit;font-size:16px;color:var(--ink)}
 .faq-search input:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 .faq-search .bt-btn{flex-shrink:0}
 @media(max-width:768px){
   .faq-search .bt-btn{width:auto}
+}
+/* ≤380px：搜尋鈕佔掉寬度，輸入框只剩 212px、提示字要 240px → 改兩列（輸入框一整列、搜尋鈕一整列）（2026-10-01 量尺 v3 T4b） */
+@media(max-width:380px){
+  .faq-search{flex-wrap:wrap;padding:8px 8px 8px 16px}
+  .faq-search input{flex:1 1 100%;min-height:40px}
+  .faq-search .bt-btn{width:100%}
 }
 </style>
 <script>window.__cxMotionLoaded=true;/* 本頁不做捲動進場動畫（Better 對拷規格）：跳過 include.js 的 GSAP 載入 */</script>
