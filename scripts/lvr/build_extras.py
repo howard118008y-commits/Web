@@ -24,7 +24,7 @@ LOW_SAMPLE = 30
 SHOP_MIN = 5  # 店面樣本低於此值不顯示中位（太少不具參考性）
 
 CITIES = ["台北市", "新北市", "台中市", "桃園市"]
-CITY_COLORS = {"台北市": "#1d1d1f", "新北市": "#c8102e",
+CITY_COLORS = {"台北市": "#3C1E0E", "新北市": "#c8102e",
                "台中市": "#16A34A", "桃園市": "#F59E0B"}
 
 
@@ -438,7 +438,7 @@ def render_presale_html(ranking: pd.DataFrame, generated_at: str) -> str:
 
   <div class="section-title">原始資料下載</div>
   <div class="download-card">
-    <div style="font-size:14px;color:#1d1d1f">4 縣市預售屋全區排名（含解約篩除）：</div>
+    <div style="font-size:14px;color:var(--cx-ink)">4 縣市預售屋全區排名（含解約篩除）：</div>
     <div class="download-grid">
       <a href="lvr-data/presale_ranking_w180.json">預售排名 JSON（近 180 天）</a>
     </div>
@@ -655,7 +655,7 @@ def render_rental_html(ranking: pd.DataFrame, generated_at: str) -> str:
 
   <div class="section-title">原始資料下載</div>
   <div class="download-card">
-    <div style="font-size:14px;color:#1d1d1f">4 縣市租屋全區排名（含年化報酬率）：</div>
+    <div style="font-size:14px;color:var(--cx-ink)">4 縣市租屋全區排名（含年化報酬率）：</div>
     <div class="download-grid">
       <a href="lvr-data/rental_ranking_w180.json">租金排名 JSON（近 180 天）</a>
     </div>

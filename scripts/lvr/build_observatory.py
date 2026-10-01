@@ -34,7 +34,7 @@ AI_REPORT_PATH = CX468_DIR / "lvr-data" / "週報_最新.txt"
 
 FOCUS_TOWNS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]
 COLORS = {
-    "中和區": "#c8102e", "永和區": "#D4AF37", "板橋區": "#1d1d1f",
+    "中和區": "#c8102e", "永和區": "#D4AF37", "板橋區": "#3C1E0E",
     "新店區": "#2563EB", "土城區": "#0EA5E9",
 }
 # 卡片超連結到區域百科頁（slug 須與 scripts/build_area_pages.py 一致）
@@ -642,20 +642,20 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
 
   <div class="section-title">本期社群圖卡（FB / IG / LINE 文章可用）</div>
   <div class="download-card">
-    <div style="font-size:14px;color:#1d1d1f;margin-bottom:12px">6 張 1080×1350 圖卡，IG 輪播或 FB 相簿直接上傳：</div>
+    <div style="font-size:14px;color:var(--cx-ink);margin-bottom:12px">6 張 1080×1350 圖卡，IG 輪播或 FB 相簿直接上傳：</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <a href="lvr-social-cards/card_1_hero.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_1_hero.png" style="width:100%;border-radius:8px;display:block" alt="Card 1: Hero"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">1. 標題</div></a>
-      <a href="lvr-social-cards/card_2_yoy.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_2_yoy.png" style="width:100%;border-radius:8px;display:block" alt="Card 2: YoY"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">2. YoY 年增率</div></a>
-      <a href="lvr-social-cards/card_3_city_trend.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_3_city_trend.png" style="width:100%;border-radius:8px;display:block" alt="Card 3: trend"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">3. 縣市趨勢</div></a>
-      <a href="lvr-social-cards/card_4_top_gain.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_4_top_gain.png" style="width:100%;border-radius:8px;display:block" alt="Card 4: top"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">4. TOP 5 漲幅</div></a>
-      <a href="lvr-social-cards/card_5_shindian.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_5_shindian.png" style="width:100%;border-radius:8px;display:block" alt="Card 5: spotlight"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">5. 新店 Spotlight</div></a>
-      <a href="lvr-social-cards/card_6_cta.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_6_cta.png" style="width:100%;border-radius:8px;display:block" alt="Card 6: CTA"><div style="font-size:11px;color:#6e6e73;text-align:center;margin-top:4px">6. CTA</div></a>
+      <a href="lvr-social-cards/card_1_hero.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_1_hero.png" style="width:100%;border-radius:8px;display:block" alt="Card 1: Hero"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">1. 標題</div></a>
+      <a href="lvr-social-cards/card_2_yoy.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_2_yoy.png" style="width:100%;border-radius:8px;display:block" alt="Card 2: YoY"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">2. YoY 年增率</div></a>
+      <a href="lvr-social-cards/card_3_city_trend.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_3_city_trend.png" style="width:100%;border-radius:8px;display:block" alt="Card 3: trend"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">3. 縣市趨勢</div></a>
+      <a href="lvr-social-cards/card_4_top_gain.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_4_top_gain.png" style="width:100%;border-radius:8px;display:block" alt="Card 4: top"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">4. TOP 5 漲幅</div></a>
+      <a href="lvr-social-cards/card_5_shindian.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_5_shindian.png" style="width:100%;border-radius:8px;display:block" alt="Card 5: spotlight"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">5. 新店 Spotlight</div></a>
+      <a href="lvr-social-cards/card_6_cta.png" target="_blank" style="display:block;text-decoration:none"><img src="lvr-social-cards/card_6_cta.png" style="width:100%;border-radius:8px;display:block" alt="Card 6: CTA"><div style="font-size:11px;color:var(--cx-ink-3);text-align:center;margin-top:4px">6. CTA</div></a>
     </div>
   </div>
 
   <div class="section-title">原始資料下載</div>
   <div class="download-card">
-    <div style="font-size:14px;color:#1d1d1f;margin-bottom:4px"><b>5 精選區明細</b>（近 180 天，含地址、建物型態、坪數、屋齡、總價、單價）：</div>
+    <div style="font-size:14px;color:var(--cx-ink);margin-bottom:4px"><b>5 精選區明細</b>（近 180 天，含地址、建物型態、坪數、屋齡、總價、單價）：</div>
     <div class="download-grid">
       <a href="lvr-data/中和區_正常住宅_近180天.csv">中和區 CSV</a>
       <a href="lvr-data/永和區_正常住宅_近180天.csv">永和區 CSV</a>
@@ -663,7 +663,7 @@ table.rank-table{{width:100%;border-collapse:collapse;font-size:14px;color:var(-
       <a href="lvr-data/新店區_正常住宅_近180天.csv">新店區 CSV</a>
       <a href="lvr-data/土城區_正常住宅_近180天.csv">土城區 CSV</a>
     </div>
-    <div style="font-size:14px;color:#1d1d1f;margin:18px 0 4px"><b>各時間窗全區排名</b>（4 縣市合計 {n_districts_180} 區）：</div>
+    <div style="font-size:14px;color:var(--cx-ink);margin:18px 0 4px"><b>各時間窗全區排名</b>（4 縣市合計 {n_districts_180} 區）：</div>
     <div class="download-grid">
       <a href="lvr-data/排名_w30.json">30 天 JSON</a>
       <a href="lvr-data/排名_w90.json">90 天 JSON</a>

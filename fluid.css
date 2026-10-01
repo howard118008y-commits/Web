@@ -165,3 +165,11 @@ table.tax-table th{white-space:nowrap}
   :is(table.cx-stack,.compare-table.src-table) [data-label]::before{content:attr(data-label);display:block;margin-bottom:2px;font-size:13px;font-weight:600;line-height:1.5;color:var(--cx-ink-2);white-space:pre-line}
   :is(.cx-tscroll,[class*="table-wrap"]):has(>table.cx-stack),.table-wrap:has(>.compare-table.src-table){overflow:visible;background:none;box-shadow:none;border-radius:0}
 }
+/*§27 標題孤字（2026-09-29 視覺目檢 low 第 33 列）：中文長標題在手機常剩一個字掉到最後一行 → 各行長度平均（不支援的瀏覽器維持原樣）*/
+:is(h1,h2,h3){text-wrap:balance}
+/*§28 電話號碼不在連字號處斷行（目檢 low 第 41 列）：純文字電話連結整串不換行；鈕內號碼另包元素者只鎖號碼；小鋮對話框內不套*/
+a[href^="tel:"]:not(:has(*)):not(:is([class^="cw-"],[class*=" cw-"],#cw-root) a),a[href^="tel:"] :is(.cx-h-num,strong){white-space:nowrap}
+/*§29 看得出是連結（2026-10-01）：hero 照片出處（CC 授權）與文章署名列的連結跟旁字同色又沒底線 → 補底線*/
+:is(.bt-hero figcaption,.area-photo figcaption,.art-meta-row) a:not([class]){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+/*§30 地價稅試算停用鈕（目檢 low 第 38 列）：原三種樣式（Tailwind 冷灰白字、深橘疊 opacity .5）統一成米白 2 底＋淡字＋細框、不靠 opacity；opacity 由 JS 寫在行內，故用 !important*/
+:is(.btn-query,#applyBtn):disabled{background:var(--cx-cream-2)!important;color:var(--cx-ink-3)!important;box-shadow:inset 0 0 0 1px var(--cx-line);opacity:1!important;cursor:not-allowed}
