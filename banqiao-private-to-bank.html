@@ -152,6 +152,11 @@ img{max-width:100%;display:block}
 .bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
 .bt-btn-outline:hover{background:rgba(255,255,255,.1)}
 .bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，非接聽時 LINE 主、電話次 */
+[data-cx-open="0"] [data-cx-hours] .cx-h-line{order:-1;background:var(--gold);color:var(--forest-deep)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-line:hover{background:var(--gold-soft)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel{background:var(--cream);color:var(--ink)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel:hover{background:var(--line)}
 
 /* 卡片 */
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
@@ -476,9 +481,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <h1 class="bt-h1">板橋民間轉銀行：<br>四個卡關點，一關一關過</h1>
       <p class="bt-p">板橋 547,794 人、239,838 戶（新北市民政局，115 年 8 月），住宅 226,609 宅是新北 29 區最多（內政部不動產資訊平台，115 年第 1 季）。人多房多，民間借款要轉回銀行的樣子也多，但卡住的位置大致就四個：本金多年沒動、民間設定排在銀行後面、鑑價碰上板橋落差極端的物件型態、收入證明不是銀行要的形式。這一頁一關配一個板橋場景，照順序拆。</p>
       <div class="bt-meta"><span class="bt-tag">民間轉銀行・板橋在地</span><span>2026年9月</span><span>鋮馨融資顧問團隊</span><span>閱讀時間約 9 分鐘</span></div>
-      <div class="bt-btns" data-consultation-need="private_to_bank">
-      <a href="tel:0222490517" class="bt-btn" data-link-location="hero">撥打 02-2249-0517</a>
-      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost" data-link-location="hero">LINE 免費評估</a>
+      <div class="bt-btns" data-cx-hours data-consultation-need="private_to_bank">
+      <a href="tel:0222490517" class="bt-btn cx-h-tel" data-link-location="hero">撥打 02-2249-0517</a>
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn cx-h-line bt-btn-ghost" data-link-location="hero">LINE 免費評估</a>
     </div>
     </div>
     <figure class="area-photo">
