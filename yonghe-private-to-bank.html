@@ -152,6 +152,11 @@ img{max-width:100%;display:block}
 .bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
 .bt-btn-outline:hover{background:rgba(255,255,255,.1)}
 .bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，非接聽時 LINE 主、電話次 */
+[data-cx-open="0"] [data-cx-hours] .cx-h-line{order:-1;background:var(--gold);color:var(--forest-deep)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-line:hover{background:var(--gold-soft)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel{background:var(--cream);color:var(--ink)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel:hover{background:var(--line)}
 
 /* 卡片 */
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
@@ -483,9 +488,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <h1 class="bt-h1">永和民間轉銀行：<br>屋主的年齡，決定銀行怎麼算年期</h1>
       <p class="bt-p">永和 210,038 人、95,932 戶、62 里 1,249 鄰（新北市民政局，115 年 8 月），65 歲以上占 25.15%，在永和、板橋、三重三區中最高（各區統計機關與期間不同，見各處標註）；老化指數 212.34，五年人口少了 5,622 人（《114 年度民政應用統計專刊》，113 年底）。民間借款要轉回銀行，承作機構第一個看的常常不是利率，是年期：申請人的年齡加上貸款年期有沒有超過它的規定、房子的屋齡撐不撐得起這個年期。永和兩個年齡都偏高，所以這一頁從年齡講起，分三種家庭配置各走一條路。</p>
       <div class="bt-meta"><span class="bt-tag">民間轉銀行・永和在地</span><span>2026年9月</span><span>鋮馨融資顧問團隊</span><span>閱讀時間約 9 分鐘</span></div>
-      <div class="bt-btns" data-consultation-need="private_to_bank">
-      <a href="tel:0222490517" class="bt-btn" data-link-location="hero">撥打 02-2249-0517</a>
-      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost" data-link-location="hero">LINE 免費評估</a>
+      <div class="bt-btns" data-cx-hours data-consultation-need="private_to_bank">
+      <a href="tel:0222490517" class="bt-btn cx-h-tel" data-link-location="hero">撥打 02-2249-0517</a>
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn cx-h-line bt-btn-ghost" data-link-location="hero">LINE 免費評估</a>
     </div>
     </div>
     <figure class="area-photo">

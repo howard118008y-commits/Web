@@ -160,6 +160,11 @@ img{max-width:100%;display:block}
 .bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
 .bt-btn-outline:hover{background:rgba(255,255,255,.1)}
 .bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，接聽中電話主、LINE 次 */
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel{order:-1;background:var(--gold);color:var(--forest-deep)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel:hover{background:var(--gold-soft)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line{background:var(--cream);color:var(--ink)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line:hover{background:var(--line)}
 
 /* 卡片 */
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
@@ -456,9 +461,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-eyebrow">板橋售後回租</p>
       <h1 class="bt-h1">板橋售後回租：<br>一個板橋，三種屋主</h1>
       <p class="bt-p">板橋的住宅存量是新北 29 區裡最大、三十年以上戶數也最多的一批——226,609 宅、62.9% 屋齡三十年以上（115 年第 1 季，內政部）；人口卻是全市之冠，65 歲以上占 20.54%（114 年底，板橋區公所）。同一個行政區裡，65 歲以上戶長占比從和平里的 15.5% 到華福里的 48.6%（115 年第 1 季，內政部不動產資訊平台村里統計）。舊城的老公寓、新板與江翠的電梯大樓、浮洲——三種屋主面對售後回租，要看的事情不一樣。這一頁分三欄講。</p>
-      <div class="bt-btns" style="margin-bottom:24px">
-        <a href="https://lin.ee/PHIfSoY" class="bt-btn" data-link-location="hero">LINE 免費評估</a>
-        <a href="tel:0222490517" class="bt-btn bt-btn-ghost" data-link-location="hero">撥打 02-2249-0517</a>
+      <div class="bt-btns" data-cx-hours style="margin-bottom:24px">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn cx-h-line" data-link-location="hero">LINE 免費評估</a>
+        <a href="tel:0222490517" class="bt-btn cx-h-tel bt-btn-ghost" data-link-location="hero">撥打 02-2249-0517</a>
       </div>
       <div class="bt-meta"><span class="bt-tag">售後回租・板橋在地</span><span>2026年9月</span><span>鋮馨融資顧問團隊</span><span>閱讀時間約 9 分鐘</span></div>
     </div>

@@ -168,6 +168,11 @@ img{max-width:100%;display:block}
 .bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
 .bt-btn-outline:hover{background:rgba(255,255,255,.1)}
 .bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，非接聽時 LINE 主、電話次 */
+[data-cx-open="0"] [data-cx-hours] .cx-h-line{order:-1;background:var(--gold);color:var(--forest-deep)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-line:hover{background:var(--gold-soft)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel{background:var(--cream);color:var(--ink)}
+[data-cx-open="0"] [data-cx-hours] .cx-h-tel:hover{background:var(--line)}
 
 /* 卡片 */
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
@@ -476,9 +481,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-eyebrow">中和公司財務健檢・企業貸款媒合</p>
       <h1 class="bt-h1">中和公司財務健檢：<br>三份文件，先對上老闆手上的那本帳</h1>
       <p class="bt-p">中和的生產總額全新北第 1（主計總處 110 年工商普查），稅籍公司的資本額中位卻只有 50 萬——大產值、小公司，帳多半在負責人一個人手上。銀行看的是 401 表、營所稅結算申報書、公司存摺三份紙本。健檢只做一件事：把兩本帳對上。需要資金時，再接企業貸款媒合。</p>
-      <div class="bt-btns" data-consultation-need="corporate_loan">
-      <a href="tel:0222490517" class="bt-btn" data-link-location="hero">撥打 02-2249-0517</a>
-      <a href="https://lin.ee/PHIfSoY" class="bt-btn bt-btn-ghost" data-link-location="hero">LINE 預約 30 分鐘健檢</a>
+      <div class="bt-btns" data-cx-hours data-consultation-need="corporate_loan">
+      <a href="tel:0222490517" class="bt-btn cx-h-tel" data-link-location="hero">撥打 02-2249-0517</a>
+      <a href="https://lin.ee/PHIfSoY" class="bt-btn cx-h-line bt-btn-ghost" data-link-location="hero">LINE 預約 30 分鐘健檢</a>
     </div>
       <div data-include="ai-bar" data-ai-q="三份文件怎麼看？|多久看得到結果？|健檢要準備什麼？"></div>
       <div class="bt-meta" style="margin-top:24px"><span class="bt-tag">公司財務健檢・中和在地</span><span>2026年9月</span><span>鋮馨融資顧問團隊</span><span>閱讀時間約 8 分鐘</span></div>

@@ -168,6 +168,11 @@ img{max-width:100%;display:block}
 .bt-btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
 .bt-btn-outline:hover{background:rgba(255,255,255,.1)}
 .bt-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，接聽中電話主、LINE 次 */
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel{order:-1;background:var(--gold);color:var(--forest-deep)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel:hover{background:var(--gold-soft)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line{background:var(--cream);color:var(--ink)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line:hover{background:var(--line)}
 
 /* 卡片 */
 .bt-card{background:#fff;border-radius:8px;box-shadow:var(--shadow);padding:32px}
@@ -480,9 +485,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
       <p class="bt-eyebrow">板橋貸款整合</p>
       <h1 class="bt-h1">板橋貸款整合：<br>一個月的扣款日曆，怎麼併成一天</h1>
       <p class="bt-p">板橋人口 549,762 人、為全市之冠（114 年底，板橋區公所）；15 至 64 歲占 68.31%、平均每戶 2.39 人（113 年底，板橋區公所），是新北典型的小家庭區。雙薪家庭的月付困境不是某一筆太大，是房貸、卡循、信貸在同一個月裡各挑一天扣款——先把日曆攤開，再談整合。</p>
-      <div class="bt-btns" data-consultation-need="private_debt">
-        <a href="https://lin.ee/PHIfSoY" class="bt-btn" data-link-location="hero">LINE 免費評估</a>
-        <a href="tel:0222490517" class="bt-btn bt-btn-ghost" data-link-location="hero">撥打 02-2249-0517</a>
+      <div class="bt-btns" data-cx-hours data-consultation-need="private_debt">
+        <a href="https://lin.ee/PHIfSoY" class="bt-btn cx-h-line" data-link-location="hero">LINE 免費評估</a>
+        <a href="tel:0222490517" class="bt-btn cx-h-tel bt-btn-ghost" data-link-location="hero">撥打 02-2249-0517</a>
       </div>
       <div class="bt-meta" style="margin-top:24px"><span class="bt-tag">貸款整合・板橋在地</span><span>2026年9月</span><span>鋮馨融資顧問團隊</span><span>閱讀時間約 8 分鐘</span></div>
     </div>

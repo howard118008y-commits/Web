@@ -32,6 +32,11 @@
 .hero-note{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:40px}
 
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* 接聽狀態（nav.js／cx-hours.js 標 data-cx-open）：hero 主次跟手機固定條同向，接聽中電話主、LINE 次 */
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel{order:-1;background:var(--cx-orange);color:var(--cx-ink)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-tel:hover{background:var(--cx-orange-soft)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line{background:var(--cx-cream);color:var(--cx-ink)}
+[data-cx-open="1"] [data-cx-hours] .cx-h-line:hover{background:var(--cx-card)}
 
 
 .btn-ghost-w{display:inline-block;background:transparent;color:rgba(255,255,255,.8);font-size:14px;padding:14px 28px;border-radius:28px;border:1.5px solid rgba(255,255,255,.28)}
@@ -105,8 +110,6 @@
 .cta-h2{font-family:"Noto Serif TC","Songti TC",serif;font-size:38px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.35;margin-bottom:16px}
 
 .cta-sub{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
-
-.cta-main-btn{display:inline-block;background:#C8945A;color:var(--cx-ink);font-size:16px;font-weight:700;padding:16px 40px;border-radius:32px;margin-bottom:16px;letter-spacing:.01em}
 
 .cta-phone{display:block;font-size:14px;color:rgba(255,255,255,.45);margin-top:8px}
 
@@ -241,9 +244,9 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
   <h1 class="hero-h1">3 分鐘，找出<br><em>你的房子</em>最佳出路。</h1>
   <p class="hero-sub">不確定該包租代管、售後回租還是貸款整合？告訴我們你的狀況，我們幫你分析最適合的方案。</p>
   <p class="hero-note">初步評估完全免費，不申請不收費</p>
-  <div class="hero-btns">
-    <a href="https://lin.ee/PHIfSoY" class="btn-green">加入 LINE 開始評估</a>
-    <a href="tel:+886-958-139-786" class="btn-ghost-w">直接來電 0958-139-786</a>
+  <div class="hero-btns" data-cx-hours>
+    <a href="https://lin.ee/PHIfSoY" class="btn-green cx-h-line">加入 LINE 開始評估</a>
+    <a href="tel:+886-958-139-786" class="btn-ghost-w cx-h-tel">直接來電 0958-139-786</a>
     <a href="apply.html" class="btn-ghost-w">填表申請，專員回電</a>
   </div>
 </div>
@@ -406,7 +409,6 @@ src="https://www.facebook.com/tr?id=27280305434986441&ev=PageView&noscript=1"
 <div class="cta-section">
   <h2 class="cta-h2">現在就開始，<br>完全免費。</h2>
   <p class="cta-sub">加入 LINE 說明你的狀況，顧問會在 24 小時內回覆，提供初步評估建議。</p>
-  <a href="https://lin.ee/PHIfSoY" class="cta-main-btn">加入鋮馨官方 LINE</a>
   <p class="cta-phone">或來電：<a href="tel:+886-2-2249-0517">02-2249-0517</a> ／ <a href="tel:+886-958-139-786">0958-139-786</a></p>
   <p class="cta-phone">不方便即時聊？<a href="apply.html">填寫評估表單</a>，專員上班時間主動回電</p>
   <div class="guarantee-row">
