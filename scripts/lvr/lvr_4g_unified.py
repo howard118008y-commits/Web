@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-# 口徑：4G（115S1+115S2 房地買賣、扣車位、住家用、排特殊備註、依編號去重、交易日 114/9/1–115/5/31）——三重／永和／板橋售後回租頁行情表唯一口徑，定義見 行銷產出/技術記錄/2026-09-14-行情口徑統一-4G.md §①
-# 資料檔：本檔同層 115S1/f_lvr_land_a.csv、115S2/f_lvr_land_a.csv（內政部 plvr DownloadSeason?season=115S1|115S2&type=zip&fileName=lvr_landcsv.zip 解出）；本機 _cache/ 無季 zip，重跑前先下載
-# 115S3 季檔 10/1 發布後，所有引用本口徑的頁（sanchong/yonghe/banqiao-sale-leaseback、第三批服務軸 6 頁、yonghe/tucheng-second-mortgage）要一起重跑、一起改，不可只改一頁；2026-09-17 加土城區（四區數字不變，僅新增土城四型態）
+# 口徑：4G（115S2+115S3 房地買賣、扣車位、住家用、排特殊備註、依編號去重、交易日 114/12/1–115/8/31；滾動兩季，2026-10-02 由 115S1、115S2 換季）——售後回租／服務軸／二胎在地頁行情表唯一口徑，定義見 行銷產出/技術記錄/2026-09-14-行情口徑統一-4G.md §①，換季紀錄見 2026-10-02-LVR-115S3換季.md
+# 資料檔：本檔同層 115S2/f_lvr_land_a.csv、115S3/f_lvr_land_a.csv（內政部 plvr DownloadSeason?season=115S2|115S3&type=zip&fileName=lvr_landcsv.zip 解出；不進 repo）；本機 _cache/ 無季 zip，重跑前先下載
+# 115S4 季檔（116 年 1 月初）發布後，所有引用本口徑的頁（sanchong/yonghe/banqiao-sale-leaseback、服務軸 7 頁〔含 zhonghe-private-to-bank，2026-10-02 起改 4G〕、yonghe/tucheng-second-mortgage）要一起重跑、一起改，不可只改一頁；換季＝季別往後滾一季、D0/D1 同步平移 3 個月；2026-09-17 加土城區（四區數字不變，僅新增土城四型態）
 """4G 口徑統一重跑（純標準庫，python3 即可）
-資料：lvr_115S1.zip / lvr_115S2.zip（內政部 plvr DownloadSeason 全國 csv 包）解出的 f_lvr_land_a.csv（新北市）
+資料：lvr_115S2.zip / lvr_115S3.zip（內政部 plvr DownloadSeason 全國 csv 包）解出的 f_lvr_land_a.csv（新北市）
 口徑：①兩季合併、依「編號」去重（保留先出現者）②交易標的以「房地」開頭 ③主要用途＝住家用
-     ④備註含 親友/員工/共有人/特殊交易/瑕疵/急需處分/公益 任一者排除 ⑤交易日 114/9/1–115/5/31
+     ④備註含 親友/員工/共有人/特殊交易/瑕疵/急需處分/公益 任一者排除 ⑤交易日 114/12/1–115/8/31
      ⑥扣車位：單價＝(總價元−車位總價元)/(建物移轉總面積−車位移轉總面積)×3.305785/1e4（萬/坪）；總價亦扣車位總價
      ⑦屋齡＝(交易日−建築完成年月)/365.25；建築完成年月缺者不入屋齡統計（n_age 另列）
      ⑧型態依「建物型態」原始標籤：公寓(5樓含以下無電梯)／華廈(10層含以下有電梯)／住宅大樓(11層含以上有電梯)／透天厝
 用法：python3 lvr_4g_unified.py            → 五區×型態主表（三重／永和／板橋／中和／土城）
       python3 lvr_4g_unified.py --banqiao  → 板橋頁額外欄（40年+／0–5年／20年+／浮洲）
+      python3 lvr_4g_unified.py --ping     → 五區×型態坪數中位（扣車位建物面積，坪；中和民轉銀頁表格用）
 """
 import csv, sys, re, statistics as st
 from datetime import date
@@ -21,7 +22,7 @@ TOWNS = ["三重區", "永和區", "板橋區", "中和區", "土城區"]
 TYPES = {"公寓": "公寓(5樓含以下無電梯)", "華廈": "華廈(10層含以下有電梯)",
          "住宅大樓": "住宅大樓(11層含以上有電梯)", "透天": "透天厝"}
 EXCL = ["親友", "員工", "共有人", "特殊交易", "瑕疵", "急需處分", "公益"]
-D0, D1 = date(2025, 9, 1), date(2026, 5, 31)
+D0, D1 = date(2025, 12, 1), date(2026, 8, 31)
 FUZHOU_ROADS = ["大觀路", "僑中一街", "僑中二街", "僑中三街", "溪崑一街", "溪崑二街", "溪城路"]
 
 def roc(s):
@@ -39,7 +40,7 @@ def f(x):
 
 def load():
     seen, out = set(), []
-    for season in ("115S1", "115S2"):
+    for season in ("115S2", "115S3"):
         with open(HERE / season / "f_lvr_land_a.csv", encoding="utf-8-sig", newline="") as fh:
             for i, r in enumerate(csv.DictReader(fh)):
                 if i == 0 and r["鄉鎮市區"].startswith("The"): continue
@@ -56,7 +57,7 @@ def load():
                 if area - pa <= 0 or tot - pt <= 0: continue
                 bd = roc(r["建築完成年月"])
                 out.append(dict(town=r["鄉鎮市區"], typ=r["建物型態"], addr=r["土地位置建物門牌"], season=season,
-                                up=(tot - pt) / (area - pa) * PING / 1e4, tot=(tot - pt) / 1e4,
+                                up=(tot - pt) / (area - pa) * PING / 1e4, tot=(tot - pt) / 1e4, ping=(area - pa) / PING,
                                 age=((td - bd).days / 365.25) if bd else None))
     return out
 
@@ -68,6 +69,12 @@ def stats(g):
 
 if __name__ == "__main__":
     data = load()
+    if "--ping" in sys.argv:
+        for town in TOWNS:
+            for name, label in TYPES.items():
+                g = [o["ping"] for o in data if o["town"] == town and o["typ"] == label]
+                print(town, name, f"n={len(g)}", "坪數中位", round(st.median(g), 1) if g else None)
+        sys.exit()
     if "--banqiao" in sys.argv:
         b = [o for o in data if o["town"] == "板橋區"]
         ap = [o for o in b if o["typ"] == TYPES["公寓"]]; bl = [o for o in b if o["typ"] == TYPES["住宅大樓"]]
