@@ -149,6 +149,11 @@
    "date": "2026-10-02",
    "file": null,
    "status": "gate_regex: 一定能"
+  },
+  "threads:17906692737563363": {
+   "date": "2026-10-02",
+   "file": "article-salary-eaten-by-debt-payments.html",
+   "status": "published"
   }
  },
  "published": [
@@ -256,6 +261,13 @@
    "title": "地價稅用哪種稅率算？自用住宅優惠要申請才有嗎？",
    "source": "threads:17890761309681757",
    "source_url": "https://www.threads.com/@cx468468/post/Dd5exyPFNg9"
+  },
+  {
+   "date": "2026-10-02",
+   "file": "article-salary-eaten-by-debt-payments.html",
+   "title": "薪水一進帳就被繳款分光？貸款整合能改變什麼",
+   "source": "threads:17906692737563363",
+   "source_url": "https://www.threads.com/@cx468468/post/Dd0VNlGG6CJ"
   }
  ]
 }
