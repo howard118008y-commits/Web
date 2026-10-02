@@ -68,6 +68,22 @@ def _eyebrow_and_title(fig, eyebrow: str, title: str, top=0.92):
              weight="bold")
 
 
+def complete_seasons(df: pd.DataFrame) -> list:
+    """完整季清單（升冪）。
+
+    規則：df 的 __season 由兩種來源標成——季檔 lvr_YYYYSn.zip（完整季），
+    以及「本期 mini-package」lvr_mini_YYYYMMDD.zip（只有近 10 天，analyze_lvr 依日期換算成季別，
+    例如 10/1 之後會出現只有幾天資料的 115S4）。故「完整季」＝_cache 內有對應季檔 zip 的季別；
+    mini 換算出的季別在季檔發布（下載清單 SEASONS 加入）之前不算，發布後自動納入，下季不用改本檔。
+    _cache 沒有任何季檔 zip（本機只有 pkl）時退回資料內全部季別格式（YYYSn）的值。
+    """
+    fmt = lambda x: isinstance(x, str) and len(x) == 5 and x[3] == "S"
+    zips = {z.stem.replace("lvr_", "") for z in OUT_DIR.glob("lvr_*.zip")}
+    zips = {z for z in zips if fmt(z)}
+    present = {x for x in df["__season"].unique() if fmt(x)}
+    return sorted(present & zips if zips else present)
+
+
 def card_1_hero(generated_at: str, season_label: str, n_districts: int) -> Path:
     fig = _new_card()
     # 墨底＋橘色帶（橘不配白字，文字一律米白）
@@ -97,23 +113,30 @@ def card_1_hero(generated_at: str, season_label: str, n_districts: int) -> Path:
     return _save(fig, "card_1_hero.png")
 
 
+def _yoy_pair(df: pd.DataFrame):
+    """(最新完整季, 去年同季)，如 ('115S3', '114S3')；df 已只含完整季。"""
+    cur = max(df["__season"].unique())
+    return cur, f"{int(cur[:3]) - 1}{cur[3:]}"
+
+
 def card_2_yoy(df: pd.DataFrame) -> Path:
     FOCUS = ["中和區", "永和區", "板橋區", "新店區", "土城區"]
     COLOR_MAP = {"中和區": ORANGE, "永和區": INK, "板橋區": GOLD,
                  "新店區": DEEP, "土城區": "#8A5A2B",
                  "台北市\n（平均）": "#6B4A35", "新北市\n（平均）": "#E58A55"}
+    cur, prev = _yoy_pair(df)
     rows = []
     for town in FOCUS:
         sub = df[df["鄉鎮市區"] == town]
         by_q = sub.groupby("__season")["單價_萬每坪"].median()
-        if "114S1" in by_q.index and "115S1" in by_q.index:
-            yoy = (by_q["115S1"] - by_q["114S1"]) / by_q["114S1"] * 100
+        if cur in by_q.index and prev in by_q.index:
+            yoy = (by_q[cur] - by_q[prev]) / by_q[prev] * 100
             rows.append((town, yoy, COLOR_MAP[town]))
     for city in ["台北市", "新北市"]:
         sub = df[df["縣市"] == city]
         by_q = sub.groupby("__season")["單價_萬每坪"].median()
-        if "114S1" in by_q.index and "115S1" in by_q.index:
-            yoy = (by_q["115S1"] - by_q["114S1"]) / by_q["114S1"] * 100
+        if cur in by_q.index and prev in by_q.index:
+            yoy = (by_q[cur] - by_q[prev]) / by_q[prev] * 100
             label = f"{city}\n（平均）"
             rows.append((label, yoy, COLOR_MAP[label]))
     rows.sort(key=lambda x: x[1])
@@ -125,7 +148,7 @@ def card_2_yoy(df: pd.DataFrame) -> Path:
     # eyebrow + title 在頂部
     fig.text(0.5, 0.94, "近 1 年 單價變化 YoY", ha="center", fontsize=22,
              color=GREY, weight="600")
-    fig.text(0.5, 0.88, "115Q1 vs 114Q1", ha="center", fontsize=38,
+    fig.text(0.5, 0.88, f"{cur.replace('S', 'Q')} vs {prev.replace('S', 'Q')}", ha="center", fontsize=38,
              color=DARK, weight="bold")
 
     ax = fig.add_axes([0.10, 0.10, 0.80, 0.66])
@@ -304,6 +327,7 @@ def card_6_cta(n_districts: int) -> Path:
 
 def main() -> None:
     df = pd.read_pickle(OUT_DIR / "clean_df.pkl")
+    df = df[df["__season"].isin(complete_seasons(df))]  # 只用完整季：card_1／2／3 都從這份取
     ranking_180 = pd.read_pickle(OUT_DIR / "ranking_w180.pkl")
     deep = pd.read_pickle(OUT_DIR / "shindian_deep.pkl")
     season_label = df["__season"].max().replace("S", "Q")
