@@ -1,64 +1,84 @@
 <meta name="robots" content="noindex">
 <style>
-/* ── 小鋮 AI 服務助理（chat-widget）── Oriental Terminal ── */
-.cw-launch{position:fixed;bottom:24px;right:24px;z-index:9990;width:58px;height:58px;border-radius:50%;background:#12213A;border:1.5px solid #1B2F4A;box-shadow:0 6px 22px rgba(0,0,0,.28);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s ease}
+/* ── 小鋮 AI 服務助理（chat-widget）── 米米版（2026-10-02 Sir：貓咪框改米米白＋橘）──
+   外型取自米米：一粒米的弧頂（取代舊貓耳）、米白身體、亮橘開襟背心（標頭＋V 領）。不放米米本人圖：
+   cx-dcard.js 見 mimi 圖會收聯絡卡，且媽祖定例一不讓米米貼著 LINE／電話鈕。
+   顏色只走變數：優先吃 nav.js 的 --cx-*，沒載 nav.js 的頁用後面的備援值。 */
+.cw-launch,.cw-teaser,.cw-panel,.cw-full-backdrop{
+  --cw-cream:var(--cx-cream,#FCF6EA);--cw-card:var(--cx-card,#FEFBF6);--cw-body:#F3E9DF;
+  --cw-orange:var(--cx-orange,#F5621C);--cw-orange-soft:var(--cx-orange-soft,#F6783B);--cw-orange-deep:var(--cx-orange-deep,#B8440C);
+  --cw-ink:var(--cx-ink,#3C1E0E);--cw-ink-line:var(--cx-ink-line,#5B4131);--cw-line:var(--cx-line,#E5CAA9);--cw-gold:var(--cx-gold,#C8945A);
+  --cw-line-green:#048456}
+.cw-launch{position:fixed;bottom:24px;right:24px;z-index:9990;width:58px;height:62px;padding:0;border:1.5px solid var(--cw-line);
+  border-radius:50% 50% 46% 46%/58% 58% 42% 42%;
+  background:linear-gradient(to bottom,var(--cw-body) 0 61%,var(--cw-orange) 61% 100%);
+  box-shadow:0 6px 20px rgba(60,30,14,.22);cursor:pointer;display:flex;align-items:flex-start;justify-content:center;transition:transform .18s ease}
+.cw-launch::after{content:'';position:absolute;left:50%;top:61%;width:14px;height:10px;transform:translateX(-50%);background:var(--cw-body);clip-path:polygon(0 0,100% 0,50% 100%)}
 .cw-launch:hover{transform:scale(1.06)}
-.cw-launch .cw-zi{font-family:'Noto Serif TC','Songti TC',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
-.cw-launch .cw-ai{position:absolute;top:-4px;right:-4px;background:#1B2F4A;color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 5px;border-radius:8px}
-.cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:#fff;color:#1B2F4A;font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid #e3e3e6;border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;max-width:200px}
-.cw-panel{position:fixed;bottom:96px;right:24px;z-index:9991;width:min(330px,calc(100vw - 32px));height:min(520px,68vh);background:#faf9f7;border:2px solid #1B2F4A;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.22);display:none;flex-direction:column;overflow:visible}
+.cw-launch:focus-visible{outline:2px solid var(--cw-orange-deep);outline-offset:3px}
+.cw-launch .cw-zi{font-family:'Noto Serif TC','Songti TC',serif;font-size:22px;font-weight:700;color:var(--cw-ink);line-height:1;margin-top:12px}
+.cw-launch .cw-ai{position:absolute;top:-4px;right:-6px;background:var(--cw-orange-deep);color:var(--cw-cream);font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 5px;border-radius:8px}
+.cw-teaser{position:fixed;bottom:36px;right:92px;z-index:9990;background:var(--cw-card);color:var(--cw-ink);font-size:13px;line-height:1.5;padding:10px 14px;border:1px solid var(--cw-line);border-radius:12px 12px 2px 12px;box-shadow:0 4px 18px rgba(60,30,14,.12);cursor:pointer;max-width:200px}
+.cw-panel{position:fixed;bottom:100px;right:24px;z-index:9991;width:min(330px,calc(100vw - 32px));height:min(520px,68vh);background:var(--cw-cream);border:1.5px solid var(--cw-line);border-radius:18px;box-shadow:0 12px 44px rgba(60,30,14,.22);display:none;flex-direction:column;overflow:visible}
 .cw-panel.cw-open{display:flex}
+/* 一粒米的弧頂：米白、頂端微尖，帶兩條淡直紋（取代舊貓耳） */
+.cw-panel::before{content:'';position:absolute;left:22%;right:22%;top:-24px;height:40px;z-index:-1;
+  background:linear-gradient(90deg,transparent 41%,rgba(91,65,49,.10) 41% 42%,transparent 42% 58%,rgba(91,65,49,.10) 58% 59%,transparent 59%),var(--cw-body);
+  border:1.5px solid var(--cw-line);border-bottom:0;border-radius:50% 50% 0 0/100% 100% 0 0}
 /* 全屏對話模式（首頁 AI 模式進來時使用） */
-.cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(18,33,58,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cw-full-backdrop{position:fixed;inset:0;z-index:9990;background:rgba(60,30,14,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .cw-panel.cw-full{top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:min(640px,92vw);height:min(680px,82vh);height:min(680px,82dvh)}
-.cw-panel.cw-full::before,.cw-panel.cw-full::after{display:none}
+.cw-panel.cw-full::before{display:none}
 .cw-panel.cw-full .cw-msg{max-width:78%;font-size:15px}
-.cw-panel::before,.cw-panel::after{content:'';position:absolute;top:-17px;width:38px;height:38px;background:#12213A;border:2px solid #1B2F4A;transform:rotate(45deg);z-index:-1}
-.cw-panel::before{left:26px;border-radius:50% 8px 0 8px}
-.cw-panel::after{right:26px;border-radius:8px 50% 8px 0}
-.cw-head{background:#12213A;padding:14px 16px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0}
-.cw-head-title{font-family:'Noto Serif TC','Songti TC',serif;font-size:18px;font-weight:600;color:#fff;letter-spacing:.04em}
-.cw-head-sub{font-size:10.5px;color:rgba(255,255,255,.55);letter-spacing:.18em;margin-top:2px}
-.cw-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);font-size:22px;line-height:1;cursor:pointer;padding:4px}
-.cw-disc{background:#f1efec;font-size:10.5px;color:#8e8e93;line-height:1.55;padding:8px 14px;letter-spacing:.02em}
+/* 標頭＝米米的亮橘背心：橘底配墨字（對比 4.80），下緣中央米白 V 領 */
+.cw-head{position:relative;background:var(--cw-orange);padding:14px 16px 16px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0}
+.cw-head::after{content:'';position:absolute;left:50%;bottom:-1px;width:22px;height:12px;transform:translateX(-50%);background:var(--cw-cream);clip-path:polygon(0 100%,50% 0,100% 100%)}
+.cw-head-title{font-family:'Noto Serif TC','Songti TC',serif;font-size:18px;font-weight:700;color:var(--cw-ink);letter-spacing:.04em}
+.cw-head-sub{font-size:10.5px;color:var(--cw-ink);letter-spacing:.18em;margin-top:2px}
+.cw-close{margin-left:auto;background:none;border:none;color:var(--cw-ink);font-size:22px;line-height:1;cursor:pointer;padding:4px}
+.cw-close:focus-visible{outline:2px solid var(--cw-ink);outline-offset:2px;border-radius:6px}
+.cw-disc{background:var(--cw-body);font-size:10.5px;color:var(--cw-ink-line);line-height:1.55;padding:8px 14px;letter-spacing:.02em}
 .cw-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .cw-msg{max-width:86%;font-size:14px;line-height:1.7;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
-.cw-msg.cw-bot{background:#fff;border:1px solid #e8e8ea;color:#1B2F4A;border-radius:2px 14px 14px 14px;align-self:flex-start}
-.cw-msg.cw-user{background:#12213A;color:#fff;border-radius:14px 2px 14px 14px;align-self:flex-end}
-.cw-msg a{color:#1B2F4A;font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
-.cw-msg.cw-user a{color:#E0B685}
-.cw-typing{align-self:flex-start;font-size:13px;color:#a1a1a6;padding:4px 14px}
-.cw-src{margin-top:8px;padding-top:6px;border-top:1px dashed #e8e8ea;font-size:12px;color:#8e8e93;line-height:1.6}
+.cw-msg.cw-bot{background:var(--cw-card);border:1px solid var(--cw-line);color:var(--cw-ink);border-radius:2px 14px 14px 14px;align-self:flex-start}
+.cw-msg.cw-user{background:var(--cw-orange);color:var(--cw-ink);border-radius:14px 2px 14px 14px;align-self:flex-end}
+.cw-msg a{color:var(--cw-orange-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px;word-break:break-all}
+.cw-msg.cw-user a{color:var(--cw-ink)}
+.cw-typing{align-self:flex-start;font-size:13px;color:var(--cw-ink-line);padding:4px 14px}
+.cw-src{margin-top:8px;padding-top:6px;border-top:1px dashed var(--cw-line);font-size:12px;color:var(--cw-ink-line);line-height:1.6}
 .cw-src a{font-weight:500;margin-right:8px;word-break:normal}
 .cw-rate{display:flex;gap:6px;margin-top:8px}
-.cw-rate button{background:#fff;border:1px solid #d2d2d7;color:#8e8e93;font-size:12px;line-height:1;padding:5px 10px;border-radius:980px;cursor:pointer;font-family:inherit}
-.cw-rate button:hover{border-color:#1B2F4A;color:#1B2F4A}
+.cw-rate button{background:var(--cw-card);border:1px solid var(--cw-line);color:var(--cw-ink-line);font-size:12px;line-height:1;padding:5px 10px;border-radius:980px;cursor:pointer;font-family:inherit}
+.cw-rate button:hover{border-color:var(--cw-orange-deep);color:var(--cw-orange-deep)}
 .cw-rate.cw-rated button{pointer-events:none;opacity:.35}
-.cw-rate.cw-rated button.cw-sel{opacity:1;border-color:#1B2F4A;color:#1B2F4A}
+.cw-rate.cw-rated button.cw-sel{opacity:1;border-color:var(--cw-orange-deep);color:var(--cw-orange-deep)}
 .cw-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}
-.cw-chip{background:#fff;border:1px solid #d2d2d7;color:#1B2F4A;font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
-.cw-chip:hover{border-color:#1B2F4A;color:#1B2F4A}
-.cw-inrow{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #ececef}
-.cw-input{flex:1;min-width:0;border:1px solid #d2d2d7;border-radius:10px;font-size:16px;padding:10px 12px;outline:none;font-family:inherit}
+.cw-chip{background:var(--cw-card);border:1px solid var(--cw-line);color:var(--cw-ink);font-size:12.5px;font-weight:500;padding:7px 13px;border-radius:980px;cursor:pointer;letter-spacing:.02em}
+.cw-chip:hover{border-color:var(--cw-orange-deep);color:var(--cw-orange-deep)}
+.cw-inrow{display:flex;gap:8px;padding:10px 12px;background:var(--cw-card);border-top:1px solid var(--cw-line)}
+.cw-input{flex:1;min-width:0;border:1px solid var(--cw-line);border-radius:10px;font-size:16px;padding:10px 12px;outline:none;font-family:inherit;background:#fff;color:var(--cw-ink)}
 /* 鍵盤／輔具焦點指示（滑鼠點擊不觸發）— WCAG 2.4.7 */
-.cw-input:focus-visible{outline:2px solid #1B2F4A;outline-offset:2px}
-.cw-input:focus{border-color:#1B2F4A}
-.cw-send{background:#1B2F4A;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;padding:0 18px;cursor:pointer;letter-spacing:.06em}
+.cw-input:focus-visible{outline:2px solid var(--cw-orange-deep);outline-offset:2px}
+.cw-input:focus{border-color:var(--cw-orange-deep)}
+.cw-send{background:var(--cw-orange);color:var(--cw-ink);border:none;border-radius:10px;font-size:13px;font-weight:700;padding:0 18px;cursor:pointer;letter-spacing:.06em}
+.cw-send:hover{background:var(--cw-orange-soft)}
 .cw-send:disabled{opacity:.4;cursor:default}
-.cw-foot{display:flex;gap:8px;padding:8px 12px 12px;background:#fff;border-radius:0 0 16px 16px}
+.cw-foot{display:flex;gap:8px;padding:8px 12px 12px;background:var(--cw-card);border-radius:0 0 16px 16px}
 .cw-cta{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:10px 8px;border-radius:10px;text-decoration:none;letter-spacing:.04em}
-.cw-cta.cw-line{background:#048456;color:#fff}
-.cw-cta.cw-form{background:#12213A;color:#fff}
+.cw-cta.cw-line{background:var(--cw-line-green);color:#fff}
+.cw-cta.cw-form{background:var(--cw-ink);color:var(--cw-cream)}
 @media(max-width:768px){
-  .cw-launch{bottom:88px;right:16px;width:54px;height:54px}
+  .cw-launch{bottom:88px;right:16px;width:54px;height:58px}
+  .cw-launch .cw-zi{font-size:20px;margin-top:11px}
   .cw-teaser{bottom:98px;right:80px}
   /* 手機版縮小：右下浮窗不滿版，不擋頁面操作（老闆 2026-07-14 令） */
-  .cw-panel{left:auto;right:12px;bottom:152px;width:min(300px,calc(100vw - 24px));height:min(560px,calc(100dvh - 170px));border-radius:18px}
+  .cw-panel{left:auto;right:12px;bottom:160px;width:min(300px,calc(100vw - 24px));height:min(560px,calc(100dvh - 186px));border-radius:18px}
   .cw-panel.cw-full{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);border-radius:14px}
   .cw-panel.cw-full .cw-msg{font-size:15px}
   .cw-msg{font-size:13px}
-  .cw-head{padding:10px 14px}
+  .cw-head{padding:10px 14px 13px}
 }
+@media(prefers-reduced-motion:reduce){.cw-launch{transition:none}.cw-launch:hover{transform:none}}
 </style>
 
 <button class="cw-launch" id="cwLaunch" aria-label="開啟小鋮 AI 服務助理" aria-expanded="false">

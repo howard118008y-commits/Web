@@ -468,8 +468,16 @@ h1 em{font-style:normal;color:inherit}
 @container (max-width:9.5em){.cx-sticky-tel svg{display:none}}
 @container (max-width:7.5em){.cx-sticky-line svg{display:none}.cx-sticky-num{font-size:.86em;letter-spacing:0}}
 @container (max-width:6.2em){.cx-sticky-num{font-size:.76em}}
-/* 浮動小鋮鈕：規則不動，只在元素上重新指派變數 → 墨底米白字；橘色只留給電話／LINE */
-.float{--gold:var(--cx-ink);--forest-deep:var(--cx-cream)}
+/* 浮動小鋮鈕：米米版（2026-10-02 Sir：改米米白＋橘），與 chat-widget.html 的 .cw-launch 同款——
+   一粒米外型、米白身體、橘背心＋V 領；主體米白，橘只佔背心，不跟電話／LINE 的全橘鈕搶 */
+.float{--gold:var(--cx-ink);--forest-deep:var(--cx-cream);height:62px;padding:0;display:flex;align-items:flex-start;justify-content:center;
+  border:1.5px solid var(--cx-line);border-radius:50% 50% 46% 46%/58% 58% 42% 42%;
+  background:linear-gradient(to bottom,#F3E9DF 0 61%,var(--cx-orange) 61% 100%);color:var(--cx-ink);
+  font-size:22px;font-weight:700;line-height:1;padding-top:12px;box-shadow:0 6px 20px rgba(60,30,14,.22)}
+.float::after{content:'';position:absolute;left:50%;top:61%;width:14px;height:10px;transform:translateX(-50%);background:#F3E9DF;clip-path:polygon(0 0,100% 0,50% 100%)}
+.float-tag{background:var(--cx-orange-deep);color:var(--cx-cream);font-family:inherit;font-weight:700;letter-spacing:.08em;border-radius:8px;right:-6px;top:-4px;line-height:1.2}
+.float:focus-visible{outline:2px solid var(--cx-orange-deep);outline-offset:3px}
+@media(max-width:860px){.float{height:58px;font-size:20px;padding-top:11px}}
 /* 固定條讓位（老闆拍板）：hero／求助卡主鈕在畫面內就收起；cx-hours.js 標 data-cx-cta-inview；只動 transform／opacity／visibility，無 CLS */
 .cx-sticky-cta{transition:transform .18s ease,opacity .18s ease,visibility 0s linear 0s}
 [data-cx-cta-inview="1"] .cx-sticky-cta{transform:translateY(calc(100% + 16px));opacity:0;visibility:hidden;pointer-events:none;
