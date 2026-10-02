@@ -352,11 +352,11 @@ PAGE = Template("""<!DOCTYPE html>
 <meta property="og:url" content="https://cx468.com.tw/area-$slug.html">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="鋮馨租賃有限公司">
-<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta property="og:image" content="https://cx468.com.tw/img/og-image.jpg?v=20261002">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="$town房市與生活機能總覽">
 <meta name="twitter:description" content="$desc">
-<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg">
+<meta name="twitter:image" content="https://cx468.com.tw/img/og-image.jpg?v=20261002">
 <meta name="author" content="鋮馨租賃有限公司">
 <meta name="geo.region" content="TW-NWT">
 <meta name="geo.placename" content="新北市$town">
