@@ -1,0 +1,4 @@
+# GitHub Pages（legacy Jekyll）設定：只排除 docs/。
+# docs/ 是內部交接與稽核檔，不對外發布（2026-10-02）。
+exclude:
+  - docs
