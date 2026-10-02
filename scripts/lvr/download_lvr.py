@@ -20,7 +20,7 @@ OUT_DIR.mkdir(exist_ok=True)
 
 URL = "https://plvr.land.moi.gov.tw/DownloadOpenData"
 SEASONS = [
-    "115S2", "115S1",
+    "115S3", "115S2", "115S1",
     "114S4", "114S3", "114S2", "114S1",
     "113S4", "113S3", "113S2", "113S1",
 ]
