@@ -94,7 +94,7 @@
     <button class="cw-close" id="cwClose" aria-label="關閉">×</button>
   </div>
   <div class="cw-disc">小鋮為 AI 引導助理，回覆僅供參考、非承諾。本公司為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定。對話請勿輸入電話、證號等個人資料。</div>
-  <div class="cw-msgs" id="cwMsgs"></div>
+  <div class="cw-msgs" id="cwMsgs" role="log" aria-live="polite" aria-relevant="additions"></div>
   <div class="cw-chips" id="cwChips"></div>
   <div class="cw-inrow">
     <input class="cw-input" id="cwInput" type="text" maxlength="300" placeholder="輸入問題，例如：我想了解貸款整合" aria-label="輸入問題">
@@ -122,6 +122,17 @@
   var sendBtn = document.getElementById('cwSend');
   var history = [];   // {role, content} 只存文字，不存個資欄位
   var busy = false;
+  // 換頁不失憶（2026-10-02 Sir）：同一分頁 30 分鐘內的對話存 sessionStorage，只在訪客自己的瀏覽器，關分頁即清
+  var CONV_KEY = 'cwConv', CONV_TTL = 30 * 60 * 1000, conv = [];
+  function saveConv(){
+    try { sessionStorage.setItem(CONV_KEY, JSON.stringify({t: Date.now(), msgs: conv.slice(-20)})); } catch(e){}
+  }
+  function loadConv(){
+    try {
+      var d = JSON.parse(sessionStorage.getItem(CONV_KEY) || 'null');
+      return d && Date.now() - d.t < CONV_TTL && d.msgs && d.msgs.length ? d.msgs : null;
+    } catch(e){ return null; }
+  }
 
   function track(name, label){
     try{ if (typeof gtag === 'function') gtag('event', name, {cw_label: label || ''}); }catch(e){}
@@ -140,17 +151,17 @@
   var FLOWS = {
     slb: {
       label: '售後回租是什麼',
-      text: '售後回租是出售房屋並過戶給買方，再依租約續住。可保有日後依約買回的權利。實拿金額須從成交價扣除原貸款、稅費與約定費用；時程依個案而定。先確認能否接受所有權移轉、負擔租金及無法買回的風險。',
+      text: '售後回租是房子過戶給投資方、簽租約繼續住，並可保有日後依約買回的權利。實拿金額依成交價扣除既有設定、稅費與約定費用計算；時程依個案而定。先確認能否接受所有權移轉、負擔租金及無法買回的風險。',
       chips: ['link:sale-leaseback.html:看完整介紹', 'flow:apply', 'flow:human']
     },
     debt: {
       label: '多筆負債想整合',
-      text: '貸款整合是評估能否把信貸、卡循或民間借款等負債，整合成較容易管理的還款方案。月付能否降低，須同時比較利率、年限、費用與總還款金額；拉長年限也可能增加總利息。名下有房仍須評估擔保空間、信用與還款能力，最終核貸由承作機構決定。',
+      text: '貸款整合是評估能否把信貸、卡循或民間借款等負債，整合成較容易管理的還款方案。月付能否降低，須同時比較利率、年限、費用與總還款金額；拉長年限也可能增加總利息。名下有房仍須評估擔保空間、信用與還款能力，最終核貸由金融機構決定。',
       chips: ['link:debt-consolidation.html:看完整介紹', 'flow:apply', 'flow:human']
     },
     p2b: {
       label: '民間想轉銀行',
-      text: '民間借款長年只繳息、本金不動嗎？可以先整理債權、房貸餘額、收入與信用資料，評估轉回銀行的可行性。是否核准、利率、時程與總成本須逐案比較，沒有保證的轉貸期限，也不以售後回租作為必要前提。',
+      text: '民間借款長年只繳息、本金不動嗎？可以先整理債權、房貸餘額、收入與信用資料，評估轉回銀行的可行性。是否核准、利率、時程與總成本須逐案比較，也不以售後回租作為必要前提。',
       chips: ['link:private-to-bank.html:看完整介紹', 'flow:apply', 'flow:human']
     },
     apply: {
@@ -188,6 +199,7 @@
     msgsEl.scrollTop = msgsEl.scrollHeight;
     history.push({role: role === 'user' ? 'user' : 'assistant', content: text});
     if (history.length > 12) history = history.slice(-12);
+    conv.push({role: role, text: text}); saveConv();
     return div;
   }
 
@@ -243,7 +255,11 @@
       var kind = parts[0];
       var chip = document.createElement(kind==='line'||kind==='tel'?'a':'button');
       chip.className = 'cw-chip';
-      if (kind === 'flow') {
+      if (kind === 'ask') {
+        var q = spec.slice(4);
+        chip.textContent = q;
+        chip.onclick = function(){ track('cw_suggest', q); inputEl.value = q; sendFree(); };
+      } else if (kind === 'flow') {
         var f = FLOWS[parts[1]];
         chip.textContent = f.label;
         chip.onclick = function(){ runFlow(parts[1]); };
@@ -307,7 +323,8 @@
         var botDiv = addMsg('bot', d.reply || '抱歉，這題由專員回答更準確。歡迎加 LINE 或來電 02-2249-0517。');
         if (d.reply) addSources(botDiv, d.sources, d.reply);
         addRating(botDiv);
-        renderChips(['flow:apply', 'flow:human']);
+        // 回答後給「下一題」建議（後端依回答內容產生），不再每則固定推申請／找真人（2026-10-02 Sir）
+        renderChips((d.suggestions || []).slice(0, 3).map(function(q){ return 'ask:' + q; }));
       })
       .catch(function(){
         showTyping(false);
@@ -349,8 +366,14 @@
     track('cw_open');
     if (!started) {
       started = true;
-      addMsg('bot', pageGreeting());
-      renderChips(START_CHIPS);
+      var saved = loadConv();
+      if (saved) {
+        saved.forEach(function(m){ addMsg(m.role, m.text); });
+        renderChips([]);
+      } else {
+        addMsg('bot', pageGreeting());
+        renderChips(START_CHIPS);
+      }
     }
     focusInput();
   }
@@ -392,6 +415,21 @@
     window.__cxAskQueue = null;
     pending.forEach(function(q){ window.cxAskFull(q); });
   } catch(e){}
+
+  var LINE_ADD = 'https://lin.ee/PHIfSoY';
+  var HANDOFF_PREFIX = '【官網對話】';   // linebot 認這個開頭：直接轉專員、不再讓 AI 回（app.py WEB_HANDOFF_PREFIX）
+  var isMobileUA = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || '');
+  function lineHref(){
+    var qs = history.filter(function(m){ return m.role === 'user'; }).slice(-3)
+      .map(function(m){ return m.content.slice(0, 60); });
+    if (!isMobileUA || !qs.length) return LINE_ADD;
+    var text = HANDOFF_PREFIX + '我剛在官網問小鋮：' + qs.join('／') + '（請專員接續回覆）';
+    return 'https://line.me/R/oaMessage/%40132qqkzh/?' + encodeURIComponent(text.slice(0, 280));
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#cwPanel a[href*="lin.ee/PHIfSoY"], #cwPanel a[href*="line.me/R/oaMessage"]');
+    if (a) a.href = lineHref();
+  }, true);
 
   launch.addEventListener('click', function(){
     panel.classList.contains('cw-open') ? closePanel() : openPanel();
