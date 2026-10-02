@@ -135,8 +135,9 @@ export default {
           "anthropic-version": "2023-06-01",
         },
         body: JSON.stringify({
-          model: "claude-opus-4-7",                  // 判讀精度優先；要省成本可改 claude-sonnet-4-6
-          max_tokens: 4096,
+          model: "claude-sonnet-5-5",                // Sir 2026-10-02：全部最新但便宜（原 claude-opus-4-7）
+          thinking: { type: "between_tools" },       // 關思考＝舊 Opus 4.7 不帶 thinking 的行為；不關的話思考吃掉 max_tokens，長謄本 JSON 會截斷
+          max_tokens: 16000,                         // 10-02 實測 3 筆抵押＋假扣押＋2 建物就用 3564；4096 對多筆謄本太緊（只算實際用量）
           system: systemPrompt,
           messages: [{ role: "user", content: userPrompt }],
         }),
