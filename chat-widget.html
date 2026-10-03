@@ -225,7 +225,7 @@
   }
 
   // 👍/👎 只掛在自由輸入的 API 回覆上；每則限送一次
-  function addRating(msgDiv){
+  function addRating(msgDiv, replyText){
     var wrap = document.createElement('div');
     wrap.className = 'cw-rate';
     var rated = false;
@@ -242,6 +242,13 @@
         try{
           if (typeof gtag === 'function') gtag('event', 'cw_rate', {rating: item[0], page_path: location.pathname});
         }catch(e){}
+        // 👎 另送後端記進「答不好的題」週報（只送小鋮那則回覆與頁面，不送訪客原話）
+        if (item[0] === 'down') {
+          try {
+            fetch(API.replace(/\/chat$/, '/chat-feedback'), {method: 'POST', headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({rating: 'down', reply: (replyText || '').slice(0, 300), page: location.pathname})}).catch(function(){});
+          } catch(e){}
+        }
       };
       wrap.appendChild(b);
     });
@@ -322,7 +329,7 @@
         showTyping(false);
         var botDiv = addMsg('bot', d.reply || '抱歉，這題由專員回答更準確。歡迎加 LINE 或來電 02-2249-0517。');
         if (d.reply) addSources(botDiv, d.sources, d.reply);
-        addRating(botDiv);
+        addRating(botDiv, d.reply);
         // 回答後給「下一題」建議（後端依回答內容產生），不再每則固定推申請／找真人（2026-10-02 Sir）
         renderChips((d.suggestions || []).slice(0, 3).map(function(q){ return 'ask:' + q; }));
       })
