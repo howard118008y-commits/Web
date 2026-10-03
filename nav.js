@@ -28,13 +28,16 @@
     'backdrop-filter:blur(14px);border-bottom:1px solid var(--cx-line);font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;color:var(--cx-ink)}',
     '.cx-nav *{box-sizing:border-box}',
     '.cx-nav a{text-decoration:none}.cx-nav a:where(:not(.cx-cta)){color:inherit}',
-    '.cx-in{max-width:1180px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:28px}',
+    '.cx-in{max-width:1280px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:28px}',
     '.cx-logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif TC",serif;font-weight:900;font-size:17px;letter-spacing:.04em;white-space:nowrap}',
     '.cx-mark{width:30px;height:30px;border-radius:7px;background:var(--cx-ink);color:var(--cx-orange);box-shadow:0 0 0 1px var(--cx-cream-dim);display:grid;place-items:center;font-size:16px;flex:none}',
     '.cx-menu{display:flex;gap:4px;list-style:none;margin:0;padding:0;margin-left:8px}',
     '.cx-menu>li{position:relative}',
     '.cx-menu>li::after{content:"";position:absolute;left:0;right:0;top:100%;height:10px}',
     '.cx-menu>li>button{background:none;border:0;color:var(--cx-ink-2);font:inherit;font-size:14.5px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:.15s}',
+    '.cx-menu>li>a.cx-ml{display:block;color:var(--cx-ink-2);font-size:14.5px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:.15s}',
+    '@media(min-width:1100px) and (max-width:1279px){.cx-in{gap:16px}.cx-menu{margin-left:0}.cx-menu>li>button,.cx-menu>li>a.cx-ml{padding:10px 7px}}',
+    '.cx-menu>li>a.cx-ml:hover{color:var(--cx-ink);background:var(--cx-cream-2)}',
     '.cx-menu>li>button:hover,.cx-menu>li.open>button{color:var(--cx-ink);background:var(--cx-cream-2)}',
     '.cx-dd{position:absolute;top:calc(100% + 6px);left:0;min-width:240px;background:var(--cx-card);border:1px solid var(--cx-line);border-radius:12px;',
     'padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(-4px);pointer-events:none;transition:.15s}',
@@ -70,6 +73,7 @@
     '.cx-sheet summary::after{content:"+";color:var(--cx-orange-deep);font-size:20px}',
     '.cx-sheet details[open] summary::after{content:"−"}',
     '.cx-sheet a{display:block;padding:11px 4px 11px 14px;font-size:15px;color:var(--cx-ink-2);text-decoration:none}',
+    '.cx-sheet a.cx-sheet-ml{padding:16px 4px;font-size:16px;font-weight:500;color:var(--cx-ink);border-bottom:1px solid var(--cx-line)}',
     '.cx-sheet a.go{color:var(--cx-orange-deep);font-weight:700}',
     '.cx-sheet .cx-sheet-foot{display:flex;flex-direction:column;gap:10px;margin-top:20px}',
     '.cx-sheet .cx-sheet-foot a{padding:14px;border-radius:10px;border:1px solid var(--cx-ink);color:var(--cx-ink);text-align:center;font-size:15px}',
@@ -80,6 +84,7 @@
     '@media(max-width:900px){.cx-in{height:58px;gap:14px}.cx-menu,.cx-resume,html[data-cx-open] .cx-line-cta{display:none}.cx-burger{display:block}.cx-cta{padding:9px 16px;font-size:14px}.cx-cta-n{display:none}.cx-cta-s{display:inline}}',
     '@media(max-width:400px){.cx-in{padding:0 14px;gap:8px}.cx-logo{font-size:15px;gap:7px}.cx-right{gap:6px}.cx-cta{padding:8px 12px;font-size:13.5px}}',
     '.cx-nav.cx-light{background:var(--cx-card);backdrop-filter:none;color:var(--cx-ink)}',
+    '.cx-light .cx-menu>li>a.cx-ml{color:var(--cx-ink);border-radius:999px}',
     '.cx-light .cx-menu>li>button{color:var(--cx-ink);border-radius:999px}',
     '.cx-sheet.cx-light{background:var(--cx-card)}',
     '.cx-sheet.cx-light a{color:var(--cx-ink)}',
@@ -158,6 +163,9 @@
   var mobile = MENU.map(function (m) {
     return '<details><summary>' + m.label + '</summary>' + links(m.items, 'go') + '</details>';
   }).join('');
+  var OFFICE = '<a href="https://cx468-office.onrender.com/" rel="nofollow noopener"';
+  desktop += '<li class="cx-ml">' + OFFICE + ' class="cx-ml">鋮馨辦公室</a></li>';
+  mobile += OFFICE + ' class="cx-sheet-ml">鋮馨辦公室</a>';
   var mount = document.getElementById('nav');
   var ctaHtml = '<a class="cx-cta" href="tel:0222490517" data-link-location="nav" aria-label="電話諮詢 02-2249-0517"><span class="cx-cta-n">02-2249-0517</span><span class="cx-cta-s">電話諮詢</span></a>';
   var ncHtml = '<div class="cx-nc"><button type="button" class="cx-nc-btn" aria-expanded="false" aria-controls="cxNc">聯絡</button>' +
@@ -191,7 +199,7 @@
     document.querySelector('.cx-nav').classList.add('cx-light');
     document.getElementById('cxSheet').classList.add('cx-light');
   }
-  var lis = document.querySelectorAll('.cx-menu>li');
+  var lis = document.querySelectorAll('.cx-menu>li:not(.cx-ml)');
   function closeAll() {
     lis.forEach(function (li) { li.classList.remove('open'); li.querySelector('button').setAttribute('aria-expanded', 'false'); });
   }
