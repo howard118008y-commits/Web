@@ -879,25 +879,112 @@ def fetch_B05():
         return _fail('B05', f'pip 例外 {type(e).__name__}: {e}')
 
 
+C01_PAGE = ('https://www.banking.gov.tw/ch/home.jsp?id=591&parentpath=0,590'
+            '&mcustomize=multimessage_view.jsp&dataserno=202407190001&dtable=Disclosure')
+
+
 def fetch_C01():
-    """房貸逾放比 — 人工指標，官方無機器可讀來源（2026-09-26 全面查證）
+    """房貸逾放比 — 金管會銀行局「本國銀行建築貸款及購置住宅貸款餘額情形表」ODS
 
-    分母（購置住宅貸款餘額）可自動抓；分子（購置住宅貸款逾放金額）不行：
-      · 舊來源 banking.gov.tw id=296 已改成「不動產證券化－新聞稿」列表頁，
-        全頁 0 個「逾放」0 個「%」（原本的 regex 是全頁撈第一個 0.01–5.00% 的
-        數字，撈到什麼都算逾放比，且 updated 寫 THIS_MONTH＝假鮮度，不可留）。
-      · 金管會每月只提供媒體「本國銀行建築貸款及購置住宅貸款餘額情形」，該表
-        未列入行政院預告統計資料發布時間表（金管會 37 項裡只有全體口徑的
-        「本國銀行逾期放款」），官網新聞稿搜尋與統計資料庫皆查無此表。
-      · 官方公開的逾放統計全是錯誤口徑：金融統計指標 index-15（全體放款
-        0.14%）、index-10/11（按機構別）、輯要 10-3（按銀行別）、統計資料庫
-        自選統計項（放款類只有餘額、無逾放維度）、BB 放款品質分類（無用途別）。
-      · 聯徵中心住宅貸款統計查詢網需會員機構登入。
-    要改回自動化＝先解決分子來源，勿再寫網頁爬取。填法見
-    行銷產出/技術記錄/房貸儀表板-季更指標手動更新指南.md
+    2026-10-03 恢復自動化。09-26 判定的「分子（購置住宅貸款逾放金額）無機器可讀
+    來源」已不成立：id=591 這張 Disclosure 附件每月就地換檔，同一張表同時有
+    「購置住宅貸款逾放餘額」（分子）、「購置住宅貸款(含催收)餘額(2)」（分母）與
+    官方自算的「購置住宅貸款逾放比率(%)」，且欄位靠**表頭文字**定位、不靠位置。
+
+    ⚠️ 不得改回「全頁撈第一個百分比」：舊版 regex 撈到什麼都當逾放比（2026-09 踩過），
+       寧可 _fail 也不要抓到別的數字。本函式三道防線：欄位由表頭字串取得、
+       自算比率必須與官方欄位對得上（容差 0.01pp）、比率須落在 0.01–5.00%。
+    ⚠️ 附件檔名含上傳時間戳、改版會變，所以每次先解析頁面取 .ods 連結，不寫死檔名。
+    口徑：購置住宅貸款專屬。不是全體放款逾放比（0.1x%）、也不是建築貸款逾放比。
+    單位：表內為新臺幣百萬元。
     """
-    return _fail('C01', '人工指標：官方未公開「購置住宅貸款逾放金額」機器可讀來源（見函式 docstring 查證清單）')
+    import zipfile
+    r = get(C01_PAGE)
+    if not r:
+        return _fail('C01', '銀行局 id=591 頁面取不到（見上一行 GET 錯誤；CI 可能被地理封鎖）')
+    m = re.search(r'uploaddowndoc\?file=Disclosure/[A-Za-z0-9_.-]+\.ods', r.text)
+    if not m:
+        return _fail('C01', f'頁面取到 {len(r.text)} 字元，但找不到 .ods 附件連結（來源版型可能改版）')
+    # filedisplay 與 flag 缺一，站方會回一頁 alert("所傳遞的參數不正確") 而不是檔案；
+    # filedisplay 的值只影響下載檔名，給任意 .ods 名即可。
+    r2 = get('https://www.banking.gov.tw/' + m.group(0) + '&filedisplay=c01.ods&flag=doc')
+    if not r2:
+        return _fail('C01', 'ODS 附件下載失敗（見上一行 GET 錯誤）')
+    try:
+        with zipfile.ZipFile(io.BytesIO(r2.content)) as zf:
+            root = ET.fromstring(zf.read('content.xml'))
+    except Exception as e:
+        return _fail('C01', f'ODS 解壓／解析失敗 {type(e).__name__}: {e}')
 
+    TB = '{urn:oasis:names:tc:opendocument:xmlns:table:1.0}'
+    OF = '{urn:oasis:names:tc:opendocument:xmlns:office:1.0}'
+    rows = []
+    for tr in root.iter(TB + 'table-row'):
+        cells = []
+        for tc in tr.findall(TB + 'table-cell'):
+            # number-columns-repeated 不展開會讓欄位錯位，上限 20 避免尾端空欄爆量
+            rep = min(int(tc.get(TB + 'number-columns-repeated', '1')), 20)
+            v = tc.get(OF + 'value')
+            if v is None:
+                v = ''.join(tc.itertext()).strip()
+            cells.extend([v] * rep)
+        rows.append(cells)
+
+    # 欄位靠表頭文字定位，不靠位置
+    want = {'ratio': '購置住宅貸款逾放比率', 'npl': '購置住宅貸款逾放餘額',
+            'bal': '購置住宅貸款(含催收)餘額'}
+    idx, hdr_row = {}, None
+    for n, cells in enumerate(rows):
+        found = {k: i for k, lbl in want.items()
+                 for i, c in enumerate(cells) if lbl in str(c)}
+        if len(found) == 3:
+            idx, hdr_row = found, n
+            break
+    if hdr_row is None:
+        return _fail('C01', f'ODS 找不到三個必要表頭（{"、".join(want.values())}）；來源表結構可能改版')
+
+    data = []
+    for cells in rows[hdr_row + 1:]:
+        if not cells:
+            continue
+        mm = re.match(r'^\s*(\d{2,3})/(\d{1,2})\s*$', str(cells[0]))
+        if not mm or max(idx.values()) >= len(cells):
+            continue
+        try:
+            vals = {k: float(str(cells[i]).replace(',', '')) for k, i in idx.items()}
+        except ValueError:
+            continue
+        data.append((int(mm.group(1)) + 1911, int(mm.group(2)), vals))
+    if not data:
+        return _fail('C01', f'ODS 表頭在第 {hdr_row} 列但之後沒有「民國年/月」資料列（來源版型可能改版）')
+
+    yr, mo, cur = data[-1]
+    v, npl, bal = cur['ratio'], cur['npl'], cur['bal']
+    if bal <= 0:
+        return _fail('C01', f'{yr}-{mo:02d} 分母異常（餘額 {bal}）')
+    calc = npl / bal * 100
+    if abs(calc - v) > 0.01:
+        return _fail('C01', f'{yr}-{mo:02d} 官方比率 {v}% 與自算 {calc:.4f}%（{npl:.0f}/{bal:.0f} 百萬）'
+                            f'差超過 0.01pp，疑似欄位對錯，不填')
+    if not 0.01 <= v < 5.0:
+        return _fail('C01', f'{yr}-{mo:02d} 比率 {v}% 不在 0.01–5.00% 合理區間，疑似口徑錯誤（全體放款？），不填')
+
+    if v > 0.5:
+        status, note = 'red',    f'逾放比 {v:.2f}%，不良貸款擴散'
+    elif v > 0.2:
+        status, note = 'yellow', f'逾放比 {v:.2f}%，件數快速攀升'
+    else:
+        status, note = 'yellow', ''
+    if not note:
+        trend = '比率持平'
+        if len(data) >= 2:
+            d_npl = (npl - data[-2][2]['npl']) / 100
+            d_v = v - data[-2][2]['ratio']
+            trend = (f'逾放金額月{"增" if d_npl >= 0 else "減"}{abs(d_npl):.2f}億、'
+                     f'比率{"持平" if abs(d_v) < 0.005 else f"月{chr(22686) if d_v > 0 else chr(28187)}{abs(d_v):.2f}個百分點"}')
+        note = (f'{mo}月底房貸逾放{npl / 100:.2f}億、'
+                f'購置住宅貸款餘額{bal / 1_000_000:.2f}兆，{trend}')
+    return dict(value=f'{v:.2f}%', status=status, note=note, updated=f'{yr}-{mo:02d}')
 
 def fetch_C02():
     """房價所得比（全國）— pip.moi.gov.tw E1050 (內政部房價負擔能力指標)"""
@@ -1247,7 +1334,7 @@ FETCHERS = {
     'B03': fetch_B03,
     'B04': fetch_B04,
     'B05': fetch_B05,
-    # C01 不註冊：人工指標（理由見 fetch_C01 docstring），跑到記「跳過」不算失敗，免得 CI 每天紅燈
+    'C01': fetch_C01,
     'C02': fetch_C02,
     'C03': fetch_C03,
     'C04': fetch_C04,
@@ -1259,7 +1346,8 @@ FETCHERS = {
 
 # pip.moi（內政部房價負擔能力）前有 F5 防火牆：本機台灣 IP 抓得到，GitHub 機房每天拿不到資料表。
 # CI 跑到這些代碼記「跳過」不算失敗，交給 ~/cx468-indicators-local/run.sh（每月 5、25 日）補抓。
-CI_SKIP = {'B05', 'C02'}
+# C01 來源 banking.gov.tw 從 GitHub 機房 IP 取不到，同樣交給本機排程器。
+CI_SKIP = {'B05', 'C01', 'C02'}
 
 # ── 主程式 ─────────────────────────────────────────────────────────────────
 
