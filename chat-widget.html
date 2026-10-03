@@ -38,6 +38,7 @@
 .cw-close{margin-left:auto;background:none;border:none;color:var(--cw-ink);font-size:22px;line-height:1;cursor:pointer;padding:4px}
 .cw-close:focus-visible{outline:2px solid var(--cw-ink);outline-offset:2px;border-radius:6px}
 .cw-disc{background:var(--cw-body);font-size:10.5px;color:var(--cw-ink-line);line-height:1.55;padding:8px 14px;letter-spacing:.02em}
+.cw-disc a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .cw-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .cw-msg{max-width:86%;font-size:14px;line-height:1.7;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
 .cw-msg.cw-bot{background:var(--cw-card);border:1px solid var(--cw-line);color:var(--cw-ink);border-radius:2px 14px 14px 14px;align-self:flex-start}
@@ -93,7 +94,7 @@
     </div>
     <button class="cw-close" id="cwClose" aria-label="關閉">×</button>
   </div>
-  <div class="cw-disc">小鋮為 AI 引導助理，回覆僅供參考、非承諾。本公司為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定。對話請勿輸入電話、證號等個人資料。</div>
+  <div class="cw-disc">小鋮為 AI 引導助理，回覆僅供參考、非承諾。本公司為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定。對話請勿輸入電話、證號等個人資料；回答不佳的提問會遮蔽個資後保存 30 天供改善，詳見<a href="privacy-policy.html#sec6">隱私權政策</a>。</div>
   <div class="cw-msgs" id="cwMsgs" role="log" aria-live="polite" aria-relevant="additions"></div>
   <div class="cw-chips" id="cwChips"></div>
   <div class="cw-inrow">
@@ -225,7 +226,7 @@
   }
 
   // 👍/👎 只掛在自由輸入的 API 回覆上；每則限送一次
-  function addRating(msgDiv, replyText){
+  function addRating(msgDiv, replyText, questionText){
     var wrap = document.createElement('div');
     wrap.className = 'cw-rate';
     var rated = false;
@@ -242,11 +243,11 @@
         try{
           if (typeof gtag === 'function') gtag('event', 'cw_rate', {rating: item[0], page_path: location.pathname});
         }catch(e){}
-        // 👎 另送後端記進「答不好的題」週報（只送小鋮那則回覆與頁面，不送訪客原話）
+        // 👎 另送後端記進「答不好的題」週報：小鋮那則回覆＋那題提問（後端遮罩個資後保存 30 天，見隱私權政策 §6）
         if (item[0] === 'down') {
           try {
             fetch(API.replace(/\/chat$/, '/chat-feedback'), {method: 'POST', headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({rating: 'down', reply: (replyText || '').slice(0, 300), page: location.pathname})}).catch(function(){});
+              body: JSON.stringify({rating: 'down', reply: (replyText || '').slice(0, 300), question: (questionText || '').slice(0, 300), page: location.pathname})}).catch(function(){});
           } catch(e){}
         }
       };
@@ -329,7 +330,7 @@
         showTyping(false);
         var botDiv = addMsg('bot', d.reply || '抱歉，這題由專員回答更準確。歡迎加 LINE 或來電 02-2249-0517。');
         if (d.reply) addSources(botDiv, d.sources, d.reply);
-        addRating(botDiv, d.reply);
+        addRating(botDiv, d.reply, q);
         // 回答後給「下一題」建議（後端依回答內容產生），不再每則固定推申請／找真人（2026-10-02 Sir）
         renderChips((d.suggestions || []).slice(0, 3).map(function(q){ return 'ask:' + q; }));
       })
