@@ -94,7 +94,7 @@
     </div>
     <button class="cw-close" id="cwClose" aria-label="關閉">×</button>
   </div>
-  <div class="cw-disc">小鋮為 AI 引導助理，回覆僅供參考、非承諾。本公司為不動產融資諮詢與媒合顧問，非金融機構，最終核貸由金融機構決定。對話請勿輸入電話、證號等個人資料；回答不佳的提問會遮蔽個資後保存 30 天供改善，詳見<a href="privacy-policy.html#sec6">隱私權政策</a>。</div>
+  <div class="cw-disc">小鋮為 AI 助理，回覆僅供參考、非承諾；本公司非金融機構，最終核貸由金融機構決定。請勿輸入個資；答不好的提問會遮蔽後存 30 天供改善（<a href="privacy-policy.html#sec6">隱私權政策</a>）。</div>
   <div class="cw-msgs" id="cwMsgs" role="log" aria-live="polite" aria-relevant="additions"></div>
   <div class="cw-chips" id="cwChips"></div>
   <div class="cw-inrow">
@@ -285,6 +285,7 @@
       }
       chipsEl.appendChild(chip);
     });
+    msgsEl.scrollTop = msgsEl.scrollHeight;   // 按鈕列出現會壓縮訊息區，捲到底才看得到最新回答（10-03 手機實測被擋半截）
   }
 
   function runFlow(key){
